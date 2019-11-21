@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDMC", "FDMCDataContext\FDMC.csproj", "{5BAFEBCE-BB6B-4E30-9A35-57B42F00B6F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FDMC", "FDMC\FDMC.csproj", "{5BAFEBCE-BB6B-4E30-9A35-57B42F00B6F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{3B1A5DFC-BDEB-4F4B-BDC2-12BD072E6DAC}"
 EndProject

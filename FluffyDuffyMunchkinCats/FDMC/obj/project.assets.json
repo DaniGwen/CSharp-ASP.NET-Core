@@ -4890,11 +4890,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMCDataContext\\FDMC.csproj",
+      "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMC\\FDMC.csproj",
       "projectName": "FDMC",
-      "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMCDataContext\\FDMC.csproj",
+      "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMC\\FDMC.csproj",
       "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMCDataContext\\obj\\",
+      "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\FluffyDuffyMunchkinCats\\FDMC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
