@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Data.Models
 {
-    class Cat
+    public class Cat
     {
+
     }
 }

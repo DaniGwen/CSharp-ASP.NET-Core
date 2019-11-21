@@ -1,9 +1,8 @@
-﻿using Data.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.SqlServer;
 
-namespace Data.DbContext
+namespace Data.Context
 {
     public class FDMCContext : DbContext
     {
