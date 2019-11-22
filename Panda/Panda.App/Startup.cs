@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Panda.Data;
 
 namespace Panda.App
 {
@@ -18,6 +20,9 @@ namespace Panda.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PandaDbContext>(options => options
+            .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
