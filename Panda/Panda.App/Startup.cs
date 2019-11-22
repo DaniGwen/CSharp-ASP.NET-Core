@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Panda.Data;
+using Panda.Domein;
 
 namespace Panda.App
 {
@@ -23,6 +25,21 @@ namespace Panda.App
             services.AddDbContext<PandaDbContext>(options => options
             .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<PandaUser, PandaUserRole>()
+                .AddEntityFrameworkStores<PandaDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                //Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+            });
+
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
@@ -31,7 +48,7 @@ namespace Panda.App
         {
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }

@@ -2168,14 +2168,27 @@
       },
       "Panda.Data/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.0.0",
           "Microsoft.EntityFrameworkCore": "3.0.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.0.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.0.1",
+          "Panda.Domein": "1.0.0"
         },
         "runtime": {
           "Panda.Data.dll": {}
         },
         "compile": {
           "Panda.Data.dll": {}
+        }
+      },
+      "Panda.Domein/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.0.0"
+        },
+        "runtime": {
+          "Panda.Domein.dll": {}
+        },
+        "compile": {
+          "Panda.Domein.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.0.0.0": {
@@ -4933,6 +4946,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "Panda.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Panda.Domein/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

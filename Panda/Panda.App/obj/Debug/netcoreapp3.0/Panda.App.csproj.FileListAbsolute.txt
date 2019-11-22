@@ -265,3 +265,14 @@ C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\bin\Debug\ne
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Panda.App.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Panda.App.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\bin\Debug\netcoreapp3.0\Panda.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\bin\Debug\netcoreapp3.0\Panda.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
