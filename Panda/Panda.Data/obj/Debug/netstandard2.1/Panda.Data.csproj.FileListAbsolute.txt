@@ -1,0 +1,8 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Data.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Data.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.csprojAssemblyReference.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.AssemblyInfo.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Data.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.pdb
