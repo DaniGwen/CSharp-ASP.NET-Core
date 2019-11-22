@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Panda.Domein;
 
 namespace Panda.Data
 {
-    public class PandaDbContext : DbContext
+    public class PandaDbContext : IdentityDbContext<PandaUser>
     {
         public PandaDbContext(DbContextOptions<PandaDbContext> options) : base(options)
         {
-
         }
     }
 }

@@ -6,3 +6,6 @@ C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\n
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Data.pdb
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.dll
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\bin\Debug\netstandard2.1\Panda.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Data\obj\Debug\netstandard2.1\Panda.Data.csproj.CopyComplete

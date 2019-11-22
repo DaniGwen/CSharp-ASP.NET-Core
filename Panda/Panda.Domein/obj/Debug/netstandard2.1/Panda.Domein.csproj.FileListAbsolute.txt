@@ -1,0 +1,8 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\bin\Debug\netstandard2.1\Panda.Domein.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\bin\Debug\netstandard2.1\Panda.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\bin\Debug\netstandard2.1\Panda.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\obj\Debug\netstandard2.1\Panda.Domein.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\obj\Debug\netstandard2.1\Panda.Domein.AssemblyInfo.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\obj\Debug\netstandard2.1\Panda.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\obj\Debug\netstandard2.1\Panda.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.Domein\obj\Debug\netstandard2.1\Panda.Domein.csprojAssemblyReference.cache
