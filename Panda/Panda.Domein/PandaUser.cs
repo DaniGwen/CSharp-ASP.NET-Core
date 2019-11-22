@@ -14,6 +14,12 @@ namespace Panda.Domein
 
         public ICollection<Receipt> Receipts { get; set; }
 
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public PandaUserRole Role { get; set; }
+
 
     }
 }
