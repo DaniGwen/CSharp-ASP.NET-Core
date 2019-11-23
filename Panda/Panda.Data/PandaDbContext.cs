@@ -22,8 +22,8 @@ namespace Panda.Data
                 .WithOne(receipt => receipt.Recipient)
                 .HasForeignKey(receipt => receipt.RecipientId);
 
-            builder.Entity<Package>().HasOne(package => package.Receipt)
-                .WithOne(receipt => receipt.Package)
+            builder.Entity<Receipt>().HasOne(receipt => receipt.Package)
+                .WithOne()
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

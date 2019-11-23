@@ -22,9 +22,5 @@ namespace Panda.Domein
         public string RecipientId { get; set; }
 
         public PandaUser Recipient { get; set; }
-
-        public string ReceiptId { get; set; }
-
-        public Receipt Receipt { get; set; }
     }
 }
