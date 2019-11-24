@@ -4,11 +4,23 @@ using Panda.Domein;
 
 namespace Panda.Data
 {
-    public class PandaDbContext : IdentityDbContext<PandaUser>
+    public class PandaDbContext : IdentityDbContext<PandaUser, PandaUserRole, string>
     {
         public PandaDbContext(DbContextOptions<PandaDbContext> options) : base(options)
         {
         }
+
+        //public PandaDbContext()
+        //{
+        //}
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder
+        //          .UseSqlServer(@"Server=LAPTOP-BDSBIU1R\SQLEXPRESS;Database=PandaDb;Integrated security=true");
+
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,9 +34,12 @@ namespace Panda.Data
                 .WithOne(receipt => receipt.Recipient)
                 .HasForeignKey(receipt => receipt.RecipientId);
 
-            builder.Entity<Receipt>().HasOne(receipt => receipt.Package)
+            builder.Entity<Receipt>()
+                .HasOne(receipt => receipt.Package)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            
         }
     }
 }

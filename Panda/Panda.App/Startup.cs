@@ -46,10 +46,10 @@ namespace Panda.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.ApplicationServices
-                .GetRequiredService<PandaDbContext>()
-                .Database
-                .EnsureCreated();
+            //using (var context = new PandaDbContext())
+            //{
+            //    context.Database.EnsureCreated();
+            //}
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

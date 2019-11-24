@@ -19,7 +19,7 @@ namespace Panda.App.Areas.Identity.Pages.Account
         private readonly SignInManager<PandaUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<PandaUser> signInManager, 
+        public LoginModel(SignInManager<PandaUser> signInManager,
             ILogger<LoginModel> logger
             )
         {
@@ -39,10 +39,6 @@ namespace Panda.App.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
-
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -70,21 +66,24 @@ namespace Panda.App.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = "/Home/Index";
 
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, false, lockoutOnFailure: true);
+                var result = await _signInManager
+                    .PasswordSignInAsync(Input.Username, Input.Password, false, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return Redirect(returnUrl);
                 }
             }
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
     }
 }

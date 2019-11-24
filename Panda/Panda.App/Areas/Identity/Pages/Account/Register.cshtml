@@ -5,27 +5,27 @@
 }
 
 <div class="row">
-    <form class="mx-auto w-50" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <form class="mx-auto w-50" method="post">
         <h1 class="text-center text-torshia">Register</h1>
         <hr class="bg-panda w-100 hr-2" />
         <div class="form-group">
-            <label asp-for="Input.Username"></label>
-            <input asp-for="Input.Username" class="form-control" />
+            <label asp-for="Input.Username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username..." asp-for="Input.Username"/>
             <span asp-validation-for="Input.Username" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Input.Password"></label>
-            <input asp-for="Input.Password" class="form-control" />
+            <label asp-for="Input.Password">Password</label>
+            <input asp-for="Input.Password" placeholder="Password..." class="form-control" />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Input.ConfirmPassword"></label>
-            <input asp-for="Input.ConfirmPassword" class="form-control" />
+            <label asp-for="Input.ConfirmPassword">Confirm password</label>
+            <input asp-for="Input.ConfirmPassword" placeholder="Confirm password..." class="form-control" />
             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Input.Email"></label>
-            <input asp-for="Input.Email" class="form-control" />
+            <label asp-for="Input.Email">Email</label>
+            <input asp-for="Input.Email" placeholder="Email..." class="form-control" />
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="d-flex justify-content-center">
