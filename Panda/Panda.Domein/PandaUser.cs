@@ -10,16 +10,11 @@ namespace Panda.Domein
             this.Packages = new List<Package>();
             this.Receipts = new List<Receipt>();
         }
+
+        public PandaUserRole UserRole { get; set; }
+
         public ICollection<Package> Packages { get; set; }
 
         public ICollection<Receipt> Receipts { get; set; }
-
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-
-        public PandaUserRole Role { get; set; }
-
-
     }
 }
