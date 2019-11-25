@@ -30,9 +30,9 @@ namespace FDMC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult AddCat()
+        public IActionResult AddCat(CatModel model)
         {
-            return View();
+            return View(model);
         }
     }
 }
