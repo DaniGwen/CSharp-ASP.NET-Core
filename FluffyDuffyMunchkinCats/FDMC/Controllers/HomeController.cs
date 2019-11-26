@@ -54,7 +54,7 @@ namespace FDMC.Controllers
             this.context.Cats.Add(cat);
             this.context.SaveChanges();
 
-            return View();
+            return Redirect("/Home");
         }
     }
 }

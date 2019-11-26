@@ -29,7 +29,7 @@ namespace FDMC
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services
-                .AddDbContext<FDMCContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FDMCContext")));
+                .AddDbContext<FDMCContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FDMCDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
