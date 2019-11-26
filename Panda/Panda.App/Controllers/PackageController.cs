@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Panda.App.Models.Package;
 using Panda.Data;
+using Panda.Domein;
+using System.Linq;
 
 namespace Panda.App.Controllers
 {
@@ -14,7 +18,15 @@ namespace Panda.App.Controllers
 
         public IActionResult Create()
         {
+            this.ViewData["Recipients"] = this.context.Users.ToList();
+
             return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(PackageCreateBindingModel bindingModel)
+        {
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model FDMC.Models.CatModel
+﻿@model FDMC.Models.AddCatModel
 @{
     ViewData["Title"] = "AddCat";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,9 +6,9 @@
 
 <h1>Add Cat</h1>
 <br />
-<form action="/" method="post">
+<form action="/Home/AddCat" method="post">
     Name:
-    <input type="text" name="name"/>
+    <input type="text" name="name" />
     <br />
     Age:
     <input type="text" name="age" />
@@ -17,9 +17,9 @@
     <input type="text" name="breed" />
     <br />
     ImageUrl:
-    <input type="text" name="image" />
+    <input type="url" name="url" />
     <br />
-    <button type="submit"></button>
+    <button type="submit">Add Cat</button>
 </form>
 
 

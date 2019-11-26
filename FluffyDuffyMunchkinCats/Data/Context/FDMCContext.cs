@@ -9,7 +9,8 @@ namespace Data.Context
     {
         public DbSet<Cat> Cats { get; set; }
 
-        public FDMCContext()
+        public FDMCContext(DbContextOptions<FDMCContext> dbContextOptions)
+            : base(dbContextOptions) 
         {
 
         }

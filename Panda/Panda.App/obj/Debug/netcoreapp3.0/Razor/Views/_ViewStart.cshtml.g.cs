@@ -19,8 +19,22 @@ using Panda.App;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\Views\_ViewImports.cshtml"
+using Panda.App.Areas.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b9f96f78b3e00c66c5a1299bf60ecf64f3274959", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"02779047203a464cd39e4aae994c6be804f843a5", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

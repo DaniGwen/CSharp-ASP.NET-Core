@@ -1,6 +1,6 @@
 ﻿namespace FDMC.Models
 {
-    public class CatModel
+    public class AddCatModel
     {
         public string Name { get; set; }
 

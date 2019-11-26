@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Migrations\20191121132327_init.cs" />
     <Compile Remove="Migrations\20191121132327_init.Designer.cs" />
+    <Compile Remove="Migrations\20191121134134_init.cs" />
+    <Compile Remove="Migrations\20191121134134_init.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
