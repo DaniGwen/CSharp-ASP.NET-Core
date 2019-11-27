@@ -11,6 +11,7 @@ namespace Panda.Domein
             this.Receipts = new List<Receipt>();
         }
 
+
         public PandaUserRole UserRole { get; set; }
 
         public ICollection<Package> Packages { get; set; }
