@@ -60,10 +60,16 @@ namespace FDMC.Controllers
             return Redirect("/Home");
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return this.Redirect("/Home");
+            }
 
-            return View();
+            var catFromDb = this.context.Cats.FirstOrDefault(cat => cat.Id == id);
+
+            return View(catFromDb);
         }
     }
 }

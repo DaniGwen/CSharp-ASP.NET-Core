@@ -1,0 +1,19 @@
+﻿@model Data.Models.Cat
+
+@{
+    ViewData["Title"] = "Cat page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1>
+
+<div>
+    <img src="@Model.ImageUrl" alt="Alternate Text" width="300" />
+    <br />
+    <br />
+    <p>Age: @Model.Age</p>
+    <p>Breed: @Model.Breed</p>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

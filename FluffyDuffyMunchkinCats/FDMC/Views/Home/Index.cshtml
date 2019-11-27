@@ -6,13 +6,16 @@
     var allCats = ViewData["allCats"];
 }
 
-<div class="text-center">
+<div>
     <h1>Fluffy Duffy Munchkin Cats</h1>
     @foreach (var cat in (List<Cat>)allCats)
     {
         <ul>
-            <p href="/Home/CatPage?id=@cat.Id">@cat.Name</p>
+            <li>
+                <a href="/Home/Details?id=@cat.Id" rel="stylesheet">@cat.Name</a>
+            </li>
         </ul>
+
     }
     <form>
         <button asp-controller="Home" asp-action="AddCat">Add Cat</button>
