@@ -1,13 +1,20 @@
-﻿@{
+﻿@using Data.Models
+
+@{
+
     ViewData["Title"] = "Home Page";
+    var allCats = ViewData["allCats"];
 }
 
 <div class="text-center">
     <h1>Fluffy Duffy Munchkin Cats</h1>
-    <ul>
-       
-    </ul>
-    <form >
+    @foreach (var cat in (List<Cat>)allCats)
+    {
+        <ul>
+            <p href="/Home/CatPage?id=@cat.Id">@cat.Name</p>
+        </ul>
+    }
+    <form>
         <button asp-controller="Home" asp-action="AddCat">Add Cat</button>
     </form>
 </div>

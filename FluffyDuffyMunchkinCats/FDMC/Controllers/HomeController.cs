@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Data.Context;
 using Data.Models;
 using FDMC.Models;
@@ -21,6 +22,8 @@ namespace FDMC.Controllers
 
         public IActionResult Index()
         {
+            this.ViewData["allCats"] = this.context.Cats.ToList();
+
             return View();
         }
 
@@ -55,6 +58,12 @@ namespace FDMC.Controllers
             this.context.SaveChanges();
 
             return Redirect("/Home");
+        }
+
+        public IActionResult Details()
+        {
+
+            return View();
         }
     }
 }
