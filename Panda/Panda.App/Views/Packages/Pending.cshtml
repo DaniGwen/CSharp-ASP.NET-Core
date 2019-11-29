@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Pending";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var pendingPackages = Model.ToList(); 
 }
 
 <h1 class="text-center">Pending Shipment</h1>
@@ -20,30 +21,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var package in Model)
+            @for (int i = 0; i < pendingPackages.Count(); i++)
             {
-
+                <tr class="row">
+                    <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>@{i + 1}</h5></th>
+                    <td class="col-lg-4 d-flex justify-content-center"><h5>@pendingPackages[i]</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>5.64 KG</h5></td>
+                    <td class="col-lg-3 d-flex justify-content-center"><h5>ul. Korab-Planina 1</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>Ivo</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center">
+                        <a href="/ship" class="btn bg-panda text-white">Ship</a>
+                    </td>
+                </tr>
             }
-            <tr class="row">
-                <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>1</h5></th>
-                <td class="col-lg-4 d-flex justify-content-center"><h5>IPhone XS Case</h5></td>
-                <td class="col-lg-1 d-flex justify-content-center"><h5>5.64 KG</h5></td>
-                <td class="col-lg-3 d-flex justify-content-center"><h5>ul. Korab-Planina 1</h5></td>
-                <td class="col-lg-2 d-flex justify-content-center"><h5>Ivo</h5></td>
-                <td class="col-lg-1 d-flex justify-content-center">
-                    <a href="/ship" class="btn bg-panda text-white">Ship</a>
-                </td>
-            </tr>
-            <tr class="row">
-                <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>2</h5></th>
-                <td class="col-lg-4 d-flex justify-content-center"><h5>Mineral Water</h5></td>
-                <td class="col-lg-1 d-flex justify-content-center"><h5>503.64 KG</h5></td>
-                <td class="col-lg-3 d-flex justify-content-center"><h5>ul. Tintyava 15-17</h5></td>
-                <td class="col-lg-2 d-flex justify-content-center"><h5>Pesho</h5></td>
-                <td class="col-lg-1 d-flex justify-content-center">
-                    <a href="/ship" class="btn bg-panda text-white">Ship</a>
-                </td>
-            </tr>
         </tbody>
     </table>
 </div>
