@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace Panda.App.Controllers
 {
-    public class PackageController : Controller
+    public class PackagesController : Controller
     {
         private readonly PandaDbContext context;
 
-        public PackageController(PandaDbContext context)
+        public PackagesController(PandaDbContext context)
         {
             this.context = context;
         }
@@ -33,13 +33,19 @@ namespace Panda.App.Controllers
                 Recipient = this.context.Users.SingleOrDefault(u => u.UserName == bindingModel.Recipient),
                 ShippingAddress = bindingModel.ShippingAddress,
                 Weight = bindingModel.Weight,
-                Status = this.context.PackageStatuses.SingleOrDefault(status => status.Name == "Pending")
+                Status = this.context.PackageStatus.SingleOrDefault(status => status.Name == "Pending")
             };
-
-            this.context.Packages.Add(package);
+            
+             this.context.Packages.Add(package);
             this.context.SaveChanges();
 
             return this.Redirect("/Packages/Pending");
+        }
+
+        [HttpGet]
+        public IActionResult Pending()
+        { 
+            return this.View();
         }
     }
 }
