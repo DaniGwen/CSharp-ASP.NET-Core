@@ -10,7 +10,7 @@ namespace Panda.Data
 
         public DbSet<Receipt> Receipts { get; set; }
 
-        public DbSet<PackageStatus> PackageStatus { get; set; }
+        public DbSet<PackageStatus> PackageStatuses { get; set; }
 
         public PandaDbContext(DbContextOptions<PandaDbContext> options) : base(options)
         {

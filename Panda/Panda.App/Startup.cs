@@ -61,12 +61,12 @@ namespace Panda.App
                     }
 
 
-                    if (!context.PackageStatus.Any())
+                    if (!context.PackageStatuses.Any())
                     {
-                        context.PackageStatus.Add(new PackageStatus { Name = "Pending" });
-                        context.PackageStatus.Add(new PackageStatus { Name = "Shipped" });
-                        context.PackageStatus.Add(new PackageStatus { Name = "Delivered" });
-                        context.PackageStatus.Add(new PackageStatus { Name = "Acquired" });
+                        context.PackageStatuses.Add(new PackageStatus { Name = "Pending" });
+                        context.PackageStatuses.Add(new PackageStatus { Name = "Shipped" });
+                        context.PackageStatuses.Add(new PackageStatus { Name = "Delivered" });
+                        context.PackageStatuses.Add(new PackageStatus { Name = "Acquired" });
                     }
 
                     context.SaveChanges();

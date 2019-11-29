@@ -27,7 +27,19 @@ namespace Panda.App.Controllers
         [HttpPost]
         public IActionResult Create(PackageCreateBindingModel bindingModel)
         {
-            return View();
+            Package package = new Package
+            {
+                Description = bindingModel.Description,
+                Recipient = this.context.Users.SingleOrDefault(u => u.UserName == bindingModel.Recipient),
+                ShippingAddress = bindingModel.ShippingAddress,
+                Weight = bindingModel.Weight,
+                Status = this.context.PackageStatuses.SingleOrDefault(status => status.Name == "Pending")
+            };
+
+            this.context.Packages.Add(package);
+            this.context.SaveChanges();
+
+            return this.Redirect("/Packages/Pending");
         }
     }
 }
