@@ -278,3 +278,5 @@ C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\ne
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Packages\Create.cshtml.g.cs
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Packages\Pending.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Packages\Delivered.cshtml.g.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Panda\Panda.App\obj\Debug\netcoreapp3.0\Razor\Views\Packages\Shipped.cshtml.g.cs
