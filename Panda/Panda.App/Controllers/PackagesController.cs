@@ -142,6 +142,7 @@ namespace Panda.App.Controllers
             {
                 var packageViewModel = new PackageDeliveredViewModel
                 {
+                    Id = package.Id,
                     Description = package.Description,
                     Recipient = package.Recipient.UserName,
                     ShippingAddress = package.ShippingAddress,
@@ -152,6 +153,29 @@ namespace Panda.App.Controllers
             }
 
             return this.View(viewModelPackages);
+        }
+
+        [HttpGet]
+        public IActionResult Details(string id)
+        {
+            var packageDB = this.context.Packages
+                .Include(package => package.Recipient)
+                .Include(package => package.Status)
+                .SingleOrDefault(x=> x.Id == id);
+
+            var viewModelPackage = new PackageDetailsViewModel
+            {
+                Id = packageDB.Id,
+                Address = packageDB.ShippingAddress,
+                Description = packageDB.Description,
+                EstimatedDeliveryDate = packageDB.EstimatedDeliveryDate?.ToString("dd/MM/yyyy"),
+                Recipient = packageDB.Recipient.UserName,
+                Status = packageDB.Status.Name,
+                Weight = packageDB.Weight
+
+            };
+
+            return this.View(viewModelPackage); 
         }
     }
 }
