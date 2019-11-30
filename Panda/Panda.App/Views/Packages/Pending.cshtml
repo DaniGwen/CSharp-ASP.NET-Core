@@ -25,10 +25,10 @@
             {
                 <tr class="row">
                     <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>@{i + 1}</h5></th>
-                    <td class="col-lg-4 d-flex justify-content-center"><h5>@pendingPackages[i]</h5></td>
-                    <td class="col-lg-1 d-flex justify-content-center"><h5>5.64 KG</h5></td>
-                    <td class="col-lg-3 d-flex justify-content-center"><h5>ul. Korab-Planina 1</h5></td>
-                    <td class="col-lg-2 d-flex justify-content-center"><h5>Ivo</h5></td>
+                    <td class="col-lg-4 d-flex justify-content-center"><h5>@pendingPackages[i].Description</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@pendingPackages[i].Weight KG</h5></td>
+                    <td class="col-lg-3 d-flex justify-content-center"><h5>@pendingPackages[i].ShippingAddress</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>@pendingPackages[i].Recipient</h5></td>
                     <td class="col-lg-1 d-flex justify-content-center">
                         <a href="/ship" class="btn bg-panda text-white">Ship</a>
                     </td>

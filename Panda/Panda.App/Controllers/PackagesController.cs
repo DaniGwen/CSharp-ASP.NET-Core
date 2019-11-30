@@ -45,6 +45,7 @@ namespace Panda.App.Controllers
         [HttpGet]
         public IActionResult Pending()
         { 
+            var pendingPackage = new Package
             return this.View();
         }
     }
