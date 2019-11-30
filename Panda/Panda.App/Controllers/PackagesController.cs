@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Panda.App.Models.Package;
 using Panda.Data;
 using Panda.Domein;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Panda.App.Controllers
@@ -44,9 +45,24 @@ namespace Panda.App.Controllers
 
         [HttpGet]
         public IActionResult Pending()
-        { 
-            var pendingPackage = new Package
-            return this.View();
+        {
+            var packagesDb = this.context.Packages.ToList();
+            var viewModelPackages = new List<Package>();
+
+            foreach (var package in packagesDb)
+            {
+                var packageForViewModel = new Package
+                {
+                    Description = package.Description,
+                    Recipient = package.Recipient,
+                    ShippingAddress = package.ShippingAddress,
+                    Weight = package.Weight
+                };
+
+                viewModelPackages.Add(packageForViewModel);
+            }
+
+            return this.View(viewModelPackages);
         }
     }
 }

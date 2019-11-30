@@ -1,9 +1,8 @@
-﻿@model IEnumerable<Panda.App.Models.Package.PackagePendingViewModel>
+﻿@model List<Panda.App.Models.Package.PackagePendingViewModel>
 
 @{
     ViewData["Title"] = "Pending";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var pendingPackages = Model.ToList(); 
 }
 
 <h1 class="text-center">Pending Shipment</h1>
@@ -21,16 +20,16 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < pendingPackages.Count(); i++)
+            @for (int i = 0; i < Model.Count(); i++)
             {
                 <tr class="row">
-                    <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>@{i + 1}</h5></th>
-                    <td class="col-lg-4 d-flex justify-content-center"><h5>@pendingPackages[i].Description</h5></td>
-                    <td class="col-lg-1 d-flex justify-content-center"><h5>@pendingPackages[i].Weight KG</h5></td>
-                    <td class="col-lg-3 d-flex justify-content-center"><h5>@pendingPackages[i].ShippingAddress</h5></td>
-                    <td class="col-lg-2 d-flex justify-content-center"><h5>@pendingPackages[i].Recipient</h5></td>
+                    <th scope="row" class="col-lg-1 d-flex justify-content-center"><h5>@(i + 1)</h5></th>
+                    <td class="col-lg-4 d-flex justify-content-center"><h5>@Model[i].Description</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@Model[i].Weight.ToString("F2") KG</h5></td>
+                    <td class="col-lg-3 d-flex justify-content-center"><h5>@Model[i].ShippingAddress</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>@Model[i].Recipient</h5></td>
                     <td class="col-lg-1 d-flex justify-content-center">
-                        <a href="/ship" class="btn bg-panda text-white">Ship</a>
+                        <a href="/Packages/Ship/@Model[i].Id" class="btn bg-panda text-white">Ship</a>
                     </td>
                 </tr>
             }
