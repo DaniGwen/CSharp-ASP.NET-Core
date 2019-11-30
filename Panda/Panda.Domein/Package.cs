@@ -14,7 +14,7 @@ namespace Panda.Domein
 
         public string ShippingAddress { get; set; }
 
-        public string StatusId { get; set; }
+        public int StatusId { get; set; }
 
         public PackageStatus Status { get; set; }
 
