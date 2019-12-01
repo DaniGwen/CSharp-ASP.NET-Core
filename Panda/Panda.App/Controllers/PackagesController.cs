@@ -188,5 +188,28 @@ namespace Panda.App.Controllers
             }
             return this.View(viewModel);
         }
+
+        [HttpPost]
+        public IActionResult Acquire(string id)
+        {
+            Package package = this.context.Packages.Find(id);
+            package.Status = this.context.PackageStatus
+                                         .SingleOrDefault(status => status.Name == "Acquired");
+            this.context.Update(package);
+            this.context.SaveChanges();
+
+            var receipt = new Receipt
+            {
+                Fee = Convert.ToDecimal((package.Weight) * 2.67),
+                IssuedOn = DateTime.UtcNow,
+                Recipient = package.Recipient,
+                Package = package,
+            };
+
+            this.context.Receipts.Add(receipt);
+            this.context.SaveChanges();
+
+            return this.Redirect("/Receipts/Index");
+        }
     }
 }
