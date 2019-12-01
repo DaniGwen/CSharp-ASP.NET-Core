@@ -1,6 +1,4 @@
-﻿using Panda.Domein;
-
-namespace Panda.App.Models.Package
+﻿namespace Panda.App.Models.Package
 {
     public class PackagePendingViewModel
     {

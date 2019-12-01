@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Panda.App.Models.Package;
 using Panda.Data;
@@ -133,7 +131,7 @@ namespace Panda.App.Controllers
         {
             var packagesDb = this.context.Packages
                 .Include(package => package.Recipient)
-                .Where(package => package.Status.Name == "Delivered")
+                .Where(package => package.Status.Name == "Delivered" || package.Status.Name == "Acquired")
                 .ToList();
 
             var viewModelPackages = new List<PackageDeliveredViewModel>();
@@ -158,24 +156,37 @@ namespace Panda.App.Controllers
         [HttpGet]
         public IActionResult Details(string id)
         {
-            var packageDB = this.context.Packages
+            var packageDb = this.context.Packages
                 .Include(package => package.Recipient)
                 .Include(package => package.Status)
-                .SingleOrDefault(x=> x.Id == id);
+                .SingleOrDefault(x => x.Id == id);
 
-            var viewModelPackage = new PackageDetailsViewModel
+            var viewModel = new PackageDetailsViewModel
             {
-                Id = packageDB.Id,
-                Address = packageDB.ShippingAddress,
-                Description = packageDB.Description,
-                EstimatedDeliveryDate = packageDB.EstimatedDeliveryDate?.ToString("dd/MM/yyyy"),
-                Recipient = packageDB.Recipient.UserName,
-                Status = packageDB.Status.Name,
-                Weight = packageDB.Weight
+                Id = packageDb.Id,
+                Address = packageDb.ShippingAddress,
+                Description = packageDb.Description,
+                EstimatedDeliveryDate = packageDb.EstimatedDeliveryDate?.ToString("dd/MM/yyyy"),
+                Recipient = packageDb.Recipient.UserName,
+                Status = packageDb.Status.Name,
+                Weight = packageDb.Weight
 
             };
 
-            return this.View(viewModelPackage); 
+            if (packageDb.Status.Name == "Pending")
+            {
+                viewModel.EstimatedDeliveryDate = "N/A";
+            }
+            else if (packageDb.Status.Name == "Shipped")
+            {
+                viewModel.EstimatedDeliveryDate = packageDb.EstimatedDeliveryDate?
+                                                  .ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                viewModel.EstimatedDeliveryDate = "Delivered";
+            }
+            return this.View(viewModel);
         }
     }
 }
