@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Panda.App.Models.Package;
+using Panda.App.Models.Receipt;
 using Panda.Data;
 
 namespace Panda.App.Controllers

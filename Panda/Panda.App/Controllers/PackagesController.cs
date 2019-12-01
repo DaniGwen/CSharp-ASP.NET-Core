@@ -189,7 +189,7 @@ namespace Panda.App.Controllers
             return this.View(viewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Acquire(string id)
         {
             Package package = this.context.Packages.Find(id);
@@ -209,7 +209,7 @@ namespace Panda.App.Controllers
             this.context.Receipts.Add(receipt);
             this.context.SaveChanges();
 
-            return this.Redirect("/Receipts/Index");
+            return this.Redirect("/Packages/Acquire");
         }
     }
 }

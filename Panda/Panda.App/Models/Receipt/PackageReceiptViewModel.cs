@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Panda.App.Models.Package
+namespace Panda.App.Models.Receipt
 {
     public class PackageReceiptViewModel
     {
@@ -10,6 +10,6 @@ namespace Panda.App.Models.Package
 
         public decimal Fee { get; set; }
 
-        public Panda.Domein.Package Package { get; set; }
+        public Domein.Package Package { get; set; }
     }
 }
