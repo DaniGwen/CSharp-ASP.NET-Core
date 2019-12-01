@@ -1,4 +1,4 @@
-﻿@model List<Panda.App.Models.Receipt.PackageReceiptViewModel>
+﻿@model List<Panda.App.Models.Receipt.ReceiptIndexViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,11 +22,11 @@
             {
                 <tr class="row">
                     <th scope="row" class="col-lg-5 d-flex justify-content-center"><h5>@Model[i].Id</h5></th>
-                    <td class="col-lg-2 d-flex justify-content-center"><h5>@Model[i].Fee</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>$@Model[i].Fee.ToString("F2" )</h5></td>
                     <td class="col-lg-2 d-flex justify-content-center"><h5>@Model[i].IssuedOn</h5></td>
-                    <td class="col-lg-2 d-flex justify-content-center"><h5>@Model[i].Package.Recipient.UserName</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>@Model[i].Recipient</h5></td>
                     <td class="col-lg-1 d-flex justify-content-center">
-                        <a href="/Receipts/Details" class="btn bg-panda text-white">Details</a>
+                        <a href="/Receipts/Details/@Model[i].Id" class="btn bg-panda text-white">Details</a>
                     </td>
                 </tr>
             }

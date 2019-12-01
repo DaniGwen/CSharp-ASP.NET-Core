@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,27 +20,40 @@ namespace Panda.App.Controllers
         }
         public IActionResult Index(string id)
         {
-            var receipts = this.context.Receipts
+            var receiptsViewModel = this.context.Receipts
                 .Include(receipt => receipt.Recipient)
                 .Include(receipt => receipt.Package)
-                .Where(receipt => receipt.RecipientId == id);
-
-            var receiptsListViewModel = new List<PackageReceiptViewModel>();
-
-            foreach (var receipt in receipts)
-            {
-                var receiptViewModel = new PackageReceiptViewModel
+                .Where(receipt => receipt.Recipient.UserName == this.User.Identity.Name)
+                .Select(receipt => new ReceiptIndexViewModel
                 {
                     Fee = receipt.Fee,
                     Id = receipt.Id,
-                    IssuedOn = receipt.IssuedOn,
-                    Package = receipt.Package
-                };
+                    IssuedOn = receipt.IssuedOn.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Recipient = receipt.Recipient.UserName
+                })
+                .ToList();
 
-                receiptsListViewModel.Add(receiptViewModel);
-            }
+            return View(receiptsViewModel);
+        }
 
-            return View(receiptsListViewModel);
+        public IActionResult Details(string id)
+        {
+            var receipt = this.context.Receipts
+                .Include(receipt => receipt.Recipient)
+                .Include(receipt => receipt.Package)
+                .Select(receipt => new ReceiptDetailsViewModel
+                {
+                    DeliveryAddress = receipt.Package.ShippingAddress,
+                    Id = receipt.Id,
+                    Weight = receipt.Package.Weight,
+                    IssuedOn = receipt.IssuedOn.ToString("dd/MM/yyyy"),
+                    PackageDescription = receipt.Package.Description,
+                    Recipient = receipt.Recipient.UserName,
+                    Fee = receipt.Fee
+                })
+                .SingleOrDefault(receipt => receipt.Id == id);
+
+            return this.View(receipt);
         }
     }
 }

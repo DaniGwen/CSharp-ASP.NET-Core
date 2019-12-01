@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Panda.App.Models.Package;
 using Panda.Data;
@@ -19,6 +20,7 @@ namespace Panda.App.Controllers
             this.context = context;
         }
 
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             this.ViewData["Recipients"] = this.context.Users.ToList();
@@ -27,6 +29,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(PackageCreateBindingModel bindingModel)
         {
             Package package = new Package
@@ -73,6 +76,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Ship(string id)
         {
             Package package = this.context.Packages.Find(id);
@@ -87,6 +91,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Deliver(string id)
         {
             Package package = this.context.Packages.Find(id);
@@ -200,16 +205,17 @@ namespace Panda.App.Controllers
 
             var receipt = new Receipt
             {
-                Fee = Convert.ToDecimal((package.Weight) * 2.67),
+                Id = Guid.NewGuid().ToString(),
+                Fee = (decimal)(package.Weight * 2.67),
                 IssuedOn = DateTime.UtcNow,
-                Recipient = package.Recipient,
+                Recipient = this.context.Users.SingleOrDefault(user => user.UserName == this.User.Identity.Name),
                 Package = package,
             };
 
             this.context.Receipts.Add(receipt);
             this.context.SaveChanges();
 
-            return this.Redirect("/Packages/Acquire");
+            return this.Redirect("/Home/Index");
         }
     }
 }
