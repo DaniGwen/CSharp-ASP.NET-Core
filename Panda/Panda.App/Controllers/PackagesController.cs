@@ -25,13 +25,18 @@ namespace Panda.App.Controllers
         {
             this.ViewData["Recipients"] = this.context.Users.ToList();
 
-            return this.View();
+            return this.View(new PackageCreateBindingModel());
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult Create(PackageCreateBindingModel bindingModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(bindingModel ?? new PackageCreateBindingModel());
+            }
+
             Package package = new Package
             {
                 Id = Guid.NewGuid().ToString(),

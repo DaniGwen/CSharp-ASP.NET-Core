@@ -17,7 +17,8 @@
                    class="form-control"
                    id="description"
                    placeholder="Description..."
-                   asp-for="Description">
+                   asp-for="Description"
+                   value="@Model.Description">
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="weight-and-address-holder d-flex justify-content-between">
@@ -27,7 +28,8 @@
                        class="form-control"
                        id="weight"
                        placeholder="Weight..."
-                       asp-for="Weight">
+                       asp-for="Weight"
+                       value="@Model.Weight">
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
             <div class="form-group w-50 pl-5">
@@ -36,7 +38,8 @@
                        class="form-control"
                        id="address"
                        placeholder="Shipping Address..."
-                       asp-for="ShippingAddress">
+                       asp-for="ShippingAddress"
+                       value="@Model.ShippingAddress">
                 <span asp-validation-for="ShippingAddress" class="text-danger"></span>
             </div>
         </div>
