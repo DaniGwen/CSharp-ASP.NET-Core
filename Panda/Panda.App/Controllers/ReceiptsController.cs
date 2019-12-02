@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Panda.App.Models.Receipt;
@@ -18,6 +19,8 @@ namespace Panda.App.Controllers
         {
             this.context = context;
         }
+
+        [Authorize]  
         public IActionResult Index(string id)
         {
             var receiptsViewModel = this.context.Receipts
@@ -36,6 +39,8 @@ namespace Panda.App.Controllers
             return View(receiptsViewModel);
         }
 
+        [HttpGet]
+        [Authorize]
         public IActionResult Details(string id)
         {
             var receipt = this.context.Receipts

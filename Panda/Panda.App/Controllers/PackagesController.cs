@@ -20,7 +20,7 @@ namespace Panda.App.Controllers
             this.context = context;
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             this.ViewData["Recipients"] = this.context.Users.ToList();
@@ -49,6 +49,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Pending()
         {
             var packagesDb = this.context.Packages
@@ -104,6 +105,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Shipped()
         {
             var packagesDb = this.context.Packages
@@ -132,6 +134,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delivered()
         {
             var packagesDb = this.context.Packages
@@ -159,6 +162,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Details(string id)
         {
             var packageDb = this.context.Packages
@@ -195,6 +199,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Acquire(string id)
         {
             Package package = this.context.Packages.Find(id);
