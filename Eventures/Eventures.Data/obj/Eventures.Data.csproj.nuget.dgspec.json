@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.Data\\Eventures.Data.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.Data\\Eventures.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.Data\\Eventures.Data.csproj",
+        "projectName": "Eventures.Data",
+        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.Data\\Eventures.Data.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

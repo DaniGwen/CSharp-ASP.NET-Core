@@ -1,0 +1,8 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\bin\Debug\netcoreapp3.0\Eventures.Domein.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\bin\Debug\netcoreapp3.0\Eventures.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp3.0\Eventures.Domein.csprojAssemblyReference.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp3.0\Eventures.Domein.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp3.0\Eventures.Domein.AssemblyInfo.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\bin\Debug\netcoreapp3.0\Eventures.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp3.0\Eventures.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp3.0\Eventures.Domein.pdb
