@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eventures.Domein;
+using Eventures.App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eventures.Data
+namespace Eventures.App.Data
 {
     public class EventuresDbContext : IdentityDbContext<EventuresUser>
     {

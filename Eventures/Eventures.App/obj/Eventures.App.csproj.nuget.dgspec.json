@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj": {}
+    "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj": {
+    "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj",
+        "projectUniqueName": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj",
         "projectName": "Eventures.App",
-        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj",
+        "projectPath": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj",
         "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\obj\\",
+        "outputPath": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,10 +38,6 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.0.0, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.0.0, )"
@@ -55,6 +51,8 @@
               "version": "[3.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[3.0.0, )"
             },

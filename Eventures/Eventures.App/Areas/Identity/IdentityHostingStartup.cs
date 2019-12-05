@@ -1,6 +1,6 @@
 ﻿using System;
-using Eventures.Data;
-using Eventures.Domein;
+using Eventures.App.Data;
+using Eventures.App.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -20,8 +20,9 @@ namespace Eventures.App.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("EventuresDbContextConnection")));
 
-                services.AddDefaultIdentity<EventuresUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<EventuresDbContext>();
+                services.AddIdentity<EventuresUser,IdentityRole>()
+                    .AddEntityFrameworkStores<EventuresDbContext>()
+                    .AddDefaultTokenProviders();
             });
         }
     }

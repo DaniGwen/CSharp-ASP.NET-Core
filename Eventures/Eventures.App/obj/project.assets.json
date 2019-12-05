@@ -23,21 +23,6 @@
           "lib/netcoreapp2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "3.0.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -443,7 +428,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "3.0.0"
         },
         "compile": {
-          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.dll": {}
+          "lib/netstandard2.1/_._": {}
         },
         "runtime": {
           "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.dll": {}
@@ -2661,19 +2646,6 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "microsoft.aspnetcore.cryptography.keyderivation.3.0.0.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/3.0.0": {
-      "sha512": "WSJY7UL2iGFNa8DcbNP6X7dqpVyX/UadvXwhOCyehcLVroYDPK08GPuYwIe0djljdB/W01Jtmsbxxj2Ad2Py9Q==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.diagnostics.entityframeworkcore/3.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp3.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll",
-        "lib/netcoreapp3.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.xml",
-        "microsoft.aspnetcore.diagnostics.entityframeworkcore.3.0.0.nupkg.sha512",
-        "microsoft.aspnetcore.diagnostics.entityframeworkcore.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -8462,7 +8434,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
-      "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.0.0",
       "Microsoft.AspNetCore.Identity.UI >= 3.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.0.0",
@@ -8477,11 +8448,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj",
+      "projectUniqueName": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj",
       "projectName": "Eventures.App",
-      "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\Eventures.App.csproj",
+      "projectPath": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\Eventures.App.csproj",
       "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Eventures\\Eventures.App\\obj\\",
+      "outputPath": "C:\\Users\\danig\\source\\repos\\Eventures\\Eventures.App\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8508,10 +8479,6 @@
     "frameworks": {
       "netcoreapp3.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[3.0.0, )"
-          },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
             "version": "[3.0.0, )"
@@ -8525,6 +8492,8 @@
             "version": "[3.0.0, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[3.0.0, )"
           },
