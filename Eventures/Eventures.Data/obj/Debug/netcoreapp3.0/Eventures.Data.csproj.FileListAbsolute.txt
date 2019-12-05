@@ -1,0 +1,11 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\bin\Debug\netcoreapp3.0\Eventures.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.csprojAssemblyReference.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.AssemblyInfo.cs
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\bin\Debug\netcoreapp3.0\Eventures.Data.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\bin\Debug\netcoreapp3.0\Eventures.Data.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\bin\Debug\netcoreapp3.0\Eventures.Data.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\bin\Debug\netcoreapp3.0\Eventures.Domein.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.csproj.CopyComplete
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Data\obj\Debug\netcoreapp3.0\Eventures.Data.pdb

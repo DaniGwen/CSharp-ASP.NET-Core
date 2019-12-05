@@ -1,0 +1,5 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\bin\Debug\netcoreapp2.1\Eventures.Domein.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\bin\Debug\netcoreapp2.1\Eventures.Domein.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp2.1\Eventures.Domein.csprojAssemblyReference.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp2.1\Eventures.Domein.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.Domein\obj\Debug\netcoreapp2.1\Eventures.Domein.AssemblyInfo.cs
