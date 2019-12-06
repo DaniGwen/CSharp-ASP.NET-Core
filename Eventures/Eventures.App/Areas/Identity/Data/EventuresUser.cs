@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Eventures.App.Models
 {
@@ -13,8 +9,7 @@ namespace Eventures.App.Models
 
         public string LastName { get; set; }
 
-        public string UniqueCitizenNumber { get; set; }
+        public string UCN { get; set; }
 
-        public string Role { get; set; }
     }
 }
