@@ -78,7 +78,8 @@ namespace Eventures.App.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new EventuresUser { UserName = Input.Username, Email = Input.Email, FirstName= Input.LastName, UCN =Input.UCN };
+                var user = new EventuresUser { UserName = Input.Username, Email = Input.Email, FirstName = Input.FirstName, UCN = Input.UCN, LastName = Input.LastName };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
