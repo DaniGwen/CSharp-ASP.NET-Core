@@ -62,13 +62,13 @@ namespace Eventures.App
                     {
                         context.Roles.Add(new IdentityRole
                         {
-                            Name = "admin",
+                            Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
 
                         context.Roles.Add(new IdentityRole
                         {
-                            Name = "user",
+                            Name = "User",
                             NormalizedName = "USER"
                         });
                     }
