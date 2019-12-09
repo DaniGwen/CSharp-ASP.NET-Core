@@ -278,3 +278,4 @@ C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.App\obj\
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.App\obj\Debug\netcoreapp3.0\Eventures.App.csproj.CopyComplete
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.App\obj\Debug\netcoreapp3.0\Eventures.App.dll
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.App\obj\Debug\netcoreapp3.0\Eventures.App.pdb
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Eventures\Eventures.App\obj\Debug\netcoreapp3.0\Razor\Views\Events\Create.cshtml.g.cs

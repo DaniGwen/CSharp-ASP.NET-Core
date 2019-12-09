@@ -3,6 +3,7 @@ using Eventures.App.Data;
 using Eventures.App.Models.BindingModels;
 using Eventures.App.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Linq;
 
 namespace Eventures.App.Controllers
@@ -51,8 +52,8 @@ namespace Eventures.App.Controllers
                 .Select(e => new EventAllViewModel
                 {
                     Name = e.Name,
-                    Start = e.Start.ToString(),
-                    End = e.End.ToString(),
+                    Start = e.Start.ToString("dd-MMM-yyyy HH:MM", CultureInfo.InvariantCulture),
+                    End = e.End.ToString("dd-MMM-yyyy HH:MM", CultureInfo.InvariantCulture),
                     Place = e.Place
                 })
                 .ToList();
