@@ -20,10 +20,11 @@
             <div class="d-flex justify-content-center">
                 <label asp-for="Place " class="font-weight-bold"></label>
             </div>
-            <input asp-for="Place " class="form-control" type="email" placeholder="Place..." />
+            <input asp-for="Place " class="form-control" type="text" placeholder="Place..." />
             <span asp-validation-for="Place" class="text-danger"></span>
         </div>
     </div>
+    <hr class="hr-2 bg-eventures mt-3" />
     <div class="d-flex justify-content-between">
         <div class="form-group w-45">
             <div class="d-flex justify-content-center">
@@ -53,7 +54,7 @@
             <div class="d-flex justify-content-center">
                 <label asp-for="PricePerTicket" class="font-weight-bold"></label>
             </div>
-            <input asp-for="PricePerTicket" class="form-control" type="number" placeholder="Price per ticket..." />
+            <input asp-for="PricePerTicket" class="form-control" type="number" step="any" placeholder="Price per ticket..." />
             <span asp-validation-for="PricePerTicket" class="text-danger"></span>
         </div>
     </div>

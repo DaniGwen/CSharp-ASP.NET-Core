@@ -3,6 +3,7 @@ using Eventures.App.Data;
 using Eventures.App.Models.BindingModels;
 using Eventures.App.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Globalization;
 using System.Linq;
 
@@ -24,6 +25,7 @@ namespace Eventures.App.Controllers
             {
                 Event eventForDb = new Event
                 {
+                    Id =  Guid.NewGuid().ToString(),
                     Name = bindingModel.Name,
                     End = bindingModel.End,
                     Place = bindingModel.Place,

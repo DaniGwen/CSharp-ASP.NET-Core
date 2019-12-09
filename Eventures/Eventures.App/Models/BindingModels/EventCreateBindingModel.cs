@@ -28,7 +28,7 @@ namespace Eventures.App.Models.BindingModels
 
         [Required]
         [Display(Name = "Price per ticket")]
-        [Range(typeof(decimal), "0.00", "79228162514264337593543950335M", ErrorMessage = "Price per ticket must be positive number")]
+        [Range(typeof(decimal), "0.00", "79228162514264337593543950335", ErrorMessage = "Price per ticket must be positive number")]
         public decimal PricePerTicket { get; set; }
     }
 }
