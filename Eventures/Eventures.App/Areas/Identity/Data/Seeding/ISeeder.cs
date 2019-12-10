@@ -5,6 +5,6 @@ namespace Eventures.App.Areas.Identity.Data.Seeding
 {
     public interface ISeeder
     {
-        void Seed();
+        void Seed(EventuresDbContext context);
     }
 }

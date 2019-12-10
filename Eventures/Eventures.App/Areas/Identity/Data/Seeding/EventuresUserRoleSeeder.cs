@@ -4,32 +4,25 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Eventures.App.Areas.Identity.Data.Seeding
 {
-    public class EventuresUserRoleSeeder : ISeeder
+    public class EventuresUserRoleSeeder
     {
-        private readonly EventuresDbContext context;
-
-        public EventuresUserRoleSeeder(EventuresDbContext context)
+        public void Seed(EventuresDbContext context)
         {
-            this.context = context;
-        }
-
-        public void Seed()
-        {
-            if (!this.context.Users.Any())
+            if (!context.Users.Any())
             {
-                this.context.Roles.Add(new IdentityRole
+                context.Roles.Add(new IdentityRole
                 {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
                 });
 
-                this.context.Roles.Add(new IdentityRole
+                context.Roles.Add(new IdentityRole
                 {
                     Name = "User",
                     NormalizedName = "USER"
                 });
 
-                this.context.SaveChanges();
+                context.SaveChanges();
             }
         }
     }

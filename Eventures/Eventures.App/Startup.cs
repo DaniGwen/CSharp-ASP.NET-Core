@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eventures.App.Areas.Identity.Data.Seeding;
 using Eventures.App.Data;
+using Eventures.App.Extensions;
 using Eventures.App.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +37,8 @@ namespace Eventures.App
                     .AddEntityFrameworkStores<EventuresDbContext>()
                     .AddDefaultTokenProviders();
 
+            services.AddScoped<EventuresUserRoleSeeder>();
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -52,13 +56,7 @@ namespace Eventures.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                using (var context = scope.ServiceProvider.GetRequiredService<EventuresDbContext>())
-                {
-                    context.Database.EnsureCreated();
-                }
-            }
+            app.UseDatabaseSeeding();
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
