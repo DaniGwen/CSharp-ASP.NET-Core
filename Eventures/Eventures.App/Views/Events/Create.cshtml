@@ -30,14 +30,14 @@
             <div class="d-flex justify-content-center">
                 <label asp-for="Start" class="font-weight-bold"></label>
             </div>
-            <input asp-for="Start" class="form-control" placeholder="Start..." type="datetime" />
+            <input asp-for="Start" class="form-control" placeholder="Start..." type="datetime-local" />
             <span asp-validation-for="Start" class="text-danger"></span>
         </div>
         <div class="form-group w-45">
             <div class="d-flex justify-content-center">
                 <label asp-for="End" class="font-weight-bold"></label>
             </div>
-            <input asp-for="End " class="form-control" type="datetime" placeholder="End..." />
+            <input asp-for="End " class="form-control" type="datetime-local" placeholder="End..." />
             <span asp-validation-for="End" class="text-danger"></span>
         </div>
     </div>
