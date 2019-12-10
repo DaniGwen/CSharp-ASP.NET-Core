@@ -57,23 +57,6 @@ namespace Eventures.App
                 using (var context = scope.ServiceProvider.GetRequiredService<EventuresDbContext>())
                 {
                     context.Database.EnsureCreated();
-
-                    if (!context.Users.Any())
-                    {
-                        context.Roles.Add(new IdentityRole
-                        {
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
-
-                        context.Roles.Add(new IdentityRole
-                        {
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
-                    }
-
-                    context.SaveChanges();
                 }
             }
             app.UseDeveloperExceptionPage();

@@ -67,9 +67,18 @@
                         }
                         else
                         {
-                            <li class="nav-item active">
-                                <p>Hello, @User.Identity.Name!</p>
-                            </li>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item active">
+                                    <p>Hello Admin!</p>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item active">
+                                    <p>Hello @User.Identity.Name!</p>
+                                </li>
+                            }
                             <li class="nav-item active">
                                 <a class="nav-link" href="/Identity/Account/Logout">Logout</a>
                             </li>

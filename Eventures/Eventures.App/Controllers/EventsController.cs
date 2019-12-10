@@ -54,8 +54,8 @@ namespace Eventures.App.Controllers
                 .Select(e => new EventAllViewModel
                 {
                     Name = e.Name,
-                    Start = e.Start.ToString("dd-MMM-yyyy HH:MM", CultureInfo.InvariantCulture),
-                    End = e.End.ToString("dd-MMM-yyyy HH:MM", CultureInfo.InvariantCulture),
+                    Start = e.Start.ToString("dd-MMM-yyyy HH:mm", CultureInfo.InvariantCulture),
+                    End = e.End.ToString("dd-MMM-yyyy HH:mm", CultureInfo.InvariantCulture),
                     Place = e.Place
                 })
                 .ToList();
