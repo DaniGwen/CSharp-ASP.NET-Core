@@ -11,22 +11,7 @@ namespace Eventures.App.Extensions
     {
         public static void UseDatabaseSeeding(this IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                serviceScope.ServiceProvider
-                    .GetRequiredService<EventuresDbContext>()
-                    .Database
-                    .EnsureCreated();
-
-                Assembly.GetAssembly(typeof(EventuresDbContext))
-                    .GetTypes()
-                    .Where(type => typeof(ISeeder).IsAssignableFrom(type))
-                    .Where(type => type.IsClass)
-                    .Select(type => (ISeeder)serviceScope.ServiceProvider.GetRequiredService(type))
-                    .ToList()
-                    .ForEach(seeder => seeder.Seed());
-               
-            }
+            //:TODO Seed root user
         }
     }
 }
