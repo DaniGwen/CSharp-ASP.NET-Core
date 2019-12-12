@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Eventures.App.Models;
+using Eventures.App.Models.BindingModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,45 +27,13 @@ namespace Eventures.App.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public UserCreateBindingModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class InputModel
-        {
-            [Required]
-            [Display(Name = "Username")]
-            public string Username { get; set; }
-
-            [Required]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-
-            [Required]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-
-            [Required]
-            [Display(Name = "UCN")]
-            public string UCN { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-        }
+       
 
         public async Task OnGetAsync(string returnUrl = null)
         {
