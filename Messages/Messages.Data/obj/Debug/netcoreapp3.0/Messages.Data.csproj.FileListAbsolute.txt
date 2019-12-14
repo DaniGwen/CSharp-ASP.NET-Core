@@ -1,0 +1,5 @@
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.deps.json
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.dll
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.csprojAssemblyReference.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.AssemblyInfoInputs.cache
+C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.AssemblyInfo.cs
