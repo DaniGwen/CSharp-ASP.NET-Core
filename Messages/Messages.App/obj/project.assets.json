@@ -1271,6 +1271,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
+          "Messages.Models": "1.0.0",
           "Microsoft.EntityFrameworkCore": "3.1.0"
         },
         "compile": {
@@ -1278,6 +1279,16 @@
         },
         "runtime": {
           "bin/placeholder/Messages.Data.dll": {}
+        }
+      },
+      "Messages.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "compile": {
+          "bin/placeholder/Messages.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Messages.Models.dll": {}
         }
       }
     }
@@ -4968,6 +4979,11 @@
       "type": "project",
       "path": "../Messages.Data/Messages.Data.csproj",
       "msbuildProject": "../Messages.Data/Messages.Data.csproj"
+    },
+    "Messages.Models/1.0.0": {
+      "type": "project",
+      "path": "../Messages.Models/Messages.Models.csproj",
+      "msbuildProject": "../Messages.Models/Messages.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {

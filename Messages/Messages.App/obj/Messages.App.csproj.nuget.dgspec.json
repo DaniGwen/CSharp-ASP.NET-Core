@@ -91,7 +91,11 @@
         },
         "frameworks": {
           "netcoreapp3.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj": {
+                "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -108,6 +112,58 @@
               "version": "[3.1.0, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj",
+        "projectName": "Messages.Models",
+        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
           "imports": [
             "net461",
             "net462",

@@ -1,39 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Messages.App.Models;
+using Messages.Data;
+using Messages.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Messages.App.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MessagesController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly MessagesDbContext context;
 
-        private readonly ILogger<MessagesController> _logger;
-
-        public MessagesController(ILogger<MessagesController> logger)
+        public MessagesController(MessagesDbContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public ActionResult AllOrderedByCreateOnAscending()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+        }
+
+        public ActionResult Create(MessageCreateBindingModel bindingModel)
+        {
+            Message message = new Message
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                Contend = bindingModel.Contend,
+                User = bindingModel.Username,
+                CreatedOn = DateTime.UtcNow
+            };
+
+            this.context.Messages.Add(message);
+            this.context.SaveChanges();
+
+            return this.Ok();
         }
     }
 }

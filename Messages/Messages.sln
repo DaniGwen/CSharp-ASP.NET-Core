@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.App", "Messages.App\Messages.App.csproj", "{3EF7D350-A26B-4E1F-A8FC-0002A8302AF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.App", "Messages.App\Messages.App.csproj", "{3EF7D350-A26B-4E1F-A8FC-0002A8302AF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Data", "Messages.Data\Messages.Data.csproj", "{F60F0E8B-CFB7-41B6-ACDA-7E34D0BCB6FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Data", "Messages.Data\Messages.Data.csproj", "{F60F0E8B-CFB7-41B6-ACDA-7E34D0BCB6FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Models", "Messages.Models\Messages.Models.csproj", "{20826CC9-017B-4978-82EB-D033CC47CCC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Models", "Messages.Models\Messages.Models.csproj", "{20826CC9-017B-4978-82EB-D033CC47CCC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
