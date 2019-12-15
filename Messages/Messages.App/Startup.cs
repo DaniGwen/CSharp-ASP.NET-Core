@@ -24,6 +24,7 @@ namespace Messages.App
             {
                 options.UseSqlServer("Server=LAPTOP-BDSBIU1R\\SQLEXPRESS;Database=MessagesDb;Integrated security=True;");
             });
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,8 +46,6 @@ namespace Messages.App
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

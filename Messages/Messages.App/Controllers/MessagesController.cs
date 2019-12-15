@@ -22,13 +22,17 @@ namespace Messages.App.Controllers
             this.context = context;
         }
 
+        [HttpGet(Name = "All")]
+        [Route("All")]
         public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreateOnAscending()
         {
-                return this.context.Messages
-                .OrderBy(m => m.CreatedOn)
-                .ToList();
+            return this.context.Messages
+            .OrderBy(m => m.CreatedOn)
+            .ToList();
         }
 
+        [HttpPost(Name = "Create")]
+        [Route("Create")]
         public async Task<ActionResult> Create(MessageCreateBindingModel bindingModel)
         {
             Message message = new Message
