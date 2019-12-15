@@ -22,7 +22,7 @@ namespace Messages.App
         {
             services.AddDbContext<MessagesDbContext>(options =>
             {
-                options.UseSqlServer(this.Configuration.GetConnectionString("MessagesDbContextConnection"));
+                options.UseSqlServer("Server=LAPTOP-BDSBIU1R\\SQLEXPRESS;Database=MessagesDb;Integrated security=True;");
             });
         }
 

@@ -22,12 +22,14 @@ namespace Messages.App.Controllers
             this.context = context;
         }
 
-        public ActionResult AllOrderedByCreateOnAscending()
+        public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreateOnAscending()
         {
-
+                return this.context.Messages
+                .OrderBy(m => m.CreatedOn)
+                .ToList();
         }
 
-        public ActionResult Create(MessageCreateBindingModel bindingModel)
+        public async Task<ActionResult> Create(MessageCreateBindingModel bindingModel)
         {
             Message message = new Message
             {
@@ -36,8 +38,8 @@ namespace Messages.App.Controllers
                 CreatedOn = DateTime.UtcNow
             };
 
-            this.context.Messages.Add(message);
-            this.context.SaveChanges();
+            await this.context.Messages.AddAsync(message);
+            await this.context.SaveChangesAsync();
 
             return this.Ok();
         }
