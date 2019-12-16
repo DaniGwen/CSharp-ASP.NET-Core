@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Messages.App.Models;
 using Messages.Data;
 using Messages.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Messages.App.Controllers
 {
@@ -37,6 +35,7 @@ namespace Messages.App.Controllers
         {
             Message message = new Message
             {
+                Id = Guid.NewGuid().ToString(),
                 Contend = bindingModel.Contend,
                 User = bindingModel.Username,
                 CreatedOn = DateTime.UtcNow

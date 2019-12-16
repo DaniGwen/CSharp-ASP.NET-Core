@@ -24,6 +24,11 @@ namespace Messages.App
             {
                 options.UseSqlServer("Server=LAPTOP-BDSBIU1R\\SQLEXPRESS;Database=MessagesDb;Integrated security=True;");
             });
+
+            services.AddCors(options => options.AddPolicy(name: "MessagesPolicy", builder =>
+            {
+                builder.WithOrigins("");
+            }));
             services.AddControllers();
         }
 
