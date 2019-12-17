@@ -27,11 +27,12 @@ namespace Messages.App
 
             services.AddCors(options => options.AddPolicy(name: "MessagesCORSPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:8080")
+                builder.WithOrigins("https://localhost:44376/")
                 .AllowAnyHeader();
             }));
 
             services.AddControllers();
+            services.AddMvc(mvcOptions => mvcOptions.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +51,13 @@ namespace Messages.App
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("MessagesCORSPolicy");
-
             app.UseHttpsRedirection();
+
+            app.UseCors("MessagesCORSPolicy");
 
             app.UseRouting();
 
-            
+            app.UseMvc();
         }
     }
 }
