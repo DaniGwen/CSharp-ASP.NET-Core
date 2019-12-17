@@ -20,8 +20,8 @@ namespace Messages.App.Controllers
             this.context = context;
         }
 
-        [HttpGet(Name = "all")]
-        [Route("all")]
+        [HttpGet(Name = "All")]
+        [Route("All")]
         public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreateOnAscending()
         {
             return this.context.Messages
