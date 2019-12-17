@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Data", "Messages.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Models", "Messages.Models\Messages.Models.csproj", "{20826CC9-017B-4978-82EB-D033CC47CCC4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front-end", "Front-end", "{722C9D43-2E2E-4692-B6AC-C442036068B2}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\index.html = ..\..\..\..\Desktop\index.html
+		..\..\..\..\Desktop\MessagesApp.js = ..\..\..\..\Desktop\MessagesApp.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -25,10 +25,12 @@ namespace Messages.App
                 options.UseSqlServer("Server=LAPTOP-BDSBIU1R\\SQLEXPRESS;Database=MessagesDb;Integrated security=True;");
             });
 
-            services.AddCors(options => options.AddPolicy(name: "MessagesPolicy", builder =>
+            services.AddCors(options => options.AddPolicy(name: "MessagesCORSPolicy", builder =>
             {
-                builder.WithOrigins("");
+                builder.WithOrigins("http://localhost:8080")
+                .AllowAnyHeader();
             }));
+
             services.AddControllers();
         }
 
@@ -48,14 +50,13 @@ namespace Messages.App
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("MessagesCORSPolicy");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            
         }
     }
 }
