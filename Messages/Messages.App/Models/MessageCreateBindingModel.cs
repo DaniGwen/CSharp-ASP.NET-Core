@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Messages.App.Models
+namespace Messages.App.ModelsC:\Users\danig\source\repos\HostMessages\HostMessages\wwwroot\js\MessagesApp.js
 {
     public class MessageCreateBindingModel
     {
@@ -11,6 +11,6 @@ namespace Messages.App.Models
 
         public string Username { get; set; }
 
-        public string Contend { get; set; }
+        public string Content { get; set; }
     }
 }

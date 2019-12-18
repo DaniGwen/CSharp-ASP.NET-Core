@@ -36,7 +36,7 @@ namespace Messages.App.Controllers
             Message message = new Message
             {
                 Id = Guid.NewGuid().ToString(),
-                Contend = bindingModel.Contend,
+                Contend = bindingModel.Content,
                 User = bindingModel.Username,
                 CreatedOn = DateTime.UtcNow
             };
