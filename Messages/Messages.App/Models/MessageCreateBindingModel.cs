@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Messages.App.ModelsC:\Users\danig\source\repos\HostMessages\HostMessages\wwwroot\js\MessagesApp.js
+﻿namespace Messages.App.Models
 {
     public class MessageCreateBindingModel
     {
