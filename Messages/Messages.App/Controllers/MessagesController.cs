@@ -21,7 +21,7 @@ namespace Messages.App.Controllers
         }
 
         [HttpGet(Name = "All")]
-        [Route("All")]
+        [Route("all")]
         public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreateOnAscending()
         {
             return this.context.Messages
@@ -30,7 +30,7 @@ namespace Messages.App.Controllers
         }
 
         [HttpPost(Name = "Create")]
-        [Route("Create")]
+        [Route("create")]
         public async Task<ActionResult> Create(MessageCreateBindingModel bindingModel)
         {
             Message message = new Message

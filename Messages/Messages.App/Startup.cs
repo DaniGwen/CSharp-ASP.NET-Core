@@ -35,7 +35,8 @@ namespace Messages.App
                 });
             });
 
-            services.AddMvc(mvcOptions => mvcOptions.EnableEndpointRouting = false);
+            services.AddMvc(mvcOptions => mvcOptions.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +58,6 @@ namespace Messages.App
             }
 
             app.UseHttpsRedirection();
-
             app.UseMvc();
         }
     }
