@@ -11,7 +11,7 @@ namespace Messages.App.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MessagesController : ControllerBase
+    public class MessagesController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly MessagesDbContext context;
 

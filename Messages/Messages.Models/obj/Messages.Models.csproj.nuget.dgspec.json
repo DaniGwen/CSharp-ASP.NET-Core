@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj": {}
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Messages\\Messages.Models\\Messages.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj": {
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Messages\\Messages.Models\\Messages.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj",
+        "projectUniqueName": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Messages\\Messages.Models\\Messages.Models.csproj",
         "projectName": "Messages.Models",
-        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\Messages.Models.csproj",
-        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Messages\\Messages.Models\\obj\\",
+        "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Messages\\Messages.Models\\Messages.Models.csproj",
+        "packagesPath": "C:\\Users\\deko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Messages\\Messages.Models\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\deko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,12 +50,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

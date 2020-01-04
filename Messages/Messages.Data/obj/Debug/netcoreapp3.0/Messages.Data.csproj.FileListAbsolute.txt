@@ -11,3 +11,16 @@ C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\bin\D
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.csproj.CopyComplete
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.dll
 C:\Users\danig\Documents\GitHub\CSharp ASP.NET Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.deps.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.runtimeconfig.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.runtimeconfig.dev.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Data.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Models.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\bin\Debug\netcoreapp3.0\Messages.Models.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.csprojAssemblyReference.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.AssemblyInfoInputs.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.AssemblyInfo.cs
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.csproj.CopyComplete
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\Messages\Messages.Data\obj\Debug\netcoreapp3.0\Messages.Data.pdb
