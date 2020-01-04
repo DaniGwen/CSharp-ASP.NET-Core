@@ -61,7 +61,7 @@ namespace DigitalCoolBook.App
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
