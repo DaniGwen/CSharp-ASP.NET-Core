@@ -1424,6 +1424,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "DigitalCoolBook.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.0"
+        },
+        "compile": {
+          "bin/placeholder/DigitalCoolBook.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalCoolBook.Models.dll": {}
+        }
       }
     }
   },
@@ -5338,10 +5351,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "DigitalCoolBook.Models/1.0.0": {
+      "type": "project",
+      "path": "../DigitalCoolBook.Models/DigitalCoolBook.Models.csproj",
+      "msbuildProject": "../DigitalCoolBook.Models/DigitalCoolBook.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "DigitalCoolBook.Models >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.0",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.0",
@@ -5378,7 +5397,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+              "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

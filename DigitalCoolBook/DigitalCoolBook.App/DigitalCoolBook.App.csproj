@@ -18,4 +18,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalCoolBook.Models\DigitalCoolBook.Models.csproj" />
+  </ItemGroup>
+
 </Project>
