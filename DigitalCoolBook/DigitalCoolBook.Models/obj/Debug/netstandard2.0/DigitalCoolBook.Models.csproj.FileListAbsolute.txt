@@ -1,0 +1,5 @@
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Models\bin\Debug\netstandard2.0\DigitalCoolBook.Models.deps.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Models\bin\Debug\netstandard2.0\DigitalCoolBook.Models.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Models\obj\Debug\netstandard2.0\DigitalCoolBook.Models.csprojAssemblyReference.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Models\obj\Debug\netstandard2.0\DigitalCoolBook.Models.AssemblyInfoInputs.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Models\obj\Debug\netstandard2.0\DigitalCoolBook.Models.AssemblyInfo.cs
