@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.Models
 {
     public class Subject
     {
-        public int Id { get; set; }
+        [Key]
+        public int SubjectId { get; set; }
 
+        [StringLength(30)]
         public string Name { get; set; }
 
         public string Abbreviation { get; set; }

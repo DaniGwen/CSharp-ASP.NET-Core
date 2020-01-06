@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalCoolBook.Models
 {
     public class GradeParalelo
     {
-        public int Id { get; set; }
+        [Key]
+        public int GradeParaleloId { get; set; }
 
         public string Name { get; set; }
 

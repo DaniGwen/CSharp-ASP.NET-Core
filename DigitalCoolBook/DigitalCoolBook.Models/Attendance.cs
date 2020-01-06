@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalCoolBook.Models
 {
     public class Attendance
     {
-        public int Id { get; set; }
+        [Key]
+        public int AttendanceId { get; set; }
 
         public DateTime Date { get; set; }
 
