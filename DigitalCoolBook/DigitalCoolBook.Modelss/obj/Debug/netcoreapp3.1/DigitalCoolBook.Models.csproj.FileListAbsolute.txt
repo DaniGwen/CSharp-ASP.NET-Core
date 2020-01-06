@@ -1,0 +1,7 @@
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.deps.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\obj\Debug\netcoreapp3.1\DigitalCoolBook.Models.AssemblyInfoInputs.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\obj\Debug\netcoreapp3.1\DigitalCoolBook.Models.AssemblyInfo.cs
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\obj\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Modelss\obj\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb

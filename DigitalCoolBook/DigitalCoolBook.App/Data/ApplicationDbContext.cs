@@ -27,4 +27,8 @@ namespace DigitalCoolBook.App.Data
         {
         }
     }
+
+    public class Attendance
+    {
+    }
 }
