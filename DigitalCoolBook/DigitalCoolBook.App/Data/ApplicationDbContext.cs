@@ -6,7 +6,7 @@ namespace DigitalCoolBook.App.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<DigitalCoolBook.Models.Attendance> Attendances { get; set; }
 
         public DbSet<GradeParalelo> GradeParalelos { get; set; }
 

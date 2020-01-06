@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.App\\Panda.App.csproj": {}
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.App\\Panda.App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.App\\Panda.App.csproj": {
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.App\\Panda.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.App\\Panda.App.csproj",
+        "projectUniqueName": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.App\\Panda.App.csproj",
         "projectName": "Panda.App",
-        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.App\\Panda.App.csproj",
-        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.App\\obj\\",
+        "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.App\\Panda.App.csproj",
+        "packagesPath": "C:\\Users\\deko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.App\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\deko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\Panda.Data.csproj": {
-                "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\Panda.Data.csproj"
+              "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\Panda.Data.csproj": {
+                "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\Panda.Data.csproj"
               }
             }
           }
@@ -75,6 +78,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -83,21 +104,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\Panda.Data.csproj": {
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\Panda.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\Panda.Data.csproj",
+        "projectUniqueName": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\Panda.Data.csproj",
         "projectName": "Panda.Data",
-        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\Panda.Data.csproj",
-        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Data\\obj\\",
+        "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\Panda.Data.csproj",
+        "packagesPath": "C:\\Users\\deko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\deko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -110,8 +134,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\Panda.Domein.csproj": {
-                "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\Panda.Domein.csproj"
+              "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\Panda.Domein.csproj": {
+                "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\Panda.Domein.csproj"
               }
             }
           }
@@ -165,21 +189,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\Panda.Domein.csproj": {
+    "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\Panda.Domein.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\Panda.Domein.csproj",
+        "projectUniqueName": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\Panda.Domein.csproj",
         "projectName": "Panda.Domein",
-        "projectPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\Panda.Domein.csproj",
-        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danig\\Documents\\GitHub\\CSharp ASP.NET Core\\Panda\\Panda.Domein\\obj\\",
+        "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\Panda.Domein.csproj",
+        "packagesPath": "C:\\Users\\deko\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\Panda\\Panda.Domein\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\deko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -223,7 +250,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

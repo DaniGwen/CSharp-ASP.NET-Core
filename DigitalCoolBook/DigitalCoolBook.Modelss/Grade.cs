@@ -5,6 +5,11 @@ namespace DigitalCoolBook.Models
 {
     public class Grade
     {
+        public Grade()
+        {
+            this.GradeParalelos = new List<GradeParalelo>();
+        }
+
         [Key]
         public int GradeId { get; set; }
 

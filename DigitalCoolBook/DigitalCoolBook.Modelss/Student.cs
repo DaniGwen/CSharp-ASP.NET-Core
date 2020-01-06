@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalCoolBook.Models
 {
-    public class Student : IdentityUser
+    public class Student
     {
         [Key]
         public int StudentId { get; set; }
