@@ -41,6 +41,7 @@ namespace DigitalCoolBook.Models
 
         public int Telephone { get; set; }
 
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public ICollection<Attendance> Attendances { get; set; }
