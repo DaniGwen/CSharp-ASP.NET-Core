@@ -1,8 +1,46 @@
-﻿@{
+﻿@using DigitalCoolBook.App.Areas.Identity.Pages.Account
+@model LoginModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid  w-50">
+    <section>
+        <form id="account" method="post">
+            <br />
+            <h2 class="text-center">Login</h2>
+            <hr class="bg-dark hr-2 " />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label class="font-weight-bold" asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" placeholder="Email..." />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" placeholder="Password..." />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+            <div class="form-group">
+                <p>
+                    <a id="forgot-password" href="/Identity/Account/ForgotPassword">Forgot your password?</a>
+                </p>
+                <p>
+                    <a href="/Identity/Account/Register">Register</a>
+                </p>
+            </div>
+        </form>
+    </section>
 </div>

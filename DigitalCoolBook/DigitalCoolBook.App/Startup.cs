@@ -32,7 +32,7 @@ namespace DigitalCoolBook.App
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser<string>>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -64,11 +64,8 @@ namespace DigitalCoolBook.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             };
-            app.UseMvc();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();

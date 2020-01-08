@@ -23,6 +23,11 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View("Identity/Account/Login");
+        }
+
         public IActionResult Privacy()
         {
             return View();
