@@ -8,6 +8,12 @@ namespace DigitalCoolBook.Models
 {
     public class Student
     {
+        public Student()
+        {
+            this.ScoreRecords = new List<ScoreRecord>();
+            this.Attendances = new List<Attendance>();
+        }
+
         [Key]
         public int StudentId { get; set; }
 
@@ -23,7 +29,7 @@ namespace DigitalCoolBook.Models
         [StringLength(20,ErrorMessage ="Sex must be between 1 and 20 characters!")]
         public string Sex { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
         public int MobilePhone { get; set; }
 
         [StringLength(100,ErrorMessage ="Address length must be less than 100!")]
@@ -35,10 +41,13 @@ namespace DigitalCoolBook.Models
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string MotherName { get; set; }
 
+        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
         public int MotherMobileNumber { get; set; }
 
+        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
         public int FatherMobileNumber { get; set; }
 
+        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
         public int Telephone { get; set; }
 
         [DataType(DataType.Password)]

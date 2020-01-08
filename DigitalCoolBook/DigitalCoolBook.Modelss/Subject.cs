@@ -8,7 +8,8 @@ namespace DigitalCoolBook.Models
         [Key]
         public int SubjectId { get; set; }
 
-        [StringLength(30)]
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
 
         public string Abbreviation { get; set; }
