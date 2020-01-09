@@ -60,14 +60,14 @@
                             <div class="log_chat_area d-flex align-items-center">
                                 @if (!this.User.Identity.IsAuthenticated)
                                 {
-                                    <a href="/Identity/Account/Login">
-                                        <i class="flaticon-user"></i>
-                                        <span>Log in</span>
-                                    </a>
+                                <a href="/Identity/Account/Login">
+                                    <i class="flaticon-user"></i>
+                                    <span>Log in</span>
+                                </a>
                                 }
                                 else
                                 {
-                                    <h3>Welcome @User.Identity.Name</h3>
+                                <h3>Welcome @User.Identity.Name</h3>
                                 }
                             </div>
                         </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
     </header>
-    <div class="slider_area ">
+    <div class="slider_area">
         <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
@@ -105,12 +105,10 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="footer footer_bg_1">
         <div class="footer_top">
             <div class="container">
                 <div class="row">
-                    
                     <div class="col-xl-2 col-md-6 col-lg-2">
                         <div class="footer_widget">
                             <h3 class="footer_title">
