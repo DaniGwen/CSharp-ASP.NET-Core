@@ -60,6 +60,25 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
+            public string Name { get; set; }
+
+            [Required]
+            public DateTime DateOfBirth { get; set; }
+
+            [StringLength(100, ErrorMessage = "Must be between 3 and 100 characters!", MinimumLength = 3)]
+            public string PlaceOfBirth { get; set; }
+
+            [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
+            public string Sex { get; set; }
+
+            [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+            public int MobilePhone { get; set; }
+
+            [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+            public int Telephone { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DigitalCoolBook.App.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -21,11 +22,6 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Login()
-        {
-            return View("Identity/Account/Login");
         }
 
         public IActionResult Privacy()
