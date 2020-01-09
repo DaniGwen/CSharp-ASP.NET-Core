@@ -29,15 +29,16 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Register()
         {
+
             return View();
         }
 

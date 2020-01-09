@@ -121,8 +121,7 @@ namespace DigitalCoolBook.App.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FatherMobileNumber")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.Property<string>("FatherName")
                         .HasColumnType("nvarchar(50)")
@@ -132,12 +131,10 @@ namespace DigitalCoolBook.App.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("MobilePhone")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.Property<int>("MotherMobileNumber")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.Property<string>("MotherName")
                         .HasColumnType("nvarchar(50)")
@@ -160,8 +157,7 @@ namespace DigitalCoolBook.App.Data.Migrations
                         .HasMaxLength(20);
 
                     b.Property<int>("Telephone")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.HasKey("StudentId");
 
@@ -224,8 +220,7 @@ namespace DigitalCoolBook.App.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("MobilePhone")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -244,8 +239,7 @@ namespace DigitalCoolBook.App.Data.Migrations
                         .HasMaxLength(20);
 
                     b.Property<int>("Telephone")
-                        .HasColumnType("int")
-                        .HasMaxLength(20);
+                        .HasColumnType("int");
 
                     b.HasKey("TeacherId");
 

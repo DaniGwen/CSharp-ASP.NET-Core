@@ -18,21 +18,21 @@ namespace DigitalCoolBook.Models
         public int StudentId { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage ="Name must be between 3 and 50 characters!", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string Name { get; set; }
 
         public DateTime Date { get; set; }
 
-        [StringLength(200,ErrorMessage ="Characters must be between 3 and 200!")]
+        [StringLength(200, ErrorMessage = "Characters must be between 3 and 200!")]
         public string PlaceOfBirth { get; set; }
 
-        [StringLength(20,ErrorMessage ="Sex must be between 1 and 20 characters!")]
+        [StringLength(20, ErrorMessage = "Sex must be between 1 and 20 characters!")]
         public string Sex { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int MobilePhone { get; set; }
 
-        [StringLength(100,ErrorMessage ="Address length must be less than 100!")]
+        [StringLength(100, ErrorMessage = "Address length must be less than 100!")]
         public string Address { get; set; }
 
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -41,13 +41,13 @@ namespace DigitalCoolBook.Models
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string MotherName { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int MotherMobileNumber { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int FatherMobileNumber { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int Telephone { get; set; }
 
         [DataType(DataType.Password)]

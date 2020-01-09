@@ -21,10 +21,10 @@ namespace DigitalCoolBook.Models
         [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
         public string Sex { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int MobilePhone { get; set; }
 
-        [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
+        [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int Telephone { get; set; }
 
         [DataType(DataType.Password)]

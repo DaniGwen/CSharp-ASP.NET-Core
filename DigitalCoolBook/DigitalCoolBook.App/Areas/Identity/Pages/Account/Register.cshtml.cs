@@ -74,10 +74,8 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
             public string Sex { get; set; }
 
-            [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
             public int MobilePhone { get; set; }
 
-            [MaxLength(20, ErrorMessage = "Maximum digits is 20!")]
             public int Telephone { get; set; }
         }
 

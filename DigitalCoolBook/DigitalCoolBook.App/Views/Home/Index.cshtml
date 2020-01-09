@@ -14,21 +14,27 @@
                 <h2>Welcome to Digital Cool Book!</h2>
                 <div>
                     <h5>
-                        <button style="background-color:#441dde" href="/Identity/Account/Login" type="button" class="btn btn-primary">
+                        <a style="background-color:#441dde" href="/Identity/Account/Login" type="button" class="btn btn-primary">
                             Login
-                        </button>
+                        </a>
                         if you are registered.
                     </h5>
                 </div>
                 <div>
                     <h5>
-                        <button style="background-color:#6e40dd" href="/Identity/Account/Register" type="button" class="btn btn-primary">
+                        <a style="background-color:#6e40dd" href="/Identity/Account/Register" type="button" class="btn btn-primary">
                             Register
-                        </button>
+                        </a>
                         if you are new.
                     </h5>
                 </div>
             </div>
         </div>
+    </div>
+}
+else
+{
+    <div>
+        <h2>Welcome @User.Identity.Name!</h2>
     </div>
 }
