@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -9,12 +10,14 @@ using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 {
@@ -84,6 +87,25 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             public int Telephone { get; set; }
 
         }
+
+        public string Hash(string password)
+        {
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            };
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA1,
+            iterationCount: 10000,
+            numBytesRequested: 256 / 8));
+
+            return hashed.ToString();
+        }
+
         public void AddTeacherToDatabase(ApplicationDbContext context)
         {
             var isRegisteredTeacher = context.Teachers
@@ -96,7 +118,7 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
                     DateOfBirth = this.Input.DateOfBirth,
                     Email = this.Input.Email,
                     MobilePhone = this.Input.MobilePhone,
-                    Password = this.Input.Password,
+                    Password = this.Hash(this.Input.Password),
                     PlaceOfBirth = this.Input.PlaceOfBirth,
                     Sex = this.Input.Sex,
                     Name = this.Input.Name,
@@ -107,6 +129,7 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
                 context.SaveChanges();
             }
         }
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
