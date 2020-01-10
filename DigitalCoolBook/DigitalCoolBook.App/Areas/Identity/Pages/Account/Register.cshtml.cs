@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using DigitalCoolBook.App.Data;
+using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +25,16 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
+            this._context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -77,8 +82,31 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             public int MobilePhone { get; set; }
 
             public int Telephone { get; set; }
-        }
 
+        }
+        public void AddTeacherToDatabase(ApplicationDbContext context)
+        {
+            var isRegisteredTeacher = context.Teachers
+                .Any(teacher => teacher.Email == this.Input.Email);
+
+            if (!isRegisteredTeacher)
+            {
+                var teacher = new Teacher
+                {
+                    DateOfBirth = this.Input.DateOfBirth,
+                    Email = this.Input.Email,
+                    MobilePhone = this.Input.MobilePhone,
+                    Password = this.Input.Password,
+                    PlaceOfBirth = this.Input.PlaceOfBirth,
+                    Sex = this.Input.Sex,
+                    Name = this.Input.Name,
+                    Telephone = this.Input.Telephone
+                };
+
+                context.Teachers.Add(teacher);
+                context.SaveChanges();
+            }
+        }
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -87,6 +115,8 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            this.AddTeacherToDatabase(_context);
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
