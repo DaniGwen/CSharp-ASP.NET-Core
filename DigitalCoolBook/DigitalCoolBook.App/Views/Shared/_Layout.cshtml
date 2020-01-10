@@ -1,10 +1,13 @@
 ﻿<!doctype html>
 <html class="no-js" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"] = DigitalCoolBook</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -56,10 +59,10 @@
                             <div class="log_chat_area d-flex align-items-center">
                                 @if (this.User.Identity.IsAuthenticated)
                                 {
-                                <a href="/Identity/Account/Logout">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                     <i class="flaticon-user"></i>
-                                    <span>Logout</span>
-                                </a>
+                                    <button type="submit" class="btn btn-outline-primary">Logout</button>
+                                </form>
                                 }
                             </div>
                         </div>
@@ -172,6 +175,6 @@
     <script src="js/mail-script.js"></script>
 
     <script src="js/main.js"></script>
-    @RenderSection("Scripts", required: false)
+    @*@RenderSection("Scripts", required: false)*@
 </body>
 </html>

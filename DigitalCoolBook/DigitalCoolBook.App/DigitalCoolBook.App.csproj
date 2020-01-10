@@ -30,4 +30,9 @@
     <ProjectReference Include="..\DigitalCoolBook.Modelss\DigitalCoolBook.Models.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Shared\" />
+  </ItemGroup>
+
 </Project>
