@@ -12,5 +12,10 @@ namespace DigitalCoolBook.App.Controllers
         {
             return View();
         }
+
+        public IActionResult RegisterStudent()
+        {
+            return View();
+        }
     }
 }
