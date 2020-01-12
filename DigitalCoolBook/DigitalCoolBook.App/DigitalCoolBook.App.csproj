@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\site.js" />
+    <Content Include="wwwroot\207 Edu mark DOC\.vscode\settings.json" />
   </ItemGroup>
 
 
@@ -28,12 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalCoolBook.Modelss\DigitalCoolBook.Models.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Pages\Shared\" />
-    <Folder Include="Views\Subjects\" />
   </ItemGroup>
 
 </Project>

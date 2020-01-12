@@ -37,13 +37,10 @@ namespace DigitalCoolBook.App
                 options.User.RequireUniqueEmail = false;
             });
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;
-            })
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
