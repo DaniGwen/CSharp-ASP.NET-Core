@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS here -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
@@ -32,14 +32,7 @@
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid p-0">
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-xl-2 col-lg-2">
-                            <div class="logo-img">
-                                <a href="/Home/Index">
-                                    <img src="/img/logo.png" alt="">
-                                </a>
-                            </div>
-                        </div>
+                    <div class="row align-items-baseline no-gutters">
                         <div class="col-xl-7 col-lg-7">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
@@ -63,7 +56,7 @@
                                 {
                                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                         <i class="flaticon-user"></i>
-                                        <button type="submit" class="btn btn-secondary">Logout</button>
+                                        <button type="submit" class="btn btn-secondary">Отписване</button>
                                     </form>
                                 }
                             </div>
@@ -88,14 +81,18 @@
                     <div class="col-xl-6 col-md-6">
                         <div class="slider_info">
                             <h3>
-                                Learn Online!
+                                Учи онлайн!
                             </h3>
-                            @if (this.User.Identity.IsAuthenticated)
+                            @if (this.User.IsInRole("Teacher"))
                             {
-                                <a href="/Subjects/Subjects" class="boxed_btn">Choose Subject</a>
-                                <a href="#" class="boxed_btn">Choose Grade</a>
+                                <a href="/Subjects/Subjects" class="boxed_btn">Избери предмет</a>
+                                <a href="#" class="boxed_btn">Избери клас</a>
                             }
-
+                            else if (this.User.IsInRole("Admin"))
+                            {
+                                <a href="/Subjects/Subjects" class="boxed_btn">Регистрация на Учител</a>
+                                <a href="#" class="boxed_btn">Избери клас</a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -103,6 +100,7 @@
         </div>
     </div>
     <div class="container body-content">
+        <img src="~/img/banner/bradcam.png" />
             @RenderBody()
     </div>
     <footer class="footer footer_bg_1">
@@ -112,7 +110,7 @@
                     <div class="col-xl-2 col-md-6 col-lg-2">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                Resources
+                                Ресурси
                             </h3>
                             <ul>
                                 <li><a href="#"></a></li>
@@ -125,7 +123,7 @@
                     <div class="col-xl-3 col-md-6 col-lg-3">
                         <div class="footer_widget">
                             <h3 class="footer_title">
-                                Address
+                                Адрес
                             </h3>
                             <p>
                                 200, D-block, Green lane USA <br>
