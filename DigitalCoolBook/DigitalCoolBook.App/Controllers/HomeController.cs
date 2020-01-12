@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DigitalCoolBook.App.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -19,7 +14,6 @@ namespace DigitalCoolBook.App.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -30,18 +24,18 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public IActionResult Register()
-        {
+        //[HttpPost]
+        //public IActionResult Register()
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -71,10 +71,32 @@ namespace DigitalCoolBook.App
                                 grades.Add(grade);
                             }
                         }
-
                         context.Grades.AddRange(grades);
                         context.SaveChanges();
                     }
+
+                    if (!context.Subjects.Any())
+                    {
+                        var subjects = new List<string>()
+                        {
+                            "Математика", "Български", "Литература", "География", "История", "Графичен дизайн"
+                        };
+
+                        var subjectsList = new List<Subject>();
+
+                        foreach (var subject in subjects)
+                        {
+                            var subjectForContext = new Subject
+                            {
+                                Name = subject
+                            };
+
+                            subjectsList.Add(subjectForContext);
+                        }
+                        context.Subjects.AddRange(subjectsList);
+                        context.SaveChanges();
+                    }
+
                 }
             }
 
@@ -89,6 +111,8 @@ namespace DigitalCoolBook.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             };
+
+            app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

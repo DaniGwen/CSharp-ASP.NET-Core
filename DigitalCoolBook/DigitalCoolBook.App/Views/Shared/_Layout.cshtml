@@ -88,7 +88,12 @@
                             <h3>
                                 Learn Online!
                             </h3>
-                            <a href="#" class="boxed_btn">Choose Subject</a>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <a href="/Subjects/Subjects" class="boxed_btn">Choose Subject</a>
+                                <a href="#" class="boxed_btn">Choose Grade</a>
+                            }
+
                         </div>
                     </div>
                 </div>
