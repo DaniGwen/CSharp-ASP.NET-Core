@@ -29,6 +29,7 @@ namespace DigitalCoolBook.App
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -51,6 +52,11 @@ namespace DigitalCoolBook.App
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                 {
                     context.Database.EnsureCreated();
+
+                    if (!context.UserRoles.Any())
+                    {
+                        
+                    }
 
                     if (!context.Grades.Any())
                     {

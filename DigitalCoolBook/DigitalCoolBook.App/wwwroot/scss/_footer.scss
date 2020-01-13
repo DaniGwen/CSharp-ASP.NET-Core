@@ -3,12 +3,11 @@
 }
 .footer{
     background-repeat: no-repeat;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-position:bottom;
+    background-size:cover;
     .footer_top{
         padding-top: 145px;
-        padding-bottom: 129px;
+        padding-bottom: 120px;
         @media #{$mobile_device} {
             padding-top: 60px;
             padding-bottom: 30px;
