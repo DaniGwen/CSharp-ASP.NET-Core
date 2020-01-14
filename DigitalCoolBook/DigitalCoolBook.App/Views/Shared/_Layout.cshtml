@@ -58,6 +58,13 @@
                                         <button type="submit" class="btn btn-secondary">Отписване</button>
                                     </form>
                                 }
+                                else if (!this.User.Identity.IsAuthenticated)
+                                {
+                                    <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="Index">
+                                        <i class="flaticon-user"></i>
+                                        <button type="submit" class="btn btn-secondary">Администратор</button>
+                                    </form>
+                                }
                             </div>
                         </div>
                         <div class="col-12">

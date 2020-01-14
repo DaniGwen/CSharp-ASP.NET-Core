@@ -22,18 +22,18 @@ using Microsoft.Extensions.Options;
 namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class RegisterTeacherModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<RegisterTeacherModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
-        public RegisterModel(
+        public RegisterTeacherModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterTeacherModel> logger,
             IEmailSender emailSender,
             ApplicationDbContext context)
         {
@@ -88,7 +88,7 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         }
 
-        public string Hash(string password)
+        public string HashPassword(string password)
         {
             byte[] salt = new byte[128 / 8];
             using (var rng = RandomNumberGenerator.Create())
@@ -106,28 +106,22 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             return hashed.ToString();
         }
 
-        public void AddTeacherToDatabase(ApplicationDbContext context)
+        public void AddTeacherToDatabase()
         {
-            var isRegisteredTeacher = context.Teachers
-                .Any(teacher => teacher.Email == this.Input.Email);
-
-            if (!isRegisteredTeacher)
+            var teacher = new Teacher
             {
-                var teacher = new Teacher
-                {
-                    DateOfBirth = this.Input.DateOfBirth,
-                    Email = this.Input.Email,
-                    MobilePhone = this.Input.MobilePhone,
-                    Password = this.Hash(this.Input.Password),
-                    PlaceOfBirth = this.Input.PlaceOfBirth,
-                    Sex = this.Input.Sex,
-                    Name = this.Input.Name,
-                    Telephone = this.Input.Telephone
-                };
+                DateOfBirth = this.Input.DateOfBirth,
+                Email = this.Input.Email,
+                MobilePhone = this.Input.MobilePhone,
+                Password = this.HashPassword(this.Input.Password),
+                PlaceOfBirth = this.Input.PlaceOfBirth,
+                Sex = this.Input.Sex,
+                Name = this.Input.Name,
+                Telephone = this.Input.Telephone
+            };
 
-                context.Teachers.Add(teacher);
-                context.SaveChanges();
-            }
+            _context.Teachers.Add(teacher);
+            _context.SaveChanges();
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -138,7 +132,7 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            this.AddTeacherToDatabase(_context);
+            this.AddTeacherToDatabase();
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -146,6 +140,7 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

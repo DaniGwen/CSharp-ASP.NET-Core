@@ -46,15 +46,12 @@ namespace DigitalCoolBook.App
             {
                 mvcOptions.EnableEndpointRouting = false;
             });
-            services.AddOptions();
-            services.Configure<AdminConfig>(Configuration.GetSection("AdminConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            this.CreateRoles(serviceProvider).Wait();
-
+            
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
@@ -63,47 +60,19 @@ namespace DigitalCoolBook.App
 
                     if (!context.Grades.Any())
                     {
-                        var paraleloArray = new string[8] { "а", "б", "в", "г", "д", "е", "ж", "з" };
-                        var grades = new List<Grade>();
-
-                        foreach (var paralelo in paraleloArray)
-                        {
-                            for (int j = 1; j <= 12; j++)
-                            {
-                                var grade = new Grade
-                                {
-                                    Name = j.ToString() + paralelo
-                                };
-                                grades.Add(grade);
-                            }
-                        }
-                        context.Grades.AddRange(grades);
+                        context.Grades.AddRange(this.AddParalelos());
                         context.SaveChanges();
                     }
 
                     if (!context.Subjects.Any())
                     {
-                        var subjects = new List<string>()
-                        {
-                            "Математика", "Български", "Литература", "География", "История", "Графичен дизайн"
-                        };
-
-                        var subjectsList = new List<Subject>();
-
-                        foreach (var subject in subjects)
-                        {
-                            var subjectForContext = new Subject
-                            {
-                                Name = subject
-                            };
-
-                            subjectsList.Add(subjectForContext);
-                        }
-                        context.Subjects.AddRange(subjectsList);
+                        context.Subjects.AddRange(this.AddSubjects());
                         context.SaveChanges();
                     }
                 }
             }
+
+            this.CreateRoles(serviceProvider).Wait();
 
             if (env.IsDevelopment())
             {
@@ -125,6 +94,47 @@ namespace DigitalCoolBook.App
             app.UseAuthorization();
             app.UseMvcWithDefaultRoute();
 
+        }
+
+        private List<Grade> AddParalelos()
+        {
+            var paraleloArray = new string[8] { "а", "б", "в", "г", "д", "е", "ж", "з" };
+            var grades = new List<Grade>();
+
+            foreach (var paralelo in paraleloArray)
+            {
+                for (int j = 1; j <= 12; j++)
+                {
+                    var grade = new Grade
+                    {
+                        Name = j.ToString() + paralelo
+                    };
+                    grades.Add(grade);
+                }
+            }
+
+            return grades;
+        }
+
+        private List<Subject> AddSubjects()
+        {
+            var subjects = new List<string>()
+                        {
+                            "Математика", "Български", "Литература", "География", "История", "Графичен дизайн"
+                        };
+
+            var subjectsList = new List<Subject>();
+
+            foreach (var subject in subjects)
+            {
+                var subjectForContext = new Subject
+                {
+                    Name = subject
+                };
+
+                subjectsList.Add(subjectForContext);
+            }
+            return subjectsList;
         }
 
         private async Task CreateRoles(IServiceProvider serviceProvider)
