@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS here -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
@@ -57,12 +57,21 @@
                                         <i class="flaticon-user"></i>
                                         <button type="submit" class="btn btn-secondary">Отписване</button>
                                     </form>
+                                    if (this.User.IsInRole("Admin"))
+                                    {
+                                        <div class="mx-4">
+                                            <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="Index">
+                                                <i class="flaticon-user"></i>
+                                                <button class="btn btn-primary">Администратор</button>
+                                            </form>
+                                        </div>
+                                    }
                                 }
                                 else if (!this.User.Identity.IsAuthenticated)
                                 {
                                     <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="Index">
                                         <i class="flaticon-user"></i>
-                                        <button type="submit" class="btn btn-secondary">Администратор</button>
+                                        <button type="submit" class="btn btn-secondary">Вляз като Администратор</button>
                                     </form>
                                 }
                             </div>
@@ -96,8 +105,10 @@
                             }
                             else if (this.User.IsInRole("Admin"))
                             {
-                                <a href="/Subjects/Subjects" class="boxed_btn">Регистрация на Учител</a>
-                                <a href="#" class="boxed_btn">Избери клас</a>
+                                <div>
+                                    <a href="/Register/RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
+                                    <a href="/Register/RegisterStudent" class="boxed_btn">Регистрация на Ученик</a>
+                                </div>
                             }
                         </div>
                     </div>
@@ -108,7 +119,7 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-    <footer class="footer footer_bg_1" >
+    <footer class="footer footer_bg_1">
         <div class="footer_top">
             <div class="container">
                 <div class="row">
@@ -155,33 +166,33 @@
             </div>
         </div>
     </footer>
-        <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
-        <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="~/js/popper.min.js"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="~/js/owl.carousel.min.js"></script>
-        <script src="~/js/isotope.pkgd.min.js"></script>
-        <script src="~/js/ajax-form.js"></script>
-        <script src="~/js/waypoints.min.js"></script>
-        <script src="~/js/jquery.counterup.min.js"></script>
-        <script src="~/js/imagesloaded.pkgd.min.js"></script>
-        <script src="~/js/scrollIt.js"></script>
-        <script src="~/js/jquery.scrollUp.min.js"></script>
-        <script src="~/js/wow.min.js"></script>
-        <script src="~/js/nice-select.min.js"></script>
-        <script src="~/js/jquery.slicknav.min.js"></script>
-        <script src="~/js/jquery.magnific-popup.min.js"></script>
-        <script src="~/js/plugins.js"></script>
-        <script src="~/js/gijgo.min.js"></script>
+    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/ajax-form.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/js/scrollIt.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/nice-select.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/gijgo.min.js"></script>
 
-        <!--contact js-->
-        <script src="~/js/contact.js"></script>
-        <script src="~/js/jquery.ajaxchimp.min.js"></script>
-        <script src="~/js/jquery.form.js"></script>
-        <script src="~/js/jquery.validate.min.js"></script>
-        <script src="~/js/mail-script.js"></script>
+    <!--contact js-->
+    <script src="~/js/contact.js"></script>
+    <script src="~/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/jquery.form.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/mail-script.js"></script>
 
-        <script src="~/js/main.js"></script>
+    <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

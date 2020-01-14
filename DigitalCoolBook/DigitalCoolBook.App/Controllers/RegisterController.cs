@@ -16,21 +16,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using IdentityUser = Microsoft.AspNetCore.Identity.IdentityUser;
 
 namespace DigitalCoolBook.App.Controllers
 {
     [Authorize(Roles = ("Admin"))]
     public class RegisterController : Controller
     {
-        private readonly SignInManager<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> _signInManager;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterTeacherModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
         public RegisterController(
-            Microsoft.AspNetCore.Identity.UserManager<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> userManager,
-            SignInManager<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> signInManager,
+            Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
             ILogger<RegisterTeacherModel> logger,
             IEmailSender emailSender,
             ApplicationDbContext context)

@@ -44,9 +44,12 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            //[Required]
+            //[EmailAddress]
+            //public string Email { get; set; }
+
+            [StringLength(30,MinimumLength = 3)]
+            public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -77,13 +80,11 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
-            var user = await _userManager.FindByEmailAsync(Input.Email);
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {

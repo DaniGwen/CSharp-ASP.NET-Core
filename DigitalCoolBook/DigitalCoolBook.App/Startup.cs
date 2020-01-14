@@ -159,7 +159,7 @@ namespace DigitalCoolBook.App
 
                 var userPassword = Configuration.GetValue<string>("AdminConfig:Password");
 
-                IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword.ToString());
+                IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword);
 
                 //Add default User to Role Admin    
                 if (addingPasswordToUser.Succeeded)
