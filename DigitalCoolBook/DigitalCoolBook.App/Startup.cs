@@ -9,11 +9,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DigitalCoolBook.Models;
+using System.Threading.Tasks;
+using System;
+using DigitalCoolBook.App.Configuration;
 
 namespace DigitalCoolBook.App
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -42,21 +46,20 @@ namespace DigitalCoolBook.App
             {
                 mvcOptions.EnableEndpointRouting = false;
             });
+            services.AddOptions();
+            services.Configure<AdminConfig>(Configuration.GetSection("AdminConfig"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            this.CreateRoles(serviceProvider).Wait();
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                 {
                     context.Database.EnsureCreated();
-
-                    if (!context.UserRoles.Any())
-                    {
-                        
-                    }
 
                     if (!context.Grades.Any())
                     {
@@ -99,7 +102,6 @@ namespace DigitalCoolBook.App
                         context.Subjects.AddRange(subjectsList);
                         context.SaveChanges();
                     }
-
                 }
             }
 
@@ -122,6 +124,58 @@ namespace DigitalCoolBook.App
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvcWithDefaultRoute();
+
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles 
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            bool isUserAddedInRole = await roleManager.RoleExistsAsync("Admin");
+            if (!isUserAddedInRole)
+            {
+                // first we create Admin rool    
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                await roleManager.CreateAsync(role);
+
+                //Here we create a Admin super user who will maintain the website                   
+
+                var user = new IdentityUser();
+                user.UserName = Configuration.GetValue<string>("AdminConfig:Username");
+                user.Email = Configuration.GetValue<string>("AdminConfig:Email");
+
+                var userPassword = Configuration.GetValue<string>("AdminConfig:Password");
+
+                IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword.ToString());
+
+                //Add default User to Role Admin    
+                if (addingPasswordToUser.Succeeded)
+                {
+                    var result1 = await userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
+
+            // creating Creating Student role     
+            isUserAddedInRole = await roleManager.RoleExistsAsync("Student");
+            if (!isUserAddedInRole)
+            {
+                var role = new IdentityRole();
+                role.Name = "Student";
+                await roleManager.CreateAsync(role);
+            }
+
+            // creating Creating Teacher role     
+            isUserAddedInRole = await roleManager.RoleExistsAsync("Teacher");
+            if (!isUserAddedInRole)
+            {
+                var role = new IdentityRole();
+                role.Name = "Teacher";
+                await roleManager.CreateAsync(role);
+            }
         }
     }
 }
+

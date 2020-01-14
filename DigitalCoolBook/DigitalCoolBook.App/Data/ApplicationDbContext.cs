@@ -1,12 +1,13 @@
 ﻿using DigitalCoolBook.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalCoolBook.App.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<DigitalCoolBook.Models.Attendance> Attendances { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
         public DbSet<GradeParalelo> GradeParalelos { get; set; }
 
@@ -26,9 +27,5 @@ namespace DigitalCoolBook.App.Data
             : base(options)
         {
         }
-    }
-
-    public class Attendance
-    {
     }
 }
