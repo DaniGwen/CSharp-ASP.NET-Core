@@ -60,7 +60,7 @@
                                     if (this.User.IsInRole("Admin"))
                                     {
                                         <div class="mx-4">
-                                            <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="Index">
+                                            <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
                                                 <i class="flaticon-user"></i>
                                                 <button class="btn btn-primary">Администратор</button>
                                             </form>
@@ -95,11 +95,11 @@
                     </div>
                     <div class="col-xl-6 col-md-6">
                         <div class="slider_info">
-                            <h3>
-                                Учи онлайн!
-                            </h3>
                             @if (this.User.IsInRole("Teacher"))
                             {
+                                <h3>
+                                    Учи онлайн!
+                                </h3>
                                 <a href="/Subjects/Subjects" class="boxed_btn">Избери предмет</a>
                                 <a href="#" class="boxed_btn">Избери клас</a>
                             }

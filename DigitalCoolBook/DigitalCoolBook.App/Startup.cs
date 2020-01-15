@@ -58,17 +58,11 @@ namespace DigitalCoolBook.App
                 {
                     context.Database.EnsureCreated();
 
-                    if (!context.Grades.Any())
-                    {
-                        context.Grades.AddRange(this.AddParalelos());
-                        context.SaveChanges();
-                    }
+                    this.SeedDb(context);
 
-                    if (!context.Subjects.Any())
-                    {
-                        context.Subjects.AddRange(this.AddSubjects());
-                        context.SaveChanges();
-                    }
+                   
+
+
                 }
             }
 
@@ -94,6 +88,25 @@ namespace DigitalCoolBook.App
             app.UseAuthorization();
             app.UseMvcWithDefaultRoute();
 
+        }
+
+        private void SeedDb(ApplicationDbContext context)
+        {
+            if (!context.Grades.Any())
+            {
+                context.Grades.AddRange(this.AddParalelos());
+                context.SaveChanges();
+            }
+
+            if (!context.Subjects.Any())
+            {
+                context.Subjects.AddRange(this.AddSubjects());
+                context.SaveChanges();
+            }
+            //if (!context)
+            //{
+
+            //}
         }
 
         private List<Grade> AddParalelos()
