@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 using DigitalCoolBook.Models;
 using System.Threading.Tasks;
 using System;
-using DigitalCoolBook.App.Configuration;
 
 namespace DigitalCoolBook.App
 {
@@ -41,7 +40,7 @@ namespace DigitalCoolBook.App
             {
                 options.User.RequireUniqueEmail = false;
             });
-
+          
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;
@@ -57,11 +56,9 @@ namespace DigitalCoolBook.App
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                 {
                     context.Database.EnsureCreated();
-
                     this.SeedDb(context);
                 }
             }
-
             this.CreateRoles(serviceProvider).Wait();
 
             if (env.IsDevelopment())
@@ -83,7 +80,6 @@ namespace DigitalCoolBook.App
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvcWithDefaultRoute();
-
         }
 
         private void SeedDb(ApplicationDbContext context)

@@ -69,9 +69,9 @@
                                 }
                                 else if (!this.User.Identity.IsAuthenticated)
                                 {
-                                    <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="Index">
+                                    <form class="form-inline" href="/Identity/Account/Login" method="get">
                                         <i class="flaticon-user"></i>
-                                        <button type="submit" class="btn btn-secondary">Вляз като Администратор</button>
+                                        <button class="btn btn-secondary">Вляз като Администратор</button>
                                     </form>
                                 }
                             </div>

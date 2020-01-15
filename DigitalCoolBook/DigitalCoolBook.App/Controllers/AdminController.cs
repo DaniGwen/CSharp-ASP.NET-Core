@@ -27,5 +27,10 @@ namespace DigitalCoolBook.App.Controllers
 
             return View(teachers);
         }
+
+        public IActionResult LoginAdmin()
+        {
+            return View();
+        }
     }
 }

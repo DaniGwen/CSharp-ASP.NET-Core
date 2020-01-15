@@ -41,12 +41,10 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
+        public ApplicationDbContext Context => _context;
 
         public class InputModel
         {
-            //[Required]
-            //[EmailAddress]
-            //public string Email { get; set; }
 
             [StringLength(30,MinimumLength = 3)]
             public string Username { get; set; }
