@@ -14,5 +14,7 @@ namespace DigitalCoolBook.App.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public string Username { get; set; }
     }
 }

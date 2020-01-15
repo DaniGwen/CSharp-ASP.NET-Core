@@ -69,7 +69,7 @@
                                 }
                                 else if (!this.User.Identity.IsAuthenticated)
                                 {
-                                    <form class="form-inline" href="/Identity/Account/Login" method="get">
+                                    <form class="form-inline" asp-controller="Admin" asp-action="LoginAdmin">
                                         <i class="flaticon-user"></i>
                                         <button class="btn btn-secondary">Вляз като Администратор</button>
                                     </form>
@@ -106,8 +106,8 @@
                             else if (this.User.IsInRole("Admin"))
                             {
                                 <div>
-                                    <a href="/Register/RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
-                                    <a href="/Register/RegisterStudent" class="boxed_btn">Регистрация на Ученик</a>
+                                    <a href="/Teacher/RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
+                                    <a href="/Student/RegisterStudent" class="boxed_btn">Регистрация на Ученик</a>
                                 </div>
                             }
                         </div>

@@ -7,12 +7,12 @@ namespace DigitalCoolBook.Models
         public int Id { get; set; }
 
         [ForeignKey("Subject")]
-        public int IdSubject { get; set; }
+        public string IdSubject { get; set; }
         public Subject Subject { get; set; }
 
 
         [ForeignKey("Student")]
-        public int IdStudent { get; set; }
+        public string IdStudent { get; set; }
         public Student Student { get; set; }
     }
 }

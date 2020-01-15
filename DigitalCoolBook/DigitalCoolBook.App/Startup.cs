@@ -31,16 +31,15 @@ namespace DigitalCoolBook.App
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
             });
-          
+
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;
@@ -50,13 +49,13 @@ namespace DigitalCoolBook.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                 {
                     context.Database.EnsureCreated();
-                    this.SeedDb(context);
+                    this.SeedDb(context, serviceProvider);
                 }
             }
             this.CreateRoles(serviceProvider).Wait();
@@ -82,7 +81,7 @@ namespace DigitalCoolBook.App
             app.UseMvcWithDefaultRoute();
         }
 
-        private void SeedDb(ApplicationDbContext context)
+        private void SeedDb(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
             if (!context.Grades.Any())
             {
@@ -112,6 +111,45 @@ namespace DigitalCoolBook.App
                 context.Students.AddRange(this.AddStudents());
                 context.SaveChanges();
             }
+
+            //ADD STUDENTS AND TEACHERS TO ASPIDENTITYUSERS
+
+            //var students = context.Students.ToList();
+            //var teachers = context.Teachers.ToList();
+            //var usersForDb = new List<IdentityUser>();
+            //var teachersForDb = new List<IdentityUser>();
+
+            //foreach (var student in students)
+            //{
+            //    var identityUser = new IdentityUser
+            //    {
+            //        UserName = student.Email,
+            //        Email = student.Email,
+            //        PhoneNumber = student.MobilePhone.ToString(),
+            //        PasswordHash = student.Password
+            //    };
+
+            //    usersForDb.Add(identityUser);
+            //}
+
+            //foreach (var teacher in teachers)
+            //{
+            //    var identityUser = new IdentityUser
+            //    {
+            //        UserName = teacher.Email,
+            //        Email = teacher.Email,
+            //        PhoneNumber = teacher.MobilePhone.ToString(),
+            //        PasswordHash = teacher.Password
+            //    };
+
+            //    teachersForDb.Add(identityUser);
+            //}
+
+            //context.Users.AddRange(usersForDb);
+            //context.SaveChanges();
+
+            //context.Users.AddRange(teachersForDb);
+            //context.SaveChanges();
         }
 
         private GradeParalelo[] AddGradeParalelo()
@@ -120,23 +158,27 @@ namespace DigitalCoolBook.App
             {
                 new GradeParalelo
                 {
-                    IdGrade = 63,
-                    IdTeacher = 1
+                   GradeParaleloId = Guid.NewGuid().ToString(),
+                    IdGrade = "047c959b-c2d4-4d49-acb9-c096660fc1d7",
+                    IdTeacher = "0b0ebf61-11ff-487a-ae66-a257787d77d1"
                 },
                 new GradeParalelo
                 {
-                     IdGrade = 62,
-                    IdTeacher = 1
+                    GradeParaleloId = Guid.NewGuid().ToString(),
+                     IdGrade ="0a5a0880-ae45-4c1b-97ee-bab17775bce1",
+                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b"
                 },
                 new GradeParalelo
                 {
-                     IdGrade = 61,
-                    IdTeacher = 2
+                    GradeParaleloId = Guid.NewGuid().ToString(),
+                     IdGrade = "0f4484a8-c74e-405d-b6cc-3c5bc581929f",
+                    IdTeacher = "5757242a-6635-4186-a9ac-05c3b165359e"
                 },
                 new GradeParalelo
                 {
-                     IdGrade = 60,
-                    IdTeacher = 2
+                    GradeParaleloId = Guid.NewGuid().ToString(),
+                     IdGrade = "29bae06b-3e83-4e2f-8a80-d87a3be14e96",
+                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b"
                 }
             };
             return gradeParalelos;
@@ -148,6 +190,7 @@ namespace DigitalCoolBook.App
              {
                 new Student
                 {
+                    StudentId = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Ceco Ivanov",
                     Password = "Ceccec155155*",
@@ -157,12 +200,14 @@ namespace DigitalCoolBook.App
                     Address = "Stoicho Popov 12",
                     FatherName = "Atanas",
                     FatherMobileNumber = 09876554,
-                    IdGradeParalelo = 1,
+                    IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
+                    Email = "ceco@ceco.com"
                 },
                 new Student
                 {
+                     StudentId = Guid.NewGuid().ToString(),
                     MobilePhone = 094098321,
                     Name = "Ivailo Dimitrov",
                     Password = "Ivoivo155155*",
@@ -172,12 +217,14 @@ namespace DigitalCoolBook.App
                      Address = "Anev Popov 12",
                     FatherName = "Todor",
                     FatherMobileNumber = 098434554,
-                    IdGradeParalelo = 2,
+                    IdGradeParalelo = "7aabcd2f-2db3-443a-a9cc-b11b105d9c1f",
                     MotherName = "Donka",
-                    MotherMobileNumber = 099009933
+                    MotherMobileNumber = 099009933,
+                      Email = "ivailo@ivailo.com"
                 },
                 new Student
                 {
+                     StudentId = Guid.NewGuid().ToString(),
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
                     Password = "Marmar155155*",
@@ -187,9 +234,10 @@ namespace DigitalCoolBook.App
                      Address = "Stoicho Simeonov 17",
                     FatherName = "John Tailer",
                     FatherMobileNumber = 09870054,
-                    IdGradeParalelo = 3,
+                    IdGradeParalelo = "d019c0ab-b482-422b-8209-fb810aced29d",
                     MotherName = "Penka",
-                    MotherMobileNumber = 0997699933
+                    MotherMobileNumber = 0997699933,
+                      Email = "mima@mima.com"
                 }
              };
             return students;
@@ -201,6 +249,7 @@ namespace DigitalCoolBook.App
             {
                 new Teacher
                 {
+                    TeacherId = Guid.NewGuid().ToString(),
                     DateOfBirth = DateTime.Parse("05/2/1990"),
                     Email = "tot@tot.com",
                     MobilePhone = 0997655443,
@@ -212,6 +261,7 @@ namespace DigitalCoolBook.App
                 },
                 new Teacher
                 {
+                    TeacherId = Guid.NewGuid().ToString(),
                      DateOfBirth = DateTime.Parse("05/2/1987"),
                     Email = "stam@stam.com",
                     MobilePhone = 099456373,
@@ -223,6 +273,7 @@ namespace DigitalCoolBook.App
                 },
                 new Teacher
                 {
+                    TeacherId = Guid.NewGuid().ToString(),
                      DateOfBirth = DateTime.Parse("05/2/1980"),
                     Email = "pesh@pesh.com",
                     MobilePhone = 0997655442,
@@ -233,6 +284,7 @@ namespace DigitalCoolBook.App
                     Telephone = 3346
                 }
             };
+
             return teachers;
         }
 
@@ -247,6 +299,7 @@ namespace DigitalCoolBook.App
                 {
                     var grade = new Grade
                     {
+                        GradeId = Guid.NewGuid().ToString(),
                         Name = j.ToString() + paralelo
                     };
                     grades.Add(grade);
@@ -269,6 +322,7 @@ namespace DigitalCoolBook.App
             {
                 var subjectForContext = new Subject
                 {
+                    SubjectId = Guid.NewGuid().ToString(),
                     Name = subject
                 };
 

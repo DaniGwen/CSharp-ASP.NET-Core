@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +15,10 @@ namespace DigitalCoolBook.Models
         }
 
         [Key]
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
+
+        [StringLength(60, ErrorMessage = "Email must be between 3 and 60 characters!", MinimumLength = 3)]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -56,10 +59,13 @@ namespace DigitalCoolBook.Models
         public ICollection<Attendance> Attendances { get; set; }
 
         [ForeignKey("GradeParalelo")]
-        public int IdGradeParalelo { get; set; }
+        public string IdGradeParalelo { get; set; }
         public GradeParalelo GradeParalelo { get; set; }
 
         public ICollection<ScoreRecord> ScoreRecords { get; set; }
+
+        public string Username { get; set; }
+     
 
     }
 }

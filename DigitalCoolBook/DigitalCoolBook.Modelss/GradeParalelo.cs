@@ -12,16 +12,16 @@ namespace DigitalCoolBook.Models
         }
 
         [Key]
-        public int GradeParaleloId { get; set; }
+        public string GradeParaleloId { get; set; }
 
         public ICollection<Student> Students { get; set; }
 
         [ForeignKey("Grade")]
-        public int IdGrade { get; set; }
+        public string IdGrade { get; set; }
         public Grade Grade { get; set; }
 
         [ForeignKey("Teacher")]
-        public int IdTeacher { get; set; }
+        public string IdTeacher { get; set; }
         public Teacher Teacher { get; set; }
     }
 }

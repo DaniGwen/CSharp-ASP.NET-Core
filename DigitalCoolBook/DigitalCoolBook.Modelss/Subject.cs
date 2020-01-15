@@ -6,7 +6,7 @@ namespace DigitalCoolBook.Models
     public class Subject
     {
         [Key]
-        public int SubjectId { get; set; }
+        public string SubjectId { get; set; }
 
         [Required]
         [StringLength(50)]

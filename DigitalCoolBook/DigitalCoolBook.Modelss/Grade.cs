@@ -11,7 +11,7 @@ namespace DigitalCoolBook.Models
         }
 
         [Key]
-        public int GradeId { get; set; }
+        public string GradeId { get; set; }
 
         [StringLength(3, ErrorMessage ="Name must be 3 character!")]
         public string Name { get; set; }

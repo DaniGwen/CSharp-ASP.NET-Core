@@ -6,7 +6,7 @@ namespace DigitalCoolBook.Models
     public class Teacher
     {
         [Key]
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -33,5 +33,9 @@ namespace DigitalCoolBook.Models
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+       
+        public string Username { get; set; }
+      
     }
 }

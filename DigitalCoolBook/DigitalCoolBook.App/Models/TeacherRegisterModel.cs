@@ -37,5 +37,7 @@ namespace DigitalCoolBook.App.Models
         public int MobilePhone { get; set; }
 
         public int Telephone { get; set; }
+
+        public string Username { get; set; }
     }
 }

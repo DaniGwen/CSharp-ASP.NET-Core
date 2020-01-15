@@ -26,56 +26,24 @@ namespace DigitalCoolBook.App.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterTeacherModel> _logger;
-        private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
         public RegisterController(
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterTeacherModel> logger,
-            IEmailSender emailSender,
             ApplicationDbContext context)
         {
             this._context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
         }
 
         public string ReturnUrl { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        [BindProperty]
-        public TeacherInputModel InputModel { get; set; }
-
-        [HttpGet]
-        public IActionResult RegisterTeacher()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RegisterTeacherAsync()
-        {
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            var teacher = new Teacher
-            {
-                DateOfBirth = this.InputModel.DateOfBirth,
-                Email = this.InputModel.Email,
-                MobilePhone = this.InputModel.MobilePhone,
-                Password = this.HashPassword(this.InputModel.Password),
-                PlaceOfBirth = this.InputModel.PlaceOfBirth,
-                Sex = this.InputModel.Sex,
-                Name = this.InputModel.Name,
-                Telephone = this.InputModel.Telephone
-            };
-
-            await _context.Teachers.AddAsync(teacher);
-            await _context.SaveChangesAsync();
-
-            return Redirect("Register/Register");
-        }
+      
+       
 
         public IActionResult RegisterStudent()
         {
