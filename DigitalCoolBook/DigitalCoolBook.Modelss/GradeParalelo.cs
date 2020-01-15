@@ -14,9 +14,6 @@ namespace DigitalCoolBook.Models
         [Key]
         public int GradeParaleloId { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 1)]
-        public string Name { get; set; }
-
         public ICollection<Student> Students { get; set; }
 
         [ForeignKey("Grade")]

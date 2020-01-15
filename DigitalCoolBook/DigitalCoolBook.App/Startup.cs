@@ -59,10 +59,6 @@ namespace DigitalCoolBook.App
                     context.Database.EnsureCreated();
 
                     this.SeedDb(context);
-
-                   
-
-
                 }
             }
 
@@ -103,10 +99,145 @@ namespace DigitalCoolBook.App
                 context.Subjects.AddRange(this.AddSubjects());
                 context.SaveChanges();
             }
-            //if (!context)
-            //{
+            if (!context.Teachers.Any())
+            {
+                context.Teachers.AddRange(this.AddTeachers());
+                context.SaveChanges();
+            }
 
-            //}
+            if (!context.GradeParalelos.Any())
+            {
+                context.GradeParalelos.AddRange(this.AddGradeParalelo());
+                context.SaveChanges();
+            }
+
+            if (!context.Students.Any())
+            {
+                context.Students.AddRange(this.AddStudents());
+                context.SaveChanges();
+            }
+        }
+
+        private GradeParalelo[] AddGradeParalelo()
+        {
+            GradeParalelo[] gradeParalelos = new GradeParalelo[4]
+            {
+                new GradeParalelo
+                {
+                    IdGrade = 63,
+                    IdTeacher = 1
+                },
+                new GradeParalelo
+                {
+                     IdGrade = 62,
+                    IdTeacher = 1
+                },
+                new GradeParalelo
+                {
+                     IdGrade = 61,
+                    IdTeacher = 2
+                },
+                new GradeParalelo
+                {
+                     IdGrade = 60,
+                    IdTeacher = 2
+                }
+            };
+            return gradeParalelos;
+        }
+
+        private Student[] AddStudents()
+        {
+            Student[] students = new Student[3]
+             {
+                new Student
+                {
+                    MobilePhone = 099760043,
+                    Name = "Ceco Ivanov",
+                    Password = "Ceccec155155*",
+                    PlaceOfBirth = "Botevgrad",
+                    Sex = "Male",
+                    Telephone = 8765,
+                    Address = "Stoicho Popov 12",
+                    FatherName = "Atanas",
+                    FatherMobileNumber = 09876554,
+                    IdGradeParalelo = 1,
+                    MotherName = "Stoqnka",
+                    MotherMobileNumber = 099999933,
+                },
+                new Student
+                {
+                    MobilePhone = 094098321,
+                    Name = "Ivailo Dimitrov",
+                    Password = "Ivoivo155155*",
+                    PlaceOfBirth = "Pirdop",
+                    Sex = "Male",
+                    Telephone = 3234,
+                     Address = "Anev Popov 12",
+                    FatherName = "Todor",
+                    FatherMobileNumber = 098434554,
+                    IdGradeParalelo = 2,
+                    MotherName = "Donka",
+                    MotherMobileNumber = 099009933
+                },
+                new Student
+                {
+                    MobilePhone = 0978755442,
+                    Name = "Mariq Ignatova",
+                    Password = "Marmar155155*",
+                    PlaceOfBirth = "Kurtovo konare",
+                    Sex = "Female",
+                    Telephone = 3300,
+                     Address = "Stoicho Simeonov 17",
+                    FatherName = "John Tailer",
+                    FatherMobileNumber = 09870054,
+                    IdGradeParalelo = 3,
+                    MotherName = "Penka",
+                    MotherMobileNumber = 0997699933
+                }
+             };
+            return students;
+        }
+
+        private Teacher[] AddTeachers()
+        {
+            Teacher[] teachers = new Teacher[3]
+            {
+                new Teacher
+                {
+                    DateOfBirth = DateTime.Parse("05/2/1990"),
+                    Email = "tot@tot.com",
+                    MobilePhone = 0997655443,
+                    Name = "Pavlina",
+                    Password = "Tottot155155*",
+                    PlaceOfBirth = "Plovdiv",
+                    Sex = "Female",
+                    Telephone = 3344
+                },
+                new Teacher
+                {
+                     DateOfBirth = DateTime.Parse("05/2/1987"),
+                    Email = "stam@stam.com",
+                    MobilePhone = 099456373,
+                    Name = "Stamat Ionchev",
+                    Password = "Stamstam155155*",
+                    PlaceOfBirth = "Plovdiv",
+                    Sex = "Male",
+                    Telephone = 3264
+                },
+                new Teacher
+                {
+                     DateOfBirth = DateTime.Parse("05/2/1980"),
+                    Email = "pesh@pesh.com",
+                    MobilePhone = 0997655442,
+                    Name = "Pesho Geshev",
+                    Password = "Peshpesh155155*",
+                    PlaceOfBirth = "Sofia",
+                    Sex = "Male",
+                    Telephone = 3346
+                }
+            };
+            return teachers;
         }
 
         private List<Grade> AddParalelos()
