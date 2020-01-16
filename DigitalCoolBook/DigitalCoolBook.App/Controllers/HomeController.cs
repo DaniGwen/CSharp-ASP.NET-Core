@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using DigitalCoolBook.App.Models;
 using Microsoft.AspNetCore.Identity;
 using DigitalCoolBook.App.Data;
+using DigitalCoolBook.Models;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -39,6 +40,16 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult StudentCreated(StudentRegisterModel model)
+        {
+            return View(model);
+        }
+
+        public IActionResult TeacherCreated(TeacherRegisterModel model)
+        {
+            return View(model);
         }
     }
 }

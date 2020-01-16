@@ -23,7 +23,7 @@ namespace DigitalCoolBook.Models
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string Name { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [StringLength(200, ErrorMessage = "Characters must be between 3 and 200!")]
         public string PlaceOfBirth { get; set; }

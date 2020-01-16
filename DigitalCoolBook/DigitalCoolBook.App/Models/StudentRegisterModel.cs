@@ -10,7 +10,6 @@ namespace DigitalCoolBook.App.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -27,14 +26,16 @@ namespace DigitalCoolBook.App.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [StringLength(100, ErrorMessage = "Must be between 3 and 100 characters!", MinimumLength = 3)]
+        [StringLength(100, ErrorMessage = "Place of birth must be between 3 and 100 characters!", MinimumLength = 3)]
         public string PlaceOfBirth { get; set; }
 
         [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
         public string Sex { get; set; }
 
+        [Range(6,20)]
         public int MobilePhone { get; set; }
 
+        [Range(3,20)]
         public int Telephone { get; set; }
 
         [StringLength(50, ErrorMessage = "Father name must be between 3 and 50 characters!", MinimumLength = 3)]

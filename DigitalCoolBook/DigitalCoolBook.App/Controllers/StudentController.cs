@@ -1,6 +1,7 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.Models;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -89,14 +90,19 @@ namespace DigitalCoolBook.App.Controllers
                 var student = new Student
                 {
                     StudentId = Guid.NewGuid().ToString(),
-                     Address = registerModel.Ad,
+                     Address = registerModel.Address,
                     Email = registerModel.Email,
                     MobilePhone = registerModel.MobilePhone,
                     Password = this.HashPassword(registerModel.Password),
                     PlaceOfBirth = registerModel.PlaceOfBirth,
                     Sex = registerModel.Sex,
                     Name = registerModel.Name,
-                    Telephone = registerModel.Telephone
+                    Telephone = registerModel.Telephone,
+                    DateOfBirth = registerModel.DateOfBirth,
+                    FatherMobileNumber = registerModel.FatherMobileNumber,
+                    FatherName = registerModel.FatherName,
+                    MotherMobileNumber = registerModel.MotherMobileNumber,
+                    MotherName  = registerModel.MotherName,
                 };
 
                 var user = new IdentityUser
@@ -106,19 +112,15 @@ namespace DigitalCoolBook.App.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
-
-                await _userManager.AddToRoleAsync(user, "Teacher");
-                //await _context.Users.AddAsync(user);
-                await _context.Teachers.AddAsync(teacher);
+                await _context.Students.AddAsync(student);
                 await _context.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Student");
                     _logger.LogInformation("User created a new account with password.");
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return Redirect("/Home/Index");
+                   
+                    return View("/Home/StudentCreated", student);
                 }
 
                 foreach (var error in result.Errors)
