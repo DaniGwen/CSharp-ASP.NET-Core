@@ -156,6 +156,10 @@ namespace DigitalCoolBook.App.Migrations
 
                     b.HasKey("StudentId");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("IdGradeParalelo");
 
                     b.ToTable("Students");
@@ -242,6 +246,9 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TeacherId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Teachers");
                 });

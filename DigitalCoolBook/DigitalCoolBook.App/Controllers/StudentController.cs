@@ -77,6 +77,7 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
+        [ActionName("RegisterStudentAsync")]
         public IActionResult RegisterStudent()
         {
             return View();
@@ -128,8 +129,6 @@ namespace DigitalCoolBook.App.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-
-
             return Redirect("/Admin/AdminPanel");
         }
 
