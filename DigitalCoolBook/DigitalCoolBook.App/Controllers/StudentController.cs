@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using DigitalCoolBook.App.Data;
+﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.Models;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Controllers
 {
-    public class TeacherController : Controller
+    public class StudentController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -21,7 +18,7 @@ namespace DigitalCoolBook.App.Controllers
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TeacherController(ILogger<HomeController> logger,
+        public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
@@ -49,10 +46,10 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var hash = this.HashPassword(loginModel.Password);
 
-                var teacher = _context.Teachers
+                var student = _context.Students
                     .FirstOrDefault(t => t.Password == this.HashPassword(loginModel.Password));
 
-                if (teacher != null)
+                if (student != null)
                 {
                     var user = new IdentityUser { UserName = loginModel.Email, Email = loginModel.Email };
 
@@ -79,20 +76,20 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult RegisterTeacher()
+        public IActionResult RegisterStudent()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
+        public async Task<IActionResult> RegisterStudentAsync(StudentRegisterModel registerModel)
         {
             if (ModelState.IsValid)
             {
-                var teacher = new Teacher
+                var student = new Student
                 {
-                    TeacherId = Guid.NewGuid().ToString(),
-                    DateOfBirth = registerModel.DateOfBirth,
+                    StudentId = Guid.NewGuid().ToString(),
+                     Address = registerModel.Ad,
                     Email = registerModel.Email,
                     MobilePhone = registerModel.MobilePhone,
                     Password = this.HashPassword(registerModel.Password),

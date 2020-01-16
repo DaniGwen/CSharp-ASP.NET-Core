@@ -37,10 +37,10 @@ namespace DigitalCoolBook.App.Models
 
         public int Telephone { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "Father name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string FatherName { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
+        [StringLength(50, ErrorMessage = "Mother name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string MotherName { get; set; }
 
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
@@ -48,5 +48,8 @@ namespace DigitalCoolBook.App.Models
 
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int FatherMobileNumber { get; set; }
+
+        [StringLength(50, ErrorMessage = "Address must be between 3 and 50 characters!", MinimumLength = 3)]
+        public string Address { get; set; }
     }
 }

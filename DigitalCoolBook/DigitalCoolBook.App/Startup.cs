@@ -31,7 +31,7 @@ namespace DigitalCoolBook.App
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -72,12 +72,10 @@ namespace DigitalCoolBook.App
                 app.UseHsts();
             };
 
-            app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseMvcWithDefaultRoute();
         }
 
