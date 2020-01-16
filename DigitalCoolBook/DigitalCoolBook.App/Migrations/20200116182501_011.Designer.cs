@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalCoolBook.App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200113211702_324")]
-    partial class _324
+    [Migration("20200116182501_011")]
+    partial class _011
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,8 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Attendance", b =>
                 {
-                    b.Property<int>("AttendanceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("AttendanceId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Attended")
                         .HasColumnType("bit");
@@ -34,8 +32,8 @@ namespace DigitalCoolBook.App.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdStudent")
-                        .HasColumnType("int");
+                    b.Property<string>("IdStudent")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AttendanceId");
 
@@ -46,10 +44,8 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Grade", b =>
                 {
-                    b.Property<int>("GradeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("GradeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(3)")
@@ -62,20 +58,14 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.GradeParalelo", b =>
                 {
-                    b.Property<int>("GradeParaleloId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("GradeParaleloId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IdGrade")
-                        .HasColumnType("int");
+                    b.Property<string>("IdGrade")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IdTeacher")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                    b.Property<string>("IdTeacher")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("GradeParaleloId");
 
@@ -93,11 +83,11 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdStudent")
-                        .HasColumnType("int");
+                    b.Property<string>("IdStudent")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IdSubject")
-                        .HasColumnType("int");
+                    b.Property<string>("IdSubject")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -110,17 +100,19 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
                 {
-                    b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<int>("FatherMobileNumber")
                         .HasColumnType("int");
@@ -129,8 +121,8 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("IdGradeParalelo")
-                        .HasColumnType("int");
+                    b.Property<string>("IdGradeParalelo")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MobilePhone")
                         .HasColumnType("int");
@@ -161,6 +153,9 @@ namespace DigitalCoolBook.App.Migrations
                     b.Property<int>("Telephone")
                         .HasColumnType("int");
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("StudentId");
 
                     b.HasIndex("IdGradeParalelo");
@@ -170,10 +165,8 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Subject", b =>
                 {
-                    b.Property<int>("SubjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("SubjectId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Abbreviation")
                         .HasColumnType("nvarchar(max)");
@@ -195,16 +188,17 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdGrade")
-                        .HasColumnType("int");
+                    b.Property<string>("IdGrade")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IdSubject")
-                        .HasColumnType("int");
+                    b.Property<string>("IdSubject")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdGrade")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IdGrade] IS NOT NULL");
 
                     b.HasIndex("IdSubject");
 
@@ -213,10 +207,8 @@ namespace DigitalCoolBook.App.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Teacher", b =>
                 {
-                    b.Property<int>("TeacherId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -247,6 +239,9 @@ namespace DigitalCoolBook.App.Migrations
 
                     b.Property<int>("Telephone")
                         .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TeacherId");
 
@@ -396,12 +391,10 @@ namespace DigitalCoolBook.App.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -438,12 +431,10 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -457,63 +448,47 @@ namespace DigitalCoolBook.App.Migrations
                 {
                     b.HasOne("DigitalCoolBook.Models.Student", "Student")
                         .WithMany("Attendances")
-                        .HasForeignKey("IdStudent")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdStudent");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.GradeParalelo", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Grade", "Grade")
                         .WithMany("GradeParalelos")
-                        .HasForeignKey("IdGrade")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdGrade");
 
                     b.HasOne("DigitalCoolBook.Models.Teacher", "Teacher")
                         .WithMany()
-                        .HasForeignKey("IdTeacher")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdTeacher");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.ScoreRecord", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Student", "Student")
                         .WithMany("ScoreRecords")
-                        .HasForeignKey("IdStudent")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdStudent");
 
                     b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
                         .WithMany("ScoreRecords")
-                        .HasForeignKey("IdSubject")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdSubject");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.GradeParalelo", "GradeParalelo")
                         .WithMany("Students")
-                        .HasForeignKey("IdGradeParalelo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdGradeParalelo");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Grade", "Grade")
                         .WithOne("SubjectGrade")
-                        .HasForeignKey("DigitalCoolBook.Models.SubjectGrade", "IdGrade")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DigitalCoolBook.Models.SubjectGrade", "IdGrade");
 
                     b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
                         .WithMany("SubjectGrades")
-                        .HasForeignKey("IdSubject")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdSubject");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

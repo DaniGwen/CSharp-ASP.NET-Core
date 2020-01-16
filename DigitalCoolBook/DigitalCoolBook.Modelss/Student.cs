@@ -7,12 +7,6 @@ namespace DigitalCoolBook.Models
 {
     public class Student
     {
-        public Student()
-        {
-            this.ScoreRecords = new List<ScoreRecord>();
-            this.Attendances = new List<Attendance>();
-        }
-
         [Key]
         public string StudentId { get; set; }
 
@@ -55,13 +49,13 @@ namespace DigitalCoolBook.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public ICollection<Attendance> Attendances { get; set; }
+        public List<Attendance> Attendances { get; set; }
 
         [ForeignKey("GradeParalelo")]
         public string IdGradeParalelo { get; set; }
         public GradeParalelo GradeParalelo { get; set; }
 
-        public ICollection<ScoreRecord> ScoreRecords { get; set; }
+        public List<ScoreRecord> ScoreRecords { get; set; }
 
         public string Username { get; set; }
      

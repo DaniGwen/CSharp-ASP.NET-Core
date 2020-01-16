@@ -110,44 +110,6 @@ namespace DigitalCoolBook.App
                 context.SaveChanges();
             }
 
-            //ADD STUDENTS AND TEACHERS TO ASPIDENTITYUSERS
-
-            //var students = context.Students.ToList();
-            //var teachers = context.Teachers.ToList();
-            //var usersForDb = new List<IdentityUser>();
-            //var teachersForDb = new List<IdentityUser>();
-
-            //foreach (var student in students)
-            //{
-            //    var identityUser = new IdentityUser
-            //    {
-            //        UserName = student.Email,
-            //        Email = student.Email,
-            //        PhoneNumber = student.MobilePhone.ToString(),
-            //        PasswordHash = student.Password
-            //    };
-
-            //    usersForDb.Add(identityUser);
-            //}
-
-            //foreach (var teacher in teachers)
-            //{
-            //    var identityUser = new IdentityUser
-            //    {
-            //        UserName = teacher.Email,
-            //        Email = teacher.Email,
-            //        PhoneNumber = teacher.MobilePhone.ToString(),
-            //        PasswordHash = teacher.Password
-            //    };
-
-            //    teachersForDb.Add(identityUser);
-            //}
-
-            //context.Users.AddRange(usersForDb);
-            //context.SaveChanges();
-
-            //context.Users.AddRange(teachersForDb);
-            //context.SaveChanges();
         }
 
         private GradeParalelo[] AddGradeParalelo()

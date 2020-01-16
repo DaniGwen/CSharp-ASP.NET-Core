@@ -14,8 +14,8 @@ namespace DigitalCoolBook.Models
 
         public string Abbreviation { get; set; }
 
-        public ICollection<ScoreRecord> ScoreRecords { get; set; }
+        public List<ScoreRecord> ScoreRecords { get; set; }
 
-        public ICollection<SubjectGrade> SubjectGrades { get; set; }
+        public List<SubjectGrade> SubjectGrades { get; set; }
     }
 }

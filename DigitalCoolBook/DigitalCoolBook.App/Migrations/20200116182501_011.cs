@@ -2,7 +2,7 @@
 
 namespace DigitalCoolBook.App.Migrations
 {
-    public partial class _007 : Migration
+    public partial class _011 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

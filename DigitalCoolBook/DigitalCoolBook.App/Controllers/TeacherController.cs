@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
@@ -9,6 +9,7 @@ using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.Extensions.Logging;
 
 namespace DigitalCoolBook.App.Controllers
@@ -132,6 +133,53 @@ namespace DigitalCoolBook.App.Controllers
 
 
             return Redirect("/Admin/AdminPanel");
+        }
+
+        public IActionResult ChooseParalelo(GradesViewModel model)
+        {
+            var grades = _context.Grades.Where(grade => grade.GradeParalelos.Count != 0).ToList();
+            var gradesForView = new List<GradesViewModel>();
+
+            foreach (var grade in grades)
+            {
+                var gradeForList = new GradesViewModel
+                {
+                    Id = grade.GradeId,
+                    Name = grade.Name
+                };
+                gradesForView.Add(gradeForList);
+            }
+            return View(gradesForView);
+        }
+
+        public IActionResult GradeDetails(string id)
+        {
+            var studentsInGrade = _context.Students
+                .Include(s => s.GradeParalelo)
+                .Where(s => s.IdGradeParalelo == id)
+                .Select(s => new
+                {
+                    s.Name,
+                    s.ScoreRecords,
+                    s.Attendances
+                })
+                .ToList();
+
+            var studentsForView = new List<GradeDetailViewModel>();
+
+            foreach (var student in studentsInGrade)
+            {
+                GradeDetailViewModel model = new GradeDetailViewModel
+                {
+                    Attendances = student.Attendances,
+                    ScoreRecords = student.ScoreRecords,
+                    Name = student.Name
+                };
+
+                studentsForView.Add(model);
+            }
+
+            return View(studentsForView);
         }
 
         public string HashPassword(string password)

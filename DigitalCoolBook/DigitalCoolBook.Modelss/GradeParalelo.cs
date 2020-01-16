@@ -6,15 +6,10 @@ namespace DigitalCoolBook.Models
 {
     public class GradeParalelo
     {
-        public GradeParalelo()
-        {
-            this.Students = new List<Student>();
-        }
-
         [Key]
         public string GradeParaleloId { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public List<Student> Students { get; set; }
 
         [ForeignKey("Grade")]
         public string IdGrade { get; set; }

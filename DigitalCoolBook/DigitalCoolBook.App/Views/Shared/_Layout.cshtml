@@ -101,7 +101,7 @@
                                     Учи онлайн!
                                 </h3>
                                 <a href="/Subjects/Subjects" class="boxed_btn">Избери предмет</a>
-                                <a href="#" class="boxed_btn">Избери клас</a>
+                                <a asp-controller="Teacher" asp-action="ChooseParalelo" class="boxed_btn">Избери клас</a>
                             }
                             else if (this.User.IsInRole("Admin"))
                             {
