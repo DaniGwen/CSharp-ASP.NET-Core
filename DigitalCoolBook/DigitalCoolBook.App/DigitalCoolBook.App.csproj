@@ -26,4 +26,9 @@
     <ProjectReference Include="..\DigitalCoolBook.Modelss\DigitalCoolBook.Models.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Models\TeacherViewModels\" />
+  </ItemGroup>
+
 </Project>

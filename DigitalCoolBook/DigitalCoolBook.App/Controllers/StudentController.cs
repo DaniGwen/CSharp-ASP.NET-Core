@@ -1,5 +1,6 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
+using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
@@ -77,14 +78,13 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
-        [ActionName("RegisterStudentAsync")]
         public IActionResult RegisterStudent()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterStudentAsync(StudentRegisterModel registerModel)
+        public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
         {
             if (ModelState.IsValid)
             {

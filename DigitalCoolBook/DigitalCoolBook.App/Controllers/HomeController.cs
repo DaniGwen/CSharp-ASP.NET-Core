@@ -5,6 +5,7 @@ using DigitalCoolBook.App.Models;
 using Microsoft.AspNetCore.Identity;
 using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
+using DigitalCoolBook.App.Models.StudentViewModels;
 
 namespace DigitalCoolBook.App.Controllers
 {

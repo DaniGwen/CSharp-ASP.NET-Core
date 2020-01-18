@@ -118,9 +118,6 @@ namespace DigitalCoolBook.App.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
                     return Redirect("/Home/Index");
                 }
 

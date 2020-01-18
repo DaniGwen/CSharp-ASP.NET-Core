@@ -106,8 +106,8 @@
                             else if (this.User.IsInRole("Admin"))
                             {
                                 <div class="d-flex justify-content-between">
-                                    <a href="/Teacher/RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
-                                    <a href="/Student/RegisterStudentAsync" class="boxed_btn">Регистрация на Ученик</a>
+                                    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
+                                    <a asp-controller="Student" asp-action="RegisterStudent" class="boxed_btn">Регистрация на Ученик</a>
                                 </div>
                             }
                         </div>

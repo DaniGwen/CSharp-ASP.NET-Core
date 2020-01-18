@@ -1,4 +1,4 @@
-﻿@model DigitalCoolBook.App.Models.StudentRegisterModel
+﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentRegisterModel
 
 @{
     ViewData["Title"] = "RegisterStudentAsync";
@@ -8,8 +8,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Student" asp-action="RegisterStudentAsync" method="post">
+        <form asp-controller="Student" asp-action="RegisterStudent" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Име</label>
+                <input asp-for="Name" class="form-control" placeholder="Име..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Емайл</label>
                 <input asp-for="Email" class="form-control" placeholder="Имейл..." />
@@ -24,11 +29,6 @@
                 <label asp-for="ConfirmPassword" class="control-label">Потвърди Парола</label>
                 <input asp-for="ConfirmPassword" class="form-control" placeholder="Парола..." />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Име</label>
-                <input asp-for="Name" class="form-control" placeholder="Име..." />
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label">Дата на раждане</label>

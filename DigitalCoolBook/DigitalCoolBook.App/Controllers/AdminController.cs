@@ -37,6 +37,13 @@ namespace DigitalCoolBook.App.Controllers
             return View(teachers);
         }
 
+        public IActionResult EditStudent()
+        {
+            var students = _context.Students.ToList();
+
+            return View(students);
+        }
+
         public IActionResult LoginAdmin()
         {
             return View();
