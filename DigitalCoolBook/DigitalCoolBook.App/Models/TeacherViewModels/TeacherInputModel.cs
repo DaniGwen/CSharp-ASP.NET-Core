@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace DigitalCoolBook.App.Models
+namespace DigitalCoolBook.App.Models.TeacherViewModels
 {
     public class TeacherInputModel
     {

@@ -1,9 +1,11 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
+using DigitalCoolBook.App.Models.TeacherViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,11 +32,29 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditTeacher()
+        public IActionResult EditTeachers(TeacherEditViewModel model)
         {
             var teachers = _context.Teachers.ToList();
+            List<TeacherEditViewModel> teachersForView = new List<TeacherEditViewModel>();
 
-            return View(teachers);
+            foreach (var teacher in teachers)
+            {
+                var teacherForView = new TeacherEditViewModel()
+                {
+                    DateOfBirth = teacher.DateOfBirth,
+                    Email = teacher.Email,
+                    MobilePhone = teacher.MobilePhone,
+                    Name = teacher.Name,
+                    PlaceOfBirth = teacher.PlaceOfBirth,
+                    Sex = teacher.Sex,
+                    Telephone = teacher.Telephone,
+                    Username = teacher.Username
+                };
+
+                teachersForView.Add(teacherForView);
+            }
+
+            return View(teachersForView);
         }
 
         public IActionResult EditStudent()

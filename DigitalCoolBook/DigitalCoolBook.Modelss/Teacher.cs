@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.Models
@@ -34,7 +33,6 @@ namespace DigitalCoolBook.Models
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
        
         public string Username { get; set; }
       
