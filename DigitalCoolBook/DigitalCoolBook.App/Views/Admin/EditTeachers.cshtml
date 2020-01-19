@@ -5,10 +5,24 @@
     ViewData["Title"] = "EditTeacher";
 }
 
-<h1>Изтриване или редактиране на Учителски профили</h1>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Затвори</span></button>
+                <h4 class="modal-title" id="deleteModalLabel">Изтрий</h4>
+            </div>
+            <div id="deleteModalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Затвори</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<h1>Изтриване или редактиране на Учителски профили</h1>
 <p>
-    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-outline-dark font-weight-bold">Create New</a>
+    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-outline-dark font-weight-bold">Създай нов</a>
 </p>
 <table class="table font-weight-bold">
     <thead>
@@ -38,35 +52,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MobilePhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobilePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                    <a href="#" class="deleteLink" id="@item.TeacherId">Изтрий</a> |
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.TeacherId  }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TeacherId })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script>
+    $("#deleteModal").modal("hide");
+    $(".deleteLink").on("click", function () {
+        $.get('@Url.Action("GetDeletePartial")',
+            { id: $(this).prop("id") },
+            function (data) {
+                $("#deleteModalBody").html(data);
+                $("#deleteModal").modal("show");
+            });
+    });
+</script>

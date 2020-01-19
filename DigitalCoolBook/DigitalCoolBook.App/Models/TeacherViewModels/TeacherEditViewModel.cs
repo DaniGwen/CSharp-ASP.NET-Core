@@ -4,7 +4,7 @@ namespace DigitalCoolBook.App.Models.TeacherViewModels
 {
     public class TeacherEditViewModel
     {
-        //public string TeacherId { get; set; }
+        public string TeacherId { get; set; }
 
         public string Name { get; set; }
 

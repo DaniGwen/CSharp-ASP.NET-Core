@@ -179,6 +179,45 @@ namespace DigitalCoolBook.App.Controllers
             return View(studentsForView);
         }
 
+        public async Task<IActionResult> GetDeletePartial(string id)
+        {
+            var teacherDelete = await _context.Teachers.FindAsync(id);
+
+            return PartialView("Delete", teacherDelete);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return new BadRequestResult();
+            }
+
+            Teacher teacher = await _context.Teachers.FindAsync(id);
+
+            if (teacher == null)
+            {
+                return new NotFoundResult();
+            }
+
+            var teacherDeleteModel = new TeacherDeleteViewModel
+            {
+                Email = teacher.Email,
+                Name = teacher.Name
+            };
+
+            return View(teacherDeleteModel);
+        }
+
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+            _context.Teachers.Remove(teacher);
+            await _context.SaveChangesAsync();
+
+            return Redirect("Admin/AdminPanel");
+        }
+
         public string HashPassword(string password)
         {
             //Add Salt to password
