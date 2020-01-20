@@ -32,7 +32,7 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditTeachers(TeacherEditViewModel model)
+        public IActionResult EditTeachers()
         {
             var teachers = _context.Teachers.ToList();
             List<TeacherEditViewModel> teachersForView = new List<TeacherEditViewModel>();

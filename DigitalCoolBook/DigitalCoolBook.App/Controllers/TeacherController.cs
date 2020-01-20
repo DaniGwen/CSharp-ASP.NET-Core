@@ -179,7 +179,7 @@ namespace DigitalCoolBook.App.Controllers
             return View(studentsForView);
         }
 
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
@@ -189,6 +189,37 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("Admin/AdminPanel");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+
+            TeacherDetailsViewModel model = new TeacherDetailsViewModel
+            {
+                TeacherId = teacher.TeacherId,
+                DateOfBirth = teacher.DateOfBirth,
+                Email = teacher.Email,
+                MobilePhone = teacher.MobilePhone,
+                Name = teacher.Name,
+                Password = teacher.Password,
+                PlaceOfBirth = teacher.PlaceOfBirth,
+                Sex = teacher.Sex,
+                Telephone = teacher.Telephone,
+                Username = teacher.Username
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TeacherDetailsViewModel model)
+        {
+            var teacher = await _context.Teachers.FindAsync(model.TeacherId);
+
+            //edit the values here!!!
+
+            return Redirect("/Admin/AdminPanel");
+        }
         public string HashPassword(string password)
         {
             //Add Salt to password

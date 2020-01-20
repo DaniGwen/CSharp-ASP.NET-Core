@@ -70,7 +70,7 @@
                 </td>
                 <td>
                     <a class="btnDelete" href="#" id="@item.TeacherId">Изтрий</a> |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TeacherId })
+                    <a asp-controller="Teacher" asp-action="Edit" asp-route-id="@item.TeacherId">Редактирай</a>
                 </td>
             </tr>
         }
