@@ -23,9 +23,8 @@
     <link rel="stylesheet" href="~/css/animate.css" />
     <link rel="stylesheet" href="~/css/slicknav.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/reset" />
-    <link rel="stylesheet" href="~/site.css" />
-    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="~/css/reset.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
     @*Scripts*@
     <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -55,39 +54,7 @@
     <script src="~/js/mail-script.js"></script>
     <script src="~/js/jquery-ui.js"></script>
     <script src="~/js/main.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var teacherId = $(".btnDelete").attr("id");
-            $("#dialog-confirm").hide();
-            $(".btnDelete").click(function () {
-                $("#dialog-confirm").dialog({
-                    resizable: false,
-                    height: 250,
-                    width: 500,
-                    modal: true,
-                    buttons: {
-                        "изтриване": function () {
-                            $.ajax({
-                                url: "/Teacher/Delete/" + teacherId,
-                                type: "POST",
-                                success: function (result) {
-                                    alert("Потребителя е изтрит!")
-                                },
-                                error: function (request, err, message) {
-                                    alert(request.responseText);
-                                }
-                            });
-                            $(this).dialog("close");
-                        },
-                        "назад": function () {
-                            $(this).dialog("close");
-                        }
-                    }
-                });
-            });
-        });
-
-    </script>
+    
 </head>
 <body>
     <header>

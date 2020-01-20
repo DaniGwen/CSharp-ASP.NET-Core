@@ -69,7 +69,7 @@
                     @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
-                    <a action="/Teacher/Delete" class="btnDelete" href="#" id="@item.TeacherId">Изтрий</a> |
+                    <a class="btnDelete" href="#" id="@item.TeacherId">Изтрий</a> |
                     @Html.ActionLink("Edit", "Edit", new { id = item.TeacherId })
                 </td>
             </tr>
@@ -77,11 +77,53 @@
     </tbody>
 </table>
 
-
+<script type="text/javascript">
+    $(function () {
+        $("#dialog-confirm").hide();
+        $(".btnDelete").click(function () {
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                height: 250,
+                width: 500,
+                modal: true,
+                buttons: {
+                    "изтриване": function () {
+                        var teacherId = $(".btnDelete").attr("id");
+                        $.ajax({
+                            url: "/Teacher/Delete/" + teacherId,
+                            type: "POST",
+                            success: function () {
+                                $("#successMessage").html("Потребителя е изтрит!");
+                                $(this).dialog("close");
+                            },
+                            error: function (request, err, message) {
+                                $("#errorMessage").html(request.responseText);
+                                $("#errorMessageDialog").dialog();
+                                //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
+                            }
+                        });
+                        $(this).dialog("close");
+                    },
+                    "назад": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 <div id="dialog-confirm" title="Изтриване на потребител?">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
         Профилът ще бъде изтрит. Продължи?
+    </p>
+</div>
+
+<div id="successMessage"></div>
+
+<div class="coDialog" style="display: none;" id="errorMessageDialog" title="Грешка!">
+    <p id="errorMessage">
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
     </p>
 </div>

@@ -58,7 +58,7 @@ namespace DigitalCoolBook.Models
         public List<ScoreRecord> ScoreRecords { get; set; }
 
         public string Username { get; set; }
-     
 
+        public bool IsDeleted { get; set; }
     }
 }
