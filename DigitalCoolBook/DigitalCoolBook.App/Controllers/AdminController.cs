@@ -41,6 +41,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var teacherForView = new TeacherEditViewModel()
                 {
+                    TeacherId = teacher.TeacherId,
                     DateOfBirth = teacher.DateOfBirth,
                     Email = teacher.Email,
                     MobilePhone = teacher.MobilePhone,

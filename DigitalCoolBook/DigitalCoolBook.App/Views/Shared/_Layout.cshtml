@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS here -->
+    <link rel="stylesheet" href="~/css/jquery-ui.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="~/css/magnific-popup.css">
@@ -25,6 +26,68 @@
     <link rel="stylesheet" href="~/reset" />
     <link rel="stylesheet" href="~/site.css" />
     <link rel="stylesheet" href="~/css/responsive.css">
+
+    @*Scripts*@
+    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/ajax-form.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/js/scrollIt.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/nice-select.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/gijgo.min.js"></script>
+
+    <!--contact js-->
+    <script src="~/js/contact.js"></script>
+    <script src="~/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/jquery.form.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/mail-script.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/main.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var teacherId = $(".btnDelete").attr("id");
+            $("#dialog-confirm").hide();
+            $(".btnDelete").click(function () {
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    height: 250,
+                    width: 500,
+                    modal: true,
+                    buttons: {
+                        "изтриване": function () {
+                            $.ajax({
+                                url: "/Teacher/Delete/" + teacherId,
+                                type: "POST",
+                                success: function (result) {
+                                    alert("Потребителя е изтрит!")
+                                },
+                                error: function (request, err, message) {
+                                    alert(request.responseText);
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "назад": function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
 </head>
 <body>
     <header>
@@ -166,33 +229,6 @@
             </div>
         </div>
     </footer>
-    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/isotope.pkgd.min.js"></script>
-    <script src="~/js/ajax-form.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/js/scrollIt.js"></script>
-    <script src="~/js/jquery.scrollUp.min.js"></script>
-    <script src="~/js/wow.min.js"></script>
-    <script src="~/js/nice-select.min.js"></script>
-    <script src="~/js/jquery.slicknav.min.js"></script>
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/plugins.js"></script>
-    <script src="~/js/gijgo.min.js"></script>
-
-    <!--contact js-->
-    <script src="~/js/contact.js"></script>
-    <script src="~/js/jquery.ajaxchimp.min.js"></script>
-    <script src="~/js/jquery.form.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/mail-script.js"></script>
-
-    <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

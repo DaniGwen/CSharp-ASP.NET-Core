@@ -49,21 +49,20 @@ namespace DigitalCoolBook.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
-                {
-                    context.Database.EnsureCreated();
-                    this.SeedDb(context, serviceProvider);
-                }
-            }
-            this.CreateRoles(serviceProvider).Wait();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+                    {
+                        context.Database.EnsureCreated();
+                        this.SeedDb(context, serviceProvider);
+                    }
+                }
+                this.CreateRoles(serviceProvider).Wait();
             }
             else
             {
@@ -77,7 +76,12 @@ namespace DigitalCoolBook.App
             app.UseRouting();
             app.UseAuthentication();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
 
         private void SeedDb(ApplicationDbContext context, IServiceProvider serviceProvider)

@@ -5,28 +5,17 @@
     ViewData["Title"] = "EditTeacher";
 }
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Затвори</span></button>
-                <h4 class="modal-title" id="deleteModalLabel">Изтрий</h4>
-            </div>
-            <div id="deleteModalBody" class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Затвори</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <h1>Изтриване или редактиране на Учителски профили</h1>
+
 <p>
-    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-outline-dark font-weight-bold">Създай нов</a>
+    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-secondary ">Създай нов</a>
 </p>
-<table class="table font-weight-bold">
+<table class="table font-weight-bold" id="teacherDetails">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -56,6 +45,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.TeacherId)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
@@ -77,23 +69,19 @@
                     @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
-                    <a href="#" class="deleteLink" id="@item.TeacherId">Изтрий</a> |
-                    @*@Html.ActionLink("Edit", "Edit", new { id=item.TeacherId  }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TeacherId })
+                    <a action="/Teacher/Delete" class="btnDelete" href="#" id="@item.TeacherId">Изтрий</a> |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TeacherId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<script>
-    $("#deleteModal").modal("hide");
-    $(".deleteLink").on("click", function () {
-        $.get('@Url.Action("GetDeletePartial")',
-            { id: $(this).prop("id") },
-            function (data) {
-                $("#deleteModalBody").html(data);
-                $("#deleteModal").modal("show");
-            });
-    });
-</script>
+
+
+<div id="dialog-confirm" title="Изтриване на потребител?">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        Профилът ще бъде изтрит. Продължи?
+    </p>
+</div>
