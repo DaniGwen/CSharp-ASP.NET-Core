@@ -5,13 +5,13 @@
     ViewData["Title"] = "EditTeacher";
 }
 
-<h1>Изтриване или редактиране на Учителски профили</h1>
+<h2>Изтриване или редактиране на учителски профили.</h2>
 
 <p>
     <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-secondary ">Създай нов</a>
 </p>
-<table class="table font-weight-bold" id="teacherDetails">
-    <thead>
+<table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
+    <thead class="thead-light">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TeacherId)
@@ -69,8 +69,8 @@
                     @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
-                    <a class="btnDelete" href="#" id="@item.TeacherId">Изтрий</a> |
-                    <a asp-controller="Teacher" asp-action="Edit" asp-route-id="@item.TeacherId">Редактирай</a>
+                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.TeacherId">Изтрий</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="Edit" asp-route-id="@item.TeacherId">Редактирай</a>
                 </td>
             </tr>
         }

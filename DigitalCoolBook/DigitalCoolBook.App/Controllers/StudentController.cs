@@ -136,12 +136,14 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult EditStudents()
         {
             var students = _context.Students.ToList();
+
             var studentsToView = new List<StudentEditViewModel>();
 
             foreach (var student in students)
             {
                 var studentModel = new StudentEditViewModel()
                 {
+                    StudentId = student.StudentId,
                     Address = student.Address,
                     DateOfBirth = student.DateOfBirth,
                     Email = student.Email,
@@ -160,6 +162,14 @@ namespace DigitalCoolBook.App.Controllers
             }
 
             return View(studentsToView);
+        }
+
+        public async Task<IActionResult> EditStudent(string id , StudentEditViewModel model)
+        {
+            var studentFromDb = await _context.Students.FindAsync(id);
+
+
+            return View();
         }
 
         public string HashPassword(string password)

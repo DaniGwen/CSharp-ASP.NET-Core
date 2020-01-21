@@ -1,84 +1,100 @@
-﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentEditViewModel
+﻿@model IEnumerable<DigitalCoolBook.App.Models.StudentViewModels.StudentEditViewModel>
 
 @{
     ViewData["Title"] = "EditStudents";
 }
 
-<h1>Редакция на Ученици</h1>
+<h2>Изтриване или редактиране на ученически профили.</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditStudents">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlaceOfBirth" class="control-label"></label>
-                <input asp-for="PlaceOfBirth" class="form-control" />
-                <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sex" class="control-label"></label>
-                <input asp-for="Sex" class="form-control" />
-                <span asp-validation-for="Sex" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MobilePhone" class="control-label"></label>
-                <input asp-for="MobilePhone" class="form-control" />
-                <span asp-validation-for="MobilePhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control" />
-                <span asp-validation-for="Telephone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FatherName" class="control-label"></label>
-                <input asp-for="FatherName" class="form-control" />
-                <span asp-validation-for="FatherName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MotherName" class="control-label"></label>
-                <input asp-for="MotherName" class="form-control" />
-                <span asp-validation-for="MotherName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MotherMobileNumber" class="control-label"></label>
-                <input asp-for="MotherMobileNumber" class="form-control" />
-                <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FatherMobileNumber" class="control-label"></label>
-                <input asp-for="FatherMobileNumber" class="form-control" />
-                <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Запази" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Назад</a>
-</div>
-
+<p>
+    <a asp-controller="Student" asp-action="RegisterStudent" class="btn btn-secondary ">Създай нов</a>
+</p>
+<table class="table font-weight-bold table-hover table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaceOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotherMobileNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherMobileNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FatherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotherMobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FatherMobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
+                <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
