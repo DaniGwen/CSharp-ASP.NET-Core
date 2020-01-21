@@ -1,26 +1,25 @@
-﻿@model DigitalCoolBook.App.Models.TeacherViewModels.TeacherDetailsViewModel
+﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentEditViewModel
 
 @{
-    ViewData["Title"] = "Details";
-    ViewData["TeacherId"] = Model.TeacherId;
+    ViewData["Title"] = "EditStudents";
 }
 
-<h1>Редактиране на профил</h1>
+<h1>Редакция на Ученици</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" asp-route-id="@Model.TeacherId">
+        <form asp-action="EditStudents">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
@@ -48,12 +47,32 @@
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="FatherName" class="control-label"></label>
+                <input asp-for="FatherName" class="form-control" />
+                <span asp-validation-for="FatherName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Запамети" class="btn btn-primary" />
+                <label asp-for="MotherName" class="control-label"></label>
+                <input asp-for="MotherName" class="form-control" />
+                <span asp-validation-for="MotherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotherMobileNumber" class="control-label"></label>
+                <input asp-for="MotherMobileNumber" class="form-control" />
+                <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FatherMobileNumber" class="control-label"></label>
+                <input asp-for="FatherMobileNumber" class="form-control" />
+                <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Запази" class="btn btn-primary" />
             </div>
         </form>
     </div>

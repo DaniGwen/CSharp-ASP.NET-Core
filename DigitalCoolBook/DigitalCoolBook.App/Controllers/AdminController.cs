@@ -1,5 +1,6 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
+using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.App.Models.TeacherViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -58,11 +59,33 @@ namespace DigitalCoolBook.App.Controllers
             return View(teachersForView);
         }
 
-        public IActionResult EditStudent()
+        public IActionResult EditStudents()
         {
             var students = _context.Students.ToList();
+            var studentsToView = new List<StudentEditViewModel>();
 
-            return View(students);
+            foreach (var student in students)
+            {
+                var studentModel = new StudentEditViewModel()
+                {
+                    Address = student.Address,
+                    DateOfBirth = student.DateOfBirth,
+                    Email = student.Email,
+                    FatherMobileNumber = student.FatherMobileNumber,
+                    FatherName = student.FatherName,
+                    MobilePhone = student.MobilePhone,
+                    MotherMobileNumber = student.MotherMobileNumber,
+                    MotherName = student.MotherName,
+                    Name = student.Name,
+                    PlaceOfBirth = student.PlaceOfBirth,
+                    Sex = student.Sex,
+                    Telephone = student.Telephone
+                };
+
+                studentsToView.Add(studentModel);
+            }
+
+            return View(studentsToView);
         }
 
         public IActionResult LoginAdmin()

@@ -75,7 +75,7 @@ namespace DigitalCoolBook.App
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
-
+            app.UseAuthorization();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

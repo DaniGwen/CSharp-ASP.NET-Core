@@ -6,6 +6,7 @@ using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.TeacherViewModels;
 using DigitalCoolBook.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -79,12 +80,14 @@ namespace DigitalCoolBook.App.Controllers
             return View(loginModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult RegisterTeacher()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
@@ -179,6 +182,7 @@ namespace DigitalCoolBook.App.Controllers
             return View(studentsForView);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
@@ -189,6 +193,7 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("Admin/AdminPanel");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -201,7 +206,6 @@ namespace DigitalCoolBook.App.Controllers
                 Email = teacher.Email,
                 MobilePhone = teacher.MobilePhone,
                 Name = teacher.Name,
-                Password = teacher.Password,
                 PlaceOfBirth = teacher.PlaceOfBirth,
                 Sex = teacher.Sex,
                 Telephone = teacher.Telephone,
@@ -211,14 +215,33 @@ namespace DigitalCoolBook.App.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Edit(TeacherDetailsViewModel model)
+        public async Task<IActionResult> Edit(TeacherDetailsViewModel model, string id)
         {
-            var teacher = await _context.Teachers.FindAsync(model.TeacherId);
+            try
+            {
+                var teacher = await _context.Teachers.FindAsync(id);
 
-            //edit the values here!!!
+                teacher.Name = model.Name;
+                teacher.MobilePhone = model.MobilePhone;
+                teacher.PlaceOfBirth = model.PlaceOfBirth;
+                teacher.Sex = model.Sex;
+                teacher.Telephone = model.Telephone;
+                teacher.Username = model.Username;
+                teacher.Email = model.Email;
 
-            return Redirect("/Admin/AdminPanel");
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+
+            //Redirect to /Admin/AdminPanel after 4 seconds
+            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+
+            return View("SuccessfulySaved");
         }
         public string HashPassword(string password)
         {
