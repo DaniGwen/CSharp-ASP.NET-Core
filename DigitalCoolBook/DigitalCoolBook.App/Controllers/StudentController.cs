@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -130,6 +131,35 @@ namespace DigitalCoolBook.App.Controllers
                 }
             }
             return Redirect("/Admin/AdminPanel");
+        }
+
+        public IActionResult EditStudents()
+        {
+            var students = _context.Students.ToList();
+            var studentsToView = new List<StudentEditViewModel>();
+
+            foreach (var student in students)
+            {
+                var studentModel = new StudentEditViewModel()
+                {
+                    Address = student.Address,
+                    DateOfBirth = student.DateOfBirth,
+                    Email = student.Email,
+                    FatherMobileNumber = student.FatherMobileNumber,
+                    FatherName = student.FatherName,
+                    MobilePhone = student.MobilePhone,
+                    MotherMobileNumber = student.MotherMobileNumber,
+                    MotherName = student.MotherName,
+                    Name = student.Name,
+                    PlaceOfBirth = student.PlaceOfBirth,
+                    Sex = student.Sex,
+                    Telephone = student.Telephone
+                };
+
+                studentsToView.Add(studentModel);
+            }
+
+            return View(studentsToView);
         }
 
         public string HashPassword(string password)

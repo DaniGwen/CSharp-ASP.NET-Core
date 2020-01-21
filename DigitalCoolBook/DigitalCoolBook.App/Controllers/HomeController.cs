@@ -43,15 +43,12 @@ namespace DigitalCoolBook.App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public IActionResult StudentCreated(StudentRegisterModel model)
+    
+        public IActionResult SuccessfulySaved()
         {
-            return View(model);
-        }
-
-        public IActionResult TeacherCreated(TeacherRegisterModel model)
-        {
-            return View(model);
+            //Redirect to /Admin/AdminPanel after 4 seconds
+            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            return View();
         }
     }
 }

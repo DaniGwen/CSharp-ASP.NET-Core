@@ -186,11 +186,20 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var teacher = await _context.Teachers.FindAsync(id);
-            _context.Teachers.Remove(teacher);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var teacher = await _context.Teachers.FindAsync(id);
+                _context.Teachers.Remove(teacher);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                return View("Error", exception);
+            }
 
-            return Redirect("Admin/AdminPanel");
+            //Redirect to /Admin/AdminPanel after 4 seconds
+            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            return Redirect("/Home/RemoveTeacherSuccess");
         }
 
         [Authorize(Roles = "Admin")]
@@ -238,11 +247,36 @@ namespace DigitalCoolBook.App.Controllers
                 throw new Exception(exception.Message);
             }
 
-            //Redirect to /Admin/AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
-
-            return View("SuccessfulySaved");
+            return Redirect("/Home/SuccessfulySaved");
         }
+
+        [HttpGet]
+        public IActionResult EditTeachers()
+        {
+            var teachers = _context.Teachers.ToList();
+            List<TeacherEditViewModel> teachersForView = new List<TeacherEditViewModel>();
+
+            foreach (var teacher in teachers)
+            {
+                var teacherForView = new TeacherEditViewModel()
+                {
+                    TeacherId = teacher.TeacherId,
+                    DateOfBirth = teacher.DateOfBirth,
+                    Email = teacher.Email,
+                    MobilePhone = teacher.MobilePhone,
+                    Name = teacher.Name,
+                    PlaceOfBirth = teacher.PlaceOfBirth,
+                    Sex = teacher.Sex,
+                    Telephone = teacher.Telephone,
+                    Username = teacher.Username
+                };
+
+                teachersForView.Add(teacherForView);
+            }
+
+            return View(teachersForView);
+        }
+
         public string HashPassword(string password)
         {
             //Add Salt to password

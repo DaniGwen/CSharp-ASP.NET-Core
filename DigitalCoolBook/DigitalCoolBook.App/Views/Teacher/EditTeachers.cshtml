@@ -82,7 +82,7 @@
         $("#dialog-confirm").hide();
         $(".btnDelete").click(function () {
             $("#dialog-confirm").dialog({
-                resizable: false,
+                resizable: true,
                 height: 250,
                 width: 500,
                 modal: true,
@@ -98,7 +98,16 @@
                             },
                             error: function (request, err, message) {
                                 $("#errorMessage").html(request.responseText);
-                                $("#errorMessageDialog").dialog();
+                                $("#errorMessageDialog").dialog({
+                                    maxHeight: 290,
+                                    width: 600,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function () {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
                                 //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
                             }
                         });
@@ -122,8 +131,8 @@
 
 <div id="successMessage"></div>
 
-<div class="coDialog" style="display: none;" id="errorMessageDialog" title="Грешка!">
-    <p id="errorMessage">
+<div style="display: none; " id="errorMessageDialog" title="Грешка!">
+    <p style="max-height:280px; overflow:auto;" id="errorMessage">
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
     </p>
 </div>

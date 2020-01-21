@@ -32,62 +32,6 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult EditTeachers()
-        {
-            var teachers = _context.Teachers.ToList();
-            List<TeacherEditViewModel> teachersForView = new List<TeacherEditViewModel>();
-
-            foreach (var teacher in teachers)
-            {
-                var teacherForView = new TeacherEditViewModel()
-                {
-                    TeacherId = teacher.TeacherId,
-                    DateOfBirth = teacher.DateOfBirth,
-                    Email = teacher.Email,
-                    MobilePhone = teacher.MobilePhone,
-                    Name = teacher.Name,
-                    PlaceOfBirth = teacher.PlaceOfBirth,
-                    Sex = teacher.Sex,
-                    Telephone = teacher.Telephone,
-                    Username = teacher.Username
-                };
-
-                teachersForView.Add(teacherForView);
-            }
-
-            return View(teachersForView);
-        }
-
-        public IActionResult EditStudents()
-        {
-            var students = _context.Students.ToList();
-            var studentsToView = new List<StudentEditViewModel>();
-
-            foreach (var student in students)
-            {
-                var studentModel = new StudentEditViewModel()
-                {
-                    Address = student.Address,
-                    DateOfBirth = student.DateOfBirth,
-                    Email = student.Email,
-                    FatherMobileNumber = student.FatherMobileNumber,
-                    FatherName = student.FatherName,
-                    MobilePhone = student.MobilePhone,
-                    MotherMobileNumber = student.MotherMobileNumber,
-                    MotherName = student.MotherName,
-                    Name = student.Name,
-                    PlaceOfBirth = student.PlaceOfBirth,
-                    Sex = student.Sex,
-                    Telephone = student.Telephone
-                };
-
-                studentsToView.Add(studentModel);
-            }
-
-            return View(studentsToView);
-        }
-
         public IActionResult LoginAdmin()
         {
             return View();
@@ -124,6 +68,7 @@ namespace DigitalCoolBook.App.Controllers
             return View();
 
         }
+
 
         public IActionResult AdminContact()
         {
