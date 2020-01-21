@@ -52,49 +52,110 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MobilePhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FatherName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotherName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotherMobileNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FatherMobileNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
-                <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobilePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotherMobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherMobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script type="text/javascript">
+    $(function () {
+        $("#dialog-confirm").hide();
+        $(".btnDelete").click(function () {
+            $("#dialog-confirm").dialog({
+                resizable: true,
+                height: 250,
+                width: 450,
+                modal: true,
+                buttons: {
+                    "изтриване": function () {
+                        var studentId = $(".btnDelete").attr("id");
+                        $.ajax({
+                            url: "/Student/DeleteStudent/" + studentId,
+                            type: "POST",
+                            success: function () {
+                                $("#successMessage").html("Потребителя е изтрит!");
+                                $(this).dialog("close");
+                            },
+                            error: function (request, err, message) {
+                                $("#errorMessage").html(request.responseText);
+                                $("#errorMessageDialog").dialog({
+                                    maxHeight: 290,
+                                    width: 600,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function () {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                                //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
+                            }
+                        });
+                        $(this).dialog("close");
+                    },
+                    "назад": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<div id="dialog-confirm" title="Изтриване на потребител">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        Профилът ще бъде изтрит. Продължи?
+    </p>
+</div>
+
+<div id="successMessage"></div>
+
+<div style="display: none; " id="errorMessageDialog" title="Грешка!">
+    <p style="max-height:280px; overflow:auto;" id="errorMessage">
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+    </p>
+</div>

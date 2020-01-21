@@ -199,12 +199,13 @@ namespace DigitalCoolBook.App.Controllers
 
             //Redirect to /Admin/AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+
             return Redirect("/Home/RemoveTeacherSuccess");
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> EditTeacher(string id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
 
@@ -226,7 +227,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Edit(TeacherDetailsViewModel model, string id)
+        public async Task<IActionResult> EditTeacher(TeacherDetailsViewModel model, string id)
         {
             try
             {
@@ -250,6 +251,7 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("/Home/SuccessfulySaved");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditTeachers()
         {

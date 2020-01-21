@@ -2,6 +2,7 @@
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -78,12 +79,14 @@ namespace DigitalCoolBook.App.Controllers
             return View(loginModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult RegisterStudent()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
         {
@@ -92,7 +95,7 @@ namespace DigitalCoolBook.App.Controllers
                 var student = new Student
                 {
                     StudentId = Guid.NewGuid().ToString(),
-                     Address = registerModel.Address,
+                    Address = registerModel.Address,
                     Email = registerModel.Email,
                     MobilePhone = registerModel.MobilePhone,
                     Password = this.HashPassword(registerModel.Password),
@@ -104,7 +107,7 @@ namespace DigitalCoolBook.App.Controllers
                     FatherMobileNumber = registerModel.FatherMobileNumber,
                     FatherName = registerModel.FatherName,
                     MotherMobileNumber = registerModel.MotherMobileNumber,
-                    MotherName  = registerModel.MotherName,
+                    MotherName = registerModel.MotherName,
                 };
 
                 var user = new IdentityUser
@@ -121,7 +124,7 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, "Student");
                     _logger.LogInformation("User created a new account with password.");
-                   
+
                     return View("/Home/StudentCreated", student);
                 }
 
@@ -133,6 +136,7 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("/Admin/AdminPanel");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult EditStudents()
         {
             var students = _context.Students.ToList();
@@ -164,14 +168,89 @@ namespace DigitalCoolBook.App.Controllers
             return View(studentsToView);
         }
 
-        public async Task<IActionResult> EditStudent(string id , StudentEditViewModel model)
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditStudent(string id)
         {
-            var studentFromDb = await _context.Students.FindAsync(id);
+            var student = await _context.Students.FindAsync(id);
 
+            var model = new StudentEditViewModel
+            {
+                Address = student.Address,
+                Telephone = student.Telephone,
+                StudentId = student.StudentId,
+                DateOfBirth = student.DateOfBirth,
+                Email = student.Email,
+                FatherMobileNumber = student.FatherMobileNumber,
+                FatherName = student.FatherName,
+                MobilePhone = student.MobilePhone,
+                MotherMobileNumber = student.MotherMobileNumber,
+                MotherName = student.MotherName,
+                Name = student.Name,
+                PlaceOfBirth = student.PlaceOfBirth,
+                Sex = student.Sex
+            };
 
-            return View();
+            return View(model);
         }
 
+        [Authorize(Roles="Admin")]
+        [HttpPost]
+        public async Task<IActionResult> EditStudent(StudentEditViewModel model, string id)
+        {
+            try
+            {
+                var student = await _context.Students.FindAsync(id);
+
+                student.Address = model.Address;
+                student.DateOfBirth = model.DateOfBirth;
+                student.Email = model.Email;
+                student.FatherMobileNumber = model.FatherMobileNumber;
+                student.FatherName = model.FatherName;
+                student.MobilePhone = model.MobilePhone;
+                student.MotherMobileNumber = model.MotherMobileNumber;
+                student.MotherName = model.MotherName ;
+                student.Name = model.Name;
+                student.PlaceOfBirth = model.PlaceOfBirth;
+                student.Sex = model.Sex;
+                student.Telephone = model.Telephone;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                return View("Error", exception);
+            }
+
+            return Redirect("/Home/SuccessfulySaved");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            var students = _context.Students.ToList();
+            var studentsList = new List<StudentChangePasswordViewModel>();
+
+            foreach (var student in students)
+            {
+                var model = new StudentChangePasswordViewModel
+                {
+                    Email = student.Email,
+                    Id = student.StudentId,
+                    Name = student.Name
+                };
+                studentsList.Add(model);
+            }
+
+            return View(studentsList);
+        }
+
+        [Authorize(Roles="Admin")]
+        public IActionResult DeleteStudent(string id)
+        {
+            
+        }
         public string HashPassword(string password)
         {
             //Add Salt to password

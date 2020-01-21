@@ -4,9 +4,6 @@ using Microsoft.Extensions.Logging;
 using DigitalCoolBook.App.Models;
 using Microsoft.AspNetCore.Identity;
 using DigitalCoolBook.App.Data;
-using DigitalCoolBook.Models;
-using DigitalCoolBook.App.Models.StudentViewModels;
-using DigitalCoolBook.App.Models.TeacherViewModels;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -48,6 +45,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             //Redirect to /Admin/AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+
             return View();
         }
     }

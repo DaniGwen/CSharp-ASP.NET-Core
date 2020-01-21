@@ -69,7 +69,6 @@ namespace DigitalCoolBook.App.Controllers
 
         }
 
-
         public IActionResult AdminContact()
         {
             return View();
