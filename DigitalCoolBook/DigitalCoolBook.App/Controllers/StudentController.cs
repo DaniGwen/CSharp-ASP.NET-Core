@@ -114,18 +114,20 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     Email = registerModel.Email,
                     UserName = registerModel.Email,
+                    Id = student.StudentId,
+                    
                 };
 
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
+                await _userManager.AddToRoleAsync(user, "Student");
                 await _context.Students.AddAsync(student);
                 await _context.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Student");
                     _logger.LogInformation("User created a new account with password.");
 
-                    return View("/Home/SuccessfulySaved", student);
+                    return View("/Home/SuccessfulySaved");
                 }
 
                 foreach (var error in result.Errors)
@@ -218,7 +220,7 @@ namespace DigitalCoolBook.App.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return View("/Home/SuccessfulySaved");
+                return Redirect("/Home/SuccessfulySaved");
             }
 
             return View();

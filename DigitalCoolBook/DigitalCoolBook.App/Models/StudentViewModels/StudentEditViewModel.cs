@@ -16,7 +16,7 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
 
         public string Sex { get; set; }
 
-        public int MobilePhone { get; set; }
+        public int? MobilePhone { get; set; }
 
         public int Telephone { get; set; }
 
@@ -24,9 +24,9 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
 
         public string MotherName { get; set; }
 
-        public int MotherMobileNumber { get; set; }
+        public int? MotherMobileNumber { get; set; }
 
-        public int FatherMobileNumber { get; set; }
+        public int? FatherMobileNumber { get; set; }
 
         public string Address { get; set; }
     }

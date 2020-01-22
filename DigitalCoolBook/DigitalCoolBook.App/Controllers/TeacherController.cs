@@ -193,7 +193,12 @@ namespace DigitalCoolBook.App.Controllers
             }
             catch (Exception exception)
             {
-                return View("Error", exception);
+                var errorModel = new ErrorViewModel
+                {
+                    Message = exception.Message
+                };
+
+                return View("Error", errorModel);
             }
 
             //Redirect to /Admin/AdminPanel after 4 seconds
@@ -242,7 +247,7 @@ namespace DigitalCoolBook.App.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return View("/Home/SuccessfulySaved");
+                return Redirect("/Home/SuccessfulySaved");
             }
                
             return View();

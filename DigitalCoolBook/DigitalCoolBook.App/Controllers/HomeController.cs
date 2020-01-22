@@ -41,6 +41,7 @@ namespace DigitalCoolBook.App.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     
+        [HttpGet]
         public IActionResult SuccessfulySaved()
         {
             //Redirect to /Admin/AdminPanel after 4 seconds
