@@ -91,38 +91,38 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
+            var teacher = new Teacher();
+            var user = new IdentityUser();
+
             if (ModelState.IsValid)
             {
-                var teacher = new Teacher
-                {
-                    TeacherId = Guid.NewGuid().ToString(),
-                    DateOfBirth = registerModel.DateOfBirth,
-                    Email = registerModel.Email,
-                    MobilePhone = registerModel.MobilePhone,
-                    Password = this.HashPassword(registerModel.Password),
-                    PlaceOfBirth = registerModel.PlaceOfBirth,
-                    Sex = registerModel.Sex,
-                    Name = registerModel.Name,
-                    Telephone = registerModel.Telephone
-                };
 
-                var user = new IdentityUser
-                {
-                    Email = registerModel.Email,
-                    UserName = registerModel.Email,
-                };
+                teacher.TeacherId = Guid.NewGuid().ToString();
+                teacher.DateOfBirth = registerModel.DateOfBirth;
+                teacher.Email = registerModel.Email;
+                teacher.MobilePhone = registerModel.MobilePhone;
+                teacher.Password = this.HashPassword(registerModel.Password);
+                teacher.PlaceOfBirth = registerModel.PlaceOfBirth;
+                teacher.Sex = registerModel.Sex;
+                teacher.Name = registerModel.Name;
+                teacher.Telephone = registerModel.Telephone;
+
+
+                user.Email = registerModel.Email;
+                user.UserName = registerModel.Email;
 
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
 
                 await _userManager.AddToRoleAsync(user, "Teacher");
-                //await _context.Users.AddAsync(user);
+
                 await _context.Teachers.AddAsync(teacher);
                 await _context.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    return Redirect("/Home/Index");
+
+                    return Redirect("/Home/SuccessfulySaved");
                 }
 
                 foreach (var error in result.Errors)
@@ -131,8 +131,7 @@ namespace DigitalCoolBook.App.Controllers
                 }
             }
 
-
-            return Redirect("/Admin/AdminPanel");
+            return View();
         }
 
         public IActionResult ChooseParalelo(GradesViewModel model)
@@ -200,7 +199,7 @@ namespace DigitalCoolBook.App.Controllers
             //Redirect to /Admin/AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
 
-            return Redirect("/Home/RemoveTeacherSuccess");
+            return Redirect("/Home/RemoveSuccess");
         }
 
         [Authorize(Roles = "Admin")]
@@ -229,7 +228,7 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTeacher(TeacherDetailsViewModel model, string id)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var teacher = await _context.Teachers.FindAsync(id);
 
@@ -242,13 +241,11 @@ namespace DigitalCoolBook.App.Controllers
                 teacher.Email = model.Email;
 
                 await _context.SaveChangesAsync();
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
 
-            return Redirect("/Home/SuccessfulySaved");
+                return View("/Home/SuccessfulySaved");
+            }
+               
+            return View();
         }
 
         [Authorize(Roles = "Admin")]

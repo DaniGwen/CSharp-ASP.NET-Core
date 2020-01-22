@@ -125,7 +125,7 @@ namespace DigitalCoolBook.App.Controllers
                     await _userManager.AddToRoleAsync(user, "Student");
                     _logger.LogInformation("User created a new account with password.");
 
-                    return View("/Home/StudentCreated", student);
+                    return View("/Home/SuccessfulySaved", student);
                 }
 
                 foreach (var error in result.Errors)
@@ -133,7 +133,8 @@ namespace DigitalCoolBook.App.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            return Redirect("/Admin/AdminPanel");
+
+            return View();
         }
 
         [Authorize(Roles = "Admin")]
@@ -194,11 +195,11 @@ namespace DigitalCoolBook.App.Controllers
             return View(model);
         }
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditStudent(StudentEditViewModel model, string id)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var student = await _context.Students.FindAsync(id);
 
@@ -209,20 +210,18 @@ namespace DigitalCoolBook.App.Controllers
                 student.FatherName = model.FatherName;
                 student.MobilePhone = model.MobilePhone;
                 student.MotherMobileNumber = model.MotherMobileNumber;
-                student.MotherName = model.MotherName ;
+                student.MotherName = model.MotherName;
                 student.Name = model.Name;
                 student.PlaceOfBirth = model.PlaceOfBirth;
                 student.Sex = model.Sex;
                 student.Telephone = model.Telephone;
 
                 await _context.SaveChangesAsync();
-            }
-            catch (Exception exception)
-            {
-                return View("Error", exception);
+
+                return View("/Home/SuccessfulySaved");
             }
 
-            return Redirect("/Home/SuccessfulySaved");
+            return View();
         }
 
         [Authorize(Roles = "Admin")]
@@ -246,11 +245,21 @@ namespace DigitalCoolBook.App.Controllers
             return View(studentsList);
         }
 
-        [Authorize(Roles="Admin")]
-        public IActionResult DeleteStudent(string id)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteStudent(string id)
         {
-            
+
+            var student = await _context.Students.FindAsync(id);
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+
+            //Redirect to / Admin / AdminPanel after 4 seconds
+            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+
+            return Redirect("/Home/RemoveSuccess");
         }
+
         public string HashPassword(string password)
         {
             //Add Salt to password

@@ -86,34 +86,34 @@ namespace DigitalCoolBook.App
 
         private void SeedDb(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            if (!context.Grades.Any())
-            {
-                context.Grades.AddRange(this.AddParalelos());
-                context.SaveChanges();
-            }
+            //if (!context.Grades.Any())
+            //{
+            //    context.Grades.AddRange(this.AddParalelos());
+            //    context.SaveChanges();
+            //}
 
-            if (!context.Subjects.Any())
-            {
-                context.Subjects.AddRange(this.AddSubjects());
-                context.SaveChanges();
-            }
-            if (!context.Teachers.Any())
-            {
-                context.Teachers.AddRange(this.AddTeachers());
-                context.SaveChanges();
-            }
+            //if (!context.Subjects.Any())
+            //{
+            //    context.Subjects.AddRange(this.AddSubjects());
+            //    context.SaveChanges();
+            //}
+            //if (!context.Teachers.Any())
+            //{
+            //    context.Teachers.AddRange(this.AddTeachers());
+            //    context.SaveChanges();
+            //}
 
-            if (!context.GradeParalelos.Any())
-            {
-                context.GradeParalelos.AddRange(this.AddGradeParalelo());
-                context.SaveChanges();
-            }
+            //if (!context.GradeParalelos.Any())
+            //{
+            //    context.GradeParalelos.AddRange(this.AddGradeParalelo());
+            //    context.SaveChanges();
+            //}
 
-            if (!context.Students.Any())
-            {
-                context.Students.AddRange(this.AddStudents());
-                context.SaveChanges();
-            }
+            //if (!context.Students.Any())
+            //{
+            //    context.Students.AddRange(this.AddStudents());
+            //    context.SaveChanges();
+            //}
 
         }
 
