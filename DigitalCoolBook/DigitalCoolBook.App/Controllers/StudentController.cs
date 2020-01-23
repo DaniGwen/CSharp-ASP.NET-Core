@@ -269,7 +269,7 @@ namespace DigitalCoolBook.App.Controllers
                 await _context.SaveChangesAsync();
 
                 var sendEmail = new EmailSender();
-                await sendEmail.SendEmailAsync("drug_boy@abv.bg", "Здравей от digitalcoolbook", "Здрасти!");
+                await sendEmail.SendEmailAsync( "Здравей от digitalcoolbook", "Здрасти!");
                 return Redirect("/Home/PasswordSaved");
             }
             return View();
