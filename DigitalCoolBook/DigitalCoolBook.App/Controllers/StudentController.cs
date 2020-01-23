@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,19 @@ namespace DigitalCoolBook.App.Controllers
         private UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
         public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration )
         {
             _userManager = userManager;
             _context = context;
             _roleManager = roleManager;
+            _configuration = configuration;
             _logger = logger;
             _signInManager = signInManager;
         }
@@ -263,13 +267,21 @@ namespace DigitalCoolBook.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = await _context.Students.FindAsync(id);
+                try
+                {
+                    var student = await _context.Students.FindAsync(id);
 
-                student.Password = this.HashPassword(model.Password);
-                await _context.SaveChangesAsync();
+                    student.Password = this.HashPassword(model.Password);
+                    await _context.SaveChangesAsync();
 
-                var sendEmail = new EmailSender();
-                await sendEmail.SendEmailAsync( "Здравей от digitalcoolbook", "Здрасти!");
+                    var sendEmail = new EmailSender(_configuration);
+                    await sendEmail.SendEmailAsync("drug_boy@abv.bg", "Здравей от digitalcoolbook", "Паролата e сменена!");
+                }
+                catch (Exception exception)
+                {
+                    return View("Error", exception.Message);
+                }
+                
                 return Redirect("/Home/PasswordSaved");
             }
             return View();

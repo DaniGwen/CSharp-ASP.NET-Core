@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
@@ -8,16 +8,21 @@ namespace DigitalCoolBook.App.Services
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender()
+        private readonly IConfiguration _configuration;
+       
+        public EmailSender(IConfiguration configuration )
         {
+           _configuration = configuration;
         }
-
-        public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
+        private string SendGridKey { get; set; }
+        private string SendGriduser { get; set; }
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var apiKey = "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";
-            return Execute(apiKey, subject, message, email);
+            this.SendGridKey = _configuration["DigitalCoolBook:EmailSenderApiKey"];
+            this.SendGriduser = _configuration["DigitalCoolBook:EmailSenderName"];
+            //this.SendGriduser = _configuration.GetSection()
+            return Execute(SendGridKey, subject, message, email);
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
@@ -25,7 +30,7 @@ namespace DigitalCoolBook.App.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress(email/* Options.SendGridUser*/),
+                From = new EmailAddress(email, SendGriduser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
