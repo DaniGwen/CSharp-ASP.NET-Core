@@ -52,7 +52,7 @@ namespace DigitalCoolBook.App.Controllers
 
         public IActionResult PasswordSaved()
         {
-            / Redirect to / Admin / AdminPanel after 4 seconds
+            // Redirect to / Admin / AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
             return View();
         }

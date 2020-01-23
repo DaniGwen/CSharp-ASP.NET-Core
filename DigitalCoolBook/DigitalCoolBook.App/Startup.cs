@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using DigitalCoolBook.Models;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using DigitalCoolBook.App.Services;
 
 namespace DigitalCoolBook.App
 {
@@ -34,7 +36,8 @@ namespace DigitalCoolBook.App
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -46,7 +49,6 @@ namespace DigitalCoolBook.App
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())

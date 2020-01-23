@@ -1,6 +1,7 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.StudentViewModels;
+using DigitalCoolBook.App.Services;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -267,6 +268,8 @@ namespace DigitalCoolBook.App.Controllers
                 student.Password = this.HashPassword(model.Password);
                 await _context.SaveChangesAsync();
 
+                var sendEmail = new EmailSender();
+                await sendEmail.SendEmailAsync("drug_boy@abv.bg", "Здравей от digitalcoolbook", "Здрасти!");
                 return Redirect("/Home/PasswordSaved");
             }
             return View();
