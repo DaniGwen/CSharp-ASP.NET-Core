@@ -49,5 +49,12 @@ namespace DigitalCoolBook.App.Controllers
 
             return View();
         }
+
+        public IActionResult PasswordSaved()
+        {
+            / Redirect to / Admin / AdminPanel after 4 seconds
+            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            return View();
+        }
     }
 }

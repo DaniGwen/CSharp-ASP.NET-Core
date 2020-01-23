@@ -115,7 +115,7 @@ namespace DigitalCoolBook.App.Controllers
                     Email = registerModel.Email,
                     UserName = registerModel.Email,
                     Id = student.StudentId,
-                    
+
                 };
 
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
@@ -227,27 +227,6 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult ChangePassword()
-        {
-            var students = _context.Students.ToList();
-            var studentsList = new List<StudentChangePasswordViewModel>();
-
-            foreach (var student in students)
-            {
-                var model = new StudentChangePasswordViewModel
-                {
-                    Email = student.Email,
-                    Id = student.StudentId,
-                    Name = student.Name
-                };
-                studentsList.Add(model);
-            }
-
-            return View(studentsList);
-        }
-
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
 
@@ -260,6 +239,37 @@ namespace DigitalCoolBook.App.Controllers
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
 
             return Redirect("/Home/RemoveSuccess");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(string id)
+        {
+            var student = await _context.Students.FindAsync(id);
+
+            var model = new StudentChangePasswordViewModel()
+            {
+                Email = student.Email,
+                Name = student.Name,
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(StudentChangePasswordViewModel model, string id)
+        {
+            if (ModelState.IsValid)
+            {
+                var student = await _context.Students.FindAsync(id);
+
+                student.Password = this.HashPassword(model.Password);
+                await _context.SaveChangesAsync();
+
+                return Redirect("/Home/PasswordSaved");
+            }
+            return View();
         }
 
         public string HashPassword(string password)

@@ -94,6 +94,7 @@
                 <td>
                     <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
                     <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
+                    <a class="btn btn-sm btn-secondary mt-1"asp-controller="Student" asp-action="ChangePassword" asp-route-id="@item.StudentId">Смяна на парола</a>
                 </td>
             </tr>
         }
