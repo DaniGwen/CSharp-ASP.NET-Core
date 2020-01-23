@@ -274,8 +274,9 @@ namespace DigitalCoolBook.App.Controllers
                     student.Password = this.HashPassword(model.Password);
                     await _context.SaveChangesAsync();
 
+                    string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
                     var sendEmail = new EmailSender(_configuration);
-                    await sendEmail.SendEmailAsync("drug_boy@abv.bg", "Здравей от digitalcoolbook", "Паролата e сменена!");
+                    await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
                 }
                 catch (Exception exception)
                 {
