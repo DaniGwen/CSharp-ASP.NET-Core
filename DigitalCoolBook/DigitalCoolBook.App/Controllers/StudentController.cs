@@ -275,7 +275,7 @@ namespace DigitalCoolBook.App.Controllers
                     await _context.SaveChangesAsync();
 
                     var sendEmail = new EmailSender(_configuration);
-                    await sendEmail.SendEmailAsync("drug_boy@abv.bg", "Здравей от digitalcoolbook", "Паролата e сменена!");
+                    await sendEmail.SendEmailAsync(model.Email, "Здравей от digitalcoolbook", "Паролата e сменена!");
                 }
                 catch (Exception exception)
                 {
