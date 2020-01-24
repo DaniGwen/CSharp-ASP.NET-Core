@@ -8,12 +8,6 @@ namespace DigitalCoolBook.Models
 {
     public class Student : IdentityUser
     {
-        //[Key]
-        //public override string Id { get; set; }
-
-        [Required]
-        [StringLength(60, ErrorMessage = "Email must be between 3 and 60 characters!", MinimumLength = 3)]
-        public override string Email { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -50,10 +44,6 @@ namespace DigitalCoolBook.Models
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int Telephone { get; set; }
 
-        //[Required]
-        //[DataType(DataType.Password)]
-        //public string Password { get; set; }
-
         public List<Attendance> Attendances { get; set; }
 
         [ForeignKey("GradeParalelo")]
@@ -61,9 +51,6 @@ namespace DigitalCoolBook.Models
         public GradeParalelo GradeParalelo { get; set; }
 
         public List<ScoreRecord> ScoreRecords { get; set; }
-
-        //[StringLength(50, ErrorMessage = "Username must be between 3 and 50 characters!", MinimumLength = 3)]
-        //public string Username { get; set; }
 
         public bool IsDeleted { get; set; }
     }

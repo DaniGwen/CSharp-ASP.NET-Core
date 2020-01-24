@@ -67,7 +67,6 @@ namespace DigitalCoolBook.App.Controllers
                     return View(loginModel);
                 }
             }
-
             return Redirect("/Home/Index");
         }
 
@@ -242,40 +241,50 @@ namespace DigitalCoolBook.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var user = await _context.Users.FindAsync(id);
+                var result = _userManager.RemovePasswordAsync(user);
+                if (result.IsCompleted)
                 {
-                    var user = await _context.Users.FindAsync(id);
-                    await _userManager.ChangePasswordAsync(user, user.PasswordHash, model.Password);
-                    await _context.SaveChangesAsync();
-                    string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
-                    var sendEmail = new EmailSender(_configuration);
-
-                    await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
+                    var addResult = await _userManager.AddPasswordAsync(user, model.Password);
+                    if (addResult.Succeeded)
+                    {
+                        return Redirect("/Home/PasswordSaved");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
+                    }
                 }
-                catch (Exception exception)
+                else
                 {
-                    return View("Error", exception.Message);
+                    ModelState.AddModelError("", result.Exception.Message);
                 }
-
-                return Redirect("/Home/PasswordSaved");
+                //await _userManager.(user, user.PasswordHash, model.Password);
+                //await _context.SaveChangesAsync();
+                //string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
+                //var sendEmail = new EmailSender(_configuration);
+                //await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
             }
-            return View();
-        }
 
-        public string HashPassword(string password)
-        {
-            //Add Salt to password
-            byte[] salt = new byte[128 / 8];
-
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-
-            return hashed.ToString();
+            return Redirect("/Home/PasswordSaved");
         }
     }
+
+
+    public string HashPassword(string password)
+    {
+        //Add Salt to password
+        byte[] salt = new byte[128 / 8];
+
+
+        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+        password: password,
+        salt: salt,
+        prf: KeyDerivationPrf.HMACSHA1,
+        iterationCount: 10000,
+        numBytesRequested: 256 / 8));
+
+        return hashed.ToString();
+    }
 }
+
