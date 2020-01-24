@@ -30,7 +30,7 @@ namespace DigitalCoolBook.App.Controllers
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration )
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _context = context;
@@ -49,39 +49,26 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
         {
-            string returnUrl = "/Home/Index";
 
             if (ModelState.IsValid)
             {
-                var hash = this.HashPassword(loginModel.Password);
+                //var user = _context.Users.FirstOrDefault(t => t.PasswordHash == hash && t.Email == loginModel.Email);
+                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
 
-                var student = _context.Students
-                    .FirstOrDefault(t => t.Password == this.HashPassword(loginModel.Password));
-
-                if (student != null)
+                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+                if (result.Succeeded)
                 {
-                    var user = new IdentityUser { UserName = loginModel.Email, Email = loginModel.Email };
-
-                    var result = await _signInManager.PasswordSignInAsync(user.UserName, loginModel.Password, isPersistent: false, lockoutOnFailure: false);
-
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                        return LocalRedirect(returnUrl);
-                    }
-                    if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        return RedirectToPage("./Lockout");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        return View(loginModel);
-                    }
+                    _logger.LogInformation("User logged in.");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                    return View(loginModel);
                 }
             }
-            return View(loginModel);
+
+            return Redirect("/Home/Index");
         }
 
         [Authorize(Roles = "Admin")]
@@ -95,52 +82,40 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
         {
+            var student = new Student();
+
             if (ModelState.IsValid)
             {
-                var student = new Student
-                {
-                    StudentId = Guid.NewGuid().ToString(),
-                    Address = registerModel.Address,
-                    Email = registerModel.Email,
-                    MobilePhone = registerModel.MobilePhone,
-                    Password = this.HashPassword(registerModel.Password),
-                    PlaceOfBirth = registerModel.PlaceOfBirth,
-                    Sex = registerModel.Sex,
-                    Name = registerModel.Name,
-                    Telephone = registerModel.Telephone,
-                    DateOfBirth = registerModel.DateOfBirth,
-                    FatherMobileNumber = registerModel.FatherMobileNumber,
-                    FatherName = registerModel.FatherName,
-                    MotherMobileNumber = registerModel.MotherMobileNumber,
-                    MotherName = registerModel.MotherName,
-                };
+                student.Id = Guid.NewGuid().ToString();
+                student.DateOfBirth = registerModel.DateOfBirth;
+                student.Email = registerModel.Email;
+                student.MobilePhone = registerModel.MobilePhone;
+                student.PasswordHash = registerModel.Password;
+                student.PlaceOfBirth = registerModel.PlaceOfBirth;
+                student.Sex = registerModel.Sex;
+                student.Name = registerModel.Name;
+                student.Telephone = registerModel.Telephone;
+                student.UserName = registerModel.Email;
 
-                var user = new IdentityUser
-                {
-                    Email = registerModel.Email,
-                    UserName = registerModel.Email,
-                    Id = student.StudentId,
-
-                };
-
-                var result = await _userManager.CreateAsync(user, registerModel.Password);
-                await _userManager.AddToRoleAsync(user, "Student");
-                await _context.Students.AddAsync(student);
-                await _context.SaveChangesAsync();
+                var result = await _userManager.CreateAsync(student, registerModel.Password);
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(student, "Student");
+
                     _logger.LogInformation("User created a new account with password.");
 
-                    return View("/Home/SuccessfulySaved");
+                    return Redirect("/Home/SuccessfulySaved");
                 }
-
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                        return View(registerModel);
+                    }
                 }
             }
-
             return View();
         }
 
@@ -155,7 +130,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var studentModel = new StudentEditViewModel()
                 {
-                    StudentId = student.StudentId,
+                    StudentId = student.Id,
                     Address = student.Address,
                     DateOfBirth = student.DateOfBirth,
                     Email = student.Email,
@@ -186,7 +161,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 Address = student.Address,
                 Telephone = student.Telephone,
-                StudentId = student.StudentId,
+                StudentId = student.Id,
                 DateOfBirth = student.DateOfBirth,
                 Email = student.Email,
                 FatherMobileNumber = student.FatherMobileNumber,
@@ -269,11 +244,9 @@ namespace DigitalCoolBook.App.Controllers
             {
                 try
                 {
-                    var student = await _context.Students.FindAsync(id);
-
-                    student.Password = this.HashPassword(model.Password);
+                    var user = await _context.Users.FindAsync(id);
+                    await _userManager.ChangePasswordAsync(user, user.PasswordHash, model.Password);
                     await _context.SaveChangesAsync();
-
                     string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
                     var sendEmail = new EmailSender(_configuration);
                     await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
@@ -282,7 +255,7 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     return View("Error", exception.Message);
                 }
-                
+
                 return Redirect("/Home/PasswordSaved");
             }
             return View();

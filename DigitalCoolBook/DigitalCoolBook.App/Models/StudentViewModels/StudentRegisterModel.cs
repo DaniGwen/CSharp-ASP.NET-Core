@@ -35,9 +35,7 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
         public string Sex { get; set; }
 
-        [Phone]
         [Display(Name = "Mobile Phone")]
-        [Range(6,20)]
         public int? MobilePhone { get; set; }
 
         [Required]

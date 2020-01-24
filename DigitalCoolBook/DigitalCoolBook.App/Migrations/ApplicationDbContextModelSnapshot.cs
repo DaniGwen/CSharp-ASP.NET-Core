@@ -96,80 +96,6 @@ namespace DigitalCoolBook.App.Migrations
                     b.ToTable("ScoreRecords");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
-                {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
-
-                    b.Property<int?>("FatherMobileNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FatherName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("IdGradeParalelo")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("MobilePhone")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MotherMobileNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MotherName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceOfBirth")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Sex")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<int>("Telephone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("StudentId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("IdGradeParalelo");
-
-                    b.ToTable("Students");
-                });
-
             modelBuilder.Entity("DigitalCoolBook.Models.Subject", b =>
                 {
                     b.Property<string>("SubjectId")
@@ -210,58 +136,6 @@ namespace DigitalCoolBook.App.Migrations
                     b.HasIndex("IdSubject");
 
                     b.ToTable("SubjectGrades");
-                });
-
-            modelBuilder.Entity("DigitalCoolBook.Models.Teacher", b =>
-                {
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("MobilePhone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Sex")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<int>("Telephone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("TeacherId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -327,6 +201,10 @@ namespace DigitalCoolBook.App.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -378,6 +256,8 @@ namespace DigitalCoolBook.App.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -460,6 +340,101 @@ namespace DigitalCoolBook.App.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FatherMobileNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FatherName")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("IdGradeParalelo")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("MobilePhone")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MotherMobileNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MotherName")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PlaceOfBirth")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.HasIndex("IdGradeParalelo");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.Teacher", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnName("Teacher_DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnName("Teacher_IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("MobilePhone")
+                        .HasColumnName("Teacher_MobilePhone")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Teacher_Name")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PlaceOfBirth")
+                        .IsRequired()
+                        .HasColumnName("Teacher_PlaceOfBirth")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Sex")
+                        .HasColumnName("Teacher_Sex")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<int>("Telephone")
+                        .HasColumnName("Teacher_Telephone")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Teacher");
+                });
+
             modelBuilder.Entity("DigitalCoolBook.Models.Attendance", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Student", "Student")
@@ -487,13 +462,6 @@ namespace DigitalCoolBook.App.Migrations
                     b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
                         .WithMany("ScoreRecords")
                         .HasForeignKey("IdSubject");
-                });
-
-            modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
-                {
-                    b.HasOne("DigitalCoolBook.Models.GradeParalelo", "GradeParalelo")
-                        .WithMany("Students")
-                        .HasForeignKey("IdGradeParalelo");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
@@ -556,6 +524,13 @@ namespace DigitalCoolBook.App.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
+                {
+                    b.HasOne("DigitalCoolBook.Models.GradeParalelo", "GradeParalelo")
+                        .WithMany("Students")
+                        .HasForeignKey("IdGradeParalelo");
                 });
 #pragma warning restore 612, 618
         }

@@ -71,6 +71,7 @@
                 <td>
                     <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.TeacherId">Изтрий</a>
                     <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.TeacherId">Редактирай</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.TeacherId">Смяна на парола</a>
                 </td>
             </tr>
         }

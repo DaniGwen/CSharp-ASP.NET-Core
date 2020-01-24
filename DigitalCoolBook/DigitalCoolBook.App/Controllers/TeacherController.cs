@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.TeacherViewModels;
+using DigitalCoolBook.App.Services;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace DigitalCoolBook.App.Controllers
@@ -22,16 +24,19 @@ namespace DigitalCoolBook.App.Controllers
         private UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
         public TeacherController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _context = context;
             _roleManager = roleManager;
+            _configuration = configuration;
             _logger = logger;
             _signInManager = signInManager;
         }
@@ -45,39 +50,25 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
         {
-            string returnUrl = "/Home/Index";
-
             if (ModelState.IsValid)
             {
-                var hash = this.HashPassword(loginModel.Password);
+                //var user = _context.Users.FirstOrDefault(t => t.PasswordHash == hash && t.Email == loginModel.Email);
+                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
 
-                var teacher = _context.Teachers
-                    .FirstOrDefault(t => t.Password == this.HashPassword(loginModel.Password));
-
-                if (teacher != null)
+                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+                if (result.Succeeded)
                 {
-                    var user = new IdentityUser { UserName = loginModel.Email, Email = loginModel.Email };
-
-                    var result = await _signInManager.PasswordSignInAsync(user.UserName, loginModel.Password, isPersistent: false, lockoutOnFailure: false);
-
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                        return LocalRedirect(returnUrl);
-                    }
-                    if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        return RedirectToPage("./Lockout");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        return View(loginModel);
-                    }
+                    _logger.LogInformation("User logged in.");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                    return View(loginModel);
                 }
             }
-            return View(loginModel);
+           
+            return Redirect("/Home/Index");
         }
 
         [Authorize(Roles = "Admin")]
@@ -92,45 +83,46 @@ namespace DigitalCoolBook.App.Controllers
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
             var teacher = new Teacher();
-            var user = new IdentityUser();
 
             if (ModelState.IsValid)
             {
-
-                teacher.TeacherId = Guid.NewGuid().ToString();
+                teacher.Id = Guid.NewGuid().ToString();
                 teacher.DateOfBirth = registerModel.DateOfBirth;
                 teacher.Email = registerModel.Email;
                 teacher.MobilePhone = registerModel.MobilePhone;
-                teacher.Password = this.HashPassword(registerModel.Password);
+                teacher.PasswordHash = registerModel.Password;
                 teacher.PlaceOfBirth = registerModel.PlaceOfBirth;
                 teacher.Sex = registerModel.Sex;
                 teacher.Name = registerModel.Name;
                 teacher.Telephone = registerModel.Telephone;
-
-
-                user.Email = registerModel.Email;
-                user.UserName = registerModel.Email;
-
-                var result = await _userManager.CreateAsync(user, registerModel.Password);
-
-                await _userManager.AddToRoleAsync(user, "Teacher");
-
-                await _context.Teachers.AddAsync(teacher);
-                await _context.SaveChangesAsync();
+                if (registerModel.Username == null)
+                {
+                    teacher.UserName = registerModel.Email;
+                }
+                else
+                {
+                    teacher.UserName = registerModel.Username;
+                }
+                
+                var result = await _userManager.CreateAsync(teacher, registerModel.Password);
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(teacher, "Teacher");
+
                     _logger.LogInformation("User created a new account with password.");
 
                     return Redirect("/Home/SuccessfulySaved");
                 }
-
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                        return View(registerModel);
+                    }
                 }
             }
-
             return View();
         }
 
@@ -215,7 +207,7 @@ namespace DigitalCoolBook.App.Controllers
 
             TeacherDetailsViewModel model = new TeacherDetailsViewModel
             {
-                TeacherId = teacher.TeacherId,
+                TeacherId = teacher.Id,
                 DateOfBirth = teacher.DateOfBirth,
                 Email = teacher.Email,
                 MobilePhone = teacher.MobilePhone,
@@ -223,7 +215,7 @@ namespace DigitalCoolBook.App.Controllers
                 PlaceOfBirth = teacher.PlaceOfBirth,
                 Sex = teacher.Sex,
                 Telephone = teacher.Telephone,
-                Username = teacher.Username
+                Username = teacher.UserName
             };
 
             return View(model);
@@ -242,14 +234,14 @@ namespace DigitalCoolBook.App.Controllers
                 teacher.PlaceOfBirth = model.PlaceOfBirth;
                 teacher.Sex = model.Sex;
                 teacher.Telephone = model.Telephone;
-                teacher.Username = model.Username;
+                teacher.UserName = model.Username;
                 teacher.Email = model.Email;
 
                 await _context.SaveChangesAsync();
 
                 return Redirect("/Home/SuccessfulySaved");
             }
-               
+
             return View();
         }
 
@@ -264,7 +256,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var teacherForView = new TeacherEditViewModel()
                 {
-                    TeacherId = teacher.TeacherId,
+                    TeacherId = teacher.Id,
                     DateOfBirth = teacher.DateOfBirth,
                     Email = teacher.Email,
                     MobilePhone = teacher.MobilePhone,
@@ -272,13 +264,53 @@ namespace DigitalCoolBook.App.Controllers
                     PlaceOfBirth = teacher.PlaceOfBirth,
                     Sex = teacher.Sex,
                     Telephone = teacher.Telephone,
-                    Username = teacher.Username
+                    Username = teacher.UserName
                 };
 
                 teachersForView.Add(teacherForView);
             }
 
             return View(teachersForView);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword(string id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+
+            var model = new TeacherChangePasswordViewModel()
+            {
+                Email = teacher.Email,
+                Name = teacher.Name,
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(TeacherChangePasswordViewModel model, string id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _context.Users.FindAsync(id);
+                    await _userManager.ChangePasswordAsync(user, user.PasswordHash, model.Password);
+                    await _context.SaveChangesAsync();
+                    string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
+                    var sendEmail = new EmailSender(_configuration);
+                    await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
+                }
+                catch (Exception exception)
+                {
+                    return View("Error", exception.Message);
+                }
+
+                return Redirect("/Home/PasswordSaved");
+            }
+            return View();
         }
 
         public string HashPassword(string password)

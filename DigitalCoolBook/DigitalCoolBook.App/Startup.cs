@@ -155,10 +155,10 @@ namespace DigitalCoolBook.App
              {
                 new Student
                 {
-                    StudentId = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Ceco Ivanov",
-                    Password = "Ceccec155155*",
+                    PasswordHash = "Ceccec155155*",
                     PlaceOfBirth = "Botevgrad",
                     Sex = "Male",
                     Telephone = 8765,
@@ -172,10 +172,10 @@ namespace DigitalCoolBook.App
                 },
                 new Student
                 {
-                     StudentId = Guid.NewGuid().ToString(),
+                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 094098321,
                     Name = "Ivailo Dimitrov",
-                    Password = "Ivoivo155155*",
+                    PasswordHash = "Ivoivo155155*",
                     PlaceOfBirth = "Pirdop",
                     Sex = "Male",
                     Telephone = 3234,
@@ -189,10 +189,10 @@ namespace DigitalCoolBook.App
                 },
                 new Student
                 {
-                     StudentId = Guid.NewGuid().ToString(),
+                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
-                    Password = "Marmar155155*",
+                    PasswordHash = "Marmar155155*",
                     PlaceOfBirth = "Kurtovo konare",
                     Sex = "Female",
                     Telephone = 3300,
@@ -214,36 +214,36 @@ namespace DigitalCoolBook.App
             {
                 new Teacher
                 {
-                    TeacherId = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     DateOfBirth = DateTime.Parse("05/2/1990"),
                     Email = "tot@tot.com",
                     MobilePhone = 0997655443,
                     Name = "Pavlina",
-                    Password = "Tottot155155*",
+                    PasswordHash = "Tottot155155*",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Female",
                     Telephone = 3344
                 },
                 new Teacher
                 {
-                    TeacherId = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                      DateOfBirth = DateTime.Parse("05/2/1987"),
                     Email = "stam@stam.com",
                     MobilePhone = 099456373,
                     Name = "Stamat Ionchev",
-                    Password = "Stamstam155155*",
+                    PasswordHash = "Stamstam155155*",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Male",
                     Telephone = 3264
                 },
                 new Teacher
                 {
-                    TeacherId = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                      DateOfBirth = DateTime.Parse("05/2/1980"),
                     Email = "pesh@pesh.com",
                     MobilePhone = 0997655442,
                     Name = "Pesho Geshev",
-                    Password = "Peshpesh155155*",
+                    PasswordHash = "Peshpesh155155*",
                     PlaceOfBirth = "Sofia",
                     Sex = "Male",
                     Telephone = 3346

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.Models
 {
-    public class Teacher
+    public class Teacher : IdentityUser
     {
-        [Key]
-        public string TeacherId { get; set; }
+        //[Key]
+        //public override string Id { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -14,7 +15,7 @@ namespace DigitalCoolBook.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 60 characters!", MinimumLength = 3)]
-        public string Email { get; set; }
+        public override string Email { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
@@ -26,7 +27,6 @@ namespace DigitalCoolBook.Models
         [StringLength(20, ErrorMessage = "Must be between 3 and 20 characters!", MinimumLength = 1)]
         public string Sex { get; set; }
 
-        [Phone]
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int? MobilePhone { get; set; }
 
@@ -34,12 +34,12 @@ namespace DigitalCoolBook.Models
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int Telephone { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //public string Password { get; set; }
 
-        [StringLength(50, ErrorMessage = "Username must be between 3 and 50 characters!", MinimumLength = 3)]
-        public string Username { get; set; }
+        //[StringLength(50, ErrorMessage = "Username must be between 3 and 50 characters!", MinimumLength = 3)]
+        //public string Username { get; set; }
 
         public bool IsDeleted { get; set; }
       

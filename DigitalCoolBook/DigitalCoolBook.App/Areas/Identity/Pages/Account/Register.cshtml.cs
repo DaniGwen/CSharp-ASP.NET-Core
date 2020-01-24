@@ -88,41 +88,6 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         }
 
-        public string HashPassword(string password)
-        {
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            };
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-
-            return hashed.ToString();
-        }
-
-        public void AddTeacherToDatabase()
-        {
-            var teacher = new Teacher
-            {
-                DateOfBirth = this.Input.DateOfBirth,
-                Email = this.Input.Email,
-                MobilePhone = this.Input.MobilePhone,
-                Password = this.HashPassword(this.Input.Password),
-                PlaceOfBirth = this.Input.PlaceOfBirth,
-                Sex = this.Input.Sex,
-                Name = this.Input.Name,
-                Telephone = this.Input.Telephone
-            };
-
-            _context.Teachers.Add(teacher);
-            _context.SaveChanges();
-        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -132,7 +97,6 @@ namespace DigitalCoolBook.App.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            this.AddTeacherToDatabase();
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
