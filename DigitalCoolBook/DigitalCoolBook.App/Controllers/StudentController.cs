@@ -249,6 +249,7 @@ namespace DigitalCoolBook.App.Controllers
                     await _context.SaveChangesAsync();
                     string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
                     var sendEmail = new EmailSender(_configuration);
+
                     await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
                 }
                 catch (Exception exception)
