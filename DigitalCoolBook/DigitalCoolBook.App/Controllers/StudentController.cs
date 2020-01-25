@@ -53,15 +53,18 @@ namespace DigitalCoolBook.App.Controllers
             if (ModelState.IsValid)
             {
                 //var user = _context.Users.FirstOrDefault(t => t.PasswordHash == hash && t.Email == loginModel.Email);
-                var user = await _userManager.FindByEmailAsync(loginModel.Email);
-                var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
-
-                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
-                if (result.Succeeded)
+                try
                 {
-                    _logger.LogInformation("User logged in.");
+                    var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                    var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
+                    var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                    }
                 }
-                else
+                catch (Exception)
                 {
                     ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
                     return View(loginModel);
@@ -256,6 +259,13 @@ namespace DigitalCoolBook.App.Controllers
                 }
             }
             return View(model);
+        }
+
+        [Authorize(Roles = "Student")]
+        [HttpGet]
+        public IActionResult Panel()
+        {
+            return View();
         }
 
         public string HashPassword(string password)

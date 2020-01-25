@@ -88,10 +88,28 @@
                                     </form>
                                     if (this.User.IsInRole("Admin"))
                                     {
-                                        <div class="mx-4">
+                                        <div class="mx-5">
                                             <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
                                                 <i class="flaticon-user"></i>
-                                                <button class="btn btn-primary">Администратор</button>
+                                                <button class="btn btn-primary">Администраторски панел</button>
+                                            </form>
+                                        </div>
+                                    }
+                                    if (this.User.IsInRole("Student"))
+                                    {
+                                        <div class="mx-4">
+                                            <form class="form-inline" asp-area="" asp-controller="Student" asp-action="Panel">
+                                                <i class="flaticon-user"></i>
+                                                <button class="btn btn-primary">Настройки на профил</button>
+                                            </form>
+                                        </div>
+                                    }
+                                    if (this.User.IsInRole("Teacher"))
+                                    {
+                                        <div class="mx-4">
+                                            <form class="form-inline" asp-area="" asp-controller="Teacher" asp-action="Panel">
+                                                <i class="flaticon-user"></i>
+                                                <button class="btn btn-primary">Настройки на профил</button>
                                             </form>
                                         </div>
                                     }

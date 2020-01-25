@@ -9,44 +9,44 @@
 <p>
     <a asp-controller="Student" asp-action="RegisterStudent" class="btn btn-secondary ">Създай нов</a>
 </p>
-<table class="table font-weight-bold table-hover table-sm">
+<table class="table table-hover table-sm">
     <thead class="thead-light">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayName("Имейл")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Име")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
+                @Html.DisplayName("Дата на раждане")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlaceOfBirth)
+                @Html.DisplayName("Място на раждане")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sex)
+                @Html.DisplayName("Пол")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MobilePhone)
+                @Html.DisplayName("Мобилен телефон")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Telephone)
+                @Html.DisplayName("Домашен телефон")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FatherName)
+                @Html.DisplayName("Бащино име")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MotherName)
+                @Html.DisplayName("Майчино име")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MotherMobileNumber)
+                @Html.DisplayName("Телефон на майката")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FatherMobileNumber)
+                @Html.DisplayName("Телефон на бащата")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayName("Адрес")
             </th>
             <th></th>
         </tr>
@@ -117,8 +117,18 @@
                             url: "/Student/DeleteStudent/" + studentId,
                             type: "POST",
                             success: function () {
-                                $("#successMessage").html("Потребителя е изтрит!");
-                                $(this).dialog("close");
+                                $("#successMessage").dialog({
+                                    resizable: false,
+                                    height: 200,
+                                    width: 300,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function () {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                                $("#successMessage").html("Профилът беше изтрит!");
                             },
                             error: function (request, err, message) {
                                 $("#errorMessage").html(request.responseText);
@@ -132,6 +142,7 @@
                                         }
                                     }
                                 });
+                                //In release version use this
                                 //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
                             }
                         });
