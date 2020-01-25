@@ -212,7 +212,7 @@ namespace DigitalCoolBook.App.Controllers
             var student = await _context.Students.FindAsync(id);
 
             _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             //Redirect to / Admin / AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
@@ -243,48 +243,35 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var user = await _context.Users.FindAsync(id);
                 var result = _userManager.RemovePasswordAsync(user);
-                if (result.IsCompleted)
+                 _context.SaveChanges();
+                var addResult = await _userManager.AddPasswordAsync(user, model.Password);
+
+                if (addResult.Succeeded)
                 {
-                    var addResult = await _userManager.AddPasswordAsync(user, model.Password);
-                    if (addResult.Succeeded)
-                    {
-                        return Redirect("/Home/PasswordSaved");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
-                    }
+                    return Redirect("/Home/PasswordSaved");
                 }
                 else
                 {
-                    ModelState.AddModelError("", result.Exception.Message);
+                    ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
                 }
-                //await _userManager.(user, user.PasswordHash, model.Password);
-                //await _context.SaveChangesAsync();
-                //string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
-                //var sendEmail = new EmailSender(_configuration);
-                //await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
             }
+            return View(model);
+        }
 
-            return Redirect("/Home/PasswordSaved");
+        public string HashPassword(string password)
+        {
+            //Add Salt to password
+            byte[] salt = new byte[128 / 8];
+
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA1,
+            iterationCount: 10000,
+            numBytesRequested: 256 / 8));
+
+            return hashed.ToString();
         }
     }
-
-
-    public string HashPassword(string password)
-    {
-        //Add Salt to password
-        byte[] salt = new byte[128 / 8];
-
-
-        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-        password: password,
-        salt: salt,
-        prf: KeyDerivationPrf.HMACSHA1,
-        iterationCount: 10000,
-        numBytesRequested: 256 / 8));
-
-        return hashed.ToString();
-    }
 }
-

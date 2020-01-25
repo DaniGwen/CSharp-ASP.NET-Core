@@ -94,11 +94,20 @@
                             url: "/Teacher/Delete/" + teacherId,
                             type: "POST",
                             success: function () {
-                                $("#successMessage").html("Потребителя е изтрит!");
-                                $(this).dialog("close");
+                                $("#successMessage").dialog({
+                                    resizable: false,
+                                    height: 200,
+                                    width: 300,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function () {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                                $("#successMessage").html("Профилът беше изтрит!");
                             },
                             error: function (request, err, message) {
-                                $("#errorMessage").html(request.responseText);
                                 $("#errorMessageDialog").dialog({
                                     maxHeight: 290,
                                     width: 600,
@@ -109,6 +118,7 @@
                                         }
                                     }
                                 });
+                                $("#errorMessage").html(request.responseText);
                                 //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
                             }
                         });

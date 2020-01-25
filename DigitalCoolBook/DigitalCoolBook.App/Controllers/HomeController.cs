@@ -9,6 +9,7 @@ namespace DigitalCoolBook.App.Controllers
 {
     public class HomeController : Controller
     {
+        private const string AdminPanelUrl = "/Admin/AdminPanel";
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
@@ -53,7 +54,15 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult PasswordSaved()
         {
             // Redirect to / Admin / AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            Response.Headers.Add("REFRESH", $"4;URL={AdminPanelUrl}");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult RemoveSuccess()
+        {
+            //this.Response.Headers.Add("REFRESH", $"4;URL={AdminPanelUrl}");
+
             return View();
         }
     }

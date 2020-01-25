@@ -175,13 +175,13 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
                 var teacher = await _context.Teachers.FindAsync(id);
                 _context.Teachers.Remove(teacher);
-                await _context.SaveChangesAsync();
+                 _context.SaveChanges();
             }
             catch (Exception exception)
             {
@@ -194,9 +194,9 @@ namespace DigitalCoolBook.App.Controllers
             }
 
             //Redirect to /Admin/AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            //Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
 
-            return Redirect("/Home/RemoveSuccess");
+            return Redirect("/Admin/AdminPanel");
         }
 
         [Authorize(Roles = "Admin")]
@@ -292,25 +292,24 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(TeacherChangePasswordViewModel model, string id)
         {
+
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var user = await _context.Users.FindAsync(id);
-                    await _userManager.ChangePasswordAsync(user, user.PasswordHash, model.Password);
-                    await _context.SaveChangesAsync();
-                    string emailMessage = $"Здравейте {model.Name}, /r/n Новата ви парола е: {model.Password}";
-                    var sendEmail = new EmailSender(_configuration);
-                    await sendEmail.SendEmailAsync(model.Email, "Digitalcoolbook профил", emailMessage);
-                }
-                catch (Exception exception)
-                {
-                    return View("Error", exception.Message);
-                }
+                var user = await _context.Users.FindAsync(id);
+                var result = _userManager.RemovePasswordAsync(user);
+                _context.SaveChanges();
+                var addResult = await _userManager.AddPasswordAsync(user, model.Password);
 
-                return Redirect("/Home/PasswordSaved");
+                if (addResult.Succeeded)
+                {
+                    return Redirect("/Home/PasswordSaved");
+                }
+                else
+                {
+                    ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
+                }
             }
-            return View();
+            return View(model);
         }
 
         public string HashPassword(string password)
