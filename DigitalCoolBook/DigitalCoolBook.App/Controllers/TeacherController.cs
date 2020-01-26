@@ -67,10 +67,16 @@ namespace DigitalCoolBook.App.Controllers
                         return View(loginModel);
                     }
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
+                    var error = new ErrorViewModel
+                    {
+                        Message = exception.Message,
+                        RequestId = Request.HttpContext.TraceIdentifier
+                    };
+
                     ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                    return View(loginModel);
+                    return View("Error", error);
                 }
                
             }
