@@ -61,6 +61,11 @@ namespace DigitalCoolBook.App.Controllers
                     {
                         _logger.LogInformation("User logged in.");
                     }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                        return View(loginModel);
+                    }
                 }
                 catch (Exception)
                 {

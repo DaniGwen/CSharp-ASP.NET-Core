@@ -20,15 +20,46 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <a class="btn btn-outline-dark mt-3 mb-2" id="changePassword">
+            Смяна на парола
+        </a>
+    </div>
     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
     <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
     <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
 
 <script>
-  $(function () {
-    $('#myTab li:last-child a').tab('show')
-  })
+    $(function () {
+        $('#myTab li:last-child a').tab('show')
+    })
 </script>
+<script>
+    $(function () {
+        $("#changePassword").click(function () {
+            $("#changePasswordDialog").dialog({
+                resizeble: false,
+                modal: true,
+                height: 270,
+                width: 310,
+                buttons: {
+                    "Назад": function () {
+
+                    },
+                    "Смени": function () {
+
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+<div style="display:none" id="changePasswordDialog" title="Смяна на парола.">
+    <label>Нова парола.</label>
+    <input type="password" name="password" value="" />
+    <lable class="mt-2">Потвърди парола.</lable>
+    <input type="password" name="confirmPassword" value="" />
+</div>
 

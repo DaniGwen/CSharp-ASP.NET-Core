@@ -47,12 +47,10 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
+        public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
-
             if (ModelState.IsValid)
             {
-                //var user = _context.Users.FirstOrDefault(t => t.PasswordHash == hash && t.Email == loginModel.Email);
                 try
                 {
                     var user = await _userManager.FindByEmailAsync(loginModel.Email);
@@ -62,6 +60,11 @@ namespace DigitalCoolBook.App.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                        return View(loginModel);
                     }
                 }
                 catch (Exception)
@@ -246,7 +249,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var user = await _context.Users.FindAsync(id);
                 var result = _userManager.RemovePasswordAsync(user);
-                 _context.SaveChanges();
+                _context.SaveChanges();
                 var addResult = await _userManager.AddPasswordAsync(user, model.Password);
 
                 if (addResult.Succeeded)
@@ -262,7 +265,6 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [Authorize(Roles = "Student")]
-        [HttpGet]
         public IActionResult Panel()
         {
             return View();
