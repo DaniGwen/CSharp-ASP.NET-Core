@@ -60,7 +60,7 @@ namespace DigitalCoolBook.App
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
                         context.Database.EnsureCreated();
-                        this.SeedDb(context, serviceProvider);
+                        this.SeedDbAsync(context, serviceProvider).Wait();
                     }
                 }
                 this.CreateRoles(serviceProvider).Wait();
@@ -85,23 +85,33 @@ namespace DigitalCoolBook.App
             });
         }
 
-        private void SeedDb(ApplicationDbContext context, IServiceProvider serviceProvider)
+        private async Task SeedDbAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            //if (!context.Grades.Any())
-            //{
-            //    context.Grades.AddRange(this.AddParalelos());
-            //    context.SaveChanges();
-            //}
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            //if (!context.Subjects.Any())
-            //{
-            //    context.Subjects.AddRange(this.AddSubjects());
-            //    context.SaveChanges();
-            //}
+            if (!context.Grades.Any())
+            {
+                context.Grades.AddRange(this.AddParalelos());
+                context.SaveChanges();
+            }
+
+            if (!context.Subjects.Any())
+            {
+                context.Subjects.AddRange(this.AddSubjects());
+                context.SaveChanges();
+            }
+
             if (!context.Teachers.Any())
             {
-                context.Teachers.AddRange(this.AddTeachers());
-                context.SaveChanges();
+                var teachers = this.AddTeachers(userManager);
+
+                foreach (var teacher in teachers)
+                {
+                    var result = await userManager.CreateAsync(teacher, teacher.PasswordHash);
+                    await userManager.AddToRoleAsync(teacher, "Teacher");
+                }
+
+                await context.SaveChangesAsync();
             }
 
             //if (!context.GradeParalelos.Any())
@@ -112,8 +122,14 @@ namespace DigitalCoolBook.App
 
             if (!context.Students.Any())
             {
-                context.Students.AddRange(this.AddStudents());
-                context.SaveChanges();
+                var students = this.AddStudents(userManager);
+
+                foreach (var student in students)
+                {
+                    var result = await userManager.CreateAsync(student, student.PasswordHash);
+                    await userManager.AddToRoleAsync(student, "Student");
+                }
+                await context.SaveChangesAsync();
             }
         }
 
@@ -149,7 +165,7 @@ namespace DigitalCoolBook.App
             return gradeParalelos;
         }
 
-        private Student[] AddStudents()
+        private Student[] AddStudents(UserManager<IdentityUser> userManager)
         {
             Student[] students = new Student[3]
              {
@@ -158,7 +174,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Ceco Ivanov",
-                    PasswordHash = "Ceccec155155*",
+                    PasswordHash = "Cec155*",
                     PlaceOfBirth = "Botevgrad",
                     Sex = "Male",
                     Telephone = 8765,
@@ -168,14 +184,15 @@ namespace DigitalCoolBook.App
                     //IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
-                    Email = "ceco@ceco.com"
+                    Email = "ceco@ceco.com",
+                    UserName = "ceco@ceco.com"
                 },
                 new Student
                 {
                      Id = Guid.NewGuid().ToString(),
                     MobilePhone = 094098321,
                     Name = "Ivailo Dimitrov",
-                    PasswordHash = "Ivoivo155155*",
+                    PasswordHash = "Ivo155*",
                     PlaceOfBirth = "Pirdop",
                     Sex = "Male",
                     Telephone = 3234,
@@ -185,15 +202,16 @@ namespace DigitalCoolBook.App
                     //IdGradeParalelo = "7aabcd2f-2db3-443a-a9cc-b11b105d9c1f",
                     MotherName = "Donka",
                     MotherMobileNumber = 099009933,
-                    Email = "ivailo@ivailo.com"
+                    Email = "ivailo@ivailo.com",
+                    UserName = "ivailo@ivailo.com"
                 },
                 new Student
                 {
                      Id = Guid.NewGuid().ToString(),
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
-                    PasswordHash = "Marmar155155*",
-                    PlaceOfBirth = "Kurtovo konare",
+                    PasswordHash = "Mar155*",
+                    PlaceOfBirth = "Kurtovo Konare",
                     Sex = "Female",
                     Telephone = 3300,
                      Address = "Stoicho Simeonov 17",
@@ -202,13 +220,14 @@ namespace DigitalCoolBook.App
                    // IdGradeParalelo = "d019c0ab-b482-422b-8209-fb810aced29d",
                     MotherName = "Penka",
                     MotherMobileNumber = 0997699933,
-                      Email = "mima@mima.com"
+                      Email = "mima@mima.com",
+                      UserName = "mima@mima.com"
                 }
              };
             return students;
         }
 
-        private Teacher[] AddTeachers()
+        private Teacher[] AddTeachers(UserManager<IdentityUser> userManager)
         {
             Teacher[] teachers = new Teacher[3]
             {
@@ -219,11 +238,13 @@ namespace DigitalCoolBook.App
                     Email = "tot@tot.com",
                     MobilePhone = 0997655443,
                     Name = "Pavlina",
-                    PasswordHash = "Tottot155155*",
+                    PasswordHash = "Tot155*",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Female",
-                    Telephone = 3344
+                    Telephone = 3344,
+                    UserName = "tot@tot.com"
                 },
+
                 new Teacher
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -231,10 +252,11 @@ namespace DigitalCoolBook.App
                     Email = "stam@stam.com",
                     MobilePhone = 099456373,
                     Name = "Stamat Ionchev",
-                    PasswordHash = "Stamstam155155*",
+                    PasswordHash = "Stam155*",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Male",
-                    Telephone = 3264
+                    Telephone = 3264,
+                    UserName = "stam@stam.com"
                 },
                 new Teacher
                 {
@@ -243,13 +265,13 @@ namespace DigitalCoolBook.App
                     Email = "pesh@pesh.com",
                     MobilePhone = 0997655442,
                     Name = "Pesho Geshev",
-                    PasswordHash = "Peshpesh155155*",
+                    PasswordHash = "Pesh155*",
                     PlaceOfBirth = "Sofia",
                     Sex = "Male",
-                    Telephone = 3346
+                    Telephone = 3346,
+                    UserName = "pesh@pesh.com"
                 }
             };
-
             return teachers;
         }
 
@@ -270,7 +292,6 @@ namespace DigitalCoolBook.App
                     grades.Add(grade);
                 }
             }
-
             return grades;
         }
 

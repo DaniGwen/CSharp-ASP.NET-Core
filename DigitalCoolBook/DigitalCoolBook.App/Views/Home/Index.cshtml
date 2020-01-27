@@ -37,7 +37,14 @@
 }
 else
 {
-    <div>
-        <h2>Добре дошъл @User.Identity.Name!</h2>
-    </div>
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2>Добре дошъл @ViewData["UserName"]!</h2>
+    }
+    else
+    {
+        <h2>Добре дошъл в DigitalCoolBook!</h2>
+    }
+</div>
 }

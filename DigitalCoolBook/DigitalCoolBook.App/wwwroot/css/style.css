@@ -1233,7 +1233,7 @@ h3 {
 
 /* line 5, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_slider.scss */
 .slider_area .single_slider {
-  height: 100vh;
+  height: 75vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -1241,8 +1241,8 @@ h3 {
 
 /* line 10, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_slider.scss */
 .slider_area .single_slider .illastrator_png {
-  position: relative;
-  right: 63px;
+  position:relative;
+  right: 180px;
 }
 
 @media (min-width: 1200px) and (max-width: 1500px) {
@@ -1275,7 +1275,7 @@ h3 {
 
 /* line 25, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_slider.scss */
 .slider_area .single_slider .illastrator_png img {
-  width: 100%;
+  width: 85%;
 }
 
 @media (max-width: 767px) {
@@ -1325,7 +1325,7 @@ h3 {
 
 /* line 1, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_about.scss */
 .about_area {
-  padding: 200px 0 270px 0;
+  padding: 150px 0 200px 0;
 }
 
 @media (max-width: 767px) {
@@ -1649,8 +1649,8 @@ h3 {
 
 /* line 9, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_footer.scss */
 .footer .footer_top {
-  padding-top: 145px;
-  padding-bottom: 129px;
+  padding-top: 80px;
+  padding-bottom: 90px;
 }
 
 @media (max-width: 767px) {

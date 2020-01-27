@@ -4,12 +4,14 @@ using Microsoft.Extensions.Logging;
 using DigitalCoolBook.App.Models;
 using Microsoft.AspNetCore.Identity;
 using DigitalCoolBook.App.Data;
+using System.Security.Claims;
+using DigitalCoolBook.Models;
+using System.Linq;
 
 namespace DigitalCoolBook.App.Controllers
 {
     public class HomeController : Controller
     {
-        private const string AdminPanelUrl = "/Admin/AdminPanel";
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
@@ -28,6 +30,22 @@ namespace DigitalCoolBook.App.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+                if (User.IsInRole("Teacher"))
+                {
+                    var teacher = (Teacher)user;
+                    ViewData["UserName"] = teacher.Name;
+                }
+                if (User.IsInRole("Student"))
+                {
+                    var student = (Student)user;
+                    ViewData["UserName"] = student.Name;
+                }
+            }
             return View();
         }
 
@@ -41,27 +59,24 @@ namespace DigitalCoolBook.App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    
+
         [HttpGet]
         public IActionResult SuccessfulySaved()
         {
-            //Redirect to /Admin/AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
-
+            Response.Headers.Add("REFRESH", "3;URL=/Admin/AdminPanel");
             return View();
         }
 
         public IActionResult PasswordSaved()
         {
-            // Redirect to / Admin / AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", $"4;URL={AdminPanelUrl}");
+            Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
             return View();
         }
 
         [HttpGet]
         public IActionResult RemoveSuccess()
         {
-            //this.Response.Headers.Add("REFRESH", $"4;URL={AdminPanelUrl}");
+            this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
 
             return View();
         }

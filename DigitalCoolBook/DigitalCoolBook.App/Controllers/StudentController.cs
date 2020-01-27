@@ -1,7 +1,6 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.StudentViewModels;
-using DigitalCoolBook.App.Services;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -12,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Controllers
@@ -49,38 +49,33 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                //var user = _context.Users.FirstOrDefault(t => t.PasswordHash == hash && t.Email == loginModel.Email);
-                try
-                {
-                    var user = await _userManager.FindByEmailAsync(loginModel.Email);
-                    var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
-                    var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
+                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
+                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
 
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                        return View(loginModel);
-                    }
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User logged in.");
                 }
-                catch (Exception exception)
+                else
                 {
-                    var error = new ErrorViewModel
-                    {
-                        Message = exception.Message,
-                        RequestId = Request.HttpContext.TraceIdentifier
-                    };
-
                     ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                    return View("Error", error);
+                    return View(loginModel);
                 }
             }
+            catch (Exception exception)
+            {
+                var error = new ErrorViewModel
+                {
+                    Message = exception.Message,
+                    RequestId = Request.HttpContext.TraceIdentifier
+                };
+
+                return View("Error", error);
+            }
+
             return Redirect("/Home/Index");
         }
 
@@ -234,7 +229,8 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("/Home/RemoveSuccess");
         }
 
-        [Authorize(Roles = "Admin")]
+
+        [Authorize(Roles = "Admin, Student, Teacher")]
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
@@ -242,6 +238,7 @@ namespace DigitalCoolBook.App.Controllers
 
             var model = new StudentChangePasswordViewModel()
             {
+                Id = student.Id,
                 Email = student.Email,
                 Name = student.Name,
             };
@@ -249,33 +246,53 @@ namespace DigitalCoolBook.App.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Student, Teacher")]
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(StudentChangePasswordViewModel model, string id)
+        public async Task<IActionResult> ChangePassword(StudentChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await _context.Users.FindAsync(id);
-                var result = _userManager.RemovePasswordAsync(user);
-                 _context.SaveChanges();
+                var user = await _context.Users.FindAsync(model.Id);
+                var result = await _userManager.RemovePasswordAsync(user);
+                _context.SaveChanges();
                 var addResult = await _userManager.AddPasswordAsync(user, model.Password);
 
                 if (addResult.Succeeded)
                 {
+                    await _signInManager.SignOutAsync();
                     return Redirect("/Home/PasswordSaved");
                 }
                 else
                 {
                     ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
                 }
+
             }
+            catch (Exception exception)
+            {
+                var error = new ErrorViewModel
+                {
+                    Message = exception.Message,
+                    RequestId = this.Request.HttpContext.TraceIdentifier
+                };
+                return View("Error", error);
+            }
+
             return View(model);
         }
 
-        [Authorize(Roles = "Student")]
-        public IActionResult Panel()
+        [Authorize(Roles = "Student, Teacher")]
+        [ActionName("Panel")]
+        public async Task<IActionResult> PanelAsync()
         {
-            return View();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userDb = await _context.Users.FindAsync(userId.Value);
+            var model = new StudentChangePasswordViewModel
+            {
+                Id = userDb.Id,
+            };
+
+            return View( model);
         }
 
         public string HashPassword(string password)

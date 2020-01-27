@@ -1,7 +1,33 @@
-﻿
+﻿@model DigitalCoolBook.App.Models.TeacherViewModels.TeacherChangePasswordViewModel
 @{
     ViewData["Title"] = "Panel";
 }
 
-<h1>Panel</h1>
+<h2>Настройки</h2>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+    </li>
+</ul>
 
+<div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <a class="btn btn-outline-dark mt-3 mb-2" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
+            Смяна на парола
+        </a>
+</div>
+
+<script>
+    $(function () {
+        $('#myTab li:last-child a').tab('show')
+    })
+</script>
