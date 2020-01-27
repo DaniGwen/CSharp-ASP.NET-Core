@@ -1,5 +1,6 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
+using DigitalCoolBook.App.Models.GradesViewModels;
 using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -131,8 +132,10 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult EditStudents()
         {
             var students = _context.Students.ToList();
-
-            var studentsToView = new List<StudentEditViewModel>();
+            var grades = _context.Grades.ToList();
+            var studentsList = new List<StudentEditViewModel>();
+            var gradesList = new List<GradeViewModel>();
+            var model = new StudentGradeEditViewModel();
 
             foreach (var student in students)
             {
@@ -152,11 +155,22 @@ namespace DigitalCoolBook.App.Controllers
                     Sex = student.Sex,
                     Telephone = student.Telephone
                 };
-
-                studentsToView.Add(studentModel);
+                studentsList.Add(studentModel);
+            }
+            foreach (var grade in grades)
+            {
+                var gradeModel = new GradeViewModel
+                {
+                    Name = grade.Name,
+                    Id = grade.GradeId
+                };
+                gradesList.Add(gradeModel);
             }
 
-            return View(studentsToView);
+            model.Grades = gradesList;
+            model.Students = studentsList;
+
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]

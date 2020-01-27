@@ -147,14 +147,14 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
-        public IActionResult ChooseParalelo(GradesViewModel model)
+        public IActionResult ChooseParalelo(GradeViewModel model)
         {
             var grades = _context.Grades.Where(grade => grade.GradeParalelos.Count != 0).ToList();
-            var gradesForView = new List<GradesViewModel>();
+            var gradesForView = new List<GradeViewModel>();
 
             foreach (var grade in grades)
             {
-                var gradeForList = new GradesViewModel
+                var gradeForList = new GradeViewModel
                 {
                     Id = grade.GradeId,
                     Name = grade.Name

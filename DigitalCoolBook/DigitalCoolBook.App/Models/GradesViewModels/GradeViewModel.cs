@@ -2,7 +2,7 @@
 
 namespace DigitalCoolBook.App.Models.GradesViewModels
 {
-    public class GradesViewModel
+    public class GradeViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }

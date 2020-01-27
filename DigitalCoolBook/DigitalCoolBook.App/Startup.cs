@@ -322,8 +322,10 @@ namespace DigitalCoolBook.App
             //initializing custom roles 
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             bool isUserAddedInRole = await roleManager.RoleExistsAsync("Admin");
+
             if (!isUserAddedInRole)
             {
                 // first we create Admin rool    
@@ -331,12 +333,13 @@ namespace DigitalCoolBook.App
                 role.Name = "Admin";
                 await roleManager.CreateAsync(role);
 
-                //Here we create a Admin super user who will maintain the website                   
+            }
 
+            if (!context.Users.Any(u=>u.Email == "admin@admin.com"))
+            {
                 var user = new IdentityUser();
                 user.UserName = Configuration.GetValue<string>("AdminConfig:Username");
                 user.Email = Configuration.GetValue<string>("AdminConfig:Email");
-
                 var userPassword = Configuration.GetValue<string>("AdminConfig:Password");
 
                 IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword);
@@ -347,6 +350,7 @@ namespace DigitalCoolBook.App
                     var result1 = await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
+           
 
             // creating Creating Student role     
             isUserAddedInRole = await roleManager.RoleExistsAsync("Student");

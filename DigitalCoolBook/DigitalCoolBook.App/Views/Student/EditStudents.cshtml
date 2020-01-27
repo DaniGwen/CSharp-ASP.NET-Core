@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DigitalCoolBook.App.Models.StudentViewModels.StudentEditViewModel>
+﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentGradeEditViewModel
 
 @{
     ViewData["Title"] = "EditStudents";
@@ -52,7 +52,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Students)
         {
             <tr>
                 <td>
@@ -92,9 +92,22 @@
                     @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
+                    <div style="overflow:scroll;height:150px" class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Клас и паралелка
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach (var grade in Model.Grades)
+                            {
+                                <a class="dropdown-item" href="#">@grade.Name</a>
+                            }
+                        </div>
+                    </div>
+                </td>
+                <td>
                     <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
                     <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
-                    <a class="btn btn-sm btn-secondary mt-1"asp-controller="Student" asp-action="ChangePassword" asp-route-id="@item.StudentId">Смяна на парола</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="ChangePassword" asp-route-id="@item.StudentId">Смяна на парола</a>
                 </td>
             </tr>
         }

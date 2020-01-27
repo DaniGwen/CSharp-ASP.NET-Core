@@ -45,6 +45,10 @@ namespace DigitalCoolBook.App.Controllers
                     var student = (Student)user;
                     ViewData["UserName"] = student.Name;
                 }
+                if (User.IsInRole("Admin"))
+                {
+                    ViewData["UserName"] = "Админ";
+                }
             }
             return View();
         }
