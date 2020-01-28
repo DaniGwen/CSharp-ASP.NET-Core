@@ -1,4 +1,4 @@
-﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentGradeEditViewModel
+﻿@model IEnumerable<DigitalCoolBook.App.Models.StudentViewModels.StudentEditViewModel>
 
 @{
     ViewData["Title"] = "EditStudents";
@@ -48,66 +48,59 @@
             <th>
                 @Html.DisplayName("Адрес")
             </th>
+            <th>
+                @Html.DisplayName("Клас")
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Students)
+        @foreach (var student in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => student.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => student.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    @Html.DisplayFor(modelItem => student.DateOfBirth)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                    @Html.DisplayFor(modelItem => student.PlaceOfBirth)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
+                    @Html.DisplayFor(modelItem => student.Sex)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhone)
+                    @Html.DisplayFor(modelItem => student.MobilePhone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Telephone)
+                    @Html.DisplayFor(modelItem => student.Telephone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FatherName)
+                    @Html.DisplayFor(modelItem => student.FatherName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MotherName)
+                    @Html.DisplayFor(modelItem => student.MotherName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MotherMobileNumber)
+                    @Html.DisplayFor(modelItem => student.MotherMobileNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FatherMobileNumber)
+                    @Html.DisplayFor(modelItem => student.FatherMobileNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
+                    @Html.DisplayFor(modelItem => student.Address)
                 </td>
                 <td>
-                    <div style="overflow:scroll;height:150px" class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Клас и паралелка
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @foreach (var grade in Model.Grades)
-                            {
-                                <a class="dropdown-item" href="#">@grade.Name</a>
-                            }
-                        </div>
-                    </div>
+                    @Html.DisplayFor(modelItem => student.Grade)
                 </td>
                 <td>
-                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.StudentId">Изтрий</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@item.StudentId">Редактирай</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="ChangePassword" asp-route-id="@item.StudentId">Смяна на парола</a>
+                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@student.StudentId">Изтрий</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@student.StudentId">Редактирай</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="ChangePassword" asp-route-id="@student.StudentId">Смяна на парола</a>
                 </td>
             </tr>
         }

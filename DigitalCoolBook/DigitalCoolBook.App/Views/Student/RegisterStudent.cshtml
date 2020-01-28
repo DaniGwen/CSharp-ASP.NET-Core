@@ -81,7 +81,19 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Създай" class="btn btn-primary" />
+                @*@Html.DropDownListFor(m => m.GradeId, Model.Grades, "Избери Клас")*@
+                <label>Клас/Паралелка</label>
+                @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"))
+                @*<select class="ui dropdown" id="GradeId" name="GradeId">
+                    @foreach (var grade in Model.Grades)
+                    {
+                        <option class="dropdown-item" value="@grade.GradeId">@grade.Name</option>
+                    }
+                </select>*@
+                <span asp-validation-for="Grades" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Създай" class="btn btn-primary" />
             </div>
         </form>
     </div>

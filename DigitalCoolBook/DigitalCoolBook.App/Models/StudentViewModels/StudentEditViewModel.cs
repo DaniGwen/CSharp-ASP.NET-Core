@@ -29,5 +29,7 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         public int? FatherMobileNumber { get; set; }
 
         public string Address { get; set; }
+
+        public string Grade { get; set; }
     }
 }

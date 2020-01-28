@@ -46,9 +46,8 @@ namespace DigitalCoolBook.Models
 
         public List<Attendance> Attendances { get; set; }
 
-        [ForeignKey("GradeParalelo")]
-        public string IdGradeParalelo { get; set; }
-        public GradeParalelo GradeParalelo { get; set; }
+        public string GradeId { get; set; }
+        public Grade Grade { get; set; }
 
         public List<ScoreRecord> ScoreRecords { get; set; }
 

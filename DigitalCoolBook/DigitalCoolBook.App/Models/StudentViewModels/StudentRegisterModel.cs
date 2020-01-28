@@ -1,10 +1,17 @@
-﻿using System;
+﻿using DigitalCoolBook.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DigitalCoolBook.App.Models.StudentViewModels
 {
     public class StudentRegisterModel
     {
+        public StudentRegisterModel()
+        {
+            this.Grades = new List<Grade>();
+        }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -60,5 +67,10 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         [Required]
         [StringLength(50, ErrorMessage = "Address must be between 3 and 50 characters!", MinimumLength = 3)]
         public string Address { get; set; }
+
+        [Required]
+        public List<Grade> Grades { get; set; }
+
+        public string GradeId { get; set; }
     }
 }

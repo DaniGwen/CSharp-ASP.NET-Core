@@ -167,8 +167,7 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult GradeDetails(string id)
         {
             var studentsInGrade = _context.Students
-                .Include(s => s.GradeParalelo)
-                .Where(s => s.IdGradeParalelo == id)
+                .Where(s => s.GradeId == id)
                 .Select(s => new
                 {
                     s.Name,

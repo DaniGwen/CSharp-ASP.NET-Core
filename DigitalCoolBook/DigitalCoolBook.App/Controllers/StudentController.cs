@@ -84,7 +84,14 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public IActionResult RegisterStudent()
         {
-            return View();
+            var studentModel = new StudentRegisterModel
+            {
+                Grades = _context.Grades
+                .OrderBy(g => g.Name)
+                .ToList()
+            };
+
+            return View(studentModel);
         }
 
         [Authorize(Roles = "Admin")]
@@ -105,6 +112,7 @@ namespace DigitalCoolBook.App.Controllers
                 student.Name = registerModel.Name;
                 student.Telephone = registerModel.Telephone;
                 student.UserName = registerModel.Email;
+                student.Grade = _context.Grades.First(g => g.GradeId == registerModel.GradeId);
 
                 var result = await _userManager.CreateAsync(student, registerModel.Password);
 
@@ -134,43 +142,40 @@ namespace DigitalCoolBook.App.Controllers
             var students = _context.Students.ToList();
             var grades = _context.Grades.ToList();
             var studentsList = new List<StudentEditViewModel>();
-            var gradesList = new List<GradeViewModel>();
-            var model = new StudentGradeEditViewModel();
-
-            foreach (var student in students)
+            try
             {
-                var studentModel = new StudentEditViewModel()
+                foreach (var student in students)
                 {
-                    StudentId = student.Id,
-                    Address = student.Address,
-                    DateOfBirth = student.DateOfBirth,
-                    Email = student.Email,
-                    FatherMobileNumber = student.FatherMobileNumber,
-                    FatherName = student.FatherName,
-                    MobilePhone = student.MobilePhone,
-                    MotherMobileNumber = student.MotherMobileNumber,
-                    MotherName = student.MotherName,
-                    Name = student.Name,
-                    PlaceOfBirth = student.PlaceOfBirth,
-                    Sex = student.Sex,
-                    Telephone = student.Telephone
-                };
-                studentsList.Add(studentModel);
+                    var studentModel = new StudentEditViewModel()
+                    {
+                        StudentId = student.Id,
+                        Address = student.Address,
+                        DateOfBirth = student.DateOfBirth,
+                        Email = student.Email,
+                        FatherMobileNumber = student.FatherMobileNumber,
+                        FatherName = student.FatherName,
+                        MobilePhone = student.MobilePhone,
+                        MotherMobileNumber = student.MotherMobileNumber,
+                        MotherName = student.MotherName,
+                        Name = student.Name,
+                        PlaceOfBirth = student.PlaceOfBirth,
+                        Sex = student.Sex,
+                        Telephone = student.Telephone
+                    };
+                    studentsList.Add(studentModel);
+                }
             }
-            foreach (var grade in grades)
+            catch (Exception exception)
             {
-                var gradeModel = new GradeViewModel
+                var errorModel = new ErrorViewModel
                 {
-                    Name = grade.Name,
-                    Id = grade.GradeId
+                    Message = exception.Message
                 };
-                gradesList.Add(gradeModel);
+
+                return View("Error", errorModel);
             }
 
-            model.Grades = gradesList;
-            model.Students = studentsList;
-
-            return View(model);
+            return View(studentsList);
         }
 
         [Authorize(Roles = "Admin")]
@@ -178,8 +183,10 @@ namespace DigitalCoolBook.App.Controllers
         public async Task<IActionResult> EditStudent(string id)
         {
             var student = await _context.Students.FindAsync(id);
+            var gradesList = new List<GradeViewModel>();
+            var model = new StudentGradeEditViewModel();
 
-            var model = new StudentEditViewModel
+            var studentEditModel = new StudentEditViewModel
             {
                 Address = student.Address,
                 Telephone = student.Telephone,
@@ -195,6 +202,9 @@ namespace DigitalCoolBook.App.Controllers
                 PlaceOfBirth = student.PlaceOfBirth,
                 Sex = student.Sex
             };
+
+            model.Student = studentEditModel;
+            model.Grades = gradesList;
 
             return View(model);
         }
@@ -306,7 +316,7 @@ namespace DigitalCoolBook.App.Controllers
                 Id = userDb.Id,
             };
 
-            return View( model);
+            return View(model);
         }
 
         public string HashPassword(string password)
