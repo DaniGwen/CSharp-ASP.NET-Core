@@ -1,17 +1,14 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
-using DigitalCoolBook.App.Models.StudentViewModels;
-using DigitalCoolBook.App.Models.TeacherViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -71,6 +68,14 @@ namespace DigitalCoolBook.App.Controllers
 
         public IActionResult AdminContact()
         {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult CreateParalelo()
+        {
+
             return View();
         }
     }
