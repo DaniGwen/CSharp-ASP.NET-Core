@@ -1,4 +1,4 @@
-﻿using DigitalCoolBook.App.Models.StudentViewModels;
+﻿using DigitalCoolBook.Models;
 using System.Collections.Generic;
 
 namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
@@ -6,8 +6,6 @@ namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
     public class ParaleloViewModel
     {
         public string Id { get; set; }
-
-        public string Name { get; set; }
 
         public string TeacherId { get; set; }
 
@@ -17,6 +15,6 @@ namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
 
         public string GradeName { get; set; }
 
-        public List<StudentEditViewModel> Students { get; set; }
+        public List<Student> Students { get; set; }
     }
 }

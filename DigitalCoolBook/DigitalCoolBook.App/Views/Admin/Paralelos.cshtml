@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.GradeParaleloViewModels.ParaleloViewModel>
+
+@{
+    ViewData["Title"] = "CreateParalelo";
+}
+
+<h1>Добавяне/Редактиране на Паралелки</h1>
+
+<p>
+    <a asp-action="Create">Нова Паралелка</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Идентификационен номер")
+            </th>
+            <th>
+                @Html.DisplayName("Учителски идентификационен номер")
+            </th>
+            <th>
+                @Html.DisplayName("Име на Учител")
+            </th>
+            <th>
+                @Html.DisplayName("Идентификационен номер на Класа")
+            </th>
+            <th>
+                @Html.DisplayName("Име на Класа")
+            </th>
+            <th>
+                @Html.DisplayName("Брой ученици")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Students.Count)
+                </td>
+                <td>
+                    @Html.ActionLink("Редактиране", "EditParalelo", new { id = item.Id }) |
+                    @Html.ActionLink("Изтриване", "DeleteParalelo", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

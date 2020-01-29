@@ -1,9 +1,12 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
+using DigitalCoolBook.App.Models.GradeParaleloViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Controllers
@@ -75,8 +78,25 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public IActionResult CreateParalelo()
         {
+            var paralelos = _context.GradeParalelos.ToList();
+            var models = new List<ParaleloViewModel>();
 
-            return View();
+            foreach (var paralelo in paralelos)
+            {
+                var model = new ParaleloViewModel
+                {
+                    Id = paralelo.GradeParaleloId,
+                    GradeId = paralelo.IdGrade,
+                    GradeName = _context.Grades.FirstOrDefault(g => g.GradeId == paralelo.IdGrade).Name,
+                    TeacherName = _context.Teachers.FirstOrDefault(t => t.Id == paralelo.IdTeacher).Name,
+                    TeacherId = paralelo.IdTeacher,
+                    Students = _context.Students.Where(s => s.Id == paralelo.Grade.GradeId).ToList()
+                };
+
+                models.Add(model);
+            }
+          
+            return View(models);
         }
     }
 }
