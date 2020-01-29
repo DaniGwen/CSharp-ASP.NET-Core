@@ -1,17 +1,19 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.GradeParaleloViewModels;
+using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Controllers
 {
-    [ValidateAntiForgeryToken]
+    [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -75,8 +77,7 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult CreateParalelo()
+        public IActionResult Paralelos()
         {
             var paralelos = _context.GradeParalelos.ToList();
             var models = new List<ParaleloViewModel>();
@@ -95,8 +96,53 @@ namespace DigitalCoolBook.App.Controllers
 
                 models.Add(model);
             }
-          
+
             return View(models);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult CreateParalelo()
+        {
+            var teachers = _context.Teachers.ToList();
+            var grades = _context.Grades.Where(g => g.Students.Any(s => s.GradeId == g.GradeId))
+                .ToList();
+
+            var model = new ParaleloCreateViewModel()
+            {
+                Grades = grades,
+                Teachers = teachers
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> CreateParaleloAsync(ParaleloCreateViewModel model)
+        {
+            try
+            {
+                    var gradeParalelo = new GradeParalelo()
+                    {
+                        GradeParaleloId = Guid.NewGuid().ToString(),
+                        IdGrade = model.GradeId,
+                        IdTeacher = model.TeacherId
+                    };
+
+                    await _context.GradeParalelos.AddAsync(gradeParalelo);
+                    await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                var error = new ErrorViewModel
+                {
+                    Message = exception.Message
+                };
+                return View("Error", error);
+            }
+
+            return Redirect("/Home/SuccessfulySaved");
         }
     }
 }

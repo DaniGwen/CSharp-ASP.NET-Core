@@ -14,5 +14,7 @@ namespace DigitalCoolBook.Models
         public List<GradeParalelo> GradeParalelos { get; set; }
 
         public SubjectGrade SubjectGrade { get; set; }
+
+        public List<Student> Students { get; set; }
     }
 }

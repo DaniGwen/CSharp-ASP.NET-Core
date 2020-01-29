@@ -4,14 +4,16 @@ using DigitalCoolBook.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DigitalCoolBook.App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200129082631_005")]
+    partial class _005
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,12 +392,17 @@ namespace DigitalCoolBook.App.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Telephone")
                         .HasColumnType("int");
 
                     b.HasIndex("GradeId");
 
                     b.HasIndex("GradeParaleloId");
+
+                    b.HasIndex("StudentId");
 
                     b.HasDiscriminator().HasValue("Student");
                 });
@@ -534,12 +541,16 @@ namespace DigitalCoolBook.App.Migrations
             modelBuilder.Entity("DigitalCoolBook.Models.Student", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Grade", "Grade")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("GradeId");
 
                     b.HasOne("DigitalCoolBook.Models.GradeParalelo", null)
                         .WithMany("Students")
                         .HasForeignKey("GradeParaleloId");
+
+                    b.HasOne("DigitalCoolBook.Models.Student", null)
+                        .WithMany("Students")
+                        .HasForeignKey("StudentId");
                 });
 #pragma warning restore 612, 618
         }
