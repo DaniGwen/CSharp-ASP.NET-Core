@@ -18,12 +18,15 @@
         <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
     </li>
 </ul>
-
 <div class="tab-content">
     <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <a class="btn btn-outline-dark mt-3 mb-2" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
             Смяна на парола
         </a>
+    </div>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
 
 <script>
