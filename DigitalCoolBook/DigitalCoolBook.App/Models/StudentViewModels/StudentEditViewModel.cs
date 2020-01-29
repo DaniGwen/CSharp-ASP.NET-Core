@@ -1,10 +1,17 @@
-﻿using DigitalCoolBook.Models;
+﻿using DigitalCoolBook.App.Models.GradesViewModels;
+using DigitalCoolBook.Models;
 using System;
+using System.Collections.Generic;
 
 namespace DigitalCoolBook.App.Models.StudentViewModels
 {
     public class StudentEditViewModel
     {
+        public StudentEditViewModel()
+        {
+            this.Grades = new List<GradeViewModel>();
+        }
+
         public string StudentId { get; set; }
 
         public string Email { get; set; }
@@ -32,5 +39,9 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         public string Address { get; set; }
 
         public Grade Grade { get; set; }
+
+        public string GradeId { get; set; }
+
+        public List<GradeViewModel> Grades { get; set; }
     }
 }

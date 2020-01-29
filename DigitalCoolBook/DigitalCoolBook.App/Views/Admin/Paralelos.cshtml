@@ -4,25 +4,15 @@
     ViewData["Title"] = "CreateParalelo";
 }
 
-<h1>Добавяне/Редактиране на Паралелки</h1>
-
+<h2>Добавяне/Редактиране на Паралелки</h2>
 <p>
-    <a asp-action="CreateParalelo">Нова Паралелка</a>
+    <button class="btn btn-secondary" asp-action="CreateParalelo">Създай нова Паралелка</button>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("Идентификационен номер")
-            </th>
-            <th>
-                @Html.DisplayName("Учителски идентификационен номер")
-            </th>
-            <th>
                 @Html.DisplayName("Име на Учител")
-            </th>
-            <th>
-                @Html.DisplayName("Идентификационен номер на Класа")
             </th>
             <th>
                 @Html.DisplayName("Име на Класа")
@@ -37,17 +27,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TeacherId)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.TeacherName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GradeId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.GradeName)
@@ -56,8 +38,12 @@
                     @Html.DisplayFor(modelItem => item.Students.Count)
                 </td>
                 <td>
-                    @Html.ActionLink("Редактиране", "EditParalelo", new { id = item.Id }) |
-                    @Html.ActionLink("Изтриване", "DeleteParalelo", new { id = item.Id })
+                    <button class="text-white btn btn-secondary btn-sm">
+                        @Html.ActionLink("Редактиране", "EditParalelo", new { id = item.Id })
+                    </button>
+                    <button class="text-white btn btn-secondary btn-sm">
+                        @Html.ActionLink("Изтриване", "DeleteParalelo", new { id = item.Id })
+                    </button>
                 </td>
             </tr>
         }

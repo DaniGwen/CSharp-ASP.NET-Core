@@ -184,10 +184,11 @@ namespace DigitalCoolBook.App.Controllers
         public async Task<IActionResult> EditStudent(string id)
         {
             var student = await _context.Students.FindAsync(id);
-            var gradesList = new List<GradeViewModel>();
-            var model = new StudentGradeEditViewModel();
+            var grades = _context.Grades
+                .OrderBy(g => g.Name)
+                .ToList();
 
-            var studentEditModel = new StudentEditViewModel
+            var model = new StudentEditViewModel
             {
                 Address = student.Address,
                 Telephone = student.Telephone,
@@ -201,11 +202,20 @@ namespace DigitalCoolBook.App.Controllers
                 MotherName = student.MotherName,
                 Name = student.Name,
                 PlaceOfBirth = student.PlaceOfBirth,
-                Sex = student.Sex
+                Sex = student.Sex,
+                Grade = student.Grade
             };
 
-            model.Student = studentEditModel;
-            model.Grades = gradesList;
+            foreach (var grade in grades)
+            {
+                var gradesModel = new GradeViewModel
+                {
+                    Id = grade.GradeId,
+                    Name = grade.Name
+                };
+
+                model.Grades.Add(gradesModel);
+            }
 
             return View(model);
         }
@@ -230,6 +240,7 @@ namespace DigitalCoolBook.App.Controllers
                 student.PlaceOfBirth = model.PlaceOfBirth;
                 student.Sex = model.Sex;
                 student.Telephone = model.Telephone;
+                student.GradeId = model.GradeId;
 
                 await _context.SaveChangesAsync();
 

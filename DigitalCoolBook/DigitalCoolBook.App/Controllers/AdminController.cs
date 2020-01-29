@@ -104,8 +104,11 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public IActionResult CreateParalelo()
         {
-            var teachers = _context.Teachers.ToList();
-            var grades = _context.Grades.Where(g => g.Students.Any(s => s.GradeId == g.GradeId))
+            var teachers = _context.Teachers
+                .ToList();
+
+            var grades = _context.Grades
+                .Where(g => g.Students.Any(s => s.GradeId == g.GradeId))
                 .ToList();
 
             var model = new ParaleloCreateViewModel()
@@ -143,6 +146,21 @@ namespace DigitalCoolBook.App.Controllers
             }
 
             return Redirect("/Home/SuccessfulySaved");
+        }
+
+        public IActionResult EditParalelo(string id)
+        {
+            var paralelo = _context.GradeParalelos.Find(id);
+            var model = new ParaleloViewModel
+            {
+                GradeId = paralelo.IdGrade,
+                GradeName = paralelo.Grade.Name,
+                Id = paralelo.GradeParaleloId,
+                TeacherId = paralelo.IdTeacher,
+                TeacherName = paralelo.Teacher.Name
+            };
+
+            return View(model);
         }
     }
 }
