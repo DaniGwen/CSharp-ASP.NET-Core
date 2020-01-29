@@ -91,7 +91,7 @@ namespace DigitalCoolBook.App.Controllers
                     GradeName = _context.Grades.FirstOrDefault(g => g.GradeId == paralelo.IdGrade).Name,
                     TeacherName = _context.Teachers.FirstOrDefault(t => t.Id == paralelo.IdTeacher).Name,
                     TeacherId = paralelo.IdTeacher,
-                    Students = _context.Students.Where(s => s.Id == paralelo.Grade.GradeId).ToList()
+                    Students = _context.Students.Where(s => s.GradeId == paralelo.Grade.GradeId).ToList()
                 };
 
                 models.Add(model);

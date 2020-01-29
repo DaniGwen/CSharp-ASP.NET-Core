@@ -140,8 +140,8 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult EditStudents()
         {
             var students = _context.Students.ToList();
-            var grades = _context.Grades.ToList();
             var studentsList = new List<StudentEditViewModel>();
+
             try
             {
                 foreach (var student in students)
@@ -160,7 +160,8 @@ namespace DigitalCoolBook.App.Controllers
                         Name = student.Name,
                         PlaceOfBirth = student.PlaceOfBirth,
                         Sex = student.Sex,
-                        Telephone = student.Telephone
+                        Telephone = student.Telephone,
+                        Grade = _context.Grades.FirstOrDefault(g => g.GradeId == student.GradeId)
                     };
                     studentsList.Add(studentModel);
                 }

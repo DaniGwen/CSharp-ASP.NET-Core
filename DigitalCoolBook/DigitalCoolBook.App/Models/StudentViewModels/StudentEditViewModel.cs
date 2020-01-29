@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigitalCoolBook.Models;
+using System;
 
 namespace DigitalCoolBook.App.Models.StudentViewModels
 {
@@ -30,6 +31,6 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
 
         public string Address { get; set; }
 
-        public string Grade { get; set; }
+        public Grade Grade { get; set; }
     }
 }
