@@ -84,16 +84,29 @@ namespace DigitalCoolBook.App.Controllers
 
             foreach (var paralelo in paralelos)
             {
+                var grades = _context.Grades
+                    .ToList();
+
                 var model = new ParaleloViewModel
                 {
                     Id = paralelo.GradeParaleloId,
-                    GradeId = paralelo.IdGrade,
-                    GradeName = _context.Grades.FirstOrDefault(g => g.GradeId == paralelo.IdGrade).Name,
-                    TeacherName = _context.Teachers.FirstOrDefault(t => t.Id == paralelo.IdTeacher).Name,
-                    TeacherId = paralelo.IdTeacher,
-                    Students = _context.Students.Where(s => s.GradeId == paralelo.Grade.GradeId).ToList()
-                };
 
+                    GradeId = paralelo.IdGrade,
+
+                    GradeName = _context.Grades
+                    .FirstOrDefault(g => g.GradeId == paralelo.IdGrade)
+                    .Name,
+
+                    TeacherName = _context.Teachers
+                    .FirstOrDefault(t => t.Id == paralelo.IdTeacher)
+                    .Name,
+
+                    TeacherId = paralelo.IdTeacher,
+
+                    Students = _context.Students
+                    .Where(s => s.GradeId == paralelo.Grade.GradeId)
+                    .ToList()
+                };
                 models.Add(model);
             }
 
@@ -170,7 +183,6 @@ namespace DigitalCoolBook.App.Controllers
                 Teachers = teachers,
                 Grades = grades
             };
-
             return View(model);
         }
 
@@ -197,6 +209,25 @@ namespace DigitalCoolBook.App.Controllers
                 return View("Error", error);
             }
             return Redirect("Home/SuccessfulySaved");
+        }
+
+        public IActionResult DeleteParalelo(string id)
+        {
+            try
+            {
+                var paralelo = _context.GradeParalelos.Find(id);
+                _context.GradeParalelos.Remove(paralelo);
+                _context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                var error = new ErrorViewModel
+                {
+                    Message = exception.Message
+                };
+                return View("Error", error);
+            }
+            return Redirect("/Home/RemoveSuccess");
         }
     }
 }

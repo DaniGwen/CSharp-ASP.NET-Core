@@ -41,45 +41,6 @@ namespace DigitalCoolBook.App.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
-        {
-            try
-            {
-                var user = await _userManager.FindByEmailAsync(loginModel.Email);
-                var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
-                var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false, false);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                    return View(loginModel);
-                }
-            }
-            catch (Exception exception)
-            {
-                var error = new ErrorViewModel
-                {
-                    Message = exception.Message,
-                    RequestId = Request.HttpContext.TraceIdentifier
-                };
-
-                return View("Error", error);
-            }
-
-            return Redirect("/Home/Index");
-        }
-
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult RegisterStudent()

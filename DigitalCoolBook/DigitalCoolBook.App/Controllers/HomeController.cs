@@ -7,6 +7,9 @@ using DigitalCoolBook.App.Data;
 using System.Security.Claims;
 using DigitalCoolBook.Models;
 using System.Linq;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -51,6 +54,47 @@ namespace DigitalCoolBook.App.Controllers
                 }
             }
             return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                    var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
+
+                    if (password)
+                    {
+                        var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
+                        _logger.LogInformation("User logged in.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                        return View(loginModel);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    var error = new ErrorViewModel
+                    {
+                        Message = exception.Message,
+                        RequestId = Request.HttpContext.TraceIdentifier
+                    };
+
+                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                    return View("Error", error);
+                }
+            }
+            return Redirect("/Home/Index");
         }
 
         public IActionResult Privacy()

@@ -7,13 +7,11 @@ using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.GradesViewModels;
 using DigitalCoolBook.App.Models.TeacherViewModels;
-using DigitalCoolBook.App.Services;
 using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -41,48 +39,6 @@ namespace DigitalCoolBook.App.Controllers
             _configuration = configuration;
             _logger = logger;
             _signInManager = signInManager;
-        }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var user = await _userManager.FindByEmailAsync(loginModel.Email);
-                    var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
-                    var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
-
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                        return View(loginModel);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    var error = new ErrorViewModel
-                    {
-                        Message = exception.Message,
-                        RequestId = Request.HttpContext.TraceIdentifier
-                    };
-
-                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                    return View("Error", error);
-                }
-            }
-            return Redirect("/Home/Index");
         }
 
         [Authorize(Roles = "Admin")]
@@ -137,13 +93,6 @@ namespace DigitalCoolBook.App.Controllers
                     }
                 }
             }
-            return View();
-        }
-
-        [Authorize(Roles =("Teacher"))]
-        [HttpGet]
-        public IActionResult CreateParalelo()
-        {
             return View();
         }
 

@@ -158,9 +158,13 @@
                             }
                             else if (this.User.IsInRole("Admin"))
                             {
-                                <div class="d-flex justify-content-between">
-                                    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="boxed_btn">Регистрация на Учител</a>
-                                    <a asp-controller="Student" asp-action="RegisterStudent" class="boxed_btn">Регистрация на Ученик</a>
+                                <div class="col">
+                                    <div class="row">
+                                        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="boxed_btn ">Регистрация на Учител</a>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <a asp-controller="Student" asp-action="RegisterStudent" class="boxed_btn ">Регистрация на Ученик</a>
+                                    </div>
                                 </div>
                             }
                         </div>
