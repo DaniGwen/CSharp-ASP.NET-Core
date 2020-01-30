@@ -5,6 +5,8 @@ namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
 {
     public class ParaleloCreateViewModel
     {
+        public string Id { get; set; }
+
         public string GradeId { get; set; }
 
         public string GradeName { get; set; }

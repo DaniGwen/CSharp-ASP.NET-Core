@@ -147,8 +147,14 @@
                                 <h3>
                                     Учи онлайн!
                                 </h3>
-                                <a href="/Subjects/Subjects" class="boxed_btn">Избери предмет</a>
-                                <a asp-controller="Teacher" asp-action="ChooseParalelo" class="boxed_btn">Избери клас</a>
+                                <div class="col w-25">
+                                    <div class="row">
+                                        <a href="/Subjects/Subjects" class="boxed_btn">Предмети</a>
+                                    </div>
+                                    <div class="row mt-2 w-25">
+                                        <a href="/Teacher/ChooseParalelo" class="boxed_btn">Класове</a>
+                                    </div>
+                                </div>
                             }
                             else if (this.User.IsInRole("Admin"))
                             {

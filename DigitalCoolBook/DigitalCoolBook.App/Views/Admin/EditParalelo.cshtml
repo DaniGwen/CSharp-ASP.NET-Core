@@ -1,0 +1,32 @@
+﻿@model DigitalCoolBook.App.Models.GradeParaleloViewModels.ParaleloCreateViewModel
+
+@{
+    ViewData["Title"] = "EditParalelo";
+}
+
+<h2>Редакция на Паралелка</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditParalelo" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Учител</label>
+                @Html.DropDownListFor(model => model.TeacherId, new SelectList(Model.Teachers, "Id", "Name"), "Избери Учител")
+            </div>
+            <div class="form-group">
+                <label>Клас</label>
+                @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас")
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Запази" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+

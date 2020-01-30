@@ -77,7 +77,7 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Paralelos()
+        public IActionResult EditParalelos()
         {
             var paralelos = _context.GradeParalelos.ToList();
             var models = new List<ParaleloViewModel>();
@@ -108,7 +108,7 @@ namespace DigitalCoolBook.App.Controllers
                 .ToList();
 
             var grades = _context.Grades
-                .Where(g => g.Students.Any(s => s.GradeId == g.GradeId))
+                .OrderBy(g => g.Name)
                 .ToList();
 
             var model = new ParaleloCreateViewModel()
@@ -126,15 +126,15 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                    var gradeParalelo = new GradeParalelo()
-                    {
-                        GradeParaleloId = Guid.NewGuid().ToString(),
-                        IdGrade = model.GradeId,
-                        IdTeacher = model.TeacherId
-                    };
+                var gradeParalelo = new GradeParalelo()
+                {
+                    GradeParaleloId = Guid.NewGuid().ToString(),
+                    IdGrade = model.GradeId,
+                    IdTeacher = model.TeacherId
+                };
 
-                    await _context.GradeParalelos.AddAsync(gradeParalelo);
-                    await _context.SaveChangesAsync();
+                await _context.GradeParalelos.AddAsync(gradeParalelo);
+                await _context.SaveChangesAsync();
             }
             catch (Exception exception)
             {
@@ -148,19 +148,55 @@ namespace DigitalCoolBook.App.Controllers
             return Redirect("/Home/SuccessfulySaved");
         }
 
+        [Authorize(Roles = ("Admin"))]
+        [HttpGet]
         public IActionResult EditParalelo(string id)
         {
             var paralelo = _context.GradeParalelos.Find(id);
-            var model = new ParaleloViewModel
+            var grades = _context.Grades
+                .OrderBy(g => g.Name)
+                .ToList();
+
+            var teachers = _context.Teachers
+                .ToList();
+
+            var model = new ParaleloCreateViewModel
             {
-                GradeId = paralelo.IdGrade,
-                GradeName = paralelo.Grade.Name,
                 Id = paralelo.GradeParaleloId,
+                GradeId = paralelo.IdGrade,
+                GradeName = _context.Grades.Find(paralelo.IdGrade).Name,
                 TeacherId = paralelo.IdTeacher,
-                TeacherName = paralelo.Teacher.Name
+                TeacherName = _context.Teachers.Find(paralelo.IdTeacher).Name,
+                Teachers = teachers,
+                Grades = grades
             };
 
             return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult EditParalelo(ParaleloCreateViewModel model)
+        {
+            try
+            {
+                var gradeParalelo = _context.GradeParalelos.Find(model.Id);
+
+                gradeParalelo.IdTeacher = model.TeacherId;
+                gradeParalelo.IdGrade = model.GradeId;
+
+                _context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                var error = new ErrorViewModel
+                {
+                    Message = exception.Message
+                };
+
+                return View("Error", error);
+            }
+            return Redirect("Home/SuccessfulySaved");
         }
     }
 }

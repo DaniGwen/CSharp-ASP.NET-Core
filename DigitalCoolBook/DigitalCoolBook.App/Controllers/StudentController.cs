@@ -113,7 +113,7 @@ namespace DigitalCoolBook.App.Controllers
                 student.Telephone = registerModel.Telephone;
                 student.UserName = registerModel.Email;
                 student.Grade = _context.Grades.First(g => g.GradeId == registerModel.GradeId);
-
+                
                 var result = await _userManager.CreateAsync(student, registerModel.Password);
 
                 if (result.Succeeded)
