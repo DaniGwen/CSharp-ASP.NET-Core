@@ -4,7 +4,7 @@
     ViewData["Title"] = "ChooseParalelo";
 }
 
-<h1>Избери Клас</h1>
+<h1>Класове</h1>
 
 <table class="table">
     <thead>
@@ -22,8 +22,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @Html.ActionLink("Детайли", "GradeDetails", new { id = item.Id }) |
+                <td class="btn btn-sm btn-secondary">
+                    @Html.ActionLink("Детайли", "GradeDetails", new { id = item.Id })
                 </td>
             </tr>
         }
