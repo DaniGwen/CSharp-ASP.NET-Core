@@ -119,6 +119,7 @@ namespace DigitalCoolBook.App.Controllers
                 .Where(s => s.GradeId == id)
                 .Select(s => new
                 {
+                    s.GradeId,
                     s.Name,
                     s.ScoreRecords,
                     s.Attendances
@@ -131,6 +132,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 GradeDetailViewModel model = new GradeDetailViewModel
                 {
+                    Id = student.GradeId,
                     Attendances = student.Attendances,
                     ScoreRecords = student.ScoreRecords,
                     Name = student.Name

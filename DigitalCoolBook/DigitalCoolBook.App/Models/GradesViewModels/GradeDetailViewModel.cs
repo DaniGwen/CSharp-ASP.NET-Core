@@ -5,6 +5,8 @@ namespace DigitalCoolBook.App.Models.GradesViewModels
 {
     public class GradeDetailViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public List<ScoreRecord> ScoreRecords { get; set; }

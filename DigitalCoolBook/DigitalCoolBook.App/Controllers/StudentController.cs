@@ -74,7 +74,7 @@ namespace DigitalCoolBook.App.Controllers
                 student.Telephone = registerModel.Telephone;
                 student.UserName = registerModel.Email;
                 student.Grade = _context.Grades.First(g => g.GradeId == registerModel.GradeId);
-                
+
                 var result = await _userManager.CreateAsync(student, registerModel.Password);
 
                 if (result.Succeeded)
@@ -287,6 +287,28 @@ namespace DigitalCoolBook.App.Controllers
             var model = new StudentChangePasswordViewModel
             {
                 Id = userDb.Id,
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DetailsAsync(string id)
+        {
+            var student = await _context.Students.FindAsync(id);
+
+            var model = new StudentDetailsViewModel
+            {
+                Address = student.Address,
+                DateOfBirth = student.DateOfBirth,
+                Email = student.Email,
+                FatherMobileNumber = student.FatherMobileNumber,
+                FatherName = student.FatherName,
+                MobilePhone = student.MobilePhone,
+                MotherMobileNumber = student.MotherMobileNumber,
+                MotherName = student.MotherName,
+                Name = student.Name,
+                PlaceOfBirth = student.PlaceOfBirth,
+                Telephone = student.Telephone
             };
 
             return View(model);
