@@ -11,8 +11,8 @@ using DigitalCoolBook.Models;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using DigitalCoolBook.App.Services;
 using System.Linq;
+using AutoMapper;
 
 namespace DigitalCoolBook.App
 {
@@ -41,7 +41,7 @@ namespace DigitalCoolBook.App
             {
                 options.User.RequireUniqueEmail = true;
             });
-
+            services.AddAutoMapper();
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;

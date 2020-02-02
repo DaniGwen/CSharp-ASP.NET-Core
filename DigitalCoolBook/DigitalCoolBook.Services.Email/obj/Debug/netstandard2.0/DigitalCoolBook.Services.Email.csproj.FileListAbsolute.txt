@@ -1,0 +1,5 @@
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Email\bin\Debug\netstandard2.0\DigitalCoolBook.Services.Email.deps.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Email\bin\Debug\netstandard2.0\DigitalCoolBook.Services.Email.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Email\obj\Debug\netstandard2.0\DigitalCoolBook.Services.Email.AssemblyInfoInputs.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Email\obj\Debug\netstandard2.0\DigitalCoolBook.Services.Email.AssemblyInfo.cs
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Email\obj\Debug\netstandard2.0\DigitalCoolBook.Services.Email.csprojAssemblyReference.cache

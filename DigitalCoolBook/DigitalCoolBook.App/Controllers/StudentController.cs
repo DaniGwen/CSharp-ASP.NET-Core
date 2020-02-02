@@ -308,7 +308,8 @@ namespace DigitalCoolBook.App.Controllers
                 MotherName = student.MotherName,
                 Name = student.Name,
                 PlaceOfBirth = student.PlaceOfBirth,
-                Telephone = student.Telephone
+                Telephone = student.Telephone,
+                GradeId = student.GradeId
             };
 
             return View(model);

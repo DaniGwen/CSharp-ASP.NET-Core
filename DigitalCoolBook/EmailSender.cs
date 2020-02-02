@@ -9,10 +9,10 @@ namespace DigitalCoolBook.App.Services
     public class EmailSender : IEmailSender
     {
         private readonly IConfiguration _configuration;
-       
-        public EmailSender(IConfiguration configuration )
+
+        public EmailSender(IConfiguration configuration)
         {
-           _configuration = configuration;
+            _configuration = configuration;
         }
         private string SendGridKey { get; set; }
         private string SendGriduser { get; set; }
@@ -45,4 +45,3 @@ namespace DigitalCoolBook.App.Services
         }
     }
 }
-

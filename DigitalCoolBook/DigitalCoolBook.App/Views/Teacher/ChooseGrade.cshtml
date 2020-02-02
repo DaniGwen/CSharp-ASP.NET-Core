@@ -22,8 +22,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td class="btn btn-sm btn-secondary">
-                    @Html.ActionLink("Детайли", "GradeDetails", new { id = item.Id })
+                <td class="btn btn-sm btn-secondary text-white">
+                   @Html.ActionLink("Детайли", "GradeDetails", new { id = item.Id })
                 </td>
             </tr>
         }

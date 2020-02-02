@@ -113,13 +113,13 @@ namespace DigitalCoolBook.App.Controllers
             return View(gradesForView);
         }
 
-        public IActionResult GradeDetails(string id)
+        public IActionResult GradeDetailsAsync(string id)
         {
             var studentsInGrade = _context.Students
                 .Where(s => s.GradeId == id)
                 .Select(s => new
                 {
-                    s.GradeId,
+                    s.Id,
                     s.Name,
                     s.ScoreRecords,
                     s.Attendances
@@ -132,7 +132,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 GradeDetailViewModel model = new GradeDetailViewModel
                 {
-                    Id = student.GradeId,
+                    Id = student.Id,
                     Attendances = student.Attendances,
                     ScoreRecords = student.ScoreRecords,
                     Name = student.Name
