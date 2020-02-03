@@ -13,6 +13,7 @@ using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Linq;
 using AutoMapper;
+using DigitalCoolBook.App.Services;
 
 namespace DigitalCoolBook.App
 {

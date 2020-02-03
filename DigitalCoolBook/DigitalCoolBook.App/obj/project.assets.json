@@ -2708,6 +2708,23 @@
         "runtime": {
           "bin/placeholder/DigitalCoolBook.Models.dll": {}
         }
+      },
+      "DigitalCoolBook.Services.Message/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "3.1.0",
+          "Sendgrid": "9.12.6"
+        },
+        "compile": {
+          "bin/placeholder/DigitalCoolBook.Services.Message.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalCoolBook.Services.Message.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -8637,12 +8654,18 @@
       "type": "project",
       "path": "../DigitalCoolBook.Modelss/DigitalCoolBook.Models.csproj",
       "msbuildProject": "../DigitalCoolBook.Modelss/DigitalCoolBook.Models.csproj"
+    },
+    "DigitalCoolBook.Services.Message/1.0.0": {
+      "type": "project",
+      "path": "../DigitalCoolBook.Services.Message/DigitalCoolBook.Services.Message.csproj",
+      "msbuildProject": "../DigitalCoolBook.Services.Message/DigitalCoolBook.Services.Message.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "DigitalCoolBook.Models >= 1.0.0",
+      "DigitalCoolBook.Services.Message >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.0",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.0",
@@ -8686,6 +8709,9 @@
           "projectReferences": {
             "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Modelss\\DigitalCoolBook.Models.csproj": {
               "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Modelss\\DigitalCoolBook.Models.csproj"
+            },
+            "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj": {
+              "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj"
             }
           }
         }

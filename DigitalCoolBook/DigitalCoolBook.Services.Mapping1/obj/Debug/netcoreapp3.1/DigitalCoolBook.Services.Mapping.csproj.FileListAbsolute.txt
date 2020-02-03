@@ -1,0 +1,8 @@
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.deps.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.AssemblyInfoInputs.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.AssemblyInfo.cs
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.csprojAssemblyReference.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Mapping1\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.pdb
