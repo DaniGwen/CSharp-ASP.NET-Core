@@ -8,13 +8,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalCoolBook.Models", "DigitalCoolBook.Modelss\DigitalCoolBook.Models.csproj", "{BA4CCD82-5DB6-41FD-A83F-03F6634CE1E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{96900B88-5E49-48F3-82F0-BC336D67ABBB}"
-	ProjectSection(SolutionItems) = preProject
-		EmailSender.cs = EmailSender.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services.Mapping", "DigitalCoolBook.Services.Mapping\DigitalCoolBook.Services.Mapping.csproj", "{9608C879-3FC0-476E-8D01-CD80A3ED1089}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services.Email", "DigitalCoolBook.Services.Email\DigitalCoolBook.Services.Email.csproj", "{6EE88E35-E28C-4E1F-B5B1-6F4C9117451D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services", "DigitalCoolBook.Services\DigitalCoolBook.Services.csproj", "{7108C3E9-30CB-4B4D-8C53-BA00220356A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +37,10 @@ Global
 		{6EE88E35-E28C-4E1F-B5B1-6F4C9117451D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE88E35-E28C-4E1F-B5B1-6F4C9117451D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE88E35-E28C-4E1F-B5B1-6F4C9117451D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7108C3E9-30CB-4B4D-8C53-BA00220356A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7108C3E9-30CB-4B4D-8C53-BA00220356A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7108C3E9-30CB-4B4D-8C53-BA00220356A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7108C3E9-30CB-4B4D-8C53-BA00220356A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9608C879-3FC0-476E-8D01-CD80A3ED1089} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
 		{6EE88E35-E28C-4E1F-B5B1-6F4C9117451D} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
+		{7108C3E9-30CB-4B4D-8C53-BA00220356A4} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5121A2FC-C965-4587-BD43-25A03EAF37CD}
