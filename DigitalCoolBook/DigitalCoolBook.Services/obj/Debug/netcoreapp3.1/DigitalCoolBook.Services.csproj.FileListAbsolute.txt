@@ -1,18 +1,7 @@
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.Views.dll
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.Views.pdb
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.StaticWebAssets.xml
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.exe
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.deps.json
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.pdb
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.dll
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.pdb
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.pdb
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.csprojAssemblyReference.cache
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.AssemblyInfoInputs.cache
@@ -20,3 +9,7 @@ C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBo
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.csproj.CopyComplete
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Mapping.pdb

@@ -24,7 +24,10 @@
     ".NETCoreApp,Version=v3.1": {
       "DigitalCoolBook.App/1.0.0": {
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
           "DigitalCoolBook.Models": "1.0.0",
+          "DigitalCoolBook.Services": "1.0.0",
+          "DigitalCoolBook.Services.Message": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.1.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.0",
           "Microsoft.AspNetCore.Identity.UI": "3.1.0",
@@ -33,7 +36,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.0",
           "Microsoft.Extensions.Logging.Debug": "3.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
-          "SendGrid": "9.12.5",
+          "SendGrid": "9.12.6",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -308,6 +311,36 @@
         },
         "compile": {
           "DigitalCoolBook.App.dll": {}
+        }
+      },
+      "AutoMapper/9.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/7.0.0": {
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "7.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
@@ -1304,15 +1337,14 @@
           }
         }
       },
-      "SendGrid/9.12.5": {
+      "SendGrid/9.12.6": {
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "12.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/SendGrid.dll": {
-            "assemblyVersion": "9.12.5.0",
-            "fileVersion": "9.12.5.0"
+            "assemblyVersion": "9.12.6.0",
+            "fileVersion": "9.12.6.0"
           }
         },
         "compile": {
@@ -2251,6 +2283,19 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "DigitalCoolBook.Data/1.0.0": {
+        "dependencies": {
+          "DigitalCoolBook.Models": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.0",
+          "Microsoft.EntityFrameworkCore": "3.1.0"
+        },
+        "runtime": {
+          "DigitalCoolBook.Data.dll": {}
+        },
+        "compile": {
+          "DigitalCoolBook.Data.dll": {}
+        }
+      },
       "DigitalCoolBook.Models/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Identity.Stores": "3.1.1"
@@ -2260,6 +2305,41 @@
         },
         "compile": {
           "DigitalCoolBook.Models.dll": {}
+        }
+      },
+      "DigitalCoolBook.Services/1.0.0": {
+        "dependencies": {
+          "DigitalCoolBook.Data": "1.0.0",
+          "DigitalCoolBook.Services.Mapping": "1.0.0"
+        },
+        "runtime": {
+          "DigitalCoolBook.Services.dll": {}
+        },
+        "compile": {
+          "DigitalCoolBook.Services.dll": {}
+        }
+      },
+      "DigitalCoolBook.Services.Mapping/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "9.0.0"
+        },
+        "runtime": {
+          "DigitalCoolBook.Services.Mapping.dll": {}
+        },
+        "compile": {
+          "DigitalCoolBook.Services.Mapping.dll": {}
+        }
+      },
+      "DigitalCoolBook.Services.Message/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "3.1.0",
+          "SendGrid": "9.12.6"
+        },
+        "runtime": {
+          "DigitalCoolBook.Services.Message.dll": {}
+        },
+        "compile": {
+          "DigitalCoolBook.Services.Message.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -3878,6 +3958,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "AutoMapper/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xCqvoxT4HIrNY/xlXG9W+BA/awdrhWvMTKTK/igkGSRbhOhpl3Q8O8Gxlhzjc9JsYqE7sS6AxgyuUUvZ6R5/Bw==",
+      "path": "automapper/9.0.0",
+      "hashPath": "automapper.9.0.0.nupkg.sha512"
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-szI4yeRIM7GWe9JyekW0dKYehPB0t6M+I55fPeCebN6PhS7zQZa0eG3bgOnOx+eP3caSNoE7KEJs2rk7MLsh8w==",
+      "path": "automapper.extensions.microsoft.dependencyinjection/7.0.0",
+      "hashPath": "automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
       "type": "package",
       "serviceable": true,
@@ -4424,12 +4518,12 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "SendGrid/9.12.5": {
+    "SendGrid/9.12.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZXfzgKl7Fb1GwFeAS7hQjtBaFKYPN7G4HSse+X6h/XPkPcb2sANlPoektDEePEuz93vTpqM6yt050pwLHDpBCA==",
-      "path": "sendgrid/9.12.5",
-      "hashPath": "sendgrid.9.12.5.nupkg.sha512"
+      "sha512": "sha512-fWg/1HbkiC2OgleRLDWhoNEpasbMsZRFo++Zw+ZzX6yRsJI0dpjQbUp5G1er9+PCNrPkg5AOUBBibrP04cwynQ==",
+      "path": "sendgrid/9.12.6",
+      "hashPath": "sendgrid.9.12.6.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",
@@ -5026,7 +5120,27 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
+    "DigitalCoolBook.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "DigitalCoolBook.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DigitalCoolBook.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DigitalCoolBook.Services.Mapping/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DigitalCoolBook.Services.Message/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

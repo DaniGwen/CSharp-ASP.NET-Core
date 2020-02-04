@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalCoolBook.App\DigitalCoolBook.App.csproj" />
+    <ProjectReference Include="..\DigitalCoolBook.Data\DigitalCoolBook.Data.csproj" />
     <ProjectReference Include="..\DigitalCoolBook.Services.Mapping1\DigitalCoolBook.Services.Mapping.csproj" />
   </ItemGroup>
 

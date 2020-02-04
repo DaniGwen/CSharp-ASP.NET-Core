@@ -3,3 +3,6 @@ C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBo
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.AssemblyInfoInputs.cache
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.AssemblyInfo.cs
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.csprojAssemblyReference.cache
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.pdb
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.pdb

@@ -6,7 +6,7 @@ namespace DigitalCoolBook.Services.Contracts
     {
         IEnumerable<TViewModel> GetStudents<TViewModel>();
 
-        TViewModel GetStudentAsync<TViewModel>(string id);
+        TViewModel GetStudent<TViewModel>(string id);
 
         IEnumerable<TViewModel> GetTeachers<TViewModel>();
 

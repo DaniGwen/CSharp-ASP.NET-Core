@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Linq;
-using AutoMapper;
 using DigitalCoolBook.App.Services;
+using DigitalCoolBook.Services;
+using DigitalCoolBook.Services.Contracts;
 
 namespace DigitalCoolBook.App
 {
@@ -42,7 +43,7 @@ namespace DigitalCoolBook.App
             {
                 options.User.RequireUniqueEmail = true;
             });
-            services.AddAutoMapper();
+            services.AddTransient<IUserService, UserService>();
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;
@@ -336,7 +337,7 @@ namespace DigitalCoolBook.App
 
             }
 
-            if (!context.Users.Any(u=>u.Email == "admin@admin.com"))
+            if (!context.Users.Any(u => u.Email == "admin@admin.com"))
             {
                 var user = new IdentityUser();
                 user.UserName = Configuration.GetValue<string>("AdminConfig:Username");
@@ -351,7 +352,7 @@ namespace DigitalCoolBook.App
                     var result1 = await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
-           
+
 
             // creating Creating Student role     
             isUserAddedInRole = await roleManager.RoleExistsAsync("Student");
