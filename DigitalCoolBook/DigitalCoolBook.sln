@@ -9,13 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalCoolBook.Models", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{96900B88-5E49-48F3-82F0-BC336D67ABBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services", "DigitalCoolBook.Services\DigitalCoolBook.Services.csproj", "{457022DE-A7D7-42DD-8411-ED00075BEAEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalCoolBook.Services", "DigitalCoolBook.Services\DigitalCoolBook.Services.csproj", "{457022DE-A7D7-42DD-8411-ED00075BEAEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services.Mapping", "DigitalCoolBook.Services.Mapping1\DigitalCoolBook.Services.Mapping.csproj", "{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalCoolBook.Services.Message", "DigitalCoolBook.Services.Message\DigitalCoolBook.Services.Message.csproj", "{6CAC54A4-1585-4270-B76C-128DE031D0BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Services.Message", "DigitalCoolBook.Services.Message\DigitalCoolBook.Services.Message.csproj", "{6CAC54A4-1585-4270-B76C-128DE031D0BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalCoolBook.Data", "DigitalCoolBook.Data\DigitalCoolBook.Data.csproj", "{880CB3E6-B840-41BA-8AC7-FA4F58EA9B45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalCoolBook.Data", "DigitalCoolBook.Data\DigitalCoolBook.Data.csproj", "{880CB3E6-B840-41BA-8AC7-FA4F58EA9B45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{457022DE-A7D7-42DD-8411-ED00075BEAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{457022DE-A7D7-42DD-8411-ED00075BEAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{457022DE-A7D7-42DD-8411-ED00075BEAEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6CAC54A4-1585-4270-B76C-128DE031D0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CAC54A4-1585-4270-B76C-128DE031D0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CAC54A4-1585-4270-B76C-128DE031D0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,7 +47,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{457022DE-A7D7-42DD-8411-ED00075BEAEF} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
-		{01AF2B5F-62E8-4FB4-91EF-2EC0862F0A97} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
 		{6CAC54A4-1585-4270-B76C-128DE031D0BD} = {96900B88-5E49-48F3-82F0-BC336D67ABBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

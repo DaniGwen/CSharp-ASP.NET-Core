@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using DigitalCoolBook.App.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,8 +12,11 @@ using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Linq;
 using DigitalCoolBook.App.Services;
-using DigitalCoolBook.Services;
+using DigitalCoolBook.App.Data;
+using AutoMapper;
 using DigitalCoolBook.Services.Contracts;
+using DigitalCoolBook.Services;
+using DigitalCoolBook.Services.Mapping;
 
 namespace DigitalCoolBook.App
 {
@@ -39,11 +41,20 @@ namespace DigitalCoolBook.App
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IUserService, UserService>();
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<OrganizationProfile>();
+            });
+            var mapper = config.CreateMapper();
+            services.AddAutoMapper(typeof(Startup));
+            //services.AddSingleton(mapper);
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
             });
-            services.AddTransient<IUserService, UserService>();
+
             services.AddMvc(mvcOptions =>
             {
                 mvcOptions.EnableEndpointRouting = false;

@@ -1,8 +1,11 @@
-﻿using DigitalCoolBook.App.Data;
+﻿using AutoMapper;
+using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.GradesViewModels;
 using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.Models;
+using DigitalCoolBook.Services;
+using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
@@ -25,20 +28,26 @@ namespace DigitalCoolBook.App.Controllers
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
         public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUserService userService,
+            IMapper mapper)
         {
             _userManager = userManager;
             _context = context;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userService = userService;
             _logger = logger;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         [Authorize(Roles = "Admin")]
@@ -59,21 +68,13 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
         {
-            var student = new Student();
+            //var student = new Student();
 
             if (ModelState.IsValid)
             {
-                student.Id = Guid.NewGuid().ToString();
-                student.DateOfBirth = registerModel.DateOfBirth;
-                student.Email = registerModel.Email;
-                student.MobilePhone = registerModel.MobilePhone;
-                student.PasswordHash = registerModel.Password;
-                student.PlaceOfBirth = registerModel.PlaceOfBirth;
-                student.Sex = registerModel.Sex;
-                student.Name = registerModel.Name;
-                student.Telephone = registerModel.Telephone;
+                var student = _mapper.Map<Student>(registerModel);
+               
                 student.UserName = registerModel.Email;
-                student.Grade = _context.Grades.First(g => g.GradeId == registerModel.GradeId);
 
                 var result = await _userManager.CreateAsync(student, registerModel.Password);
 
@@ -94,37 +95,22 @@ namespace DigitalCoolBook.App.Controllers
                     }
                 }
             }
-            return View();
+            return View(registerModel);
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult EditStudents()
         {
-            var students = _context.Students.ToList();
+            var students = _userService.GetStudents();
             var studentsList = new List<StudentEditViewModel>();
-
+            
             try
             {
                 foreach (var student in students)
                 {
-                    var studentModel = new StudentEditViewModel()
-                    {
-                        StudentId = student.Id,
-                        Address = student.Address,
-                        DateOfBirth = student.DateOfBirth,
-                        Email = student.Email,
-                        FatherMobileNumber = student.FatherMobileNumber,
-                        FatherName = student.FatherName,
-                        MobilePhone = student.MobilePhone,
-                        MotherMobileNumber = student.MotherMobileNumber,
-                        MotherName = student.MotherName,
-                        Name = student.Name,
-                        PlaceOfBirth = student.PlaceOfBirth,
-                        Sex = student.Sex,
-                        Telephone = student.Telephone,
-                        Grade = _context.Grades.FirstOrDefault(g => g.GradeId == student.GradeId)
-                    };
-                    studentsList.Add(studentModel);
+                    var studentDto = _mapper.Map<StudentEditViewModel>(student);
+                    
+                    studentsList.Add(studentDto);
                 }
             }
             catch (Exception exception)
@@ -153,7 +139,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 Address = student.Address,
                 Telephone = student.Telephone,
-                StudentId = student.Id,
+                Id = student.Id,
                 DateOfBirth = student.DateOfBirth,
                 Email = student.Email,
                 FatherMobileNumber = student.FatherMobileNumber,

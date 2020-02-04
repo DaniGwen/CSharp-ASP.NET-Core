@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using DigitalCoolBook.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services.Contracts
 {
     public interface IUserService
     {
-        IEnumerable<TViewModel> GetStudents<TViewModel>();
+        IEnumerable<Student> GetStudents();
 
-        TViewModel GetStudent<TViewModel>(string id);
+        Task<Student> GetStudentAsync(string id);
 
-        IEnumerable<TViewModel> GetTeachers<TViewModel>();
+        IEnumerable<Teacher> GetTeachers();
 
-        TViewModel GetTeacher<TViewModel>(string id);
+        Task<Teacher> GetTeacherAsync(string id);
     }
 }

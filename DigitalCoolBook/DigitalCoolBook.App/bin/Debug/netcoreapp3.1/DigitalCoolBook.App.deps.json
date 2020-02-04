@@ -25,6 +25,7 @@
       "DigitalCoolBook.App/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "DigitalCoolBook.Data": "1.0.0",
           "DigitalCoolBook.Models": "1.0.0",
           "DigitalCoolBook.Services": "1.0.0",
           "DigitalCoolBook.Services.Message": "1.0.0",
@@ -2309,25 +2310,13 @@
       },
       "DigitalCoolBook.Services/1.0.0": {
         "dependencies": {
-          "DigitalCoolBook.Data": "1.0.0",
-          "DigitalCoolBook.Services.Mapping": "1.0.0"
+          "DigitalCoolBook.Data": "1.0.0"
         },
         "runtime": {
           "DigitalCoolBook.Services.dll": {}
         },
         "compile": {
           "DigitalCoolBook.Services.dll": {}
-        }
-      },
-      "DigitalCoolBook.Services.Mapping/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "9.0.0"
-        },
-        "runtime": {
-          "DigitalCoolBook.Services.Mapping.dll": {}
-        },
-        "compile": {
-          "DigitalCoolBook.Services.Mapping.dll": {}
         }
       },
       "DigitalCoolBook.Services.Message/1.0.0": {
@@ -5131,11 +5120,6 @@
       "sha512": ""
     },
     "DigitalCoolBook.Services/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DigitalCoolBook.Services.Mapping/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -7,12 +7,8 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
 {
     public class StudentEditViewModel
     {
-        public StudentEditViewModel()
-        {
-            this.Grades = new List<GradeViewModel>();
-        }
-
-        public string StudentId { get; set; }
+      
+        public string Id { get; set; }
 
         public string Email { get; set; }
 

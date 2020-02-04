@@ -25,6 +25,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\DigitalCoolBook.Data\DigitalCoolBook.Data.csproj" />
     <ProjectReference Include="..\DigitalCoolBook.Modelss\DigitalCoolBook.Models.csproj" />
     <ProjectReference Include="..\DigitalCoolBook.Services.Message\DigitalCoolBook.Services.Message.csproj" />
     <ProjectReference Include="..\DigitalCoolBook.Services\DigitalCoolBook.Services.csproj" />

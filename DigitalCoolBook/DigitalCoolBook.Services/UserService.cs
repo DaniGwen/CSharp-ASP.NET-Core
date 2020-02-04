@@ -1,8 +1,9 @@
-﻿
-using DigitalCoolBook.App.Data;
+﻿using DigitalCoolBook.App.Data;
+using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services
 {
@@ -15,29 +16,30 @@ namespace DigitalCoolBook.Services
             _context = context;
         }
 
-        public TViewModel GetStudent<TViewModel>(string id)
+        public async Task<Student> GetStudentAsync(string id)
         {
-            throw new NotImplementedException();
+            var student = await _context.Students.FindAsync(id);
+            return student;
         }
 
-        public IEnumerable<TViewModel> GetStudents<TViewModel>()
+        public IEnumerable<Student> GetStudents()
         {
-            throw new NotImplementedException();
+            var students = _context.Students.ToList();
+
+            return students;
         }
 
-        public IEnumerable<TViewModel> GetTeacher<TViewModel>(string id)
+        public IEnumerable<Teacher> GetTeachers()
         {
-            throw new NotImplementedException();
+            var teachers = _context.Teachers.ToList();
+
+            return teachers;
         }
 
-        public IEnumerable<TViewModel> GetTeachers<TViewModel>()
+        public async Task<Teacher> GetTeacherAsync(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        TViewModel IUserService.GetTeacher<TViewModel>(string id)
-        {
-            throw new NotImplementedException();
+            var teacher = await _context.Teachers.FindAsync(id);
+            return teacher;
         }
     }
 }

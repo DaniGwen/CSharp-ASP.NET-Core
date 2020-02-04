@@ -8,22 +8,10 @@
     ".NETCoreApp,Version=v3.1": {
       "DigitalCoolBook.Services/1.0.0": {
         "dependencies": {
-          "DigitalCoolBook.Data": "1.0.0",
-          "DigitalCoolBook.Services.Mapping": "1.0.0"
+          "DigitalCoolBook.Data": "1.0.0"
         },
         "runtime": {
           "DigitalCoolBook.Services.dll": {}
-        }
-      },
-      "AutoMapper/7.0.1": {
-        "dependencies": {
-          "System.ValueTuple": "4.5.0"
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/AutoMapper.dll": {
-            "assemblyVersion": "7.0.1.0",
-            "fileVersion": "7.0.1.0"
-          }
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
@@ -261,7 +249,6 @@
       "System.Collections.Immutable/1.7.0": {},
       "System.ComponentModel.Annotations/4.7.0": {},
       "System.Diagnostics.DiagnosticSource/4.7.0": {},
-      "System.ValueTuple/4.5.0": {},
       "DigitalCoolBook.Data/1.0.0": {
         "dependencies": {
           "DigitalCoolBook.Models": "1.0.0",
@@ -279,14 +266,6 @@
         "runtime": {
           "DigitalCoolBook.Models.dll": {}
         }
-      },
-      "DigitalCoolBook.Services.Mapping/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "7.0.1"
-        },
-        "runtime": {
-          "DigitalCoolBook.Services.Mapping.dll": {}
-        }
       }
     }
   },
@@ -295,13 +274,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AutoMapper/7.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6xHbhsW09sWjjYuE1sqhYn25PQzB6UEUVPME5uhlaIz2NR2+L3+FGbVxvknJKug1BLp6VTLxDb5RcGXKMm0ieQ==",
-      "path": "automapper/7.0.1",
-      "hashPath": "automapper.7.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
       "type": "package",
@@ -478,24 +450,12 @@
       "path": "system.diagnostics.diagnosticsource/4.7.0",
       "hashPath": "system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512"
     },
-    "System.ValueTuple/4.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
-      "path": "system.valuetuple/4.5.0",
-      "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
-    },
     "DigitalCoolBook.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "DigitalCoolBook.Models/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DigitalCoolBook.Services.Mapping/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

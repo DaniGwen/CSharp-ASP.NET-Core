@@ -2728,27 +2728,13 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "DigitalCoolBook.Data": "1.0.0",
-          "DigitalCoolBook.Services.Mapping": "1.0.0"
+          "DigitalCoolBook.Data": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DigitalCoolBook.Services.dll": {}
         },
         "runtime": {
           "bin/placeholder/DigitalCoolBook.Services.dll": {}
-        }
-      },
-      "DigitalCoolBook.Services.Mapping/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "AutoMapper": "7.0.1"
-        },
-        "compile": {
-          "bin/placeholder/DigitalCoolBook.Services.Mapping.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DigitalCoolBook.Services.Mapping.dll": {}
         }
       },
       "DigitalCoolBook.Services.Message/1.0.0": {
@@ -8707,11 +8693,6 @@
       "path": "../DigitalCoolBook.Services/DigitalCoolBook.Services.csproj",
       "msbuildProject": "../DigitalCoolBook.Services/DigitalCoolBook.Services.csproj"
     },
-    "DigitalCoolBook.Services.Mapping/1.0.0": {
-      "type": "project",
-      "path": "../DigitalCoolBook.Services.Mapping1/DigitalCoolBook.Services.Mapping.csproj",
-      "msbuildProject": "../DigitalCoolBook.Services.Mapping1/DigitalCoolBook.Services.Mapping.csproj"
-    },
     "DigitalCoolBook.Services.Message/1.0.0": {
       "type": "project",
       "path": "../DigitalCoolBook.Services.Message/DigitalCoolBook.Services.Message.csproj",
@@ -8721,6 +8702,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
+      "DigitalCoolBook.Data >= 1.0.0",
       "DigitalCoolBook.Models >= 1.0.0",
       "DigitalCoolBook.Services >= 1.0.0",
       "DigitalCoolBook.Services.Message >= 1.0.0",
@@ -8765,6 +8747,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
+              "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj"
+            },
             "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Modelss\\DigitalCoolBook.Models.csproj": {
               "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Modelss\\DigitalCoolBook.Models.csproj"
             },

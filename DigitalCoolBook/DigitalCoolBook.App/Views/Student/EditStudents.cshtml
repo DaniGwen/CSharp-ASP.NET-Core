@@ -98,9 +98,9 @@
                     @Html.DisplayFor(modelItem => student.Grade.Name)
                 </td>
                 <td>
-                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@student.StudentId">Изтрий</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@student.StudentId">Редактирай</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="ChangePassword" asp-route-id="@student.StudentId">Смяна на парола</a>
+                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@student.Id">Изтрий</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="EditStudent" asp-route-id="@student.Id">Редактирай</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Student" asp-action="ChangePassword" asp-route-id="@student.Id">Смяна на парола</a>
                 </td>
             </tr>
         }
