@@ -42,14 +42,15 @@ namespace DigitalCoolBook.App
                 .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IGradeService, GradeService>();
 
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<OrganizationProfile>();
             });
             var mapper = config.CreateMapper();
+
             services.AddAutoMapper(typeof(Startup));
-            //services.AddSingleton(mapper);
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;

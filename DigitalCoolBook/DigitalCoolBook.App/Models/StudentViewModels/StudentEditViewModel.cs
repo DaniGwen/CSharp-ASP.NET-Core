@@ -7,7 +7,10 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
 {
     public class StudentEditViewModel
     {
-      
+        public StudentEditViewModel()
+        {
+            this.Grades = new List<GradeViewModel>();
+        }
         public string Id { get; set; }
 
         public string Email { get; set; }
@@ -39,5 +42,7 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         public string GradeId { get; set; }
 
         public List<GradeViewModel> Grades { get; set; }
+
+        public string GradeName { get; set; }
     }
 }

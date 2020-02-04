@@ -29,6 +29,7 @@ namespace DigitalCoolBook.App.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly IGradeService _gradeService;
         private readonly IMapper _mapper;
 
         public StudentController(ILogger<HomeController> logger,
@@ -38,6 +39,7 @@ namespace DigitalCoolBook.App.Controllers
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
             IUserService userService,
+            IGradeService gradeService,
             IMapper mapper)
         {
             _userManager = userManager;
@@ -45,6 +47,7 @@ namespace DigitalCoolBook.App.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
             _userService = userService;
+            _gradeService = gradeService;
             _logger = logger;
             _signInManager = signInManager;
             _mapper = mapper;
@@ -54,14 +57,12 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public IActionResult RegisterStudent()
         {
-            var studentModel = new StudentRegisterModel
+            var model = new StudentRegisterModel
             {
-                Grades = _context.Grades
-                .OrderBy(g => g.Name)
-                .ToList()
+                Grades = _gradeService.GetGrades().ToList()
             };
 
-            return View(studentModel);
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -73,7 +74,7 @@ namespace DigitalCoolBook.App.Controllers
             if (ModelState.IsValid)
             {
                 var student = _mapper.Map<Student>(registerModel);
-               
+
                 student.UserName = registerModel.Email;
 
                 var result = await _userManager.CreateAsync(student, registerModel.Password);
@@ -99,17 +100,19 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult EditStudents()
+        public async Task<IActionResult> EditStudentsAsync()
         {
-            var students = _userService.GetStudents();
             var studentsList = new List<StudentEditViewModel>();
-            
+
             try
             {
+                var students = _userService.GetStudents();
+
                 foreach (var student in students)
                 {
                     var studentDto = _mapper.Map<StudentEditViewModel>(student);
-                    
+                    var grade = await _gradeService.GetGradeAsync(student.GradeId);
+                    studentDto.GradeName = grade.Name;
                     studentsList.Add(studentDto);
                 }
             }
@@ -128,40 +131,17 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> EditStudent(string id)
+        public async Task<IActionResult> EditStudentAsync(string id)
         {
-            var student = await _context.Students.FindAsync(id);
-            var grades = _context.Grades
-                .OrderBy(g => g.Name)
-                .ToList();
+            var student = await _userService.GetStudentAsync(id);
+            var grades = _gradeService.GetGrades().ToList();
 
-            var model = new StudentEditViewModel
-            {
-                Address = student.Address,
-                Telephone = student.Telephone,
-                Id = student.Id,
-                DateOfBirth = student.DateOfBirth,
-                Email = student.Email,
-                FatherMobileNumber = student.FatherMobileNumber,
-                FatherName = student.FatherName,
-                MobilePhone = student.MobilePhone,
-                MotherMobileNumber = student.MotherMobileNumber,
-                MotherName = student.MotherName,
-                Name = student.Name,
-                PlaceOfBirth = student.PlaceOfBirth,
-                Sex = student.Sex,
-                Grade = student.Grade
-            };
+            var model = _mapper.Map<StudentEditViewModel>(student);
 
             foreach (var grade in grades)
             {
-                var gradesModel = new GradeViewModel
-                {
-                    Id = grade.GradeId,
-                    Name = grade.Name
-                };
-
-                model.Grades.Add(gradesModel);
+                var gradeModel = _mapper.Map<GradeViewModel>(grade);
+                model.Grades.Add(gradeModel);
             }
 
             return View(model);
@@ -173,7 +153,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student = await _context.Students.FindAsync(id);
+                var student = await _userService.GetStudentAsync(id);
 
                 student.Address = model.Address;
                 student.DateOfBirth = model.DateOfBirth;
@@ -189,7 +169,7 @@ namespace DigitalCoolBook.App.Controllers
                 student.Telephone = model.Telephone;
                 student.GradeId = model.GradeId;
 
-                await _context.SaveChangesAsync();
+                await _userService.SaveChangesAsync();
 
                 return Redirect("/Home/SuccessfulySaved");
             }
@@ -200,11 +180,7 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
-
-            var student = await _context.Students.FindAsync(id);
-
-            _context.Students.Remove(student);
-            _context.SaveChanges();
+            await _userService.RemoveStudentAsync(id);
 
             //Redirect to / Admin / AdminPanel after 4 seconds
             Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
@@ -217,14 +193,9 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student = await _userService.GetStudentAsync(id);
 
-            var model = new StudentChangePasswordViewModel()
-            {
-                Id = student.Id,
-                Email = student.Email,
-                Name = student.Name,
-            };
+            var model = _mapper.Map<StudentChangePasswordViewModel>(student);
 
             return View(model);
         }

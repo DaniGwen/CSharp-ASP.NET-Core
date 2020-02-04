@@ -23,7 +23,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="btn btn-sm btn-secondary text-white">
-                   @Html.ActionLink("Детайли", "GradeDetails", new { id = item.Id })
+                   @Html.ActionLink("Детайли", "GradeDetails", new { id = item.GradeId })
                 </td>
             </tr>
         }

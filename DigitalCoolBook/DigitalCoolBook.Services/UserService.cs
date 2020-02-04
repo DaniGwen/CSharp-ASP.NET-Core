@@ -36,10 +36,23 @@ namespace DigitalCoolBook.Services
             return teachers;
         }
 
-        public async Task<Teacher> GetTeacherAsync(string id)
+        public async Task<Teacher> GetTeacher(string id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
             return teacher;
+        }
+
+        public async Task RemoveStudentAsync(string id)
+        {
+            var student = await this.GetStudentAsync(id);
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -12,6 +12,10 @@ namespace DigitalCoolBook.Services.Contracts
 
         IEnumerable<Teacher> GetTeachers();
 
-        Task<Teacher> GetTeacherAsync(string id);
+        Task<Teacher> GetTeacher(string id);
+
+        Task RemoveStudentAsync(string id);
+
+        Task SaveChangesAsync();
     }
 }

@@ -105,7 +105,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var gradeForList = new GradeViewModel
                 {
-                    Id = grade.GradeId,
+                    GradeId = grade.GradeId,
                     Name = grade.Name
                 };
                 gradesForView.Add(gradeForList);
