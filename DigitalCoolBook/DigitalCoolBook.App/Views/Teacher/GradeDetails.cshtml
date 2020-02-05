@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Ученици")
             </th>
             <th></th>
         </tr>
@@ -24,9 +24,11 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="btn btn-secondary btn-sm">
-                    @Html.ActionLink("Виж повече", "Details", "Student", new { id = item.Id })
+                    @Html.ActionLink("Информация", "Details", "Student", new { id = item.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a class="btn btn-outline-info" href="/Teacher/ChooseGrade">Назад</a>
+

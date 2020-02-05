@@ -1,6 +1,7 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,9 @@ namespace DigitalCoolBook.Services
 
         public IEnumerable<Grade> GetGrades()
         {
-            var grades = _context.Grades.OrderBy(g => g.Name).ToList();
+            var grades = _context.Grades
+                .Include(g => g.GradeParalelos)
+                .OrderBy(g => g.Name);
 
             return grades;
         }

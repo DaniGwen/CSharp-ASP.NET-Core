@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
-using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.GradesViewModels;
 using DigitalCoolBook.App.Models.StudentViewModels;
 using DigitalCoolBook.Models;
-using DigitalCoolBook.Services;
 using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -25,8 +22,6 @@ namespace DigitalCoolBook.App.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IGradeService _gradeService;
         private readonly IMapper _mapper;
@@ -34,15 +29,11 @@ namespace DigitalCoolBook.App.Controllers
         public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration,
             IUserService userService,
             IGradeService gradeService,
             IMapper mapper)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
-            _configuration = configuration;
             _userService = userService;
             _gradeService = gradeService;
             _logger = logger;

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using DigitalCoolBook.App.Data;
 using DigitalCoolBook.App.Models;
 using DigitalCoolBook.App.Models.GradesViewModels;
 using DigitalCoolBook.App.Models.TeacherViewModels;
 using DigitalCoolBook.Models;
+using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
@@ -25,18 +27,27 @@ namespace DigitalCoolBook.App.Controllers
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
+        private readonly IGradeService _gradeService;
+        private readonly IMapper _mapper;
 
         public TeacherController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUserService userService,
+            IGradeService gradeService,
+            IMapper mapper)
         {
             _userManager = userManager;
             _context = context;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userService = userService;
+            _gradeService = gradeService;
+            _mapper = mapper;
             _logger = logger;
             _signInManager = signInManager;
         }
@@ -52,19 +63,12 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
-            var teacher = new Teacher();
-
             if (ModelState.IsValid)
             {
+                var teacher = _mapper.Map<TeacherRegisterModel, Teacher>(registerModel);
                 teacher.Id = Guid.NewGuid().ToString();
-                teacher.DateOfBirth = registerModel.DateOfBirth;
-                teacher.Email = registerModel.Email;
-                teacher.MobilePhone = registerModel.MobilePhone;
                 teacher.PasswordHash = registerModel.Password;
-                teacher.PlaceOfBirth = registerModel.PlaceOfBirth;
-                teacher.Sex = registerModel.Sex;
-                teacher.Name = registerModel.Name;
-                teacher.Telephone = registerModel.Telephone;
+
                 if (registerModel.Username == null)
                 {
                     teacher.UserName = registerModel.Email;
@@ -96,26 +100,26 @@ namespace DigitalCoolBook.App.Controllers
             return View();
         }
 
-        public IActionResult ChooseGrade(GradeViewModel model)
+        public IActionResult ChooseGrade()
         {
-            var grades = _context.Grades.Where(grade => grade.GradeParalelos.Count != 0).ToList();
-            var gradesForView = new List<GradeViewModel>();
+            var grades = _gradeService.GetGrades()
+                .Where(grade => grade.GradeParalelos.Count != 0)
+                .ToList();
+
+            var gradesToView = new List<GradeViewModel>();
 
             foreach (var grade in grades)
             {
-                var gradeForList = new GradeViewModel
-                {
-                    GradeId = grade.GradeId,
-                    Name = grade.Name
-                };
-                gradesForView.Add(gradeForList);
+                var gradeDto = _mapper.Map<GradeViewModel>(grade);
+                gradesToView.Add(gradeDto);
             }
-            return View(gradesForView);
+
+            return View(gradesToView);
         }
 
         public IActionResult GradeDetailsAsync(string id)
         {
-            var studentsInGrade = _context.Students
+            var studentsInGrade = _userService.GetStudents()
                 .Where(s => s.GradeId == id)
                 .Select(s => new
                 {

@@ -25,7 +25,7 @@ namespace DigitalCoolBook.Services
 
         public IEnumerable<Student> GetStudents()
         {
-            var students = _context.Students.ToList();
+            var students = _context.Students;
 
             return students;
         }

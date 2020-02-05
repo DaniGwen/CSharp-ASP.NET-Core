@@ -8,24 +8,19 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="font-weight-bold">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="btn btn-sm btn-secondary text-white">
-                   @Html.ActionLink("Детайли", "GradeDetails", new { id = item.GradeId })
+                    @Html.ActionLink("Детайли", "GradeDetails", new { id = item.GradeId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a class="btn btn-outline-info" href="/Home/Index">Назад</a>
