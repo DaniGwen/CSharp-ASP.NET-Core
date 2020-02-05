@@ -25,7 +25,6 @@ namespace DigitalCoolBook.App.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
@@ -35,7 +34,6 @@ namespace DigitalCoolBook.App.Controllers
         public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
             IUserService userService,
@@ -43,7 +41,6 @@ namespace DigitalCoolBook.App.Controllers
             IMapper mapper)
         {
             _userManager = userManager;
-            _context = context;
             _roleManager = roleManager;
             _configuration = configuration;
             _userService = userService;
@@ -206,9 +203,9 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                var user = await _context.Users.FindAsync(model.Id);
+                var user = await _userService.GetUserAsync(model.Id);
                 var result = await _userManager.RemovePasswordAsync(user);
-                _context.SaveChanges();
+                await _userService.SaveChangesAsync();
                 var addResult = await _userManager.AddPasswordAsync(user, model.Password);
 
                 if (addResult.Succeeded)
@@ -219,6 +216,7 @@ namespace DigitalCoolBook.App.Controllers
                 else
                 {
                     ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
+                    return View(model);
                 }
 
             }
@@ -231,8 +229,6 @@ namespace DigitalCoolBook.App.Controllers
                 };
                 return View("Error", error);
             }
-
-            return View(model);
         }
 
         [Authorize(Roles = "Student, Teacher")]
@@ -240,7 +236,7 @@ namespace DigitalCoolBook.App.Controllers
         public async Task<IActionResult> PanelAsync()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userDb = await _context.Users.FindAsync(userId.Value);
+            var userDb = await _userService.GetUserAsync(userId.Value);
             var model = new StudentChangePasswordViewModel
             {
                 Id = userDb.Id,
@@ -251,23 +247,9 @@ namespace DigitalCoolBook.App.Controllers
 
         public async Task<IActionResult> DetailsAsync(string id)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student = await _userService.GetStudentAsync(id);
 
-            var model = new StudentDetailsViewModel
-            {
-                Address = student.Address,
-                DateOfBirth = student.DateOfBirth,
-                Email = student.Email,
-                FatherMobileNumber = student.FatherMobileNumber,
-                FatherName = student.FatherName,
-                MobilePhone = student.MobilePhone,
-                MotherMobileNumber = student.MotherMobileNumber,
-                MotherName = student.MotherName,
-                Name = student.Name,
-                PlaceOfBirth = student.PlaceOfBirth,
-                Telephone = student.Telephone,
-                GradeId = student.GradeId
-            };
+            var model = _mapper.Map<StudentDetailsViewModel>(student);
 
             return View(model);
         }

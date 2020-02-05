@@ -12,6 +12,7 @@ namespace DigitalCoolBook.Services.Mapping
             CreateMap<Student, StudentEditViewModel>();
             CreateMap<StudentEditViewModel, Student>();
             CreateMap<StudentRegisterModel, Student>();
+            CreateMap<Student,StudentDetailsViewModel>();
             CreateMap<Grade, GradeViewModel>();
             CreateMap<Student, StudentChangePasswordViewModel>();
         }

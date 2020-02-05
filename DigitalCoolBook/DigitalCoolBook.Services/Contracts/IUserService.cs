@@ -1,4 +1,5 @@
 ﻿using DigitalCoolBook.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,5 +18,7 @@ namespace DigitalCoolBook.Services.Contracts
         Task RemoveStudentAsync(string id);
 
         Task SaveChangesAsync();
+
+        Task<IdentityUser> GetUserAsync(string id);
     }
 }

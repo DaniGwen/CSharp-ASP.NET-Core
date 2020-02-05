@@ -1,6 +1,7 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,6 +54,13 @@ namespace DigitalCoolBook.Services
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IdentityUser> GetUserAsync(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            return user;
         }
     }
 }
