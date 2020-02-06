@@ -6,7 +6,6 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Data;
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.App.Models.TeacherViewModels;
@@ -16,15 +15,12 @@
     using Microsoft.AspNetCore.Cryptography.KeyDerivation;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+
     public class TeacherController : Controller
     {
         private readonly ILogger<HomeController> logger;
         private readonly SignInManager<IdentityUser> signInManager;
-        private readonly ApplicationDbContext context;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IConfiguration configuration;
         private readonly IUserService userService;
         private readonly IGradeService gradeService;
         private readonly IMapper mapper;
@@ -33,17 +29,11 @@
         public TeacherController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager,
-            IConfiguration configuration,
             IUserService userService,
             IGradeService gradeService,
             IMapper mapper)
         {
             this.userManager = userManager;
-            this.context = context;
-            this.roleManager = roleManager;
-            this.configuration = configuration;
             this.userService = userService;
             this.gradeService = gradeService;
             this.mapper = mapper;
@@ -231,48 +221,51 @@
 
         [Authorize(Roles = "Admin,Teacher")]
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(TeacherChangePasswordViewModel model, string id)
+        public async Task<IActionResult> ChangePassword(TeacherChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var user = await context.Users.FindAsync(id);
-                var result = await userManager.RemovePasswordAsync(user);
-                context.SaveChanges();
-                var addPasswordResult = await userManager.AddPasswordAsync(user, model.Password);
+                var user = await this.userService.GetTeacherAsync(model.Id);
+                await this.userManager.RemovePasswordAsync(user);
+                await this.userService.SaveChangesAsync();
+                var addPasswordResult = await this.userManager.AddPasswordAsync(user, model.Password);
 
                 if (addPasswordResult.Succeeded)
                 {
-                    await signInManager.SignOutAsync();
-                    return Redirect("/Home/PasswordSaved");
+                    await this.signInManager.SignOutAsync();
+                    return this.Redirect("/Home/PasswordSaved");
                 }
                 else
                 {
-                    ModelState.AddModelError("", addPasswordResult.Errors.FirstOrDefault().ToString());
+                    this.ModelState.AddModelError(string.Empty, addPasswordResult.Errors
+                        .FirstOrDefault()
+                        .ToString());
                 }
-                return View(model);
+
+                return this.View(model);
             }
-            return View("Error");
+
+            return this.View("Error");
         }
 
         [Authorize(Roles = "Student, Teacher")]
         [ActionName("Panel")]
         public async Task<IActionResult> PanelAsync()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-            var user = await context.Users.FindAsync(userId.Value);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier);
+            var user = await this.userService.GetUserAsync(userId.Value);
             var model = new TeacherChangePasswordViewModel
             {
                 Id = user.Id,
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public string HashPassword(string password)
         {
-            //Add Salt to password
+            // Add Salt to password
             byte[] salt = new byte[128 / 8];
-
 
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password: password,

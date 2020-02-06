@@ -1,39 +1,36 @@
-﻿using DigitalCoolBook.App.Data;
-using DigitalCoolBook.App.Models;
-using DigitalCoolBook.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Mvc;
+
     public class SubjectsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ISubjectService subjectService;
+        private readonly IMapper mapper;
 
-        public SubjectsController(ApplicationDbContext context)
+        public SubjectsController(ISubjectService subjectService, IMapper mapper)
         {
-            _context = context;
+            this.subjectService = subjectService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult Subjects()
         {
-            var subjects = _context.Subjects.ToList();
-            var listOfSubjects = new List<SubjectViewModel>();
+            var subjects = this.subjectService.GetSubjects().ToList();
+            var subjectList = new List<SubjectViewModel>();
 
             foreach (var subject in subjects)
             {
-                var subjectModel = new SubjectViewModel
-                {
-                    SubjectId = subject.SubjectId,
-                    Name = subject.Name
-                };
-
-                listOfSubjects.Add(subjectModel);
+                var subjectModel = this.mapper.Map<SubjectViewModel>(subject);
+                subjectList.Add(subjectModel);
             }
 
-            return View(listOfSubjects);
+            return this.View(subjectList);
         }
     }
 }

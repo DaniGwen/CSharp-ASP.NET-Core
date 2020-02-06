@@ -1,12 +1,12 @@
-﻿using DigitalCoolBook.App.Data;
-using DigitalCoolBook.Models;
-using DigitalCoolBook.Services.Contracts;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DigitalCoolBook.Services
+﻿namespace DigitalCoolBook.Services
 {
+    using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Identity;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _context;
@@ -18,28 +18,22 @@ namespace DigitalCoolBook.Services
 
         public async Task<Student> GetStudentAsync(string id)
         {
-            var student = await _context.Students.FindAsync(id);
-            return student;
+           return await _context.Students.FindAsync(id);
         }
 
         public IQueryable<Student> GetStudents()
         {
-            var students = _context.Students;
-
-            return students;
+           return _context.Students;
         }
 
         public IQueryable<Teacher> GetTeachers()
         {
-            var teachers = _context.Teachers;
-
-            return teachers;
+            return _context.Teachers;
         }
 
         public async Task<Teacher> GetTeacherAsync(string id)
         {
-            var teacher = await _context.Teachers.FindAsync(id);
-            return teacher;
+            return await _context.Teachers.FindAsync(id);
         }
 
         public async Task RemoveStudentAsync(string id)
@@ -57,9 +51,7 @@ namespace DigitalCoolBook.Services
 
         public async Task<IdentityUser> GetUserAsync(string id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            return user;
+            return await _context.Users.FindAsync(id);
         }
 
         public async Task RemoveTeacherAsync(string id)

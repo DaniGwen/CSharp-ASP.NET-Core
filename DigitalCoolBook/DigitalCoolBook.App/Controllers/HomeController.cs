@@ -1,85 +1,90 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using DigitalCoolBook.App.Models;
-using Microsoft.AspNetCore.Identity;
-using DigitalCoolBook.App.Data;
-using System.Security.Claims;
-using DigitalCoolBook.Models;
-using System.Linq;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using DigitalCoolBook.App.Models;
+    using Microsoft.AspNetCore.Identity;
+    using System.Security.Claims;
+    using DigitalCoolBook.Models;
+    using System;
+    using System.Threading.Tasks;
+    using DigitalCoolBook.Services.Contracts;
+
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _context;
+        private readonly ILogger<HomeController> logger;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IUserService userService;
+        private UserManager<IdentityUser> userManager;
 
-        public HomeController(ILogger<HomeController> logger,
+        public HomeController(
+            ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            ApplicationDbContext context)
+            IUserService userService)
         {
-            _userManager = userManager;
-            _context = context;
-            _logger = logger;
-            _signInManager = signInManager;
+            this.userManager = userManager;
+            this.userService = userService;
+            this.logger = logger;
+            this.signInManager = signInManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)
+                    .Value;
+                var user = await this.userService.GetUserAsync(userId);
 
-                if (User.IsInRole("Teacher"))
+                if (this.User.IsInRole("Teacher"))
                 {
                     var teacher = (Teacher)user;
-                    ViewData["UserName"] = teacher.Name;
+                    this.ViewData["UserName"] = teacher.Name;
                 }
-                if (User.IsInRole("Student"))
+
+                if (this.User.IsInRole("Student"))
                 {
                     var student = (Student)user;
-                    ViewData["UserName"] = student.Name;
+                    this.ViewData["UserName"] = student.Name;
                 }
-                if (User.IsInRole("Admin"))
+
+                if (this.User.IsInRole("Admin"))
                 {
-                    ViewData["UserName"] = "Админ";
+                    this.ViewData["UserName"] = "Админ";
                 }
             }
-            return View();
+
+            return this.View();
         }
 
         public IActionResult Login()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginModel)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 try
                 {
-                    var user = await _userManager.FindByEmailAsync(loginModel.Email);
-                    var password = await _userManager.CheckPasswordAsync(user, loginModel.Password);
+                    var user = await this.userManager
+                        .FindByEmailAsync(loginModel.Email);
+                    var password = await this.userManager
+                        .CheckPasswordAsync(user, loginModel.Password);
 
                     if (password)
                     {
-                        var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
-                        _logger.LogInformation("User logged in.");
+                        var result = await this.signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
+                        this.logger.LogInformation("User logged in.");
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                        return View(loginModel);
+                        this.ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                        return this.View(loginModel);
                     }
                 }
                 catch (Exception exception)
@@ -87,46 +92,47 @@ namespace DigitalCoolBook.App.Controllers
                     var error = new ErrorViewModel
                     {
                         Message = exception.Message,
-                        RequestId = Request.HttpContext.TraceIdentifier
+                        RequestId = this.Request.HttpContext.TraceIdentifier,
                     };
 
-                    ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
-                    return View("Error", error);
+                    this.ModelState.AddModelError(string.Empty, "Грешен имейл или парола.");
+                    return this.View("Error", error);
                 }
             }
-            return Redirect("/Home/Index");
+
+            return this.Redirect("/Home/Index");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel
+            { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
 
         [HttpGet]
         public IActionResult SuccessfulySaved()
         {
-            Response.Headers.Add("REFRESH", "3;URL=/Admin/AdminPanel");
-            return View();
+            this.Response.Headers.Add("REFRESH", "3;URL=/Admin/AdminPanel");
+            return this.View();
         }
 
         public IActionResult PasswordSaved()
         {
-            Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
-            return View();
+            this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
+            return this.View();
         }
 
         [HttpGet]
         public IActionResult RemoveSuccess()
         {
             this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
-
-            return View();
+            return this.View();
         }
     }
 }

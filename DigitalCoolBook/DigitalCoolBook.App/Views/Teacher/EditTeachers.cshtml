@@ -45,7 +45,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TeacherId)
+                    @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -69,9 +69,9 @@
                     @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
-                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.TeacherId">Изтрий</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.TeacherId">Редактирай</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.TeacherId">Смяна на парола</a>
+                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.Id">Изтрий</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Редактирай</a>
+                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
                 </td>
             </tr>
         }
