@@ -190,7 +190,8 @@ C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBo
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.pdb
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\stylecop.json
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache

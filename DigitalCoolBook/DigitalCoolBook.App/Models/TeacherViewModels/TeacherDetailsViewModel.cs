@@ -1,10 +1,10 @@
-﻿using System;
-
-namespace DigitalCoolBook.App.Models.TeacherViewModels
+﻿namespace DigitalCoolBook.App.Models.TeacherViewModels
 {
+    using System;
+
     public class TeacherDetailsViewModel
     {
-        public string TeacherId { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 

@@ -38,6 +38,7 @@
           "Microsoft.Extensions.Logging.Debug": "3.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
           "SendGrid": "9.12.6",
+          "StyleCop.Analyzers": "1.1.118",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1352,6 +1353,7 @@
           "lib/netstandard2.0/SendGrid.dll": {}
         }
       },
+      "StyleCop.Analyzers/1.1.118": {},
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -4513,6 +4515,13 @@
       "sha512": "sha512-fWg/1HbkiC2OgleRLDWhoNEpasbMsZRFo++Zw+ZzX6yRsJI0dpjQbUp5G1er9+PCNrPkg5AOUBBibrP04cwynQ==",
       "path": "sendgrid/9.12.6",
       "hashPath": "sendgrid.9.12.6.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.1.118": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw==",
+      "path": "stylecop.analyzers/1.1.118",
+      "hashPath": "stylecop.analyzers.1.1.118.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

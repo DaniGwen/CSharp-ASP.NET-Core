@@ -1,35 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
-using DigitalCoolBook.App.Data;
-using DigitalCoolBook.App.Models;
-using DigitalCoolBook.App.Models.GradesViewModels;
-using DigitalCoolBook.App.Models.TeacherViewModels;
-using DigitalCoolBook.Models;
-using DigitalCoolBook.Services.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.Models.GradesViewModels;
+    using DigitalCoolBook.App.Models.TeacherViewModels;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
     public class TeacherController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
-        private readonly IUserService _userService;
-        private readonly IGradeService _gradeService;
-        private readonly IMapper _mapper;
+        private readonly ILogger<HomeController> logger;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly ApplicationDbContext context;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration configuration;
+        private readonly IUserService userService;
+        private readonly IGradeService gradeService;
+        private readonly IMapper mapper;
+        private UserManager<IdentityUser> userManager;
 
         public TeacherController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
@@ -41,31 +40,31 @@ namespace DigitalCoolBook.App.Controllers
             IGradeService gradeService,
             IMapper mapper)
         {
-            _userManager = userManager;
-            _context = context;
-            _roleManager = roleManager;
-            _configuration = configuration;
-            _userService = userService;
-            _gradeService = gradeService;
-            _mapper = mapper;
-            _logger = logger;
-            _signInManager = signInManager;
+            this.userManager = userManager;
+            this.context = context;
+            this.roleManager = roleManager;
+            this.configuration = configuration;
+            this.userService = userService;
+            this.gradeService = gradeService;
+            this.mapper = mapper;
+            this.logger = logger;
+            this.signInManager = signInManager;
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult RegisterTeacher()
         {
-            return View();
+            return this.View();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var teacher = _mapper.Map<TeacherRegisterModel, Teacher>(registerModel);
+                var teacher = this.mapper.Map<TeacherRegisterModel, Teacher>(registerModel);
                 teacher.Id = Guid.NewGuid().ToString();
                 teacher.PasswordHash = registerModel.Password;
 
@@ -78,31 +77,32 @@ namespace DigitalCoolBook.App.Controllers
                     teacher.UserName = registerModel.Username;
                 }
 
-                var result = await _userManager.CreateAsync(teacher, registerModel.Password);
+                var result = await this.userManager.CreateAsync(teacher, registerModel.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(teacher, "Teacher");
+                    await this.userManager.AddToRoleAsync(teacher, "Teacher");
 
-                    _logger.LogInformation("User created a new account with password.");
+                    this.logger.LogInformation("User created a new account with password.");
 
-                    return Redirect("/Home/SuccessfulySaved");
+                    return this.Redirect("/Home/SuccessfulySaved");
                 }
                 else
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("", error.Description);
-                        return View(registerModel);
+                        this.ModelState.AddModelError(string.Empty, error.Description);
+                        return this.View(registerModel);
                     }
                 }
             }
-            return View();
+
+            return this.View();
         }
 
         public IActionResult ChooseGrade()
         {
-            var grades = _gradeService.GetGrades()
+            var grades = this.gradeService.GetGrades()
                 .Where(grade => grade.GradeParalelos.Count != 0)
                 .ToList();
 
@@ -110,23 +110,23 @@ namespace DigitalCoolBook.App.Controllers
 
             foreach (var grade in grades)
             {
-                var gradeDto = _mapper.Map<GradeViewModel>(grade);
+                var gradeDto = this.mapper.Map<GradeViewModel>(grade);
                 gradesToView.Add(gradeDto);
             }
 
-            return View(gradesToView);
+            return this.View(gradesToView);
         }
 
-        public IActionResult GradeDetailsAsync(string id)
+        public async Task<IActionResult> GradeDetailsAsync(string id)
         {
-            var studentsInGrade = _userService.GetStudents()
+            var studentsInGrade = this.userService.GetStudents()
                 .Where(s => s.GradeId == id)
                 .Select(s => new
                 {
                     s.Id,
                     s.Name,
                     s.ScoreRecords,
-                    s.Attendances
+                    s.Attendances,
                 })
                 .ToList();
 
@@ -139,131 +139,94 @@ namespace DigitalCoolBook.App.Controllers
                     Id = student.Id,
                     Attendances = student.Attendances,
                     ScoreRecords = student.ScoreRecords,
-                    Name = student.Name
+                    Name = student.Name,
                 };
 
                 studentsForView.Add(model);
             }
 
-            this.ViewData["paraleloName"] = _context.Grades.Find(id).Name;
+            var grade = await this.gradeService.GetGradeAsync(id);
+            this.ViewData["paraleloName"] = grade.Name;
 
-            return View(studentsForView);
+            return this.View(studentsForView);
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
             try
             {
-                var teacher = await _context.Teachers.FindAsync(id);
-                _context.Teachers.Remove(teacher);
-                _context.SaveChanges();
+                await this.userService.RemoveTeacherAsync(id);
+                await this.userService.SaveChangesAsync();
             }
             catch (Exception exception)
             {
                 var errorModel = new ErrorViewModel
                 {
-                    Message = exception.Message
+                    Message = exception.Message,
                 };
 
-                return View("Error", errorModel);
+                return this.View("Error", errorModel);
             }
 
-            //Redirect to /Admin/AdminPanel after 4 seconds
-            //Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
-
-            return Redirect("/Admin/AdminPanel");
+            return this.Redirect("/Admin/AdminPanel");
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditTeacher(string id)
         {
-            var teacher = await _context.Teachers.FindAsync(id);
+            var teacher = await this.userService.GetTeacherAsync(id);
 
-            TeacherDetailsViewModel model = new TeacherDetailsViewModel
-            {
-                TeacherId = teacher.Id,
-                DateOfBirth = teacher.DateOfBirth,
-                Email = teacher.Email,
-                MobilePhone = teacher.MobilePhone,
-                Name = teacher.Name,
-                PlaceOfBirth = teacher.PlaceOfBirth,
-                Sex = teacher.Sex,
-                Telephone = teacher.Telephone,
-                Username = teacher.UserName
-            };
+            TeacherDetailsViewModel model = this.mapper.Map<TeacherDetailsViewModel>(teacher);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> EditTeacher(TeacherDetailsViewModel model, string id)
+        public async Task<IActionResult> EditTeacher(TeacherDetailsViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var teacher = await _context.Teachers.FindAsync(id);
+                var teacher = await this.userService.GetTeacherAsync(model.Id);
+                this.mapper.Map(model, teacher, typeof(TeacherDetailsViewModel), typeof(Teacher));
 
-                teacher.Name = model.Name;
-                teacher.MobilePhone = model.MobilePhone;
-                teacher.PlaceOfBirth = model.PlaceOfBirth;
-                teacher.Sex = model.Sex;
-                teacher.Telephone = model.Telephone;
-                teacher.UserName = model.Email;
-                teacher.Email = model.Email;
+                await this.userService.SaveChangesAsync();
 
-                await _context.SaveChangesAsync();
-
-                return Redirect("/Home/SuccessfulySaved");
+                return this.Redirect("/Home/SuccessfulySaved");
             }
 
-            return View();
+            return this.View();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditTeachers()
         {
-            var teachers = _context.Teachers.ToList();
-            List<TeacherEditViewModel> teachersForView = new List<TeacherEditViewModel>();
+            var teachers = this.userService.GetTeachers().ToList();
+            var teacherList = new List<TeacherEditViewModel>();
 
             foreach (var teacher in teachers)
             {
-                var teacherForView = new TeacherEditViewModel()
-                {
-                    TeacherId = teacher.Id,
-                    DateOfBirth = teacher.DateOfBirth,
-                    Email = teacher.Email,
-                    MobilePhone = teacher.MobilePhone,
-                    Name = teacher.Name,
-                    PlaceOfBirth = teacher.PlaceOfBirth,
-                    Sex = teacher.Sex,
-                    Telephone = teacher.Telephone,
-                    Username = teacher.UserName
-                };
+                var teacherDto = this.mapper.Map<TeacherEditViewModel>(teacher);
 
-                teachersForView.Add(teacherForView);
+                teacherList.Add(teacherDto);
             }
 
-            return View(teachersForView);
+            return this.View(teacherList);
         }
 
         [Authorize(Roles = "Admin,Teacher")]
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
-            var teacher = await _context.Teachers.FindAsync(id);
+            var teacher = await this.userService.GetTeacherAsync(id);
 
-            var model = new TeacherChangePasswordViewModel()
-            {
-                Id = id,
-                Email = teacher.Email,
-                Name = teacher.Name,
-            };
+            var model = this.mapper.Map<TeacherChangePasswordViewModel>(teacher);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin,Teacher")]
@@ -272,14 +235,14 @@ namespace DigitalCoolBook.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _context.Users.FindAsync(id);
-                var result = await _userManager.RemovePasswordAsync(user);
-                _context.SaveChanges();
-                var addPasswordResult = await _userManager.AddPasswordAsync(user, model.Password);
+                var user = await context.Users.FindAsync(id);
+                var result = await userManager.RemovePasswordAsync(user);
+                context.SaveChanges();
+                var addPasswordResult = await userManager.AddPasswordAsync(user, model.Password);
 
                 if (addPasswordResult.Succeeded)
                 {
-                    await _signInManager.SignOutAsync();
+                    await signInManager.SignOutAsync();
                     return Redirect("/Home/PasswordSaved");
                 }
                 else
@@ -296,7 +259,7 @@ namespace DigitalCoolBook.App.Controllers
         public async Task<IActionResult> PanelAsync()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-            var user = await _context.Users.FindAsync(userId.Value);
+            var user = await context.Users.FindAsync(userId.Value);
             var model = new TeacherChangePasswordViewModel
             {
                 Id = user.Id,

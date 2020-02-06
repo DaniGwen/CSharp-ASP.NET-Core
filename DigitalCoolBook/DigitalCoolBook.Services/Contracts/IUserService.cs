@@ -1,21 +1,24 @@
 ﻿using DigitalCoolBook.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services.Contracts
 {
     public interface IUserService
     {
-        IEnumerable<Student> GetStudents();
+
+        IQueryable<Student> GetStudents();
 
         Task<Student> GetStudentAsync(string id);
 
-        IEnumerable<Teacher> GetTeachers();
+        IQueryable<Teacher> GetTeachers();
 
-        Task<Teacher> GetTeacher(string id);
+        Task<Teacher> GetTeacherAsync(string id);
 
         Task RemoveStudentAsync(string id);
+
+        Task RemoveTeacherAsync(string id);
 
         Task SaveChangesAsync();
 

@@ -2,7 +2,6 @@
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,21 +22,21 @@ namespace DigitalCoolBook.Services
             return student;
         }
 
-        public IEnumerable<Student> GetStudents()
+        public IQueryable<Student> GetStudents()
         {
             var students = _context.Students;
 
             return students;
         }
 
-        public IEnumerable<Teacher> GetTeachers()
+        public IQueryable<Teacher> GetTeachers()
         {
-            var teachers = _context.Teachers.ToList();
+            var teachers = _context.Teachers;
 
             return teachers;
         }
 
-        public async Task<Teacher> GetTeacher(string id)
+        public async Task<Teacher> GetTeacherAsync(string id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
             return teacher;
@@ -61,6 +60,13 @@ namespace DigitalCoolBook.Services
             var user = await _context.Users.FindAsync(id);
 
             return user;
+        }
+
+        public async Task RemoveTeacherAsync(string id)
+        {
+            var teacher = await this.GetTeacherAsync(id);
+            _context.Remove(teacher);
+            await this.SaveChangesAsync();
         }
     }
 }

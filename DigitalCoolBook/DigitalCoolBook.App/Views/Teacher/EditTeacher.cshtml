@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Details";
-    ViewData["TeacherId"] = Model.TeacherId;
 }
 
 <h1>Редактиране на профил</h1>
@@ -10,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditTeacher" asp-route-id="@Model.TeacherId">
+        <form asp-action="EditTeacher" asp-route-id="@Model.Id">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Име</label>
@@ -39,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MobilePhone" class="control-label">Мобилен телефон</label>
-                <input asp-for="MobilePhone" class="form-control" type="tel"/>
+                <input asp-for="MobilePhone" class="form-control" type="tel" />
                 <span asp-validation-for="MobilePhone" class="text-danger"></span>
             </div>
             <div class="form-group">
