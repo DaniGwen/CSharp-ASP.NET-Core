@@ -1,90 +1,103 @@
-﻿using DigitalCoolBook.App.Data;
-using DigitalCoolBook.App.Models;
-using DigitalCoolBook.App.Models.GradeParaleloViewModels;
-using DigitalCoolBook.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.Models.GradeParaleloViewModels;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+
     [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<AdminController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<AdminController> logger;
+        private readonly IGradeService gradeService;
+        private readonly IUserService userService;
+        private readonly IMapper mapper;
+        private readonly SignInManager<IdentityUser> signInManager;
 
-        public AdminController(ApplicationDbContext context, SignInManager<IdentityUser> signInManager,
-            ILogger<AdminController> logger)
+        public AdminController(
+            ApplicationDbContext context,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<AdminController> logger,
+            IGradeService gradeService,
+            IUserService userService,
+            IMapper mapper)
         {
-            _signInManager = signInManager;
+            this.signInManager = signInManager;
             _context = context;
-            _logger = logger;
+            this.logger = logger;
+            this.gradeService = gradeService;
+            this.userService = userService;
+            this.mapper = mapper;
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult AdminPanel()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult LoginAdmin()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> LoginAdminAsync(LoginAdminViewModel inputModel, string returnUrl)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(inputModel.Username, inputModel.Password, inputModel.RememberMe, lockoutOnFailure: false);
+                var result = await this.signInManager.PasswordSignInAsync(inputModel.Username, inputModel.Password, inputModel.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    this.logger.LogInformation("User logged in.");
+                    return this.LocalRedirect(returnUrl);
                 }
 
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    this.logger.LogWarning("User account locked out.");
+                    return this.RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View();
+                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return this.View(inputModel);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View();
+            return this.View();
 
         }
 
         public IActionResult AdminContact()
         {
-            return View();
+            return this.View();
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult EditParalelos()
         {
-            var paralelos = _context.GradeParalelos.ToList();
+            var paralelos = this.gradeService.GetGradeParalelos().ToList();
             var models = new List<ParaleloViewModel>();
 
             foreach (var paralelo in paralelos)
             {
-                var grades = _context.Grades
+                var grades = this.gradeService
+                    .GetGrades()
                     .ToList();
 
                 var model = new ParaleloViewModel
@@ -93,44 +106,50 @@ namespace DigitalCoolBook.App.Controllers
 
                     GradeId = paralelo.IdGrade,
 
-                    GradeName = _context.Grades
+                    TeacherId = paralelo.IdTeacher,
+
+                    GradeName = this.gradeService
+                    .GetGrades()
                     .FirstOrDefault(g => g.GradeId == paralelo.IdGrade)
                     .Name,
 
-                    TeacherName = _context.Teachers
+                    TeacherName = this.userService
+                    .GetTeachers()
                     .FirstOrDefault(t => t.Id == paralelo.IdTeacher)
                     .Name,
 
-                    TeacherId = paralelo.IdTeacher,
-
-                    Students = _context.Students
+                    Students = this.userService
+                    .GetStudents()
                     .Where(s => s.GradeId == paralelo.Grade.GradeId)
-                    .ToList()
+                    .ToList(),
                 };
+
                 models.Add(model);
             }
 
-            return View(models);
+            return this.View(models);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateParalelo()
         {
-            var teachers = _context.Teachers
+            var teachers = this.userService
+                .GetTeachers()
                 .ToList();
 
-            var grades = _context.Grades
+            var grades = this.gradeService
+                .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList();
 
             var model = new ParaleloCreateViewModel()
             {
                 Grades = grades,
-                Teachers = teachers
+                Teachers = teachers,
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -139,51 +158,48 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                var gradeParalelo = new GradeParalelo()
-                {
-                    GradeParaleloId = Guid.NewGuid().ToString(),
-                    IdGrade = model.GradeId,
-                    IdTeacher = model.TeacherId
-                };
+                var gradeParalelo = this.mapper.Map<GradeParalelo>(model);
 
-                await _context.GradeParalelos.AddAsync(gradeParalelo);
-                await _context.SaveChangesAsync();
+                gradeParalelo.GradeParaleloId = Guid.NewGuid().ToString();
+
+                await this.gradeService.AddGradeParaleloAsync(gradeParalelo);
+                await this.gradeService.SaveChangesAsync();
             }
             catch (Exception exception)
             {
                 var error = new ErrorViewModel
                 {
-                    Message = exception.Message
+                    Message = exception.Message,
                 };
-                return View("Error", error);
+                return this.View("Error", error);
             }
 
-            return Redirect("/Home/SuccessfulySaved");
+            return this.Redirect("/Home/SuccessfulySaved");
         }
 
-        [Authorize(Roles = ("Admin"))]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult EditParalelo(string id)
+        public async Task<IActionResult> EditParaleloAsync(string id)
         {
-            var paralelo = _context.GradeParalelos.Find(id);
-            var grades = _context.Grades
+            var paralelo = await this.gradeService.GetGradeParaleloAsync(id);
+
+            var grades = this.gradeService
+                .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList();
 
-            var teachers = _context.Teachers
+            var teachers = this.userService
+                .GetTeachers()
                 .ToList();
 
-            var model = new ParaleloCreateViewModel
-            {
-                Id = paralelo.GradeParaleloId,
-                GradeId = paralelo.IdGrade,
-                GradeName = _context.Grades.Find(paralelo.IdGrade).Name,
-                TeacherId = paralelo.IdTeacher,
-                TeacherName = _context.Teachers.Find(paralelo.IdTeacher).Name,
-                Teachers = teachers,
-                Grades = grades
-            };
-            return View(model);
+            var model = this.mapper.Map<ParaleloCreateViewModel>(paralelo);
+
+            model.GradeName = await this.gradeService.GetGradeAsync(paralelo.IdGrade).Name;
+            model.TeacherName = this.userService.GetTeacherAsync(paralelo.IdTeacher).Name;
+            model.Teachers = teachers;
+            model.Grades = grades;
+
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]

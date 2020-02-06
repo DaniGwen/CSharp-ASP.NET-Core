@@ -10,27 +10,43 @@ namespace DigitalCoolBook.Services
 {
     public class GradeService : IGradeService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public GradeService(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
+        }
+
+        public async Task AddGradeParaleloAsync(GradeParalelo gradeParalelo)
+        {
+            await this.context.GradeParalelos.AddAsync(gradeParalelo);
         }
 
         public async Task<Grade> GetGradeAsync(string id)
         {
-            var grade = await _context.Grades.FindAsync(id);
-
-            return grade;
+            return await this.context.Grades.FindAsync(id);
         }
 
-        public IEnumerable<Grade> GetGrades()
+        public async Task<GradeParalelo> GetGradeParaleloAsync(string id)
         {
-            var grades = _context.Grades
+            return await this.context.GradeParalelos.FindAsync(id);
+        }
+
+        public IQueryable<GradeParalelo> GetGradeParalelos()
+        {
+            return this.context.GradeParalelos;
+        }
+
+        public IQueryable<Grade> GetGrades()
+        {
+           return this.context.Grades
                 .Include(g => g.GradeParalelos)
                 .OrderBy(g => g.Name);
+        }
 
-            return grades;
+        public async Task SaveChangesAsync()
+        {
+            await this.context.SaveChangesAsync();
         }
     }
 }

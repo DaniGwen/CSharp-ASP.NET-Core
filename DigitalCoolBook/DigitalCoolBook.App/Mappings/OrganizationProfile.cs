@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.Models.GradeParaleloViewModels;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.App.Models.StudentViewModels;
     using DigitalCoolBook.App.Models.TeacherViewModels;
@@ -20,6 +21,8 @@
 
             // Grade mappings
             this.CreateMap<Grade, GradeViewModel>();
+            this.CreateMap<ParaleloCreateViewModel, GradeParalelo>();
+            this.CreateMap<GradeParalelo, ParaleloCreateViewModel>();
 
             // Teacher mappings
             this.CreateMap<TeacherRegisterModel, Teacher>();

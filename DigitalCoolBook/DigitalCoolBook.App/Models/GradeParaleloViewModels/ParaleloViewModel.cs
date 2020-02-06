@@ -1,8 +1,8 @@
-﻿using DigitalCoolBook.Models;
-using System.Collections.Generic;
-
-namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
+﻿namespace DigitalCoolBook.App.Models.GradeParaleloViewModels
 {
+    using System.Collections.Generic;
+    using DigitalCoolBook.Models;
+
     public class ParaleloViewModel
     {
         public string Id { get; set; }
