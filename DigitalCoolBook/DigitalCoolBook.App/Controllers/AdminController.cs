@@ -18,7 +18,6 @@
     [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly ILogger<AdminController> logger;
         private readonly IGradeService gradeService;
         private readonly IUserService userService;
@@ -26,7 +25,6 @@
         private readonly SignInManager<IdentityUser> signInManager;
 
         public AdminController(
-            ApplicationDbContext context,
             SignInManager<IdentityUser> signInManager,
             ILogger<AdminController> logger,
             IGradeService gradeService,
@@ -34,7 +32,6 @@
             IMapper mapper)
         {
             this.signInManager = signInManager;
-            _context = context;
             this.logger = logger;
             this.gradeService = gradeService;
             this.userService = userService;

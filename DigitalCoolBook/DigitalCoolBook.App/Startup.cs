@@ -1,31 +1,31 @@
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using DigitalCoolBook.Models;
-using System.Threading.Tasks;
-using System;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Linq;
-using DigitalCoolBook.App.Services;
-using DigitalCoolBook.App.Data;
-using AutoMapper;
-using DigitalCoolBook.Services.Contracts;
-using DigitalCoolBook.Services;
-using DigitalCoolBook.Services.Mapping;
-
 namespace DigitalCoolBook.App
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.App.Services;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services;
+    using DigitalCoolBook.Services.Contracts;
+    using DigitalCoolBook.Services.Mapping;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,14 +35,16 @@ namespace DigitalCoolBook.App
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    this.Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();
+            services.AddTransient<ISubjectService, SubjectService>();
 
             var config = new MapperConfiguration(cfg =>
             {

@@ -2,6 +2,7 @@
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services
 {
@@ -12,6 +13,11 @@ namespace DigitalCoolBook.Services
         public SubjectService(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        public async Task<Subject> GetSubjectAsync(string id)
+        {
+            return await context.Subjects.FindAsync(id);
         }
 
         public IQueryable<Subject> GetSubjects()

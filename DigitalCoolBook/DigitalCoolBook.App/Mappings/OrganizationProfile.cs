@@ -1,10 +1,10 @@
 ﻿namespace DigitalCoolBook.Services.Mapping
 {
     using AutoMapper;
-    using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.App.Models.StudentViewModels;
+    using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.App.Models.TeacherViewModels;
     using DigitalCoolBook.Models;
 
