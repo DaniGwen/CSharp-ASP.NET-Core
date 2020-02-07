@@ -14,6 +14,8 @@ namespace DigitalCoolBook.Models
 
         public string Abbreviation { get; set; }
 
+        public List<Cathegory> Cathegories { get; set; }
+
         public List<ScoreRecord> ScoreRecords { get; set; }
 
         public List<SubjectGrade> SubjectGrades { get; set; }

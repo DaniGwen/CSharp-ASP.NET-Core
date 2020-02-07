@@ -70,20 +70,20 @@ namespace DigitalCoolBook.App
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-
                 using (var serviceScope = app.ApplicationServices.CreateScope())
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
                         context.Database.EnsureCreated();
+                        this.CreateRoles(serviceProvider).Wait();
                         this.SeedDbAsync(context, serviceProvider).Wait();
                     }
                 }
-                this.CreateRoles(serviceProvider).Wait();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             };
@@ -145,8 +145,132 @@ namespace DigitalCoolBook.App
                     var result = await userManager.CreateAsync(student, student.PasswordHash);
                     await userManager.AddToRoleAsync(student, "Student");
                 }
+
                 await context.SaveChangesAsync();
             }
+
+            if (!context.Cathegories.Any())
+            {
+                List<Cathegory> cathegories = this.AddCathegories();
+                await context.Cathegories.AddRangeAsync(cathegories);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private List<Cathegory> AddCathegories()
+        {
+            var cathegories = new List<Cathegory>
+           {
+               new Cathegory()
+               {
+                   Id = 1.ToString(),
+                   Title = "Живот и творчество",
+                   Lessons = new List<Lesson>(this.AddLessons("1")),
+               },
+               new Cathegory()
+               {
+                   Id = 2.ToString(),
+                   Title = "Творци на модерното изкуство",
+                   Lessons = new List<Lesson>(this.AddLessons("2")),
+               },
+               new Cathegory()
+               {
+                   Id = 3.ToString(),
+                   Title = "Световни музей и галерии",
+                   Lessons = new List<Lesson>(this.AddLessons("3")),
+               },
+               new Cathegory()
+               {
+                   Id = 4.ToString(),
+                   Title = "Протестно Изкуство",
+                   Lessons = new List<Lesson>(this.AddLessons("4")),
+               },
+           };
+
+            return cathegories;
+        }
+
+        private IEnumerable<Lesson> AddLessons(string id)
+        {
+            var lessons = new List<Lesson>();
+
+            switch (id)
+            {
+                case "1":
+                    lessons = new List<Lesson>()
+                {
+                    new Lesson
+                    {
+                        Id = 10.ToString(),
+                        Title = "Живот и творчество на художника",
+                        Contend = "„Днес може би малцина си дават точна сметка за онова, което изгубваме. Може би мнозина не знаят името на тоя извънредно даровит млад човек, отгледан в оскъдица от баща овчар. Но ще минат години и всички ще почувстваме цената на златото, което той носеше в душата си. И с щедростта на приказен цар разсипваше в своите декоративни видения” " +
+                          "Сирак Скитник, в. „Слово”, 1927 г., бр. 1388",
+                    },
+                    new Lesson
+                    {
+                        Id = 20.ToString(),
+                        Title = "Творчески процес",
+                        Contend = "Творчество e умствен и обществен процес на човешката дейност, при който се създават качествено нови материални и духовни ценности. Свързан е с генерирането на нови идеи и понятия, или пък нови връзки между вече съществуващи такива. Съществената разлика с производството е оригиналността на новия продукт. Творчеството е също така неразривно свързано със свободата.",
+                    },
+                };
+                    break;
+                case "2":
+                    lessons = new List<Lesson>()
+                {
+                    new Lesson
+                    {
+                        Id = 30.ToString(),
+                        Title = "Творци на модерното изкуство",
+                        Contend = "Първите крачки в модерното изкуство са направени от импресионистите и под влиянието на Едуард Мане през 1880-те години. Освен че отричат нормите на френската академия на изкуствата – нещо което преди тях са сторили и художниците на реализма – те добавят и съвсем нови елементи в рисуването. Примери за това са използването на чисти бои и рисуването чрез нанасяне на щрихи. Това отричане на класическото изкуство отваря пътя на художници като Сезан, Гоген и Ван Гог и към стилове като кубизма.",
+                    },
+                    new Lesson
+                    {
+                        Id = 40.ToString(),
+                        Title = "Творци на съвременното изкуство",
+                        Contend = "Съвременното изкуство е съвременна живопис създадена в края на 20 век или в 21 век. Творчеството на съвременните живописци е повлияно от средата на глобален, културно разнообразен и технологично развиващ се свят. Съвременната живопис е динамична комбинация от материали, методи, идеи и субекти, които излизат изъвн традиционните граници на мисълта и излизат извън границите на човешкото въображение. Тази живопис е разнообразна и дигитална като цяло се отличава със самата липса на единен, организиращ принцип, идеология или „идеологизъм“. Съвременното изкуство е част от културен диалог, който засяга по-големи общностни рамки като лична и културна идентичност, семейство, общност и националност в света на чо",
+                    },
+                };
+                    break;
+                case "3":
+                    lessons = new List<Lesson>()
+                {
+                    new Lesson
+                    {
+                        Id = 50.ToString(),
+                        Title = "Световни Музей",
+                        Contend = "1. Националния дворец музей, Тайпе, Тайван " +
+                        "Този величествен музей се намира в Тайпе, Тайван, Китай. Tук ще намерите изложени над 693 507 експоната, изобразяващи древната история на Китай за последните 8000 години. На това място може да получите пълна представа за историята и културата на Китай." +
+                        "2. Музея Прадо, Мадрид, Испания" +
+                        "Ако се интересувате от историята и културата на Испания, трябва непременно да посетите музея Прадо. Тук ще имате възможността да разгледате много богата колекция от различни експонати от цяла Европа. Музеят разполага с около 950 склуптори, 64000 рисунки, 2400 щампи, 800 декоратишни изкуства, 900 монети и 800 медала...",
+                    },
+                    new Lesson
+                    {
+                        Id = 60.ToString(),
+                        Title = "Галерии",
+                        Contend = "От 1998 г. Берлинската картинна галерия се помества в специално построена за нея сграда в Културфорума. В проекта на новата музейна сграда, изпълнена от архитектите Хайнц Хилмер, Христоф Затлер и Томас Албрехт, е включена вилата на издателя Паул Парей. Северната фасада на правоъгълното здание е леко изтеглено напред. Цокълът на фасадата навява на италианския Ренесанс и пруския класицизъм.",
+                    },
+                };
+                    break;
+                case "4":
+                    lessons = new List<Lesson>()
+                {
+                    new Lesson
+                    {
+                        Id = 70.ToString(),
+                        Title = "Художествени форми на протест",
+                        Contend = "Още преди две години обществените места в Истанбул бяха предвидени за творческите изяви на общо 88 творци от различни държави. Художествените инсталации и творби трябваше да се разположат из парка Гези, на площад Таксим, из застрашения от разрушаване квартал - т.е. все на места, за които дискутира цяла Турция. Истанбулската градска управа обаче не даде разрешение за ползването на обществените места като изложбени зали",
+                    },
+                    new Lesson
+                    {
+                        Id = 80.ToString(),
+                        Title = "Форми на протестното изкуство",
+                        Contend = "Всяко разминаване с комунистическата идеология, включително в областта на изкуството, се преследва, отстранява, а в част от случаите се унищожава физически. Модерното изкуство се заклеймява като вражеско и човеконенавистно, и се обявява за продукт на психично болни и психопати. Забранено е внасянето на книги, албуми и каталози, както и организиране на изложби с потенциално модерен характер.",
+                    },
+                };
+                    break;
+            }
+
+            return lessons;
         }
 
         private GradeParalelo[] AddGradeParalelo()
@@ -258,13 +382,13 @@ namespace DigitalCoolBook.App
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Female",
                     Telephone = 3344,
-                    UserName = "tot@tot.com"
+                    UserName = "tot@tot.com",
                 },
 
                 new Teacher
                 {
                     Id = Guid.NewGuid().ToString(),
-                     DateOfBirth = DateTime.Parse("05/2/1987"),
+                    DateOfBirth = DateTime.Parse("05/2/1987"),
                     Email = "stam@stam.com",
                     MobilePhone = 099456373,
                     Name = "Stamat Ionchev",
@@ -272,12 +396,13 @@ namespace DigitalCoolBook.App
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Male",
                     Telephone = 3264,
-                    UserName = "stam@stam.com"
+                    UserName = "stam@stam.com",
                 },
+
                 new Teacher
                 {
                     Id = Guid.NewGuid().ToString(),
-                     DateOfBirth = DateTime.Parse("05/2/1980"),
+                    DateOfBirth = DateTime.Parse("05/2/1980"),
                     Email = "pesh@pesh.com",
                     MobilePhone = 0997655442,
                     Name = "Pesho Geshev",
@@ -285,7 +410,7 @@ namespace DigitalCoolBook.App
                     PlaceOfBirth = "Sofia",
                     Sex = "Male",
                     Telephone = 3346,
-                    UserName = "pesh@pesh.com"
+                    UserName = "pesh@pesh.com",
                 }
             };
             return teachers;

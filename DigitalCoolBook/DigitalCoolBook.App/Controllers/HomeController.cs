@@ -37,6 +37,10 @@
                 var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)
                     .Value;
                 var user = await this.userService.GetUserAsync(userId);
+                if (user == null)
+                {
+                    return this.View();
+                }
 
                 if (this.User.IsInRole("Teacher"))
                 {

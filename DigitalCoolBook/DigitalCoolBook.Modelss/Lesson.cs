@@ -1,6 +1,11 @@
 ﻿namespace DigitalCoolBook.Models
 {
-    internal class Lesson
+    public class Lesson
     {
+        public string Id { get; set; }
+
+        public string Title { get; set; }
+
+        public string Contend { get; set; }
     }
 }

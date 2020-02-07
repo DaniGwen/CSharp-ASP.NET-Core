@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DigitalCoolBook.App.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser,IdentityRole,string>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Attendance> Attendances { get; set; }
 
@@ -22,6 +22,10 @@ namespace DigitalCoolBook.App.Data
         public DbSet<SubjectGrade> SubjectGrades { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Cathegory> Cathegories { get; set; }
+
+        public DbSet<Lesson> Lessons { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
