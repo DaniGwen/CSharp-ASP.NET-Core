@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
@@ -36,8 +37,8 @@
         }
 
         [HttpGet]
-        [ActionName("Details")]
-        public async Task<IActionResult> DetailsAsync(string id)
+        [ActionName("Categories")]
+        public async Task<IActionResult> CategoriesAsync(string id)
         {
             var categoryLessons = this.subjectService.GetLessons().ToList();
             var subjectsDb = this.subjectService.GetSubjects()
@@ -49,6 +50,25 @@
             var model = this.mapper.Map<SubjectViewModel>(subject);
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        [ActionName("CategoryDetails")]
+        public async Task<IActionResult> CategoryDetailsAsync(string id)
+        {
+            var lessons = this.subjectService.GetLessons()
+                .Where(lesson => lesson.CategoryId == id)
+                .ToList();
+
+            var lessonsList = new List<LessonsViewModel>();
+
+            foreach (var lesson in lessons)
+            {
+                var lessonDto = this.mapper.Map<LessonsViewModel>(lesson);
+                lessonsList.Add(lessonDto);
+            }
+
+            return this.View(lessonsList);
         }
     }
 }

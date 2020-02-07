@@ -11,5 +11,7 @@
         Task<Subject> GetSubjectAsync(string id);
 
         IQueryable<Lesson> GetLessons();
+
+        Task<Lesson> GetLessonAsync(string id);
     }
 }

@@ -14,7 +14,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a class="btn boxed-btn w-25" asp-controller="Subject" asp-action="Details" asp-route-id="@item.SubjectId">
+                <a class="btn boxed-btn w-25" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
                     @Html.DisplayFor(modelItem => item.Name)
                 </a>
             </td>

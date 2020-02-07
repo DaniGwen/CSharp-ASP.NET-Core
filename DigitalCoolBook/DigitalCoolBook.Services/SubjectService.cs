@@ -15,6 +15,11 @@ namespace DigitalCoolBook.Services
             this.context = context;
         }
 
+        public async Task<Lesson> GetLessonAsync(string id)
+        {
+            return await this.context.Lessons.FindAsync(id);
+        }
+
         public IQueryable<Lesson> GetLessons()
         {
             return this.context.Lessons;

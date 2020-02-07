@@ -8,7 +8,7 @@
 
         public string Title { get; set; }
 
-        public string Contend { get; set; }
+        public string Content { get; set; }
 
         [ForeignKey("Category")]
         public string CategoryId { get; set; }

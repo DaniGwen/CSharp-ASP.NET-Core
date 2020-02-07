@@ -1,6 +1,7 @@
 ﻿namespace DigitalCoolBook.Services.Mapping
 {
     using AutoMapper;
+    using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.App.Models.StudentViewModels;
@@ -33,6 +34,7 @@
 
             // Subjects mappings
             this.CreateMap<Subject, SubjectViewModel>();
+            this.CreateMap<Lesson, LessonsViewModel>();
         }
     }
 }
