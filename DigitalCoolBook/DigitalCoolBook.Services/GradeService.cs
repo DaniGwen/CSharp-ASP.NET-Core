@@ -39,9 +39,13 @@ namespace DigitalCoolBook.Services
 
         public IQueryable<Grade> GetGrades()
         {
-           return this.context.Grades
-                .Include(g => g.GradeParalelos)
-                .OrderBy(g => g.Name);
+            return this.context.Grades;
+        }
+
+        public async Task RemoveGradeParaleloAsync(GradeParalelo paralelo)
+        {
+            this.context.GradeParalelos.Remove(paralelo);
+            await this.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()

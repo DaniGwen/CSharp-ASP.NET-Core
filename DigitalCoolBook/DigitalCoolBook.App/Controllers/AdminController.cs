@@ -194,8 +194,14 @@
 
             var model = this.mapper.Map<ParaleloCreateViewModel>(paralelo);
 
-            model.GradeName = await this.gradeService.GetGradeAsync(paralelo.IdGrade).Name;
-            model.TeacherName = this.userService.GetTeacherAsync(paralelo.IdTeacher).Name;
+            model.GradeName = this.gradeService
+                .GetGrades()
+                .FirstOrDefault(g => g.GradeId == paralelo.IdGrade).Name;
+
+            model.TeacherName = this.userService
+                .GetTeachers()
+                .FirstOrDefault(t => t.Id == paralelo.IdTeacher).Name;
+
             model.Teachers = teachers;
             model.Grades = grades;
 
@@ -204,46 +210,48 @@
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult EditParalelo(ParaleloCreateViewModel model)
+        public async Task<IActionResult> EditParaleloAsync(ParaleloCreateViewModel model)
         {
             try
             {
-                var gradeParalelo = _context.GradeParalelos.Find(model.Id);
+                var gradeParalelo = await this.gradeService.GetGradeParaleloAsync(model.GradeParaleloId);
 
-                gradeParalelo.IdTeacher = model.TeacherId;
-                gradeParalelo.IdGrade = model.GradeId;
+                gradeParalelo.IdTeacher = model.IdTeacher;
+                gradeParalelo.IdGrade = model.IdGrade;
 
-                _context.SaveChanges();
+                await this.gradeService.SaveChangesAsync();
             }
             catch (Exception exception)
             {
                 var error = new ErrorViewModel
                 {
-                    Message = exception.Message
+                    Message = exception.Message,
                 };
 
-                return View("Error", error);
+                return this.View("Error", error);
             }
-            return Redirect("Home/SuccessfulySaved");
+
+            return this.Redirect("/Home/SuccessfulySaved");
         }
 
-        public IActionResult DeleteParalelo(string id)
+        public async Task<IActionResult> DeleteParaleloAsync(string id)
         {
             try
             {
-                var paralelo = _context.GradeParalelos.Find(id);
-                _context.GradeParalelos.Remove(paralelo);
-                _context.SaveChanges();
+                var paralelo = await this.gradeService.GetGradeParaleloAsync(id);
+                await this.gradeService.RemoveGradeParaleloAsync(paralelo);
+                await this.gradeService.SaveChangesAsync();
             }
             catch (Exception exception)
             {
                 var error = new ErrorViewModel
                 {
-                    Message = exception.Message
+                    Message = exception.Message,
                 };
-                return View("Error", error);
+                return this.View("Error", error);
             }
-            return Redirect("/Home/RemoveSuccess");
+
+            return this.Redirect("/Home/RemoveSuccess");
         }
     }
 }
