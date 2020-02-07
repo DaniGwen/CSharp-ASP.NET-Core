@@ -1,27 +1,17 @@
 ﻿@model DigitalCoolBook.App.Models.SubjectViewModels.SubjectViewModel
 
 <body>
-     <!-- bradcam_area_start -->
-     <div class="courses_details_banner">
-         <div class="container">
-             <div class="row">
-                 <div class="col-xl-6">
-                     <div class="course_text">
-                            <h3>@Model.Name</h3>
-                            <div class="hours">
-                                <div class="video">
-                                     <div class="single_video">
-                                            <i class="fa fa-clock-o"></i> <span>...</span>
-                                     </div>
-                                     <div class="single_video">
-                                            <i class="fa fa-play-circle-o"></i> <span>...</span>
-                                     </div>
-                                </div>
-                            </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
+    <!-- bradcam_area_start -->
+    <div class="courses_details_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="course_text">
+                        <h3>@Model.Name</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- bradcam_area_end -->
 
@@ -30,89 +20,97 @@
             <div class="row">
                 <div class="col-xl-7 col-lg-7">
                     <div class="single_courses">
-                        <h3>Описание</h3>
-                        <p>.............</p>
-                    <h3 class="second_title">Course Outline</h3>
+                        <h3>Раздели</h3>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <div class="boxed_btn" style="margin-top:10px; width:380px" data-toggle="popover" title="Преглед" data-content="@category.Lessons.First()">
+                                <a class="">@category.Title</a>
+                            </div>
+                            <br />
+                        }
+                        <h3 class="second_title">Course Outline</h3>
                     </div>
                     <div class="outline_courses_info">
-                            <div id="accordion">
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    <i class="flaticon-question"></i> Is WordPress hosting worth it?
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Our set he for firmament morning sixth subdue darkness creeping gathered divide our
-                                                let god moving. Moving in fourth air night bring upon
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                    <i class="flaticon-question"></i>Basic Classes</span>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
-                                            <div class="card-body">
-                                                Our set he for firmament morning sixth subdue darkness creeping gathered divide our
-                                                let god moving. Moving in fourth air night bring upon
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    <i class="flaticon-question"></i> Will you transfer my site?
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Our set he for firmament morning sixth subdue darkness creeping gathered divide our
-                                                let god moving. Moving in fourth air night bring upon
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading_4">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_4" aria-expanded="false" aria-controls="collapse_4">
-                                                    <i class="flaticon-question"></i> Why should I host with Hostza?
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse_4" class="collapse" aria-labelledby="heading_4" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Our set he for firmament morning sixth subdue darkness creeping gathered divide our
-                                                let god moving. Moving in fourth air night bring upon
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading_5">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" aria-controls="collapse_5">
-                                                    <i class="flaticon-question"></i> How do I get started <span>with Shared
-                                                        Hosting?</span>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse_5" class="collapse" aria-labelledby="heading_5" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Our set he for firmament morning sixth subdue darkness creeping gathered divide our
-                                                let god moving. Moving in fourth air night bring upon
-                                            </div>
-                                        </div>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <i class="flaticon-question"></i> Is WordPress hosting worth it?
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Our set he for firmament morning sixth subdue darkness creeping gathered divide our
+                                        let god moving. Moving in fourth air night bring upon
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <i class="flaticon-question"></i>Basic Classes</span>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                    <div class="card-body">
+                                        Our set he for firmament morning sixth subdue darkness creeping gathered divide our
+                                        let god moving. Moving in fourth air night bring upon
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <i class="flaticon-question"></i> Will you transfer my site?
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Our set he for firmament morning sixth subdue darkness creeping gathered divide our
+                                        let god moving. Moving in fourth air night bring upon
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="heading_4">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_4" aria-expanded="false" aria-controls="collapse_4">
+                                            <i class="flaticon-question"></i> Why should I host with Hostza?
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse_4" class="collapse" aria-labelledby="heading_4" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Our set he for firmament morning sixth subdue darkness creeping gathered divide our
+                                        let god moving. Moving in fourth air night bring upon
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="heading_5">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" aria-controls="collapse_5">
+                                            <i class="flaticon-question"></i> How do I get started <span>
+                                                with Shared
+                                                Hosting?
+                                            </span>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse_5" class="collapse" aria-labelledby="heading_5" data-parent="#accordion">
+                                    <div class="card-body">
+                                        Our set he for firmament morning sixth subdue darkness creeping gathered divide our
+                                        let god moving. Moving in fourth air night bring upon
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-5">
@@ -126,7 +124,7 @@
                         <div class="author_info">
                             <div class="auhor_header">
                                 <div class="thumb">
-                                        <img src="img/latest_blog/author.png" alt="">
+                                    <img src="img/latest_blog/author.png" alt="">
                                 </div>
                                 <div class="name">
                                     <h3>Macau Wilium</h3>
@@ -153,8 +151,8 @@
                             <i class="flaticon-mark-as-favorite-star"></i>
                             <i class="flaticon-mark-as-favorite-star"></i>
                             <i class="flaticon-mark-as-favorite-star"></i>
-                            
-                        <form action="#">
+
+                            <form action="#">
                                 <textarea name="" id="" cols="30" rows="10" placeholder="Write your feedback"></textarea>
                                 <button type="submit" class="boxed_btn">Submit</button>
                             </form>
@@ -164,8 +162,6 @@
             </div>
         </div>
     </div>
-
-
 
 
     <!-- testimonial_area_start -->
@@ -216,7 +212,6 @@
         </div>
     </div>
     <!-- testimonial_area_end -->
-
     <!-- our_courses_start -->
     <div class="our_courses">
         <div class="container">
@@ -224,7 +219,8 @@
                 <div class="col-xl-12">
                     <div class="section_title text-center mb-100">
                         <h3>Our Course Speciality</h3>
-                        <p>Your domain control panel is designed for ease-of-use and <br>
+                        <p>
+                            Your domain control panel is designed for ease-of-use and <br>
                             allows for all aspects of your domains.
                         </p>
                     </div>
@@ -282,124 +278,11 @@
             </div>
         </div>
     </div>
-    <!-- our_courses_end -->
-
-    <!-- subscribe_newsletter_Start -->
-    <div class="subscribe_newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6">
-                    <div class="newsletter_text">
-                        <h3>Subscribe Newsletter</h3>
-                        <p>Your domain control panel is designed for ease-of-use and allows for all aspects of your</p>
-                    </div>
-                </div>
-                <div class="col-xl-5 offset-xl-1 col-lg-6">
-                    <div class="newsletter_form">
-                        <h4>Your domain control panel is</h4>
-                        <form action="#" class="newsletter_form">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit">Sign Up</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- subscribe_newsletter_end -->
-
-
-
-    <!-- form itself end-->
-    <form id="test-form" class="white-popup-block mfp-hide">
-        <div class="popup_box ">
-            <div class="popup_inner">
-                <div class="logo text-center">
-                    <a href="#">
-                        <img src="img/form-logo.png" alt="">
-                    </a>
-                </div>
-                <h3>Sign in</h3>
-                <form action="#">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12">
-                            <input type="email" placeholder="Enter email">
-                        </div>
-                        <div class="col-xl-12 col-md-12">
-                            <input type="password" placeholder="Password">
-                        </div>
-                        <div class="col-xl-12">
-                            <button type="submit" class="boxed_btn_orange">Sign in</button>
-                        </div>
-                    </div>
-                </form>
-                <p class="doen_have_acc">Don’t have an account? <a class="dont-hav-acc" href="#test-form2">Sign Up</a>
-                </p>
-            </div>
-        </div>
-    </form>
-    <!-- form itself end -->
-
-    <!-- form itself end-->
-    <form id="test-form2" class="white-popup-block mfp-hide">
-        <div class="popup_box ">
-            <div class="popup_inner">
-                <div class="logo text-center">
-                    <a href="#">
-                        <img src="img/form-logo.png" alt="">
-                    </a>
-                </div>
-                <h3>Resistration</h3>
-                <form action="#">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12">
-                            <input type="email" placeholder="Enter email">
-                        </div>
-                        <div class="col-xl-12 col-md-12">
-                            <input type="password" placeholder="Password">
-                        </div>
-                        <div class="col-xl-12 col-md-12">
-                            <input type="Password" placeholder="Confirm password">
-                        </div>
-                        <div class="col-xl-12">
-                            <button type="submit" class="boxed_btn_orange">Sign Up</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </form>
-    <!-- form itself end -->
-
-
-    <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
-
-    <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-
-    <script src="js/main.js"></script>
 </body>
-
-</html>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        })
+    }
+</script>

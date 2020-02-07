@@ -7,6 +7,7 @@
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     public class SubjectController : Controller
     {
@@ -38,7 +39,12 @@
         [ActionName("Details")]
         public async Task<IActionResult> DetailsAsync(string id)
         {
-            var subject = await this.subjectService.GetSubjectAsync(id);
+            var categoryLessons = this.subjectService.GetLessons().ToList();
+            var subjectsDb = this.subjectService.GetSubjects()
+                .Include(s => s.Categories)
+                .ToList();
+
+            var subject = subjectsDb.FirstOrDefault(s => s.SubjectId == id);
 
             var model = this.mapper.Map<SubjectViewModel>(subject);
 

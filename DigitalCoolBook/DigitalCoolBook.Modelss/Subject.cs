@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace DigitalCoolBook.Models
+﻿namespace DigitalCoolBook.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Subject
     {
         [Key]
@@ -14,7 +15,7 @@ namespace DigitalCoolBook.Models
 
         public string Abbreviation { get; set; }
 
-        public List<Cathegory> Cathegories { get; set; }
+        public List<Category> Categories { get; set; }
 
         public List<ScoreRecord> ScoreRecords { get; set; }
 

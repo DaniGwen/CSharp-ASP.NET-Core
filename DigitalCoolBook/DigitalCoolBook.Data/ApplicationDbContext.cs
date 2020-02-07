@@ -23,7 +23,7 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Teacher> Teachers { get; set; }
 
-        public DbSet<Cathegory> Cathegories { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public DbSet<Lesson> Lessons { get; set; }
 

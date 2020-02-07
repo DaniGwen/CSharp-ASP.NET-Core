@@ -40,7 +40,7 @@ namespace DigitalCoolBook.Data.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.Cathegory", b =>
+            modelBuilder.Entity("DigitalCoolBook.Models.Category", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -55,7 +55,7 @@ namespace DigitalCoolBook.Data.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Cathegories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Grade", b =>
@@ -97,7 +97,7 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CathegoryId")
+                    b.Property<string>("CategoryId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Contend")
@@ -108,7 +108,7 @@ namespace DigitalCoolBook.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CathegoryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Lessons");
                 });
@@ -486,10 +486,10 @@ namespace DigitalCoolBook.Data.Migrations
                         .HasForeignKey("IdStudent");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.Cathegory", b =>
+            modelBuilder.Entity("DigitalCoolBook.Models.Category", b =>
                 {
-                    b.HasOne("DigitalCoolBook.Models.Subject", null)
-                        .WithMany("Cathegories")
+                    b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
+                        .WithMany("Categories")
                         .HasForeignKey("SubjectId");
                 });
 
@@ -506,9 +506,9 @@ namespace DigitalCoolBook.Data.Migrations
 
             modelBuilder.Entity("DigitalCoolBook.Models.Lesson", b =>
                 {
-                    b.HasOne("DigitalCoolBook.Models.Cathegory", null)
+                    b.HasOne("DigitalCoolBook.Models.Category", "Category")
                         .WithMany("Lessons")
-                        .HasForeignKey("CathegoryId");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.ScoreRecord", b =>

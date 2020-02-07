@@ -9,5 +9,7 @@
         IQueryable<Subject> GetSubjects();
 
         Task<Subject> GetSubjectAsync(string id);
+
+        IQueryable<Lesson> GetLessons();
     }
 }
