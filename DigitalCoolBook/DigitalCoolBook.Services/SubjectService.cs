@@ -1,11 +1,11 @@
-﻿using DigitalCoolBook.App.Data;
-using DigitalCoolBook.Models;
-using DigitalCoolBook.Services.Contracts;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DigitalCoolBook.Services
+﻿namespace DigitalCoolBook.Services
 {
+    using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class SubjectService : ISubjectService
     {
         private readonly ApplicationDbContext context;
@@ -13,6 +13,11 @@ namespace DigitalCoolBook.Services
         public SubjectService(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        public IQueryable<Category> GetCategories()
+        {
+            return this.context.Categories;
         }
 
         public async Task<Lesson> GetLessonAsync(string id)

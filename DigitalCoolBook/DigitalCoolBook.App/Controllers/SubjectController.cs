@@ -6,6 +6,7 @@
     using AutoMapper;
     using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
+    using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -69,6 +70,21 @@
             }
 
             return this.View(lessonsList);
+        }
+
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            var categories = this.subjectService.GetCategories().ToList();
+            var subjects = this.subjectService.GetSubjects().ToList();
+
+            var categoriesModel = new CategoryCreateViewModel
+            {
+                Categories = categories,
+                Subjects = subjects,
+            };
+
+            return this.View(categoriesModel);
         }
     }
 }

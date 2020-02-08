@@ -13,5 +13,7 @@
         IQueryable<Lesson> GetLessons();
 
         Task<Lesson> GetLessonAsync(string id);
+
+        IQueryable<Category> GetCategories();
     }
 }
