@@ -1,30 +1,30 @@
-﻿using AutoMapper;
-using DigitalCoolBook.App.Models;
-using DigitalCoolBook.App.Models.GradesViewModels;
-using DigitalCoolBook.App.Models.StudentViewModels;
-using DigitalCoolBook.Models;
-using DigitalCoolBook.Services.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.Models.GradesViewModels;
+    using DigitalCoolBook.App.Models.StudentViewModels;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+
     public class StudentController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
         private readonly IUserService _userService;
         private readonly IGradeService _gradeService;
         private readonly IMapper _mapper;
+        private UserManager<IdentityUser> _userManager;
 
         public StudentController(ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,

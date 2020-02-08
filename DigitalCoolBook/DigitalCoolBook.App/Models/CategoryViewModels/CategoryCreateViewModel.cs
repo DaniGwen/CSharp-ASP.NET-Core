@@ -1,12 +1,15 @@
 ﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
 {
-    using DigitalCoolBook.Models;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using DigitalCoolBook.Models;
 
     public class CategoryCreateViewModel
     {
+        [Required(ErrorMessage = "Моля изберете тема.")]
         public string CategoryId { get; set; }
 
+        [Required(ErrorMessage = "Моля изберете предмет.")]
         public string SubjectId { get; set; }
 
         public string Title { get; set; }
@@ -15,8 +18,8 @@
 
         public Lesson Lesson { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
 
-        public List<Subject> Subjects { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
     }
 }

@@ -10,6 +10,7 @@
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Nancy.Json;
 
     public class SubjectController : Controller
     {
@@ -73,7 +74,7 @@
         }
 
         [HttpGet]
-        public IActionResult AddCategory()
+        public IActionResult AddLesson()
         {
             var categories = this.subjectService.GetCategories().ToList();
             var subjects = this.subjectService.GetSubjects().ToList();
@@ -85,6 +86,28 @@
             };
 
             return this.View(categoriesModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddLesson(string subjectId, string categoryId, string content)
+        {
+            ;
+            return this.Redirect("/Home/SuccessfulySaved");
+        }
+
+
+        [HttpPost]
+        public JsonResult GetCategories(string subjectId)
+        {
+            var categories = this.subjectService
+                .GetCategories()
+                .Where(c => c.SubjectId == subjectId)
+                .ToList();
+
+            var categoriesDto = this.mapper
+                .Map<IEnumerable<Category>, IEnumerable<CategoryAjaxViewModel>>(categories);
+
+            return this.Json(categoriesDto);
         }
     }
 }
