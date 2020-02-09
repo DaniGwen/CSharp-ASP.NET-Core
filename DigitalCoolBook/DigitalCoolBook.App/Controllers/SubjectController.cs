@@ -1,5 +1,6 @@
 ﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,7 +11,6 @@
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Nancy.Json;
 
     public class SubjectController : Controller
     {
@@ -89,9 +89,23 @@
         }
 
         [HttpPost]
-        public IActionResult AddLesson(string subjectId, string categoryId, string content)
+        public IActionResult AddLesson(string categoryId, string content, string title)
         {
-            ;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var lesson = new Lesson
+            {
+                Id = Guid.NewGuid().ToString(),
+                CategoryId = categoryId,
+                Content = content,
+                Title = title,
+            };
+
+            this.subjectService.CreateLessonAsync()
+
             return this.Redirect("/Home/SuccessfulySaved");
         }
 
