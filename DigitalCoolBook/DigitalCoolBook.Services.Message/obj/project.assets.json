@@ -627,23 +627,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\deko\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\AW\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj",
+      "projectUniqueName": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj",
       "projectName": "DigitalCoolBook.Services.Message",
-      "projectPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj",
-      "packagesPath": "C:\\Users\\deko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\deko\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\obj\\",
+      "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj",
+      "packagesPath": "C:\\Users\\AW\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\DigitalCoolBook.Services.Message\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\deko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\AW\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -694,7 +690,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

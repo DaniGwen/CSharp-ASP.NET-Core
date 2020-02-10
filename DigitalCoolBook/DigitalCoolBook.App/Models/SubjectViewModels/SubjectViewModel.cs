@@ -9,6 +9,10 @@
         [Key]
         public string SubjectId { get; set; }
 
+        public string CategoryId { get; set; }
+
+        public string CategoryTitle { get; set; }
+
         public string Name { get; set; }
 
         public List<Category> Categories { get; set; }

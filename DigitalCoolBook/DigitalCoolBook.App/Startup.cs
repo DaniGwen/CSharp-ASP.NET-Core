@@ -3,6 +3,8 @@ namespace DigitalCoolBook.App
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.Encodings.Web;
+    using System.Text.Unicode;
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Data;
@@ -19,10 +21,10 @@ namespace DigitalCoolBook.App
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.WebEncoders;
 
     public class Startup
     {
-
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -292,27 +294,30 @@ namespace DigitalCoolBook.App
                 new GradeParalelo
                 {
                    GradeParaleloId = Guid.NewGuid().ToString(),
-                    IdGrade = "047c959b-c2d4-4d49-acb9-c096660fc1d7",
-                    IdTeacher = "0b0ebf61-11ff-487a-ae66-a257787d77d1"
+                   IdGrade = "047c959b-c2d4-4d49-acb9-c096660fc1d7",
+                   IdTeacher = "0b0ebf61-11ff-487a-ae66-a257787d77d1",
                 },
+
                 new GradeParalelo
                 {
                     GradeParaleloId = Guid.NewGuid().ToString(),
-                     IdGrade ="0a5a0880-ae45-4c1b-97ee-bab17775bce1",
-                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b"
+                    IdGrade = "0a5a0880-ae45-4c1b-97ee-bab17775bce1",
+                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b",
                 },
+
                 new GradeParalelo
                 {
                     GradeParaleloId = Guid.NewGuid().ToString(),
-                     IdGrade = "0f4484a8-c74e-405d-b6cc-3c5bc581929f",
-                    IdTeacher = "5757242a-6635-4186-a9ac-05c3b165359e"
+                    IdGrade = "0f4484a8-c74e-405d-b6cc-3c5bc581929f",
+                    IdTeacher = "5757242a-6635-4186-a9ac-05c3b165359e",
                 },
+
                 new GradeParalelo
                 {
                     GradeParaleloId = Guid.NewGuid().ToString(),
-                     IdGrade = "29bae06b-3e83-4e2f-8a80-d87a3be14e96",
-                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b"
-                }
+                    IdGrade = "29bae06b-3e83-4e2f-8a80-d87a3be14e96",
+                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b",
+                },
             };
             return gradeParalelos;
         }
@@ -341,21 +346,21 @@ namespace DigitalCoolBook.App
                 },
                 new Student
                 {
-                     Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     MobilePhone = 094098321,
                     Name = "Ivailo Dimitrov",
                     PasswordHash = "Ivo155*",
                     PlaceOfBirth = "Pirdop",
                     Sex = "Male",
                     Telephone = 3234,
-                     Address = "Anev Popov 12",
+                    Address = "Anev Popov 12",
                     FatherName = "Todor",
                     FatherMobileNumber = 098434554,
                     //IdGradeParalelo = "7aabcd2f-2db3-443a-a9cc-b11b105d9c1f",
                     MotherName = "Donka",
                     MotherMobileNumber = 099009933,
                     Email = "ivailo@ivailo.com",
-                    UserName = "ivailo@ivailo.com"
+                    UserName = "ivailo@ivailo.com",
                 },
                 new Student
                 {
@@ -440,7 +445,7 @@ namespace DigitalCoolBook.App
                     var grade = new Grade
                     {
                         GradeId = Guid.NewGuid().ToString(),
-                        Name = j.ToString() + paralelo
+                        Name = j.ToString() + paralelo,
                     };
                     grades.Add(grade);
                 }
@@ -452,7 +457,7 @@ namespace DigitalCoolBook.App
         {
             var subjects = new List<string>()
                         {
-                            "Математика", "Български", "Литература", "География", "История", "Графичен дизайн"
+                            "Математика", "Български", "Литература", "География", "История", "Компютърна графика",
                         };
 
             var subjectsList = new List<Subject>();
@@ -462,7 +467,7 @@ namespace DigitalCoolBook.App
                 var subjectForContext = new Subject
                 {
                     SubjectId = Guid.NewGuid().ToString(),
-                    Name = subject
+                    Name = subject,
                 };
 
                 subjectsList.Add(subjectForContext);
@@ -472,7 +477,7 @@ namespace DigitalCoolBook.App
 
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
-            //initializing custom roles 
+            // initializing custom roles
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
             var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
@@ -481,7 +486,7 @@ namespace DigitalCoolBook.App
 
             if (!isUserAddedInRole)
             {
-                // first we create Admin rool    
+                // first we create Admin rool
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 await roleManager.CreateAsync(role);
@@ -497,7 +502,7 @@ namespace DigitalCoolBook.App
 
                 IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword);
 
-                //Add default User to Role Admin    
+                // Add default User to Role Admin
                 if (addingPasswordToUser.Succeeded)
                 {
                     var result1 = await userManager.AddToRoleAsync(user, "Admin");
@@ -505,7 +510,7 @@ namespace DigitalCoolBook.App
             }
 
 
-            // creating Creating Student role     
+            // creating Creating Student role
             isUserAddedInRole = await roleManager.RoleExistsAsync("Student");
             if (!isUserAddedInRole)
             {
@@ -514,7 +519,7 @@ namespace DigitalCoolBook.App
                 await roleManager.CreateAsync(role);
             }
 
-            // creating Creating Teacher role     
+            // creating Creating Teacher role
             isUserAddedInRole = await roleManager.RoleExistsAsync("Teacher");
             if (!isUserAddedInRole)
             {

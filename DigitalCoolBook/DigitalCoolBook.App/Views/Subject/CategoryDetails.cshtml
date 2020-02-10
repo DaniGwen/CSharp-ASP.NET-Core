@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<DigitalCoolBook.App.Models.CategoryViewModels.LessonsViewModel>
 
 @{
-    ViewData["Title"] = "CategoryDetails";
     Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
 }
 
-<h1></h1>
+<h2>@ViewData["CategoryTitle"]</h2>
 
 <table class="table">
     <thead>
@@ -20,20 +19,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Изтриване", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <p>

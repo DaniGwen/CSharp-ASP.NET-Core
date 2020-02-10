@@ -9,3 +9,14 @@ C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBo
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.dll
 C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.deps.json
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.csprojAssemblyReference.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.AssemblyInfoInputs.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.AssemblyInfo.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.csproj.CopyComplete
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb

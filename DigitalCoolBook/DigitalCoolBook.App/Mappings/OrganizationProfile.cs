@@ -37,6 +37,7 @@
             this.CreateMap<Lesson, LessonsViewModel>();
             this.CreateMap<Category, CategoryCreateViewModel>();
             this.CreateMap<Category, CategoryAjaxViewModel>();
+            this.CreateMap<Lesson, LessonEditViewModel>();
         }
     }
 }

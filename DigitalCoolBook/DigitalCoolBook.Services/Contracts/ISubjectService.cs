@@ -15,5 +15,9 @@
         Task<Lesson> GetLessonAsync(string id);
 
         IQueryable<Category> GetCategories();
+
+        Task CreateLessonAsync(Lesson lesson);
+
+        Task SaveChangesAsync();
     }
 }

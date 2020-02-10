@@ -27,11 +27,9 @@
                         <h3>Раздели</h3>
                         @foreach (var category in Model.Categories)
                         {
-                            <div asp-controller="">
-                                <a href="/Subject/CategoryDetails/@category.Id" type="button" class="boxed_btn" style="width:380px" data-toggle="popover" data-placement="top" data-content="popup">
-                                    @category.Title
-                                </a>
-                            </div>
+                            <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = @category.Id, categoryTitle = category.Title })" type="button" class="boxed-btn mt-2" style="width:380px" data-toggle="popover" data-placement="top" data-content="popup">
+                                @category.Title
+                            </a>
                             <br />
                         }
                     </div>

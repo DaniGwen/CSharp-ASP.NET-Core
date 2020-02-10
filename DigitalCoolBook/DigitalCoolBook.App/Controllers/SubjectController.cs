@@ -9,6 +9,7 @@
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -56,10 +57,10 @@
 
         [HttpGet]
         [ActionName("CategoryDetails")]
-        public async Task<IActionResult> CategoryDetailsAsync(string id)
+        public async Task<IActionResult> CategoryDetailsAsync(string categoryTitle, string categoryId)
         {
             var lessons = this.subjectService.GetLessons()
-                .Where(lesson => lesson.CategoryId == id)
+                .Where(lesson => lesson.CategoryId == categoryId)
                 .ToList();
 
             var lessonsList = new List<LessonsViewModel>();
@@ -69,6 +70,8 @@
                 var lessonDto = this.mapper.Map<LessonsViewModel>(lesson);
                 lessonsList.Add(lessonDto);
             }
+
+            this.ViewData["categoryTitle"] = categoryTitle;
 
             return this.View(lessonsList);
         }
@@ -89,7 +92,8 @@
         }
 
         [HttpPost]
-        public IActionResult AddLesson(string categoryId, string content, string title)
+        [ActionName("AddLesson")]
+        public async Task<IActionResult> AddLessonAsync(string categoryId, string content, string title)
         {
             if (!this.ModelState.IsValid)
             {
@@ -104,11 +108,10 @@
                 Title = title,
             };
 
-            this.subjectService.CreateLessonAsync()
+            await this.subjectService.CreateLessonAsync(lesson);
 
             return this.Redirect("/Home/SuccessfulySaved");
         }
-
 
         [HttpPost]
         public JsonResult GetCategories(string subjectId)
@@ -122,6 +125,23 @@
                 .Map<IEnumerable<Category>, IEnumerable<CategoryAjaxViewModel>>(categories);
 
             return this.Json(categoriesDto);
+        }
+
+        [HttpGet]
+        [ActionName("Edit")]
+        public async Task<IActionResult> EditAsync(string id)
+        {
+            var lesson = await this.subjectService.GetLessonAsync(id);
+
+            var model = this.mapper.Map<LessonEditViewModel>(lesson);
+
+            var categories = this.subjectService.GetCategories().ToList();
+
+            var categoriesDto = this.mapper.Map<IList<CategoryAjaxViewModel>>(categories);
+
+            model.Categories = categoriesDto;
+
+            return this.View(model);
         }
     }
 }

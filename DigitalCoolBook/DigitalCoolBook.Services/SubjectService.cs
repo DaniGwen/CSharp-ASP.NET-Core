@@ -15,6 +15,12 @@
             this.context = context;
         }
 
+        public async Task CreateLessonAsync(Lesson lesson)
+        {
+            await this.context.Lessons.AddAsync(lesson);
+            await this.SaveChangesAsync();
+        }
+
         public IQueryable<Category> GetCategories()
         {
             return this.context.Categories;
@@ -38,6 +44,11 @@
         public IQueryable<Subject> GetSubjects()
         {
             return this.context.Subjects;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await this.context.SaveChangesAsync();
         }
     }
 }
