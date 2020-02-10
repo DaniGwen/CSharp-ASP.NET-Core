@@ -143,5 +143,25 @@
 
             return this.View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(LessonEditViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var lesson = await this.subjectService.GetLessonAsync(model.Id);
+                lesson.Title = model.Title;
+                lesson.Content = model.Content;
+                lesson.CategoryId = model.CategoryId;
+
+                await this.subjectService.SaveChangesAsync();
+            }
+            else
+            {
+                return this.View(model);
+            }
+
+            return this.Redirect("/Home/SuccessfulySaved");
+        }
     }
 }

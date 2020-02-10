@@ -1,15 +1,15 @@
 ﻿namespace DigitalCoolBook.App.Controllers
 {
+    using System;
     using System.Diagnostics;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.Models;
+    using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using DigitalCoolBook.App.Models;
-    using Microsoft.AspNetCore.Identity;
-    using System.Security.Claims;
-    using DigitalCoolBook.Models;
-    using System;
-    using System.Threading.Tasks;
-    using DigitalCoolBook.Services.Contracts;
 
     public class HomeController : Controller
     {
@@ -122,7 +122,7 @@
         [HttpGet]
         public IActionResult SuccessfulySaved()
         {
-            this.Response.Headers.Add("REFRESH", "3;URL=/Admin/AdminPanel");
+            this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
             return this.View();
         }
 
