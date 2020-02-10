@@ -137,7 +137,7 @@
 
             var categories = this.subjectService.GetCategories().ToList();
 
-            var categoriesDto = this.mapper.Map<IList<CategoryAjaxViewModel>>(categories);
+            var categoriesDto = this.mapper.Map<IList<CategoryViewModel>>(categories);
 
             model.Categories = categoriesDto;
 

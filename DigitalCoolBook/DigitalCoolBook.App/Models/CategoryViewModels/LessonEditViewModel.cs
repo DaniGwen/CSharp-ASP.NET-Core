@@ -7,13 +7,15 @@
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage ="Моля въведете заглавие.")]
+        [Required(ErrorMessage ="Въведете заглавие")]
+        [StringLength(maximumLength: 40, ErrorMessage = "Въведете заглавие до 40 символа и минимум 3 символа.", MinimumLength = 3)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage ="Моля въведете съдържание.")]
+        [Required(ErrorMessage ="Въведете съдържание")]
+        [StringLength(maximumLength: 1000, ErrorMessage = "Минимално съдържание 20 символа.", MinimumLength = 20)]
         public string Content { get; set; }
 
-        public IList<CategoryAjaxViewModel> Categories { get; set; }
+        public IList<CategoryViewModel> Categories { get; set; }
 
         public string CategoryId { get; set; }
     }

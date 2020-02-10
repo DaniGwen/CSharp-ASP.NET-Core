@@ -1,6 +1,8 @@
 ﻿<!doctype html>
 <html lang="en">
-
+@{ 
+    Html.ValidationSummary();
+}
 <head>
     <meta charset="utf-8">
     <title>@ViewData["Title"] = DigitalCoolBook</title>
@@ -53,7 +55,7 @@
     <script src="~/js/mail-script.js"></script>
     <script src="~/js/jquery-ui.js"></script>
     <script src="~/js/main.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
     <header>
