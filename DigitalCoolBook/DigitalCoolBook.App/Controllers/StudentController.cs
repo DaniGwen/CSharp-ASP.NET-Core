@@ -19,26 +19,27 @@
 
     public class StudentController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IUserService _userService;
-        private readonly IGradeService _gradeService;
-        private readonly IMapper _mapper;
-        private UserManager<IdentityUser> _userManager;
+        private readonly ILogger<HomeController> logger;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IUserService userService;
+        private readonly IGradeService gradeService;
+        private readonly IMapper mapper;
+        private UserManager<IdentityUser> userManager;
 
-        public StudentController(ILogger<HomeController> logger,
+        public StudentController(
+            ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IUserService userService,
             IGradeService gradeService,
             IMapper mapper)
         {
-            _userManager = userManager;
-            _userService = userService;
-            _gradeService = gradeService;
-            _logger = logger;
-            _signInManager = signInManager;
-            _mapper = mapper;
+            this.userManager = userManager;
+            this.userService = userService;
+            this.gradeService = gradeService;
+            this.logger = logger;
+            this.signInManager = signInManager;
+            this.mapper = mapper;
         }
 
         [Authorize(Roles = "Admin")]
@@ -47,44 +48,43 @@
         {
             var model = new StudentRegisterModel
             {
-                Grades = _gradeService.GetGrades().ToList()
+                Grades = gradeService.GetGrades().ToList(),
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
         {
-            //var student = new Student();
-
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var student = _mapper.Map<Student>(registerModel);
+                var student = this.mapper.Map<Student>(registerModel);
 
                 student.UserName = registerModel.Email;
 
-                var result = await _userManager.CreateAsync(student, registerModel.Password);
+                var result = await this.userManager.CreateAsync(student, registerModel.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(student, "Student");
+                    await this.userManager.AddToRoleAsync(student, "Student");
 
-                    _logger.LogInformation("User created a new account with password.");
+                    this.logger.LogInformation("User created a new account with password.");
 
-                    return Redirect("/Home/SuccessfulySaved");
+                    return this.Redirect("/Home/SuccessfulySaved");
                 }
                 else
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("", error.Description);
-                        return View(registerModel);
+                        this.ModelState.AddModelError("", error.Description);
+                        return this.View(registerModel);
                     }
                 }
             }
-            return View(registerModel);
+
+            return this.View(registerModel);
         }
 
         [Authorize(Roles = "Admin")]
@@ -94,14 +94,14 @@
 
             try
             {
-                var students = _userService.GetStudents().ToList();
+                var students = this.userService.GetStudents().ToList();
 
                 foreach (var student in students)
                 {
-                    var studentDto = _mapper.Map<StudentEditViewModel>(student);
+                    var studentDto = this.mapper.Map<StudentEditViewModel>(student);
                     if (student.GradeId != null)
                     {
-                        var grade = await _gradeService.GetGradeAsync(student.GradeId);
+                        var grade = await this.gradeService.GetGradeAsync(student.GradeId);
                         studentDto.GradeName = grade.Name;
                     }
 
@@ -112,7 +112,7 @@
             {
                 var errorModel = new ErrorViewModel
                 {
-                   Message = exception.Message,
+                    Message = exception.Message,
                 };
 
                 return this.View("Error", errorModel);
@@ -125,27 +125,27 @@
         [HttpGet]
         public async Task<IActionResult> EditStudentAsync(string id)
         {
-            var student = await _userService.GetStudentAsync(id);
-            var grades = _gradeService.GetGrades().ToList();
+            var student = await this.userService.GetStudentAsync(id);
+            var grades = this.gradeService.GetGrades().ToList();
 
-            var model = _mapper.Map<StudentEditViewModel>(student);
+            var model = this.mapper.Map<StudentEditViewModel>(student);
 
             foreach (var grade in grades)
             {
-                var gradeModel = _mapper.Map<GradeViewModel>(grade);
+                var gradeModel = this.mapper.Map<GradeViewModel>(grade);
                 model.Grades.Add(gradeModel);
             }
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditStudent(StudentEditViewModel model, string id)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var student = await _userService.GetStudentAsync(id);
+                var student = await this.userService.GetStudentAsync(id);
 
                 student.Address = model.Address;
                 student.DateOfBirth = model.DateOfBirth;
@@ -161,21 +161,21 @@
                 student.Telephone = model.Telephone;
                 student.GradeId = model.GradeId;
 
-                await _userService.SaveChangesAsync();
+                await this.userService.SaveChangesAsync();
 
-                return Redirect("/Home/SuccessfulySaved");
+                return this.Redirect("/Home/SuccessfulySaved");
             }
 
-            return View();
+            return this.View();
         }
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
-            await _userService.RemoveStudentAsync(id);
+            await this.userService.RemoveStudentAsync(id);
 
-            //Redirect to / Admin / AdminPanel after 4 seconds
-            Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
+            // Redirect to / Admin / AdminPanel after 4 seconds
+            this.Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
 
             return Redirect("/Home/RemoveSuccess");
         }
@@ -185,11 +185,11 @@
         [HttpGet]
         public async Task<IActionResult> ChangePassword(string id)
         {
-            var student = await _userService.GetStudentAsync(id);
+            var student = await this.userService.GetStudentAsync(id);
 
-            var model = _mapper.Map<StudentChangePasswordViewModel>(student);
+            var model = this.mapper.Map<StudentChangePasswordViewModel>(student);
 
-            return View(model);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin, Student, Teacher")]
@@ -198,20 +198,20 @@
         {
             try
             {
-                var user = await _userService.GetUserAsync(model.Id);
-                var result = await _userManager.RemovePasswordAsync(user);
-                await _userService.SaveChangesAsync();
-                var addResult = await _userManager.AddPasswordAsync(user, model.Password);
+                var user = await this.userService.GetUserAsync(model.Id);
+                var result = await this.userManager.RemovePasswordAsync(user);
+                await this.userService.SaveChangesAsync();
+                var addResult = await this.userManager.AddPasswordAsync(user, model.Password);
 
                 if (addResult.Succeeded)
                 {
-                    await _signInManager.SignOutAsync();
-                    return Redirect("/Home/PasswordSaved");
+                    await this.signInManager.SignOutAsync();
+                    return this.Redirect("/Home/PasswordSaved");
                 }
                 else
                 {
-                    ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
-                    return View(model);
+                    this.ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
+                    return this.View(model);
                 }
 
             }
@@ -220,9 +220,9 @@
                 var error = new ErrorViewModel
                 {
                     Message = exception.Message,
-                    RequestId = this.Request.HttpContext.TraceIdentifier
+                    RequestId = this.Request.HttpContext.TraceIdentifier,
                 };
-                return View("Error", error);
+                return this.View("Error", error);
             }
         }
 
@@ -230,31 +230,29 @@
         [ActionName("Panel")]
         public async Task<IActionResult> PanelAsync()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-            var userDb = await _userService.GetUserAsync(userId.Value);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier);
+            var userDb = await this.userService.GetUserAsync(userId.Value);
             var model = new StudentChangePasswordViewModel
             {
                 Id = userDb.Id,
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public async Task<IActionResult> DetailsAsync(string id)
         {
-            var student = await _userService.GetStudentAsync(id);
+            var student = await this.userService.GetStudentAsync(id);
 
-            var model = _mapper.Map<StudentDetailsViewModel>(student);
+            var model = this.mapper.Map<StudentDetailsViewModel>(student);
 
-            return View(model);
+            return this.View(model);
         }
 
         public string HashPassword(string password)
         {
-            //Add Salt to password
+            // Add Salt to password
             byte[] salt = new byte[128 / 8];
-
-
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password: password,
             salt: salt,
