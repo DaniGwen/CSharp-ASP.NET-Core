@@ -6,7 +6,6 @@
 
     public class SubjectViewModel
     {
-        [Key]
         public string SubjectId { get; set; }
 
         public string CategoryId { get; set; }

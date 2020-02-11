@@ -12,12 +12,12 @@
         [Required(ErrorMessage = "Моля изберете предмет.")]
         public string SubjectId { get; set; }
 
-        [Required(ErrorMessage ="Моля изберете заглавие.")]
-        public string Title { get; set; }
+        //[Required(ErrorMessage ="Моля изберете заглавие.")]
+        //public string Title { get; set; }
 
-        public string Name { get; set; }
+        //public string Name { get; set; }
 
-        public Lesson Lesson { get; set; }
+        //public Lesson Lesson { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
 

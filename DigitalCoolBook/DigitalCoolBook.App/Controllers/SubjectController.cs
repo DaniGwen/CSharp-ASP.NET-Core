@@ -10,7 +10,6 @@
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -200,6 +199,12 @@
         {
             if (this.ModelState.IsValid)
             {
+                if (this.subjectService.GetSubjects().Any(s => s.Name == model.Name))
+                {
+                    this.ModelState.AddModelError(string.Empty, "Предмета вече съществува.");
+                    return this.View(model);
+                }
+
                 var subject = new Subject
                 {
                     Name = model.Name,
@@ -211,6 +216,29 @@
             {
                 return this.View(model);
             }
+
+            return this.Redirect("/Home/SuccessfulySaved");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult CreateCategory()
+        {
+            var subjects = this.subjectService.GetSubjects().ToList();
+
+            var model = new CategoryAdminCreateViewModel()
+            {
+                Subjects = this.mapper.Map<List<SubjectViewModel>>(subjects),
+            };
+
+            return this.View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult CreateCategory(CategoryAdminCreateViewModel model)
+        {
+            // TODO create category
 
             return this.View();
         }
