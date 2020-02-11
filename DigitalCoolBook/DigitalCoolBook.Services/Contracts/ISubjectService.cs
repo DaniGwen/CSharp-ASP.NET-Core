@@ -23,5 +23,7 @@
         Task DeleteLessonAsync(Lesson lesson);
 
         Task CreateSubjectAsync(Subject subject);
+
+        Task CreateCategoryAsync(Category category);
     }
 }

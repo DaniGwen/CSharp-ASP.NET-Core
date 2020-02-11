@@ -15,6 +15,12 @@
             this.context = context;
         }
 
+        public async Task CreateCategoryAsync(Category category)
+        {
+            await this.context.Categories.AddAsync(category);
+            await this.SaveChangesAsync();
+        }
+
         public async Task CreateLessonAsync(Lesson lesson)
         {
             await this.context.Lessons.AddAsync(lesson);

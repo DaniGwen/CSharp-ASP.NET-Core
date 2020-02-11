@@ -236,11 +236,25 @@
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult CreateCategory(CategoryAdminCreateViewModel model)
+        public async Task<IActionResult> CreateCategoryAsync(CategoryAdminCreateViewModel model)
         {
-            // TODO create category
+            if (this.ModelState.IsValid)
+            {
+                var category = new Category
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    SubjectId = model.SubjectId,
+                    Title = model.Title,
+                };
+                await this.subjectService.CreateCategoryAsync(category);
+            }
+            else
+            {
+                this.ModelState.AddModelError(string.Empty, "Моля попълнете всички полета.");
+                return this.View(model);
+            }
 
-            return this.View();
+            return this.Redirect("/Home/SuccessfulySaved");
         }
     }
 }
