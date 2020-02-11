@@ -20,10 +20,12 @@
 
         Task SaveChangesAsync();
 
-        Task DeleteLessonAsync(Lesson lesson);
+        Task RemoveLessonAsync(string id);
 
         Task CreateSubjectAsync(Subject subject);
 
         Task CreateCategoryAsync(Category category);
+
+        Task RemoveCategoryAsync(string categoryId);
     }
 }

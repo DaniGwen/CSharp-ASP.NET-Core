@@ -33,8 +33,9 @@
             await this.SaveChangesAsync();
         }
 
-        public async Task DeleteLessonAsync(Lesson lesson)
+        public async Task RemoveLessonAsync(string id)
         {
+            var lesson = await this.context.Lessons.FindAsync(id);
             this.context.Lessons.Remove(lesson);
             await this.SaveChangesAsync();
         }
@@ -62,6 +63,13 @@
         public IQueryable<Subject> GetSubjects()
         {
             return this.context.Subjects;
+        }
+
+        public async Task RemoveCategoryAsync(string categoryId)
+        {
+            var category = await this.context.Categories.FindAsync(categoryId);
+            this.context.Categories.Remove(category);
+            await this.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()

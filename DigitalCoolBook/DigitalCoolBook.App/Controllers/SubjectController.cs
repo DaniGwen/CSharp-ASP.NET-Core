@@ -175,8 +175,7 @@
         {
             try
             {
-                var lesson = await this.subjectService.GetLessonAsync(id);
-                await this.subjectService.DeleteLessonAsync(lesson);
+                await this.subjectService.RemoveLessonAsync(id);
             }
             catch (Exception)
             {
@@ -253,6 +252,15 @@
                 this.ModelState.AddModelError(string.Empty, "Моля попълнете всички полета.");
                 return this.View(model);
             }
+
+            return this.Redirect("/Subject/AddLesson");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategoryAsync(string categoryId)
+        {
+            await this.subjectService.RemoveCategoryAsync(categoryId);
 
             return this.Redirect("/Subject/AddLesson");
         }

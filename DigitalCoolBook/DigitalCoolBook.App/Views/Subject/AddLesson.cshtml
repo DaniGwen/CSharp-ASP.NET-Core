@@ -25,11 +25,12 @@
             <div class="form-group">
                 <div class="col">
                     <label class="gj-font-size-16">Избери Раздел</label>
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "тема..", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
                     <p class="mt-1">Или</p>
                     <p>
-                        <a href="/Subject/CreateCategory" class="btn btn-outline-secondary">Добави Тема</a>
+                        <a href="/Subject/CreateCategory" class="btn btn-outline-secondary">Добави Раздел</a>
+                        <a href="#" id="deleteCategory" class="btn btn-outline-secondary ml-2">Изтрии Раздела</a>
                     </p>
                 </div>
             </div>
@@ -46,6 +47,9 @@
     </div>
 </div>
 
+<div id="successMessage"></div>
+<div id="errorMessage"></div>
+
 <script>
     var categoryDropDown = $('#CategoryId'); // cache variable
     $('#SubjectId').change(function () {
@@ -59,11 +63,54 @@
             url: "/Subject/GetCategories",
             data: { subjectId: SubjectId }, // sends subjectId to the action
             success: function (response) {
-                categoryDropDown.append($('<option></option>').val('').text('Избери Тема')); // add a default null option
+                categoryDropDown.append($('<option></option>').val('').text('Избери Раздел')); // add a default null option
                 $.each(response, function (i, item) {
                     categoryDropDown.append($('<option></option>').val(item.id).text(item.title));
                 });
             },
         });
     })
+
+    // Deletes choosen Category
+
+    $(function () {
+        $("#deleteCategory").click(function () {
+            var categoryId = $('#CategoryId').val();
+            $.ajax({
+                type: "POST",
+                url: "/Subject/DeleteCategory",
+                data: { categoryId: categoryId },
+                success: function () {
+                    $("#successMessage").dialog(
+                        {
+                            resizable: false,
+                            height: 200,
+                            width: 300,
+                            modal: true,
+                            buttons: {
+                                "Затвори": function () {
+                                    window.location.href = "/Subject/AddLesson",
+                                        $(this).dialog("close");
+                                }
+                            }
+                        });
+                    $("#successMessage").html("Раздела изтрит!")
+                },
+                error: function (request, err, message) {
+                    $("#errorMessage").html(request.statusText);
+                    $("#errorMessage").dialog({
+                        maxHeight: 290,
+                        width: 600,
+                        modal: true,
+                        buttons: {
+                            "Затвори": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
+            })
+        })
+    })
+
 </script>
