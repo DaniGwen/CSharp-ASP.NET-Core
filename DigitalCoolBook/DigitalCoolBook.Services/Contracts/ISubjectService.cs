@@ -21,5 +21,7 @@
         Task SaveChangesAsync();
 
         Task DeleteLessonAsync(Lesson lesson);
+
+        Task CreateSubjectAsync(Subject subject);
     }
 }

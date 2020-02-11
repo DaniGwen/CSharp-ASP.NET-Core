@@ -1,0 +1,30 @@
+﻿@model DigitalCoolBook.App.Models.SubjectViewModels.SubjectCreateViewModel
+
+@{
+    ViewData["Title"] = "CreateSubject";
+    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+}
+
+<h2>Създаване на Учебен предмет</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateSubject">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Име</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Създай" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AddLesson">Назад</a>
+</div>
+

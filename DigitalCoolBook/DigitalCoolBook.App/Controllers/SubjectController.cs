@@ -9,6 +9,7 @@
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,7 @@
             return this.View(lessonsList);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AddLesson()
         {
@@ -91,6 +93,7 @@
             return this.View(categoriesModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("AddLesson")]
         public async Task<IActionResult> AddLessonAsync(string categoryId, string content, string title)
@@ -127,9 +130,10 @@
             return this.Json(categoriesDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ActionName("Edit")]
-        public async Task<IActionResult> EditAsync(string id)
+        public async Task<IActionResult> EditLessonAsync(string id)
         {
             var lesson = await this.subjectService.GetLessonAsync(id);
 
@@ -144,8 +148,9 @@
             return this.View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> EditAsync(LessonEditViewModel model)
+        public async Task<IActionResult> EditLessonAsync(LessonEditViewModel model)
         {
             if (this.ModelState.IsValid)
             {
@@ -164,6 +169,7 @@
             return this.Redirect("/Home/SuccessfulySaved");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ActionName("DeleteLesson")]
         public async Task<bool> DeleteLessonAsync(string id)
@@ -179,6 +185,34 @@
             }
 
             return true;
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult CreateSubject()
+        {
+            return this.View(new SubjectCreateViewModel());
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> CreateSubjectAsync(SubjectCreateViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var subject = new Subject
+                {
+                    Name = model.Name,
+                    SubjectId = Guid.NewGuid().ToString(),
+                };
+                await this.subjectService.CreateSubjectAsync(subject);
+            }
+            else
+            {
+                return this.View(model);
+            }
+
+            return this.View();
         }
     }
 }

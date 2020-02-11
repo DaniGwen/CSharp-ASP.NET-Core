@@ -21,6 +21,12 @@
             await this.SaveChangesAsync();
         }
 
+        public async Task CreateSubjectAsync(Subject subject)
+        {
+            await this.context.Subjects.AddAsync(subject);
+            await this.SaveChangesAsync();
+        }
+
         public async Task DeleteLessonAsync(Lesson lesson)
         {
             this.context.Lessons.Remove(lesson);

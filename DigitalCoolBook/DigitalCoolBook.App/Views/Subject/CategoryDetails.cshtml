@@ -29,27 +29,47 @@
                     @Html.DisplayFor(modelItem => item.Content)
                 </td>
                 <td>
-                    <div class="form-group">
-                        <button class="btn btn-outline-info w-100">
-                            @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
-                        </button>
-                        <a class="btnDelete btn-outline-info w-100" id="@item.Id" href="#">Изтрии</a>
-                    </div>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <div class="form-group">
+                            <button class="btn btn-outline-info w-100">
+                                @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
+                            </button>
+
+                            <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@item.Id" href="#">Изтрии</a>
+                        </div>
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (this.User.IsInRole("Admin"))
+{
+    <p class="btn btn-outline-info">
+        <a asp-action="AddLesson">Създаване</a>
+    </p>
+}
+
+<div id="dialog-confirm" title="Изтриване на урок">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        Информацията ще бъде изтрита. Продължи?
+    </p>
+</div>
+
+<div id="successMessage"></div>
+
+<div style="display: none; " id="errorMessageDialog" title="Грешка!">
+    <p style="max-height:280px; overflow:auto;" id="errorMessage">
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+    </p>
+</div>
 
 <script>
-    $(function ()
-    {
+    $(function () {
         $("#dialog-confirm").hide();
-        $(".btnDelete").click(function ()
-        {
+        $(".btnDelete").click(function () {
             $("#dialog-confirm").dialog({
                 resizable: true,
                 height: 250,
@@ -57,38 +77,33 @@
                 modal: true,
                 buttons:
                 {
-                    "изтриване": function ()
-                    {
+                    "изтриване": function () {
                         var categoryId = $(".btnDelete").attr("id");
                         $.ajax({
                             url: "/Subject/DeleteLesson/" + categoryId,
                             type: "POST",
-                            success: function ()
-                            {
+                            success: function () {
                                 $("#successMessage").dialog({
                                     resizable: false,
                                     height: 200,
                                     width: 300,
                                     modal: true,
                                     buttons: {
-                                        "Затвори": function ()
-                                        {
+                                        "Затвори": function () {
                                             $(this).dialog("close");
                                         }
                                     }
                                 });
                                 $("#successMessage").html("Успешно изтриване!");
                             },
-                            error: function (request, err, message)
-                            {
+                            error: function (request, err, message) {
                                 $("#errorMessage").html(request.statusText);
                                 $("#errorMessageDialog").dialog({
                                     maxHeight: 290,
                                     width: 600,
                                     modal: true,
                                     buttons: {
-                                        "Затвори": function ()
-                                        {
+                                        "Затвори": function () {
                                             $(this).dialog("close");
                                         }
                                     }
@@ -107,18 +122,3 @@
         });
     });
 </script>
-
-<div id="dialog-confirm" title="Изтриване на урок">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-        Информацията ще бъде изтрита. Продължи?
-    </p>
-</div>
-
-<div id="successMessage"></div>
-
-<div style="display: none; " id="errorMessageDialog" title="Грешка!">
-    <p style="max-height:280px; overflow:auto;" id="errorMessage">
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-    </p>
-</div>
