@@ -19,5 +19,7 @@
         Task CreateLessonAsync(Lesson lesson);
 
         Task SaveChangesAsync();
+
+        Task DeleteLessonAsync(Lesson lesson);
     }
 }

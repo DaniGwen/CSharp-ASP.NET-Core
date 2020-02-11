@@ -29,8 +29,12 @@
                     @Html.DisplayFor(modelItem => item.Content)
                 </td>
                 <td>
-                    @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
-                    @Html.ActionLink("Изтриване", "Delete", new { id = item.Id })
+                    <div class="form-group">
+                        <button class="btn btn-outline-info w-100">
+                            @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
+                        </button>
+                        <a class="btnDelete btn-outline-info w-100" id="@item.Id" href="#">Изтрии</a>
+                    </div>
                 </td>
             </tr>
         }
@@ -39,3 +43,82 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<script>
+    $(function ()
+    {
+        $("#dialog-confirm").hide();
+        $(".btnDelete").click(function ()
+        {
+            $("#dialog-confirm").dialog({
+                resizable: true,
+                height: 250,
+                width: 450,
+                modal: true,
+                buttons:
+                {
+                    "изтриване": function ()
+                    {
+                        var categoryId = $(".btnDelete").attr("id");
+                        $.ajax({
+                            url: "/Subject/DeleteLesson/" + categoryId,
+                            type: "POST",
+                            success: function ()
+                            {
+                                $("#successMessage").dialog({
+                                    resizable: false,
+                                    height: 200,
+                                    width: 300,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function ()
+                                        {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                                $("#successMessage").html("Успешно изтриване!");
+                            },
+                            error: function (request, err, message)
+                            {
+                                $("#errorMessage").html(request.statusText);
+                                $("#errorMessageDialog").dialog({
+                                    maxHeight: 290,
+                                    width: 600,
+                                    modal: true,
+                                    buttons: {
+                                        "Затвори": function ()
+                                        {
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                });
+                                //In release version use this
+                                //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
+                            }
+                        });
+                        $(this).dialog("close");
+                    },
+                    "назад": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<div id="dialog-confirm" title="Изтриване на урок">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        Информацията ще бъде изтрита. Продължи?
+    </p>
+</div>
+
+<div id="successMessage"></div>
+
+<div style="display: none; " id="errorMessageDialog" title="Грешка!">
+    <p style="max-height:280px; overflow:auto;" id="errorMessage">
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+    </p>
+</div>

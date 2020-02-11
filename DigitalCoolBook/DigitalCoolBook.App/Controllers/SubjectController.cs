@@ -163,5 +163,22 @@
 
             return this.Redirect("/Home/SuccessfulySaved");
         }
+
+        [HttpPost]
+        [ActionName("DeleteLesson")]
+        public async Task<bool> DeleteLessonAsync(string id)
+        {
+            try
+            {
+                var lesson = await this.subjectService.GetLessonAsync(id);
+                await this.subjectService.DeleteLessonAsync(lesson);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

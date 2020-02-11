@@ -21,6 +21,12 @@
             await this.SaveChangesAsync();
         }
 
+        public async Task DeleteLessonAsync(Lesson lesson)
+        {
+            this.context.Lessons.Remove(lesson);
+            await this.SaveChangesAsync();
+        }
+
         public IQueryable<Category> GetCategories()
         {
             return this.context.Categories;
