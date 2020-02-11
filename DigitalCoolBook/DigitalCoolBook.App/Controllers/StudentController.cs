@@ -48,7 +48,7 @@
         {
             var model = new StudentRegisterModel
             {
-                Grades = gradeService.GetGrades().ToList(),
+                Grades = this.gradeService.GetGrades().ToList(),
             };
 
             return this.View(model);
@@ -177,9 +177,8 @@
             // Redirect to / Admin / AdminPanel after 4 seconds
             this.Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
 
-            return Redirect("/Home/RemoveSuccess");
+            return this.Redirect("/Home/RemoveSuccess");
         }
-
 
         [Authorize(Roles = "Admin, Student, Teacher")]
         [HttpGet]
@@ -210,10 +209,9 @@
                 }
                 else
                 {
-                    this.ModelState.AddModelError("", addResult.Errors.FirstOrDefault().ToString());
+                    this.ModelState.AddModelError(string.Empty, addResult.Errors.FirstOrDefault().ToString());
                     return this.View(model);
                 }
-
             }
             catch (Exception exception)
             {

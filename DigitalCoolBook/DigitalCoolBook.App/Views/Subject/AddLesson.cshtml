@@ -8,7 +8,7 @@
 <h2>Добавяне на учебни материали</h2>
 <hr />
 <br />
-<div class="row">
+<div class="row form-group">
     <div class="col-md-4">
         <form asp-action="AddLesson" method="post">
             <div class="form-group">
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <div class="col">
-                    <label class="gj-font-size-16">Избери Тема</label>
+                    <label class="gj-font-size-16">Избери Раздел</label>
                     @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "тема..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
                     <p class="mt-1">Или</p>
@@ -34,12 +34,12 @@
                 </div>
             </div>
             <div>
-                <label for="title">Заглавие</label>
+                <label for="title" class="gj-font-size-16">Тема</label>
                 <input type="text" class="form-control" id="title" name="title" />
-                <label for="content">Съдържание на урока</label>
-                <textarea class="form-control" style="width:700px" id="content" name="content" rows="10"></textarea>
+                <label for="content" class="gj-font-size-16">Съдържание</label>
+                <textarea class="form-control" style="width:850px" id="content" name="content" rows="10"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Запази" class="btn btn-primary" />
             </div>
         </form>

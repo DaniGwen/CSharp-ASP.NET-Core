@@ -41,7 +41,7 @@
 
         [HttpGet]
         [ActionName("Categories")]
-        public async Task<IActionResult> CategoriesAsync(string id)
+        public IActionResult CategoriesAsync(string id)
         {
             var categoryLessons = this.subjectService.GetLessons().ToList();
             var subjectsDb = this.subjectService.GetSubjects()
@@ -57,7 +57,7 @@
 
         [HttpGet]
         [ActionName("CategoryDetails")]
-        public async Task<IActionResult> CategoryDetailsAsync(string categoryTitle, string categoryId)
+        public IActionResult CategoryDetailsAsync(string categoryTitle, string categoryId)
         {
             var lessons = this.subjectService.GetLessons()
                 .Where(lesson => lesson.CategoryId == categoryId)
@@ -254,7 +254,7 @@
                 return this.View(model);
             }
 
-            return this.Redirect("/Home/SuccessfulySaved");
+            return this.Redirect("/Subject/AddLesson");
         }
     }
 }
