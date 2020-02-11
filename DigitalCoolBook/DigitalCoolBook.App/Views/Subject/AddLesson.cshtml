@@ -14,7 +14,7 @@
             <div class="form-group">
                 <div class="col">
                     <label class="gj-font-size-16">Избери Предмет</label>
-                    @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Избери предмет", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "предмет..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
                     <p class="mt-1">Или</p>
                     <p>
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <div class="col">
                     <label class="gj-font-size-16">Избери Тема</label>
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Избери тема", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "тема..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
                     <p class="mt-1">Или</p>
                     <p>

@@ -94,13 +94,17 @@
 
             try
             {
-                var students = _userService.GetStudents();
+                var students = _userService.GetStudents().ToList();
 
                 foreach (var student in students)
                 {
                     var studentDto = _mapper.Map<StudentEditViewModel>(student);
-                    var grade = await _gradeService.GetGradeAsync(student.GradeId);
-                    studentDto.GradeName = grade.Name;
+                    if (student.GradeId != null)
+                    {
+                        var grade = await _gradeService.GetGradeAsync(student.GradeId);
+                        studentDto.GradeName = grade.Name;
+                    }
+
                     studentsList.Add(studentDto);
                 }
             }
@@ -108,13 +112,13 @@
             {
                 var errorModel = new ErrorViewModel
                 {
-                    Message = exception.Message
+                   Message = exception.Message,
                 };
 
-                return View("Error", errorModel);
+                return this.View("Error", errorModel);
             }
 
-            return View(studentsList);
+            return this.View(studentsList);
         }
 
         [Authorize(Roles = "Admin")]
