@@ -140,7 +140,7 @@ namespace DigitalCoolBook.App
 
             if (!context.Students.Any())
             {
-                var students = this.AddStudents(userManager);
+                var students = this.AddStudents(userManager, context);
 
                 foreach (var student in students)
                 {
@@ -322,9 +322,9 @@ namespace DigitalCoolBook.App
             return gradeParalelos;
         }
 
-        private Student[] AddStudents(UserManager<IdentityUser> userManager)
+        private Student[] AddStudents(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
-            Student[] students = new Student[3]
+            Student[] students = new Student[4]
              {
                 new Student
                 {
@@ -342,7 +342,8 @@ namespace DigitalCoolBook.App
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
                     Email = "ceco@ceco.com",
-                    UserName = "ceco@ceco.com"
+                    UserName = "ceco@ceco.com",
+                    GradeId = context.Grades.First(g => g.Name == "10е").GradeId,
                 },
                 new Student
                 {
@@ -361,25 +362,45 @@ namespace DigitalCoolBook.App
                     MotherMobileNumber = 099009933,
                     Email = "ivailo@ivailo.com",
                     UserName = "ivailo@ivailo.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
                 },
                 new Student
                 {
-                     Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
                     PasswordHash = "Mar155*",
                     PlaceOfBirth = "Kurtovo Konare",
                     Sex = "Female",
                     Telephone = 3300,
-                     Address = "Stoicho Simeonov 17",
+                    Address = "Stoicho Simeonov 17",
                     FatherName = "John Tailer",
                     FatherMobileNumber = 09870054,
                    // IdGradeParalelo = "d019c0ab-b482-422b-8209-fb810aced29d",
                     MotherName = "Penka",
                     MotherMobileNumber = 0997699933,
-                      Email = "mima@mima.com",
-                      UserName = "mima@mima.com"
-                }
+                    Email = "mima@mima.com",
+                    UserName = "mima@mima.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 0978757342,
+                    Name = "Атанас Сакъзов",
+                    PasswordHash = "Atanas155*",
+                    PlaceOfBirth = "Мелник",
+                    Sex = "Мале",
+                    Telephone = 3400,
+                    Address = "Радко Димитриев 19",
+                    FatherName = "Свилен Сакъзов",
+                    FatherMobileNumber = 098722054,
+                    MotherName = "Генка Шикерова",
+                    MotherMobileNumber = 0987699033,
+                    Email = "atanas@atanas.com",
+                    UserName = "atanas@atanas.com",
+                    GradeId = context.Grades.First(g => g.Name == "10е").GradeId,
+                },
              };
             return students;
         }
@@ -415,7 +436,6 @@ namespace DigitalCoolBook.App
                     Telephone = 3264,
                     UserName = "stam@stam.com",
                 },
-
                 new Teacher
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -428,7 +448,7 @@ namespace DigitalCoolBook.App
                     Sex = "Male",
                     Telephone = 3346,
                     UserName = "pesh@pesh.com",
-                }
+                },
             };
             return teachers;
         }

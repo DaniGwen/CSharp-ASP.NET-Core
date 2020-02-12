@@ -48,7 +48,9 @@
         {
             var model = new StudentRegisterModel
             {
-                Grades = this.gradeService.GetGrades().ToList(),
+                Grades = this.gradeService.GetGrades()
+                .OrderBy(g => g.Name)
+                .ToList(),
             };
 
             return this.View(model);
@@ -78,7 +80,7 @@
                 {
                     foreach (var error in result.Errors)
                     {
-                        this.ModelState.AddModelError("", error.Description);
+                        this.ModelState.AddModelError(string.Empty, error.Description);
                         return this.View(registerModel);
                     }
                 }
@@ -135,6 +137,8 @@
                 var gradeModel = this.mapper.Map<GradeViewModel>(grade);
                 model.Grades.Add(gradeModel);
             }
+
+            model.Grades.OrderBy(g => g.Name);
 
             return this.View(model);
         }
