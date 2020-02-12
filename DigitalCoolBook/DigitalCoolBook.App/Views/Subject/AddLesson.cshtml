@@ -8,7 +8,7 @@
 <h2>Добавяне на учебни материали</h2>
 <hr class="hr-orchid" />
 <br />
-<div class="row container-fluid">
+<div class="row container">
     <div class="col-md-4">
         <form asp-action="AddLesson" method="post">
             <div class="form-group">
@@ -16,9 +16,9 @@
                     <label class="gj-font-size-16">Избери Предмет</label>
                     @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Предмет..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
-                    <div class="row mt-2 ">
+                    <div class="row mt-3">
                         <a href="/Subject/CreateSubject" class="btn btn-outline-secondary">Добави Предмет</a>
-                        <a href="#" id="deleteSubject" class="btn btn-outline-secondary ml-2">Изтрии Предмета</a>
+                        <a href="#" id="deleteSubject" class="btn btn-outline-danger ml-2">Изтрии Предмета</a>
                     </div>
                 </div>
             </div>
@@ -28,9 +28,9 @@
                     <label class="gj-font-size-16">Избери Раздел</label>
                     @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Раздел..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
-                    <div class="row mt-2">
+                    <div class="row mt-3">
                         <a href="/Subject/CreateCategory" class="btn btn-outline-secondary">Добави Раздел</a>
-                        <a href="#" id="deleteCategory" class="btn btn-outline-secondary ml-2">Изтрии Раздела</a>
+                        <a href="#" id="deleteCategory" class="btn btn-outline-danger ml-2">Изтрии Раздела</a>
                     </div>
                 </div>
             </div>
@@ -41,8 +41,11 @@
                 <label for="content" class="gj-font-size-16">Съдържание</label>
                 <textarea class="form-control" style="width:850px" id="content" name="content" rows="10"></textarea>
             </div>
-            <div class="form-group mt-2">
-                <input type="submit" value="Запази" class="btn btn-primary" />
+            <div class="row form-group mt-2 d-flex justify-content-lg-between">
+                <div class="col">
+                    <input type="submit" value="Запази" class="btn btn-primary" />
+                    <a class="btn btn-outline-danger" href="/Subject/RemoveLesson">Изтриване на урок</a>
+                </div>
             </div>
         </form>
     </div>

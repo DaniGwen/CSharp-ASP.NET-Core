@@ -4,6 +4,7 @@ namespace DigitalCoolBook.App.Models
 {
     public class LoginAdminViewModel
     {
+        [Required(ErrorMessage ="Моля въведете потребителско име")]
         [StringLength(30, MinimumLength = 3)]
         public string Username { get; set; }
 

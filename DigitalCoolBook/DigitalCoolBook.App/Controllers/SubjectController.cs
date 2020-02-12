@@ -130,6 +130,17 @@
             return this.Json(categoriesDto);
         }
 
+        [HttpPost]
+        public JsonResult GetLessons(string categoryId)
+        {
+            var lessons = this.subjectService.GetLessons()
+                .Where(l => l.CategoryId == categoryId);
+
+            var model = this.mapper.Map<List<LessonsViewModel>>(lessons);
+
+            return this.Json(model);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [ActionName("Edit")]
@@ -167,23 +178,6 @@
             }
 
             return this.Redirect("/Home/SuccessfulySaved");
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [ActionName("DeleteLesson")]
-        public async Task<bool> DeleteLessonAsync(string id)
-        {
-            try
-            {
-                await this.subjectService.RemoveLessonAsync(id);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         [Authorize(Roles = "Admin")]
@@ -264,7 +258,7 @@
         {
             if (categoryId == null)
             {
-               return this.BadRequest("Моля изберете категория.");
+                return this.BadRequest("Моля изберете категория.");
             }
 
             await this.subjectService.RemoveCategoryAsync(categoryId);
@@ -283,6 +277,37 @@
             }
 
             await this.subjectService.RemoveSubjectAsync(subjectId);
+
+            return this.Redirect("/Subject/AddLesson");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult RemoveLesson()
+        {
+            var categories = this.subjectService.GetCategories().ToList();
+            var lessons = this.subjectService.GetLessons().ToList();
+
+            var model = new LessonRemoveViewModel
+            {
+                Categories = categories,
+                Lessons = lessons,
+            };
+
+            return this.View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ActionName("RemoveLesson")]
+        public async Task<IActionResult> RemovelessonAsync(string lessonId)
+        {
+            if (lessonId == null)
+            {
+                return this.BadRequest("Моля изберете урок.");
+            }
+
+            await this.subjectService.RemoveLessonAsync(lessonId);
 
             return this.Redirect("/Subject/AddLesson");
         }

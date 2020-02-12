@@ -76,7 +76,6 @@
             }
 
             return this.View();
-
         }
 
         public IActionResult AdminContact()
