@@ -27,5 +27,7 @@
         Task CreateCategoryAsync(Category category);
 
         Task RemoveCategoryAsync(string categoryId);
+
+        Task RemoveSubjectAsync(string subjectId);
     }
 }

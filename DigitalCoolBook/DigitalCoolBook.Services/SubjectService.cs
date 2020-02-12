@@ -76,5 +76,12 @@
         {
             await this.context.SaveChangesAsync();
         }
+
+        public async Task RemoveSubjectAsync(string subjectId)
+        {
+            var subject = await this.context.Subjects.FindAsync(subjectId);
+            this.context.Remove(subject);
+            await this.SaveChangesAsync();
+        }
     }
 }

@@ -264,5 +264,14 @@
 
             return this.Redirect("/Subject/AddLesson");
         }
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteSubject(string subjectId)
+        {
+            await this.subjectService.RemoveSubjectAsync(subjectId);
+
+            return this.Redirect("/Subject/AddLesson");
+        }
     }
 }
