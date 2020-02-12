@@ -508,7 +508,8 @@ namespace DigitalCoolBook.Data.Migrations
                 {
                     b.HasOne("DigitalCoolBook.Models.Category", "Category")
                         .WithMany("Lessons")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.ScoreRecord", b =>

@@ -6,7 +6,7 @@
 }
 
 <h2>Добавяне на учебни материали</h2>
-<hr />
+<hr class="hr-orchid" />
 <br />
 <div class="row container-fluid">
     <div class="col-md-4">
@@ -14,7 +14,7 @@
             <div class="form-group">
                 <div class="col">
                     <label class="gj-font-size-16">Избери Предмет</label>
-                    @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "предмет..", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Предмет..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
                     <div class="row mt-2 ">
                         <a href="/Subject/CreateSubject" class="btn btn-outline-secondary">Добави Предмет</a>
@@ -22,11 +22,11 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr class="hr-orchid"/>
             <div class="form-group">
                 <div class="col">
                     <label class="gj-font-size-16">Избери Раздел</label>
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Раздел..", new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
                     <div class="row mt-2">
                         <a href="/Subject/CreateCategory" class="btn btn-outline-secondary">Добави Раздел</a>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr class="hr-orchid"/>
             <div>
                 <label for="title" class="gj-font-size-16">Тема</label>
                 <input type="text" class="form-control" id="title" name="title" />
@@ -49,10 +49,10 @@
 </div>
 
 <div id="successMessage"></div>
-<div id="errorMessage"></div>
+<div id="errorMessage" title="Грешка!"></div>
 
+@*Updates Category according Subject selection*@
 <script>
-    // Updates Category according Subject selection
     var categoryDropDown = $('#CategoryId'); // cache variable
     $('#SubjectId').change(function () {
         var SubjectId = $(this).val();
@@ -72,86 +72,122 @@
             },
         });
     })
+</script>
 
-    // Deletes choosen Category
+@*Deletes choosen Category*@
+<script>
     $(function () {
         $("#deleteCategory").click(function () {
             var categoryId = $('#CategoryId').val();
-            $.ajax({
-                type: "POST",
-                url: "/Subject/DeleteCategory",
-                data: { categoryId: categoryId },
-                success: function () {
-                    $("#successMessage").dialog(
-                        {
-                            resizable: false,
-                            height: 200,
-                            width: 300,
-                            modal: true,
-                            buttons: {
-                                "Затвори": function () {
-                                    window.location.href = "/Subject/AddLesson",
-                                        $(this).dialog("close");
+            $("#successMessage").dialog(
+                {
+                    resizable: false,
+                    height: 200,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Изтриване": function () {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Subject/RemoveCategory",
+                                data: { categoryId: categoryId },
+                                success: function () {
+                                    $("#successMessage").dialog(
+                                        {
+                                            resizable: false,
+                                            height: 200,
+                                            width: 300,
+                                            modal: true,
+                                            buttons:
+                                            {
+                                                "Затвори": function () {
+                                                    window.location.href = "/Subject/AddLesson",
+                                                        $(this).dialog("close");
+                                                }
+                                            }
+                                        });
+                                    $("#successMessage").html("Раздела изтрит!")
+                                },
+                                error: function (request, err, message) {
+                                    $("#errorMessage").html(request.responseText);
+                                    $("#errorMessage").dialog({
+                                        maxHeight: 290,
+                                        width: 600,
+                                        modal: true,
+                                        buttons:
+                                        {
+                                            "Затвори": function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        });
-                    $("#successMessage").html("Раздела изтрит!")
-                },
-                error: function (request, err, message) {
-                    $("#errorMessage").html(request.statusText);
-                    $("#errorMessage").dialog({
-                        maxHeight: 290,
-                        width: 600,
-                        modal: true,
-                        buttons: {
-                            "Затвори": function () {
-                                $(this).dialog("close");
-                            }
+                            })
+                        },
+                        "Отказ": function () {
+                            $(this).dialog("close");
                         }
-                    });
-                }
-            })
+                    }
+                })
+            $("#successMessage").html("Изтриване на раздела?")
         })
     })
+</script>
 
-    // Delete choosen Subject 
+@*Delete choosen Subject*@
+<script>
     $(function () {
         $("#deleteSubject").click(function () {
             var subjectId = $('#SubjectId').val();
-            $.ajax({
-                type: "POST",
-                url: "/Subject/DeleteSubject",
-                data: { subjectId: subjectId },
-                success: function () {
-                    $("#successMessage").dialog(
-                        {
-                            resizable: false,
-                            height: 200,
-                            width: 300,
-                            modal: true,
-                            buttons: {
-                                "Затвори": function () {
-                                    window.location.href = "/Subject/AddLesson",
-                                        $(this).dialog("close");
+            $("#successMessage").dialog(
+                {
+                    resizable: false,
+                    height: 200,
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Изтриване": function () {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Subject/RemoveSubject",
+                                data: { subjectId: subjectId },
+                                success: function () {
+                                    $("#successMessage").dialog(
+                                        {
+                                            resizable: false,
+                                            height: 200,
+                                            width: 300,
+                                            modal: true,
+                                            buttons: {
+                                                "Затвори": function () {
+                                                    window.location.href = "/Subject/AddLesson",
+                                                        $(this).dialog("close");
+                                                }
+                                            }
+                                        });
+                                    $("#successMessage").html("Предмета изтрит!")
+                                },
+                                error: function (request, err, message) {
+                                    $("#errorMessage").html(request.responseText);
+                                    $("#errorMessage").dialog({
+                                        maxHeight: 290,
+                                        width: 600,
+                                        modal: true,
+                                        buttons: {
+                                            "Затвори": function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        });
-                    $("#successMessage").html("Предмета изтрит!")
-                },
-                error: function (request, err, message) {
-                    $("#errorMessage").html(request.statusText);
-                    $("#errorMessage").dialog({
-                        maxHeight: 290,
-                        width: 600,
-                        modal: true,
-                        buttons: {
-                            "Затвори": function () {
-                                $(this).dialog("close");
-                            }
+                            })
+                        },
+                        "Отказ": function () {
+                            $(this).dialog("close");
                         }
-                    });
-                }
-            })
+                    }
+                })
+            $("#successMessage").html("Изтриване на предмета?")
         })
     })
 </script>

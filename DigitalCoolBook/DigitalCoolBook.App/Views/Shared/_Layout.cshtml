@@ -54,6 +54,15 @@
     <script src="~/js/jquery-ui.js"></script>
     <script src="~/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    <!----styling-->
+    <style>
+        hr.hr-orchid {
+            background-color: darkorchid;
+            height: 2px;
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -83,14 +92,12 @@
                                 @if (this.User.Identity.IsAuthenticated)
                                 {
                                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                        <i class="flaticon-user"></i>
                                         <button type="submit" class="btn btn-secondary">Отписване</button>
                                     </form>
                                     if (this.User.IsInRole("Admin"))
                                     {
                                         <div class="mx-5">
                                             <form class="form-inline" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
-                                                <i class="flaticon-user"></i>
                                                 <button class="btn btn-primary">Администраторски панел</button>
                                             </form>
                                         </div>
@@ -99,7 +106,6 @@
                                     {
                                         <div class="mx-4">
                                             <form class="form-inline" asp-area="" asp-controller="Student" asp-action="Panel">
-                                                <i class="flaticon-user"></i>
                                                 <button class="btn btn-primary">Профил</button>
                                             </form>
                                         </div>
@@ -108,7 +114,6 @@
                                     {
                                         <div class="mx-4">
                                             <form class="form-inline" asp-area="" asp-controller="Teacher" asp-action="Panel">
-                                                <i class="flaticon-user"></i>
                                                 <button class="btn btn-primary">Профил</button>
                                             </form>
                                         </div>
@@ -117,7 +122,6 @@
                                 else if (!this.User.Identity.IsAuthenticated)
                                 {
                                     <form class="form-inline" asp-controller="Admin" asp-action="LoginAdmin">
-                                        <i class="flaticon-user"></i>
                                         <button class="btn btn-secondary">Вляз като Администратор</button>
                                     </form>
                                 }

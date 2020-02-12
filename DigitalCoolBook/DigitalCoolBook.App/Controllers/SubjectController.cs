@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Models;
@@ -258,17 +259,29 @@
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> DeleteCategoryAsync(string categoryId)
+        [ActionName("RemoveCategory")]
+        public async Task<IActionResult> RemoveCategoryAsync(string categoryId)
         {
+            if (categoryId == null)
+            {
+               return this.BadRequest("Моля изберете категория.");
+            }
+
             await this.subjectService.RemoveCategoryAsync(categoryId);
 
             return this.Redirect("/Subject/AddLesson");
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> DeleteSubject(string subjectId)
+        [ActionName("RemoveSubject")]
+        public async Task<IActionResult> RemoveSubjectAsync(string subjectId)
         {
+            if (subjectId == null)
+            {
+                return this.BadRequest("Моля изберете предмет.");
+            }
+
             await this.subjectService.RemoveSubjectAsync(subjectId);
 
             return this.Redirect("/Subject/AddLesson");

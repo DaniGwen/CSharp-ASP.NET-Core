@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Data;
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
     using DigitalCoolBook.Models;

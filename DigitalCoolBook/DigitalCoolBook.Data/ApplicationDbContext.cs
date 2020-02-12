@@ -35,6 +35,10 @@ namespace DigitalCoolBook.App.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Category>().HasMany(c => c.Lessons)
+                .WithOne(c => c.Category)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
