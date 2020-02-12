@@ -30,11 +30,12 @@
                 <input asp-for="PlaceOfBirth" class="form-control" />
                 <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Sex" class="control-label">Пол</label>
-                <input asp-for="Sex" class="form-control" />
-                <span asp-validation-for="Sex" class="text-danger"></span>
-            </div>
+            <label asp-for="Sex" class="control-label">Пол</label>
+            <select class="form-control" name="sex" id="sex">
+                <option value="Male">Мъж</option>
+                <option value="Female">Жена</option>
+                <option value="Other">Друго</option>
+            </select>
             <div class="form-group">
                 <label asp-for="MobilePhone" class="control-label">Мобилен телефон</label>
                 <input asp-for="MobilePhone" class="form-control" />
