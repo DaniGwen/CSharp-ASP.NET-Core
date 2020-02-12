@@ -1,13 +1,13 @@
-﻿using DigitalCoolBook.Models.Enums;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace DigitalCoolBook.Models
+﻿namespace DigitalCoolBook.Models
 {
+    using Microsoft.AspNetCore.Identity;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Student : IdentityUser
     {
+
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
         public string Name { get; set; }
@@ -51,5 +51,7 @@ namespace DigitalCoolBook.Models
         public List<ScoreRecord> ScoreRecords { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public virtual ICollection<TestStudent> TestStudent { get; set; }
     }
 }

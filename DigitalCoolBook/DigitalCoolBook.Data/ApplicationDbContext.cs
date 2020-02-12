@@ -27,6 +27,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Lesson> Lessons { get; set; }
 
+        public DbSet<Test> Tests { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -39,6 +41,9 @@ namespace DigitalCoolBook.App.Data
             builder.Entity<Category>().HasMany(c => c.Lessons)
                 .WithOne(c => c.Category)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TestStudent>()
+                .HasKey(k => new { k.StudentId, k.TestId });
         }
     }
 }

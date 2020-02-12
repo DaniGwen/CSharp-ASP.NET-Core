@@ -1,10 +1,10 @@
-﻿using DigitalCoolBook.Models.Enums;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace DigitalCoolBook.Models
+﻿namespace DigitalCoolBook.Models
 {
+    using Microsoft.AspNetCore.Identity;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Teacher : IdentityUser
     {
 
@@ -30,6 +30,7 @@ namespace DigitalCoolBook.Models
         public int Telephone { get; set; }
 
         public bool IsDeleted { get; set; }
-      
+
+        public ICollection<Test> Tests { get; set; }
     }
 }
