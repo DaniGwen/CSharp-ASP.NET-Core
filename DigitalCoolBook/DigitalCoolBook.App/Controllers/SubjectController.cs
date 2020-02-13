@@ -42,14 +42,14 @@
 
         [HttpGet]
         [ActionName("Categories")]
-        public IActionResult CategoriesAsync(string id)
+        public IActionResult CategoriesAsync(string Id)
         {
             var categoryLessons = this.subjectService.GetLessons().ToList();
             var subjectsDb = this.subjectService.GetSubjects()
                 .Include(s => s.Categories)
                 .ToList();
 
-            var subject = subjectsDb.FirstOrDefault(s => s.SubjectId == id);
+            var subject = subjectsDb.FirstOrDefault(s => s.SubjectId == Id);
 
             var model = this.mapper.Map<SubjectViewModel>(subject);
 
@@ -58,7 +58,7 @@
 
         [HttpGet]
         [ActionName("CategoryDetails")]
-        public IActionResult CategoryDetailsAsync(string categoryTitle, string categoryId)
+        public IActionResult CategoryDetailsAsync(string categoryId, string categoryTitle, string subjectId)
         {
             var lessons = this.subjectService.GetLessons()
                 .Where(lesson => lesson.CategoryId == categoryId)
@@ -72,6 +72,7 @@
                 lessonsList.Add(lessonDto);
             }
 
+            this.ViewData["SubjectID"] = subjectId;
             this.ViewData["categoryTitle"] = categoryTitle;
 
             return this.View(lessonsList);

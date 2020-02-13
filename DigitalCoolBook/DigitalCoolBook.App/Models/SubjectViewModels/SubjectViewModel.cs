@@ -1,7 +1,6 @@
 ﻿namespace DigitalCoolBook.App.Models.SubjectViewModels
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using DigitalCoolBook.Models;
 
     public class SubjectViewModel

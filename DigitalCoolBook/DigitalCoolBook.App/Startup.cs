@@ -10,6 +10,7 @@ namespace DigitalCoolBook.App
     using DigitalCoolBook.App.Data;
     using DigitalCoolBook.App.Services;
     using DigitalCoolBook.Models;
+    using DigitalCoolBook.Service;
     using DigitalCoolBook.Services;
     using DigitalCoolBook.Services.Contracts;
     using DigitalCoolBook.Services.Mapping;
@@ -47,6 +48,7 @@ namespace DigitalCoolBook.App
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<ISubjectService, SubjectService>();
+            services.AddTransient<ITestService, TestService>();
 
             var config = new MapperConfiguration(cfg =>
             {

@@ -3,12 +3,14 @@
 @{
     Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
 }
-<div class="d-flex justify-content-center">
+
+<div class="col d-flex justify-content-center">
     <h2>@ViewData["CategoryTitle"]</h2>
 </div>
-<hr class="hr-orchid"/>
+<hr class="hr-orchid" />
 <h2 class="d-flex justify-content-center">Теми</h2>
 <hr class="hr-orchid" />
+
 <div>
     @foreach (var item in Model)
     {
@@ -29,6 +31,10 @@
         </div>
     }
 </div>
+<div class="mt-4 ml-4 mb-2">
+    <a href="@Url.Action("Categories", "Subject",new {Id = ViewData["SubjectId"]})" class="btn btn-outline-info">Назад</a>
+</div>
+
 @if (this.User.IsInRole("Admin"))
 {
     <p class="btn btn-outline-info">

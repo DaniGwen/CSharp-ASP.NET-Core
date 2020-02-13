@@ -10,10 +10,10 @@
         public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public TimeSpan Timer { get; set; }
 
-        public string SubjectId { get; set; }
-        public Subject Subject { get; set; }
+        public string LessonId { get; set; }
+        public Lesson Lesson { get; set; }
 
         public DateTime Date { get; set; }
 

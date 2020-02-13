@@ -13,12 +13,12 @@
             @Model.Content
         </p>
     </div>
-    <div>
-        <a class="btn btn-outline-info mt-1" href="/Subject/CategoryDetails/@Model.CategoryId">Назад</a>
+    <div class="form-group">
+        <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})" class="btn btn-outline-info mt-1">Назад</a>
         <div class="d-flex justify-content-center mb-2">
             @if (this.User.IsInRole("Teacher"))
             {
-                <a class="btn boxed-btn ml-5">Тест</a>
+                <a href="/Test/Test/@Model.Id" class="btn boxed-btn ml-5">Тест</a>
             }
         </div>
     </div>

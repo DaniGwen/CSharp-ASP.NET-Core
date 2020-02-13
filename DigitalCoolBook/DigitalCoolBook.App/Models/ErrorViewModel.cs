@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-
 namespace DigitalCoolBook.App.Models
 {
+    using System.Collections.Generic;
+
     public class ErrorViewModel
     {
         public string RequestId { get; set; }
