@@ -168,28 +168,28 @@ namespace DigitalCoolBook.App
                    Id = 1.ToString(),
                    Title = "Живот и творчество",
                    Lessons = new List<Lesson>(this.AddLessons("1")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Графичен дизайн").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
                },
                new Category()
                {
                    Id = 2.ToString(),
                    Title = "Творци на модерното изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("2")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Графичен дизайн").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
                },
                new Category()
                {
                    Id = 3.ToString(),
                    Title = "Световни музей и галерии",
                    Lessons = new List<Lesson>(this.AddLessons("3")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Графичен дизайн").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
                },
                new Category()
                {
                    Id = 4.ToString(),
                    Title = "Протестно Изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("4")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Графичен дизайн").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
                },
            };
 
@@ -477,7 +477,9 @@ namespace DigitalCoolBook.App
         {
             var subjects = new List<string>()
                         {
-                            "Математика", "Български", "Литература", "География", "История", "Компютърна графика",
+                            "Математика", "Български", "Литература",
+                            "География", "История", "Компютърна графика",
+                            "Изобразително изкуство",
                         };
 
             var subjectsList = new List<Subject>();
@@ -492,6 +494,7 @@ namespace DigitalCoolBook.App
 
                 subjectsList.Add(subjectForContext);
             }
+
             return subjectsList;
         }
 

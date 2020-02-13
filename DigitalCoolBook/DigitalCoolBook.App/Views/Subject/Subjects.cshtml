@@ -12,14 +12,15 @@
 </p>
 <table class="table">
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a class="btn boxed-btn w-25" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="btn boxed-btn w-50" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

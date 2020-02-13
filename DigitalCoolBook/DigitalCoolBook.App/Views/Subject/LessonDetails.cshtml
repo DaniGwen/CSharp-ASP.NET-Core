@@ -1,0 +1,25 @@
+﻿@model DigitalCoolBook.App.Models.CategoryViewModels.LessonsViewModel
+
+@{
+    ViewData["Title"] = "LessonDetails";
+    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+}
+
+<div>
+    <h2 class="d-flex justify-content-center">@Model.Title</h2>
+    <hr />
+    <div>
+        <p>
+            @Model.Content
+        </p>
+    </div>
+    <div>
+        <a class="btn btn-outline-info mt-1" href="/Subject/CategoryDetails/@Model.CategoryId">Назад</a>
+        <div class="d-flex justify-content-center mb-2">
+            @if (this.User.IsInRole("Teacher"))
+            {
+                <a class="btn boxed-btn ml-5">Тест</a>
+            }
+        </div>
+    </div>
+</div>

@@ -3,47 +3,32 @@
 @{
     Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
 }
+<div class="d-flex justify-content-center">
+    <h2>@ViewData["CategoryTitle"]</h2>
+</div>
+<hr class="hr-orchid"/>
+<h2 class="d-flex justify-content-center">Теми</h2>
+<hr class="hr-orchid" />
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="d-flex justify-content-center">
+            <a href="/Subject/LessonDetails/@item.Id" class="boxed-btn w-75 mb-2">@item.Title</a>
+        </div>
+        <div>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <div class="form-group">
+                    <button class="btn btn-outline-info w-100">
+                        @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
+                    </button>
 
-<h2>@ViewData["CategoryTitle"]</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayName("Тема")
-            </th>
-            <th>
-                @Html.DisplayName("Съдържание")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <div class="form-group">
-                            <button class="btn btn-outline-info w-100">
-                                @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
-                            </button>
-
-                            <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@item.Id" href="#">Изтрии</a>
-                        </div>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@item.Id" href="#">Изтрии</a>
+                </div>
+            }
+        </div>
+    }
+</div>
 @if (this.User.IsInRole("Admin"))
 {
     <p class="btn btn-outline-info">

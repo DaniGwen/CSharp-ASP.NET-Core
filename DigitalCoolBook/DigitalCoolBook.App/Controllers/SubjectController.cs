@@ -311,5 +311,17 @@
 
             return this.Redirect("/Subject/AddLesson");
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher, Admin")]
+        [ActionName("LessonDetails")]
+        public async Task<IActionResult> LessonDetailsAsync(string id)
+        {
+            var lesson = await this.subjectService.GetLessonAsync(id);
+
+            var model = this.mapper.Map<LessonsViewModel>(lesson);
+
+            return this.View(model);
+        }
     }
 }

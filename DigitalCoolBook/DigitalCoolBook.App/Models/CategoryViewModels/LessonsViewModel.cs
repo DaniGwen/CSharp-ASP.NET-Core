@@ -2,7 +2,7 @@
 {
     public class LessonsViewModel
     {
-        public string CategoryTitle { get; set; }
+        public string CategoryId { get; set; }
 
         public string Title { get; set; }
 
