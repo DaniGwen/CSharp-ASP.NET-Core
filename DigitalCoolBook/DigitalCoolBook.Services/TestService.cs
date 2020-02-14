@@ -16,9 +16,20 @@
             this.context = context;
         }
 
+        public async Task AddTestAsync(Test test)
+        {
+            await this.context.Tests.AddAsync(test);
+            await this.SaveChangesAsync();
+        }
+
         public Test GetTest(string id)
         {
             return this.context.Tests.FirstOrDefault(t => t.LessonId == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await this.context.SaveChangesAsync();
         }
     }
 }

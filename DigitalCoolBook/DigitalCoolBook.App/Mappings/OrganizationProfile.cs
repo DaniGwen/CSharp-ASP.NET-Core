@@ -7,6 +7,7 @@
     using DigitalCoolBook.App.Models.StudentViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.App.Models.TeacherViewModels;
+    using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
 
     public class OrganizationProfile : Profile
@@ -39,6 +40,10 @@
             this.CreateMap<Category, CategoryAjaxViewModel>();
             this.CreateMap<Lesson, LessonEditViewModel>();
             this.CreateMap<Category, CategoryViewModel>();
+
+            // Test mappings
+            this.CreateMap<Test, TestViewModel>();
+            this.CreateMap<TestViewModel, Test>();
         }
     }
 }

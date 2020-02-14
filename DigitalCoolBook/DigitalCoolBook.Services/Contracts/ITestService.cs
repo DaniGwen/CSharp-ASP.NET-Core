@@ -6,6 +6,9 @@
     public interface ITestService
     {
        Test GetTest(string id);
+
         Task SaveChangesAsync();
+
+        Task AddTestAsync(Test test);
     }
 }

@@ -2,8 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using DigitalCoolBook.Models;
 
     public class TestViewModel
     {
@@ -14,5 +13,11 @@
         public TimeSpan Time { get; set; }
 
         public DateTime Date { get; set; }
+
+        public List<Grade> Grades { get; set; }
+
+        public string GradeId { get; set; }
+
+        public string LessonId { get; set; }
     }
 }

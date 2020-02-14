@@ -420,3 +420,4 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Subject\CreateCategory.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Subject\RemoveLesson.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Subject\LessonDetails.cshtml.g.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\CreateTest.cshtml.g.cs

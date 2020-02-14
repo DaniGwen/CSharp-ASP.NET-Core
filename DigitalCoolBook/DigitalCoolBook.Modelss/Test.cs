@@ -22,5 +22,7 @@
         public string Place { get; set; }
 
         public virtual ICollection<TestStudent> TestStudent { get; set; }
+
+        public string GradeId { get; set; }
     }
 }
