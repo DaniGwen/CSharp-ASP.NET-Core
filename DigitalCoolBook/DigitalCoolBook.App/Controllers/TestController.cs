@@ -62,8 +62,8 @@
             }
             catch (Exception exception)
             {
-                this.ViewBag.ErrorMsg = exception.Message;
-                return this.View("/Home/Error");
+                this.TempData["ErrorMsg"] = exception.Message;
+                return this.RedirectToAction("ErrorView", "Home");
             }
 
             this.TempData["SuccessMsg"] = "Теста е създаден успешно!";

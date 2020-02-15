@@ -75,7 +75,8 @@
 
                     this.logger.LogInformation("User created a new account with password.");
 
-                    return this.Redirect("/Home/SuccessfulySaved");
+                    this.TempData["SuccessMsg"] = "Акаунта е създаден.";
+                    return this.Redirect("/Home/Success");
                 }
                 else
                 {
@@ -90,6 +91,7 @@
             return this.View();
         }
 
+        [Authorize(Roles ="Admin, Teacher")]
         public IActionResult ChooseGrade()
         {
             var grades = this.gradeService.GetGrades()
@@ -107,6 +109,7 @@
             return this.View(gradesToView);
         }
 
+        [Authorize(Roles ="Admin, Teacher")]
         public async Task<IActionResult> GradeDetailsAsync(string id)
         {
             var studentsInGrade = this.userService.GetStudents()
@@ -149,6 +152,8 @@
             {
                 await this.userService.RemoveTeacherAsync(id);
                 await this.userService.SaveChangesAsync();
+                this.TempData["SuccessMsg"] = "Акаунта е премахнат.";
+                return this.Redirect("/Home/Success");
             }
             catch (Exception exception)
             {
@@ -159,8 +164,6 @@
 
                 return this.View("Error", errorModel);
             }
-
-            return this.Redirect("/Admin/AdminPanel");
         }
 
         [Authorize(Roles = "Admin")]
@@ -184,11 +187,11 @@
                 this.mapper.Map(model, teacher, typeof(TeacherDetailsViewModel), typeof(Teacher));
 
                 await this.userService.SaveChangesAsync();
-
-                return this.Redirect("/Home/SuccessfulySaved");
+                this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+                return this.Redirect("/Home/Success");
             }
 
-            return this.View();
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -233,7 +236,8 @@
                 if (addPasswordResult.Succeeded)
                 {
                     await this.signInManager.SignOutAsync();
-                    return this.Redirect("/Home/PasswordSaved");
+                    this.TempData["SuccessMsg"] = "Паролата е записана успешно";
+                    return this.Redirect("/Home/Success");
                 }
                 else
                 {

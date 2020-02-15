@@ -74,7 +74,8 @@
 
                     this.logger.LogInformation("User created a new account with password.");
 
-                    return this.Redirect("/Home/SuccessfulySaved");
+                    this.TempData["SuccessMsg"] = "Акаунта е регистриран";
+                    return this.Redirect("/Home/Success");
                 }
                 else
                 {
@@ -166,8 +167,8 @@
                 student.GradeId = model.GradeId;
 
                 await this.userService.SaveChangesAsync();
-
-                return this.Redirect("/Home/SuccessfulySaved");
+                this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+                return this.Redirect("/Home/Success");
             }
 
             return this.View();
@@ -180,8 +181,8 @@
 
             // Redirect to / Admin / AdminPanel after 4 seconds
             this.Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
-
-            return this.Redirect("/Home/RemoveSuccess");
+            this.TempData["SuccessMsg"] = "Акаунта е премахнат";
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Admin, Student, Teacher")]
@@ -209,7 +210,8 @@
                 if (addResult.Succeeded)
                 {
                     await this.signInManager.SignOutAsync();
-                    return this.Redirect("/Home/PasswordSaved");
+                    this.TempData["SuccessMsg"] = "Паролата е записана успешно";
+                    return this.Redirect("/Home/Success");
                 }
                 else
                 {

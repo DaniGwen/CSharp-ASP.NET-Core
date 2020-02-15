@@ -113,8 +113,8 @@
             };
 
             await this.subjectService.CreateLessonAsync(lesson);
-
-            return this.Redirect("/Home/SuccessfulySaved");
+            this.TempData["SuccessMsg"] = "Успешно добавяне.";
+            return this.Redirect("/Home/Success");
         }
 
         [HttpPost]
@@ -178,7 +178,8 @@
                 return this.View(model);
             }
 
-            return this.Redirect("/Home/SuccessfulySaved");
+            this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Admin")]
@@ -212,7 +213,8 @@
                 return this.View(model);
             }
 
-            return this.Redirect("/Home/SuccessfulySaved");
+            this.TempData["SuccessMsg"] = "Предмета е създаден.";
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Admin")]

@@ -169,7 +169,8 @@
                 return this.View("Error", error);
             }
 
-            return this.Redirect("/Home/SuccessfulySaved");
+            this.TempData["SuccessMsg"] = "Паралелката създадена успешно";
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Admin")]
@@ -226,7 +227,8 @@
                 return this.View("Error", error);
             }
 
-            return this.Redirect("/Home/SuccessfulySaved");
+            this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+            return this.Redirect("/Home/Success");
         }
 
         public async Task<IActionResult> DeleteParaleloAsync(string id)
@@ -246,7 +248,8 @@
                 return this.View("Error", error);
             }
 
-            return this.Redirect("/Home/RemoveSuccess");
+            this.TempData["SuccessMsg"] = "Премахването е успешно";
+            return this.Redirect("/Home/Success");
         }
     }
 }

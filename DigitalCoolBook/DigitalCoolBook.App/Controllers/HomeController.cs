@@ -123,8 +123,7 @@
         [Authorize(Roles ="Teacher, Admin")]
         public IActionResult Success()
         {
-            var message = this.TempData["SuccessMsg"];
-            //this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
+            this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
             return this.View();
         }
 
