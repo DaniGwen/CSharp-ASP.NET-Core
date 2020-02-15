@@ -52,15 +52,23 @@
         [ActionName("CreateTest")]
         public async Task<IActionResult> CreateTestAsync(TestViewModel model)
         {
-            var test = new Test
+            try
             {
-                TestId = Guid.NewGuid().ToString(),
-                TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
-            };
-            this.mapper.Map<Test>(model);
-            await this.testService.AddTestAsync(test);
+                var test = this.mapper.Map<Test>(model);
+                test.TestId = Guid.NewGuid().ToString();
+                test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            return this.View();
+                await this.testService.AddTestAsync(test);
+            }
+            catch (Exception exception)
+            {
+                this.ViewBag.ErrorMsg = exception.Message;
+                return this.View("/Home/Error");
+            }
+
+            this.TempData["SuccessMsg"] = "Теста е създаден успешно!";
+
+            return this.RedirectToAction("Success", "Home");
         }
     }
 }

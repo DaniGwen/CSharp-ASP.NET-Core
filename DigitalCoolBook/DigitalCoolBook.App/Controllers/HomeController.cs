@@ -7,6 +7,7 @@
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -119,10 +120,11 @@
             { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
 
-        [HttpGet]
-        public IActionResult SuccessfulySaved()
+        [Authorize(Roles ="Teacher, Admin")]
+        public IActionResult Success()
         {
-            this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
+            var message = this.TempData["SuccessMsg"];
+            //this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
             return this.View();
         }
 
@@ -132,8 +134,8 @@
             return this.View();
         }
 
-        [HttpGet]
-        public IActionResult RemoveSuccess()
+        [Authorize(Roles = "Teacher, Admin")]
+        public IActionResult ErrorView()
         {
             this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
             return this.View();

@@ -2,15 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using DigitalCoolBook.Models;
 
     public class TestViewModel
     {
         public string TestId { get; set; }
 
+        [Required(ErrorMessage ="Моля въведете място на провеждане на теста.")]
         public string Place { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public TimeSpan Timer { get; set; }
 
         public DateTime Date { get; set; }
 

@@ -8,12 +8,12 @@
 <div class="container-lg pt-3">
     <h1>Създаване на Тест</h1>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CreateTest" method="post">
+    <form asp-action="CreateTest" method="post">
+        <div class="row">
+            <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div>
-                    <input type="hidden" name="LessonId" value="@Model.LessonId"/>
+                    <input type="hidden" name="LessonId" value="@Model.LessonId" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Place" class="control-label"></label>
@@ -21,27 +21,25 @@
                     <span asp-validation-for="Place" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Time" class="control-label"></label>
-                    <input asp-for="Time" class="form-control" />
-                    <span asp-validation-for="Time" class="text-danger"></span>
+                    <label asp-for="Timer" class="control-label"></label>
+                    <input asp-for="Timer" class="form-control" />
+                    <span asp-validation-for="Timer" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Date" class="control-label"></label>
                     <input asp-for="Date" class="form-control" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Запази" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
+            <div class="col">
+                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), new { @class = "form-control w-50" })
+            </div>
         </div>
-        <div class="col">
-            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), new { @class = "form-control w-50" })
+        <div class="form-group">
+            <input type="submit" value="Запази" class="btn btn-primary"/>
         </div>
-    </div>
+    </form>
     <div>
         <a asp-action="Index">Назад</a>
     </div>
 </div>
-
-
