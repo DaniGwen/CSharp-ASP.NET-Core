@@ -20,6 +20,7 @@
             this.CreateMap<StudentRegisterModel, Student>();
             this.CreateMap<Student, StudentDetailsViewModel>();
             this.CreateMap<Student, StudentChangePasswordViewModel>();
+            this.CreateMap<Student, StudentTestDropDownModel>();
 
             // Grade mappings
             this.CreateMap<Grade, GradeViewModel>();

@@ -4,6 +4,7 @@
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -19,6 +20,12 @@
         public async Task AddTestAsync(Test test)
         {
             await this.context.Tests.AddAsync(test);
+            await this.SaveChangesAsync();
+        }
+
+        public async Task AddTestStudentsAsync(List<TestStudent> testStudentList)
+        {
+            await this.context.AddRangeAsync(testStudentList);
             await this.SaveChangesAsync();
         }
 

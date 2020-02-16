@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using DigitalCoolBook.App.Models.StudentViewModels;
     using DigitalCoolBook.Models;
 
     public class TestViewModel
@@ -21,5 +22,9 @@
         public string GradeId { get; set; }
 
         public string LessonId { get; set; }
+
+        public string StudentId { get; set; }
+
+        public List<StudentTestDropDownModel> Students { get; set; }
     }
 }

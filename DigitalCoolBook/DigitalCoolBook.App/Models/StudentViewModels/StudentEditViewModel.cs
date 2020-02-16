@@ -1,10 +1,10 @@
-﻿using DigitalCoolBook.App.Models.GradesViewModels;
-using DigitalCoolBook.Models;
-using System;
-using System.Collections.Generic;
-
-namespace DigitalCoolBook.App.Models.StudentViewModels
+﻿namespace DigitalCoolBook.App.Models.StudentViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using DigitalCoolBook.App.Models.GradesViewModels;
+    using DigitalCoolBook.Models;
+
     public class StudentEditViewModel
     {
         public StudentEditViewModel()

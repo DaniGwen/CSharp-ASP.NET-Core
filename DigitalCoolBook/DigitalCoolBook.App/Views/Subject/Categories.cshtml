@@ -17,96 +17,36 @@
             </div>
         </div>
     </div>
-    <!-- bradcam_area_end -->
-
-    <div class="courses_details_info">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-7 col-lg-7">
-                    <div class="single_courses">
-                        <h3>Раздели</h3>
-                        @foreach (var category in Model.Categories)
-                        {
-                            <a href="@Url.Action("CategoryDetails", "Subject",
-                                new {categoryId = @category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
-                                type="button" class="boxed-btn mt-2" style="width:380px" data-toggle="popover">
-                                @category.Title
-                            </a>
-                            <br />
-                        }
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-5">
-                    <div class="courses_sidebar">
-                        <div class="video_thumb">
-                            <img src="img/latest_blog/video.png" alt="">
-                            <a class="popup-video" href="https://www.youtube.com/watch?v=AjgD3CvWzS0">
-                                <i class="fa fa-play"></i>
-                            </a>
-                        </div>
-                        <div class="author_info">
-                            <div class="auhor_header">
-                                <div class="thumb">
-                                    <img src="img/latest_blog/author.png" alt="">
-                                </div>
-                                <div class="name">
-                                    <h3>Macau Wilium</h3>
-                                    <p>UI/UX Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- testimonial_area_start -->
+    <h2 class="d-flex justify-content-center">Раздели</h2>
     <div class="testimonial_area testimonial_bg_1 overlay">
         <div class="testmonial_active owl-carousel">
-            <div class="single_testmoial">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="testmonial_text text-center">
-                                <div class="author_img">
-                                    <img src="img/testmonial/author_img.png" alt="">
-                                </div>
-                                <p>
-                                    "Working in conjunction with humanitarian aid <br> agencies we have supported
-                                    programmes to <br>
-                                    alleviate.
-                                    human suffering.
+            @foreach (var category in Model.Categories)
+            {
+                <div class="single_testmoial">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="testmonial_text text-center">
+                                    <div class="author_img">
+                                        <img src="img/testmonial/author_img.png" alt="">
+                                        <a href="@Url.Action("CategoryDetails", "Subject",
+                                new {categoryId = @category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
+                                           type="button" class="boxed-btn mt-2" style="width:380px" data-toggle="popover">
+                                            @category.Title
+                                        </a>
 
-                                </p>
-                                <span>- Jquileen</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="single_testmoial">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="testmonial_text text-center">
-                                <div class="author_img">
-                                    <img src="img/testmonial/author_img.png" alt="">
-                                </div>
-                                <p>
-                                    "Working in conjunction with humanitarian aid <br> agencies we have supported
-                                    programmes to <br>
-                                    alleviate.
-                                    human suffering.
-
-                                </p>
-                                <span>- Jquileen</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
+    <br />
+
+    <!-- testimonial_area_start -->
     <!-- testimonial_area_end -->
     <!-- our_courses_start -->
     <div class="our_courses">

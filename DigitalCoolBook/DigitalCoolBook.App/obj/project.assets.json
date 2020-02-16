@@ -2875,7 +2875,10 @@
         },
         "runtime": {
           "bin/placeholder/DigitalCoolBook.Services.Message.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
