@@ -115,5 +115,14 @@
             var model = this.mapper.Map<List<TestsNamesViewModel>>(tests);
             return this.View(model);
         }
+
+        [HttpGet]
+        [Authorize(Roles ="Teacher")]
+        public async Task<IActionResult> StartTest(string id)
+        {
+            var test = await this.testService.GetTestAsync(id);
+            var model = this.mapper.Map<TestStartViewModel>(test);
+            return this.View(model);
+        }
     }
 }

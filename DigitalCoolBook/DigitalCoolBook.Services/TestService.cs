@@ -29,7 +29,12 @@
             await this.SaveChangesAsync();
         }
 
-        public Test GetTest(string id)
+        public async Task<Test> GetTestAsync(string id)
+        {
+           return await this.context.Tests.FindAsync(id);
+        }
+
+        public Test GetTestByLesson(string id)
         {
             return this.context.Tests.FirstOrDefault(t => t.LessonId == id);
         }

@@ -7,7 +7,7 @@
 
     public interface ITestService
     {
-       Test GetTest(string id);
+       Test GetTestByLesson(string id);
 
         Task SaveChangesAsync();
 
@@ -16,5 +16,7 @@
         Task AddTestStudentsAsync(List<TestStudent> testStudentList);
 
         IQueryable<Test> GetTests();
+
+        Task<Test> GetTestAsync(string id);
     }
 }
