@@ -5,17 +5,14 @@
     ViewData["Title"] = "EditTeacher";
 }
 
-<h2>Изтриване или редактиране на учителски профили.</h2>
+<h2>Редактиране на учителски профили.</h2>
 
 <p>
-    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-secondary ">Създай нов</a>
+    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-secondary ">Добавяне на учител</a>
 </p>
 <table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
     <thead class="thead-light">
         <tr>
-            <th>
-                @Html.DisplayName("Идентификационен номер")
-            </th>
             <th>
                 @Html.DisplayName("Име")
             </th>
@@ -44,9 +41,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
