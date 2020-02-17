@@ -34,16 +34,14 @@
             <div class="col">
                 @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете клас", new { @class = "form-control w-50" })
             </div>
-            <div class="col">
-                <fieldset id="checkArray">
-                </fieldset>
-                <div class="form-group">
-                    <input id="add" value="Добави избраните" class="btn btn-info" />
+            <div class="col form-control">
+                <i class="mb-2">Ученици</i>
+                <div id="checkArray">
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <input id="button" type="submit" @*onclick="submitForm()"*@ value="Запази" class="btn btn-primary" />
+            <input id="button" type="submit" value="Запази" class="btn btn-primary" />
         </div>
     </form>
     <div>
@@ -65,35 +63,12 @@
             success: function (response) {
                 $.each(response, function (i, item) {
                     studentCheckBox.append(
-                        $('<input/>', { type: 'checkbox', name: 'chkBox', id: item.id, value: item.name }),
-                        $('<label/>', { 'for': 'cb' + item.id, text: item.name }),
+                        $('<input/>', { type: 'checkbox', name: 'chkBox', id: item.id, value: item.name}),
+                        $('<label/>', { for: item.id, text: item.name }),
                         $('<br/>')
                     );
                 });
             },
         });
     })
-
-    //$(function () {
-    //    $('#add').click(function () {
-
-    //    })
-    //})
-
-    // Get checked students
-    function submitForm() {
-        $("#form").submit(function () {
-            var formData =  $("#form").serializeArray();
-            var selected = new Array();
-            $('input:checked').each(function (i, element) {
-                selected.push(element.value)
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "/Test/CreateTest",
-                data: { students: selected, formData: formData },
-            })
-        })
-    }
 </script>

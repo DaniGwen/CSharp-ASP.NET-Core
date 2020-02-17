@@ -59,13 +59,25 @@
         [HttpPost]
         [Authorize(Roles = "Teacher, Admin")]
         [ActionName("CreateTest")]
-        public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] students, string[] chkBox)
+        public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] chkBox)
         {
             try
             {
                 var test = this.mapper.Map<Test>(model);
                 test.TestId = Guid.NewGuid().ToString();
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                foreach (var student in chkBox)
+                {
+                    var testStudent = new TestStudent()
+                    {
+                        StudentId = this.userService.GetStudents().FirstOrDefault(s => s.Name == student).Id,
+                        TestId = test.TestId,
+                    };
+
+                    test.TestStudent.Add(testStudent);
+                }
+
                 await this.testService.AddTestAsync(test);
             }
             catch (Exception exception)

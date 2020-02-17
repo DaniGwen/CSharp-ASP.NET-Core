@@ -18,34 +18,19 @@
         </div>
     </div>
     <h2 class="d-flex justify-content-center">Раздели</h2>
-    <div class="testimonial_area testimonial_bg_1 overlay">
-        <div class="testmonial_active owl-carousel">
-            @foreach (var category in Model.Categories)
-            {
-                <div class="single_testmoial">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="testmonial_text text-center">
-                                    <div class="author_img">
-                                        <img src="img/testmonial/author_img.png" alt="">
-                                        <a href="@Url.Action("CategoryDetails", "Subject",
-                                new {categoryId = @category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
-                                           type="button" class="boxed-btn mt-2" style="width:380px" data-toggle="popover">
-                                            @category.Title
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+    @foreach (var category in Model.Categories)
+    {
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <a href="@Url.Action("CategoryDetails", "Subject",
+                    new { categoryId = @category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
+                   type="button" class="boxed-btn mt-2" style="width:380px" data-toggle="popover">
+                    @category.Title
+                </a>
+            </div>
         </div>
-    </div>
+    }
     <br />
-
     <!-- testimonial_area_start -->
     <!-- testimonial_area_end -->
     <!-- our_courses_start -->

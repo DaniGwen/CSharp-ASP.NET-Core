@@ -5,6 +5,11 @@
 
     public class Test
     {
+        public Test()
+        {
+            this.TestStudent = new HashSet<TestStudent>();
+        }
+
         public string TestId { get; set; }
 
         public string TeacherId { get; set; }
