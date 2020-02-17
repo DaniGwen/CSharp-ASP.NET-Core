@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.TestviewModels.TestsNamesViewModel>
+
+@{
+    ViewData["Title"] = "Tests";
+    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+}
+
+<h1>Тестове</h1>
+
+<p>
+    <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTest">Създай нов</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TestName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestName)
+                </td>
+                <td class="btn btn-outline-success mb-2">
+                    @Html.ActionLink("Старт", "StartTest", "Test", new { id = item.TestId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

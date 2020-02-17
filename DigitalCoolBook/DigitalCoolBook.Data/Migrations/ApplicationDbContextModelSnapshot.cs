@@ -200,6 +200,9 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Property<string>("TeacherId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("TestName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<TimeSpan>("Timer")
                         .HasColumnType("time");
 

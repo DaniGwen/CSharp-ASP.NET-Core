@@ -148,14 +148,17 @@
                         <div class="slider_info">
                             @if (this.User.IsInRole("Teacher"))
                             {
-                                <div class="col">
-                                    <div class="row">
-                                        <a asp-Controller="Subject" asp-action="Subjects" class="boxed_btn">Предмети</a>
-                                    </div>
-                                    <div class="row mt-2 w-25">
-                                        <a href="/Teacher/ChooseGrade" class="boxed_btn">Класове</a>
-                                    </div>
+                            <div class="col">
+                                <div class="row mx-auto">
+                                    <a asp-Controller="Subject" asp-action="Subjects" class="boxed_btn">Предмети</a>
                                 </div>
+                                <div class="row mt-2 mx-auto">
+                                    <a href="/Teacher/ChooseGrade" class="boxed_btn">Класове</a>
+                                </div>
+                                <div class="row mt-2 mx-auto">
+                                    <a href="/Test/Tests" class="boxed_btn">Тестове</a>
+                                </div>
+                            </div>
                             }
                             else if (this.User.IsInRole("Admin"))
                             {

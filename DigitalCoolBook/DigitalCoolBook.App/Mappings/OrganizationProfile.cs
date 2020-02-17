@@ -45,6 +45,7 @@
             // Test mappings
             this.CreateMap<Test, TestViewModel>();
             this.CreateMap<TestViewModel, Test>();
+            this.CreateMap<Test, TestsNamesViewModel>();
         }
     }
 }

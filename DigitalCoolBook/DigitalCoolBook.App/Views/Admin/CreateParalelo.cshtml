@@ -8,29 +8,32 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 form-group">
         <form asp-action="CreateParalelo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label>Учител</label>
+                <h3>Учител</h3>
                 <div class="dropdown">
                     @Html.DropDownListFor(model => model.IdTeacher, new SelectList(Model.Teachers, "Id", "Name"), "Избери Учител")
                 </div>
             </div>
             <div class="form-group">
-                <label>Клас</label>
+                <h3>Клас</h3>
                 <div class="dropdown">
                     @Html.DropDownListFor(model => model.IdGrade, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас")
                 </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Създай" class="btn btn-primary" />
+            <div class="row form-group">
+                <div class="mx-auto">
+                    <a href="/Admin/Paralelos">Назад</a>
+                </div>
+                <div class="mx-auto">
+                    <input type="submit" value="Създай" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a href="/Admin/Paralelos">Назад</a>
-</div>
+
 

@@ -25,29 +25,28 @@
                     <input asp-for="Timer" class="form-control" />
                     <span asp-validation-for="Timer" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Date" class="control-label"></label>
-                    <input asp-for="Date" class="form-control" />
-                    <span asp-validation-for="Date" class="text-danger"></span>
-                </div>
             </div>
             <div class="col">
+                <label>Паралелка</label>
                 @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете клас", new { @class = "form-control w-50" })
             </div>
             <div class="col form-control">
-                <i class="mb-2">Ученици</i>
+                <a class="mb-4">Ученици</a>
                 <div id="checkArray">
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <input id="button" type="submit" value="Запази" class="btn btn-primary" />
+        <div class="row form-group mb-2 mt-3">
+            <div class="ml-4">
+                <a class="btn btn-outline-secondary" asp-action="Index">Назад</a>
+            </div>
+            <div class="ml-5">
+                <input id="button" type="submit" value="Запази" class="btn btn-primary" />
+            </div>
         </div>
     </form>
-    <div>
-        <a asp-action="Index">Назад</a>
-    </div>
 </div>
+
 <script>
     var studentCheckBox = $('#checkArray'); // cache variable
     $('#GradeId').change(function () {

@@ -34,6 +34,11 @@
             return this.context.Tests.FirstOrDefault(t => t.LessonId == id);
         }
 
+        public IQueryable<Test> GetTests()
+        {
+            return this.context.Tests;
+        }
+
         public async Task SaveChangesAsync()
         {
             await this.context.SaveChangesAsync();
