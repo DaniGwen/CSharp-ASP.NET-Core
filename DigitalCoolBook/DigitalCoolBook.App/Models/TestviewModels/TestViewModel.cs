@@ -8,14 +8,21 @@
 
     public class TestViewModel
     {
+        public TestViewModel()
+        {
+            this.Grades = new List<Grade>();
+            this.Students = new List<StudentTestDropDownModel>();
+        }
+
         public string TestId { get; set; }
 
         [Display(Name ="Място")]
         [Required(ErrorMessage ="Моля въведете място на провеждане на теста.")]
         public string Place { get; set; }
 
-        [Display(Name ="Времетраене на теста")]
-        public TimeSpan Timer { get; set; }
+        [Required(ErrorMessage ="Моля попълнете полето.")]
+        [Display(Name ="Дата и час на теста")]
+        public DateTime Timer { get; set; }
 
         [Display(Name = "Дата на провеждане")]
         public DateTime Date { get; set; }

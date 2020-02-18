@@ -19,7 +19,7 @@
         public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
-        public TimeSpan Timer { get; set; }
+        public DateTime Timer { get; set; }
 
         public string LessonId { get; set; }
         public Lesson Lesson { get; set; }

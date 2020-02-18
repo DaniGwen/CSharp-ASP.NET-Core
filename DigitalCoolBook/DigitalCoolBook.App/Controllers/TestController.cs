@@ -120,12 +120,12 @@
         public async Task<IActionResult> StartTest(string id)
         {
             var test = await this.testService.GetTestAsync(id);
-            test.Date = DateTime.UtcNow;
+            test.Date = DateTime.Now;
             await this.testService.SaveChangesAsync();
 
             var model = this.mapper.Map<TestStartViewModel>(test);
 
-            // for test
+            // for test only
             var questions = new List<QuestionsModel>
             {
                 new QuestionsModel
@@ -142,9 +142,17 @@
                 },
             };
             model.Questions.AddRange(questions);
+            model.Timer = String.Format("{0:s}", test.Timer);
             await this.testService.SaveChangesAsync();
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EndTest(TestStartViewModel model)
+        {
+            // TODO: Implement
+            return this.Redirect("/Home/Success");
         }
     }
 }

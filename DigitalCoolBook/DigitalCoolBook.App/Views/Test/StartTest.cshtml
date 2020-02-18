@@ -3,46 +3,79 @@
 @{
     Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
 }
-
+<input type="hidden" id="setTimer" value="@Model.Timer"/>
 <div class="container">
     <div class="col text-center mt-4">
-       <h3>
-           @Model.TestName
-       </h3>
+        <h3>
+            @Model.TestName
+        </h3>
     </div>
-    <div class="row ">
-        <div class="col-md-6 text-left">
-            <div class="col">
-                @Html.DisplayNameFor(model => model.Date)
+    <form asp-action="EndTest" method="post">
+        <div class="row ">
+            <div class="col-md-6 text-left">
+                <div class="col">
+                    @Html.DisplayNameFor(model => model.Date)
+                </div>
+                <div class="col" id="dateTime">
+                    @Html.DisplayFor(model => model.Date)
+                </div>
             </div>
-            <div class="col">
-                @Html.DisplayFor(model => model.Date)
+            <div class="col-md-6 text-right">
+                <div class="col">
+                    @Html.DisplayNameFor(model => model.Timer)
+                </div>
+                <div class="col" id="timer">
+                </div>
+            </div>
+            <div class="col w-50 text-center">
+                @for (int i = 0; i < Model.Questions.Count; i++)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item ">
+                            @Html.CheckBoxFor(m => m.Questions[i].IsChecked)
+                            @Model.Questions[i].Name
+                        </li>
+                    </ul>
+                }
             </div>
         </div>
-        <div class="col-md-6 text-right">
-            <div class="col">
-                @Html.DisplayNameFor(model => model.Timer)
-            </div>
-            <div class="col">
-                @Html.DisplayFor(model => model.Timer)
-            </div>
+        <div class="text-center">
+            <button class="btn btn-outline-info mt-2 mb-2">Напред</button>
         </div>
-        <div class="col w-50 text-center">
-            @for (int i = 0; i < Model.Questions.Count; i++)
-            {
-            <ul class="list-group">
-                <li class="list-group-item ">
-                    @Html.CheckBoxFor(m => m.Questions[i].IsChecked)
-                    @Model.Questions[i].Name
-                </li>
-               
-            </ul>
-            }
+        <div class="text-right pb-1">
+            <input type="submit" value="Предаване" class="btn btn-outline-danger" />
         </div>
-    </div>
+    </form>
 </div>
 
+<script type="text/javascript">
+    var timer = new Date( Date.parse($('#setTimer').val())).getTime();
+// Set the date we're counting down to
+var countDownDate = timer;
+    debugger;
+// Update the count down every 1 second
+    var x = setInterval(function () {
 
-<div class="text-center">
-    <button class="btn btn-outline-info mt-2 mb-2">Напред</button>
-</div>
+  // Get today's date and time
+  var now = new Date().getTime();
+     
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>

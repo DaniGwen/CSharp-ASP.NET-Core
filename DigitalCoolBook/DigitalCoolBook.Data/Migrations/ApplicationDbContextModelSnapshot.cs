@@ -203,8 +203,8 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Property<string>("TestName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("Timer")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("Timer")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("TestId");
 

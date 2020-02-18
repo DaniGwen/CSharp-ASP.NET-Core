@@ -14,7 +14,7 @@
         public string TestName { get; set; }
 
         [Display(Name = "Времетраене")]
-        public TimeSpan Timer { get; set; }
+        public string Timer { get; set; }
 
         [Display(Name ="Дата")]
         public DateTime Date { get; set; }
