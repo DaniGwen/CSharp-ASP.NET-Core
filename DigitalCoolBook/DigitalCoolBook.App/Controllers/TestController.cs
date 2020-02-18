@@ -36,7 +36,7 @@
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Admin")]
-        public async Task<IActionResult> CreateTest(string id)
+        public IActionResult CreateTest(string id)
         {
             var model = new TestViewModel
             {
@@ -44,7 +44,6 @@
                 .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList(),
-                Date = DateTime.UtcNow,
                 LessonId = id,
             };
 
@@ -117,11 +116,34 @@
         }
 
         [HttpGet]
-        [Authorize(Roles ="Teacher")]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> StartTest(string id)
         {
             var test = await this.testService.GetTestAsync(id);
+            test.Date = DateTime.UtcNow;
+            await this.testService.SaveChangesAsync();
+
             var model = this.mapper.Map<TestStartViewModel>(test);
+
+            // for test
+            var questions = new List<QuestionsModel>
+            {
+                new QuestionsModel
+                {
+                    Name = "Koe ot slednite?",
+                },
+                new QuestionsModel
+                {
+                    Name = "Ima li .....",
+                },
+                new QuestionsModel
+                {
+                    Name = "V koe ot izbroenite?",
+                },
+            };
+            model.Questions.AddRange(questions);
+            await this.testService.SaveChangesAsync();
+
             return this.View(model);
         }
     }

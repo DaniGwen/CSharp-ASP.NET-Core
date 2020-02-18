@@ -3,10 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class TestStartViewModel
     {
+        public TestStartViewModel()
+        {
+            this.Questions = new List<QuestionsModel>();
+        }
+
         public string TestName { get; set; }
 
         [Display(Name = "Времетраене")]
@@ -16,6 +20,6 @@
         public DateTime Date { get; set; }
 
         [Display(Name ="Въпроси")]
-        public List<string> Questions { get; set; }
+        public List<QuestionsModel> Questions { get; set; }
     }
 }
