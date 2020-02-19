@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DigitalCoolBook.App.Models.CategoryViewModels
 {
     public class LessonsViewModel
     {

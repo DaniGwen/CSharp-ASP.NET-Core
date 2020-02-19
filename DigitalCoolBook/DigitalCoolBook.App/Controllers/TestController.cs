@@ -172,5 +172,18 @@
 
             return this.View(model);
         }
+
+        [HttpPost]
+        [Authorize(Roles= "Admin")]
+        public IActionResult AddQuestions(QuestionsAddViewModel model)
+        {
+            if (model.Questions.Count < 1)
+            {
+                this.ModelState.AddModelError(string.Empty, "Моля добавете поне един въпрос.");
+                return this.View(model);
+            }
+
+            return this.View();
+        }
     }
 }
