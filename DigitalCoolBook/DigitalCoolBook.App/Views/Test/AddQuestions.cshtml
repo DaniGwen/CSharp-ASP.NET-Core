@@ -16,16 +16,14 @@
             <div class="row">
                 @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "Id", "Title"), "Изберете Урок..", new { @class = "dropdown" })
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <h4>Брой на въпросите</h4>
             </div>
             <div>
-                <input type="number" id="numberOfQuestions" />
+                <input type="number" id="numberOfQuestions" value="" />
             </div>
-            <form>
-                <div class="form-group">
-                    <label></label>
-                    <input />
+            <form class="form-control-lg">
+                <div id="questionsField">
                 </div>
             </form>
         </div>
@@ -34,6 +32,16 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#numberOfQuestions').change()
+        $('#numberOfQuestions').change(function () {
+            // remove fields before create new ones
+            $('#questionsField').empty();
+            var numberOfQuestions = $('#numberOfQuestions').val();
+            for (var i = 0; i < numberOfQuestions; i++) {
+                 $('#questionsField').append(
+                     $('<label class="col-sm-2 col-form-label col-form-label-sm w-70">Въпрос ' + (i + 1) + '<label/>', { for: 'question' + i }),
+                    $('<input class="mt-2 form-control form-control-sm w-70"/>', { type: 'text', id: 'question' + i }),
+                    $('<br/>'))
+            }
+        })
     })
 </script>
