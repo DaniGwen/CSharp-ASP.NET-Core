@@ -1,0 +1,39 @@
+﻿@model DigitalCoolBook.App.Models.TestviewModels.QuestionsAddViewModel
+
+@{
+    ViewData["Title"] = "AddQuestions";
+    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+}
+
+<h1 class="text-center">Добавяне на въпроси към тест</h1>
+<br />
+<div class="row">
+    <div class="col">
+        <div class="form-group">
+            <div class="row">
+                <h4>Уроци</h4>
+            </div>
+            <div class="row">
+                @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "Id", "Title"), "Изберете Урок..", new { @class = "dropdown" })
+            </div>
+            <div class="row">
+                <h4>Брой на въпросите</h4>
+            </div>
+            <div>
+                <input type="number" id="numberOfQuestions" />
+            </div>
+            <form>
+                <div class="form-group">
+                    <label></label>
+                    <input />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#numberOfQuestions').change()
+    })
+</script>

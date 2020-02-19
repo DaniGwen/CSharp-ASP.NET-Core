@@ -6,6 +6,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
+    using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
@@ -125,7 +126,7 @@
 
             var model = this.mapper.Map<TestStartViewModel>(test);
 
-            // for test only
+            // for TEST only
             var questions = new List<QuestionsModel>
             {
                 new QuestionsModel
@@ -142,8 +143,7 @@
                 },
             };
             model.Questions.AddRange(questions);
-            model.Timer = String.Format("{0:s}", test.Timer);
-            await this.testService.SaveChangesAsync();
+            model.Timer = string.Format("{0:s}", test.Timer);
 
             return this.View(model);
         }
@@ -153,6 +153,24 @@
         {
             // TODO: Implement
             return this.Redirect("/Home/Success");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddQuestions()
+        {
+            var lessonsDb = this.subjectService.GetLessons()
+                .OrderBy(lesson => lesson.Title)
+                .ToList();
+
+            var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessonsDb);
+
+            var model = new QuestionsAddViewModel
+            {
+                Lessons = lessonsDto,
+            };
+
+            return this.View(model);
         }
     }
 }
