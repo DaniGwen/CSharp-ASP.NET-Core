@@ -326,7 +326,7 @@ namespace DigitalCoolBook.App
 
         private Student[] AddStudents(UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
-            Student[] students = new Student[7]
+            Student[] students = new Student[12]
              {
                 new Student
                 {
@@ -370,7 +370,7 @@ namespace DigitalCoolBook.App
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
                     PasswordHash = "Mar155*",
-                    PlaceOfBirth = "Kurtovo Konare",
+                    PlaceOfBirth = "Мелник",
                     Sex = "Female",
                     Telephone = 3300,
                     Address = "Stoicho Simeonov 17",
@@ -453,6 +453,96 @@ namespace DigitalCoolBook.App
                     Email = "ivelin@ivelin.com",
                     UserName = "ivelin@ivelin.com",
                     GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 099760043,
+                    Name = "Маньо Минчев",
+                    PasswordHash = "Man155*",
+                    PlaceOfBirth = "Haskovo",
+                    Sex = "Male",
+                    Telephone = 8765,
+                    Address = "Alexander Nevski 9",
+                    FatherName = "Atanas",
+                    FatherMobileNumber = 09876554,
+                    MotherName = "Maria",
+                    MotherMobileNumber = 099999933,
+                    Email = "man@man.com",
+                    UserName = "man@man.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 099760043,
+                    Name = "Щефан Сандерс",
+                    PasswordHash = "Shtef155*",
+                    PlaceOfBirth = "Костинброд",
+                    Sex = "Male",
+                    Telephone = 876521,
+                    Address = "Петър Стоев 10",
+                    FatherName = "Велизар",
+                    FatherMobileNumber = 09876554,
+                    MotherName = "Петра",
+                    MotherMobileNumber = 099999933,
+                    Email = "shtef@shtef.com",
+                    UserName = "shtef@shtef.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 099760043,
+                    Name = "Богомил Милев",
+                    PasswordHash = "Bog155*",
+                    PlaceOfBirth = "Елин Пелин",
+                    Sex = "Male",
+                    Telephone = 098765,
+                    Address = "Княз Момчил 2",
+                    FatherName = "Иван",
+                    FatherMobileNumber = 09876554,
+                    MotherName = "Стела",
+                    MotherMobileNumber = 099999933,
+                    Email = "bog@bog.com",
+                    UserName = "bog@bog.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 099760043,
+                    Name = "Десислава Атанасова",
+                    PasswordHash = "Des155*",
+                    PlaceOfBirth = "Благоевград",
+                    Sex = "Female",
+                    Telephone = 88899,
+                    Address = "Богомил 2",
+                    FatherName = "Светослав",
+                    FatherMobileNumber = 09876554,
+                    MotherName = "Биляна",
+                    MotherMobileNumber = 099999933,
+                    Email = "des@des.com",
+                    UserName = "des@des.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                },
+                new Student
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MobilePhone = 099760043,
+                    Name = "Радослав Първанов",
+                    PasswordHash = "Rad155*",
+                    PlaceOfBirth = "Перник",
+                    Sex = "Male",
+                    Telephone = 87652,
+                    Address = "Stoicho Popov 12",
+                    FatherName = "Atanas",
+                    FatherMobileNumber = 09876554,
+                    MotherName = "Stoqnka",
+                    MotherMobileNumber = 099999933,
+                    Email = "rad@rad.com",
+                    UserName = "rad@rad.com",
+                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
                 },
              };
             return students;
@@ -562,7 +652,7 @@ namespace DigitalCoolBook.App
 
             if (!isUserAddedInRole)
             {
-                // first we create Admin rool
+                // first we create Admin role
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 await roleManager.CreateAsync(role);
@@ -572,21 +662,21 @@ namespace DigitalCoolBook.App
             if (!context.Users.Any(u => u.Email == "admin@admin.com"))
             {
                 var user = new IdentityUser();
-                user.UserName = Configuration.GetValue<string>("AdminConfig:Username");
-                user.Email = Configuration.GetValue<string>("AdminConfig:Email");
-                var userPassword = Configuration.GetValue<string>("AdminConfig:Password");
+                user.UserName = this.Configuration.GetValue<string>("AdminConfig:Username");
+                user.Email = this.Configuration.GetValue<string>("AdminConfig:Email");
+                var userPassword = this.Configuration.GetValue<string>("AdminConfig:Password");
 
                 IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword);
 
                 // Add default User to Role Admin
                 if (addingPasswordToUser.Succeeded)
                 {
-                    var result1 = await userManager.AddToRoleAsync(user, "Admin");
+                   await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
 
 
-            // creating Creating Student role
+            // Creating Student role
             isUserAddedInRole = await roleManager.RoleExistsAsync("Student");
             if (!isUserAddedInRole)
             {
@@ -595,7 +685,7 @@ namespace DigitalCoolBook.App
                 await roleManager.CreateAsync(role);
             }
 
-            // creating Creating Teacher role
+            // Creating Teacher role
             isUserAddedInRole = await roleManager.RoleExistsAsync("Teacher");
             if (!isUserAddedInRole)
             {

@@ -22,7 +22,7 @@
         [Required(ErrorMessage ="Моля въведете място на провеждане на теста.")]
         public string Place { get; set; }
 
-        [Required(ErrorMessage ="Моля попълнете полето.")]
+        [Required(ErrorMessage ="Моля попълнете дата.")]
         [Display(Name ="Дата и час на теста")]
         public DateTime Timer { get; set; }
 
