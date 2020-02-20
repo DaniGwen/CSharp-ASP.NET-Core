@@ -18,11 +18,13 @@
                     @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "Id", "Title"), "Изберете Урок..", new { @class = "dropdown" })
                 </div>
                 <span asp-validation-for="LessonId" class="text-danger"></span>
+                <span class="text-danger" id="alertLessonId"></span>
+                <div class="mt-2" id="AddTestButton"></div>
                 <div class="row mt-2">
                     <h4>Брой на въпросите</h4>
                 </div>
                 <div>
-                    <input type="number" id="numberOfQuestions" name="numberOfQuestions" />
+                    <input class="form-group" type="number" id="numberOfQuestions" name="numberOfQuestions" />
                 </div>
                 <span class="text-danger" id="validateInput"></span>
                 <div id="Questions" name="Questions"></div>
@@ -49,9 +51,8 @@
             }
         })
     })
-    // TODO FIX BUG (form submit with errors)
 
-    // Questions input validation
+    // input validation
     $(function () {
         $('#save').click(function (event) {
             var alertSpan = $('#validateInput');
@@ -76,6 +77,33 @@
                 $('#form').submit();
             }
             return;
+        })
+    })
+
+    $(function () {
+        $('#LessonId').change(function () {
+            // remove add test button and alert span if any
+            $('#AddTestButton').empty();
+            $('#alertLessonId').empty();
+
+            // check if test exist for that lesson
+            var lessonId = $('#LessonId').val();
+            $.ajax({
+                type: 'post',
+                url: '/Test/CheckTestExist',
+                data: { lessonId: lessonId },
+                success: function () {
+                    return;
+                },
+
+                // add test button and alert if there is no test for that lesson
+                error: function () {
+                    $('#alertLessonId').html('Няма създаден тест за този предмет.');
+                    $('#AddTestButton').append(
+                        $('<a class="btn btn-outline-primary" href="/Test/CreateTest/' + lessonId + '">Създай тест</a>')
+                    )
+                }
+            })
         })
     })
 </script>

@@ -27,8 +27,14 @@
                 </div>
             </div>
             <div class="col">
-                <label>Паралелка</label>
-                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете клас", new { @class = "form-control w-50" })
+                <div class="form-group">
+                    <label>Урок</label>
+                    @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "Id", "Title"), "Изберете Урок..", new { @class = "form-control w-50" })
+                </div>
+                <div class="form-group">
+                    <label class="mt-2">Паралелка</label>
+                    @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
+                </div>
             </div>
             <div class="col form-control">
                 <a class="mb-4">Ученици</a>
@@ -61,7 +67,7 @@
     $("#datetimepicker-input").val(output + " 00:01:00");
 </script>
 
-@*Update checkboxes*@"
+@*Update checkboxes*@
 <script>
     var studentCheckBox = $('#checkArray'); // cache variable
     $('#GradeId').change(function () {

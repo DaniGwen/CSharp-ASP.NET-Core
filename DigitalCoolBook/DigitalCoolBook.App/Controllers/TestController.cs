@@ -12,6 +12,7 @@
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     public class TestController : Controller
     {
@@ -39,6 +40,8 @@
         [Authorize(Roles = "Teacher, Admin")]
         public IActionResult CreateTest(string id)
         {
+            var lessons = this.subjectService.GetLessons().ToList();
+
             var model = new TestViewModel
             {
                 Grades = this.gradeService
@@ -46,6 +49,7 @@
                 .OrderBy(g => g.Name)
                 .ToList(),
                 LessonId = id,
+                Lessons = this.mapper.Map<List<LessonsViewModel>>(lessons),
             };
 
             return this.View(model);
@@ -58,7 +62,7 @@
         {
             try
             {
-                // Getting lesson from DB to create testName
+                // Getting lesson from DB to create test Name
                 var lesson = await this.subjectService.GetLessonAsync(model.LessonId);
                 var testName = "Тест по:  " + lesson.Title;
 
@@ -93,7 +97,8 @@
             return this.RedirectToAction("Success", "Home");
         }
 
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Admin")]
+        [ActionName("GetStudents")]
         public JsonResult GetStudentsAsync(string gradeId)
         {
             var students = this.userService.GetStudents()
@@ -174,16 +179,67 @@
         }
 
         [HttpPost]
-        [Authorize(Roles= "Admin")]
-        public IActionResult AddQuestions(QuestionsAddViewModel model)
+        [Authorize(Roles = "Admin")]
+        [ActionName("AddQuestions")]
+        public async Task<IActionResult> AddQuestionsAsync(QuestionsAddViewModel model)
         {
-            if (model.Questions.Count < 1)
+            try
             {
-                this.ModelState.AddModelError(string.Empty, "Моля добавете поне един въпрос.");
-                return this.View(model);
+                if (model.Questions.Count < 1)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Моля добавете поне един въпрос.");
+                    return this.View(model);
+                }
+
+                var test = this.testService.GetTests()
+                    .Include("Lesson")
+                    .FirstOrDefault(t => t.LessonId == model.LessonId);
+
+                foreach (var question in model.Questions)
+                {
+                    test.Questions.Add(new Question
+                    {
+                        QuestionId = Guid.NewGuid().ToString(),
+                        Content = question,
+                    });
+                }
+            }
+            catch (Exception exception)
+            {
+                this.TempData["ErrorMsg"] = exception.Message;
+
+                return this.Redirect("/Home/ErrorView");
             }
 
-            return this.View();
+            await this.testService.SaveChangesAsync();
+            this.TempData["SuccessMsg"] = "Въпросите бяха записани";
+
+            return this.Redirect("/Home/Success");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult CheckTestExist(string lessonId)
+        {
+            var test = this.testService.GetTests()
+               .FirstOrDefault(t => t.LessonId == lessonId);
+
+            if (test == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Json(string.Empty);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetLessons(string lessonId)
+        {
+            //TODO 
+
+
+            return this.Json(string.Empty);
         }
     }
 }

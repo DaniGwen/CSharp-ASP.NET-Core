@@ -134,12 +134,6 @@ namespace DigitalCoolBook.App
                 await context.SaveChangesAsync();
             }
 
-            //if (!context.GradeParalelos.Any())
-            //{
-            //    context.GradeParalelos.AddRange(this.AddGradeParalelo());
-            //    context.SaveChanges();
-            //}
-
             if (!context.Students.Any())
             {
                 var students = this.AddStudents(userManager, context);
@@ -151,6 +145,12 @@ namespace DigitalCoolBook.App
                 }
 
                 await context.SaveChangesAsync();
+            }
+
+            if (!context.GradeParalelos.Any())
+            {
+                context.GradeParalelos.AddRange(this.AddGradeParalelo(context));
+                context.SaveChanges();
             }
 
             if (!context.Categories.Any())
@@ -289,36 +289,36 @@ namespace DigitalCoolBook.App
             return lessons;
         }
 
-        private GradeParalelo[] AddGradeParalelo()
+        private GradeParalelo[] AddGradeParalelo(ApplicationDbContext context)
         {
             GradeParalelo[] gradeParalelos = new GradeParalelo[4]
             {
                 new GradeParalelo
                 {
-                   GradeParaleloId = Guid.NewGuid().ToString(),
-                   IdGrade = "047c959b-c2d4-4d49-acb9-c096660fc1d7",
-                   IdTeacher = "0b0ebf61-11ff-487a-ae66-a257787d77d1",
+                   GradeParaleloId = "1",
+                   IdGrade = context.Grades.First(grade => grade.Name == "10à").GradeId,
+                   IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },
 
                 new GradeParalelo
                 {
-                    GradeParaleloId = Guid.NewGuid().ToString(),
-                    IdGrade = "0a5a0880-ae45-4c1b-97ee-bab17775bce1",
-                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b",
+                    GradeParaleloId = "2",
+                    IdGrade = context.Grades.First(grade => grade.Name == "10å").GradeId,
+                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "stam@stam.com").Id,
                 },
 
                 new GradeParalelo
                 {
-                    GradeParaleloId = Guid.NewGuid().ToString(),
-                    IdGrade = "0f4484a8-c74e-405d-b6cc-3c5bc581929f",
-                    IdTeacher = "5757242a-6635-4186-a9ac-05c3b165359e",
+                    GradeParaleloId = "3",
+                    IdGrade = context.Grades.First(grade => grade.Name == "10á").GradeId,
+                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "pesh@pesh.com").Id,
                 },
 
                 new GradeParalelo
                 {
-                    GradeParaleloId = Guid.NewGuid().ToString(),
-                    IdGrade = "29bae06b-3e83-4e2f-8a80-d87a3be14e96",
-                    IdTeacher = "1a928ae1-95ad-479a-9f79-32981787c45b",
+                    GradeParaleloId = "4",
+                    IdGrade = context.Grades.First(grade => grade.Name == "12à").GradeId,
+                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },
             };
             return gradeParalelos;
@@ -340,7 +340,6 @@ namespace DigitalCoolBook.App
                     Address = "Stoicho Popov 12",
                     FatherName = "Atanas",
                     FatherMobileNumber = 09876554,
-                    //IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
                     Email = "ceco@ceco.com",
@@ -359,7 +358,6 @@ namespace DigitalCoolBook.App
                     Address = "Anev Popov 12",
                     FatherName = "Todor",
                     FatherMobileNumber = 098434554,
-                    //IdGradeParalelo = "7aabcd2f-2db3-443a-a9cc-b11b105d9c1f",
                     MotherName = "Donka",
                     MotherMobileNumber = 099009933,
                     Email = "ivailo@ivailo.com",
@@ -378,7 +376,6 @@ namespace DigitalCoolBook.App
                     Address = "Stoicho Simeonov 17",
                     FatherName = "John Tailer",
                     FatherMobileNumber = 09870054,
-                   // IdGradeParalelo = "d019c0ab-b482-422b-8209-fb810aced29d",
                     MotherName = "Penka",
                     MotherMobileNumber = 0997699933,
                     Email = "mima@mima.com",
@@ -415,7 +412,6 @@ namespace DigitalCoolBook.App
                     Address = "Gen. Petko Stoqnov 12",
                     FatherName = "Samuil",
                     FatherMobileNumber = 09876554,
-                    //IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
                     Email = "stef@stef.com",
@@ -434,7 +430,6 @@ namespace DigitalCoolBook.App
                     Address = "Stoicho Popov 12",
                     FatherName = "Atanas",
                     FatherMobileNumber = 09876554,
-                    //IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
                     Email = "drag@drag.com",
@@ -453,7 +448,6 @@ namespace DigitalCoolBook.App
                     Address = "Stoicho 12",
                     FatherName = "Atanas",
                     FatherMobileNumber = 09876554,
-                    //IdGradeParalelo = "66c50edf-b7fb-44a4-90b2-c4e7d943a522",
                     MotherName = "Stoqnka",
                     MotherMobileNumber = 099999933,
                     Email = "ivelin@ivelin.com",

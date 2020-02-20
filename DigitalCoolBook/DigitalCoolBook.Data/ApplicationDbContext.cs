@@ -29,6 +29,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Test> Tests { get; set; }
 
+        public DbSet<Question> Questions { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

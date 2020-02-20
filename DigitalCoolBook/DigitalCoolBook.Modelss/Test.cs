@@ -2,14 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Test
     {
         public Test()
         {
             this.TestStudent = new HashSet<TestStudent>();
-            this.Questions = new HashSet<string>();
+            this.Questions = new HashSet<Question>();
         }
 
         public string TestId { get; set; }
@@ -34,7 +33,6 @@
 
         public string GradeId { get; set; }
 
-        [NotMapped]
-        public ICollection<string> Questions { get; set; }
+        public ICollection<Question> Questions { get; set; }
     }
 }
