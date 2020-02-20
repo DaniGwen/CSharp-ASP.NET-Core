@@ -7,10 +7,9 @@
 
 <h1 class="text-center">Добавяне на въпроси към тест</h1>
 <br />
-<div class="row">
-    <div class="col">
-        <form class="form-group" asp-action="AddQuestions" typeof="post">
-
+<form id="form" class="form-group" asp-action="AddQuestions" typeof="post">
+    <div class="row">
+        <div class="col">
             <div>
                 <div class="row">
                     <h4>Уроци</h4>
@@ -27,11 +26,11 @@
                 </div>
                 <span class="text-danger" id="validateInput"></span>
                 <div id="Questions" name="Questions"></div>
-                <button class="btn btn-outline-primary mt-3" id="submit" >Запази</button>
             </div>
-        </form>
+            <button type="submit" class="btn btn-outline-primary mt-3" id="save">Запази</button>
+        </div>
     </div>
-</div>
+</form>
 
 <script type="text/javascript">
     // Adding question fields on number input
@@ -45,30 +44,38 @@
                 $('#Questions').append(
                     $('<label class="col-sm-2 col-form-label col-form-label-sm w-75">Въпрос ' + (i + 1) + '<label/>'),
                     $('<input class="mt-2 form-control form-control-sm w-75" id="question' + i + '" name="Questions"/>'),
-                    $('<span class="text-danger" id="alertQuestion' + i +'"></span>'),
+                    $('<span class="text-danger" id="alertQuestion' + i + '"></span>'),
                     $('<br/>'))
             }
         })
     })
+    // TODO FIX BUG (form submit with errors)
 
+    // Questions input validation
     $(function () {
-        $('#submit').on('click', function () {
+        $('#save').click(function (event) {
+            var alertSpan = $('#validateInput');
+            alertSpan.empty();
+            event.preventDefault();
             var numberOfQuestions = $('#numberOfQuestions').val();
             var errorCount = 0;
             if (numberOfQuestions <= 0) {
-                $('#validateInput').html("Моля добавете въпроси.");
+                alertSpan.html("Моля добавете въпроси.");
                 return;
             }
             for (var i = 0; i < numberOfQuestions; i++) {
                 if ($('#question' + i).val() == '') {
-                    $('#alertQuestion'+ i).html('Попълнете въпроса.');
+                    $('#alertQuestion' + i).html('Попълнете въпроса.');
                     errorCount += 1;
+                }
+                else {
+                    $('#alertQuestion' + i).empty();
                 }
             }
             if (errorCount === 0) {
-                $('#submit').submit();
+                $('#form').submit();
             }
-           return;
+            return;
         })
     })
 </script>
