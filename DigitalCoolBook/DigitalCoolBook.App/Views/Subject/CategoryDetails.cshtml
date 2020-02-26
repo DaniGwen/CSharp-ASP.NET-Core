@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DigitalCoolBook.App.Models.CategoryViewModels.LessonsViewModel>
+﻿@model DigitalCoolBook.App.Models.CategoryViewModels.CategoryDetailsViewModel
 
 @{
     Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
@@ -12,27 +12,27 @@
 <hr class="hr-orchid" />
 
 <div>
-    @foreach (var item in Model)
+    @foreach (var lesson in Model.Lessons)
     {
         <div class="d-flex justify-content-center">
-            <a href="/Subject/LessonDetails/@item.Id" class="boxed-btn w-75 mb-2">@item.Title</a>
+            <a href="/Subject/LessonDetails/@lesson.LessonId" class="boxed-btn w-75 mb-2">@lesson.Title</a>
         </div>
         <div>
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="form-group">
                     <button class="btn btn-outline-info w-100">
-                        @Html.ActionLink("Промяна", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
                     </button>
 
-                    <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@item.Id" href="#">Изтрии</a>
+                    <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
                 </div>
             }
         </div>
     }
 </div>
 <div class="mt-4 ml-4 mb-2">
-    <a href="@Url.Action("Categories", "Subject",new {Id = ViewData["SubjectId"]})" class="btn btn-outline-info">Назад</a>
+    <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})" class="btn btn-outline-info">Назад</a>
 </div>
 
 @if (this.User.IsInRole("Admin"))

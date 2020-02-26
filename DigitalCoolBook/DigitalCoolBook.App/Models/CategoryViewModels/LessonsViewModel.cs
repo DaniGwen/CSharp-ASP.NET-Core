@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DigitalCoolBook.App.Models.CategoryViewModels
+﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
 {
     public class LessonsViewModel
     {
@@ -10,6 +8,6 @@ namespace DigitalCoolBook.App.Models.CategoryViewModels
 
         public string Content { get; set; }
 
-        public string Id { get; set; }
+        public string LessonId { get; set; }
     }
 }

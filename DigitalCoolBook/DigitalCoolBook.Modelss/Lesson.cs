@@ -1,10 +1,12 @@
 ﻿namespace DigitalCoolBook.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class Lesson
     {
-        public string Id { get; set; }
+        [Key]
+        public string LessonId { get; set; }
 
         public string Title { get; set; }
 

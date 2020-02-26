@@ -58,24 +58,23 @@
 
         [HttpGet]
         [ActionName("CategoryDetails")]
+        [Authorize(Roles = "Admin, Teacher")]
         public IActionResult CategoryDetailsAsync(string categoryId, string categoryTitle, string subjectId)
         {
             var lessons = this.subjectService.GetLessons()
                 .Where(lesson => lesson.CategoryId == categoryId)
                 .ToList();
 
-            var lessonsList = new List<LessonsViewModel>();
+            var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
 
-            foreach (var lesson in lessons)
+            var model = new CategoryDetailsViewModel
             {
-                var lessonDto = this.mapper.Map<LessonsViewModel>(lesson);
-                lessonsList.Add(lessonDto);
-            }
+                CategoryTitle = categoryTitle,
+                Lessons = lessonsDto,
+                SubjectId = subjectId,
+            };
 
-            this.ViewData["SubjectID"] = subjectId;
-            this.ViewData["categoryTitle"] = categoryTitle;
-
-            return this.View(lessonsList);
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -106,7 +105,7 @@
 
             var lesson = new Lesson
             {
-                Id = Guid.NewGuid().ToString(),
+                LessonId = Guid.NewGuid().ToString(),
                 CategoryId = categoryId,
                 Content = content,
                 Title = title,

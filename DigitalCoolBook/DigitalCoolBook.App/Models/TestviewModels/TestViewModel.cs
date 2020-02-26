@@ -9,13 +9,6 @@
 
     public class TestViewModel
     {
-        public TestViewModel()
-        {
-            this.Grades = new List<Grade>();
-            this.Students = new List<StudentTestDropDownModel>();
-            this.Lessons = new List<LessonsViewModel>();
-        }
-
         public string TestId { get; set; }
 
         [Display(Name ="Място")]
@@ -33,10 +26,11 @@
 
         public string GradeId { get; set; }
 
-        public string LessonId { get; set; }
-        public List<LessonsViewModel> Lessons { get; set; }
+        public string LessonTitle { get; set; }
 
-        public string StudentId { get; set; }
+        public string LessonId { get; set; }
+
+        public List<LessonsViewModel> Lessons { get; set; }
 
         public List<StudentTestDropDownModel> Students { get; set; }
     }

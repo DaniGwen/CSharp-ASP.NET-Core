@@ -50,6 +50,7 @@
                 .ToList(),
                 LessonId = id,
                 Lessons = this.mapper.Map<List<LessonsViewModel>>(lessons),
+                Timer = DateTime.Now,
             };
 
             return this.View(model);
@@ -62,9 +63,7 @@
         {
             try
             {
-                // Getting lesson from DB to create test Name
-                var lesson = await this.subjectService.GetLessonAsync(model.LessonId);
-                var testName = "Тест по:  " + lesson.Title;
+                var testName = "Тест по:  " + model.LessonTitle;
 
                 // Mapping and setting test
                 var test = this.mapper.Map<Test>(model);
