@@ -656,7 +656,6 @@ namespace DigitalCoolBook.App
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 await roleManager.CreateAsync(role);
-
             }
 
             if (!context.Users.Any(u => u.Email == "admin@admin.com"))

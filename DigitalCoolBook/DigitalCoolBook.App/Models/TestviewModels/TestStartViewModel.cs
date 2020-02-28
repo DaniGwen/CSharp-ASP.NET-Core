@@ -21,5 +21,7 @@
 
         [Display(Name ="Въпроси")]
         public List<QuestionsModel> Questions { get; set; }
+
+        public bool IsExpired { get; set; }
     }
 }

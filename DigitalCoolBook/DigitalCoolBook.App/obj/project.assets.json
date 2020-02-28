@@ -965,6 +965,9 @@
           }
         }
       },
+      "Moment.js/2.24.0": {
+        "type": "package"
+      },
       "Nancy/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -4446,6 +4449,21 @@
         "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Moment.js/2.24.0": {
+      "sha512": "EklynJ92k3/mjOu+ux0CQvXMZqPkkuuV5SuGQNfAnbsVIdNEa8Lj0HQovfbeK4xRlFJ6BAMQB05esoM1KkyvNg==",
+      "type": "package",
+      "path": "moment.js/2.24.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/moment-with-locales.js",
+        "Content/Scripts/moment-with-locales.min.js",
+        "Content/Scripts/moment.js",
+        "Content/Scripts/moment.min.js",
+        "moment.js.2.24.0.nupkg.sha512",
+        "moment.js.nuspec"
       ]
     },
     "Nancy/2.0.0": {
@@ -9096,6 +9114,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.0",
       "Microsoft.Extensions.Logging.Debug >= 3.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
+      "Moment.js >= 2.24.0",
       "Nancy >= 2.0.0",
       "SendGrid >= 9.12.6",
       "StyleCop.Analyzers >= 1.1.118"
@@ -9186,6 +9205,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.1, )"
+          },
+          "Moment.js": {
+            "target": "Package",
+            "version": "[2.24.0, )"
           },
           "Nancy": {
             "target": "Package",

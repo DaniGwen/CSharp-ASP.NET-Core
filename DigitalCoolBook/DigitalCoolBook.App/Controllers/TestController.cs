@@ -50,7 +50,6 @@
                 .ToList(),
                 LessonId = id,
                 Lessons = this.mapper.Map<List<LessonsViewModel>>(lessons),
-                Timer = DateTime.Now,
             };
 
             return this.View(model);
@@ -125,12 +124,12 @@
         public async Task<IActionResult> StartTest(string id)
         {
             var test = await this.testService.GetTestAsync(id);
+            this.TempData["TestId"] = test.TestId;
             test.Date = DateTime.Now;
-            await this.testService.SaveChangesAsync();
 
-            var model = this.mapper.Map<TestStartViewModel>(test);
+            var testModel = this.mapper.Map<TestStartViewModel>(test);
 
-            // for TEST only
+            // for Testing only
             var questions = new List<QuestionsModel>
             {
                 new QuestionsModel
@@ -146,15 +145,20 @@
                     Name = "V koe ot izbroenite?",
                 },
             };
-            model.Questions.AddRange(questions);
-            model.Timer = string.Format("{0:s}", test.Timer);
 
-            return this.View(model);
+            testModel.Questions.AddRange(questions);
+            testModel.IsExpired = false;
+            testModel.Timer = test.Timer.ToString("yyyy-MM-ddTHH:mm:ss");
+
+            return this.View(testModel);
         }
 
         [HttpPost]
-        public IActionResult EndTest(TestStartViewModel model)
+        [ActionName("EndTest")]
+        public async Task<IActionResult> EndTestAsync(TestStartViewModel model)
         {
+            var test = await this.testService.GetTestAsync(this.TempData["TestId"].ToString());
+
             // TODO: Implement
             return this.Redirect("/Home/Success");
         }

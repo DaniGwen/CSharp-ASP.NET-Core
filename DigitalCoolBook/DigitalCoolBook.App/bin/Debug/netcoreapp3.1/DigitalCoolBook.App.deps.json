@@ -37,6 +37,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.0",
           "Microsoft.Extensions.Logging.Debug": "3.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
+          "Moment.js": "2.24.0",
           "Nancy": "2.0.0",
           "SendGrid": "9.12.6",
           "StyleCop.Analyzers": "1.1.118",
@@ -1239,6 +1240,7 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
+      "Moment.js/2.24.0": {},
       "Nancy/2.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyModel": "2.0.4",
@@ -4479,6 +4481,13 @@
       "sha512": "sha512-+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
+    },
+    "Moment.js/2.24.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EklynJ92k3/mjOu+ux0CQvXMZqPkkuuV5SuGQNfAnbsVIdNEa8Lj0HQovfbeK4xRlFJ6BAMQB05esoM1KkyvNg==",
+      "path": "moment.js/2.24.0",
+      "hashPath": "moment.js.2.24.0.nupkg.sha512"
     },
     "Nancy/2.0.0": {
       "type": "package",

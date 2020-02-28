@@ -16,7 +16,7 @@
         public string Place { get; set; }
 
         [Required(ErrorMessage ="Моля попълнете дата.")]
-        [Display(Name ="Дата и час на теста")]
+        [Display(Name ="Таймер на теста")]
         public DateTime Timer { get; set; }
 
         [Display(Name = "Дата на провеждане")]
@@ -31,7 +31,5 @@
         public string LessonId { get; set; }
 
         public List<LessonsViewModel> Lessons { get; set; }
-
-        public List<StudentTestDropDownModel> Students { get; set; }
     }
 }

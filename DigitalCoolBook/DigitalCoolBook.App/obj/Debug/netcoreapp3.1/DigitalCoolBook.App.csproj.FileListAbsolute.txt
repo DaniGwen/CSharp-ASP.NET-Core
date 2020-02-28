@@ -419,8 +419,8 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\CreateTest.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\Success.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\ErrorView.cshtml.g.cs
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\Tests.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\StartTest.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\AddQuestions.cshtml.g.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache

@@ -34,5 +34,7 @@
         public string GradeId { get; set; }
 
         public ICollection<Question> Questions { get; set; }
+
+        public bool IsExpired { get; set; }
     }
 }
