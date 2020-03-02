@@ -129,25 +129,42 @@
             var test = await this.testService.GetTestAsync(id);
             this.TempData["TestId"] = test.TestId;
 
-            var questionsDb = this.questionService
-                .GetQuestions()
-                .Where(question => question.TestId == test.TestId);
-
             // Map test to testModel
             var testModel = this.mapper.Map<TestStartViewModel>(test);
 
-            // Add questions to model
-            testModel.Questions
-                    .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
-
-            // Add Answers to questions
-            foreach (var question in testModel.Questions)
+            try
             {
-                question.Answers
-                    .AddRange(this.questionService
-                    .GetAnswers()
-                    .Where(a => a.QuestionId == question.QuestionId)
-                    .ToList());
+                var questionsDb = this.questionService
+               .GetQuestions()
+               .Where(question => question.TestId == test.TestId)
+               .ToList();
+
+                // Add questions to model
+                testModel.Questions
+                        .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
+            }
+            catch (Exception)
+            {
+                this.TempData["ErrorMsg"] = "Няма добавени въпроси за този тест!";
+                this.Redirect("Home/Error");
+            }
+
+            try
+            {
+                // Add Answers to questions
+                foreach (var question in testModel.Questions)
+                {
+                    question.Answers
+                        .AddRange(this.questionService
+                        .GetAnswers()
+                        .Where(answer => answer.QuestionId == question.QuestionId)
+                        .ToList());
+                }
+            }
+            catch (Exception)
+            {
+                this.TempData["ErrorMsg"] = "Няма добавени отговори към въпросите";
+                this.Redirect("Home/Error");
             }
 
             testModel.IsExpired = false;
