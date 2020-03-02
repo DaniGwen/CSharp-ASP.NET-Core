@@ -31,14 +31,19 @@ namespace DigitalCoolBook.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<Question> GetQuestionAsync(string testId)
+        public IQueryable<Answer> GetAnswers()
         {
-            throw new System.NotImplementedException();
+            return this.context.Answers;
         }
 
-        public IQueryable GetQuestions()
+        public async Task<Question> GetQuestionAsync(string testId)
         {
-            throw new System.NotImplementedException();
+           return await this.context.Questions.FindAsync(testId);
+        }
+
+        public IQueryable<Question> GetQuestions()
+        {
+            return this.context.Questions;
         }
 
         public async Task SaveChangesAsync()

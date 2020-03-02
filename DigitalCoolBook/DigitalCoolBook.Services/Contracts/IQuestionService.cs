@@ -7,7 +7,7 @@ namespace DigitalCoolBook.Services.Contracts
 {
     public interface IQuestionService
     {
-        IQueryable GetQuestions();
+        IQueryable<Question> GetQuestions();
 
         Task<Question> GetQuestionAsync(string testId);
 
@@ -16,5 +16,7 @@ namespace DigitalCoolBook.Services.Contracts
         Task AddQuestion(Question question);
 
         Task AddQuestionsAsync(List<Question> questions);
+
+        IQueryable<Answer> GetAnswers();
     }
 }

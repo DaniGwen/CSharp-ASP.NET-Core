@@ -128,31 +128,30 @@
         {
             var test = await this.testService.GetTestAsync(id);
             this.TempData["TestId"] = test.TestId;
-            test.Date = DateTime.Now;
 
+            var questionsDb = this.questionService
+                .GetQuestions()
+                .Where(question => question.TestId == test.TestId);
+
+            // Map test to testModel
             var testModel = this.mapper.Map<TestStartViewModel>(test);
 
-            // for Testing only
-            var questions = new List<QuestionsModel>
-            {
-                new QuestionsModel
-                {
-                    Title = "Koe ot slednite?",
-                },
-                new QuestionsModel
-                {
-                    Title = "Ima li .....",
-                },
-                new QuestionsModel
-                {
-                    Title = "V koe ot izbroenite?",
-                },
-            };
+            // Add questions to model
+            testModel.Questions
+                    .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
 
-            testModel.Questions.AddRange(questions);
+            // Add Answers to questions
+            foreach (var question in testModel.Questions)
+            {
+                question.Answers
+                    .AddRange(this.questionService
+                    .GetAnswers()
+                    .Where(a => a.QuestionId == question.QuestionId)
+                    .ToList());
+            }
+
             testModel.IsExpired = false;
             testModel.Timer = test.Timer.ToString();
-           //testModel.Timer = test.Timer.ToString("yyyy-MM-ddTHH:mm:ss");
 
             return this.View(testModel);
         }

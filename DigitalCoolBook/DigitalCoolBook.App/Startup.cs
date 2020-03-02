@@ -49,6 +49,7 @@ namespace DigitalCoolBook.App
             services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<ITestService, TestService>();
+            services.AddTransient<IQuestionService, QuestionService>();
 
             var config = new MapperConfiguration(cfg =>
             {
