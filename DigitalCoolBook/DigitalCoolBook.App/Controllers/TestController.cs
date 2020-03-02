@@ -62,13 +62,11 @@
         {
             try
             {
-                var testName = "Тест по:  " + model.LessonTitle;
-
                 // Mapping and setting test
                 var test = this.mapper.Map<Test>(model);
                 test.TestId = Guid.NewGuid().ToString();
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                test.TestName = testName;
+                test.TestName = model.LessonTitle;
 
                 // Adding relation  between Test and Student
                 foreach (var student in chkBox)
@@ -111,8 +109,10 @@
         public IActionResult Tests()
         {
             var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             var tests = this.testService.GetTests()
                 .Where(t => t.TeacherId == teacherId)
+                .OrderByDescending(test => test.IsExpired)
                 .ToList();
 
             var model = this.mapper.Map<List<TestsNamesViewModel>>(tests);
@@ -157,9 +157,13 @@
         [ActionName("EndTest")]
         public async Task<IActionResult> EndTestAsync(TestStartViewModel model)
         {
-            var test = await this.testService.GetTestAsync(this.TempData["TestId"].ToString());
+            var test = await this.testService
+                .GetTestAsync(this.TempData["TestId"].ToString());
 
-            // TODO: Implement
+            test.Date = DateTime.Now;
+            test.IsExpired = true;
+            await this.testService.SaveChangesAsync();
+
             return this.Redirect("/Home/Success");
         }
 

@@ -80,15 +80,15 @@
             clearInterval(x);
             document.getElementById("timer").innerHTML = "EXPIRED";
 
-            // FIX not working
             // Ajax to save the test and set "IsExpired" to "true"
-            $(function () {
-                $("#form").submit(function (event) {
-                    aler("Теста е предаден.");
-                })
-            })
+            submitForm();
         }
     }, 1000);
+
+    function submitForm() {
+        alert("Край на теста.", 3000);
+        $("#form").submit();
+    };
 </script>
 
 @*digital-clock function*@

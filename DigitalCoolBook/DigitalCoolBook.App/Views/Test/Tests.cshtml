@@ -20,14 +20,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var test in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TestName)
+                    @if (test.IsExpired)
+                    {
+                        <div class="text-danger">
+                            @Html.DisplayFor(modelItem => test.TestName)
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => test.TestName)
+                    }
                 </td>
                 <td class="btn btn-outline-success mb-2">
-                    @Html.ActionLink("Старт", "StartTest", "Test", new { id = item.TestId })
+                    @if (test.IsExpired)
+                    {
+                        Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "linkdisabled" });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId })
+                    }
                 </td>
             </tr>
         }
