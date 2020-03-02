@@ -35,7 +35,8 @@
                     <ul class="list-group">
                         <li class="list-group-item ">
                             @Html.CheckBoxFor(m => m.Questions[i].IsChecked)
-                            @Html.DisplayNameFor(m=>m.Questions[i].Title)
+                            @Html.DisplayFor(m => m.Questions[i].Title)
+                            @Html.HiddenFor(m => m.Questions[i].Title)
                         </li>
                     </ul>
                 }

@@ -21,19 +21,22 @@
         private readonly IMapper mapper;
         private readonly IGradeService gradeService;
         private readonly IUserService userService;
+        private readonly IQuestionService questionService;
 
         public TestController(
             ITestService testService,
             ISubjectService subjectService,
             IMapper mapper,
             IGradeService gradeService,
-            IUserService userService)
+            IUserService userService,
+            IQuestionService questionService)
         {
             this.testService = testService;
             this.subjectService = subjectService;
             this.mapper = mapper;
             this.gradeService = gradeService;
             this.userService = userService;
+            this.questionService = questionService;
         }
 
         [HttpGet]
@@ -163,6 +166,26 @@
 
             test.Date = DateTime.Now;
             test.IsExpired = true;
+
+            var listOfQuestions = new List<Question>();
+
+            // Adding questions which are checked to Db
+            foreach (var question in model.Questions)
+            {
+                if (question.IsChecked)
+                {
+                    var questionDb = new Question
+                    {
+                        QuestionId = Guid.NewGuid().ToString(),
+                        Content = question.Title,
+                        TestId = test.TestId,
+                    };
+
+                    listOfQuestions.Add(questionDb);
+                }
+            }
+
+            await this.questionService.AddQuestionsAsync(listOfQuestions);
             await this.testService.SaveChangesAsync();
 
             this.ViewData["SuccessMsg"] = "Теста беше предаден.";
