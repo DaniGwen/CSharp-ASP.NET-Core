@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
 
     public class Test
     {
@@ -18,7 +19,7 @@
         public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
-        public DateTime Timer { get; set; }
+        public int Timer { get; set; }
 
         public string LessonId { get; set; }
         public Lesson Lesson { get; set; }

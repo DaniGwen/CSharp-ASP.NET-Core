@@ -68,7 +68,7 @@
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 test.TestName = model.LessonTitle;
 
-                // Adding relation  between Test and Student
+                // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in chkBox)
                 {
                     var testStudent = new TestStudent()
@@ -134,21 +134,22 @@
             {
                 new QuestionsModel
                 {
-                    Name = "Koe ot slednite?",
+                    Title = "Koe ot slednite?",
                 },
                 new QuestionsModel
                 {
-                    Name = "Ima li .....",
+                    Title = "Ima li .....",
                 },
                 new QuestionsModel
                 {
-                    Name = "V koe ot izbroenite?",
+                    Title = "V koe ot izbroenite?",
                 },
             };
 
             testModel.Questions.AddRange(questions);
             testModel.IsExpired = false;
-            testModel.Timer = test.Timer.ToString("yyyy-MM-ddTHH:mm:ss");
+            testModel.Timer = test.Timer.ToString();
+           //testModel.Timer = test.Timer.ToString("yyyy-MM-ddTHH:mm:ss");
 
             return this.View(testModel);
         }
@@ -164,6 +165,7 @@
             test.IsExpired = true;
             await this.testService.SaveChangesAsync();
 
+            this.ViewData["SuccessMsg"] = "Теста беше предаден.";
             return this.Redirect("/Home/Success");
         }
 

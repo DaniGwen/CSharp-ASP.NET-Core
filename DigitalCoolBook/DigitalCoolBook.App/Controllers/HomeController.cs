@@ -124,12 +124,14 @@
         public IActionResult Success()
         {
             this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");
+
             return this.View();
         }
 
         public IActionResult PasswordSaved()
         {
             this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
+
             return this.View();
         }
 
@@ -137,6 +139,7 @@
         public IActionResult ErrorView()
         {
             this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
+
             return this.View();
         }
     }

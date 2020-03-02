@@ -2,7 +2,7 @@
 {
     public class QuestionsModel
     {
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         public bool IsChecked { get; set; }
     }

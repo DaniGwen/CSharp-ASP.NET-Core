@@ -15,9 +15,9 @@
         [Required(ErrorMessage ="Моля въведете място на провеждане на теста.")]
         public string Place { get; set; }
 
-        [Required(ErrorMessage ="Моля попълнете дата.")]
-        [Display(Name ="Таймер на теста")]
-        public DateTime Timer { get; set; }
+        [Required(ErrorMessage ="Въведете времетраене на теста.")]
+        [Display(Name ="Времетраене")]
+        public int Timer { get; set; }
 
         [Display(Name = "Дата на провеждане")]
         public DateTime Date { get; set; }

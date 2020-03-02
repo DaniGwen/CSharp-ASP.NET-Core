@@ -38,7 +38,7 @@
                 <td class="btn btn-outline-success mb-2">
                     @if (test.IsExpired)
                     {
-                        Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "linkdisabled" });
+                        <span class="text-danger">Теста е приключил</span>
                     }
                     else
                     {
