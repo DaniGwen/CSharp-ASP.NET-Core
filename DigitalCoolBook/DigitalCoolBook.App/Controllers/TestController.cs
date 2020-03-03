@@ -43,7 +43,7 @@
         [Authorize(Roles = "Teacher, Admin")]
         public IActionResult CreateTest(string id)
         {
-            var lessons = this.subjectService.GetLessons().ToList();
+            var tests = this.testService.GetTests().ToList();
 
             var model = new TestViewModel
             {
@@ -51,8 +51,8 @@
                 .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList(),
-                LessonId = id,
-                Lessons = this.mapper.Map<List<LessonsViewModel>>(lessons),
+                TestId = id,
+                Tests = this.mapper.Map<List<Test>>(tests),
             };
 
             return this.View(model);
@@ -69,7 +69,7 @@
                 var test = this.mapper.Map<Test>(model);
                 test.TestId = Guid.NewGuid().ToString();
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                test.TestName = model.LessonTitle;
+                test.TestName = model.TestTitle;
 
                 // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in chkBox)
@@ -142,29 +142,41 @@
                 // Add questions to model
                 testModel.Questions
                         .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
+
+                if (testModel.Questions.Count == 0)
+                {
+                    this.TempData["ErrorMsg"] = "Теста не съдържа въпроси.";
+                    this.Redirect("/Home/Error");
+                }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                this.TempData["ErrorMsg"] = "Няма добавени въпроси за този тест!";
-                this.Redirect("Home/Error");
+                this.View("/Error", exception.Message);
             }
 
             try
             {
-                // Add Answers to questions
+                // Add Answers to testModel.Questions
                 foreach (var question in testModel.Questions)
                 {
-                    question.Answers
-                        .AddRange(this.questionService
-                        .GetAnswers()
+                    var answers = this.questionService.GetAnswers()
                         .Where(answer => answer.QuestionId == question.QuestionId)
-                        .ToList());
+                        .ToList();
+
+                    if (answers.Count == 0)
+                    {
+                        this.TempData["ErrorMsg"] =
+                            "Някой от въпросите нямат отговори. Моля добавете отговори за всеки въпрос.";
+
+                        this.Redirect("Home/Error");
+                    }
+
+                    question.Answers.AddRange(answers);
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                this.TempData["ErrorMsg"] = "Няма добавени отговори към въпросите";
-                this.Redirect("Home/Error");
+                this.View("/Error", exception.Message);
             }
 
             testModel.IsExpired = false;
@@ -186,20 +198,20 @@
             var listOfQuestions = new List<Question>();
 
             // Adding questions which are checked to Db
-            foreach (var question in model.Questions)
-            {
-                if (question.IsChecked)
-                {
-                    var questionDb = new Question
-                    {
-                        QuestionId = Guid.NewGuid().ToString(),
-                        Content = question.Title,
-                        TestId = test.TestId,
-                    };
+            //foreach (var question in model.Questions)
+            //{
+            //    if (question.IsChecked)
+            //    {
+            //        var questionDb = new Question
+            //        {
+            //            QuestionId = Guid.NewGuid().ToString(),
+            //            Content = question.Title,
+            //            TestId = test.TestId,
+            //        };
 
-                    listOfQuestions.Add(questionDb);
-                }
-            }
+            //        listOfQuestions.Add(questionDb);
+            //    }
+            //}
 
             await this.questionService.AddQuestionsAsync(listOfQuestions);
             await this.testService.SaveChangesAsync();

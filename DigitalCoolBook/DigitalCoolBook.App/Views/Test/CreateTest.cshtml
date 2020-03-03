@@ -13,7 +13,7 @@
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div>
-                    <input type="hidden" name="LessonId" value="@Model.LessonId" />
+                    <input type="hidden" name="LessonId" value="@Model.TestId" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Place" class="control-label"></label>
@@ -29,7 +29,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Урок</label>
-                    @Html.DropDownListFor(m => m.LessonTitle, new SelectList(Model.Lessons, "Title","Title"), "Изберете Урок..", new { @class = "form-control w-50" })
+                    @Html.DropDownListFor(m => m.TestTitle, new SelectList(Model.Tests, "TestId","TestName"), "Изберете Тест..", new { @class = "form-control w-50" })
                 </div>
                 <div class="form-group">
                     <label class="mt-2">Паралелка</label>

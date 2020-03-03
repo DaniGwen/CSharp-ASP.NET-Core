@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-    using DigitalCoolBook.App.Models.StudentViewModels;
     using DigitalCoolBook.Models;
 
     public class TestViewModel
@@ -26,10 +24,8 @@
 
         public string GradeId { get; set; }
 
-        public string LessonTitle { get; set; }
+        public string TestTitle { get; set; }
 
-        public string LessonId { get; set; }
-
-        public List<LessonsViewModel> Lessons { get; set; }
+        public List<Test> Tests { get; set; }
     }
 }
