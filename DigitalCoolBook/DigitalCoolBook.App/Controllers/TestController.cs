@@ -63,6 +63,7 @@
         [ActionName("CreateTest")]
         public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] chkBox)
         {
+            // Checks if no students has been selected
             if (chkBox.Length == 0)
             {
                 this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
@@ -97,11 +98,8 @@
             }
             catch (Exception exception)
             {
-                this.TempData["ErrorMsg"] = exception.Message;
-                return this.RedirectToAction("ErrorView", "Home");
+                return this.View("/Error", exception.Message);
             }
-
-            this.TempData["SuccessMsg"] = "Теста е създаден успешно!";
 
             return this.RedirectToAction("/StartTest");
         }
@@ -121,11 +119,11 @@
         [Authorize(Roles = "Teacher")]
         public IActionResult Tests()
         {
-            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
             var tests = this.testService.GetTests().ToList();
 
+            // Map and create model for the view
             var model = this.mapper.Map<List<TestsNamesViewModel>>(tests);
+
             return this.View(model);
         }
 
@@ -134,27 +132,23 @@
         public async Task<IActionResult> StartTest(string id)
         {
             var test = await this.testService.GetTestAsync(id);
+
             this.TempData["TestId"] = test.TestId;
 
             // Map test to testModel
-            var testModel = this.mapper.Map<TestStartViewModel>(test);
+            var model = this.mapper.Map<TestStartViewModel>(test);
 
             try
             {
+                // Gets the questions for this test
                 var questionsDb = this.questionService
                .GetQuestions()
                .Where(question => question.TestId == test.TestId)
                .ToList();
 
-                // Add questions to model
-                testModel.Questions
+                // Add questions to model and map questions to QuestionModel
+                model.Questions
                         .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
-
-                if (testModel.Questions.Count == 0)
-                {
-                    this.TempData["ErrorMsg"] = "Теста не съдържа въпроси.";
-                    this.Redirect("/Home/Error");
-                }
             }
             catch (Exception exception)
             {
@@ -163,20 +157,12 @@
 
             try
             {
-                // Add Answers to testModel.Questions
-                foreach (var question in testModel.Questions)
+                // Add Answers to Questions for this test
+                foreach (var question in model.Questions)
                 {
                     var answers = this.questionService.GetAnswers()
                         .Where(answer => answer.QuestionId == question.QuestionId)
                         .ToList();
-
-                    if (answers.Count == 0)
-                    {
-                        this.TempData["ErrorMsg"] =
-                            "Някой от въпросите нямат отговори. Моля добавете отговори за всеки въпрос.";
-
-                        this.Redirect("Home/Error");
-                    }
 
                     question.Answers.AddRange(answers);
                 }
@@ -186,16 +172,16 @@
                 this.View("/Error", exception.Message);
             }
 
-            testModel.IsExpired = false;
-            testModel.Timer = test.Timer.ToString();
+            model.Timer = test.Timer.ToString();
 
-            return this.View(testModel);
+            return this.View(model);
         }
 
         [HttpPost]
         [ActionName("EndTest")]
         public async Task<IActionResult> EndTestAsync(TestStartViewModel model)
         {
+            // REFACTOR AND IMPLEMENT
             var test = await this.testService
                 .GetTestAsync(this.TempData["TestId"].ToString());
 
