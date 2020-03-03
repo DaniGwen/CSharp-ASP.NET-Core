@@ -41,9 +41,10 @@
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Admin")]
-        public IActionResult CreateTest(string id)
+        [ActionName("CreateTest")]
+        public async Task<IActionResult> CreateTestAsync(string id)
         {
-            var tests = this.testService.GetTests().ToList();
+            var tests = await this.testService.GetTestAsync(id);
 
             var model = new TestViewModel
             {
@@ -52,7 +53,6 @@
                 .OrderBy(g => g.Name)
                 .ToList(),
                 TestId = id,
-                Tests = this.mapper.Map<List<Test>>(tests),
             };
 
             return this.View(model);
@@ -63,11 +63,21 @@
         [ActionName("CreateTest")]
         public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] chkBox)
         {
+            if (chkBox.Length == 0)
+            {
+                this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
+                return this.View(model);
+            }
+
             try
             {
-                // Mapping and setting test
+                // Create and map test
                 var test = this.mapper.Map<Test>(model);
+
+                // Adding Id to test
                 test.TestId = Guid.NewGuid().ToString();
+
+                // Finds current Teacher Id
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 test.TestName = model.TestTitle;
 
@@ -93,7 +103,7 @@
 
             this.TempData["SuccessMsg"] = "Теста е създаден успешно!";
 
-            return this.RedirectToAction("Success", "Home");
+            return this.RedirectToAction("/StartTest");
         }
 
         [Authorize(Roles = "Teacher, Admin")]
@@ -113,10 +123,7 @@
         {
             var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var tests = this.testService.GetTests()
-                .Where(t => t.TeacherId == teacherId)
-                .OrderByDescending(test => test.IsExpired)
-                .ToList();
+            var tests = this.testService.GetTests().ToList();
 
             var model = this.mapper.Map<List<TestsNamesViewModel>>(tests);
             return this.View(model);
@@ -195,26 +202,7 @@
             test.Date = DateTime.Now;
             test.IsExpired = true;
 
-            var listOfQuestions = new List<Question>();
-
-            // Adding questions which are checked to Db
-            //foreach (var question in model.Questions)
-            //{
-            //    if (question.IsChecked)
-            //    {
-            //        var questionDb = new Question
-            //        {
-            //            QuestionId = Guid.NewGuid().ToString(),
-            //            Content = question.Title,
-            //            TestId = test.TestId,
-            //        };
-
-            //        listOfQuestions.Add(questionDb);
-            //    }
-            //}
-
-            await this.questionService.AddQuestionsAsync(listOfQuestions);
-            await this.testService.SaveChangesAsync();
+            var expiredTest = this.mapper.Map<ExpiredTest>(test);
 
             this.ViewData["SuccessMsg"] = "Теста беше предаден.";
             return this.Redirect("/Home/Success");

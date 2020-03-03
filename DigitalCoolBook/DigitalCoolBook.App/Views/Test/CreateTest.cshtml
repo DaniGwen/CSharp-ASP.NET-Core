@@ -16,21 +16,12 @@
                     <input type="hidden" name="LessonId" value="@Model.TestId" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Place" class="control-label"></label>
-                    <input asp-for="Place" class="form-control" />
-                    <span asp-validation-for="Place" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Timer" class="control-label"></label>
                     <input asp-for="Timer" type="number" class="form-control" id="datetimepicker-input" />
                     <span asp-validation-for="Timer" class="text-danger"></span>
                 </div>
             </div>
             <div class="col">
-                <div class="form-group">
-                    <label>Урок</label>
-                    @Html.DropDownListFor(m => m.TestTitle, new SelectList(Model.Tests, "TestId","TestName"), "Изберете Тест..", new { @class = "form-control w-50" })
-                </div>
                 <div class="form-group">
                     <label class="mt-2">Паралелка</label>
                     @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
@@ -44,10 +35,10 @@
         </div>
         <div class="row form-group mb-2 mt-3">
             <div class="ml-4">
-                <a class="btn btn-outline-secondary" asp-action="Index">Назад</a>
+                <a class="btn btn-outline-secondary" asp-action="Tests">Назад</a>
             </div>
             <div class="ml-5">
-                <input id="button" type="submit" value="Запази" class="btn btn-primary" />
+                <input id="button" type="submit" value="Старт тест" class="btn btn-primary" />
             </div>
         </div>
     </form>
