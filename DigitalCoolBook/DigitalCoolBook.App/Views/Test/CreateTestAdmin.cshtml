@@ -7,7 +7,7 @@
 
 <h1 class="text-center">Създаване на тест</h1>
 
-<form asp-action="CreateTestAdmin" method="post">
+<form id="form" asp-action="CreateTestAdmin" method="post">
     <div class="container">
         <div class="form-group text-center">
             <label for="@Model.Place">Място на провеждане</label>
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <div class="row mt-2">
-                <label >
+                <label>
                     Брой въпроси
                 </label>
             </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-block" value="запази"/>
+            <button id="save" class="btn btn-block btn-primary">запази</button>
         </div>
     </div>
 </form>
@@ -54,9 +54,9 @@
                     $('<span class="text-danger" id="alertQuestion' + i + '"></span>'),
                     $('<br/>'),
                     $('<label class="form-group">брой отговори<label/>'),
-                    $('<input onchange="AppendFields(this,' + i + ')" type="number" id="answersCount' + i + '" class="form-control" name="answersCount' + i + '"/>'),
+                    $('<input onchange="AppendFields(this,' + i + ')" type="number" id="numberOfAnswers" class="form-control" name="answersCount' + i + '"/>'),
+                    $('<span class="text-danger" id="validateNumberOfAnswers">'),
                     $('<div class="form-group" id="answerInput' + i + '"></div>'),
-
                 );
             }
         })
@@ -75,27 +75,39 @@
         // Print answer input fields
         for (var i = 0; i < index; i++) {
             $(currentQuestionInput).append(
-                $('<label class="text-center">Отговор ' + answersLetters[i] + '<label/>'),
+                $('<label>Отговор ' + answersLetters[i] + '<label/>'),
                 $('<input class="form-control" id="answer' + i + '" name="[' + indexQuestion + '].Answers" placeholder="Въведете отговор.."/>'),
-                $('<span class="text-danger" id="alertQuestion' + i + '"></span>'),
+                $('<span class="text-danger" id="alertAnswer' + i + '"></span>'),
             )
         }
     }
 
-    // input validation for questions
+    // Input validation for questions and answers and Submit form
     $(function () {
         $('#save').click(function (event) {
-            var alertSpan = $('#validateInput');
-            alertSpan.empty();
             event.preventDefault();
+            var alertNumberOfQuestions = $('#validateInput');
+            var alertNumberOfAnswers = $('#validateNumberOfAnswers');
 
+            alertNumberOfQuestions.empty();
+            alertNumberOfAnswers.empty();
+
+            // Error if questions or answers less than zero
             var numberOfQuestions = $('#numberOfQuestions').val();
+            var numberOfAnswers = $('#numberOfAnswers').val();
+
             var errorCount = 0;
 
             if (numberOfQuestions <= 0) {
-                alertSpan.html("Моля добавете въпроси.");
+                alertNumberOfQuestions.html("Моля добавете въпроси.");
                 return;
             }
+
+            if (numberOfAnswers <= 0) {
+                alertNumberOfAnswers.html("Моля добавете отговори.");
+                return;
+            }
+
             for (var i = 0; i < numberOfQuestions; i++) {
                 if ($('#question' + i).val() == '') {
                     $('#alertQuestion' + i).html('Попълнете въпроса.');
@@ -105,6 +117,18 @@
                     $('#alertQuestion' + i).empty();
                 }
             }
+
+            for (var i = 0; i < numberOfAnswers; i++) {
+                if ($('#answer' + i + '').val() == '') {
+                    $('#alertAnswer' + i + '').html('Попълнете отговора.');
+                    errorCount += 1;
+                }
+                else {
+                    $('#alertAnswer' + i).empty();
+                }
+            }
+
+            // Submit if no errors
             if (errorCount === 0) {
                 $('#form').submit();
             }

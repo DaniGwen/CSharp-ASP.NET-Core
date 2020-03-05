@@ -170,7 +170,7 @@
             await this.questionService.AddQuestionsAsync(questionsForDb);
             await this.questionService.AddAnswersAsync(answersForDb);
 
-            return this.Redirect("/Home/Success");
+            return this.StatusCode(200);
         }
 
         [Authorize(Roles = "Teacher, Admin")]
