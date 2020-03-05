@@ -6655,3 +6655,7 @@ h6 {
     margin-right: 10px;
     font-size: 12px;
 }
+
+.int-input {
+    width: 50px;
+}
