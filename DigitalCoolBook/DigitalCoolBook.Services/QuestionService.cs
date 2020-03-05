@@ -15,6 +15,13 @@ namespace DigitalCoolBook.Services
         {
             this.context = context;
         }
+
+        public async Task AddAnswersAsync(ICollection<Answer> answers)
+        {
+            await this.context.Answers.AddRangeAsync(answers);
+            await this.SaveChangesAsync();
+        }
+
         public Task AddQuestion(Question question)
         {
             throw new System.NotImplementedException();

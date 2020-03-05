@@ -123,37 +123,54 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ActionName("CreateTestAdmin")]
-        public async Task<IActionResult> CreateTestAdminAsync(ICollection<QuestionAnswerViewModel> model, string LessonId, string Place)
+        public async Task<IActionResult> CreateTestAdminAsync(ICollection<QuestionAnswerViewModel> model, string LessonId, string place)
         {
             var lesson = await this.subjectService.GetLessonAsync(LessonId);
 
-            // Instanciate test, question and answer
-            var question = new Question();
-            var answer = new Answer();
+            // Instanciate test
             var test = new Test
             {
                 TestId = Guid.NewGuid().ToString(),
                 LessonId = LessonId,
-                Place = Place,
+                Place = place,
                 TestName = lesson.Title,
             };
+
+            // Collections of answers and questions to be saved in DB
+            var questionsForDb = new List<Question>();
+            var answersForDb = new List<Answer>();
 
             // Create question and asnwers
             foreach (var questionDto in model)
             {
-                question.QuestionId = Guid.NewGuid().ToString();
-                question.TestId = test.TestId;
-                question.Title = questionDto.Question;
+                var question = new Question
+                {
+                    QuestionId = Guid.NewGuid().ToString(),
+                    TestId = test.TestId,
+                    Title = questionDto.Question,
+                };
+
+                questionsForDb.Add(question);
 
                 // Setting answers properties
                 foreach (var answerDto in questionDto.Answers)
                 {
-                    answer.
+                    var answer = new Answer
+                    {
+                        AnswerId = Guid.NewGuid().ToString(),
+                        Title = answerDto,
+                        QuestionId = question.QuestionId,
+                    };
+
+                    answersForDb.Add(answer);
                 }
-                
             }
 
-            return Redirect("/Home/Success");
+            await this.testService.AddTestAsync(test);
+            await this.questionService.AddQuestionsAsync(questionsForDb);
+            await this.questionService.AddAnswersAsync(answersForDb);
+
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Teacher, Admin")]

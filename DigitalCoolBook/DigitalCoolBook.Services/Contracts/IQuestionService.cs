@@ -18,5 +18,7 @@ namespace DigitalCoolBook.Services.Contracts
         Task AddQuestionsAsync(List<Question> questions);
 
         IQueryable<Answer> GetAnswers();
+
+        Task AddAnswersAsync(ICollection<Answer> answers);
     }
 }
