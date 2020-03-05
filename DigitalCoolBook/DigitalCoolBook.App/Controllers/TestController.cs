@@ -58,8 +58,9 @@
             return this.View(model);
         }
 
+        // Teacher adds students, sets the timer and start the test
         [HttpPost]
-        [Authorize(Roles = "Teacher, Admin")]
+        [Authorize(Roles = "Teacher")]
         [ActionName("CreateTest")]
         public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] chkBox)
         {
@@ -102,6 +103,57 @@
             }
 
             return this.RedirectToAction("/StartTest");
+        }
+
+        // Admin creates a test for a lesson
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateTestAdmin()
+        {
+            var lessons = this.subjectService.GetLessons().ToList();
+
+            var model = new TestCreateAdminViewModel()
+            {
+                Lessons = this.mapper.Map<List<LessonsViewModel>>(lessons),
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ActionName("CreateTestAdmin")]
+        public async Task<IActionResult> CreateTestAdminAsync(ICollection<QuestionAnswerViewModel> model, string LessonId, string Place)
+        {
+            var lesson = await this.subjectService.GetLessonAsync(LessonId);
+
+            // Instanciate test, question and answer
+            var question = new Question();
+            var answer = new Answer();
+            var test = new Test
+            {
+                TestId = Guid.NewGuid().ToString(),
+                LessonId = LessonId,
+                Place = Place,
+                TestName = lesson.Title,
+            };
+
+            // Create question and asnwers
+            foreach (var questionDto in model)
+            {
+                question.QuestionId = Guid.NewGuid().ToString();
+                question.TestId = test.TestId;
+                question.Title = questionDto.Question;
+
+                // Setting answers properties
+                foreach (var answerDto in questionDto.Answers)
+                {
+                    answer.
+                }
+                
+            }
+
+            return Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Teacher, Admin")]
@@ -234,7 +286,7 @@
                     test.Questions.Add(new Question
                     {
                         QuestionId = Guid.NewGuid().ToString(),
-                        Content = question,
+                        Title = question,
                     });
                 }
             }
