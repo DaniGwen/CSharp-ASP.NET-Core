@@ -170,7 +170,9 @@
             await this.questionService.AddQuestionsAsync(questionsForDb);
             await this.questionService.AddAnswersAsync(answersForDb);
 
-            return this.StatusCode(200);
+            this.TempData["SuccessMsg"] = "Теста е записан.";
+
+            return this.Redirect("/Home/Success");
         }
 
         [Authorize(Roles = "Teacher, Admin")]

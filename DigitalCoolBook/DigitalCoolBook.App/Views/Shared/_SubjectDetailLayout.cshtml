@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
     <!--Scripts-->
+    <script src="external/jquery/jquery.js"></script>
     <script src="~/js/moment.js"></script>
     <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
@@ -89,57 +90,124 @@
 </head>
 <body>
     <header>
-    </header>
-    <div class="container ">
-        @RenderBody()
-    </div>
-    <footer class="footer footer_bg_1">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Ресурси
-                            </h3>
-                            <ul>
-                                <li><a href="#"></a></li>
-                                <li><a href="#">Tutorials</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Contact</a></li>
-                            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="container-fluid" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            if (this.User.IsInRole("Admin"))
+                            {
+                                <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
+                                    <button class="btn btn-dark">Администраторски панел</button>
+                                </form>
+                            }
+                            if (this.User.IsInRole("Student"))
+                            {
+                                <form class="nav-item" asp-area="" asp-controller="Student" asp-action="Panel">
+                                    <button class="btn btn-primary">Профил</button>
+                                </form>
+                            }
+                            if (this.User.IsInRole("Teacher"))
+                            {
+                                <form class="nav-item" asp-area="" asp-controller="Teacher" asp-action="Panel">
+                                    <button class="btn btn-primary">Профил</button>
+                                </form>
+                            }
+                        <li class="nav-item ml-1">
+                            <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                <button type="submit" class="btn btn-secondary">Отписване</button>
+                            </form>
+                        </li>
+                    }
+                    else if (!this.User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <form class="nav-item" asp-controller="Admin" asp-action="LoginAdmin">
+                                <button class="btn btn-secondary">Вляз като Администратор</button>
+                            </form>
+                        </li>
+                    }
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container ">
+            @RenderBody()
+        </div>
+        <footer class="footer footer_bg_1">
+            <div class="footer_top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-2 col-md-6 col-lg-2">
+                            <div class="footer_widget">
+                                <h3 class="footer_title">
+                                    Ресурси
+                                </h3>
+                                <ul>
+                                    <li><a href="#"></a></li>
+                                    <li><a href="#">Tutorials</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#"> Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-lg-3">
+                            <div class="footer_widget">
+                                <h3 class="footer_title">
+                                    Адрес
+                                </h3>
+                                <p>
+                                    200, D-block, Green lane USA <br>
+                                    +10 367 467 8934 <br>
+                                    edumark@contact.com
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Адрес
-                            </h3>
-                            <p>
-                                200, D-block, Green lane USA <br>
-                                +10 367 467 8934 <br>
-                                edumark@contact.com
+                </div>
+            </div>
+            <div class="copy-right_text">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p class="copy_right text-center">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    @RenderSection("Scripts", required: false)
-</body>
+        </footer>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>
