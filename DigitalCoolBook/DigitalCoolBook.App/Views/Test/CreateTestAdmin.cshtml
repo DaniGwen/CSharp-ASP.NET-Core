@@ -11,12 +11,13 @@
     <div class="container">
         <div class="form-group text-center">
             <label for="@Model.Place">Място на провеждане</label>
-            <input type="text" class="form-control" name="place" placeholder="Място на теста..">
-            <span class="text-danger" asp-validation-for="@Model.Place"></span>
+            <input type="text" class="form-control" name="place" id="inputPlace" placeholder="Място на теста..">
+            <span class="text-danger" id="alertPlace"></span>
         </div>
         <div class="form-group text-center">
             <label>Тема на теста</label>
-            @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "LessonId", "Title"), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "LessonId", "Title"), "Изберете тема на теста", new { @class = "form-control" })
+            <span class="text-danger" id="alertLesson"></span>
         </div>
         <div class="form-group">
             <div class="row mt-2">
@@ -91,12 +92,18 @@
     // Input validation for questions and answers and Submit form
     $(function () {
         $('#save').click(function (event) {
-            event.preventDefault();
+
+            // Alert variables
             var alertNumberOfQuestions = $('#validateInput');
             var alertNumberOfAnswers = $('#validateNumberOfAnswers');
+            var alertPlace = $('#alertPlace');
+            var alertLesson = $('#alertLesson');
 
+            //empty alert messages
             alertNumberOfQuestions.empty();
             alertNumberOfAnswers.empty();
+            alertPlace.empty();
+            alertLesson.empty();
 
 
             // Error if questions or answers less than zero
@@ -105,21 +112,31 @@
 
             var errorCount = 0;
 
+            if ($("#inputPlace").val() == '') {
+                alertPlace.html('Попълнете полето.').fadeToggle(3500);
+                errorCount += 1;
+            }
+
+            if ($("#LessonId").val() == '') {
+               alertLesson.html('Изберете от менюто.').fadeToggle(3500);
+                errorCount += 1;
+            }
+
             if (numberOfQuestions <= 0) {
-                alertNumberOfQuestions.html("Моля добавете въпроси.").fadeOut(5000);
+                alertNumberOfQuestions.html("Моля добавете въпроси.").fadeToggle(3500);
                 errorCount += 1;
                 return;
             }
 
             if (numberOfAnswers <= 0) {
-                alertNumberOfAnswers.html("Моля добавете отговори.").fadeOut(5000);
+                alertNumberOfAnswers.html("Моля добавете отговори.").fadeToggle(3500);
                 errorCount += 1;
                 return;
             }
 
             for (var i = 0; i < numberOfQuestions; i++) {
                 if ($('#question' + i).val() == '') {
-                    $('#alertQuestion' + i).html('Попълнете въпроса.').fadeOut(5000);
+                    $('#alertQuestion' + i).html('Попълнете въпроса.').fadeToggle(3500);
                     errorCount += 1;
                 }
                 else {
@@ -128,7 +145,7 @@
 
                 for (var j = 0; j < numberOfAnswers; j++) {
                     if ($('#answer' + j + '').val() == '') {
-                        $('#alertAnswer' + j + '').html('Попълнете отговора.').fadeOut(5000);
+                        $('#alertAnswer' + j + '').html('Попълнете отговора.').fadeToggle(3500);
                         errorCount += 1;
                     }
                     else {
@@ -138,12 +155,9 @@
             }
 
             // Submit if no errors
-            if (errorCount === 0) {
-                $('#form').submit(function (event) {
-                    $('#dialog-popup').dialog("open");
-                });
+            if (errorCount > 0) {
+                event.preventDefault();
             }
-            return;
         })
     })
 

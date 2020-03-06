@@ -9,6 +9,7 @@
         [Required(ErrorMessage = "Въведете място.")]
         public string Place { get; set; }
 
+        [Required(ErrorMessage="Изберете тема.")]
         public string LessonId { get; set; }
 
         public List<LessonsViewModel> Lessons { get; set; }
