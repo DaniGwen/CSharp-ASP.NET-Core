@@ -12,6 +12,7 @@
         <div class="form-group text-center">
             <label for="@Model.Place">Място на провеждане</label>
             <input type="text" class="form-control" name="place" placeholder="Място на теста..">
+            <span class="text-danger" asp-validation-for="@Model.Place"></span>
         </div>
         <div class="form-group text-center">
             <label>Тема на теста</label>
@@ -24,7 +25,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <input class="form-control" type="number" id="numberOfQuestions" name="numberOfQuestions" />
+                <input class="form-control" type="number" min="0" max="999" value="0" id="numberOfQuestions" name="numberOfQuestions" />
             </div>
             <span class="text-danger" id="validateInput"></span>
             <div id="questions" name="questions">
@@ -35,8 +36,10 @@
         </div>
     </div>
 </form>
+<div id="dialog-popup">Теста е записан.</div>
 
 <script type="text/javascript">
+
     // Adding question fields on number input
     $(function () {
         $('#numberOfQuestions').change(function () {
@@ -47,14 +50,16 @@
 
             var numberOfQuestions = $('#numberOfQuestions').val();
 
+            // Input field for each question with its label and alert span
             for (var i = 0; i < numberOfQuestions; i++) {
                 $('#questions').append(
                     $('<label >Въпрос ' + (i + 1) + '<label/>'),
                     $('<input class="mt-2 form-control" id="question' + i + '" name="[' + i + '].Question" placeholder="Въведете въпрос.."/>'),
                     $('<span class="text-danger" id="alertQuestion' + i + '"></span>'),
                     $('<br/>'),
-                    $('<label class="form-group">брой отговори<label/>'),
-                    $('<input onchange="AppendFields(this,' + i + ')" type="number" id="numberOfAnswers" class="form-control" name="answersCount' + i + '"/>'),
+                    $('<label class="form-group">Брой отговори<label/>'),
+                    // Input number for answers and call AppendFields()
+                    $('<input onchange="AppendFields(this,' + i + ')" type="number" max="7" min="0" value="0" id="numberOfAnswers" class="form-control" name="answersCount' + i + '"/>'),
                     $('<span class="text-danger" id="validateNumberOfAnswers">'),
                     $('<div class="form-group" id="answerInput' + i + '"></div>'),
                 );
@@ -64,11 +69,12 @@
 
     // Append answers fields on answersCount change
     function AppendFields(answerCountValue, indexQuestion) {
+
         var currentQuestionInput = $('#answerInput' + indexQuestion + '');
 
         var index = $(answerCountValue).val();
 
-        var answersLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+        var answersLetters = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж'];
 
         $(currentQuestionInput).empty();
 
@@ -92,6 +98,7 @@
             alertNumberOfQuestions.empty();
             alertNumberOfAnswers.empty();
 
+
             // Error if questions or answers less than zero
             var numberOfQuestions = $('#numberOfQuestions').val();
             var numberOfAnswers = $('#numberOfAnswers').val();
@@ -99,40 +106,60 @@
             var errorCount = 0;
 
             if (numberOfQuestions <= 0) {
-                alertNumberOfQuestions.html("Моля добавете въпроси.");
+                alertNumberOfQuestions.html("Моля добавете въпроси.").fadeOut(5000);
+                errorCount += 1;
                 return;
             }
 
             if (numberOfAnswers <= 0) {
-                alertNumberOfAnswers.html("Моля добавете отговори.");
+                alertNumberOfAnswers.html("Моля добавете отговори.").fadeOut(5000);
+                errorCount += 1;
                 return;
             }
 
             for (var i = 0; i < numberOfQuestions; i++) {
                 if ($('#question' + i).val() == '') {
-                    $('#alertQuestion' + i).html('Попълнете въпроса.');
+                    $('#alertQuestion' + i).html('Попълнете въпроса.').fadeOut(5000);
                     errorCount += 1;
                 }
                 else {
                     $('#alertQuestion' + i).empty();
                 }
-            }
 
-            for (var i = 0; i < numberOfAnswers; i++) {
-                if ($('#answer' + i + '').val() == '') {
-                    $('#alertAnswer' + i + '').html('Попълнете отговора.');
-                    errorCount += 1;
-                }
-                else {
-                    $('#alertAnswer' + i).empty();
+                for (var j = 0; j < numberOfAnswers; j++) {
+                    if ($('#answer' + j + '').val() == '') {
+                        $('#alertAnswer' + j + '').html('Попълнете отговора.').fadeOut(5000);
+                        errorCount += 1;
+                    }
+                    else {
+                        $('#alertAnswer' + i).empty();
+                    }
                 }
             }
 
             // Submit if no errors
             if (errorCount === 0) {
-                $('#form').submit();
+                $('#form').submit(function (event) {
+                    $('#dialog-popup').dialog("open");
+                });
             }
             return;
         })
     })
+
+    // Modal dialog popup
+    $(function () {
+        $("#dialog-popup").dialog({
+            resizable: false,
+            height: "auto",
+            width: 300,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "Ок": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
 </script>
