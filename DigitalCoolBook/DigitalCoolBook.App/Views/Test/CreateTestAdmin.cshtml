@@ -2,15 +2,20 @@
 
 @{
     ViewData["Title"] = "CreateTestAdmin";
-    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+    Layout = "_LayoutMenus";
 }
+<style>
+    .orangeBG{
+        background: #ffb74d;
+    }
+</style>
 
 <h1 class="text-center">Създаване на тест</h1>
 
 <form id="form" asp-action="CreateTestAdmin" method="post">
     <div class="container">
         <div class="form-group text-center">
-            <label >Място на провеждане</label>
+            <label>Място на провеждане</label>
             <input type="text" class="form-control" name="place" id="inputPlace" placeholder="Място на теста..">
             <span class="text-danger" id="alertPlace"></span>
         </div>
@@ -19,6 +24,7 @@
             @Html.DropDownListFor(m => m.LessonId, new SelectList(Model.Lessons, "LessonId", "Title"), "Изберете тема на теста", new { @class = "form-control" })
             <span class="text-danger" id="alertLesson"></span>
         </div>
+        <hr class="hr-orchid w-100" />
         <div class="form-group">
             <div class="row mt-2">
                 <label>
@@ -26,7 +32,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <input class="form-control" type="number" min="0" max="999" value="0" id="numberOfQuestions" name="numberOfQuestions" />
+                <input class="form-control orangeBG" type="number" min="0" max="999" value="0" id="numberOfQuestions" name="numberOfQuestions" />
             </div>
             <span class="text-danger" id="validateInput"></span>
             <div id="questions" name="questions">
@@ -60,9 +66,10 @@
                     $('<br/>'),
                     $('<label class="form-group">Брой отговори<label/>'),
                     // Input number for answers and call AppendFields()
-                    $('<input onchange="AppendFields(this,' + i + ')" type="number" max="7" min="0" value="0" id="numberOfAnswers" class="form-control" name="answersCount' + i + '"/>'),
+                    $('<input onchange="AppendFields(this,' + i + ')" type="number" max="7" min="0" value="0" id="numberOfAnswers" class="form-control orangeBG" name="answersCount' + i + '"/>'),
                     $('<span class="text-danger" id="validateNumberOfAnswers">'),
                     $('<div class="form-group" id="answerInput' + i + '"></div>'),
+                    $('<hr class="hr-orchid w-100"/>'),
                 );
             }
         })

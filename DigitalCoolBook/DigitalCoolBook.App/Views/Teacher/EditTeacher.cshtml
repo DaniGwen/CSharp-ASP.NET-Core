@@ -2,7 +2,13 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_LayoutMenus";
 }
+<style>
+    .myOrangeButton {
+        background: #ffb74d;
+    }
+</style>
 
 <h1>Редактиране на профил</h1>
 
@@ -52,7 +58,7 @@
                     <a class="btn btn-secondary" asp-action="EditTeachers">Назад</a>
                 </div>
                 <div class="mx-auto">
-                    <input type="submit" value="Запиши" class="btn btn-primary" />
+                    <input type="submit" value="Запиши" class="btn myOrangeButton" />
                 </div>
             </div>
         </form>

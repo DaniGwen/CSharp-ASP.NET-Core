@@ -2,11 +2,16 @@
 
 @{
     ViewData["Title"] = "AddCategory";
-    Layout = "~/Views/Shared/_SubjectDetailLayout.cshtml";
+    Layout = "_LayoutMenus";
 }
 
-<h2>Добавяне на учебни материали</h2>
-<hr class="hr-orchid" />
+<style>
+    .myOrangeButton{
+            background: #ffb74d;
+        }
+</style>
+
+<h2 class="text-center">Добавяне на учебни материали</h2>
 <br />
 <div class="row container">
     <div class="col-md-4">
@@ -43,7 +48,7 @@
             </div>
             <div class="row form-group mt-2 d-flex justify-content-lg-between">
                 <div class="col">
-                    <input type="submit" value="Запази" class="btn btn-primary" />
+                    <input type="submit" value="Запази" class="btn myOrangeButton" />
                     <a class="btn btn-outline-danger" href="/Subject/RemoveLesson">Изтриване на урок</a>
                 </div>
             </div>

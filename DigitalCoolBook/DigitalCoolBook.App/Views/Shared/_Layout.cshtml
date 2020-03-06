@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@ViewData["Title"] = DigitalCoolBook</title>
+    <title>DigitalCoolBook</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -63,32 +63,42 @@
             height: 2px;
         }
 
-        \
+        .navbar {
+            background: #4caf50;
+        }
+
+        .footer {
+            background: #4caf50;
+        }
+
+        .jumbotron {
+            background: #ffb74d;
+        }
     </style>
 
 </head>
 <body>
     <header>
         @* navigation bar *@
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Digital Cool Book</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="container-fluid" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Home/Index">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Меню 1</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Меню 2</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
+                            падащо меню
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Action</a>
@@ -104,7 +114,7 @@
                             if (this.User.IsInRole("Admin"))
                             {
                                 <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
-                                    <button class="btn btn-dark">Администраторски панел</button>
+                                    <button class="btn">Администраторски панел</button>
                                 </form>
                             }
                             if (this.User.IsInRole("Student"))
@@ -119,14 +129,14 @@
                                     <button class="btn btn-primary">Профил</button>
                                 </form>
                             }
-                            <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                <button type="submit" class="btn btn-secondary">Отписване</button>
+                            <form class="nav-item mt-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                <button type="submit" class="btn btn-secondary"><span class="glyphicon glyphicon-user"></span>Отписване</button>
                             </form>
                         }
                         else if (!this.User.Identity.IsAuthenticated)
                         {
                             <form class="nav-item" asp-controller="Admin" asp-action="LoginAdmin">
-                                <button class="btn btn-secondary">Вляз като Администратор</button>
+                                <button class="btn btn-secondary">Вляз като Администратор<span class="glyphicon glyphicon-user"></span></button>
                             </form>
                         }
                     </li>
@@ -134,8 +144,46 @@
             </div>
         </nav>
     </header>
-    <div class="text-center">
-        <div>
+    <div class="container text-center mt-2">
+        <div class="jumbotron">
+            @if (!this.User.Identity.IsAuthenticated)
+            {
+                <div class="container-fluid ">
+                    <br />
+                    <div class="d-flex justify-content-center">
+                        <div class="jumbotron-fluid">
+                            <h1>Добре дошли в Digital Cool Book!</h1>
+                            <div>
+                                <h5>
+                                    <a style="background-color:#441dde" asp-controller="Home" asp-action="Login" type="button" class="btn btn-primary">
+                                        Вписване
+                                    </a>
+                                </h5>
+                            </div>
+                            <div>
+                                <h5>
+                                    <a style="background-color:#6e40dd" asp-controller="Admin" asp-action="AdminContact" type="button" class="btn btn-primary">
+                                        Свързване с администратор
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <h2 class="text-white">Добре дошъл @ViewData["UserName"]!</h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-white">Добре дошъл в DigitalCoolBook!</h2>
+                    }
+                </div>
+            }
             @if (this.User.IsInRole("Teacher"))
             {
                 <div class="col">
@@ -154,10 +202,10 @@
             {
                 <div class="col">
                     <div class="row">
-                        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="boxed_btn ">Регистрация на Учител</a>
+                        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-light">Регистрация на Учител</a>
                     </div>
                     <div class="row mt-2">
-                        <a asp-controller="Student" asp-action="RegisterStudent" class="boxed_btn ">Регистрация на Ученик</a>
+                        <a asp-controller="Student" asp-action="RegisterStudent" class="btn btn-light">Регистрация на Ученик</a>
                     </div>
                 </div>
             }
@@ -166,53 +214,88 @@
     <div class="container">
         @RenderBody()
     </div>
-    <footer class="footer footer_bg_1">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Ресурси
-                            </h3>
-                            <ul>
-                                <li><a href="#"></a></li>
-                                <li><a href="#">Tutorials</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Адрес
-                            </h3>
-                            <p>
-                                200, D-block, Green lane USA <br>
-                                +10 367 467 8934 <br>
-                                edumark@contact.com
-                            </p>
-                        </div>
-                    </div>
+    <!-- Footer -->
+    <footer class="footer font-small pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+
                 </div>
-            </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
                 </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
             </div>
+            <!-- Grid row -->
+
         </div>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+
     </footer>
+    <!-- Footer -->
     @RenderSection("Scripts", required: false)
 </body>
 </html>

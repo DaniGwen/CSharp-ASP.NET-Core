@@ -5,7 +5,7 @@
 }
 <head>
     <meta charset="utf-8">
-    <title>@ViewData["Title"] = DigitalCoolBook</title>
+    <title>DigitalCoolBook</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -63,7 +63,7 @@
     <!----styling-->
     <style>
         hr.hr-orchid {
-            background-color: burlywood;
+            background-color: #4caf50;
             height: 1px;
             width: 832px;
         }
@@ -86,19 +86,31 @@
             width: 80px;
             height: 30px;
         }
+        @* green *@
+        .navbar {
+            background: #4caf50;
+        }
+        @* green *@
+        .footer {
+            background: #4caf50;
+        }
+        @* Orange *@
+        .jumbotron {
+            background: #ffb74d;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">Digital Cool Book</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="container-fluid" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Home/Index">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
@@ -139,75 +151,99 @@
                                     <button class="btn btn-primary">Профил</button>
                                 </form>
                             }
-                        <li class="nav-item ml-1">
-                            <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                            <form class="nav-item mt-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                 <button type="submit" class="btn btn-secondary">Отписване</button>
                             </form>
-                        </li>
-                    }
-                    else if (!this.User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            <form class="nav-item" asp-controller="Admin" asp-action="LoginAdmin">
-                                <button class="btn btn-secondary">Вляз като Администратор</button>
-                            </form>
-                        </li>
-                    }
+                        }
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container ">
+        @RenderBody()
+    </div>
+    <!-- Footer -->
+    <footer class="footer font-small pt-4">
 
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
                     </ul>
+
                 </div>
-            </nav>
-        </header>
-        <div class="container ">
-            @RenderBody()
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
         </div>
-        <footer class="footer footer_bg_1">
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-2 col-md-6 col-lg-2">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
-                                    Ресурси
-                                </h3>
-                                <ul>
-                                    <li><a href="#"></a></li>
-                                    <li><a href="#">Tutorials</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-lg-3">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
-                                    Адрес
-                                </h3>
-                                <p>
-                                    200, D-block, Green lane USA <br>
-                                    +10 367 467 8934 <br>
-                                    edumark@contact.com
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copy-right_text">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <p class="copy_right text-center">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        @RenderSection("Scripts", required: false)
-    </body>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    @RenderSection("Scripts", required: false)
+</body>
 </html>

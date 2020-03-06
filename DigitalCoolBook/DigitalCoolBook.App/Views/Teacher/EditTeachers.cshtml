@@ -3,12 +3,17 @@
 
 @{
     ViewData["Title"] = "EditTeacher";
+    Layout = "_LayoutMenus";
 }
-
+<style>
+    .myOrangeButton {
+        background: #ffb74d;
+    }
+</style>
 <h2>Редактиране на учителски профили.</h2>
 
 <p>
-    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-secondary ">Добавяне на учител</a>
+    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn myOrangeButton">Добавяне на учител</a>
 </p>
 <table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
     <thead class="thead-light">
@@ -63,9 +68,9 @@
                     @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
-                    <a class="btnDelete btn btn-sm btn-secondary" href="#" id="@item.Id">Изтрий</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Редактирай</a>
-                    <a class="btn btn-sm btn-secondary mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
+                    <a class="btnDelete btn btn-sm myOrangeButton" href="#" id="@item.Id">Изтрий</a>
+                    <a class="btn btn-sm myOrangeButton mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Редактирай</a>
+                    <a class="btn btn-sm myOrangeButton mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
                 </td>
             </tr>
         }

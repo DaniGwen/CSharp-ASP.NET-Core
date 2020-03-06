@@ -2,11 +2,19 @@
 
 @{
     ViewData["Title"] = "EditStudent";
+    Layout = "_LayoutMenus";
 }
 
-<h2>Редакция на ученик</h2>
-<hr />
-<div class="row">
+<style>
+    .myOrangeButton {
+        background: #ffb74d;
+    }
+</style>
+
+<div class="container-fluid">
+    <h2>Редакция на ученик</h2>
+    <hr />
+
     <div class="col-md-4">
         <form asp-action="EditStudent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label">Дата на раждане</label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input type="text" class="form-control" id="datepicker" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -76,7 +84,7 @@
                 @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас")
             </div>
             <div class="form-group">
-                <input type="submit" value="Запази" class="btn btn-primary" />
+                <input type="submit" value="Запази" class="btn myOrangeButton" />
             </div>
         </form>
     </div>
@@ -86,3 +94,8 @@
     <a asp-action="EditStudents">Назад</a>
 </div>
 
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+</script>
