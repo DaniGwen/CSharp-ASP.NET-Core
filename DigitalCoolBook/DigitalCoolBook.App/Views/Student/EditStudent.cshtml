@@ -24,10 +24,10 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="Name" class="col-sm-2 col-form-label">Име</label>
+        <label asp-for="StudentName" class="col-sm-2 col-form-label">Име</label>
         <div class="col-sm-10">
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="StudentName" class="form-control" />
+            <span asp-validation-for="StudentName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
@@ -106,18 +106,22 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Клас</label>
         <div class="col-sm-10">
-            @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас")
+            @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас", new { @class="form-control"})
         </div>
     </div>
+    <hr />
     <div class="form-group">
         <input type="submit" value="Запази" class="btn btn-block myOrangeButton" />
+        <a class="btn btn-block btn-outline-dark mb-2" asp-action="EditStudents">Назад</a>
     </div>
 </form>
-<div>
-    <a class="btn btn-block btn-outline-dark mb-2" asp-action="EditStudents">Назад</a>
-</div>
 
 <script>
+    var changeYear = $(".selector").datepicker("option", "changeYear");
+
+    // Setter
+    $(".selector").datepicker("option", "changeYear", true);
+
     $(function () {
         $("#datepicker").datepicker();
     });

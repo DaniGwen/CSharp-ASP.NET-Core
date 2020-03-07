@@ -10,7 +10,7 @@
     }
 </style>
 
-<h1>Редактиране на профил</h1>
+<h2 class="text-center">Редактиране на профил</h2>
 
 <hr />
 <form asp-action="EditTeacher" asp-route-id="@Model.Id">
@@ -68,12 +68,11 @@
             <span asp-validation-for="Telephone" class="text-danger"></span>
         </div>
     </div>
-  
+    <hr />
     <div class="form-group">
         <input type="submit" value="Запиши" class="btn btn-block myOrangeButton" />
         <a class="btn btn-block btn-outline-dark" asp-action="EditTeachers">Назад</a>
     </div>
-
 </form>
 <script type="text/javascript">
     $(function () {

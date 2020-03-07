@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.Models;
 
@@ -11,13 +12,17 @@
         {
             this.Grades = new List<GradeViewModel>();
         }
+
         public string Id { get; set; }
 
+        [Required(ErrorMessage = "Полето е задъжително.")]
         public string Email { get; set; }
 
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Полето е задъжително.")]
+        public string StudentName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        [Required(ErrorMessage ="Полето е задъжително.")]
+        public string DateOfBirth { get; set; }
 
         public string PlaceOfBirth { get; set; }
 

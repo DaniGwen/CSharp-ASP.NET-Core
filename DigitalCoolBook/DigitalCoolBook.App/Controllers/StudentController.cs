@@ -129,17 +129,18 @@
         public async Task<IActionResult> EditStudentAsync(string id)
         {
             var student = await this.userService.GetStudentAsync(id);
-            var grades = this.gradeService.GetGrades().ToList();
+            var grades = this.gradeService.GetGrades().OrderBy(grade => grade.Name).ToList();
 
+            // Map student to view model
             var model = this.mapper.Map<StudentEditViewModel>(student);
 
-            foreach (var grade in grades)
-            {
-                var gradeModel = this.mapper.Map<GradeViewModel>(grade);
-                model.Grades.Add(gradeModel);
-            }
+            // Map grades to gradeModel and add to view model
+            var gradeModel = this.mapper.Map<List<GradeViewModel>>(grades);
+            model.Grades.AddRange(gradeModel);
 
-            model.Grades.OrderBy(g => g.Name);
+            // convert DateTime from Db to string for view model
+            model.DateOfBirth = student.DateOfBirth.Date.ToString();
+            model.StudentName = student.Name;
 
             return this.View(model);
         }
@@ -153,14 +154,14 @@
                 var student = await this.userService.GetStudentAsync(id);
 
                 student.Address = model.Address;
-                student.DateOfBirth = model.DateOfBirth;
+                student.DateOfBirth = DateTime.Parse(model.DateOfBirth);
                 student.Email = model.Email;
                 student.FatherMobileNumber = model.FatherMobileNumber;
                 student.FatherName = model.FatherName;
                 student.MobilePhone = model.MobilePhone;
                 student.MotherMobileNumber = model.MotherMobileNumber;
                 student.MotherName = model.MotherName;
-                student.Name = model.Name;
+                student.Name = model.StudentName;
                 student.PlaceOfBirth = model.PlaceOfBirth;
                 student.Sex = model.Sex;
                 student.Telephone = model.Telephone;
