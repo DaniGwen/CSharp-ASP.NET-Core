@@ -420,8 +420,12 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\Tests.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\StartTest.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\AddQuestions.cshtml.g.cs
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\Error.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Test\CreateTestAdmin.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutMenus.cshtml.g.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\bin\Debug\netcoreapp3.1\en\DigitalCoolBook.App.resources.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.Resources.Welcome.en.resources
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.csproj.GenerateResource.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\en\DigitalCoolBook.App.resources.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.App\obj\Debug\netcoreapp3.1\DigitalCoolBook.App.MvcApplicationPartsAssemblyInfo.cache

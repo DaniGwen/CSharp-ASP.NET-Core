@@ -41,6 +41,8 @@
           "Nancy": "2.0.0",
           "SendGrid": "9.12.6",
           "StyleCop.Analyzers": "1.1.118",
+          "cldrjs": "0.5.1",
+          "jquery-globalize": "1.4.2",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -313,6 +315,11 @@
         "runtime": {
           "DigitalCoolBook.App.dll": {}
         },
+        "resources": {
+          "en/DigitalCoolBook.App.resources.dll": {
+            "locale": "en"
+          }
+        },
         "compile": {
           "DigitalCoolBook.App.dll": {}
         }
@@ -345,6 +352,12 @@
         },
         "compile": {
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
+      "cldrjs/0.5.1": {},
+      "jquery-globalize/1.4.2": {
+        "dependencies": {
+          "cldrjs": "0.5.1"
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
@@ -4075,6 +4088,20 @@
       "sha512": "sha512-szI4yeRIM7GWe9JyekW0dKYehPB0t6M+I55fPeCebN6PhS7zQZa0eG3bgOnOx+eP3caSNoE7KEJs2rk7MLsh8w==",
       "path": "automapper.extensions.microsoft.dependencyinjection/7.0.0",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512"
+    },
+    "cldrjs/0.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v38w9mdsmia1Mr/25yvyRYi6t3nWAO5Z/2ySxVV/Xp9laXmNX5JUR4Q2GMzzeERFqMtFjeB/flFADhzhYe6c0w==",
+      "path": "cldrjs/0.5.1",
+      "hashPath": "cldrjs.0.5.1.nupkg.sha512"
+    },
+    "jquery-globalize/1.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0/QV5CcjbsFEy76Vz6oiXSbDL6E+2bru5w7gRpy9v48iXs8SCU/5WXmVA9V2jm36h+7HNw1qV8yheqAlo+SB0w==",
+      "path": "jquery-globalize/1.4.2",
+      "hashPath": "jquery-globalize.1.4.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
       "type": "package",

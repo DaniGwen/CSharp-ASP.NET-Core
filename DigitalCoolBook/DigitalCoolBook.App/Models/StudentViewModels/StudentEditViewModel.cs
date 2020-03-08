@@ -19,9 +19,9 @@
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Полето е задъжително.")]
-        public string StudentName { get; set; }
+        public string Name { get; set; }
 
-        [Required(ErrorMessage ="Полето е задъжително.")]
+        [Required(ErrorMessage ="Попълнете дата на раждане.")]
         public string DateOfBirth { get; set; }
 
         public string PlaceOfBirth { get; set; }

@@ -2,6 +2,7 @@ namespace DigitalCoolBook.App
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text.Encodings.Web;
     using System.Text.Unicode;
@@ -18,6 +19,7 @@ namespace DigitalCoolBook.App
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -91,7 +93,21 @@ namespace DigitalCoolBook.App
 
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            var supportedCultures = new[]
+            {
+                // Add english-USA support localization
+                // new CultureInfo("en-US"),
+                new CultureInfo("bg"),
             };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("bg"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

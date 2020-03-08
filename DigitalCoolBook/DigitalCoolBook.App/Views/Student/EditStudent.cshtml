@@ -24,17 +24,17 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="StudentName" class="col-sm-2 col-form-label">Име</label>
+        <label asp-for="Name" class="col-sm-2 col-form-label">Име</label>
         <div class="col-sm-10">
-            <input asp-for="StudentName" class="form-control" />
-            <span asp-validation-for="StudentName" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="DateOfBirth" class="col-sm-2 col-form-label">Дата на раждане</label>
+        <label class="col-sm-2 col-form-label">Дата на раждане</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="datepicker" />
-            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            <input type="text" class="datepicker" id="datepicker" name="dateOfBirth" />
+            <span asp-validation-for="DateOfBirth" class="text-danger" id="alertDatepicker"></span>
         </div>
     </div>
     <div class="form-group row">
@@ -106,23 +106,34 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Клас</label>
         <div class="col-sm-10">
-            @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас", new { @class="form-control"})
+            @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), new { @class = "form-control" })
         </div>
     </div>
     <hr />
     <div class="form-group">
         <input type="submit" value="Запази" class="btn btn-block myOrangeButton" />
-        <a class="btn btn-block btn-outline-dark mb-2" asp-action="EditStudents">Назад</a>
     </div>
 </form>
-
+<a class="btn btn-block btn-outline-dark mb-2" asp-action="EditStudents">Назад</a>
 <script>
-    var changeYear = $(".selector").datepicker("option", "changeYear");
-
-    // Setter
-    $(".selector").datepicker("option", "changeYear", true);
+    $.datepicker.setDefaults($.datepicker.regional["bg"]);
+    $.datepicker.setDefaults({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: "dd.M.yy",
+    });
 
     $(function () {
-        $("#datepicker").datepicker();
+        $('#datepicker').datepicker();
     });
+
+    $(function () {
+        $('form').on('submit', function (event) {
+            if ($('#datepicker').val() == '') {
+                event.preventDefault();
+                $('#alertDatepicker').html("Попълнете дата на раждане.").fadeToggle(4000);
+            }
+        })
+    })
 </script>

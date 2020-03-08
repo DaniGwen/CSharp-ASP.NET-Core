@@ -140,18 +140,17 @@
 
             // convert DateTime from Db to string for view model
             model.DateOfBirth = student.DateOfBirth.Date.ToString();
-            model.StudentName = student.Name;
 
             return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> EditStudent(StudentEditViewModel model, string id)
+        public async Task<IActionResult> EditStudent(StudentEditViewModel model)
         {
             if (this.ModelState.IsValid)
             {
-                var student = await this.userService.GetStudentAsync(id);
+                var student = await this.userService.GetStudentAsync(model.Id);
 
                 student.Address = model.Address;
                 student.DateOfBirth = DateTime.Parse(model.DateOfBirth);
@@ -161,7 +160,7 @@
                 student.MobilePhone = model.MobilePhone;
                 student.MotherMobileNumber = model.MotherMobileNumber;
                 student.MotherName = model.MotherName;
-                student.Name = model.StudentName;
+                student.Name = model.Name;
                 student.PlaceOfBirth = model.PlaceOfBirth;
                 student.Sex = model.Sex;
                 student.Telephone = model.Telephone;
@@ -169,10 +168,11 @@
 
                 await this.userService.SaveChangesAsync();
                 this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+
                 return this.Redirect("/Home/Success");
             }
 
-            return this.View();
+            return this.View(model);
         }
 
         [Authorize(Roles = "Admin")]

@@ -28,6 +28,15 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "cldrjs/0.5.1": {
+        "type": "package"
+      },
+      "jquery-globalize/1.4.2": {
+        "type": "package",
+        "dependencies": {
+          "cldrjs": "0.5.1"
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
         "type": "package",
         "compile": {
@@ -2914,6 +2923,40 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
+    "cldrjs/0.5.1": {
+      "sha512": "v38w9mdsmia1Mr/25yvyRYi6t3nWAO5Z/2ySxVV/Xp9laXmNX5JUR4Q2GMzzeERFqMtFjeB/flFADhzhYe6c0w==",
+      "type": "package",
+      "path": "cldrjs/0.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cldrjs.0.5.1.nupkg.sha512",
+        "cldrjs.nuspec",
+        "content/Scripts/cldr.js",
+        "content/Scripts/cldr/event.js",
+        "content/Scripts/cldr/supplemental.js",
+        "content/Scripts/cldr/unresolved.js"
+      ]
+    },
+    "jquery-globalize/1.4.2": {
+      "sha512": "0/QV5CcjbsFEy76Vz6oiXSbDL6E+2bru5w7gRpy9v48iXs8SCU/5WXmVA9V2jm36h+7HNw1qV8yheqAlo+SB0w==",
+      "type": "package",
+      "path": "jquery-globalize/1.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Scripts/globalize.js",
+        "content/Scripts/globalize/currency.js",
+        "content/Scripts/globalize/date.js",
+        "content/Scripts/globalize/message.js",
+        "content/Scripts/globalize/number.js",
+        "content/Scripts/globalize/plural.js",
+        "content/Scripts/globalize/relative-time.js",
+        "content/Scripts/globalize/unit.js",
+        "jquery-globalize.1.4.2.nupkg.sha512",
+        "jquery-globalize.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
@@ -9117,7 +9160,9 @@
       "Moment.js >= 2.24.0",
       "Nancy >= 2.0.0",
       "SendGrid >= 9.12.6",
-      "StyleCop.Analyzers >= 1.1.118"
+      "StyleCop.Analyzers >= 1.1.118",
+      "cldrjs >= 0.5.1",
+      "jquery-globalize >= 1.4.2"
     ]
   },
   "packageFolders": {
@@ -9223,6 +9268,14 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[1.1.118, )"
+          },
+          "cldrjs": {
+            "target": "Package",
+            "version": "[0.5.1, )"
+          },
+          "jquery-globalize": {
+            "target": "Package",
+            "version": "[1.4.2, )"
           }
         },
         "imports": [
