@@ -187,7 +187,9 @@
                 this.mapper.Map(model, teacher, typeof(TeacherDetailsViewModel), typeof(Teacher));
 
                 await this.userService.SaveChangesAsync();
+
                 this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+
                 return this.Redirect("/Home/Success");
             }
 

@@ -59,20 +59,20 @@
 
     <!----styling-->
     <style>
-        hr.hr-orchid {
-            background-color: darkorchid;
-            height: 2px;
-        }
-
+        @*#NAVBAR light-green lighten-3*@
         .navbar {
-            background: #4caf50;
+            background: #c5e1a5;
         }
-
+        @*FOOTER light-green lighten-3*@
         .footer {
-            background: #4caf50;
+            background: #c5e1a5;
         }
-
+        @*JUMBOTRON lighten-4*@
         .jumbotron {
+            background: #ffcc80 ;
+        }
+        @*HR lighten-4*@
+        hr.hr-orange {
             background: #ffb74d;
         }
     </style>
@@ -81,7 +81,7 @@
 <body>
     <header>
         @* navigation bar *@
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">Digital Cool Book</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,20 +153,14 @@
                     <br />
                     <div class="d-flex justify-content-center">
                         <div class="jumbotron-fluid">
-                            <h1>Добре дошли в Digital Cool Book!</h1>
-                            <div>
-                                <h5>
-                                    <a style="background-color:#441dde" asp-controller="Home" asp-action="Login" type="button" class="btn btn-primary">
-                                        Вписване
-                                    </a>
-                                </h5>
-                            </div>
-                            <div>
-                                <h5>
-                                    <a style="background-color:#6e40dd" asp-controller="Admin" asp-action="AdminContact" type="button" class="btn btn-primary">
-                                        Свързване с администратор
-                                    </a>
-                                </h5>
+                            <section>
+                                <h1 style="border: 1px solid">Добре дошли в Digital Cool Book!</h1>
+                                <span>Ученето може да е забавно!</span>
+                            </section>
+                            <div class="pt-4">
+                                <a style="background-color:#441dde" asp-controller="Home" asp-action="Login" type="button" class="btn btn-primary">
+                                    Вписване
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +171,7 @@
                 <div>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <h2 class="text-white">Добре дошъл @ViewData["UserName"]!</h2>
+                            <h2>Добре дошъл @ViewData["UserName"]!</h2>
                     }
                     else
                     {
@@ -189,13 +183,13 @@
             {
                 <div class="col">
                     <div class="row mx-auto">
-                        <a asp-Controller="Subject" asp-action="Subjects" class="boxed_btn">Предмети</a>
+                        <a asp-Controller="Subject" asp-action="Subjects" class="btn btn-secondary">Предмети</a>
                     </div>
                     <div class="row mt-2 mx-auto">
-                        <a href="/Teacher/ChooseGrade" class="boxed_btn">Класове</a>
+                        <a href="/Teacher/ChooseGrade" class="btn btn-secondary">Класове</a>
                     </div>
                     <div class="row mt-2 mx-auto">
-                        <a href="/Test/Tests" class="boxed_btn">Тестове</a>
+                        <a href="/Test/Tests" class="btn btn-secondary">Тестове</a>
                     </div>
                 </div>
             }

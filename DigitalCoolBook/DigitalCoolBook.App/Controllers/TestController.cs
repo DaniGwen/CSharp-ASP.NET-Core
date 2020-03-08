@@ -198,6 +198,13 @@
             return this.View(model);
         }
 
+        [Authorize(Roles="Teacher")]
+        [HttpGet]
+        public IActionResult SetTestTimer()
+        {
+
+        }
+
         [HttpGet]
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> StartTest(string id)

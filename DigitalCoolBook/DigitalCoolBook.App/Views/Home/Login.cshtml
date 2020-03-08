@@ -9,7 +9,7 @@
         <form asp-action="Login" method="post">
             <br />
             <h2 class="text-center">Вписване</h2>
-            <hr style="background-color:#6e40dd;height: 2px" />
+            <hr class="hr-orange" />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label class="font-weight-bold" asp-for="Email">Имейл</label>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Вписване</button>
             </div>
-            <hr style="background-color:#6e40dd;height: 2px" />
+            <hr class="hr-orange" />
             <div class="form-group">
                 <p>
                     <a id="forgot-password" href="/Identity/Account/ForgotPassword">Забравена парола?</a>
