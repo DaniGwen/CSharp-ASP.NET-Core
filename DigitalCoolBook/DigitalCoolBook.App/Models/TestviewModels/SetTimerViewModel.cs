@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DigitalCoolBook.App.Models.TestviewModels
 {
 
     public class SetTimerViewModel
@@ -7,6 +9,7 @@
 
         public string TestName { get; set; }
 
+        [Required(ErrorMessage ="Задайте време.")]
         public int Timer { get; set; }
     }
 }

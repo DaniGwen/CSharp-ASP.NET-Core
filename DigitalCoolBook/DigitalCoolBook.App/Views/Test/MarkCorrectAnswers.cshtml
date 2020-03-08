@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.TestviewModels.QuestionsModel>
+
+@{
+    ViewData["Title"] = "MarkCorrectAnswers";
+    Layout = "~/Views/Shared/_LayoutMenus.cshtml";
+}
+
+<h3 class="text-center mt-2">Oтбележете верните отговори</h3>
+<form asp-action="MarkCorrectAnswers" method="post">
+    <input hidden name="testId" value="@TempData["TestId"]" />
+    <div class="container w-75">
+        <div class="form-group">
+            @foreach (var question in Model)
+            {
+                <span>@question.Title</span>
+                @Html.HiddenFor(modelItem => question.QuestionId)
+                foreach (var answer in question.Answers)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <input type="checkbox" name="correctAnswerIds" value="@answer.AnswerId" />
+                            <span>@answer.Title</span>
+                        </li>
+                    </ul>
+                }
+            }
+            <p class="text-center"><small>Това са верните отговори на базата на който ще е резултата</small></p>
+            <div class="form-group d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-block btn-outline-primary">запази</button>
+            </div>
+        </div>
+    </div>
+</form>

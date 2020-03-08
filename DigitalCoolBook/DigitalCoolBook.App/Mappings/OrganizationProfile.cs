@@ -48,6 +48,7 @@
             this.CreateMap<Test, TestsNamesViewModel>();
             this.CreateMap<Test, TestStartViewModel>();
             this.CreateMap<Test, ExpiredTest>();
+            this.CreateMap<Test, SetTimerViewModel>();
 
             // Question mappings
             this.CreateMap<Question, QuestionsModel>();

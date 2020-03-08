@@ -3,7 +3,6 @@
     using DigitalCoolBook.App.Data;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -15,6 +14,12 @@
         public TestService(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        public async Task AddExpiredTestAsync(ExpiredTest expiredTest)
+        {
+            await this.context.ExpiredTests.AddAsync(expiredTest);
+            await this.SaveChangesAsync();
         }
 
         public async Task AddTestAsync(Test test)
@@ -31,7 +36,7 @@
 
         public async Task<Test> GetTestAsync(string id)
         {
-           return await this.context.Tests.FindAsync(id);
+            return await this.context.Tests.FindAsync(id);
         }
 
         public Test GetTestByLesson(string id)

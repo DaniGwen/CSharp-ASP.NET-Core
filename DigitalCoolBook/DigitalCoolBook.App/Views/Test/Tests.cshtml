@@ -37,6 +37,10 @@
                     {
                         <span class="text-danger">Теста е приключил</span>
                     }
+                    else if (test.Timer == 0)
+                    {
+                        @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId })
+                    }
                     else
                     {
                         @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId })

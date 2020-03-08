@@ -2,6 +2,7 @@
 
 @{
     Layout = "_LayoutMenus";
+    var index = 0;
 }
 
 <div class="container">
@@ -17,7 +18,7 @@
                     @Html.DisplayNameFor(model => model.Date)
                 </div>
                 <div class="col" id="dateTime">
-                    @Convert.ToString(string.Format("{0:dd/mm/yyyy}", Model.Date))
+                    @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
                     <div class="digital-clock">00:00:00</div>
                 </div>
             </div>
@@ -29,19 +30,21 @@
                 <div class="col" id="timer">
                 </div>
             </div>
-            <div class="col w-50 text-center">
+            <div class="col w-50">
                 @foreach (var question in Model.Questions)
                 {
-                    @Html.DisplayText(question.Title)
+                    <span>@question.Title</span>
                     @Html.Hidden(question.Title)
 
                     foreach (var answer in question.Answers)
                     {
                         <ul class="list-group">
-                            <li class="list-group-item ">
-                                @Html.CheckBox(answer.Title)
+                            <li class="list-group-item">
+                                <input type="checkbox" name="markedAnswers" value="@answer.AnswerId" />
+                                <label>@answer.Title</label>
                             </li>
                         </ul>
+                        index += 1;
                     }
                 }
             </div>

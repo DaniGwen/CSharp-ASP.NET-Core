@@ -18,5 +18,7 @@
         IQueryable<Test> GetTests();
 
         Task<Test> GetTestAsync(string id);
+
+        Task AddExpiredTestAsync(ExpiredTest expiredTest);
     }
 }

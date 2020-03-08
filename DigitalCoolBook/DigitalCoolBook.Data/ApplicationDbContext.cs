@@ -35,6 +35,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<ExpiredTest> ExpiredTests { get; set; }
 
+        public DbSet<CorrectAnswer> CorrectAnswers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

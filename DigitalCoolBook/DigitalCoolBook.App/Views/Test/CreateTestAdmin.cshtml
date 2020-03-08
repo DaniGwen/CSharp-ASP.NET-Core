@@ -5,7 +5,7 @@
     Layout = "_LayoutMenus";
 }
 <style>
-    .orangeBG{
+    .orangeBG {
         background: #ffb74d;
     }
 </style>
@@ -13,7 +13,7 @@
 <h1 class="text-center">Създаване на тест</h1>
 
 <form id="form" asp-action="CreateTestAdmin" method="post">
-    <div class="container">
+    <div class="container w-75">
         <div class="form-group text-center">
             <label>Място на провеждане</label>
             <input type="text" class="form-control" name="place" id="inputPlace" placeholder="Място на теста..">
@@ -38,8 +38,10 @@
             <div id="questions" name="questions">
             </div>
         </div>
-        <div class="form-group">
-            <button id="save" class="btn btn-block btn-primary">запази</button>
+        <p class="text-right"><small class="col-form-label-sm" style="color:firebrick">бъдете сигурни че информацията е правилна, след натискане на бутона "напред" не може да се върнете.</small></p>
+        <div class="form-group row d-flex justify-content-between">
+            <a asp-action="AdminPanel" asp-controller="Admin" class="btn btn-outline-info mt-1">назад</a>
+            <button id="save" class="btn btn-block btn-primary w-25">напред</button>
         </div>
     </div>
 </form>
@@ -125,7 +127,7 @@
             }
 
             if ($("#LessonId").val() == '') {
-               alertLesson.html('Изберете от менюто.').fadeToggle(3500);
+                alertLesson.html('Изберете от менюто.').fadeToggle(3500);
                 errorCount += 1;
             }
 

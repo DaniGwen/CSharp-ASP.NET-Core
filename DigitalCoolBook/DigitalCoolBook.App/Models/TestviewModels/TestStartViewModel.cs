@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.Models;
 
     public class TestStartViewModel
     {
@@ -19,5 +18,7 @@
         public List<QuestionsModel> Questions { get; set; }
 
         public bool IsExpired { get; set; }
+
+        public string[] Answers { get; set; }
     }
 }

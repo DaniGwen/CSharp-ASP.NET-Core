@@ -170,9 +170,40 @@
             await this.questionService.AddQuestionsAsync(questionsForDb);
             await this.questionService.AddAnswersAsync(answersForDb);
 
-            this.TempData["SuccessMsg"] = "Теста е записан.";
+            return this.RedirectToAction("MarkCorrectAnswers", new { testId = test.TestId });
+        }
 
-            return this.Redirect("/Home/Success");
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult MarkCorrectAnswers(string testId)
+        {
+            var questions = this.questionService
+                .GetQuestions()
+                .Where(question => question.TestId == testId);
+
+            // Map questions to question model
+            var model = this.mapper.Map<List<QuestionsModel>>(questions);
+
+            // Passing test Id to this view
+            this.TempData["TestId"] = testId;
+
+            // Add answers to questions
+            foreach (var question in model)
+            {
+                question.Answers = this.questionService.GetAnswers()
+               .Where(answer => answer.QuestionId == question.QuestionId)
+               .ToList();
+            }
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult MarkCorrectAnswers(string[] correctAnswerIds, string testId)
+        {
+            // TODO get test, his questions and answers then set IsCorrect to true
+            return this.View();
         }
 
         [Authorize(Roles = "Teacher, Admin")]
@@ -198,11 +229,38 @@
             return this.View(model);
         }
 
-        [Authorize(Roles="Teacher")]
         [HttpGet]
-        public IActionResult SetTestTimer()
+        [Authorize(Roles = "Teacher")]
+        [ActionName("SetTestTimer")]
+        public async Task<IActionResult> SetTestTimerAsync(string testId)
         {
+            // Get test from DB
+            var test = await this.testService.GetTestAsync(testId);
 
+            // Map test to model
+            var model = this.mapper.Map<SetTimerViewModel>(test);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Teacher")]
+        [ActionName("SetTestTimer")]
+        public async Task<IActionResult> SetTestTimerAsync(SetTimerViewModel viewModel)
+        {
+            if (this.ModelState.IsValid)
+            {
+                // Get test from DB
+                var test = await this.testService.GetTestAsync(viewModel.TestId);
+
+                test.Timer = viewModel.Timer;
+
+                await this.testService.SaveChangesAsync();
+
+                return this.RedirectToAction("Tests");
+            }
+
+            return this.View(viewModel);
         }
 
         [HttpGet]
@@ -250,25 +308,26 @@
                 this.View("/Error", exception.Message);
             }
 
-            model.Timer = test.Timer.ToString();
-
             return this.View(model);
         }
 
         [HttpPost]
         [ActionName("EndTest")]
-        public async Task<IActionResult> EndTestAsync(TestStartViewModel model)
+        public async Task<IActionResult> EndTestAsync(EndTestViewModel model)
         {
-            // REFACTOR AND IMPLEMENT
             var test = await this.testService
                 .GetTestAsync(this.TempData["TestId"].ToString());
 
             test.Date = DateTime.Now;
-            test.IsExpired = true;
 
             var expiredTest = this.mapper.Map<ExpiredTest>(test);
 
-            this.ViewData["SuccessMsg"] = "Теста беше предаден.";
+            // Add expired test to DB
+            await this.testService.AddExpiredTestAsync(expiredTest);
+
+            // TODO Check against DB if marked answers are correct and calculate result
+
+            this.TempData["SuccessMsg"] = "Теста беше предаден.";
             return this.Redirect("/Home/Success");
         }
 

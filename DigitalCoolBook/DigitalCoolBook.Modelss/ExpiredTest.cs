@@ -25,10 +25,10 @@ namespace DigitalCoolBook.Models
 
         public string Place { get; set; }
 
-        public virtual ICollection<TestStudent> TestStudent { get; set; }
+        public string StudentId { get; set; }
 
-        public ICollection<Question> Questions { get; set; }
+       // public virtual ICollection<TestStudent> TestStudent { get; set; }
 
-        public bool IsExpired { get; set; }
+        public List<CorrectAnswer> CorrectAnswers { get; set; }
     }
 }
