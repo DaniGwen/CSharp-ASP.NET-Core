@@ -38,6 +38,11 @@ namespace DigitalCoolBook.Services
             throw new System.NotImplementedException();
         }
 
+        public async Task<Answer> GetAnswerAsync(string correctAnswerId)
+        {
+            return await this.context.Answers.FindAsync(correctAnswerId);
+        }
+
         public IQueryable<Answer> GetAnswers()
         {
             return this.context.Answers;

@@ -5,8 +5,9 @@
     Layout = "_LayoutMenus";
 }
 <style>
-    .orangeBG {
-        background: #ffb74d;
+    /*#dcedc8 light-green lighten-4*/
+    .light-green {
+        background: #dcedc8;
     }
 </style>
 
@@ -32,20 +33,19 @@
                 </label>
             </div>
             <div class="form-group">
-                <input class="form-control orangeBG" type="number" min="0" max="999" value="0" id="numberOfQuestions" name="numberOfQuestions" />
+                <input class="form-control light-green" type="number" min="0" max="999" value="0" id="numberOfQuestions" name="numberOfQuestions" />
             </div>
             <span class="text-danger" id="validateInput"></span>
             <div id="questions" name="questions">
             </div>
         </div>
-        <p class="text-right"><small class="col-form-label-sm" style="color:firebrick">бъдете сигурни че информацията е правилна, след натискане на бутона "напред" не може да се върнете.</small></p>
+        <p class="text-right"><small class="col-form-label-sm" style="color: firebrick">бъдете сигурни че информацията е правилна, след натискане на бутона "напред" не може да се върнете.</small></p>
         <div class="form-group row d-flex justify-content-between">
             <a asp-action="AdminPanel" asp-controller="Admin" class="btn btn-outline-info mt-1">назад</a>
             <button id="save" class="btn btn-block btn-primary w-25">напред</button>
         </div>
     </div>
 </form>
-<div id="dialog-popup">Теста е записан.</div>
 
 <script type="text/javascript">
 
@@ -68,7 +68,7 @@
                     $('<br/>'),
                     $('<label class="form-group">Брой отговори<label/>'),
                     // Input number for answers and call AppendFields()
-                    $('<input onchange="AppendFields(this,' + i + ')" type="number" max="7" min="0" value="0" id="numberOfAnswers" class="form-control orangeBG" name="answersCount' + i + '"/>'),
+                    $('<input class="form-control light-green" onchange="AppendFields(this,' + i + ')" type="number" max="7" min="0" value="0" id="numberOfAnswers" name="answersCount' + i + '"/>'),
                     $('<span class="text-danger" id="validateNumberOfAnswers">'),
                     $('<div class="form-group" id="answerInput' + i + '"></div>'),
                     $('<hr class="hr-orchid w-100"/>'),
@@ -169,20 +169,4 @@
             }
         })
     })
-
-    // Modal dialog popup
-    $(function () {
-        $("#dialog-popup").dialog({
-            resizable: false,
-            height: "auto",
-            width: 300,
-            modal: true,
-            autoOpen: false,
-            buttons: {
-                "Ок": function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
-    });
 </script>

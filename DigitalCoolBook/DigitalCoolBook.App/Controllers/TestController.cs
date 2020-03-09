@@ -200,9 +200,18 @@
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult MarkCorrectAnswers(string[] correctAnswerIds, string testId)
+        public async Task<IActionResult> MarkCorrectAnswersAsync(string[] correctAnswerIds, string testId)
         {
-            // TODO get test, his questions and answers then set IsCorrect to true
+            // Sets correct answers to true
+            foreach (var correctAnswer in correctAnswerIds)
+            {
+                var answer = await this.questionService.GetAnswerAsync(correctAnswer);
+                answer.IsCorrect = true;
+            }
+
+            await this.questionService.SaveChangesAsync();
+
+
             return this.View();
         }
 
