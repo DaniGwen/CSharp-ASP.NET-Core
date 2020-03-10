@@ -4,15 +4,15 @@ namespace DigitalCoolBook.App.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Въведете имейл.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Въведете парола.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомни ме?")]
         public bool RememberMe { get; set; }
 
         public string Username { get; set; }

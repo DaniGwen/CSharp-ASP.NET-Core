@@ -54,7 +54,7 @@
 </head>
 <body>
     <header>
-        @* navigation bar *@
+        @*navigation bar*@
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">Digital Cool Book</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,9 +110,7 @@
                         }
                         else if (!this.User.Identity.IsAuthenticated)
                         {
-                            <form class="nav-item" asp-controller="Admin" asp-action="LoginAdmin">
-                                <button class="btn btn-secondary">Вляз като Администратор<span class="glyphicon glyphicon-user"></span></button>
-                            </form>
+                            <a href="/Admin/LoginAdmin" class="btn btn-secondary">Вляз като Администратор<span class="glyphicon glyphicon-user"></span></a>
                         }
                     </li>
                 </ul>

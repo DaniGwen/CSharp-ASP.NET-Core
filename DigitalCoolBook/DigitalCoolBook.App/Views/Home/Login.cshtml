@@ -9,8 +9,8 @@
         <form asp-action="Login" method="post">
             <br />
             <h2 class="text-center">Вписване</h2>
-            <hr class="hr-orange" />
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="font-weight-bold" asp-for="Email">Имейл</label>
                 <input asp-for="Email" class="form-control" placeholder="Имейл..." />
@@ -29,11 +29,14 @@
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Вписване</button>
+            <div class="form-group row d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary w-50">Вписване</button>
             </div>
-            <hr class="hr-orange" />
+            <hr />
             <div class="form-group">
+                <p>
+                    <a href="/Home/Index">назад</a>
+                </p>
                 <p>
                     <a id="forgot-password" href="/Identity/Account/ForgotPassword">Забравена парола?</a>
                 </p>

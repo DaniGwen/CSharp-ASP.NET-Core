@@ -16,9 +16,9 @@
     public class LoginModel : PageModel
     {
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ApplicationDbContext context;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly ILogger<LoginModel> logger;
-        private readonly ApplicationDbContext context;
 
         public LoginModel(
             SignInManager<IdentityUser> signInManager,
@@ -46,10 +46,11 @@
 
         public class InputModel
         {
+            [Required(ErrorMessage="Въведете потребителско име.")]
             [StringLength(30, MinimumLength = 3)]
             public string Username { get; set; }
 
-            [Required]
+            [Required(ErrorMessage ="Въведете парола.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -59,11 +60,6 @@
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!string.IsNullOrEmpty(this.ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, this.ErrorMessage);
-            }
-
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
@@ -76,7 +72,7 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
 
             if (this.ModelState.IsValid)
             {
@@ -103,6 +99,14 @@
                 else
                 {
                     this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return this.Page();
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(this.ErrorMessage))
+                {
+                    this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
                     return this.Page();
                 }
             }

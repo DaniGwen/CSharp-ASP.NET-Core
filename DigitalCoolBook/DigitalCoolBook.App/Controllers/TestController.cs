@@ -219,6 +219,7 @@
             }
             catch (Exception exception)
             {
+                // return error object to view
                 return this.Json(new { error = "Нещо се обърка.", message = exception.Message });
             }
         }
@@ -424,10 +425,59 @@
         [Authorize(Roles = "Admin")]
         public IActionResult GetLessons(string lessonId)
         {
-            //TODO 
-
+            // TODO 
 
             return this.Json(string.Empty);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult TestsPreview()
+        {
+            var tests = this.testService.GetTests();
+
+            var model = this.mapper.Map<List<TestPreviewViewModel>>(tests);
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [ActionName("GetTestDetails")]
+        public async Task<IActionResult> GetTestDetailsAsync(string testId)
+        {
+            var test = await this.testService.GetTestAsync(testId);
+
+            // Map test to view model
+            var model = this.mapper.Map<TestDetailsViewModel>(test);
+
+            // Getting the questions for this test
+            var questions = this.questionService.GetQuestions()
+                .Where(question => question.TestId == model.TestId)
+                .ToList();
+
+            // Getting the answers from DB
+            var answers = this.questionService.GetAnswers().ToList();
+
+            // Map the questions to questions view model
+            var questionsModel = this.mapper.Map<List<QuestionDetailsViewModel>>(questions);
+
+            // Iterate through questionsModel and add answers
+            foreach (var question in questionsModel)
+            {
+                // Filter the answers for that question
+                var answersForQuestion = answers.Where(answer => answer.QuestionId == question.QuestionId)
+                    .ToList();
+
+                // Map answers to answers view model
+                var answersModel = this.mapper.Map<List<AnswerDetailsViewModel>>(answersForQuestion);
+
+                question.Answers = answersModel;
+            }
+
+            model.Questions = questionsModel;
+
+            return this.Json(model);
         }
     }
 }
