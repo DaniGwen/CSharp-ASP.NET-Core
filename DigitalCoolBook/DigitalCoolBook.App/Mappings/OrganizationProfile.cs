@@ -55,6 +55,9 @@
             // Question mappings
             this.CreateMap<Question, QuestionsModel>();
             this.CreateMap<Question, QuestionDetailsViewModel>();
+
+            // Answer mappings
+            this.CreateMap<Answer, AnswerDetailsViewModel>();
         }
     }
 }

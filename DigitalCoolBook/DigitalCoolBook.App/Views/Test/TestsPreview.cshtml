@@ -28,7 +28,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Редактирай", "Edit", new { testId = item.TestId }) |
-                    @Html.ActionLink("Детайли", "Details", new { testId = item.TestId }) |
+                    <a href="/Test/GetTestDetails/@item.TestId" class="btn btn-outline-info">Детайли</a> |
                     @Html.ActionLink("Изтрии", "Delete", new { testId = item.TestId })
                 </td>
             </tr>
