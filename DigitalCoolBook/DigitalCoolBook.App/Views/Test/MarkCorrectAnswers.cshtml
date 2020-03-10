@@ -34,19 +34,22 @@
 </form>
 <div id="popupDialog"></div>
 
-<!--Submit with ajax and display popup confirmation-->
+<!--Submit and display popup confirmation-->
 <script type="text/javascript">
     $('form').on('submit', function (event) {
-        DoValidation();     // validate checkboxes
+        event.preventDefault();
 
-        var action = $(this).attr("action");     // get form action
-        var formData = $(this).serialize();      // serialize form fields
+        // DoValidation();   // validate checkboxes
+
+        var action = $(this).attr("action");   // get form action
+        var formData = $(this).serialize();    // serialize form fields
+        var popupDialog = $('#popupDialog');  //popup dialog
 
         $.post(action, formData, function (response) {
-            $('#popupDialog').dialog({
+            popupDialog.dialog({
                 resizable: false,
-                height: 250,
-                width: 450,
+                height: 220,
+                width: 400,
                 modal: true,
                 buttons: {
                     "Ok": function () {
@@ -54,14 +57,20 @@
                     }
                 }
             })
+        }).done(function (response) {
+            popupDialog.html(response)
+                .fail(function (response) {
+                    popupDialog.html(response.error + '-' + response.message);
+                });
         })
     })
 
-    /*TODO Validate checkboxes */
+    // TODO fix bug
+    // Validate checkboxes
     function DoValidation() {
         if ($('#checkArray:checkbox:checked').length == 0) {
             $("#alertAnswers").html("Маркирайте верните отговори за всички въпроси.").fadeToggle(5000);
-            event.preventDefault();
+            return false;
         }
     }
 </script>

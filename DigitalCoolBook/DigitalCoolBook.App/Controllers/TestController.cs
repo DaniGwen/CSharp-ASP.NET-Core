@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -200,19 +201,26 @@
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
+        [ActionName("MarkCorrectAnswers")]
         public async Task<IActionResult> MarkCorrectAnswersAsync(string[] correctAnswerIds, string testId)
         {
-            // Sets correct answers to true
-            foreach (var correctAnswer in correctAnswerIds)
+            try
             {
-                var answer = await this.questionService.GetAnswerAsync(correctAnswer);
-                answer.IsCorrect = true;
+                // Sets correct answers to true
+                foreach (var correctAnswer in correctAnswerIds)
+                {
+                    var answer = await this.questionService.GetAnswerAsync(correctAnswer);
+                    answer.IsCorrect = true;
+                }
+
+                await this.questionService.SaveChangesAsync();
+
+                return this.Json("Успешно записване.");
             }
-
-            await this.questionService.SaveChangesAsync();
-
-
-            return this.View();
+            catch (Exception exception)
+            {
+                return this.Json(new { error = "Нещо се обърка.", message = exception.Message });
+            }
         }
 
         [Authorize(Roles = "Teacher, Admin")]
