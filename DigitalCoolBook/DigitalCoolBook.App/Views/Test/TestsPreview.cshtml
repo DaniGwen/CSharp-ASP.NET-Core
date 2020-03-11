@@ -38,26 +38,45 @@
     </table>
 </div>
 <div id="popup"></div>
+<div id="confirmdelete"></div>
 
 <script>
     // delete test
     function DeleteTest(elem) {
-        var testId = $(elem).attr('id');
-        // post to action and display popup with message
-        $.post("/Test/DeleteTest", { testId: testId }, function (message) {
-            $('#popup').dialog({
-                resizable: false,
-                modal: true,
-                heigth: 220,
-                width: 400,
-                buttons: {
-                    "Ok": function () {
-                        $(this).dialog('close',location.href= location.href);
-                    }
+        // Sets the popup title
+        $('#popup').dialog({ title: "Изтриване на тест" });
+
+        $('#popup').dialog({
+            resizable: false,
+            modal: true,
+            heigth: 220,
+            width: 400,
+            buttons: {
+
+                "Назад": function () {
+                    $(this).dialog('close');
+                },
+                // delete test
+                "Изтриване": function () {
+
+                    // post to action and display popup with message
+                    $.post("/Test/DeleteTest", { testId: $(elem).attr('id') }, function (message) {
+                        $('#popup').dialog({
+                            resizable: false,
+                            modal: true,
+                            heigth: 220,
+                            width: 400,
+                            buttons: {
+                                "Ok": function () {
+                                    $(this).dialog('close', location.href = location.href);
+                                }
+                            }
+                        })
+                        $('#popup').html(message);
+                    })
                 }
-            })
-            $('#popup').html(message);
+
+            }
         })
-        
     }
 </script>
