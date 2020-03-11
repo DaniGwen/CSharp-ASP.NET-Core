@@ -46,7 +46,11 @@
         <tbody>
             @if (!Model.Any())
             {
-                <tr class="text-center">Няма записи в базата данни.</tr>
+                <tr class="text-center">
+                    <td>
+                        Няма записи в базата данни.
+                    </td>
+                </tr>
             }
             else
             {
@@ -84,6 +88,7 @@
             }
         </tbody>
     </table>
+    <a class="btn btn-sm btn-outline-info mb-2" href="/Admin/AdminPanel">назад</a>
 </div>
 
 

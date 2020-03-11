@@ -6,55 +6,52 @@
 }
 
 <style>
-    .myOrangeButton{
-            background: #ffb74d;
-        }
+    .myOrangeButton {
+        background: #ffb74d;
+    }
 </style>
 
-<h2 class="text-center">Добавяне на учебни материали</h2>
+<h3 class="text-center mt-2">Добавяне на тема</h3>
 <br />
-<div class="row container">
-    <div class="col-md-4">
-        <form asp-action="AddLesson" method="post">
-            <div class="form-group">
-                <div class="col">
-                    <label class="gj-font-size-16">Избери Предмет</label>
-                    @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Предмет..", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
-                    <div class="row mt-3">
-                        <a href="/Subject/CreateSubject" class="btn btn-outline-secondary">Добави Предмет</a>
-                        <a href="#" id="deleteSubject" class="btn btn-outline-danger ml-2">Изтрии Предмета</a>
-                    </div>
-                </div>
+<div class="container-fluid w-75">
+    <form asp-action="AddLesson" method="post">
+        <div class="col form-group">
+            <label class="gj-font-size-16 form-group">Избери Предмет</label>
+            @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Предмет..", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
+            <small>В тази секция може да добавите нов предмет или да изтриете съществуващ такъв.</small>
+            <div class="row mt-3 form-group">
+                <a href="/Subject/CreateSubject" class="btn btn-sm btn-outline-secondary form-group">Добави Предмет</a>
+                <a href="#" id="deleteSubject" class="btn btn-sm btn-outline-danger ml-2 form-group">Изтрии Предмета</a>
             </div>
-            <hr class="hr-orchid"/>
-            <div class="form-group">
-                <div class="col">
-                    <label class="gj-font-size-16">Избери Раздел</label>
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Раздел..", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
-                    <div class="row mt-3">
-                        <a href="/Subject/CreateCategory" class="btn btn-outline-secondary">Добави Раздел</a>
-                        <a href="#" id="deleteCategory" class="btn btn-outline-danger ml-2">Изтрии Раздела</a>
-                    </div>
-                </div>
+        </div>
+        <hr />
+        <div class="col form-group">
+            <label class="gj-font-size-16">Избери Раздел</label>
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Раздел..", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+            <small>В тази секция може да добавите нов раздел в избрания предмет или да изтриете избраният от менюто раздел.</small>
+            <div class="row mt-3 form-group">
+                <a href="/Subject/CreateCategory" class="btn btn-sm btn-outline-secondary">Добави Раздел</a>
+                <a href="#" id="deleteCategory" class="btn btn-sm btn-outline-danger ml-2">Изтрии Раздела</a>
             </div>
-            <hr class="hr-orchid"/>
-            <div>
-                <label for="title" class="gj-font-size-16">Тема</label>
-                <input type="text" class="form-control" id="title" name="title" />
-                <label for="content" class="gj-font-size-16">Съдържание</label>
-                <textarea class="form-control" style="width:850px" id="content" name="content" rows="10"></textarea>
+        </div>
+        <hr />
+        <div>
+            <label for="title" class="gj-font-size-16">Тема</label>
+            <input type="text" class="form-control" id="title" name="title" />
+            <label for="content" class="gj-font-size-16">Съдържание</label>
+            <textarea class="form-control" style="width:850px" id="content" name="content" rows="10"></textarea>
+        </div>
+        <div class="row form-group mt-2 d-flex justify-content-lg-between">
+            <div class="col form-group">
+                <a class="btn btn-outline-danger form-group " href="/Subject/RemoveLesson">Изтриване на урок</a>
+                <input type="submit" value="Запази" class="btn btn-outline-secondary form-group ml-3" />
             </div>
-            <div class="row form-group mt-2 d-flex justify-content-lg-between">
-                <div class="col">
-                    <input type="submit" value="Запази" class="btn myOrangeButton" />
-                    <a class="btn btn-outline-danger" href="/Subject/RemoveLesson">Изтриване на урок</a>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
+
 
 <div id="successMessage"></div>
 <div id="errorMessage" title="Грешка!"></div>
