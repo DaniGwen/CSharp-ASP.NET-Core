@@ -11,7 +11,7 @@ namespace DigitalCoolBook.Models
         [StringLength(3, ErrorMessage ="Name must be 3 character!")]
         public string Name { get; set; }
 
-        public List<GradeParalelo> GradeParalelos { get; set; }
+        public List<GradeTeacher> GradeTeachers { get; set; }
 
         public SubjectGrade SubjectGrade { get; set; }
 

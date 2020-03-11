@@ -9,55 +9,55 @@
 
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public UserService(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Student> GetStudentAsync(string id)
         {
-           return await _context.Students.FindAsync(id);
+           return await this.context.Students.FindAsync(id);
         }
 
         public IQueryable<Student> GetStudents()
         {
-           return _context.Students;
+           return this.context.Students;
         }
 
         public IQueryable<Teacher> GetTeachers()
         {
-            return _context.Teachers;
+            return this.context.Teachers;
         }
 
         public async Task<Teacher> GetTeacherAsync(string id)
         {
-            return await _context.Teachers.FindAsync(id);
+            return await this.context.Teachers.FindAsync(id);
         }
 
         public async Task RemoveStudentAsync(string id)
         {
             var student = await this.GetStudentAsync(id);
 
-            _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
+            this.context.Students.Remove(student);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<IdentityUser> GetUserAsync(string id)
         {
-            return await _context.Users.FindAsync(id);
+            return await this.context.Users.FindAsync(id);
         }
 
         public async Task RemoveTeacherAsync(string id)
         {
             var teacher = await this.GetTeacherAsync(id);
-            _context.Remove(teacher);
+            this.context.Teachers.Remove(teacher);
             await this.SaveChangesAsync();
         }
     }

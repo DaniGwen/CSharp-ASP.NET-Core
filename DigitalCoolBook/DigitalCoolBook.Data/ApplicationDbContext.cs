@@ -9,7 +9,7 @@ namespace DigitalCoolBook.App.Data
     {
         public DbSet<Attendance> Attendances { get; set; }
 
-        public DbSet<GradeParalelo> GradeParalelos { get; set; }
+        public DbSet<GradeTeacher> GradeTeachers { get; set; }
 
         public DbSet<Grade> Grades { get; set; }
 
@@ -61,9 +61,19 @@ namespace DigitalCoolBook.App.Data
                 .WithOne(question => question.Test)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<Question>().HasMany(test => test.Answers)
-            //    .WithOne(question => question.Question)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<GradeTeacher>().HasKey(gt => gt.GradeTeacherId);
+
+            builder.Entity<GradeTeacher>()
+                .HasOne(gt => gt.Teacher)
+                .WithMany(teacher => teacher.GradeTeachers)
+                .HasForeignKey(gt => gt.IdTeacher)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<GradeTeacher>()
+                .HasOne(gt => gt.Grade)
+                .WithMany(grade => grade.GradeTeachers)
+                .HasForeignKey(gt => gt.IdGrade)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

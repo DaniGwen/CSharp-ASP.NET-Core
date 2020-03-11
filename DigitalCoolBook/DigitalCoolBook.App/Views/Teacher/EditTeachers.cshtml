@@ -10,72 +10,75 @@
         background: #ffb74d;
     }
 </style>
-<h2>Редактиране на учителски профили.</h2>
+<div class="container-fluid">
+    <h2 class="text-center">Редактиране на учителски профили.</h2>
 
-<p>
-    <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn myOrangeButton">Добавяне на учител</a>
-</p>
-<table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
-    <thead class="thead-light">
-        <tr>
-            <th>
-                @Html.DisplayName("Име")
-            </th>
-            <th>
-                @Html.DisplayName("Имейл")
-            </th>
-            <th>
-                @Html.DisplayName("Дата на раждане")
-            </th>
-            <th>
-                @Html.DisplayName("Място на раждане")
-            </th>
-            <th>
-                @Html.DisplayName("Пол")
-            </th>
-            <th>
-                @Html.DisplayName("Мобилен телефон")
-            </th>
-            <th>
-                @Html.DisplayName("Домашен телефон")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-sm btn-outline-info">Добавяне на учител</a>
+    </p>
+    <table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
+        <thead class="thead-light">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telephone)
-                </td>
-                <td>
-                    <a class="btnDelete btn btn-sm myOrangeButton" href="#" id="@item.Id">Изтрий</a>
-                    <a class="btn btn-sm myOrangeButton mt-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Редактирай</a>
-                    <a class="btn btn-sm myOrangeButton mt-1" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
-                </td>
+                <th>
+                    @Html.DisplayName("Име")
+                </th>
+                <th>
+                    @Html.DisplayName("Имейл")
+                </th>
+                <th>
+                    @Html.DisplayName("Дата на раждане")
+                </th>
+                <th>
+                    @Html.DisplayName("Място на раждане")
+                </th>
+                <th>
+                    @Html.DisplayName("Пол")
+                </th>
+                <th>
+                    @Html.DisplayName("Мобилен телефон")
+                </th>
+                <th>
+                    @Html.DisplayName("Домашен телефон")
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobilePhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telephone)
+                    </td>
+                    <td class="row form-group">
+                        <a class="btnDelete btn btn-sm btn-outline-danger" href="#" id="@item.Id">Изтрий</a>
+                        <a class="btn btn-sm btn-outline-info ml-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Промяна</a>
+                        <a class="btn btn-sm btn-outline-info mt-1 ml-3" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 
 <script type="text/javascript">
     $(function () {
@@ -83,30 +86,36 @@
         $(".btnDelete").click(function () {
             $("#dialog-confirm").dialog({
                 resizable: true,
-                height: 250,
-                width: 500,
+                height: 220,
+                width: 400,
                 modal: true,
                 buttons: {
+
+                    "назад": function () {
+                        $(this).dialog("close");
+                    },
+                    // delete teacher
                     "изтриване": function () {
                         var teacherId = $(".btnDelete").attr("id");
                         $.ajax({
                             url: "/Teacher/Delete/" + teacherId,
                             type: "POST",
-                            success: function () {
+                            success: function (message) {
                                 $("#successMessage").dialog({
                                     resizable: false,
                                     height: 200,
                                     width: 300,
                                     modal: true,
                                     buttons: {
-                                        "Затвори": function () {
-                                            $(this).dialog("close");
+                                        "Ok": function () {
+                                            $(this).dialog("close", location.href = location.href);
                                         }
                                     }
                                 });
-                                $("#successMessage").html("Профилът беше изтрит!");
+                                $("#successMessage").html(message);
                             },
-                            error: function (request, err, message) {
+                            // error dialog
+                            error: function (message) {
                                 $("#errorMessageDialog").dialog({
                                     maxHeight: 290,
                                     width: 600,
@@ -117,15 +126,12 @@
                                         }
                                     }
                                 });
-                                $("#errorMessage").html(request.responseText);
-                                //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
+                                $("#errorMessage").html(message);
                             }
                         });
                         $(this).dialog("close");
-                    },
-                    "назад": function () {
-                        $(this).dialog("close");
                     }
+
                 }
             });
         });

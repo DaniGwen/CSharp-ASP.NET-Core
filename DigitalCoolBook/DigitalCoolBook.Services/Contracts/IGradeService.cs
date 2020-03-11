@@ -10,14 +10,14 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task<Grade> GetGradeAsync(string id);
 
-        IQueryable<GradeParalelo> GetGradeParalelos();
+        IQueryable<GradeTeacher> GetGradeParalelos();
 
-        Task AddGradeParaleloAsync(GradeParalelo gradeParalelo);
+        Task AddGradeParaleloAsync(GradeTeacher gradeParalelo);
 
-        Task<GradeParalelo> GetGradeParaleloAsync(string id);
+        Task<GradeTeacher> GetGradeParaleloAsync(string id);
 
         Task SaveChangesAsync();
 
-        Task RemoveGradeParaleloAsync(GradeParalelo paralelo);
+        Task RemoveGradeParaleloAsync(GradeTeacher paralelo);
     }
 }

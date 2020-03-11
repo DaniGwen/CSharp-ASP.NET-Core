@@ -97,7 +97,7 @@
 
                 var model = new ParaleloViewModel
                 {
-                    Id = paralelo.GradeParaleloId,
+                    Id = paralelo.GradeTeacherId,
 
                     GradeId = paralelo.IdGrade,
 
@@ -153,9 +153,9 @@
         {
             try
             {
-                var gradeParalelo = this.mapper.Map<GradeParalelo>(model);
+                var gradeParalelo = this.mapper.Map<GradeTeacher>(model);
 
-                gradeParalelo.GradeParaleloId = Guid.NewGuid().ToString();
+                gradeParalelo.GradeTeacherId = Guid.NewGuid().ToString();
 
                 await this.gradeService.AddGradeParaleloAsync(gradeParalelo);
                 await this.gradeService.SaveChangesAsync();

@@ -164,9 +164,9 @@ namespace DigitalCoolBook.App
                 await context.SaveChangesAsync();
             }
 
-            if (!context.GradeParalelos.Any())
+            if (!context.GradeTeachers.Any())
             {
-                context.GradeParalelos.AddRange(this.AddGradeParalelo(context));
+                context.GradeTeachers.AddRange(this.AddGradeParalelo(context));
                 context.SaveChanges();
             }
 
@@ -557,34 +557,34 @@ namespace DigitalCoolBook.App
             return lessons;
         }
 
-        private GradeParalelo[] AddGradeParalelo(ApplicationDbContext context)
+        private GradeTeacher[] AddGradeParalelo(ApplicationDbContext context)
         {
-            GradeParalelo[] gradeParalelos = new GradeParalelo[4]
+            GradeTeacher[] gradeParalelos = new GradeTeacher[4]
             {
-                new GradeParalelo
+                new GradeTeacher
                 {
-                   GradeParaleloId = "1",
+                   GradeTeacherId = "1",
                    IdGrade = context.Grades.First(grade => grade.Name == "10à").GradeId,
                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },
 
-                new GradeParalelo
+                new GradeTeacher
                 {
-                    GradeParaleloId = "2",
+                    GradeTeacherId = "2",
                     IdGrade = context.Grades.First(grade => grade.Name == "10å").GradeId,
                     IdTeacher = context.Teachers.First(teacher => teacher.Email == "stam@stam.com").Id,
                 },
 
-                new GradeParalelo
+                new GradeTeacher
                 {
-                    GradeParaleloId = "3",
+                    GradeTeacherId = "3",
                     IdGrade = context.Grades.First(grade => grade.Name == "10á").GradeId,
                     IdTeacher = context.Teachers.First(teacher => teacher.Email == "pesh@pesh.com").Id,
                 },
 
-                new GradeParalelo
+                new GradeTeacher
                 {
-                    GradeParaleloId = "4",
+                    GradeTeacherId = "4",
                     IdGrade = context.Grades.First(grade => grade.Name == "12à").GradeId,
                     IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },

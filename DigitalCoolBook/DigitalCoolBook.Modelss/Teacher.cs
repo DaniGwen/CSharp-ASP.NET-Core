@@ -32,5 +32,7 @@
         public bool IsDeleted { get; set; }
 
         public ICollection<Test> Tests { get; set; }
+
+        public List<GradeTeacher> GradeTeachers { get; set; }
     }
 }

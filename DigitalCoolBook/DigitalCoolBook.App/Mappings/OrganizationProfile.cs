@@ -24,8 +24,8 @@
 
             // Grade mappings
             this.CreateMap<Grade, GradeViewModel>();
-            this.CreateMap<ParaleloCreateViewModel, GradeParalelo>();
-            this.CreateMap<GradeParalelo, ParaleloCreateViewModel>();
+            this.CreateMap<ParaleloCreateViewModel, GradeTeacher>();
+            this.CreateMap<GradeTeacher, ParaleloCreateViewModel>();
 
             // Teacher mappings
             this.CreateMap<TeacherRegisterModel, Teacher>();

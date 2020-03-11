@@ -17,9 +17,9 @@ namespace DigitalCoolBook.Services
             this.context = context;
         }
 
-        public async Task AddGradeParaleloAsync(GradeParalelo gradeParalelo)
+        public async Task AddGradeParaleloAsync(GradeTeacher gradeParalelo)
         {
-            await this.context.GradeParalelos.AddAsync(gradeParalelo);
+            await this.context.GradeTeachers.AddAsync(gradeParalelo);
         }
 
         public async Task<Grade> GetGradeAsync(string id)
@@ -27,14 +27,14 @@ namespace DigitalCoolBook.Services
             return await this.context.Grades.FindAsync(id);
         }
 
-        public async Task<GradeParalelo> GetGradeParaleloAsync(string id)
+        public async Task<GradeTeacher> GetGradeParaleloAsync(string id)
         {
-            return await this.context.GradeParalelos.FindAsync(id);
+            return await this.context.GradeTeachers.FindAsync(id);
         }
 
-        public IQueryable<GradeParalelo> GetGradeParalelos()
+        public IQueryable<GradeTeacher> GetGradeParalelos()
         {
-            return this.context.GradeParalelos;
+            return this.context.GradeTeachers;
         }
 
         public IQueryable<Grade> GetGrades()
@@ -42,9 +42,9 @@ namespace DigitalCoolBook.Services
             return this.context.Grades;
         }
 
-        public async Task RemoveGradeParaleloAsync(GradeParalelo paralelo)
+        public async Task RemoveGradeParaleloAsync(GradeTeacher paralelo)
         {
-            this.context.GradeParalelos.Remove(paralelo);
+            this.context.GradeTeachers.Remove(paralelo);
             await this.SaveChangesAsync();
         }
 

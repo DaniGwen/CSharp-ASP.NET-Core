@@ -36,6 +36,7 @@
             }
         </tbody>
     </table>
+    <a class="btn btn-outline-info mb-2" href="/Admin/AdminPanel">назад</a>
 </div>
 <div id="popup"></div>
 <div id="confirmdelete"></div>
@@ -58,8 +59,6 @@
                 },
                 // delete test
                 "Изтриване": function () {
-
-                    // post to action and display popup with message
                     $.post("/Test/DeleteTest", { testId: $(elem).attr('id') }, function (message) {
                         $('#popup').dialog({
                             resizable: false,
@@ -75,7 +74,6 @@
                         $('#popup').html(message);
                     })
                 }
-
             }
         })
     }

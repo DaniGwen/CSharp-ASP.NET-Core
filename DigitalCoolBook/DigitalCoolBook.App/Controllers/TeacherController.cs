@@ -91,11 +91,11 @@
             return this.View();
         }
 
-        [Authorize(Roles ="Admin, Teacher")]
+        [Authorize(Roles = "Admin, Teacher")]
         public IActionResult ChooseGrade()
         {
             var grades = this.gradeService.GetGrades()
-                .Where(grade => grade.GradeParalelos.Count != 0)
+                .Where(grade => grade.GradeTeachers.Count != 0)
                 .ToList();
 
             var gradesToView = new List<GradeViewModel>();
@@ -109,7 +109,7 @@
             return this.View(gradesToView);
         }
 
-        [Authorize(Roles ="Admin, Teacher")]
+        [Authorize(Roles = "Admin, Teacher")]
         public async Task<IActionResult> GradeDetailsAsync(string id)
         {
             var studentsInGrade = this.userService.GetStudents()
@@ -144,30 +144,25 @@
             return this.View(studentsForView);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             try
             {
                 await this.userService.RemoveTeacherAsync(id);
                 await this.userService.SaveChangesAsync();
-                this.TempData["SuccessMsg"] = "Акаунта е премахнат.";
-                return this.Redirect("/Home/Success");
-            }
-            catch (Exception exception)
-            {
-                var errorModel = new ErrorViewModel
-                {
-                    Message = exception.Message,
-                };
 
-                return this.View("Error", errorModel);
+                return this.Json("Акаунта е изтрит.");
+            }
+            catch (Exception)
+            {
+                return this.Json("Грешка при изтриването.");
             }
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditTeacher(string id)
         {
             var teacher = await this.userService.GetTeacherAsync(id);
@@ -254,6 +249,7 @@
             return this.View("Error");
         }
 
+        [HttpGet]
         [Authorize(Roles = "Student, Teacher")]
         [ActionName("Panel")]
         public async Task<IActionResult> PanelAsync()
