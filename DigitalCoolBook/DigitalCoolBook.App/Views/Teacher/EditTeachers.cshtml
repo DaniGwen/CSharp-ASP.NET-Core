@@ -44,36 +44,43 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (!Model.Any())
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateOfBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sex)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MobilePhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Telephone)
-                    </td>
-                    <td class="row form-group">
-                        <a class="btnDelete btn btn-sm btn-outline-danger" href="#" id="@item.Id">Изтрий</a>
-                        <a class="btn btn-sm btn-outline-info ml-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Промяна</a>
-                        <a class="btn btn-sm btn-outline-info mt-1 ml-3" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
-                    </td>
-                </tr>
+                <tr class="text-center">Няма записи в базата данни.</tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfBirth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sex)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MobilePhone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telephone)
+                        </td>
+                        <td class="row form-group">
+                            <a class="btnDelete btn btn-sm btn-outline-danger" href="#" id="@item.Id">Изтрий</a>
+                            <a class="btn btn-sm btn-outline-info ml-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Промяна</a>
+                            <a class="btn btn-sm btn-outline-info mt-1 ml-3" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
@@ -108,7 +115,7 @@
                                     modal: true,
                                     buttons: {
                                         "Ok": function () {
-                                            $(this).dialog("close", location.href = location.href);
+                                            $(this).dialog('close', location.href = "/Teacher/EditTeachers");
                                         }
                                     }
                                 });
