@@ -5,32 +5,27 @@
     Layout = "_LayoutMenus";
 }
 
-<h2>Създаване на Раздел</h2>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateCategory" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="gj-font-size-16">Учебен Предмет</label>
-                @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Избери Предмет", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label">Заглавие</label>
-                <input id="title" asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <a href="#" id="submit" class="btn btn-primary">Създай</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container-fluid w-75">
+    <h2>Създаване на Раздел</h2>
+    <hr />
+    <form asp-action="CreateCategory" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="gj-font-size-16">Учебен Предмет</label>
+            @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Избери Предмет", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label asp-for="Title" class="control-label">Заглавие</label>
+            <input id="title" asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group d-flex justify-content-center">
+            <a id="submit" class="btn btn-outline-info">Създай</a>
+        </div>
+    </form>
+    <a href="/Admin/AdminPanel" class="mb-2">назад</a>
+    <hr />
 </div>
 
 <div id="successMessage"></div>
@@ -55,13 +50,12 @@
                             width: 300,
                             modal: true,
                             buttons: {
-                                "Затвори": function () {
-                                    window.location.href = "/Subject/AddLesson",
-                                    $(this).dialog("close");
+                                "Ок": function () {
+                                    $(this).dialog("close", location.href = "/Subject/AddLesson");
                                 }
                             }
                         });
-                    $("#successMessage").html("Темата е създадена!")
+                    $("#successMessage").html("Разделът е създаден.")
                 },
                 error: function (request, err, message) {
                     $("#errorMessageDialog").dialog({
@@ -75,7 +69,6 @@
                         }
                     });
                     $("#errorMessage").html(request.responseText);
-                    //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
                 }
             })
         })
