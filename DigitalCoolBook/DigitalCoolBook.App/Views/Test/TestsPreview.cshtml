@@ -5,33 +5,59 @@
     Layout = "~/Views/Shared/_LayoutMenus.cshtml";
 }
 
-<h2>Тестове</h2>
 
-<p>
-    <a asp-action="CreateTestAdmin">Създай нов</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TestName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="container-fluid w-75 align-content-center">
+    <h2 class="text-center">Тестове</h2>
+    <p>
+        <a asp-action="CreateTestAdmin">Създай нов</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TestName)
-                </td>
-                <td>
-                    @Html.ActionLink("Редактирай", "Edit", new { testId = item.TestId }) |
-                    <a href="/Test/GetTestDetails/@item.TestId" class="btn btn-outline-info">Детайли</a> |
-                    @Html.ActionLink("Изтрии", "Delete", new { testId = item.TestId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestName)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
+                    </td>
+                    <td class="d-flex justify-content-end">
+                        <a class="btn btn-outline-secondary btn-sm mr-2" href="/Test/EditTest"> Редактирай</a>
+                        <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Изтрии</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="popup"></div>
+
+<script>
+    // delete test
+    function DeleteTest(elem) {
+        var testId = $(elem).attr('id');
+        // post to action and display popup with message
+        $.post("/Test/DeleteTest", { testId: testId }, function (message) {
+            $('#popup').dialog({
+                resizable: false,
+                modal: true,
+                heigth: 220,
+                width: 400,
+                buttons: {
+                    "Ok": function () {
+                        $(this).dialog('close',location.href= location.href);
+                    }
+                }
+            })
+            $('#popup').html(message);
+        })
+        
+    }
+</script>

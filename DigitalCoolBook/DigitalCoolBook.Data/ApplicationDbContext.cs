@@ -56,6 +56,14 @@ namespace DigitalCoolBook.App.Data
             builder.Entity<Answer>().HasOne(a => a.Question)
                 .WithMany(q => q.Answers)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Test>().HasMany(test => test.Questions)
+                .WithOne(question => question.Test)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //builder.Entity<Question>().HasMany(test => test.Answers)
+            //    .WithOne(question => question.Question)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

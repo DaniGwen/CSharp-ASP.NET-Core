@@ -487,13 +487,21 @@
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult DeleteTest(string testId)
+        [ActionName("DeleteTest")]
+        public async Task<IActionResult> DeleteTestAsync(string testId)
         {
-            var test = this.testService.RemoveTestAsync(testId);
+            try
+            {
+                await this.testService.RemoveTestAsync(testId);
 
-
+                return this.Json("Теста е изтрит.");
+            }
+            catch (Exception)
+            {
+                return this.Json("Грешка при изтриване на теста!");
+            }
         }
     }
 }
