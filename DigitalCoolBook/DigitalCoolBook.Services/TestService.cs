@@ -49,6 +49,13 @@
             return this.context.Tests;
         }
 
+        public async Task RemoveTestAsync(string testId)
+        {
+            var test = await this.context.Tests.FindAsync(testId);
+            this.context.Remove(test);
+            await this.SaveChangesAsync();
+        }
+
         public async Task SaveChangesAsync()
         {
             await this.context.SaveChangesAsync();

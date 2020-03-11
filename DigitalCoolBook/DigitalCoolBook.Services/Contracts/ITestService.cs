@@ -20,5 +20,7 @@
         Task<Test> GetTestAsync(string id);
 
         Task AddExpiredTestAsync(ExpiredTest expiredTest);
+
+        Task RemoveTestAsync(string testId);
     }
 }

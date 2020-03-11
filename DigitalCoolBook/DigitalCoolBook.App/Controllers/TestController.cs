@@ -486,5 +486,14 @@
                 return this.Json("Нещо се обърка.");
             }
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteTest(string testId)
+        {
+            var test = this.testService.RemoveTestAsync(testId);
+
+
+        }
     }
 }
