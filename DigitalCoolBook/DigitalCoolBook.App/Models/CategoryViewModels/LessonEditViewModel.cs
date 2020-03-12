@@ -5,7 +5,7 @@
 
     public class LessonEditViewModel
     {
-        public string Id { get; set; }
+        public string LessonId { get; set; }
 
         [Required(ErrorMessage ="Въведете заглавие")]
         [StringLength(maximumLength: 40, ErrorMessage = "Въведете заглавие до 40 символа и минимум 3 символа.", MinimumLength = 3)]

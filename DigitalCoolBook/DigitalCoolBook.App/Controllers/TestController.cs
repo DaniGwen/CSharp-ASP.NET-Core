@@ -503,5 +503,51 @@
                 return this.Json("Грешка при изтриване на теста!");
             }
         }
+
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        [ActionName("EditTest")]
+        public async Task<IActionResult> EditTestAsync(string id)
+        {
+            try
+            {
+                var test = await this.testService.GetTestAsync(id);
+
+                // Map test to view model
+                var model = this.mapper.Map<TestDetailsViewModel>(test);
+
+                // Getting the questions for this test
+                var questions = this.questionService.GetQuestions()
+                    .Where(question => question.TestId == model.TestId)
+                    .ToList();
+
+                // Getting the answers from DB
+                var answers = this.questionService.GetAnswers().ToList();
+
+                // Map the questions to questions view model
+                var questionsModel = this.mapper.Map<List<QuestionDetailsViewModel>>(questions);
+
+                // Iterate through questionsModel and add answers
+                foreach (var question in questionsModel)
+                {
+                    // Filter the answers for that question
+                    var answersForQuestion = answers.Where(answer => answer.QuestionId == question.QuestionId)
+                        .ToList();
+
+                    // Map answers to answers view model
+                    var answersModel = this.mapper.Map<List<AnswerDetailsViewModel>>(answersForQuestion);
+
+                    question.Answers = answersModel;
+                }
+
+                model.Questions = questionsModel;
+
+                return this.View(model);
+            }
+            catch (Exception)
+            {
+                return this.Json("Нещо се обърка.");
+            }
+        }
     }
 }

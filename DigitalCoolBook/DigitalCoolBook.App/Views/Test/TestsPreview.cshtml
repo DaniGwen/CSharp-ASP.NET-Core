@@ -26,17 +26,17 @@
             {
                 <tr>
                     <td>
-                        <a href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
+                        <a class="btn btn-block btn-outline-info w-100" href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
                     </td>
                     <td class="d-flex justify-content-end">
-                        <a class="btn btn-outline-secondary btn-sm mr-2" href="/Test/EditTest"> Редактирай</a>
+                        <a class="btn btn-outline-secondary btn-sm mr-2" href="/Test/EditTest/@item.TestId"> Редактирай</a>
                         <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Изтрии</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <a class="btn btn-outline-info mb-2" href="/Admin/AdminPanel">назад</a>
+    <a href="/Admin/AdminPanel">назад</a>
 </div>
 <div id="popup"></div>
 <div id="confirmdelete"></div>

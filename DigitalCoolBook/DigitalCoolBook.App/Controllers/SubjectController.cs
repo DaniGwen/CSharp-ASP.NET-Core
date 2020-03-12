@@ -167,24 +167,24 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ActionName("EditLesson")]
-        public async Task<IActionResult> EditLessonAsync(LessonEditViewModel model)
+        public async Task<IActionResult> EditLessonAsync(string lessonId, string title, string content, string categoryId)
         {
-            if (this.ModelState.IsValid)
+            try
             {
-                var lesson = await this.subjectService.GetLessonAsync(model.Id);
-                lesson.Title = model.Title;
-                lesson.Content = model.Content;
-                lesson.CategoryId = model.CategoryId;
+                var lesson = await this.subjectService.GetLessonAsync(lessonId);
+
+                lesson.Title = title;
+                lesson.Content = content;
+                lesson.CategoryId = categoryId;
 
                 await this.subjectService.SaveChangesAsync();
-            }
-            else
-            {
-                return this.View(model);
-            }
 
-            this.TempData["SuccessMsg"] = "Промяната е записана успешно";
-            return this.Redirect("/Home/Success");
+                return this.Json("Промените са записани.");
+            }
+            catch (Exception e)
+            {
+                return this.Json("Грешка при записването.");
+            }
         }
 
         [Authorize(Roles = "Admin")]
