@@ -288,8 +288,8 @@
             return this.Redirect("/Subject/AddLesson");
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult RemoveLesson()
         {
             var categories = this.subjectService.GetCategories().ToList();
@@ -304,19 +304,21 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ActionName("RemoveLesson")]
         public async Task<IActionResult> RemovelessonAsync(string lessonId)
         {
-            if (lessonId == null)
+            try
             {
-                return this.BadRequest("Моля изберете урок.");
+                await this.subjectService.RemoveLessonAsync(lessonId);
+
+                return this.Json("Темата е изтрита.");
             }
-
-            await this.subjectService.RemoveLessonAsync(lessonId);
-
-            return this.Redirect("/Subject/AddLesson");
+            catch (Exception)
+            {
+                return this.Json("Грешка при изтриване.");
+            }
         }
 
         [HttpGet]
@@ -332,7 +334,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult LessonsPreview()
         {
             var lessons = this.subjectService.GetLessons();

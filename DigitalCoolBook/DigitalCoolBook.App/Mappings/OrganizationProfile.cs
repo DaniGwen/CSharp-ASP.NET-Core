@@ -41,6 +41,7 @@
             this.CreateMap<Category, CategoryAjaxViewModel>();
             this.CreateMap<Lesson, LessonEditViewModel>();
             this.CreateMap<Category, CategoryViewModel>();
+            this.CreateMap<Lesson, LessonPreviewViewModel>();
 
             // Test mappings
             this.CreateMap<Test, TestViewModel>();
