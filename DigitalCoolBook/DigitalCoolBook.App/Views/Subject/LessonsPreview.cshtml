@@ -8,32 +8,23 @@
 <div class="container-fluid w-75">
     <h3 class="text-center">Преглед на темите</h3>
     <p>
-        <a asp-action="AddLesson">нова тема</a>
+        <a asp-action="AddLesson" data-toggle="tooltip" title="Добави нова тема.">нова тема</a>
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a class="btn btn-outline-info" id="lessonDetails">@item.Title</a>
-                    </td>
-                    <td class="d-flex justify-content-end ">
-                        <a class="btn btn-sm btn-outline-secondary" id="edit" value="@item.LessonId">Редактирай</a>
-                        <a class="btn btn-sm btn-outline-danger" onclick="Delete(this)" id="delete" value="@item.LessonId">Изтрии</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="text-center mb-3">
+        @Html.DisplayNameFor(model => model.Title)
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row form-group">
+            <a class="btn btn-outline-info btn-block w-75 form-group" id="lessonDetails">@item.Title</a>
+            <div class="d-flex justify-content-end form-group ">
+                <a class="btn btn-sm btn-outline-secondary ml-1" href="/Subject/EditLesson/@item.LessonId">Редактирай</a>
+                <a class="btn btn-sm btn-outline-danger ml-1" onclick="Delete(this)" id="delete" value="@item.LessonId">Изтрии</a>
+            </div>
+        </div>
+    }
+
+    <a class="mb-1" href="/Admin/AdminPanel">Назад</a>
 </div>
 
 <div id="dialog"></div>

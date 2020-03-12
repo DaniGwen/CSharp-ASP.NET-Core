@@ -146,9 +146,9 @@
             return this.Json(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
-        [ActionName("Edit")]
+        [Authorize(Roles = "Admin")]
+        [ActionName("EditLesson")]
         public async Task<IActionResult> EditLessonAsync(string id)
         {
             var lesson = await this.subjectService.GetLessonAsync(id);
@@ -164,8 +164,9 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ActionName("EditLesson")]
         public async Task<IActionResult> EditLessonAsync(LessonEditViewModel model)
         {
             if (this.ModelState.IsValid)
