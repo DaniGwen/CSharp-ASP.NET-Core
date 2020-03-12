@@ -3,14 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.JsonDeserializeModels;
     using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -77,8 +80,8 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddLesson()
         {
             var categories = this.subjectService.GetCategories().ToList();
@@ -93,27 +96,29 @@
             return this.View(categoriesModel);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ActionName("AddLesson")]
-        public async Task<IActionResult> AddLessonAsync(string categoryId, string content, string title)
+        public async Task<IActionResult> AddLessonAsync(string title, string content, string categoryId)
         {
-            if (!this.ModelState.IsValid)
+            try
             {
-                return this.View();
+                var lesson = new Lesson
+                {
+                    LessonId = Guid.NewGuid().ToString(),
+                    CategoryId = categoryId,
+                    Content = content,
+                    Title = title,
+                };
+
+                await this.subjectService.CreateLessonAsync(lesson);
+
+                return this.Json("Темата е добавена.");
             }
-
-            var lesson = new Lesson
+            catch (Exception)
             {
-                LessonId = Guid.NewGuid().ToString(),
-                CategoryId = categoryId,
-                Content = content,
-                Title = title,
-            };
-
-            await this.subjectService.CreateLessonAsync(lesson);
-            this.TempData["SuccessMsg"] = "Успешно добавяне.";
-            return this.Redirect("/Home/Success");
+                return this.Json("Възникна грешка.");
+            }
         }
 
         [HttpPost]
@@ -216,8 +221,8 @@
             return this.Redirect("/Home/Success");
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateCategory()
         {
             var subjects = this.subjectService.GetSubjects().ToList();
@@ -230,8 +235,8 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCategoryAsync(CategoryAdminCreateViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -250,7 +255,7 @@
                 return this.View(model);
             }
 
-            return this.Redirect("/Subject/AddLesson");
+            return this.Json("/Subject/AddLesson");
         }
 
         [Authorize(Roles = "Admin")]
@@ -322,6 +327,17 @@
             var lesson = await this.subjectService.GetLessonAsync(id);
 
             var model = this.mapper.Map<LessonsViewModel>(lesson);
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles="Admin")]
+        public IActionResult LessonsPreview()
+        {
+            var lessons = this.subjectService.GetLessons();
+
+            var model = this.mapper.Map<List<LessonPreviewViewModel>>(lessons);
 
             return this.View(model);
         }

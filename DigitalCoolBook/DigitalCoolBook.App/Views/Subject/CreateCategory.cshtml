@@ -42,7 +42,7 @@
                     SubjectId: $("#SubjectId").val(),
                     Title: $("#title").val(),
                 },
-                success: function () {
+                success: function (redirect) {
                     $("#successMessage").dialog(
                         {
                             resizable: false,
@@ -51,7 +51,7 @@
                             modal: true,
                             buttons: {
                                 "Ок": function () {
-                                    $(this).dialog("close", location.href = "/Subject/AddLesson");
+                                    $(this).dialog("close", location.href = redirect);
                                 }
                             }
                         });
@@ -59,8 +59,8 @@
                 },
                 error: function (request, err, message) {
                     $("#errorMessageDialog").dialog({
-                        maxHeight: 290,
-                        width: 600,
+                        maxHeight: 220,
+                        width: 300,
                         modal: true,
                         buttons: {
                             "Затвори": function () {
@@ -68,7 +68,8 @@
                             }
                         }
                     });
-                    $("#errorMessage").html(request.responseText);
+                    $('#errorMessageDialog').dialog({ title: 'Грешка'});
+                    $("#errorMessageDialog").html("Възникна грешка.");
                 }
             })
         })

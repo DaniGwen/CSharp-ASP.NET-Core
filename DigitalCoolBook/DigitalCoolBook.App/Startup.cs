@@ -60,10 +60,14 @@ namespace DigitalCoolBook.App
             var mapper = config.CreateMapper();
 
             services.AddAutoMapper(typeof(Startup));
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
 
             services.AddMvc(mvcOptions =>
             {
