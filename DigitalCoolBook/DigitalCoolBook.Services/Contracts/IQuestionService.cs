@@ -22,5 +22,7 @@ namespace DigitalCoolBook.Services.Contracts
         Task AddAnswersAsync(ICollection<Answer> answers);
 
         Task<Answer> GetAnswerAsync(string correctAnswerId);
+
+        void RemoveRange(IQueryable<Answer> answersToRemove);
     }
 }

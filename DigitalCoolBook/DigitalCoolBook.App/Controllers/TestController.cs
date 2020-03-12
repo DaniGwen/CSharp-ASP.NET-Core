@@ -505,7 +505,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [ActionName("EditTest")]
         public async Task<IActionResult> EditTestAsync(string id)
         {
@@ -548,6 +548,63 @@
             {
                 return this.Json("Нещо се обърка.");
             }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ActionName("EditTest")]
+        public async Task<IActionResult> EditTestAsync(ICollection<TestEditViewModel> model, string testId)
+        {
+            try
+            {
+                // questions for test from DB
+                var questions = this.questionService.GetQuestions().Where(q => q.TestId == testId);
+
+                // answers from DB
+                var answers = this.questionService.GetAnswers();
+
+                var answersForDb = new List<Answer>();
+
+                foreach (var question in questions)
+                {
+                    foreach (var questionModel in model)
+                    {
+                        // Set question title
+                        if (question.QuestionId == questionModel.QuestionId)
+                        {
+                            question.Title = questionModel.Question;
+
+                            // Find the answers belong to this question
+                            var answersToRemove = answers
+                                .Where(a => a.QuestionId == question.QuestionId)
+                                .ToList();
+
+                            // Remove old answers
+                            await this.questionService.RemoveRange(answersToRemove);
+
+                            foreach (var answerTitle in questionModel.Answers)
+                            {
+                                var answer = new Answer
+                                {
+                                    AnswerId = Guid.NewGuid().ToString(),
+                                    QuestionId = question.QuestionId,
+                                    Title = answerTitle,
+                                };
+                            }
+                        }
+
+
+                    }
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return this.Json("");
         }
     }
 }
