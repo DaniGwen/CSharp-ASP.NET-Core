@@ -5,31 +5,29 @@
     Layout = "~/Views/Shared/_LayoutMenus.cshtml";
 }
 
-<h2>Задаване на таймер</h2>
-<hr />
-
-<form asp-action="SetTestTimer" method="post">
-    <input hidden="hidden" asp-for="TestId" class="form-control" />
-    <div class="form-group row">
-        <label class="col-form-label">@Model.TestName</label>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Времетраене</label>
-        <div class="col-sm-10">
-            <div class="row">
-                <input asp-for="Timer" id="timerinput" min="0" class="form-control" /><small class="col-form-label ml-1">минути.</small>
-            </div>
+<div class="container-fluid">
+    <h2>Задаване на таймер</h2>
+    <hr />
+    <form asp-action="SetTestTimer" method="post">
+        <input hidden="hidden" asp-for="TestId" class="form-control" />
+        <div class="form-group row">
+            <label class="col-form-label-lg">@Model.TestName</label>
         </div>
-        <span class="text-danger" id="alertTimer"></span>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Времетраене</label>
+            <input asp-for="Timer" id="timerinput" min="0" max="360" class="col-form-label-sm" />
+            <small class="col-form-label-sm ml-1">минути.</small>
+            <span class="text-danger" id="alertTimer"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Ок" class="btn btn-primary btn-block w-25" />
+        </div>
+    </form>
+    <div>
+        <a asp-action="Tests">Назад</a>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Ок" class="btn btn-primary btn-block" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index">Назад към списък</a>
 </div>
+
 
 <!--validate timer input-->
 <script type="text/javascript">

@@ -41,7 +41,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "Teacher, Admin")]
+        [Authorize(Roles = "Teacher")]
         [ActionName("CreateTest")]
         public async Task<IActionResult> CreateTestAsync(string id)
         {
@@ -63,10 +63,10 @@
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         [ActionName("CreateTest")]
-        public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] chkBox)
+        public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] students)
         {
             // Checks if no students has been selected
-            if (chkBox.Length == 0)
+            if (students.Length == 0)
             {
                 this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
                 return this.View(model);
@@ -85,7 +85,7 @@
                 test.TestName = model.TestTitle;
 
                 // Adding "TestStudent" relation  between Test and Student
-                foreach (var student in chkBox)
+                foreach (var student in students)
                 {
                     var testStudent = new TestStudent()
                     {

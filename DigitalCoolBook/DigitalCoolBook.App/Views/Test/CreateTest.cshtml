@@ -6,29 +6,27 @@
 }
 
 <div class="container-lg pt-3">
-    <h1>Създаване на Тест</h1>
+    <h1 class="text-center">Стартиране на тест</h1>
     <hr />
     <form id="form" asp-action="CreateTest" method="post">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col form-group">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div>
                     <input type="hidden" name="LessonId" value="@Model.TestId" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Timer" class="control-label"></label>
-                    <input asp-for="Timer" type="number" class="form-control" id="datetimepicker-input" />
+                    <input asp-for="Timer" type="number" class="form-control" min="0" max="360" />
                     <span asp-validation-for="Timer" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <label class="mt-2">Паралелка</label>
-                    @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
-                </div>
+            <div class="col form-group">
+                <label class="mt-2">Паралелка</label>
+                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
             </div>
             <div class="col form-control">
-                <a class="mb-4">Ученици</a>
+                <a class="mb-4">Ученици:</a>
                 <div id="checkArray">
                 </div>
             </div>
@@ -44,20 +42,6 @@
     </form>
 </div>
 
-@*Sets default date of dateTime picker to current date*@
-<script type="text/javascript">
-    var d = new Date();
-
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-
-    var output = d.getFullYear() + '-' +
-        (month < 10 ? '0' : '') + month + '-' +
-        (day < 10 ? '0' : '') + day;
-
-    $("#datetimepicker-input").val(output + " 00:01");
-</script>
-
 @*Update checkboxes*@
 <script>
     var studentCheckBox = $('#checkArray'); // cache variable
@@ -67,6 +51,7 @@
         if (!GradeId) {
             return; // exit if null
         }
+        // Send request to server with grade Id and receive collection of students
         $.ajax({
             type: "POST",
             url: "/Test/GetStudents",
@@ -74,7 +59,7 @@
             success: function (response) {
                 $.each(response, function (i, item) {
                     studentCheckBox.append(
-                        $('<input/>', { type: 'checkbox', name: 'chkBox', id: item.id, value: item.name }),
+                        $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
                         $('<label/>', { for: item.id, text: item.name }),
                         $('<br/>')
                     );

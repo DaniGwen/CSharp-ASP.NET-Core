@@ -5,48 +5,41 @@
     Layout = "_LayoutMenus";
 }
 
-<h1>Тестове</h1>
+<div class="container-fluid w-75">
+    <h1 class="text-center">Тестове</h1>
+    <div class="row">
+        @Html.DisplayNameFor(model => model.TestName)
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TestName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var test in Model)
+    @foreach (var test in Model)
+    {
+        @if (test.IsExpired)
         {
-            <tr>
-                <td>
-                    @if (test.IsExpired)
-                    {
-                        <div class="text-danger">
-                            @Html.DisplayFor(modelItem => test.TestName)
-                        </div>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => test.TestName)
-                    }
-                </td>
-                <td class="btn btn-outline-success mb-2">
-                    @if (test.IsExpired)
-                    {
-                        <span class="text-danger">Теста е приключил</span>
-                    }
-                    else if (test.Timer == 0)
-                    {
-                        @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId })
-                    }
-                </td>
-            </tr>
+            <div class="text-danger">
+                @Html.DisplayFor(modelItem => test.TestName)
+            </div>
         }
-    </tbody>
-</table>
+        else
+        {
+            @Html.DisplayFor(modelItem => test.TestName)
+        }
+
+        <div class="btn btn-outline-success mb-2">
+            @if (test.IsExpired)
+            {
+                <span class="text-danger">Теста е приключил</span>
+            }
+            else if (test.Timer == 0)
+            {
+                @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId })
+            }
+            else
+            {
+                @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId })
+            }
+        </div>
+    }
+
+
+</div>
+

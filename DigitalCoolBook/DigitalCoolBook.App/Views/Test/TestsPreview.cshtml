@@ -7,36 +7,23 @@
 
 
 
-<div class="container-fluid w-75 align-content-center">
+<div class="container-fluid w-75">
     <h2 class="text-center">Тестове</h2>
-    <p>
-        <a asp-action="CreateTestAdmin">Създай нов</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TestName)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a class="btn btn-block btn-outline-info w-100" href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
-                    </td>
-                    <td class="d-flex justify-content-end">
-                        <a class="btn btn-outline-secondary btn-sm mr-2" href="/Test/EditTest/@item.TestId"> Редактирай</a>
-                        <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Изтрии</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <a href="/Admin/AdminPanel">назад</a>
+    <div class="form-group">
+        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTestAdmin">Създай нов</a>
+        <div class="col-form-label-lg">
+            @Html.DisplayNameFor(model => model.TestName)
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="row form-group">
+                <a class="btn btn-block btn-outline-info w-75 mr-1" href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
+                <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Изтрии</a>
+            </div>
+        }
+
+        <a href="/Admin/AdminPanel">назад</a>
+    </div>
 </div>
 <div id="popup"></div>
 <div id="confirmdelete"></div>
