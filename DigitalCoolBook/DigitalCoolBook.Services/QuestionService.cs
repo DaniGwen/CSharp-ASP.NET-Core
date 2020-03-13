@@ -58,11 +58,11 @@ namespace DigitalCoolBook.Services
             return this.context.Questions;
         }
 
-        public void RemoveRange(List<Answer> answersToRemove)
+        public async Task RemoveAnswers(List<Answer> answersToRemove)
         {
             this.context.Answers.RemoveRange(answersToRemove);
 
-            this.SaveChangesAsync();
+            await this.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()

@@ -53,16 +53,15 @@
                 modal: true,
                 buttons: {
                     "Ok": function () {
-                        $(this).dialog('close', relocate.href="/Test/CreateTestAdmin");
+                        $(this).dialog('close', relocate.href = "/Test/CreateTestAdmin");
                     }
                 }
             })
         }).done(function (response) {
             popupDialog.html(response)
-                .fail(function (response) {
-                    popupDialog.html(response.error + '-' + response.message);
-                });
-        })
+        }).fail(function (response) {
+            popupDialog.html(response.error + '-' + response.message);
+        });
     })
 
     // TODO fix bug

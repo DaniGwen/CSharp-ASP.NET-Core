@@ -558,10 +558,13 @@
             try
             {
                 // questions for test from DB
-                var questions = this.questionService.GetQuestions().Where(q => q.TestId == testId);
+                var questions = this.questionService.GetQuestions()
+                    .Where(q => q.TestId == testId)
+                    .ToList();
 
                 // answers from DB
-                var answers = this.questionService.GetAnswers();
+                var answers = this.questionService.GetAnswers()
+                    .ToList();
 
                 var answersForDb = new List<Answer>();
 
@@ -580,8 +583,9 @@
                                 .ToList();
 
                             // Remove old answers
-                            await this.questionService.RemoveRange(answersToRemove);
+                            await this.questionService.RemoveAnswers(answersToRemove);
 
+                            // Create new answers with updated titles
                             foreach (var answerTitle in questionModel.Answers)
                             {
                                 var answer = new Answer
@@ -590,21 +594,23 @@
                                     QuestionId = question.QuestionId,
                                     Title = answerTitle,
                                 };
+
+                                answersForDb.Add(answer);
                             }
                         }
-
-
                     }
                 }
 
+                await this.questionService.AddAnswersAsync(answersForDb);
 
+                // Redirect to MarkCorrectAnswers action to select the right answers
+                return this.RedirectToAction("MarkCorrectAnswers", new { testId = testId });
             }
             catch (Exception)
             {
-
-                throw;
+                this.TempData["ErrorMsg"] = "Грешка при обработка на заявката!";
+                return this.View("/Home/Error");
             }
-            return this.Json("");
         }
     }
 }

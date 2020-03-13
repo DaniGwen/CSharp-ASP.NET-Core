@@ -23,6 +23,6 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task<Answer> GetAnswerAsync(string correctAnswerId);
 
-        void RemoveRange(IQueryable<Answer> answersToRemove);
+        Task RemoveAnswers(List<Answer> answersToRemove);
     }
 }
