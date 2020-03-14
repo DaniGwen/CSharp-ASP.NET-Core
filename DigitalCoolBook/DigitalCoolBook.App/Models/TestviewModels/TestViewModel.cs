@@ -17,6 +17,8 @@
         [Display(Name ="Времетраене")]
         public int Timer { get; set; }
 
+        public string TestName { get; set; }
+
         [Display(Name = "Дата на провеждане")]
         public DateTime Date { get; set; }
 

@@ -1,33 +1,72 @@
-﻿@model DigitalCoolBook.App.Models.TestviewModels.SetTimerViewModel
+﻿@model DigitalCoolBook.App.Models.TestviewModels.TestViewModel
 
 @{
-    ViewData["Title"] = "SetTestTimerAsync";
-    Layout = "~/Views/Shared/_LayoutMenus.cshtml";
+    ViewData["Title"] = "TestSetup";
+    Layout = "_LayoutMenus";
 }
 
-<div class="container-fluid">
-    <h2>Задаване на таймер</h2>
+<div class="container-lg pt-3">
+    <h1 class="text-center">Стартиране на тест</h1>
     <hr />
-    <form asp-action="SetTestTimer" method="post">
-        <input hidden="hidden" asp-for="TestId" class="form-control" />
-        <div class="form-group row">
-            <label class="col-form-label-lg">@Model.TestName</label>
+    <form id="form" asp-action="CreateTest" method="post">
+        <div class="row">
+            <input hidden="hidden" asp-for="TestId" class="form-control" />
+            <div class="form-group row">
+                <label class="col-form-label-lg">@Model.TestName</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Времетраене</label>
+                <input asp-for="Timer" id="timerinput" min="0" max="360" class="col-form-label-sm" />
+                <small class="col-form-label-sm ml-1">минути.</small>
+                <span class="text-danger" id="alertTimer"></span>
+            </div>
+            <div class="col form-group">
+                <label class="mt-2">Паралелка</label>
+                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
+            </div>
+            <div class="col form-control">
+                <a class="mb-4">Ученици:</a>
+                <div id="checkArray">
+                </div>
+            </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Времетраене</label>
-            <input asp-for="Timer" id="timerinput" min="0" max="360" class="col-form-label-sm" />
-            <small class="col-form-label-sm ml-1">минути.</small>
-            <span class="text-danger" id="alertTimer"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Ок" class="btn btn-primary btn-block w-25" />
+        <div class="row form-group mb-2 mt-3">
+            <div class="ml-4">
+                <a class="btn btn-outline-secondary" asp-action="Tests">Назад</a>
+            </div>
+            <div class="ml-5">
+                <input id="button" type="submit" value="Старт тест" class="btn btn-primary" />
+            </div>
         </div>
     </form>
-    <div>
-        <a asp-action="Tests">Назад</a>
-    </div>
 </div>
 
+<!--Update checkboxes-->
+<script>
+    var studentCheckBox = $('#checkArray'); // cache variable
+    $('#GradeId').change(function () {
+        var GradeId = $(this).val();
+        studentCheckBox.empty(); // clear existing options
+        if (!GradeId) {
+            return; // exit if null
+        }
+        // Send request to server with grade Id and receive collection of students
+        $.ajax({
+            type: "POST",
+            url: "/Test/GetStudents",
+            data: { gradeId: GradeId }, // sends gradeId to the action
+            success: function (response) {
+                $.each(response, function (i, item) {
+                    studentCheckBox.append(
+                        $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
+                        $('<label/>', { for: item.id, text: item.name }),
+                        $('<br/>')
+                    );
+                });
+            },
+        });
+    })
+</script>
 
 <!--validate timer input-->
 <script type="text/javascript">
