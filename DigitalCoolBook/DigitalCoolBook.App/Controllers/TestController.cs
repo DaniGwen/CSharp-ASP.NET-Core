@@ -202,21 +202,40 @@
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         [ActionName("SetTestTimer")]
-        public async Task<IActionResult> SetTestTimerAsync(SetTimerViewModel viewModel)
+        public async Task<IActionResult> SetTestTimerAsync(TestViewModel model, string[] students)
         {
             if (this.ModelState.IsValid)
             {
-                // Get test from DB
-                var test = await this.testService.GetTestAsync(viewModel.TestId);
+                if (students.Length == 0)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
+                    return this.View(model);
+                }
 
-                test.Timer = viewModel.Timer;
+                // Get test from DB
+                var test = await this.testService.GetTestAsync(model.TestId);
+
+                // Finds current Teacher Id
+                test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                // Adding "TestStudent" relation  between Test and Student
+                foreach (var student in students)
+                {
+                    var testStudent = new TestStudent()
+                    {
+                        StudentId = this.userService.GetStudents().FirstOrDefault(s => s.Name == student).Id,
+                        TestId = test.TestId,
+                    };
+
+                    // Add TestStudent service then add testStudent to DB
+                }
 
                 await this.testService.SaveChangesAsync();
 
                 return this.RedirectToAction("Tests");
             }
 
-            return this.View(viewModel);
+            return this.RedirectToAction($"/StartTest/{model.TestId}");
         }
 
         [HttpGet]
@@ -265,53 +284,6 @@
             }
 
             return this.View(model);
-        }
-
-        // Teacher adds students, sets the timer and start the test
-        [HttpPost]
-        [Authorize(Roles = "Teacher")]
-        [ActionName("CreateTest")]
-        public async Task<IActionResult> CreateTestAsync(TestViewModel model, string[] students)
-        {
-            // Checks if no students has been selected
-            if (students.Length == 0)
-            {
-                this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
-                return this.View(model);
-            }
-
-            try
-            {
-                // Create and map test
-                var test = this.mapper.Map<Test>(model);
-
-                // Adding Id to test
-                test.TestId = Guid.NewGuid().ToString();
-
-                // Finds current Teacher Id
-                test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                test.TestName = model.TestTitle;
-
-                // Adding "TestStudent" relation  between Test and Student
-                foreach (var student in students)
-                {
-                    var testStudent = new TestStudent()
-                    {
-                        StudentId = this.userService.GetStudents().FirstOrDefault(s => s.Name == student).Id,
-                        TestId = test.TestId,
-                    };
-
-                    test.TestStudent.Add(testStudent);
-                }
-
-                await this.testService.AddTestAsync(test);
-            }
-            catch (Exception exception)
-            {
-                return this.View("/Error", exception.Message);
-            }
-
-            return this.RedirectToAction($"/StartTest/{model.TestId}");
         }
 
         [HttpPost]
