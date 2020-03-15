@@ -12,25 +12,23 @@
         </h3>
     </div>
     <form id="form" asp-action="EndTest" method="post">
-        <div class="row d-flex justify-content-start">
-            <div class="col-md-6">
+        <div>
+            <div class="col d-flex justify-content-start">
                 <div class="col">
                     @Html.DisplayNameFor(model => model.Date)
                 </div>
                 <div class="col" id="dateTime">
                     @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
-                    <div class="digital-clock">00:00:00ч.</div>
+                    <div class="digital-clock">00:00:00 ч.</div>
                 </div>
             </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <div class="col">
+            <div class="col d-flex justify-content-end">
+                <div class="text-right">
                     @Html.DisplayNameFor(model => model.Timer)
-                    <h1 class="timer" data-minutes-left="@Model.Timer"></h1>
                 </div>
-                <div class="col" id="timer">
-                </div>
+                <div class="timer" data-minutes-left="@Model.Timer"></div>
             </div>
-            <div class="col w-50">
+            <div class="col">
                 @foreach (var question in Model.Questions)
                 {
                     <span>@question.Title</span>
