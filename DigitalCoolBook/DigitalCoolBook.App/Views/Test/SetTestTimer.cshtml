@@ -10,7 +10,7 @@
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
         <div class="row">
-            <input hidden="hidden" asp-for="TestId" class="form-control" />
+            <input hidden name="TestId" value="@Model.TestId" />
             <div class="form-group row">
                 <label class="col-form-label-lg">@Model.TestName</label>
             </div>

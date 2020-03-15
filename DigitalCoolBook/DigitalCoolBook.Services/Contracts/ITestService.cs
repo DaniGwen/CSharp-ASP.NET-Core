@@ -22,5 +22,7 @@
         Task AddExpiredTestAsync(ExpiredTest expiredTest);
 
         Task RemoveTestAsync(string testId);
+
+        Task AddTestStudentsAsync(ICollection<TestStudent> testStudents);
     }
 }

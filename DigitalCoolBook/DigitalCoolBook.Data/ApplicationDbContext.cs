@@ -37,6 +37,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<CorrectAnswer> CorrectAnswers { get; set; }
 
+        public DbSet<TestStudent> TestStudents { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

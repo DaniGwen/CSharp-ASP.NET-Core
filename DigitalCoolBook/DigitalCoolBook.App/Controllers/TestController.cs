@@ -40,24 +40,6 @@
             this.questionService = questionService;
         }
 
-        // Set the timer for the test before it starts
-        [HttpGet]
-        [Authorize(Roles = "Teacher")]
-        [ActionName("SetTestTimer")]
-        public async Task<IActionResult> SetTestTimerAsync(string id)
-        {
-            var model = new TestViewModel
-            {
-                Grades = this.gradeService
-                .GetGrades()
-                .OrderBy(g => g.Name)
-                .ToList(),
-                TestId = id,
-            };
-
-            return this.View(model);
-        }
-
         // Admin creates a test for a lesson
         [HttpGet]
         [Authorize(Roles = "Admin")]
@@ -199,12 +181,30 @@
             return this.View(model);
         }
 
+        // Set the timer for the test before it starts
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        [ActionName("SetTestTimer")]
+        public async Task<IActionResult> SetTestTimerAsync(string testId)
+        {
+            var model = new TestViewModel
+            {
+                Grades = this.gradeService
+                .GetGrades()
+                .OrderBy(g => g.Name)
+                .ToList(),
+                TestId = testId,
+            };
+
+            return this.View(model);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         [ActionName("SetTestTimer")]
         public async Task<IActionResult> SetTestTimerAsync(TestViewModel model, string[] students)
         {
-            if (this.ModelState.IsValid)
+            try
             {
                 if (students.Length == 0)
                 {
@@ -218,6 +218,12 @@
                 // Finds current Teacher Id
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+                // Set test timer
+                test.Timer = model.Timer;
+
+                // Adding test-student in list before adding them to DB
+                var testStudentForDB = new List<TestStudent>();
+
                 // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in students)
                 {
@@ -227,15 +233,20 @@
                         TestId = test.TestId,
                     };
 
-                    // Add TestStudent service then add testStudent to DB
+                    testStudentForDB.Add(testStudent);
                 }
 
+                // Add mapping entity test-student to DB
+                await this.testService.AddTestStudentsAsync(testStudentForDB);
                 await this.testService.SaveChangesAsync();
 
                 return this.RedirectToAction("Tests");
             }
-
-            return this.RedirectToAction($"/StartTest/{model.TestId}");
+            catch (Exception exception)
+            {
+                this.TempData["ErrorMsg"] = exception.Message;
+                return this.View("Error");
+            }
         }
 
         [HttpGet]

@@ -34,6 +34,12 @@
             await this.SaveChangesAsync();
         }
 
+        public async Task AddTestStudentsAsync(ICollection<TestStudent> testStudents)
+        {
+            await this.context.TestStudents.AddRangeAsync(testStudents);
+            await this.SaveChangesAsync();
+        }
+
         public async Task<Test> GetTestAsync(string id)
         {
             return await this.context.Tests.FindAsync(id);
