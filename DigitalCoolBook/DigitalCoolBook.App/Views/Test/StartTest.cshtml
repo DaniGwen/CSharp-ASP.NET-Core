@@ -5,24 +5,24 @@
     var index = 0;
 }
 
-<div class="container">
+<div class="container-fluid w-70">
     <div class="col text-center mt-4">
         <h3>
             @Model.TestName
         </h3>
     </div>
     <form id="form" asp-action="EndTest" method="post">
-        <div class="row ">
-            <div class="col-md-6 text-left">
+        <div class="row d-flex justify-content-start">
+            <div class="col-md-6">
                 <div class="col">
                     @Html.DisplayNameFor(model => model.Date)
                 </div>
                 <div class="col" id="dateTime">
                     @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
-                    <div class="digital-clock">00:00:00</div>
+                    <div class="digital-clock">00:00:00ч.</div>
                 </div>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 d-flex justify-content-end">
                 <div class="col">
                     @Html.DisplayNameFor(model => model.Timer)
                     <h1 class="timer" data-minutes-left="@Model.Timer"></h1>
@@ -58,14 +58,18 @@
     </form>
 </div>
 
-@*countdown function*@
-<script type="text/javascript">
+<!--Script-->
+<script src="~/js/jquery.simple.timer.js" type="text/javascript"></script>
 
-    $('.timer').startTimer({
-        onComplete: function () {
-            submitForm();
-        }
-    });
+<!--countdown function-->
+<script type="text/javascript">
+    $(function () {
+        $('.timer').startTimer({
+            onComplete: function () {
+                submitForm();
+            }
+        });
+    })
 
     function submitForm() {
         alert("Край на теста.");
@@ -73,7 +77,7 @@
     };
 </script>
 
-@*digital-clock*@
+<!--digital-clock-->
 <script>
     $(document).ready(function () {
         clockUpdate();
@@ -108,3 +112,36 @@
         $('.digital-clock').text(h + ':' + m + ':' + s)
     }
 </script>
+
+<style>
+    .timer, .timer-done, .timer-loop {
+        font-size: 30px;
+        color: black;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    /*These are the default CSS classes
+    used by this plugin. Use these values
+    for a basic style to get started.*/
+
+    .jst-hours {
+        float: left;
+    }
+
+    .jst-minutes {
+        float: left;
+    }
+
+    .jst-seconds {
+        float: left;
+    }
+
+    .jst-clearDiv {
+        clear: both;
+    }
+
+    .jst-timeout {
+        color: red;
+    }
+</style>
