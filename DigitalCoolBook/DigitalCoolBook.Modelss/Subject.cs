@@ -16,7 +16,7 @@
 
         public List<Category> Categories { get; set; }
 
-        public List<ScoreStudent> ScoreStudents { get; set; }
+        public List<Score> Scores{ get; set; }
 
         public List<SubjectGrade> SubjectGrades { get; set; }
     }

@@ -5,34 +5,33 @@
     Layout = "_LayoutMenus";
 }
 
-<div class="container-lg pt-3">
-    <h1 class="text-center">Стартиране на тест</h1>
+<div class="container-fluid w-70">
+    <p class="col-form-label-lg text-center">Стартиране на тест</p>
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
-        <div class="row">
-            <input hidden name="TestId" value="@Model.TestId" />
-            <div class="form-group row">
-                <label class="col-form-label-lg">@Model.TestName</label>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Времетраене</label>
+        <input hidden name="TestId" value="@Model.TestId" />
+        <div class="col form-group d-flex justify-content-center">
+            <div class="row">
+                <label class="col-form-label mr-1">Времетраене: </label>
                 <input asp-for="Timer" id="timerinput" min="0" max="360" class="col-form-label-sm" />
                 <small class="col-form-label-sm ml-1">минути.</small>
-                <span class="text-danger" id="alertTimer"></span>
             </div>
-            <div class="col form-group">
-                <label class="mt-2">Паралелка</label>
-                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
-            </div>
-            <div class="col form-control">
-                <a class="mb-4">Ученици:</a>
-                <div id="checkArray">
-                </div>
-            </div>
+                <span class="row text-danger" id="alertTimer"></span>
         </div>
-        <div class="row form-group mb-2 mt-3">
+        <div class="row form-group d-flex justify-content-center ">
+            <label class="col-form-label mt-2 mr-2">Паралелка</label>
+            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-25" })
+        </div>
+        <div class="row d-flex justify-content-center mb-1">
+            <small>Изберете присъстващи ученици</small>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <a class="mb-4 mr-3">Ученици:</a>
+            <div id="checkArray"></div>
+        </div>
+        <div class="row form-group mb-2 mt-3 d-flex justify-content-between">
             <div class="ml-4">
-                <a class="btn btn-outline-secondary" asp-action="Tests">Назад</a>
+                <a asp-action="Tests">Назад</a>
             </div>
             <div class="ml-5">
                 <input id="button" type="submit" value="Старт тест" class="btn btn-primary" />

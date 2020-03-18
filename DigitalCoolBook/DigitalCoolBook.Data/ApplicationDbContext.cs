@@ -13,7 +13,7 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Grade> Grades { get; set; }
 
-        public DbSet<ScoreStudent> ScoreRecords { get; set; }
+        public DbSet<ScoreStudent> ScoreStudents { get; set; }
 
         public DbSet<Student> Students { get; set; }
 
@@ -38,6 +38,8 @@ namespace DigitalCoolBook.App.Data
         public DbSet<CorrectAnswer> CorrectAnswers { get; set; }
 
         public DbSet<TestStudent> TestStudents { get; set; }
+
+        public DbSet<Score> Scores { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -76,6 +78,9 @@ namespace DigitalCoolBook.App.Data
                 .WithMany(grade => grade.GradeTeachers)
                 .HasForeignKey(gt => gt.IdGrade)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ScoreStudent>()
+                .HasKey(scoreStudent => new { scoreStudent.ScoreId, scoreStudent.StudentId });
         }
     }
 }

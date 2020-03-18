@@ -2,8 +2,6 @@
 {
     public class ScoreStudent
     {
-        public int ScoreRecordId { get; set; }
-
         public string ScoreId { get; set; }
         public Score Score { get; set; }
 

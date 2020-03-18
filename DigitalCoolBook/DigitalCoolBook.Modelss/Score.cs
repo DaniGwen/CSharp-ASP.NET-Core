@@ -10,6 +10,6 @@ namespace DigitalCoolBook.Models
 
         public string SubjectId { get; set; }
 
-        public ICollection<ScoreStudent> ScoreRecords  { get; set; }
+        public ICollection<ScoreStudent> ScoreStudents  { get; set; }
     }
 }
