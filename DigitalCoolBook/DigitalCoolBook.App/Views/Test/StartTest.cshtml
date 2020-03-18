@@ -13,20 +13,22 @@
     </div>
     <form id="form" asp-action="EndTest" method="post">
         <div>
-            <div class="col d-flex justify-content-start">
-                <div class="col">
-                    @Html.DisplayNameFor(model => model.Date)
-                </div>
-                <div class="col" id="dateTime">
+            <div class="row">
+                <div class="col align-content-start">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </div>
                     @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
-                    <div class="digital-clock">00:00:00 ч.</div>
+                    <div>
+                        <span class="digital-clock">00:00:00</span><span>ч.</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col d-flex justify-content-end">
-                <div class="text-right">
-                    @Html.DisplayNameFor(model => model.Timer)
+                <div class="col d-flex justify-content-end">
+                    <div>
+                        @Html.DisplayName("Оставащо време")
+                    </div>
+                    <div class="timer" data-minutes-left="@Model.Timer"></div>
                 </div>
-                <div class="timer" data-minutes-left="@Model.Timer"></div>
             </div>
             <div class="col">
                 @foreach (var question in Model.Questions)
