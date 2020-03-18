@@ -48,7 +48,7 @@
         public string GradeId { get; set; }
         public Grade Grade { get; set; }
 
-        public List<ScoreRecord> ScoreRecords { get; set; }
+        public List<ScoreStudent> ScoreRecords { get; set; }
 
         public bool IsDeleted { get; set; }
 

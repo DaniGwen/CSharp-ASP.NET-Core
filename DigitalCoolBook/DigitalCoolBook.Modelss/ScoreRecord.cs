@@ -1,18 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DigitalCoolBook.Models
+﻿namespace DigitalCoolBook.Models
 {
-    public class ScoreRecord
+    public class ScoreStudent
     {
-        public int Id { get; set; }
+        public int ScoreRecordId { get; set; }
 
-        [ForeignKey("Subject")]
-        public string IdSubject { get; set; }
-        public Subject Subject { get; set; }
+        public string ScoreId { get; set; }
+        public Score Score { get; set; }
 
-
-        [ForeignKey("Student")]
-        public string IdStudent { get; set; }
+        public string StudentId { get; set; }
         public Student Student { get; set; }
     }
 }

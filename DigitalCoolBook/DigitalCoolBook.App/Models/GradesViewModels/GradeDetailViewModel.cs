@@ -9,7 +9,7 @@ namespace DigitalCoolBook.App.Models.GradesViewModels
 
         public string Name { get; set; }
 
-        public List<ScoreRecord> ScoreRecords { get; set; }
+        public List<ScoreStudent> ScoreRecords { get; set; }
 
         public List<Attendance> Attendances { get; set; }
     }

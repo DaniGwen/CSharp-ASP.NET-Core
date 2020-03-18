@@ -250,7 +250,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> StartTest(string id)
         {
             var test = await this.testService.GetTestAsync(id);
@@ -299,8 +299,13 @@
 
         [HttpPost]
         [ActionName("EndTest")]
-        public async Task<IActionResult> EndTestAsync(EndTestViewModel model)
+        public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
+            foreach (var question in model)
+            {
+
+            }
+
             var test = await this.testService
                 .GetTestAsync(this.TempData["TestId"].ToString());
 

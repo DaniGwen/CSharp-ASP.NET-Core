@@ -13,7 +13,7 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Grade> Grades { get; set; }
 
-        public DbSet<ScoreRecord> ScoreRecords { get; set; }
+        public DbSet<ScoreStudent> ScoreRecords { get; set; }
 
         public DbSet<Student> Students { get; set; }
 

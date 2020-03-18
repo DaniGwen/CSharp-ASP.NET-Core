@@ -23,5 +23,7 @@ namespace DigitalCoolBook.Services.Contracts
         Task SaveChangesAsync();
 
         Task<IdentityUser> GetUserAsync(string id);
+
+        Task AddScorePoints(int points)
     }
 }

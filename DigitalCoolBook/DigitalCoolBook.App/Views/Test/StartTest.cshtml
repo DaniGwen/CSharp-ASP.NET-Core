@@ -7,52 +7,49 @@
 
 <div class="container-fluid w-70">
     <div class="col text-center mt-4">
-        <h3>
-            @Model.TestName
-        </h3>
+        <p class="col-form-label-lg">@Model.TestName</p>
     </div>
     <form id="form" asp-action="EndTest" method="post">
-        <div>
-            <div class="row">
-                <div class="col align-content-start">
-                    <div>
-                        @Html.DisplayNameFor(model => model.Date)
-                    </div>
-                    @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
-                    <div>
-                        <span class="digital-clock">00:00:00</span><span>ч.</span>
-                    </div>
+        <div class="row">
+            <div class="col align-content-start">
+                <div>
+                    @Html.DisplayNameFor(model => model.Date)
                 </div>
-                <div class="col d-flex justify-content-end">
-                    <div>
-                        @Html.DisplayName("Оставащо време")
-                    </div>
-                    <div class="timer" data-minutes-left="@Model.Timer"></div>
+                @Convert.ToString(string.Format("{0:dd/M/yyyy}", Model.Date))
+                <div>
+                    <span class="digital-clock">00:00:00</span><span>ч.</span>
                 </div>
             </div>
-            <div class="col">
-                @foreach (var question in Model.Questions)
-                {
+            <div class="col d-flex justify-content-center">
+                <div class="row form-group text-right">
+                    <span class="col-form-label">Оставащо време:</span>
+                </div>
+                <div class="row form-group mt-3">
+                    <span class="timer col-form-label" data-minutes-left="@Model.Timer"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            @foreach (var question in Model.Questions)
+            {
+                <div class="col-form-label-lg mt-4">
                     <span>@question.Title</span>
-                    @Html.Hidden(question.Title)
+                </div>
+                <input type="hidden" name="[@index].questionId" value="@question.QuestionId" />
 
-                    foreach (var answer in question.Answers)
-                    {
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <input type="checkbox" name="markedAnswers" value="@answer.AnswerId" />
-                                <label>@answer.Title</label>
-                            </li>
-                        </ul>
-                        index += 1;
-                    }
+                foreach (var answer in question.Answers)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <input type="checkbox" name="[@index].answerId" value="@answer.AnswerId" />
+                            <label class="col-form-label-lg">@answer.Title</label>
+                        </li>
+                    </ul>
                 }
-            </div>
+                index += 1;
+            }
         </div>
-        <div class="text-center">
-            <button class="btn btn-outline-info mt-2 mb-2">Напред</button>
-        </div>
-        <div class="text-right pb-1">
+        <div class="d-flex justify-content-center mt-2 mb-2">
             <input type="submit" value="Предаване" class="btn btn-outline-danger" />
         </div>
     </form>
