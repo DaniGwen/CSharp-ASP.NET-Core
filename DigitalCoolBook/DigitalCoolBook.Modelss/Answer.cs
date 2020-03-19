@@ -10,8 +10,6 @@
 
         public Question Question { get; set; }
 
-        public bool IsChecked { get; set; }
-
         public bool IsCorrect { get; set; }
     }
 }

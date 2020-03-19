@@ -223,7 +223,6 @@ namespace DigitalCoolBook.App
                     Title = "Модерното изкуство възниква във:",
                     Answers = this.AddAnswers("1"),
                 },
-
                 new Question
                 {
                     QuestionId = "2",
@@ -231,7 +230,6 @@ namespace DigitalCoolBook.App
                     Title = "Кой от художниците е виден представител на импресионизма?",
                     Answers = this.AddAnswers("2"),
                 },
-
                 new Question
                 {
                     QuestionId = "3",
@@ -239,7 +237,6 @@ namespace DigitalCoolBook.App
                     Title = "Индивидуален стил на художника е:",
                     Answers = this.AddAnswers("3"),
                 },
-
                 new Question
                 {
                     QuestionId = "4",
@@ -247,7 +244,6 @@ namespace DigitalCoolBook.App
                     Title = "Концептуалното изкуство включва:",
                     Answers = this.AddAnswers("4"),
                 },
-
                 new Question
                 {
                     QuestionId = "5",
@@ -276,22 +272,20 @@ namespace DigitalCoolBook.App
                     AnswerId = "1",
                     QuestionId = "1",
                     Title = "Франция",
+                    IsCorrect = true,
                 },
-
                 new Answer
                 {
                     AnswerId = "2",
                     QuestionId = "1",
                     Title = "Германия",
                 },
-
                 new Answer
                 {
                     AnswerId = "3",
                     QuestionId = "1",
                     Title = "САЩ",
                 },
-
                 new Answer
                 {
                     AnswerId = "4",
@@ -308,22 +302,20 @@ namespace DigitalCoolBook.App
                     AnswerId = "5",
                     QuestionId = "2",
                     Title = "Моне",
+                    IsCorrect = true,
                 },
-
                 new Answer
                 {
                     AnswerId = "6",
                     QuestionId = "2",
                     Title = "Пикасо",
                 },
-
                 new Answer
                 {
                     AnswerId = "7",
                     QuestionId = "2",
                     Title = "Ван Гог",
                 },
-
                 new Answer
                 {
                     AnswerId = "8",
@@ -340,22 +332,20 @@ namespace DigitalCoolBook.App
                     AnswerId = "9",
                     QuestionId = "3",
                     Title = "Техника в живописа",
+                    IsCorrect = true,
                 },
-
                 new Answer
                 {
                     AnswerId = "10",
                     QuestionId = "3",
                     Title = "изображение с  материали и техники",
                 },
-
                 new Answer
                 {
                     AnswerId = "11",
                     QuestionId = "3",
                     Title = "система на художника от закономерности за предаване на рисунък, форма, цветове, тема в творбата",
                 },
-
                 new Answer
                 {
                     AnswerId = "12",
@@ -372,22 +362,20 @@ namespace DigitalCoolBook.App
                     AnswerId = "13",
                     QuestionId = "4",
                     Title = "Артинсталации, пърформанс",
+                    IsCorrect = true,
                 },
-
                 new Answer
                 {
                     AnswerId = "14",
                     QuestionId = "4",
                     Title = "пърформанс, графити",
                 },
-
                 new Answer
                 {
                     AnswerId = "15",
                     QuestionId = "4",
                     Title = "абстрактна живопис",
                 },
-
                 new Answer
                 {
                     AnswerId = "16",
@@ -404,22 +392,20 @@ namespace DigitalCoolBook.App
                     AnswerId = "17",
                     QuestionId = "5",
                     Title = "дигитално изкуство и видеоарт",
+                    IsCorrect = true,
                 },
-
                 new Answer
                 {
                     AnswerId = "18",
                     QuestionId = "5",
                     Title = "нямат приложение в съвременното изкуство",
                 },
-
                 new Answer
                 {
                     AnswerId = "19",
                     QuestionId = "5",
                     Title = "техника в кубизма",
                 },
-
                 new Answer
                 {
                     AnswerId = "20",

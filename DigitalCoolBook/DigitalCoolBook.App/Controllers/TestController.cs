@@ -310,16 +310,15 @@
 
             var points = 0;
 
-            // Filter correct answers relevant to these questions
+            // Check for correct answer and add points
             foreach (var question in questions)
             {
-                var correctAnswer = question.Answers
-                    .First(answer => answer.IsCorrect == true);
+                var correctAnswerId = question.Answers
+                    .First(answer => answer.IsCorrect == true).AnswerId;
 
-                var modelAnswer = model
-                    .First(model => model.QuestionId == question.QuestionId || model.AnswerId == correctAnswer.AnswerId);
+                var modelAnswerId = model.First(q => q.QuestionId == question.QuestionId).AnswerId;
 
-                if (modelAnswer != null)
+                if (modelAnswerId == correctAnswerId)
                 {
                     points += 1;
                 }
