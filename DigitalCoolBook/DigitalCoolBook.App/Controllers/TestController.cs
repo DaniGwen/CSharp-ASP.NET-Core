@@ -23,6 +23,7 @@
         private readonly IGradeService gradeService;
         private readonly IUserService userService;
         private readonly IQuestionService questionService;
+        private readonly IScoreService scoreService;
 
         public TestController(
             ITestService testService,
@@ -30,7 +31,8 @@
             IMapper mapper,
             IGradeService gradeService,
             IUserService userService,
-            IQuestionService questionService)
+            IQuestionService questionService,
+            IScoreService scoreService)
         {
             this.testService = testService;
             this.subjectService = subjectService;
@@ -38,6 +40,7 @@
             this.gradeService = gradeService;
             this.userService = userService;
             this.questionService = questionService;
+            this.scoreService = scoreService;
         }
 
         // Admin creates a test for a lesson
@@ -348,7 +351,7 @@
                 StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
             };
 
-            // TODO Calculate the result and display 
+           await this.
 
 
             return this.View("/Test/Result");
