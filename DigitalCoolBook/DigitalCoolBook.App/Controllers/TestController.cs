@@ -308,6 +308,7 @@
                 .Where(question => question.TestId == this.TempData["TestId"].ToString())
                 .ToList();
 
+            // Points max 10
             var points = 0;
 
             // Check for correct answer and add points
@@ -324,19 +325,33 @@
                 }
             }
 
+            // Test from DB
             var test = await this.testService
                 .GetTestAsync(this.TempData["TestId"].ToString());
 
-            test.Date = DateTime.Now;
-
+            // Create expired test to keep history
             var expiredTest = this.mapper.Map<ExpiredTest>(test);
+            expiredTest.Date = DateTime.Now;
 
             // Add expired test to DB
             await this.testService.AddExpiredTestAsync(expiredTest);
 
-            // TODO Check against DB if marked answers are correct and calculate result
-            this.TempData["SuccessMsg"] = "Теста беше предаден.";
-            return this.Redirect("/Home/Success");
+            var score = new Score
+            {
+                ScoreId = Guid.NewGuid().ToString(),
+                ScorePoints = points,
+            };
+
+            var scoreStudent = new ScoreStudent
+            {
+                ScoreId = score.ScoreId,
+                StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+            };
+
+            // TODO Calculate the result and display 
+
+
+            return this.View("/Test/Result");
         }
 
         [HttpGet]
