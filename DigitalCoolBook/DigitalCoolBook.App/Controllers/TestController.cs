@@ -302,6 +302,7 @@
 
         [HttpPost]
         [ActionName("EndTest")]
+        [Authorize(Roles="Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
             // Gets questions for this test
@@ -339,22 +340,27 @@
             // Add expired test to DB
             await this.testService.AddExpiredTestAsync(expiredTest);
 
+            // Create Score
             var score = new Score
             {
                 ScoreId = Guid.NewGuid().ToString(),
                 ScorePoints = points,
             };
 
+            // Create ScoreStudent
             var scoreStudent = new ScoreStudent
             {
                 ScoreId = score.ScoreId,
                 StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
             };
 
-           await this.
+            // Save entities to DB
+            await this.scoreService.AddScoreAsync(score);
+            await this.scoreService.AddScoreStudentAsync(scoreStudent);
 
+            var result = points.ToString() + "0";
 
-            return this.View("/Test/Result");
+            return this.View("/Test/Result", result);
         }
 
         [HttpGet]
