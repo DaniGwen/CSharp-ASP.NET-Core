@@ -301,9 +301,28 @@
         [ActionName("EndTest")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            foreach (var question in model)
-            {
+            // Gets questions for this test
+            var questions = this.questionService
+                .GetQuestions()
+                .Include(question => question.Answers)
+                .Where(question => question.TestId == this.TempData["TestId"].ToString())
+                .ToList();
 
+            var points = 0;
+
+            // Filter correct answers relevant to these questions
+            foreach (var question in questions)
+            {
+                var correctAnswer = question.Answers
+                    .First(answer => answer.IsCorrect == true);
+
+                var modelAnswer = model
+                    .First(model => model.QuestionId == question.QuestionId || model.AnswerId == correctAnswer.AnswerId);
+
+                if (modelAnswer != null)
+                {
+                    points += 1;
+                }
             }
 
             var test = await this.testService
@@ -317,7 +336,6 @@
             await this.testService.AddExpiredTestAsync(expiredTest);
 
             // TODO Check against DB if marked answers are correct and calculate result
-
             this.TempData["SuccessMsg"] = "Теста беше предаден.";
             return this.Redirect("/Home/Success");
         }
