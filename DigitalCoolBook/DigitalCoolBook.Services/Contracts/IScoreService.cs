@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using DigitalCoolBook.Models;
+using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services.Contracts
 {
-    public interface IScore
+    public interface IScoreService
     {
-        Task GetScoreAsync(string scoreId);
+        Task<Score> GetScoreAsync(string scoreId);
 
-        Task AddScoreAsync(string scoreId);
+        Task AddScoreAsync(Score score);
 
-        Task AddScoreStudentAsync(string scoreStudentId);
+        Task AddScoreStudentAsync(ScoreStudent scoreStudent);
     }
 }
