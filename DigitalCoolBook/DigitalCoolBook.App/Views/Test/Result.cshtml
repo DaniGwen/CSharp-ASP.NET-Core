@@ -1,24 +1,26 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "EndTest";
     Layout = "~/Views/Shared/_LayoutMenus.cshtml";
+    int result = (int)this.ViewData["Result"];
 }
 
 <h2 class="text-center">Резултат</h2>
 
-<canvas id="doughnutChart"></canvas>
+<canvas id="doughnutChart" value="@result"></canvas>
 
 <script>
     //doughnut
+    var value = document.getElementById("doughnutChart").getAttribute("value");
     var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    debugger;
     var myLineChart = new Chart(ctxD, {
         type: 'doughnut',
         data: {
-            labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+            labels: ["Green","Red"],
             datasets: [{
-                data: [300, 50, 100, 40, 120],
-                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+                data: [value, 10,],
+                backgroundColor: [ "#46BFBD","#F7464A"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
             }]
         },
         options: {

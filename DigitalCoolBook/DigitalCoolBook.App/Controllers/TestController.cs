@@ -302,7 +302,7 @@
 
         [HttpPost]
         [ActionName("EndTest")]
-        [Authorize(Roles="Teacher, Student")]
+        [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
             // Gets questions for this test
@@ -325,7 +325,7 @@
 
                 if (modelAnswerId == correctAnswerId)
                 {
-                    points += 1;
+                    points += 10;
                 }
             }
 
@@ -335,6 +335,7 @@
 
             // Create expired test to keep history
             var expiredTest = this.mapper.Map<ExpiredTest>(test);
+            expiredTest.ExpiredTestId = Guid.NewGuid().ToString();
             expiredTest.Date = DateTime.Now;
 
             // Add expired test to DB
@@ -358,9 +359,9 @@
             await this.scoreService.AddScoreAsync(score);
             await this.scoreService.AddScoreStudentAsync(scoreStudent);
 
-            var result = points.ToString() + "0";
+            this.ViewData["Result"] = points;
 
-            return this.View("/Test/Result", result);
+            return this.View("Result");
         }
 
         [HttpGet]
