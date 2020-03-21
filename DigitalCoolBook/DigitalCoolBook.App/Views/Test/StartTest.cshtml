@@ -33,7 +33,7 @@
             @foreach (var question in Model.Questions)
             {
                 <div class="col-form-label-lg mt-4">
-                    <span>@question.Title</span>
+                    <span name="questionCount">@question.Title</span>
                 </div>
                 <input type="hidden" name="[@index].questionId" value="@question.QuestionId" />
 
@@ -49,8 +49,8 @@
                 index += 1;
             }
         </div>
-        <div class="d-flex justify-content-center mt-2 mb-2">
-            <input type="submit" value="Предаване" class="btn btn-outline-danger" />
+        <div class="d-flex justify-content-center mt-4 mb-3">
+            <input type="submit" value="Предай" class="btn btn-outline-danger" />
         </div>
     </form>
 </div>
@@ -61,7 +61,11 @@
 <!--validate checkboxes-->
 <script>
     $('form').on('submit', function (event) {
+        var count = document.getElementsByName("questionCount").length;
+        debugger;
+        for (var i = 0; i < length; i++) {
 
+        }
     })
 </script>
 
