@@ -60,7 +60,7 @@
             width: 80px;
             height: 30px;
         }
-         /*#NAVBAR light-green lighten-3*/
+        /*#NAVBAR light-green lighten-3*/
         .navbar {
             background: #c5e1a5;
         }
@@ -70,7 +70,7 @@
         }
         /*JUMBOTRON orange lighten-3*/
         .jumbotron {
-            background: #ffcc80 ;
+            background: #ffcc80;
         }
         /*HR lighten-4*/
         hr.hr-orange {
@@ -114,23 +114,23 @@
                             if (this.User.IsInRole("Admin"))
                             {
                                 <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
-                                    <button class="btn btn-dark">Администраторски панел</button>
+                                    <button class="btn btn-outline-primary btn-sm">Администраторски панел</button>
                                 </form>
                             }
                             if (this.User.IsInRole("Student"))
                             {
                                 <form class="nav-item" asp-area="" asp-controller="Student" asp-action="Panel">
-                                    <button class="btn btn-primary">Профил</button>
+                                    <button class="btn btn-outline-primary btn-sm">Профил</button>
                                 </form>
                             }
                             if (this.User.IsInRole("Teacher"))
                             {
                                 <form class="nav-item" asp-area="" asp-controller="Teacher" asp-action="Panel">
-                                    <button class="btn btn-primary">Профил</button>
+                                    <button class="btn btn-outline-primary btn-sm">Профил</button>
                                 </form>
                             }
                             <form class="nav-item mt-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                <button type="submit" class="btn btn-secondary">Отписване</button>
+                                <button type="submit" class="btn btn-outline-secondary btn-sm">Отписване</button>
                             </form>
                         }
                     </li>
@@ -141,7 +141,7 @@
     <div class="container ">
         @RenderBody()
     </div>
-    <!-- Footer -->
+    - Footer -->
     <footer class="footer font-small pt-4">
 
         <!-- Footer Links -->
@@ -154,19 +154,21 @@
                 <div class="col-md-6 mt-md-0 mt-3">
 
                     <!-- Content -->
-                    <h5 class="text-uppercase">Footer Content</h5>
-                    <p>Here you can use rows and columns to organize your footer content.</p>
+                    <h5 class="">Контакти</h5>
+                    <p>Телефон:</p>
+                    <p>Адрес:</p>
+                    <p>Пощенски код:</p>
 
                 </div>
-                <!-- Grid column -->
 
+                <!-- Grid column -->
                 <hr class="clearfix w-100 d-md-none pb-3">
 
                 <!-- Grid column -->
                 <div class="col-md-3 mb-md-0 mb-3">
 
                     <!-- Links -->
-                    <h5 class="text-uppercase">Links</h5>
+                    <h5 class="text-uppercase">Друга информация</h5>
 
                     <ul class="list-unstyled">
                         <li>
@@ -177,9 +179,6 @@
                         </li>
                         <li>
                             <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
                         </li>
                     </ul>
 
@@ -200,9 +199,6 @@
                         </li>
                         <li>
                             <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
                         </li>
                     </ul>
 
@@ -220,6 +216,7 @@
             <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
         </div>
         <!-- Copyright -->
+
     </footer>
     <!-- Footer -->
 
