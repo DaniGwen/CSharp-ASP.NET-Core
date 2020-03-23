@@ -5,14 +5,15 @@
     Layout = "_LayoutMenus";
 }
 
-<div>
+<div class="container-fluid">
     <h2 class="d-flex justify-content-center">@Model.Title</h2>
     <hr />
     <div>
-        <p>
+        <p style="font-size:larger;">
             @Model.Content
         </p>
     </div>
+    <hr />
     <div class="form-group">
         <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})" class="btn btn-outline-info mt-1">Назад</a>
         <div class="d-flex justify-content-center mb-2">

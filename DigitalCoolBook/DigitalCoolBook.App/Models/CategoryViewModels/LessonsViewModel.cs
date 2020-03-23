@@ -9,5 +9,7 @@
         public string Content { get; set; }
 
         public string LessonId { get; set; }
+
+        public string ScoreId { get; set; }
     }
 }

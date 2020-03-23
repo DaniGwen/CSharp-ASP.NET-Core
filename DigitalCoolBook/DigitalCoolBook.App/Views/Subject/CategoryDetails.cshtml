@@ -4,43 +4,51 @@
     Layout = "_LayoutMenus";
 }
 
-<div class="col d-flex justify-content-center">
-    <h2>@ViewData["CategoryTitle"]</h2>
-</div>
-<hr class="hr-orchid" />
-<h2 class="d-flex justify-content-center">Теми</h2>
-<hr class="hr-orchid" />
-
-<div>
-    @foreach (var lesson in Model.Lessons)
-    {
-        <div class="d-flex justify-content-center">
-            <a href="/Subject/LessonDetails/@lesson.LessonId" class="boxed-btn w-75 mb-2">@lesson.Title</a>
-        </div>
-        <div>
-            @if (this.User.IsInRole("Admin"))
+<div class="container-fluid">
+    <div class="col">
+        <h2>@ViewData["CategoryTitle"]</h2>
+    </div>
+    <hr />
+    <h2 class="d-flex justify-content-center mb-2">Теми</h2>
+    <div>
+        @foreach (var lesson in Model.Lessons)
+        {
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
+            </div>
+            <div>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <div class="form-group">
+                        <button class="btn btn-outline-info w-100">
+                            @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
+                        </button>
+                        <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
+                    </div>
+                }
+            </div>
+            @if (this.User.IsInRole("Student"))
             {
-                <div class="form-group">
-                    <button class="btn btn-outline-info w-100">
-                        @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
-                    </button>
+                <div class="col">
 
-                    <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
                 </div>
             }
         </div>
+        }
+    </div>
+    <hr />
+    <div class="mt-4 ml-4 mb-2">
+        <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})" class="btn btn-outline-info">Назад</a>
+    </div>
+
+    @if (this.User.IsInRole("Admin"))
+    {
+        <p class="btn btn-outline-info">
+            <a asp-action="AddLesson">Създаване</a>
+        </p>
     }
 </div>
-<div class="mt-4 ml-4 mb-2">
-    <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})" class="btn btn-outline-info">Назад</a>
-</div>
-
-@if (this.User.IsInRole("Admin"))
-{
-    <p class="btn btn-outline-info">
-        <a asp-action="AddLesson">Създаване</a>
-    </p>
-}
 
 <div id="dialog-confirm" title="Изтриване на урок">
     <p>

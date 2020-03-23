@@ -61,7 +61,7 @@
 
         [HttpGet]
         [ActionName("CategoryDetails")]
-        [Authorize(Roles = "Admin, Teacher")]
+        [Authorize(Roles = "Admin, Teacher, Student")]
         public IActionResult CategoryDetailsAsync(string categoryId, string categoryTitle, string subjectId)
         {
             var lessons = this.subjectService.GetLessons()
@@ -76,6 +76,12 @@
                 Lessons = lessonsDto,
                 SubjectId = subjectId,
             };
+
+            // If the user is Student we add score to the view
+            if (this.User.IsInRole("Student"))
+            {
+
+            }
 
             return this.View(model);
         }
@@ -323,7 +329,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "Teacher, Admin")]
+        [Authorize(Roles = "Teacher, Admin, Student")]
         [ActionName("LessonDetails")]
         public async Task<IActionResult> LessonDetailsAsync(string id)
         {

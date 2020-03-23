@@ -346,6 +346,7 @@
             {
                 ScoreId = Guid.NewGuid().ToString(),
                 ScorePoints = points,
+                LessonId = test.LessonId,
             };
 
             // Create ScoreStudent

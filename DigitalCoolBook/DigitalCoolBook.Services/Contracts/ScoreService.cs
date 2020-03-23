@@ -1,5 +1,6 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.Services.Contracts
@@ -11,6 +12,11 @@ namespace DigitalCoolBook.Services.Contracts
         public ScoreService(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        public IQueryable GetScores()
+        {
+            return this.context.Scores;
         }
 
         public async Task<Score> GetScoreAsync(string scoreId)

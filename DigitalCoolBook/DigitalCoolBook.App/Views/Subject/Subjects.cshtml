@@ -12,7 +12,7 @@
 @foreach (var item in Model)
 {
     <div class="d-flex justify-content-center mb-3">
-        <a class="btn btn-outline-info btn-lg w-50" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
+        <a class="btn-outline-info btn-lg" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
             @Html.DisplayFor(modelItem => item.Name)
         </a>
     </div>
