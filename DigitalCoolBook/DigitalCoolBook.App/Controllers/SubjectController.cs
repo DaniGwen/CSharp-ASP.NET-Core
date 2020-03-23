@@ -71,9 +71,13 @@
 
             var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
 
+            // Add score percent in view
+            if (this.User.IsInRole("Student"))
+            {
             foreach (var lesson in lessonsDto)
             {
-                lesson.ScoreId = this.scoreService.GetSc
+                lesson.Score = this.scoreService.GetScores()
+            }
             }
 
             var model = new CategoryDetailsViewModel

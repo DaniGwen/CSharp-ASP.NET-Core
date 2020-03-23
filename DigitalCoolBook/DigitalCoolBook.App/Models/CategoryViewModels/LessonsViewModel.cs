@@ -10,6 +10,6 @@
 
         public string LessonId { get; set; }
 
-        public string ScoreId { get; set; }
+        public int Score { get; set; }
     }
 }

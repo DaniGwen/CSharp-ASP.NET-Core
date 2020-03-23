@@ -339,17 +339,21 @@
             expiredTest.Date = DateTime.Now;
             expiredTest.Result = points;
 
-            // Add expired test to DB
+            // Add expired test to DB if score is bigger then the one in the database
             if (this.testService.GetExpiredTests().Any())
             {
                 var expiredTestDb = this.testService.GetExpiredTests().First();
 
                 if (expiredTestDb.Result < expiredTest.Result)
                 {
-                    this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
+                    await this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
+                    await this.testService.AddExpiredTestAsync(expiredTest);
                 }
             }
-            await this.testService.AddExpiredTestAsync(expiredTest);
+            else
+            {
+                await this.testService.AddExpiredTestAsync(expiredTest);
+            }
 
             // Create Score
             var score = new Score

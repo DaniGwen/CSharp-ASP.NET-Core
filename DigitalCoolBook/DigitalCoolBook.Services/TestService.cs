@@ -81,6 +81,7 @@
         {
             var expiredTest = await this.context.ExpiredTests.FindAsync(id);
             this.context.ExpiredTests.Remove(expiredTest);
+            await this.SaveChangesAsync();
         }
     }
 }
