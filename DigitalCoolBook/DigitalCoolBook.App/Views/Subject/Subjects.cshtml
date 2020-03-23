@@ -4,15 +4,15 @@
     Layout = "_LayoutMenus";
     ViewData["Title"] = "Subjects";
 }
-<div class="row">
+<div class="row mb-2">
     <div class="col d-flex justify-content-center">
         <h1>Учебни предмети</h1>
     </div>
 </div>
 @foreach (var item in Model)
 {
-    <div class="d-flex justify-content-center mb-2">
-        <a class="btn boxed-btn w-50" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
+    <div class="d-flex justify-content-center mb-3">
+        <a class="btn btn-outline-info btn-lg w-50" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
             @Html.DisplayFor(modelItem => item.Name)
         </a>
     </div>
