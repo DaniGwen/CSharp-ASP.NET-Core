@@ -1,5 +1,6 @@
 ﻿namespace DigitalCoolBook.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,5 +16,7 @@
         [ForeignKey("Category")]
         public string CategoryId { get; set; }
         public Category Category { get; set; }
+
+        public ICollection<Score> Scores { get; set; }
     }
 }

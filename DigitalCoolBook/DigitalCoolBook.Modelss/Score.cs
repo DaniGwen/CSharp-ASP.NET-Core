@@ -9,6 +9,7 @@ namespace DigitalCoolBook.Models
         public int ScorePoints { get; set; }
 
         public string LessonId { get; set; }
+        public Lesson Lesson { get; set; }
 
         public ICollection<ScoreStudent> ScoreStudents  { get; set; }
     }

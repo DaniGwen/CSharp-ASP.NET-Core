@@ -12,6 +12,8 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task AddScoreStudentAsync(ScoreStudent scoreStudent);
 
-        IQueryable GetScores();
+        IQueryable<Score> GetScores();
+
+        IQueryable<ScoreStudent> GetScoreStudents();
     }
 }

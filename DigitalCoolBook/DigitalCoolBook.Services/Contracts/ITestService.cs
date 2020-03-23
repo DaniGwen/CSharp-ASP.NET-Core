@@ -25,7 +25,7 @@
 
         Task AddTestStudentsAsync(ICollection<TestStudent> testStudents);
 
-        Task GetExpiredTest(string id);
+        Task<ExpiredTest> GetExpiredTest(string id);
 
         IQueryable<ExpiredTest> GetExpiredTests();
 

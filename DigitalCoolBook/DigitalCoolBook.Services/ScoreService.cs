@@ -15,9 +15,10 @@ namespace DigitalCoolBook.Services
             this.context = context;
         }
 
-        public Task AddScoreAsync(Score score)
+        public async Task AddScoreAsync(Score score)
         {
-            throw new System.NotImplementedException();
+            await this.context.Scores.AddAsync(score);
+            await this.SaveChangesAsync();
         }
 
         public async Task AddScoreStudentAsync(ScoreStudent scoreStudent)
@@ -31,9 +32,14 @@ namespace DigitalCoolBook.Services
             return await this.context.Scores.FindAsync(scoreId);
         }
 
-        public IQueryable GetScores()
+        public IQueryable<Score> GetScores()
         {
             return this.context.Scores;
+        }
+
+        public IQueryable<ScoreStudent> GetScoreStudents()
+        {
+            return this.context.ScoreStudents;
         }
 
         public async Task SaveChangesAsync()

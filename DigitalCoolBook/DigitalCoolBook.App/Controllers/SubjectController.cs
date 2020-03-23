@@ -74,10 +74,11 @@
             // Add score percent in view
             if (this.User.IsInRole("Student"))
             {
-            foreach (var lesson in lessonsDto)
-            {
-                lesson.Score = this.scoreService.GetScores()
-            }
+                foreach (var lesson in lessonsDto)
+                {
+                    //lesson.Score = this.scoreService.GetScoreStudents()
+                    //        .Where(s => s.ScoreId == )
+                }
             }
 
             var model = new CategoryDetailsViewModel
