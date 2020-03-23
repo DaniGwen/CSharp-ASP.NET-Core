@@ -28,5 +28,7 @@
         Task GetExpiredTest(string id);
 
         IQueryable<ExpiredTest> GetExpiredTests();
+
+        Task RemoveExpiredTest(string id);
     }
 }
