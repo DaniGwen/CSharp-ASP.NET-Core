@@ -71,5 +71,16 @@
         {
            return await this.context.ExpiredTests.FindAsync(id);
         }
+
+        public IQueryable<ExpiredTest> GetExpiredTests()
+        {
+            return this.context.ExpiredTests;
+        }
+
+        public async Task RemoveExpiredTest(string id)
+        {
+            var expiredTest = await this.context.ExpiredTests.FindAsync(id);
+            this.context.ExpiredTests.Remove(expiredTest);
+        }
     }
 }

@@ -340,9 +340,14 @@
             expiredTest.Result = points;
 
             // Add expired test to DB
-            if (this.testService.)
+            if (this.testService.GetExpiredTests().Any())
             {
+                var expiredTestDb = this.testService.GetExpiredTests().First();
 
+                if (expiredTestDb.Result < expiredTest.Result)
+                {
+                    this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
+                }
             }
             await this.testService.AddExpiredTestAsync(expiredTest);
 
