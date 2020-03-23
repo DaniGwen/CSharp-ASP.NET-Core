@@ -54,7 +54,7 @@
 </head>
 <body>
     <header>
-        @*navigation bar*@
+        <!--navigation bar-->
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">Digital Cool Book</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,15 +65,30 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/Home/Index">Начало <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Меню 1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Меню 2</a>
-                    </li>
+                    @if (this.User.IsInRole("Teacher"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Subject/Subjects">Предмети</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher/ChooseGrade">Класове</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Test/Tests">Тестове</a>
+                        </li>
+                    }
+                    else if (this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher/RegisterTeacher">Регистрация на Учител</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Student/RegisterStudent">Регистрация на Ученик</a>
+                        </li>
+                    }
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Меню
+                            Още..
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/Subject/Subjects">Предмети</a>
@@ -82,7 +97,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav nav-right">
                     <li>
                         @if (this.User.Identity.IsAuthenticated)
                         {
@@ -118,6 +133,9 @@
                 </ul>
             </div>
         </nav>
+        <div class="collapse navbar-collapse " id="navbarNavDropdown">
+
+        </div>
     </header>
     <div class="container text-center mt-2">
         <div class="jumbotron">
@@ -151,31 +169,6 @@
                     {
                         <h2 class="text-white">Добре дошъл в Digital Cool Book!</h2>
                     }
-                </div>
-            }
-            @if (this.User.IsInRole("Teacher"))
-            {
-                <div class="col">
-                    <div class="row mx-auto">
-                        <a asp-Controller="Subject" asp-action="Subjects" class="btn btn-secondary">Предмети</a>
-                    </div>
-                    <div class="row mt-2 mx-auto">
-                        <a href="/Teacher/ChooseGrade" class="btn btn-secondary">Класове</a>
-                    </div>
-                    <div class="row mt-2 mx-auto">
-                        <a href="/Test/Tests" class="btn btn-secondary">Тестове</a>
-                    </div>
-                </div>
-            }
-            else if (this.User.IsInRole("Admin"))
-            {
-                <div class="col">
-                    <div class="row">
-                        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-light">Регистрация на Учител</a>
-                    </div>
-                    <div class="row mt-2">
-                        <a asp-controller="Student" asp-action="RegisterStudent" class="btn btn-light">Регистрация на Ученик</a>
-                    </div>
                 </div>
             }
         </div>
@@ -227,7 +220,6 @@
 
                 </div>
                 <!-- Grid column -->
-
                 <!-- Grid column -->
                 <div class="col-md-3 mb-md-0 mb-3">
 
