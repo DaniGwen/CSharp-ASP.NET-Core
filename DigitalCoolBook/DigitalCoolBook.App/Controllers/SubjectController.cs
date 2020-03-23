@@ -3,17 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.JsonDeserializeModels;
     using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.SubjectViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -21,11 +17,16 @@
     {
         private readonly ISubjectService subjectService;
         private readonly IMapper mapper;
+        private readonly IScoreService scoreService;
 
-        public SubjectController(ISubjectService subjectService, IMapper mapper)
+        public SubjectController(
+            ISubjectService subjectService,
+            IMapper mapper,
+            IScoreService scoreService)
         {
             this.subjectService = subjectService;
             this.mapper = mapper;
+            this.scoreService = scoreService;
         }
 
         [HttpGet]
@@ -69,6 +70,11 @@
                 .ToList();
 
             var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
+
+            foreach (var lesson in lessonsDto)
+            {
+                lesson.ScoreId = this.scoreService.GetSc
+            }
 
             var model = new CategoryDetailsViewModel
             {

@@ -66,5 +66,10 @@
         {
             await this.context.SaveChangesAsync();
         }
+
+        public async Task<ExpiredTest> GetExpiredTest(string id)
+        {
+           return await this.context.ExpiredTests.FindAsync(id);
+        }
     }
 }

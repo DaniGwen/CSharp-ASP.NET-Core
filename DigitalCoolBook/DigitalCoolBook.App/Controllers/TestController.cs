@@ -312,7 +312,7 @@
                 .Where(question => question.TestId == this.TempData["TestId"].ToString())
                 .ToList();
 
-            // Points max 10
+            // Max points 10
             var points = 0;
 
             // Check for correct answer and add points
@@ -337,8 +337,13 @@
             var expiredTest = this.mapper.Map<ExpiredTest>(test);
             expiredTest.ExpiredTestId = Guid.NewGuid().ToString();
             expiredTest.Date = DateTime.Now;
+            expiredTest.Result = points;
 
             // Add expired test to DB
+            if (this.testService.)
+            {
+
+            }
             await this.testService.AddExpiredTestAsync(expiredTest);
 
             // Create Score
