@@ -9,12 +9,14 @@
         <h2>@ViewData["CategoryTitle"]</h2>
     </div>
     <hr />
-    <h2 class="text-center mb-2">Теми</h2>
+    <div class="d-flex justify-content-center">
+        <h2 class="mb-2 my-border col-sm-auto text-white">Теми</h2>
+    </div>
     <div>
         @foreach (var lesson in Model.Lessons)
         {
             <div class="row">
-                <div class="col-form-label d-flex justify-content-center">
+                <div class=" col-sm-7 d-flex justify-content-center">
                     <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
                 </div>
                 <div>
@@ -30,7 +32,7 @@
                 </div>
                 @if (this.User.IsInRole("Student"))
                 {
-                    <div class="col d-flex justify-content-end">
+                    <div class="col-sm-4 d-flex justify-content-end">
                         <p class="text-info">Точки:</p>
                         @if (lesson.Score == 0)
                         {
