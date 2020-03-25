@@ -28,18 +28,23 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <a class="btn btn-outline-dark mt-3 mb-2" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
+    <div class="tab-pane active mt-3 mb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <a class="btn-outline-dark btn-sm" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
             Смяна на парола
         </a>
     </div>
-    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <p class="btn btn-outline-info mt-3 mb-2" id="averageScore" onclick="AverageScore('@Model.Id')">Среден успех</p>
+    <div class="tab-pane mt-3 mb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <a class="btn-outline-info btn-sm" id="averageScore" onclick="AverageScore('@Model.Id')">
+            Среден успех
+        </a>
     </div>
     <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
     <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
+
 <div id="popupDialog" title="Среден успех"></div>
+
+<!--get the average score-->
 <script type="text/javascript">
     function AverageScore(studentId) {
         $.get("/Student/GetAverageScore/" + studentId + "", function (data) {
