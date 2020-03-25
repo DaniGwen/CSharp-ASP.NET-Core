@@ -20,3 +20,4 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.csproj.CopyComplete
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.csproj.CoreCompileInputs.cache

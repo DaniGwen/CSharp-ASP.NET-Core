@@ -14,3 +14,4 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.AssemblyInfo.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.csproj.CoreCompileInputs.cache

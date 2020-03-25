@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Models.CategoryViewModels;
@@ -76,23 +77,31 @@
             {
                 foreach (var lesson in lessonsDto)
                 {
-                    //lesson.Score = this.scoreService.GetScoreStudents()
-                    //        .Where(s => s.ScoreId == )
+                    // Gets student ID
+                    var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                    var studentScores = this.scoreService
+                        .GetScoreStudents()
+                        .Where(ss => ss.StudentId == studentId)
+                        .ToList();
+
+                    var score = studentScores.FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
+
+                    // Set Score if there is any
+                    if (score != null)
+                    {
+                        lesson.Score = score.Score.ScorePoints;
+                    }
                 }
             }
 
+            // Create model for the view
             var model = new CategoryDetailsViewModel
             {
                 CategoryTitle = categoryTitle,
                 Lessons = lessonsDto,
                 SubjectId = subjectId,
             };
-
-            // If the user is Student we add score to the view
-            if (this.User.IsInRole("Student"))
-            {
-
-            }
 
             return this.View(model);
         }
