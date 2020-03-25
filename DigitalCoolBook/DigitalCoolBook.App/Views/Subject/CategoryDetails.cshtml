@@ -9,12 +9,12 @@
         <h2>@ViewData["CategoryTitle"]</h2>
     </div>
     <hr />
-    <h2 class="d-flex justify-content-center mb-2">Теми</h2>
+    <h2 class="text-center mb-2">Теми</h2>
     <div>
         @foreach (var lesson in Model.Lessons)
         {
             <div class="row">
-                <div class="col d-flex justify-content-center">
+                <div class="col-form-label d-flex justify-content-center">
                     <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
                 </div>
                 <div>
@@ -30,10 +30,11 @@
                 </div>
                 @if (this.User.IsInRole("Student"))
                 {
-                    <div class="col">
+                    <div class="col d-flex justify-content-end">
+                        <p class="text-info">Точки:</p>
                         @if (lesson.Score == 0)
                         {
-                            <p class="text-info font-weight-bold">@lesson.Score%</p>
+                            <p class="text-info font-weight-bold ml-2">@lesson.Score%</p>
                         }
                         else if (lesson.Score < 70)
                         {
@@ -49,8 +50,8 @@
         }
     </div>
     <hr />
-    <div class="mt-4 ml-4 mb-2">
-        <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})" class="btn btn-outline-info">Назад</a>
+    <div class="mt-4 ml-4 mb-2 row form-group">
+        <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})">Назад</a>
     </div>
 
     @if (this.User.IsInRole("Admin"))
