@@ -268,7 +268,7 @@
             double averageScore = 0;
 
             // Calculate average score
-            if (scores != null)
+            if (scores.Count > 0)
             {
                 averageScore = scores.Average(scoreStudent => scoreStudent.Score.ScorePoints);
             }

@@ -4,6 +4,12 @@
     Layout = "_LayoutMenus";
 }
 
+<style>
+    h1 {
+        font-size: 8em;
+    }
+</style>
+
 <h3 class="text-info">Настройки</h3>
 <hr />
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -33,11 +39,19 @@
     <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
     <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
-
+<div id="popupDialog" title="Среден успех"></div>
 <script type="text/javascript">
     function AverageScore(studentId) {
         $.get("/Student/GetAverageScore/" + studentId + "", function (data) {
-            $('#averageScore').html(data + "%")
+            $('#popupDialog').dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog('close')
+                    }
+                }
+            })
+            $('#popupDialog').html("<h1 class='text-center'>" + data + "</h1>")
         })
     }
 
