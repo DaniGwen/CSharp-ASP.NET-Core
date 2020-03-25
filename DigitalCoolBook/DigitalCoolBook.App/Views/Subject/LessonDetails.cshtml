@@ -6,7 +6,7 @@
 }
 
 <div class="container-fluid">
-    <h2 class="d-flex justify-content-center">@Model.Title</h2>
+    <h3 class="text-info mt-2">@Model.Title</h3>
     <hr />
     <div>
         <p style="font-size:larger;">
@@ -15,7 +15,7 @@
     </div>
     <hr />
     <div class="form-group">
-        <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})" class="btn btn-outline-info mt-1">Назад</a>
+        <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})" class="mt-1">Назад</a>
         <div class="d-flex justify-content-center mb-2">
             @if (this.User.IsInRole("Teacher"))
             {

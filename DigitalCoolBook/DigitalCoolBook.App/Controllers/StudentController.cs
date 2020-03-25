@@ -24,6 +24,7 @@
         private readonly IUserService userService;
         private readonly IGradeService gradeService;
         private readonly IMapper mapper;
+        private readonly IScoreService scoreService;
         private UserManager<IdentityUser> userManager;
 
         public StudentController(
@@ -32,7 +33,8 @@
             UserManager<IdentityUser> userManager,
             IUserService userService,
             IGradeService gradeService,
-            IMapper mapper)
+            IMapper mapper,
+            IScoreService scoreService)
         {
             this.userManager = userManager;
             this.userService = userService;
@@ -40,6 +42,7 @@
             this.logger = logger;
             this.signInManager = signInManager;
             this.mapper = mapper;
+            this.scoreService = scoreService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -252,6 +255,25 @@
             var model = this.mapper.Map<StudentDetailsViewModel>(student);
 
             return this.View(model);
+        }
+
+        [Authorize(Roles = "Student")]
+        public IActionResult GetAverageScore(string id)
+        {
+            // Get ScoreStudets with student Id
+            var scores = this.scoreService.GetScoreStudents()
+                .Where(s => s.StudentId == id)
+                .ToList();
+
+            double averageScore = 0;
+
+            // Calculate average score
+            if (scores != null)
+            {
+                averageScore = scores.Average(scoreStudent => scoreStudent.Score.ScorePoints);
+            }
+
+            return this.Json(averageScore);
         }
 
         public string HashPassword(string password)

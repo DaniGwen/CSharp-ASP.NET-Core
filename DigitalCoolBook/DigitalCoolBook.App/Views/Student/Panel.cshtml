@@ -4,13 +4,14 @@
     Layout = "_LayoutMenus";
 }
 
-<h2>Настройки</h2>
+<h3 class="text-info">Настройки</h3>
+<hr />
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Сигурност</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Профил</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
@@ -23,78 +24,87 @@
 <div class="tab-content">
     <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <a class="btn btn-outline-dark mt-3 mb-2" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
-           Смяна на парола
+            Смяна на парола
         </a>
     </div>
-    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <p class="btn btn-outline-info mt-3 mb-2" id="averageScore" onclick="AverageScore('@Model.Id')">Среден успех</p>
+    </div>
     <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
     <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
 
-<script>
+<script type="text/javascript">
+    function AverageScore(studentId) {
+        $.get("/Student/GetAverageScore/" + studentId + "", function (data) {
+            $('#averageScore').html(data + "%")
+        })
+    }
+
     $(function () {
         $('#myTab li:last-child a').tab('show')
     })
 </script>
+
 @*<script>
-    $(function () {
-        $("#changePassword").click(function () {
-            $("#changePasswordDialog").dialog({
-                resizeble: false,
-                modal: true,
-                height: 270,
-                width: 310,
-                buttons: {
-                    "Назад": function () {
-                        $(this).dialog("close");
-                    },
-                    "Смени": function () {
-                        var url = "/Student/ChangePassword/" + $(".classId").attr("id");
-                        var model = $("#passwordForm").serialize();
-                        $.ajax({
-                            url: url,
-                            type: "POST",
-                            data: model,
-                            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                            success: function () {
-                                $("#success").dialog({
-                                    resizable: false,
-                                    height: 270,
-                                    width: 320,
-                                    modal: true,
-                                    buttons: {
-                                        "Затвори": function () {
-                                            $(this).dialog("close");
+        $(function () {
+            $("#changePassword").click(function () {
+                $("#changePasswordDialog").dialog({
+                    resizeble: false,
+                    modal: true,
+                    height: 270,
+                    width: 310,
+                    buttons: {
+                        "Назад": function () {
+                            $(this).dialog("close");
+                        },
+                        "Смени": function () {
+                            var url = "/Student/ChangePassword/" + $(".classId").attr("id");
+                            var model = $("#passwordForm").serialize();
+                            $.ajax({
+                                url: url,
+                                type: "POST",
+                                data: model,
+                                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                                success: function () {
+                                    $("#success").dialog({
+                                        resizable: false,
+                                        height: 270,
+                                        width: 320,
+                                        modal: true,
+                                        buttons: {
+                                            "Затвори": function () {
+                                                $(this).dialog("close");
+                                            }
                                         }
-                                    }
-                                });
-                                $("#success").html("Паролата беше сменена.");
-                            },
-                            error: function (request, err, message) {
-                                $("#error").dialog({
-                                    resizable: false,
-                                    height: 270,
-                                    width: 320,
-                                    modal: true,
-                                    buttons: {
-                                        "Затвори": function () {
-                                            $(this).dialog("close");
+                                    });
+                                    $("#success").html("Паролата беше сменена.");
+                                },
+                                error: function (request, err, message) {
+                                    $("#error").dialog({
+                                        resizable: false,
+                                        height: 270,
+                                        width: 320,
+                                        modal: true,
+                                        buttons: {
+                                            "Затвори": function () {
+                                                $(this).dialog("close");
+                                            }
                                         }
-                                    }
-                                })
-                                $("#errorMessage").html(request.message, message, err)
-                            }
-                        })
+                                    })
+                                    $("#errorMessage").html(request.message, message, err)
+                                }
+                            })
+                        }
                     }
-                }
+                })
             })
         })
-    })
-</script>*@
+    </script>*@
 
 @*<div style="display: none" id="success"></div>
-<div style="display: none" id="error">
-    <div id="errorMessage">
-    </div>
-</div>*@
+    <div style="display: none" id="error">
+        <div id="errorMessage">
+        </div>
+    </div>*@
 
