@@ -356,23 +356,26 @@
             }
 
             // Create Score
-            var score = new Score
+            if (this.User.IsInRole("Student"))
             {
-                ScoreId = Guid.NewGuid().ToString(),
-                ScorePoints = points,
-                LessonId = test.LessonId,
-            };
+                var score = new Score
+                {
+                    ScoreId = Guid.NewGuid().ToString(),
+                    ScorePoints = points,
+                    LessonId = test.LessonId,
+                };
 
-            // Create ScoreStudent
-            var scoreStudent = new ScoreStudent
-            {
-                ScoreId = score.ScoreId,
-                StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
-            };
+                // Create ScoreStudent
+                var scoreStudent = new ScoreStudent
+                {
+                    ScoreId = score.ScoreId,
+                    StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                };
 
-            // Save entities to DB
-            await this.scoreService.AddScoreAsync(score);
-            await this.scoreService.AddScoreStudentAsync(scoreStudent);
+                // Save entities to DB
+                await this.scoreService.AddScoreAsync(score);
+                await this.scoreService.AddScoreStudentAsync(scoreStudent);
+            }
 
             this.ViewData["Result"] = points;
 
