@@ -72,7 +72,7 @@
 
             var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
 
-            // Add score percent in view
+            // If User is Student adding score in view
             if (this.User.IsInRole("Student"))
             {
                 foreach (var lesson in lessonsDto)
@@ -91,6 +91,10 @@
                     if (score != null)
                     {
                         lesson.Score = score.Score.ScorePoints;
+                    }
+                    else
+                    {
+                        lesson.Score = 0;
                     }
                 }
             }

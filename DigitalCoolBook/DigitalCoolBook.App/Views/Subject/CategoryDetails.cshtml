@@ -13,28 +13,39 @@
     <div>
         @foreach (var lesson in Model.Lessons)
         {
-        <div class="row">
-            <div class="col d-flex justify-content-center">
-                <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
-            </div>
-            <div>
-                @if (this.User.IsInRole("Admin"))
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
+                </div>
+                <div>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <div class="form-group">
+                            <button class="btn btn-outline-info w-100">
+                                @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
+                            </button>
+                            <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
+                        </div>
+                    }
+                </div>
+                @if (this.User.IsInRole("Student"))
                 {
-                    <div class="form-group">
-                        <button class="btn btn-outline-info w-100">
-                            @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
-                        </button>
-                        <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
+                    <div class="col">
+                        @if (lesson.Score == 0)
+                        {
+                            <p class="text-info font-weight-bold">@lesson.Score%</p>
+                        }
+                        else if (lesson.Score < 70)
+                        {
+                            <p class="text-danger font-weight-bold">@lesson.Score%</p>
+                        }
+                        else if (lesson.Score >= 70)
+                        {
+                            <p class="text-success font-weight-bold">@lesson.Score%</p>
+                        }
                     </div>
                 }
             </div>
-            @if (this.User.IsInRole("Student"))
-            {
-                <div class="col">
-
-                </div>
-            }
-        </div>
         }
     </div>
     <hr />
