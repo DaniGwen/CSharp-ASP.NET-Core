@@ -11,5 +11,7 @@
         public string LessonId { get; set; }
 
         public int Score { get; set; }
+
+        public bool IsUnlocked { get; set; }
     }
 }

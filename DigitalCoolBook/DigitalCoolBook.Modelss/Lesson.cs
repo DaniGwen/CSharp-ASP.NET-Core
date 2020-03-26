@@ -20,5 +20,7 @@
         public ICollection<Score> Scores { get; set; }
 
         public int Level { get; set; }
+
+        public bool IsUnlocked { get; set; }
     }
 }

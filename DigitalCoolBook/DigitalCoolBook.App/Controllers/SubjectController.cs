@@ -132,13 +132,20 @@
         {
             try
             {
+                var lessonLevel = int.Parse(level);
                 var lesson = new Lesson
                 {
                     LessonId = Guid.NewGuid().ToString(),
                     CategoryId = categoryId,
                     Content = content,
                     Title = title,
+                    Level = lessonLevel,
                 };
+
+                if (lessonLevel > 1)
+                {
+                    lesson.IsUnlocked = false;
+                }
 
                 await this.subjectService.CreateLessonAsync(lesson);
 

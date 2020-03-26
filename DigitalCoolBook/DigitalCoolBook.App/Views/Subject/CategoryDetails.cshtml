@@ -17,7 +17,15 @@
         {
             <div class="row">
                 <div class=" col-sm-7 d-flex justify-content-center">
-                    <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
+                    @if (lesson.IsUnlocked)
+                    {
+                        <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
+                    }
+                    else
+                    {
+                        <small class="text-danger">Заключен.</small>
+                        <a href="#" class=" btn-outline-secondary btn-lg mb-2 disabled" aria-disabled="true">@lesson.Title</a>
+                    }
                 </div>
                 <div>
                     @if (this.User.IsInRole("Admin"))
