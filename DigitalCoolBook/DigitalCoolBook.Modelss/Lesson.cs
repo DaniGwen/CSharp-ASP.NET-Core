@@ -18,5 +18,7 @@
         public Category Category { get; set; }
 
         public ICollection<Score> Scores { get; set; }
+
+        public int Level { get; set; }
     }
 }
