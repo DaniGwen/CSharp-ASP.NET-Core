@@ -125,12 +125,12 @@
                                 </form>
                             }
                             <form class="nav-item mt-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                <button type="submit" class="btn btn-outline-dark btn-sm"><span class="glyphicon glyphicon-user"></span>Отписване</button>
+                                <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-user"></span>Отписване</button>
                             </form>
                         }
                         else if (!this.User.Identity.IsAuthenticated)
                         {
-                            <a href="/Admin/LoginAdmin" class="btn btn-outline-secondary btn-sm">Вляз като Администратор<span class="glyphicon glyphicon-user"></span></a>
+                            <a href="/Admin/LoginAdmin" class="btn btn-outline-secondary btn-sm">Вляз като Администратор <span class="fa fa-user"></span></a>
                         }
                     </li>
                 </ul>
@@ -149,12 +149,12 @@
                     <div class="d-flex justify-content-center">
                         <div class="jumbotron-fluid">
                             <section>
-                                <h1 style="border: 1px solid">Добре дошли в Digital Cool Book!</h1>
+                                <h1 style="border-bottom: 2px solid;border-left: 2px solid">Добре дошли в Digital Cool Book!</h1>
                                 <span>Ученето може да бъде забавно!</span>
                             </section>
                             <div class="pt-4">
-                                <a style="background-color:#441dde" asp-controller="Home" asp-action="Login" type="button" class="btn btn-primary">
-                                    Вписване
+                                <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
+                                   <span class="fa fa-user"></span> Вписване
                                 </a>
                             </div>
                         </div>
