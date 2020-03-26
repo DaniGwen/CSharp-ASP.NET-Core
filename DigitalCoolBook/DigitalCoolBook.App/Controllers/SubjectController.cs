@@ -114,22 +114,21 @@
         [Authorize(Roles = "Admin")]
         public IActionResult AddLesson()
         {
-            var categories = this.subjectService.GetCategories().ToList();
             var subjects = this.subjectService.GetSubjects().ToList();
 
-            var categoriesModel = new CategoryCreateViewModel
+            var model = new CategoryCreateViewModel
             {
-                Categories = categories,
+                Categories = new List<Category>(),
                 Subjects = subjects,
             };
 
-            return this.View(categoriesModel);
+            return this.View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ActionName("AddLesson")]
-        public async Task<IActionResult> AddLessonAsync(string title, string content, string categoryId)
+        public async Task<IActionResult> AddLessonAsync(string title, string content, string categoryId, string level)
         {
             try
             {

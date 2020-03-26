@@ -48,7 +48,7 @@
                 <label class="input-group-text" for="inputGroupSelect01">Ниво на достъп</label>
             </div>
             <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Изберете...</option>
+                <option selected></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -61,11 +61,12 @@
                 <option value="3">10</option>
             </select>
         </div>
+        <span class="text-danger" id="alertLevel"></span>
         <hr />
         <div>
             <label for="title" class="gj-font-size-16">Тема</label>
             <input type="text" class="form-control" id="title" name="title" />
-            <span class="text-danger mb-1" id="alertTitle"></span>
+            <span class="row text-danger ml-2 mb-1" id="alertTitle"></span>
             <label for="content" class="gj-font-size-16">Съдържание</label>
             <textarea class="form-control" id="content" name="content" rows="10"></textarea>
             <span class="text-danger" id="alertContent"></span>
@@ -236,14 +237,19 @@
             $('#alertContent').html("Въведете съдържание.").fadeToggle(4000);
             return false;
         }
+        if ($('#inputGroupSelect01').val() == '') {
+            $('#alertLevel').html('Изберете от менюто.')
+            return false;
+        }
 
         event.preventDefault();
 
         var categoryId = $('#CategoryId').val();
         var title = $('#title').val();
         var content = $('#content').val();
+        var level = $('#inputGroupSelect01').val();
 
-        $.post("/Subject/AddLesson", { categoryId: categoryId, title: title, content: content }, function (message) {
+        $.post("/Subject/AddLesson", { categoryId: categoryId, title: title, content: content, level: level }, function (message) {
             $('#successMessage').dialog({
                 resizable: false,
                 height: 200,
