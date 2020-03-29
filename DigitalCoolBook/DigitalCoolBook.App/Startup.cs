@@ -46,6 +46,11 @@ namespace DigitalCoolBook.App
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+            });
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();
@@ -114,6 +119,7 @@ namespace DigitalCoolBook.App
                 SupportedUICultures = supportedCultures,
             });
 
+            app.UseResponseCompression();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -127,6 +133,7 @@ namespace DigitalCoolBook.App
             });
         }
 
+        // Seed data
         private async Task SeedDbAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
