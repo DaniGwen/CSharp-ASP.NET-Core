@@ -1,0 +1,12 @@
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.csprojAssemblyReference.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.AssemblyInfoInputs.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.AssemblyInfo.cs
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\bin\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.deps.json
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\bin\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.csproj.CopyComplete
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\bin\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web.Models\obj\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.csproj.CoreCompileInputs.cache
