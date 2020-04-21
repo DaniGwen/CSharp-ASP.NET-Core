@@ -1,4 +1,6 @@
-﻿namespace SULS.Models
+﻿using System.Collections.Generic;
+
+namespace SULS.Models
 {
     public class User
     {
@@ -9,5 +11,9 @@
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public virtual List<Submission> Submitions { get; set; }
+
+        public virtual List<Problem> Problems { get; set; }
     }
 }
