@@ -4,8 +4,8 @@ namespace SULS.Services
 {
     public interface IUserService
     {
-        User GetUser(string username, string password);
+        User GetUserOrNull(string username, string password);
 
-        string HashPassword(string password);
+        void AddUser(string username, string email, string password);
     }
 }

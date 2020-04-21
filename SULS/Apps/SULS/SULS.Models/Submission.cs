@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace SULS.Models
@@ -13,8 +14,11 @@ namespace SULS.Models
 
         public string Id { get; set; }
 
+        [Required]
+        [MaxLength(800)]
         public string Code { get; set; }
 
+        [Required]
         public int AchievedResult { get; set; }
 
         public DateTime CreatedOn { get; set; }
