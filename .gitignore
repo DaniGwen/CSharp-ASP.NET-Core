@@ -361,3 +361,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 SULS/SULS_Problem Description.docx
+SULS/Apps/SULS/SULS.Data/DbSettings.cs

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SULS.Models
 {
     public class User
     {
+        public User()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public string Id { get; set; }
 
         public string Username { get; set; }
@@ -12,7 +18,7 @@ namespace SULS.Models
 
         public string Password { get; set; }
 
-        public virtual List<Submission> Submitions { get; set; }
+        public virtual List<Submission> Submissions { get; set; }
 
         public virtual List<Problem> Problems { get; set; }
     }
