@@ -39,7 +39,7 @@ namespace SULS.App.Controllers
 
             this.SignIn(user.Id, user.Username, user.Email);
 
-            return this.Redirect("/Home/Index");
+            return this.Redirect("/Home/IndexLoggedIn");
         }
 
         public IActionResult Register()

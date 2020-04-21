@@ -1,6 +1,9 @@
 ﻿using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes;
+using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
+using SULS.App.ViewModels.Problems;
+using System.Collections.Generic;
 
 namespace SULS.App.Controllers
 {
@@ -17,6 +20,14 @@ namespace SULS.App.Controllers
         public IActionResult Index()
         {
             return this.View();
+        }
+
+        [Authorize]
+        public IActionResult IndexLoggedIn()
+        {
+            //TODO Get problems from DB
+            var model = new List<ProblemViewModel>();
+            return this.View(model);
         }
     }
 }
