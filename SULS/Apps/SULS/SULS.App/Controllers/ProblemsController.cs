@@ -3,9 +3,11 @@ using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
 using SULS.App.ViewModels.Problems;
+using SULS.Models;
 using SULS.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SULS.App.Controllers
@@ -13,10 +15,12 @@ namespace SULS.App.Controllers
     public class ProblemsController : Controller
     {
         private readonly IProblemService problemService;
+        private readonly ISubmissionService submissionService;
 
-        public ProblemsController(IProblemService problemService)
+        public ProblemsController(IProblemService problemService, ISubmissionService submissionService)
         {
             this.problemService = problemService;
+            this.submissionService = submissionService;
         }
 
         [Authorize]
@@ -40,9 +44,28 @@ namespace SULS.App.Controllers
             return this.Redirect("/Home/IndexLoggedIn");
         }
 
-        public IActionResult Details()
+        public IActionResult Details(string id)
         {
-            return this.View();
+            var problem = this.problemService.GetProblemById(id);
+
+            var submissions = this.submissionService.GetSubmissionsByProblemId(id)
+                .Select(s => new ProblemDetailViewModel
+                {
+                    AchievedResult = s.AchievedResult,
+                    CreatedOn = s.CreatedOn,
+                    MaxPoints = problem.Points,
+                    Username = s.User.Username,
+                    SubmissionId = s.Id,
+                })
+                .ToList();
+
+            var model = new ProblemDetailNameViewModel
+            {
+                Name = problem.Name,
+                Submissions = submissions,
+            };
+
+            return this.View(model);
         }
     }
 }

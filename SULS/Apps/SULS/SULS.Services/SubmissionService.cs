@@ -1,6 +1,7 @@
 ﻿using SULS.Data;
 using SULS.Models;
 using System;
+using System.Linq;
 
 namespace SULS.Services
 {
@@ -29,13 +30,19 @@ namespace SULS.Services
                 Code = code,
                 CreatedOn = DateTime.UtcNow,
                 AchievedResult = rnd.Next(0, problem.Points),
-                User = user,
                 ProblemId = problemId,
-                UserId = user.Id,
+                UserId = user.Id
             };
 
             this.context.Submissions.Add(submission);
             this.context.SaveChanges();
+        }
+
+        public IQueryable<Submission> GetSubmissionsByProblemId(string problemId)
+        {
+            var submissions = this.context.Submissions.Where(s => s.ProblemId == problemId);
+
+            return submissions;
         }
     }
 }
