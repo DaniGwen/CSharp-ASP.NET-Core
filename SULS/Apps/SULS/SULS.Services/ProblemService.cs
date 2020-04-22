@@ -7,13 +7,10 @@ using System.Text;
 
 namespace SULS.Services
 {
-    public class ProblemService : IProblemService
+    public class ProblemService : BaseService,IProblemService
     {
-        private readonly SULSContext context;
-
-        public ProblemService(SULSContext context)
+        public ProblemService(SULSContext context) : base(context)
         {
-            this.context = context;
         }
 
         public void AddProblem(string name, int points, string userId)
@@ -25,13 +22,13 @@ namespace SULS.Services
                 UserId = userId,
             };
 
-            this.context.Problems.Add(problem);
-            this.context.SaveChanges();
+           base.context.Problems.Add(problem);
+           base.context.SaveChanges();
         }
 
         public IQueryable<Problem> GetProblemsByUserId(string userId)
         {
-            return this.context.Problems
+            return base.context.Problems
                 .Where(u => u.UserId == userId);
         }
     }

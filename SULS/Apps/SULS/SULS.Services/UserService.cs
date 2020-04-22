@@ -8,13 +8,10 @@ using System.Text;
 
 namespace SULS.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
-        private readonly SULSContext context;
-
-        public UserService(SULSContext context)
+        public UserService(SULSContext context):base(context)
         {
-            this.context = context;
         }
 
         public void AddUser(string username, string email, string password)

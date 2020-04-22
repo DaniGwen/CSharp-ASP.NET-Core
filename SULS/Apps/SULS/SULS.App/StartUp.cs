@@ -20,6 +20,7 @@
         {
             serviceProvider.Add<IUserService, UserService>();
             serviceProvider.Add<IProblemService, ProblemService>();
+            serviceProvider.Add<ISubmissionService, SubmissionService>();
         }
     }
 }
