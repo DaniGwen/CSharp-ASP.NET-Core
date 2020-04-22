@@ -26,6 +26,11 @@ namespace SULS.Services
            base.context.SaveChanges();
         }
 
+        public Problem GetProblemById(string problemId)
+        {
+            return this.context.Problems.FirstOrDefault(p => p.Id == problemId);
+        }
+
         public IQueryable<Problem> GetProblemsByUserId(string userId)
         {
             return base.context.Problems

@@ -8,5 +8,6 @@ namespace SULS.Services
         void AddProblem(string name, int points, string userId);
 
         IQueryable<Problem> GetProblemsByUserId(string userId);
+        Problem GetProblemById(string problemId);
     }
 }

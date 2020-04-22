@@ -7,5 +7,7 @@ namespace SULS.Services
         User GetUserOrNull(string username, string password);
 
         void AddUser(string username, string email, string password);
+
+        User GetUserById(string userId);
     }
 }

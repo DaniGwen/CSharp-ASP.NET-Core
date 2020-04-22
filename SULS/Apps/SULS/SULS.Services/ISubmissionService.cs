@@ -4,6 +4,6 @@ namespace SULS.Services
 {
    public interface ISubmissionService
     {
-        void AddSubmission(string code, User user);
+        void AddSubmission(string code, string user, string problemId);
     }
 }

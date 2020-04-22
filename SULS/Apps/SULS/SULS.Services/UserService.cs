@@ -27,6 +27,11 @@ namespace SULS.Services
             this.context.SaveChanges();
         }
 
+        public User GetUserById(string userId)
+        {
+            return this.context.Users.FirstOrDefault(u => u.Id == userId);
+        }
+
         public User GetUserOrNull(string username, string password)
         {
             var hashedPassword = this.HashPassword(password);

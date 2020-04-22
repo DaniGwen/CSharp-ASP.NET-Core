@@ -3,6 +3,7 @@ using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
 using SULS.App.ViewModels.Submissions;
+using SULS.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,9 +12,11 @@ namespace SULS.App.Controllers
 {
     public class SubmissionsController:Controller
     {
-        public SubmissionsController()
-        {
+        private readonly ISubmissionService submissionService;
 
+        public SubmissionsController(ISubmissionService submissionService)
+        {
+            this.submissionService = submissionService;
         }
 
         [Authorize]
@@ -26,7 +29,14 @@ namespace SULS.App.Controllers
         [HttpPost]
         public IActionResult Create(SubmissionCreatViewModel model)
         {
-            return this.View();
+            if (!ModelState.IsValid)
+            {
+                return this.Redirect("/Submissions/Create");
+            }
+
+            this.submissionService.AddSubmission(model.Code, this.User.Id, model.ProblemId);
+
+            return this.Redirect("/Home/IndexLoggedIn");
         }
     }
 }

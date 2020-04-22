@@ -39,5 +39,10 @@ namespace SULS.App.Controllers
 
             return this.Redirect("/Home/IndexLoggedIn");
         }
+
+        public IActionResult Details()
+        {
+            return this.View();
+        }
     }
 }

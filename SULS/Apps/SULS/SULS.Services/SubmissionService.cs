@@ -1,20 +1,41 @@
 ﻿using SULS.Data;
 using SULS.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SULS.Services
 {
-   public class SubmissionService : BaseService, ISubmissionService
+    public class SubmissionService : BaseService, ISubmissionService
     {
-        public SubmissionService(SULSContext context):base(context)
+        private readonly IProblemService problemService;
+        private readonly IUserService userService;
+
+        public SubmissionService(
+            SULSContext context,
+            IProblemService problemService,
+            IUserService userService) : base(context)
         {
+            this.problemService = problemService;
+            this.userService = userService;
         }
 
-        public void AddSubmission(string code, User user)
+        public void AddSubmission(string code, string userId, string problemId)
         {
-            throw new NotImplementedException();
+            var rnd = new Random();
+            var problem = this.problemService.GetProblemById(problemId);
+            var user = this.userService.GetUserById(userId);
+
+            var submission = new Submission
+            {
+                Code = code,
+                CreatedOn = DateTime.UtcNow,
+                AchievedResult = rnd.Next(0, problem.Points),
+                User = user,
+                ProblemId = problemId,
+                UserId = user.Id,
+            };
+
+            this.context.Submissions.Add(submission);
+            this.context.SaveChanges();
         }
     }
 }

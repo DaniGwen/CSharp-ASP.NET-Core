@@ -22,6 +22,11 @@ namespace SULS.App.Controllers
         [HttpGet(Url = "/")]
         public IActionResult IndexSlash()
         {
+            if (User != null)
+            {
+                return this.IndexLoggedIn();
+            }
+
             return this.Index();
         }
 
