@@ -19,6 +19,7 @@
         public void ConfigureServices(IServiceProvider serviceProvider)
         {
             serviceProvider.Add<IUserService, UserService>();
+            serviceProvider.Add<IProblemService, ProblemService>();
         }
     }
 }
