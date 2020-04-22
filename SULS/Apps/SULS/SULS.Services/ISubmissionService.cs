@@ -8,5 +8,7 @@ namespace SULS.Services
         void AddSubmission(string code, string user, string problemId);
 
         IQueryable<Submission> GetSubmissionsByProblemId(string problemId);
+
+        void DeleteById(string id);
     }
 }

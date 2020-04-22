@@ -64,5 +64,13 @@ namespace SULS.App.Controllers
 
             return this.Redirect("/Users/Login");
         }
+
+        [Authorize]
+        public IActionResult Logout()
+        {
+            this.SignOut();
+
+            return this.Redirect("/");
+        }
     }
 }

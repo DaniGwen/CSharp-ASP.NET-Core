@@ -38,6 +38,14 @@ namespace SULS.Services
             this.context.SaveChanges();
         }
 
+        public void DeleteById(string id)
+        {
+            var submission = this.context.Submissions.Find(id);
+            this.context.Submissions.Remove(submission);
+
+            this.context.SaveChanges();
+        }
+
         public IQueryable<Submission> GetSubmissionsByProblemId(string problemId)
         {
             var submissions = this.context.Submissions.Where(s => s.ProblemId == problemId);

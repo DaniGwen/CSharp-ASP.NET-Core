@@ -48,5 +48,12 @@ namespace SULS.App.Controllers
 
             return this.Redirect("/Home/IndexLoggedIn");
         }
+
+        public IActionResult Delete(string id)
+        {
+            this.submissionService.DeleteById(id);
+
+            return this.Redirect("/Home/IndexLoggedIn");
+        }
     }
 }
