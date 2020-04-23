@@ -11,6 +11,11 @@
         [HttpGet(Url = "/")]
         public IActionResult SlashIndex()
         {
+            if (this.IsLoggedIn())
+            {
+                return this.Redirect("Trips/All");
+            }
+
             return this.Index();
         }
 

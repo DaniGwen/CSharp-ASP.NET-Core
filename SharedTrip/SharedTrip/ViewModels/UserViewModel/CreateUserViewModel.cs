@@ -1,8 +1,4 @@
 ﻿using SIS.MvcFramework.Attributes.Validation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace SharedTrip.ViewModels.UserViewModel
 {
