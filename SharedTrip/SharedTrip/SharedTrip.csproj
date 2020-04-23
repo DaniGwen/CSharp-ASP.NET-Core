@@ -18,10 +18,10 @@
     <None Update="Views\Home\Index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Views\Shared\Error.html">
+    <None Update="Views\Error.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Views\Shared\_Layout.html">
+    <None Update="Views\_Layout.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Views\Trips\Add.html">
@@ -39,40 +39,40 @@
     <None Update="Views\Users\Register.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-grid.css">
+    <None Update="Resources\css\bootstrap-grid.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-grid.css.map">
+    <None Update="Resources\css\bootstrap-grid.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-grid.min.css">
+    <None Update="Resources\css\bootstrap-grid.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-grid.min.css.map">
+    <None Update="Resources\css\bootstrap-grid.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-reboot.css">
+    <None Update="Resources\css\bootstrap-reboot.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-reboot.css.map">
+    <None Update="Resources\css\bootstrap-reboot.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-reboot.min.css">
+    <None Update="Resources\css\bootstrap-reboot.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap-reboot.min.css.map">
+    <None Update="Resources\css\bootstrap-reboot.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap.css">
+    <None Update="Resources\css\bootstrap.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap.css.map">
+    <None Update="Resources\css\bootstrap.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap.min.css">
+    <None Update="Resources\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="wwwroot\css\bootstrap.min.css.map">
+    <None Update="Resources\css\bootstrap.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -2,10 +2,19 @@
 {
     using SIS.HTTP;
     using SIS.MvcFramework;
+    using SIS.MvcFramework.Attributes;
+    using SIS.MvcFramework.Result;
+    using System.ComponentModel.DataAnnotations;
 
     public class HomeController : Controller
-    { 
-        public HttpResponse Index()
+    {
+        [HttpGet(Url = "/")]
+        public IActionResult SlashIndex()
+        {
+            return this.Index();
+        }
+
+        public IActionResult Index()
         {
             return this.View();
         }

@@ -8,7 +8,7 @@ namespace SharedTrip
     {
         public static async Task Main()
         {
-            await WebHost.StartAsync(new Startup());
+            WebHost.Start(new Startup());
         }
     }
 }

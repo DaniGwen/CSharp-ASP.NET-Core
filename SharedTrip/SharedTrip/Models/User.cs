@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SharedTrip.Models
 {
@@ -17,7 +18,7 @@ namespace SharedTrip.Models
 
         public string Password { get; set; }
 
-        public UserTrip UserTrip { get; set; }
+        public virtual ICollection<UserTrip> UserTrips { get; set; }
 
     }
 }
