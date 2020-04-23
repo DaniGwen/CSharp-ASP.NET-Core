@@ -2,6 +2,7 @@
 using SharedTrip.ViewModels.TripViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SharedTrip.Services
@@ -23,11 +24,22 @@ namespace SharedTrip.Services
                 Description = model.Description,
                 EndPoint = model.EndPoint,
                 ImagePath = model.ImagePath,
-                StartPoint = model.StartingPoint,
+                StartPoint = model.StartPoint,
+                Seats = model.Seats,
             };
 
             this.context.Trips.Add(trip);
             this.context.SaveChanges();
+        }
+
+        public Trip GetTripById(string id)
+        {
+            return this.context.Trips.Find(id);
+        }
+
+        public IQueryable<Trip> GetTrips()
+        {
+            return this.context.Trips;
         }
     }
 }

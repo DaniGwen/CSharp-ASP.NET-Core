@@ -1,29 +1,30 @@
 ﻿using SIS.MvcFramework.Attributes.Validation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace SharedTrip.ViewModels.TripViewModels
 {
     public class CreateTripViewModel
     {
-        [RequiredSis]
-        public string StartingPoint { get; set; }
+        [Required]
+        public string StartPoint { get; set; }
 
-        [RequiredSis]
+        [Required]
         public string EndPoint { get; set; }
 
-        [RequiredSis]
+        [Required]
         public DateTime DepartureTime { get; set; }
 
         public string ImagePath { get; set; }
 
-        [RequiredSis]
-        [RangeSis(2, 6, null)]
+        [Required]
+        [RangeSis(2, 6, "error")]
         public int Seats { get; set; }
 
-        [RequiredSis]
-        [StringLengthSis(1, 80, null)]
+        [Required]
+        [StringLengthSis(1, 80, "error")]
         public string Description { get; set; }
     }
 }

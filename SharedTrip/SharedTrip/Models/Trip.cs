@@ -22,6 +22,8 @@ namespace SharedTrip.Models
 
         public string ImagePath { get; set; }
 
+        public int Seats { get; set; }
+
         public virtual ICollection<UserTrip> UserTrips { get; set; }
     }
 }
