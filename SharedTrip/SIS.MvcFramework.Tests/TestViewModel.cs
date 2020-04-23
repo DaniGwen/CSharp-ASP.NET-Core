@@ -4,10 +4,8 @@ namespace SIS.MvcFramework.Tests
 {
     public class TestViewModel
     {
-        public int Year { get; set; }
+        public string StringValue { get; set; }
 
-        public string Name { get; set; }
-
-        public IEnumerable<int> Numbers { get; set; }
+        public IEnumerable<string> ListValues { get; set; }
     }
 }
