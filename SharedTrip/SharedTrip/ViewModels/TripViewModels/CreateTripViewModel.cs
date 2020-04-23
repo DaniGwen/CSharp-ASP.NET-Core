@@ -23,6 +23,7 @@ namespace SharedTrip.ViewModels.TripViewModels
         public int Seats { get; set; }
 
         [RequiredSis]
+        [StringLengthSis(1, 80, null)]
         public string Description { get; set; }
     }
 }
