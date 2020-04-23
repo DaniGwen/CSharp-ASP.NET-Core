@@ -4,6 +4,11 @@ namespace SharedTrip.Models
 {
     public class Trip
     {
+        public Trip()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public string Id { get; set; }
 
         public string StartPoint { get; set; }
