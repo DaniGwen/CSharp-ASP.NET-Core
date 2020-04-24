@@ -1,10 +1,8 @@
 ﻿namespace SharedTrip.App.Controllers
 {
-    using SIS.HTTP;
     using SIS.MvcFramework;
     using SIS.MvcFramework.Attributes;
     using SIS.MvcFramework.Result;
-    using System.ComponentModel.DataAnnotations;
 
     public class HomeController : Controller
     {

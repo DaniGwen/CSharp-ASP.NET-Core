@@ -60,14 +60,31 @@ namespace SharedTrip.Controllers
 
             var model = new TripDetailsViewModel
             {
+                Id = trip.Id,
                 StartPoint = trip.StartPoint,
                 Seats = trip.Seats,
                 DepartureTime = trip.DepartureTime.ToString("dd.MM.yyyy HH:mm"),
                 Description = trip.Description,
                 EndPoint = trip.EndPoint,
+                Image = trip.ImagePath,
             };
 
             return this.View(model);
+        }
+
+        [Authorize]
+        public IActionResult AddUserToTrip(string tripId)
+        {
+            var userId = this.User.Id;
+
+            if (!this.tripService.IsUserJoined(userId, tripId))
+            {
+                this.tripService.CreateUserTrip(tripId, userId);
+
+                return this.Redirect("/");
+            }
+
+            return this.Redirect($"/Trips/Details?tripId={tripId}");
         }
     }
 }

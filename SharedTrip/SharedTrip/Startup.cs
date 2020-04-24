@@ -12,7 +12,7 @@
     {
         public void Configure(IServerRoutingTable routeTable)
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
 
             using(var context = new ApplicationDbContext())
             {

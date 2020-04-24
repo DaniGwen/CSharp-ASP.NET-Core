@@ -32,6 +32,27 @@ namespace SharedTrip.Services
             this.context.SaveChanges();
         }
 
+        public void CreateUserTrip(string tripId, string userId)
+        {
+            var trip = this.context.Trips.Find(tripId);
+
+            if (trip.Seats <= 0)
+            {
+                return;
+            }
+
+            var userTrip = new UserTrip
+            {
+                 TripId = trip.Id,
+                 UserId = userId,
+            };
+
+            trip.Seats -= 1;
+
+            this.context.UserTrips.Add(userTrip);
+            this.context.SaveChanges();
+        }
+
         public Trip GetTripById(string id)
         {
             return this.context.Trips.Find(id);
@@ -40,6 +61,12 @@ namespace SharedTrip.Services
         public IQueryable<Trip> GetTrips()
         {
             return this.context.Trips;
+        }
+
+        public bool IsUserJoined(string userId, string tripId)
+        {
+            return this.context.UserTrips
+                .Any(x => x.TripId == tripId && x.UserId == userId);
         }
     }
 }

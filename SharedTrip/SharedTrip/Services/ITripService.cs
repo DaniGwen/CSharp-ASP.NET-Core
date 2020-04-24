@@ -11,5 +11,9 @@ namespace SharedTrip.Services
         IQueryable<Trip> GetTrips();
 
         Trip GetTripById(string id);
+
+        void CreateUserTrip(string tripDbId, string userId);
+
+        bool IsUserJoined(string userId, string tripId);
     }
 }
