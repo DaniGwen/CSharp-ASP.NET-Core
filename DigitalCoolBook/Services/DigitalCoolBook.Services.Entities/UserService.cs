@@ -18,12 +18,12 @@
 
         public async Task<Student> GetStudentAsync(string id)
         {
-            return await this.context.Students.FindAsync(id);
+           return await this.context.Students.FindAsync(id);
         }
 
         public IQueryable<Student> GetStudents()
         {
-            return this.context.Students;
+           return this.context.Students;
         }
 
         public IQueryable<Teacher> GetTeachers()
@@ -59,6 +59,11 @@
             var teacher = await this.GetTeacherAsync(id);
             this.context.Teachers.Remove(teacher);
             await this.SaveChangesAsync();
+        }
+
+        public IdentityUser GetUserByEmail(string email)
+        {
+            return context.Users.FirstOrDefault(u => u.Email == email);
         }
     }
 }

@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-DigitalCoolBook.App-D279BCFE-6108-464C-B657-2672745AEB0F")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigitalCoolBook.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]

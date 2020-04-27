@@ -6,11 +6,13 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Models;
+    using DigitalCoolBook.App.Models.AdminViewModels;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -21,6 +23,8 @@
         private readonly IGradeService gradeService;
         private readonly IUserService userService;
         private readonly IMapper mapper;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly IEmailSender emailSender;
         private readonly SignInManager<IdentityUser> signInManager;
 
         public AdminController(
@@ -28,13 +32,17 @@
             ILogger<AdminController> logger,
             IGradeService gradeService,
             IUserService userService,
-            IMapper mapper)
+            IMapper mapper,
+            UserManager<IdentityUser> userManager,
+            IEmailSender emailSender)
         {
             this.signInManager = signInManager;
             this.logger = logger;
             this.gradeService = gradeService;
             this.userService = userService;
             this.mapper = mapper;
+            this.userManager = userManager;
+            this.emailSender = emailSender;
         }
 
         [Authorize(Roles = "Admin")]
@@ -158,7 +166,6 @@
                 gradeParalelo.GradeTeacherId = Guid.NewGuid().ToString();
 
                 await this.gradeService.AddGradeParaleloAsync(gradeParalelo);
-                await this.gradeService.SaveChangesAsync();
             }
             catch (Exception exception)
             {
@@ -250,6 +257,92 @@
 
             this.TempData["SuccessMsg"] = "Премахването е успешно";
             return this.Redirect("/Home/Success");
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword(ForgotPasswordInputMode model)
+        {
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(email);
+            }
+
+            var user = this.userService.GetUserByEmail(email);
+
+            if (user == null)
+            {
+                this.ModelState.AddModelError(string.Empty, $"{email} няма регистриран такъв имейл.");
+
+                return this.View();
+            }
+
+            user.PasswordHash = null;
+
+            var newPassword = GeneratePassword(4, 1, 3, 1);
+
+            await this.userManager.AddPasswordAsync(user, newPassword);
+
+            await this.userService.SaveChangesAsync();
+
+            var emailSubject = "Your new password. Digital Cool Book.";
+            var emailBody = "Здравейте," + Environment.NewLine + $"Вашата нова парола е: {newPassword}" +
+                             Environment.NewLine + "Променете вашата парола от настройките на вашия профил." +
+                             Environment.NewLine + Environment.NewLine + "Поздрави." + Environment.NewLine +
+                             "Digital Cool Book";
+
+            await this.emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
+
+            var result = "Новата ви парола ще бъде изпратена на посоченият имейл до няколко минути.";
+
+            return this.Json(result);
+        }
+
+        // Generates Random password
+        private static string GeneratePassword(int lowercase, int uppercase, int numerics, int symbols)
+        {
+            string lowers = "abcdefghijklmnopqrstuvwxyz";
+            string uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string number = "0123456789";
+            string specialSymbols = "*=!|@+-_&?'%^.,";
+
+            Random random = new Random();
+
+            string generated = "!";
+            for (int i = 1; i <= lowercase; i++)
+            {
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    lowers[random.Next(lowers.Length - 1)].ToString());
+            }
+
+            for (int i = 1; i <= symbols; i++)
+            {
+                generated = generated.Insert(
+                   random.Next(generated.Length),
+                   specialSymbols[random.Next(specialSymbols.Length - 1)].ToString());
+            }
+
+            for (int i = 1; i <= uppercase; i++)
+            {
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    uppers[random.Next(uppers.Length - 1)].ToString());
+            }
+
+            for (int i = 1; i <= numerics; i++)
+            {
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    number[random.Next(number.Length - 1)].ToString());
+            }
+
+            return generated.Replace("!", string.Empty);
         }
     }
 }

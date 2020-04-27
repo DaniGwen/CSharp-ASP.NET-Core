@@ -24,6 +24,8 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task<IdentityUser> GetUserAsync(string id);
 
+        IdentityUser GetUserByEmail(string email);
+
         //Task AddScorePoints(int points)
     }
 }

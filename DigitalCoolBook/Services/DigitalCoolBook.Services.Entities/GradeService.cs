@@ -18,6 +18,7 @@ namespace DigitalCoolBook.Services
         public async Task AddGradeParaleloAsync(GradeTeacher gradeParalelo)
         {
             await this.context.GradeTeachers.AddAsync(gradeParalelo);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<Grade> GetGradeAsync(string id)
@@ -43,7 +44,7 @@ namespace DigitalCoolBook.Services
         public async Task RemoveGradeParaleloAsync(GradeTeacher paralelo)
         {
             this.context.GradeTeachers.Remove(paralelo);
-            await this.SaveChangesAsync();
+            await this.context.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()

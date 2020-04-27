@@ -16,8 +16,7 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task<GradeTeacher> GetGradeParaleloAsync(string id);
 
-        Task SaveChangesAsync();
-
         Task RemoveGradeParaleloAsync(GradeTeacher paralelo);
+        Task SaveChangesAsync();
     }
 }
