@@ -70,13 +70,13 @@ namespace DigitalCoolBook.App.Data
             builder.Entity<GradeTeacher>()
                 .HasOne(gt => gt.Teacher)
                 .WithMany(teacher => teacher.GradeTeachers)
-                .HasForeignKey(gt => gt.IdTeacher)
+                .HasForeignKey(gt => gt.TeacherId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<GradeTeacher>()
                 .HasOne(gt => gt.Grade)
                 .WithMany(grade => grade.GradeTeachers)
-                .HasForeignKey(gt => gt.IdGrade)
+                .HasForeignKey(gt => gt.GradeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<ScoreStudent>()

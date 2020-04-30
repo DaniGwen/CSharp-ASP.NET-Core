@@ -5,15 +5,20 @@ namespace DigitalCoolBook.Models
 {
     public class GradeTeacher
     {
+        public GradeTeacher()
+        {
+            this.Students = new List<Student>();
+        }
+
         [Key]
         public string GradeTeacherId { get; set; }
 
-        public List<Student> Students { get; set; }
+        public ICollection<Student> Students { get; set; }
 
-        public string IdGrade { get; set; }
+        public string GradeId { get; set; }
         public Grade Grade { get; set; }
 
-        public string IdTeacher { get; set; }
+        public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
     }
 }

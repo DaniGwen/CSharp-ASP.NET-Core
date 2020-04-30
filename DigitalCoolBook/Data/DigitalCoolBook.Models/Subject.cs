@@ -5,6 +5,13 @@
 
     public class Subject
     {
+        public Subject()
+        {
+            this.Categories = new List<Category>();
+            this.Scores = new List<Score>();
+            this.SubjectGrades = new List<SubjectGrade>();
+        }
+
         [Key]
         public string SubjectId { get; set; }
 

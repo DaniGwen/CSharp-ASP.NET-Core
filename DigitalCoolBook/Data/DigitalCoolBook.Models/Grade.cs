@@ -5,16 +5,21 @@ namespace DigitalCoolBook.Models
 {
     public class Grade
     {
+        public Grade()
+        {
+            this.GradeTeachers = new List<GradeTeacher>();
+            this.Students = new List<Student>();
+        }
+
         [Key]
         public string GradeId { get; set; }
 
-        [StringLength(3, ErrorMessage ="Name must be 3 character!")]
         public string Name { get; set; }
 
-        public List<GradeTeacher> GradeTeachers { get; set; }
+        public ICollection<GradeTeacher> GradeTeachers { get; set; }
+
+        public ICollection<Student> Students { get; set; }
 
         public SubjectGrade SubjectGrade { get; set; }
-
-        public List<Student> Students { get; set; }
     }
 }

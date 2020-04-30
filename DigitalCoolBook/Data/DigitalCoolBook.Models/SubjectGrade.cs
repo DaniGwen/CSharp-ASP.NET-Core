@@ -6,12 +6,12 @@ namespace DigitalCoolBook.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("Grade")]
-        public string IdGrade { get; set; }
+        //[ForeignKey("Grade")]
+        public string GradeId { get; set; }
         public Grade Grade { get; set; }
 
-        [ForeignKey("Subject")]
-        public string IdSubject { get; set; }
+        //[ForeignKey("Subject")]
+        public string SubjectId { get; set; }
         public Subject Subject { get; set; }
     }
 }

@@ -7,6 +7,12 @@
 
     public class Student : IdentityUser
     {
+        public Student()
+        {
+            this.Attendances = new List<Attendance>();
+            this.ScoreRecords = new List<ScoreStudent>();
+            this.TestStudent = new List<TestStudent>();
+        }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
@@ -43,15 +49,15 @@
         [Range(4, 20, ErrorMessage = "Enter between 4 and 20 digits!")]
         public int Telephone { get; set; }
 
-        public List<Attendance> Attendances { get; set; }
+        public bool IsDeleted { get; set; }
 
         public string GradeId { get; set; }
         public Grade Grade { get; set; }
 
+        public List<Attendance> Attendances { get; set; }
+
         public List<ScoreStudent> ScoreRecords { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-        public virtual ICollection<TestStudent> TestStudent { get; set; }
+        public ICollection<TestStudent> TestStudent { get; set; }
     }
 }

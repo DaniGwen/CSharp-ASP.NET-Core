@@ -5,15 +5,20 @@ namespace DigitalCoolBook.Models
 {
     public class Category
     {
+        public Category()
+        {
+            this.Lessons = new List<Lesson>();
+        }
+
         public string Id { get; set; }
 
         public string Title { get; set; }
 
-        [ForeignKey("Subject")]
+        //[ForeignKey("Subject")]
         public string SubjectId { get; set; }
         public Subject Subject { get; set; }
 
-        public List<Lesson> Lessons { get; set; }
+        public ICollection<Lesson> Lessons { get; set; }
 
 
     }

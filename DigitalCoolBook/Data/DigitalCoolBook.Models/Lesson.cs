@@ -6,6 +6,11 @@
 
     public class Lesson
     {
+        public Lesson()
+        {
+            this.Scores = new List<Score>();
+        }    
+
         [Key]
         public string LessonId { get; set; }
 

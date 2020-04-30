@@ -574,29 +574,29 @@ namespace DigitalCoolBook.App
                 new GradeTeacher
                 {
                    GradeTeacherId = "1",
-                   IdGrade = context.Grades.First(grade => grade.Name == "10à").GradeId,
-                   IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
+                   GradeId = context.Grades.First(grade => grade.Name == "10à").GradeId,
+                   TeacherId = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "2",
-                    IdGrade = context.Grades.First(grade => grade.Name == "10å").GradeId,
-                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "stam@stam.com").Id,
+                    GradeId = context.Grades.First(grade => grade.Name == "10å").GradeId,
+                    TeacherId = context.Teachers.First(teacher => teacher.Email == "stam@stam.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "3",
-                    IdGrade = context.Grades.First(grade => grade.Name == "10á").GradeId,
-                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "pesh@pesh.com").Id,
+                    GradeId = context.Grades.First(grade => grade.Name == "10á").GradeId,
+                    TeacherId = context.Teachers.First(teacher => teacher.Email == "pesh@pesh.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "4",
-                    IdGrade = context.Grades.First(grade => grade.Name == "12à").GradeId,
-                    IdTeacher = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
+                    GradeId = context.Grades.First(grade => grade.Name == "12à").GradeId,
+                    TeacherId = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
                 },
             };
             return gradeParalelos;

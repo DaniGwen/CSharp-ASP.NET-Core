@@ -7,8 +7,8 @@
     {
         public Test()
         {
-            this.TestStudent = new HashSet<TestStudent>();
-            this.Questions = new HashSet<Question>();
+            this.TestStudent = new List<TestStudent>();
+            this.Questions = new List<Question>();
         }
 
         public string TestId { get; set; }
@@ -29,9 +29,7 @@
 
         public string Place { get; set; }
 
-        public virtual ICollection<TestStudent> TestStudent { get; set; }
-
-        public string GradeId { get; set; }
+        public ICollection<TestStudent> TestStudent { get; set; }
 
         public ICollection<Question> Questions { get; set; }
 

@@ -6,6 +6,11 @@ namespace DigitalCoolBook.Models
 {
     public class ExpiredTest
     {
+        public ExpiredTest()
+        {
+            this.CorrectAnswers = new List<CorrectAnswer>();
+        }
+
         [Key]
         public string ExpiredTestId { get; set; }
 
@@ -29,6 +34,6 @@ namespace DigitalCoolBook.Models
 
        // public virtual ICollection<TestStudent> TestStudent { get; set; }
 
-        public List<CorrectAnswer> CorrectAnswers { get; set; }
+        public ICollection<CorrectAnswer> CorrectAnswers { get; set; }
     }
 }

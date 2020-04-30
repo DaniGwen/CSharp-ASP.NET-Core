@@ -13,8 +13,8 @@ namespace DigitalCoolBook.Models
 
         public bool Attended { get; set; }
 
-        [ForeignKey("Student")]
-        public string IdStudent { get; set; }
+        //[ForeignKey("Student")]
+        public string StudentId { get; set; }
         public Student Student { get; set; }
     }
 }

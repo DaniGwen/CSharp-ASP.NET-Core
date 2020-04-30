@@ -4,6 +4,10 @@ namespace DigitalCoolBook.Models
 {
     public class Score
     {
+        public Score()
+        {
+            this.ScoreStudents = new LinkedList<ScoreStudent>();
+        }
         public string ScoreId { get; set; }
 
         public int ScorePoints { get; set; }

@@ -7,6 +7,11 @@
 
     public class Teacher : IdentityUser
     {
+        public Teacher()
+        {
+            this.Tests = new List<Test>();
+            this.GradeTeachers = new List<GradeTeacher>();
+        }
 
         [Required]
         [StringLength(50, ErrorMessage = "Name must be between 3 and 50 characters!", MinimumLength = 3)]
