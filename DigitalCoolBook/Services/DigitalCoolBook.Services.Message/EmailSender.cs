@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
 using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Services
@@ -42,6 +43,20 @@ namespace DigitalCoolBook.App.Services
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
+        }
+
+        public async Task<string> SendNewPassword(string newPassword, string email)
+        {
+            var emailSubject = "Your new password. Digital Cool Book.";
+
+            var emailBody = "Здравейте," + Environment.NewLine + $"Вашата нова парола е: {newPassword}" +
+                             Environment.NewLine + "Променете вашата парола от настройките на вашия профил." +
+                             Environment.NewLine + Environment.NewLine + "Поздрави." + Environment.NewLine +
+                             "Digital Cool Book";
+
+            await this.SendEmailAsync(email, emailSubject, emailBody);
+
+            return "Новата ви парола ще бъде изпратена на посоченият имейл до няколко минути.";
         }
     }
 }

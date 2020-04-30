@@ -155,8 +155,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj"
+              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
+                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj"
+              },
+              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
               }
             }
           }

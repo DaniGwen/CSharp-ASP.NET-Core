@@ -8,6 +8,7 @@
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.AdminViewModels;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
+    using DigitalCoolBook.App.Services;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
@@ -24,7 +25,7 @@
         private readonly IUserService userService;
         private readonly IMapper mapper;
         private readonly UserManager<IdentityUser> userManager;
-        private readonly IEmailSender emailSender;
+        private readonly EmailSender emailSender;
         private readonly SignInManager<IdentityUser> signInManager;
 
         public AdminController(
@@ -34,7 +35,7 @@
             IUserService userService,
             IMapper mapper,
             UserManager<IdentityUser> userManager,
-            IEmailSender emailSender)
+            EmailSender emailSender)
         {
             this.signInManager = signInManager;
             this.logger = logger;
@@ -107,18 +108,18 @@
                 {
                     Id = paralelo.GradeTeacherId,
 
-                    GradeId = paralelo.IdGrade,
+                    GradeId = paralelo.GradeId,
 
-                    TeacherId = paralelo.IdTeacher,
+                    TeacherId = paralelo.TeacherId,
 
                     GradeName = this.gradeService
                     .GetGrades()
-                    .FirstOrDefault(g => g.GradeId == paralelo.IdGrade)
+                    .FirstOrDefault(g => g.GradeId == paralelo.GradeId)
                     .Name,
 
                     TeacherName = this.userService
                     .GetTeachers()
-                    .FirstOrDefault(t => t.Id == paralelo.IdTeacher)
+                    .FirstOrDefault(t => t.Id == paralelo.TeacherId)
                     .Name,
 
                     Students = this.userService
@@ -199,11 +200,11 @@
 
             model.GradeName = this.gradeService
                 .GetGrades()
-                .FirstOrDefault(g => g.GradeId == paralelo.IdGrade).Name;
+                .FirstOrDefault(g => g.GradeId == paralelo.GradeId).Name;
 
             model.TeacherName = this.userService
                 .GetTeachers()
-                .FirstOrDefault(t => t.Id == paralelo.IdTeacher).Name;
+                .FirstOrDefault(t => t.Id == paralelo.TeacherId).Name;
 
             model.Teachers = teachers;
             model.Grades = grades;
@@ -219,8 +220,8 @@
             {
                 var gradeParalelo = await this.gradeService.GetGradeParaleloAsync(model.GradeParaleloId);
 
-                gradeParalelo.IdTeacher = model.IdTeacher;
-                gradeParalelo.IdGrade = model.IdGrade;
+                gradeParalelo.TeacherId = model.IdTeacher;
+                gradeParalelo.GradeId = model.IdGrade;
 
                 await this.gradeService.SaveChangesAsync();
             }
@@ -290,15 +291,7 @@
 
             await this.userService.SaveChangesAsync();
 
-            var emailSubject = "Your new password. Digital Cool Book.";
-            var emailBody = "Здравейте," + Environment.NewLine + $"Вашата нова парола е: {newPassword}" +
-                             Environment.NewLine + "Променете вашата парола от настройките на вашия профил." +
-                             Environment.NewLine + Environment.NewLine + "Поздрави." + Environment.NewLine +
-                             "Digital Cool Book";
-
-            await this.emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
-
-            var result = "Новата ви парола ще бъде изпратена на посоченият имейл до няколко минути.";
+            var result = this.emailSender.SendNewPassword(newPassword, user.Email);
 
             return this.Json(result);
         }

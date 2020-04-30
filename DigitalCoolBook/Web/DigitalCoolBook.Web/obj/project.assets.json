@@ -2744,7 +2744,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": "1.0.0"
+          "DigitalCoolBook.Data": "1.0.0",
+          "DigitalCoolBook.Models": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DigitalCoolBook.Services.dll": {}
@@ -8968,16 +8969,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }
