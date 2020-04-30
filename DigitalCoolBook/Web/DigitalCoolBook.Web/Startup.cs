@@ -13,6 +13,7 @@ namespace DigitalCoolBook.App
     using DigitalCoolBook.Services;
     using DigitalCoolBook.Services.Contracts;
     using DigitalCoolBook.Services.Mapping;
+    using DigitalCoolBook.Services.Message;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -63,7 +64,7 @@ namespace DigitalCoolBook.App
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IScoreService, ScoreService>();
-			services.AddTransient<IEmailSender, EmailSender>();
+			services.AddTransient<IEmailSend, EmailSender>();
 
             var config = new MapperConfiguration(cfg =>
             {

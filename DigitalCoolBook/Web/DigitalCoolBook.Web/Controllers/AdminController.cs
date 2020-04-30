@@ -8,12 +8,11 @@
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.AdminViewModels;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
-    using DigitalCoolBook.App.Services;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using DigitalCoolBook.Services.Message;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -25,7 +24,7 @@
         private readonly IUserService userService;
         private readonly IMapper mapper;
         private readonly UserManager<IdentityUser> userManager;
-        private readonly EmailSender emailSender;
+        private readonly IEmailSend emailSender;
         private readonly SignInManager<IdentityUser> signInManager;
 
         public AdminController(
@@ -35,7 +34,7 @@
             IUserService userService,
             IMapper mapper,
             UserManager<IdentityUser> userManager,
-            EmailSender emailSender)
+            IEmailSend emailSender)
         {
             this.signInManager = signInManager;
             this.logger = logger;
@@ -291,6 +290,7 @@
 
             await this.userService.SaveChangesAsync();
 
+            // Sends the new password to the user
             var result = this.emailSender.SendNewPassword(newPassword, user.Email);
 
             return this.Json(result);

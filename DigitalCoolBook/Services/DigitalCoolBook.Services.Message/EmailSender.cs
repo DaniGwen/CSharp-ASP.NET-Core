@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using DigitalCoolBook.Services.Message;
 using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DigitalCoolBook.App.Services
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender : IEmailSend
     {
         private readonly IConfiguration _configuration;
 
