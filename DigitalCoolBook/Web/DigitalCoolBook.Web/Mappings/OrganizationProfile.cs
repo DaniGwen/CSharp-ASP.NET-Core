@@ -17,7 +17,7 @@
             // Student mappings
             this.CreateMap<Student, StudentEditViewModel>();
             this.CreateMap<StudentEditViewModel, Student>();
-            this.CreateMap<StudentRegisterModel, Student>();
+            this.CreateMap<StudentRegisterInputModel, Student>();
             this.CreateMap<Student, StudentDetailsViewModel>();
             this.CreateMap<Student, StudentChangePasswordViewModel>();
             this.CreateMap<Student, StudentTestDropDownModel>();

@@ -49,7 +49,7 @@
         [HttpGet]
         public IActionResult RegisterStudent()
         {
-            var model = new StudentRegisterModel
+            var model = new StudentRegisterInputModel
             {
                 Grades = this.gradeService.GetGrades()
                 .OrderBy(g => g.Name)
@@ -61,7 +61,7 @@
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> RegisterStudent(StudentRegisterModel registerModel)
+        public async Task<IActionResult> RegisterStudent(StudentRegisterInputModel registerModel)
         {
             if (this.ModelState.IsValid)
             {

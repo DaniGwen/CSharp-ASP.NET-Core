@@ -1,98 +1,101 @@
-﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentRegisterModel
+﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentRegisterInputModel
 
 @{
     ViewData["Title"] = "RegisterStudentAsync";
     Layout = "_LayoutMenus";
 }
 
-<h1 class="mt-1">Регистрация на Ученик</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RegisterStudent">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Име</label>
-                <input asp-for="Name" class="form-control" placeholder="Име..." />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Емайл</label>
-                <input asp-for="Email" class="form-control" placeholder="Имейл..." />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label">Парола</label>
-                <input asp-for="Password" class="form-control" placeholder="Парола..." />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label">Потвърди Парола</label>
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="Парола..." />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label">Дата на раждане</label>
-                <input asp-for="DateOfBirth" type="date" class="form-control" placeholder="Дата на раждане..." />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlaceOfBirth" class="control-label">Място на раждане</label>
-                <input asp-for="PlaceOfBirth" class="form-control" placeholder="Място на раждане" />
-                <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
-            </div>
-            <label asp-for="Sex" class="control-label">Пол</label>
-            <select class="form-control" name="sex" id="sex">
-                <option value="Мъж">Мъж</option>
-                <option value="Жена">Жена</option>
-                <option value="Друго">Друго</option>
-            </select>
-            <div class="form-group">
-                <label asp-for="MobilePhone" class="control-label">Мобилен телефон</label>
-                <input asp-for="MobilePhone" class="form-control" placeholder="Мобилен телефон..." />
-                <span asp-validation-for="MobilePhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telephone" class="control-label">Домашен Телефон</label>
-                <input asp-for="Telephone" class="form-control" placeholder="Домашен Телефон..." />
-                <span asp-validation-for="Telephone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FatherName" class="control-label">Име на Баща</label>
-                <input asp-for="FatherName" class="form-control" placeholder="Име на Баща..." />
-                <span asp-validation-for="FatherName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MotherName" class="control-label">Име на Майка</label>
-                <input asp-for="MotherName" class="form-control" placeholder="Име на Майка..." />
-                <span asp-validation-for="MotherName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MotherMobileNumber" class="control-label">Телефон на Майката</label>
-                <input asp-for="MotherMobileNumber" class="form-control" placeholder="Телефон..." />
-                <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FatherMobileNumber" class="control-label">Телефон на Бащата</label>
-                <input asp-for="FatherMobileNumber" class="form-control" placeholder="Телефон..." />
-                <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label">Адрес</label>
-                <input asp-for="Address" class="form-control" placeholder="Адрес..." />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас/Паралелка")
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Създай" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container-fluid w-50">
+    <h1 class="mt-1">Регистрация на Ученик</h1>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form asp-action="RegisterStudent">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Име</label>
+                    <input asp-for="Name" class="form-control" placeholder="Име..." />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Емайл</label>
+                    <input asp-for="Email" class="form-control" placeholder="Имейл..." />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label">Парола</label>
+                    <input asp-for="Password" class="form-control" placeholder="Парола..." />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label">Потвърди Парола</label>
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Парола..." />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="control-label">Дата на раждане</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" placeholder="Дата на раждане..." />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PlaceOfBirth" class="control-label">Място на раждане</label>
+                    <input asp-for="PlaceOfBirth" class="form-control" placeholder="Място на раждане" />
+                    <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                </div>
+                <label asp-for="Sex" class="control-label">Пол</label>
+                <select class="form-control" name="sex" id="sex">
+                    <option value="Мъж">Мъж</option>
+                    <option value="Жена">Жена</option>
+                    <option value="Друго">Друго</option>
+                </select>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">Адрес</label>
+                    <input asp-for="Address" class="form-control" placeholder="Адрес..." />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MobilePhone" class="control-label">Мобилен телефон</label>
+                    <input asp-for="MobilePhone" class="form-control" style="width: 20em;" placeholder="Мобилен телефон..." />
+                    <span asp-validation-for="MobilePhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telephone" class="control-label">Домашен Телефон</label>
+                    <input asp-for="Telephone" class="form-control" style="width: 20em;" placeholder="Домашен Телефон..." />
+                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FatherName" class="control-label">Име на Баща</label>
+                    <input asp-for="FatherName" class="form-control" placeholder="Име на Баща..." />
+                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FatherMobileNumber" class="control-label">Телефон на Бащата</label>
+                    <input asp-for="FatherMobileNumber" class="form-control" style="width: 20em;" placeholder="Телефон..." />
+                    <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MotherName" class="control-label">Име на Майка</label>
+                    <input asp-for="MotherName" class="form-control" placeholder="Име на Майка..." />
+                    <span asp-validation-for="MotherName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MotherMobileNumber" class="control-label">Телефон на Майката</label>
+                    <input asp-for="MotherMobileNumber" class="form-control" style="width: 20em;" placeholder="Телефон..." />
+                    <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас/Паралелка")
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Създай" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Назад</a>
+    <div>
+        <a asp-controller="Home" asp-action="Index">Назад</a>
+    </div>
+
 </div>
 

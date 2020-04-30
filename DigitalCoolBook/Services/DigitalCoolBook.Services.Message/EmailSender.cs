@@ -29,6 +29,7 @@ namespace DigitalCoolBook.App.Services
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
+
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress(email, SendGriduser),
@@ -36,6 +37,7 @@ namespace DigitalCoolBook.App.Services
                 PlainTextContent = message,
                 HtmlContent = message
             };
+
             msg.AddTo(new EmailAddress(email));
 
             // Disable click tracking.
