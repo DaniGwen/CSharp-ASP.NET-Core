@@ -7,18 +7,15 @@ namespace DigitalCoolBook.App
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Data;
-    using DigitalCoolBook.App.Services;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Service;
     using DigitalCoolBook.Services;
     using DigitalCoolBook.Services.Contracts;
     using DigitalCoolBook.Services.Mapping;
-    using DigitalCoolBook.Services.Message;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Localization;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -57,14 +54,12 @@ namespace DigitalCoolBook.App
                    options.MinimumSameSitePolicy = SameSiteMode.None;
                });
 
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IScoreService, ScoreService>();
-			services.AddTransient<IEmailSend, EmailSender>();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -79,8 +74,10 @@ namespace DigitalCoolBook.App
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
+            services.AddControllersWithViews()
+                .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true)
+                .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddMvc(mvcOptions =>
             {
@@ -94,6 +91,7 @@ namespace DigitalCoolBook.App
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+
                 using (var serviceScope = app.ApplicationServices.CreateScope())
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())

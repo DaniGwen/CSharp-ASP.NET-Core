@@ -8,13 +8,15 @@
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.AdminViewModels;
     using DigitalCoolBook.App.Models.GradeParaleloViewModels;
+    using DigitalCoolBook.App.Services;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
-    using DigitalCoolBook.Services.Message;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+    using SendGrid;
 
     [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
@@ -24,7 +26,7 @@
         private readonly IUserService userService;
         private readonly IMapper mapper;
         private readonly UserManager<IdentityUser> userManager;
-        private readonly IEmailSend emailSender;
+        private readonly IConfiguration configuration;
         private readonly SignInManager<IdentityUser> signInManager;
 
         public AdminController(
@@ -34,7 +36,8 @@
             IUserService userService,
             IMapper mapper,
             UserManager<IdentityUser> userManager,
-            IEmailSend emailSender)
+            IConfiguration configuration
+            )
         {
             this.signInManager = signInManager;
             this.logger = logger;
@@ -42,7 +45,7 @@
             this.userService = userService;
             this.mapper = mapper;
             this.userManager = userManager;
-            this.emailSender = emailSender;
+            this.configuration = configuration;
         }
 
         [Authorize(Roles = "Admin")]
@@ -291,7 +294,9 @@
             await this.userService.SaveChangesAsync();
 
             // Sends the new password to the user
-            var result = this.emailSender.SendNewPassword(newPassword, user.Email);
+            var emailSender = new EmailSender(configuration);
+
+            var result = emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
 
             return this.Json(result);
         }

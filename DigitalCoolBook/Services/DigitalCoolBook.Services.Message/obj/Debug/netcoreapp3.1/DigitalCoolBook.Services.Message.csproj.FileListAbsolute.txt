@@ -19,8 +19,8 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\Digita
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\bin\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.pdb
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.csprojAssemblyReference.cache
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.csproj.CoreCompileInputs.cache
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.AssemblyInfoInputs.cache
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.AssemblyInfo.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.pdb
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.Message.csproj.CoreCompileInputs.cache
