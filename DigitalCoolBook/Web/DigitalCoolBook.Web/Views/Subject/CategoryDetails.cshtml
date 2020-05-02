@@ -63,7 +63,7 @@
     </div>
     <hr />
     <div class="mt-4 ml-4 mb-2 row form-group">
-        <a href="@Url.Action("Categories", "Subject",new {Id = Model.SubjectId})">Назад</a>
+        <a href="@Url.Action("Subjects", "Subject")">Назад</a>
     </div>
 
     @if (this.User.IsInRole("Admin"))
@@ -74,7 +74,7 @@
     }
 </div>
 
-<div id="dialog-confirm" title="Изтриване на урок">
+<div hidden id="dialog-confirm" title="Изтриване на урок">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
         Информацията ще бъде изтрита. Продължи?

@@ -50,6 +50,7 @@
         public IActionResult CategoriesAsync(string Id)
         {
             var categoryLessons = this.subjectService.GetLessons().ToList();
+
             var subjectsDb = this.subjectService.GetSubjects()
                 .Include(s => s.Categories)
                 .ToList();
@@ -133,6 +134,7 @@
             try
             {
                 var lessonLevel = int.Parse(level);
+
                 var lesson = new Lesson
                 {
                     LessonId = Guid.NewGuid().ToString(),
@@ -142,9 +144,9 @@
                     Level = lessonLevel,
                 };
 
-                if (lessonLevel > 1)
+                if (lessonLevel == 1)
                 {
-                    lesson.IsUnlocked = false;
+                    lesson.IsUnlocked = true;
                 }
 
                 await this.subjectService.CreateLessonAsync(lesson);

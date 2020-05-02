@@ -86,16 +86,16 @@
                 <div class="form-group">
                     @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас/Паралелка")
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Създай" class="btn btn-primary" />
+                <div class="row d-flex justify-content-between">
+                    <div class="form-group mt-2">
+                        <a asp-controller="Home" asp-action="Index">Назад</a>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Създай" class="btn btn-primary" />
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-
-    <div>
-        <a asp-controller="Home" asp-action="Index">Назад</a>
-    </div>
-
 </div>
 

@@ -32,7 +32,7 @@ namespace DigitalCoolBook.App.Services
             // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
             msg.SetClickTracking(false, false);
 
-           await client.SendEmailAsync(msg);
+            var response = await client.SendEmailAsync(msg);
         }
 
         public async Task<string> SendNewPassword(string newPassword, string email, string username)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bFLCpvKqX6c7Rae46nwqBeRpxuN7i1H6mRERZcJAM4Uzco/WBr25wgGt1sgUlovUiGtoxZB2MtVX/XrEa96fpA==",
+  "dgSpecHash": "Hv+jaVvYqKKjuCCtLLmRwrGX6jziJy9mdLCnH2i2g7A4gM3i7u1bsJ3KH6uSa96Oq9jphGwyGV8ALjXDgn4/pw==",
   "success": true,
   "projectFilePath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web\\DigitalCoolBook.App.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.templating\\3.1.1\\microsoft.visualstudio.web.codegeneration.templating.3.1.1.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.utils\\3.1.1\\microsoft.visualstudio.web.codegeneration.utils.3.1.1.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\3.1.1\\microsoft.visualstudio.web.codegenerators.mvc.3.1.1.nupkg.sha512",
+    "C:\\Users\\AW\\.nuget\\packages\\microsoft.web.librarymanager.build\\2.1.76\\microsoft.web.librarymanager.build.2.1.76.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\moment.js\\2.24.0\\moment.js.2.24.0.nupkg.sha512",
@@ -148,6 +149,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
+    "C:\\Users\\AW\\.nuget\\packages\\system.runtime.loader\\4.3.0\\system.runtime.loader.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.numerics\\4.3.0\\system.runtime.numerics.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.serialization.formatters\\4.3.0\\system.runtime.serialization.formatters.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime.serialization.json\\4.3.0\\system.runtime.serialization.json.4.3.0.nupkg.sha512",
