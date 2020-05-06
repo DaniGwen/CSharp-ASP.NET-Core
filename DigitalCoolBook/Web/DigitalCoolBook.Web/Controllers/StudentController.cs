@@ -206,22 +206,29 @@
         {
             try
             {
-                var user = await this.userService.GetUserAsync(model.Id);
-                var result = await this.userManager.RemovePasswordAsync(user);
-                await this.userService.SaveChangesAsync();
-                var addResult = await this.userManager.AddPasswordAsync(user, model.Password);
-
-                if (addResult.Succeeded)
+                if (this.ModelState.IsValid)
                 {
-                    await this.signInManager.SignOutAsync();
-                    this.TempData["SuccessMsg"] = "Паролата е записана успешно";
-                    return this.Redirect("/Home/Success");
+                    var user = await this.userService.GetUserAsync(model.Id);
+                    var result = await this.userManager.RemovePasswordAsync(user);
+                    await this.userService.SaveChangesAsync();
+                    var addResult = await this.userManager.AddPasswordAsync(user, model.Password);
+
+                    if (addResult.Succeeded)
+                    {
+                        await this.signInManager.SignOutAsync();
+                        this.TempData["SuccessMsg"] = "Паролата е записана успешно";
+                        return this.Redirect("/Home/Success");
+                    }
+                    else
+                    {
+                        this.ModelState.AddModelError(string.Empty, addResult.Errors.FirstOrDefault().ToString());
+                        return this.View(model);
+                    }
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, addResult.Errors.FirstOrDefault().ToString());
                     return this.View(model);
-                }
+                }                
             }
             catch (Exception exception)
             {

@@ -296,9 +296,9 @@
             // Sends the new password to the user
             var emailSender = new EmailSender(configuration);
 
-            var result = emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
+            emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
 
-            return this.Json(result);
+            return this.Json("Нова парола беше изпратена на вашият имейл.");
         }
 
         // Generates Random password

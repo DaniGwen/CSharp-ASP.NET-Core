@@ -35,20 +35,18 @@ namespace DigitalCoolBook.App.Services
             var response = await client.SendEmailAsync(msg);
         }
 
-        public async Task<string> SendNewPassword(string newPassword, string email, string username)
+        public async Task SendNewPassword(string newPassword, string email, string username)
         {
             var emailSubject = "Your new password. Digital Cool Book.";
 
             var emailBody = $"Здравейте, {username}"
-                             + Environment.NewLine + Environment.NewLine +
+                             + "\r\n" + "\r\n" +
                              $"Вашата нова парола е: {newPassword}" +
-                             Environment.NewLine + "Променете вашата парола от настройките на вашия профил." +
-                             Environment.NewLine + Environment.NewLine + "Поздрави." + Environment.NewLine +
+                             "\r\n" + "Променете вашата парола от настройките на вашия профил." +
+                             "\r\n" + "\r\n" + "Поздрави." + "\r\n" +
                              "<strong>Digital Cool Book</strong>";
 
             await this.Execute( emailSubject, emailBody, email);
-
-            return "Новата ви парола ще бъде изпратена на посоченият имейл до няколко минути.";
         }
     }
 }
