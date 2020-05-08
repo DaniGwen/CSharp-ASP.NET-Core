@@ -227,6 +227,9 @@
                 // Adding test-student in list before adding them to DB
                 var testStudentForDB = new List<TestStudent>();
 
+                // Adding students in TestRoom
+                this.testService.AddTestRoom(students, test.TeacherId);
+
                 // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in students)
                 {

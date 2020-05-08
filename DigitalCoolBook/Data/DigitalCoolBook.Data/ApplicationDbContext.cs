@@ -41,6 +41,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Score> Scores { get; set; }
 
+        public DbSet<TestRoom> TestRooms { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

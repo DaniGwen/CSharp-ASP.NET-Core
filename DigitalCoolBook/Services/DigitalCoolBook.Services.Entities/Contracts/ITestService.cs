@@ -7,7 +7,7 @@
 
     public interface ITestService
     {
-       Test GetTestByLesson(string id);
+        Test GetTestByLesson(string id);
 
         Task SaveChangesAsync();
 
@@ -30,5 +30,7 @@
         IQueryable<ExpiredTest> GetExpiredTests();
 
         Task RemoveExpiredTest(string id);
+
+        Task AddTestRoom(string[] students, string teacherId);
     }
 }

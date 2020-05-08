@@ -69,7 +69,7 @@
 
         public async Task<ExpiredTest> GetExpiredTest(string id)
         {
-           return await this.context.ExpiredTests.FindAsync(id);
+            return await this.context.ExpiredTests.FindAsync(id);
         }
 
         public IQueryable<ExpiredTest> GetExpiredTests()
@@ -81,6 +81,25 @@
         {
             var expiredTest = await this.context.ExpiredTests.FindAsync(id);
             this.context.ExpiredTests.Remove(expiredTest);
+            await this.SaveChangesAsync();
+        }
+
+        // Add students to test room
+        public async Task AddTestRoom(string[] students, string teacherId)
+        {
+            var testRoom = new TestRoom
+            {
+                TeacherId = teacherId,
+            };
+
+            foreach (var studentId in students)
+            {
+                var studentFromDb = this.context.Students.FirstOrDefault(s => s.Id == studentId);
+
+                testRoom.Students.Add(studentFromDb);
+            }
+
+            await this.context.TestRooms.AddAsync(testRoom);
             await this.SaveChangesAsync();
         }
     }
