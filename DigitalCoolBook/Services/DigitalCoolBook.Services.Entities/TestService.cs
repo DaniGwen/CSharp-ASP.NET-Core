@@ -94,9 +94,15 @@
 
             foreach (var studentId in students)
             {
-                var studentFromDb = this.context.Students.FirstOrDefault(s => s.Id == studentId);
+                var studentFromDb = this.context.Students.FirstOrDefault(s => s.Name == studentId);
 
-                testRoom.Students.Add(studentFromDb);
+                var studentForTestRoom = new TestRoomStudent
+                {
+                    StudentId = studentFromDb.Id,
+                    TestRoomId = testRoom.Id,
+                };
+
+                testRoom.Students.Add(studentForTestRoom);
             }
 
             await this.context.TestRooms.AddAsync(testRoom);
