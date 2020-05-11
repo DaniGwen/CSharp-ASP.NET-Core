@@ -62,15 +62,7 @@
                     </li>
                     @if (this.User.IsInRole("Teacher"))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Subject/Subjects">Предмети</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Teacher/ChooseGrade">Класове</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Test/Tests">Тестове</a>
-                        </li>
+                        <partial name="_PartialTeacherNav"/>
                     }
                     else if (this.User.IsInRole("Admin"))
                     {

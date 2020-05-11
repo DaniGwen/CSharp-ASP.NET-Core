@@ -242,16 +242,17 @@
                     testStudentForDB.Add(testStudent);
                 }
 
-                // Add mapping entity test-student to DB
+                // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudentForDB);
                 await this.testService.SaveChangesAsync();
 
-                return this.RedirectToAction("Tests");
+                return this.RedirectToAction("StartTest");
             }
             catch (Exception exception)
             {
                 this.TempData["ErrorMsg"] = exception.Message;
-                return this.View("Error");
+
+                return this.Redirect("/Home/Error");
             }
         }
 
@@ -259,15 +260,16 @@
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> StartTest(string id)
         {
-            var test = await this.testService.GetTestAsync(id);
-
-            this.TempData["TestId"] = test.TestId;
-
-            // Map test to testModel
-            var model = this.mapper.Map<TestStartViewModel>(test);
-
             try
             {
+                var test = await this.testService.GetTestAsync(id);
+
+                this.TempData["TestId"] = test.TestId;
+
+                // Map test to testModel
+                var model = this.mapper.Map<TestStartViewModel>(test);
+
+
                 // Gets the questions for this test
                 var questionsDb = this.questionService
                .GetQuestions()
@@ -277,14 +279,7 @@
                 // Add questions to model and map questions to QuestionModel
                 model.Questions
                         .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
-            }
-            catch (Exception exception)
-            {
-                this.View("/Error", exception.Message);
-            }
 
-            try
-            {
                 // Add Answers to Questions for this test
                 foreach (var question in model.Questions)
                 {
@@ -294,13 +289,17 @@
 
                     question.Answers.AddRange(answers);
                 }
+
+                return this.View(model);
             }
             catch (Exception exception)
             {
-                this.View("/Error", exception.Message);
+                this.TempData["ErrorMsg"] = exception.Message;
+
+                this.Redirect("/Home/Error");
             }
 
-            return this.View(model);
+            return this.View();
         }
 
         [HttpPost]

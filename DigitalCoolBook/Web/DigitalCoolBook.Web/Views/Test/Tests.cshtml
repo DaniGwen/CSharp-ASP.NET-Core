@@ -16,22 +16,16 @@
         <div class="row">
             <p class="col-form-label-lg">@test.TestName</p>
             <div class="col d-flex justify-content-end">
-                @if (test.IsExpired)
-                {
-                    <p class="col-form-label-lg text-danger ml-3">Теста е изтекъл</p>
-                }
-                else if (test.Timer == 0)
-                {
-                    <div class="col-form-label-lg ml-3">
-                        @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId }, new { @class = "btn btn-outline-info" })
-                    </div>
-                }
-                else
-                {
-                    <div class="col-form-label-lg ml-3">
-                        @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "btn btn-outline-success" })
-                    </div>
-                }
+
+                <div class="col-form-label-lg ml-3">
+                    @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId }, new { @class = "btn btn-outline-info" })
+                </div>
+
+
+                @*<div class="col-form-label-lg ml-3">
+                    @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "btn btn-outline-success" })
+                </div>*@
+
             </div>
 
         </div>

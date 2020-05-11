@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DigitalCoolBook.App.Attributes
+﻿namespace DigitalCoolBook.App.Attributes
 {
+    using System;
+
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class ValidationAttribute : Attribute
     {

@@ -92,6 +92,8 @@
                 TeacherId = teacherId,
             };
 
+            var testRoomStudentsList = new List<TestRoomStudent>();
+
             foreach (var studentId in students)
             {
                 var studentFromDb = this.context.Students.FirstOrDefault(s => s.Name == studentId);
@@ -102,9 +104,9 @@
                     TestRoomId = testRoom.Id,
                 };
 
-                testRoom.Students.Add(studentForTestRoom);
+                testRoomStudentsList.Add(studentForTestRoom);
             }
-
+            await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
             await this.context.TestRooms.AddAsync(testRoom);
             await this.SaveChangesAsync();
         }

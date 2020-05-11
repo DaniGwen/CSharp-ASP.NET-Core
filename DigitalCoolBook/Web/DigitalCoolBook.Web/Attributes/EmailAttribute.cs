@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace DigitalCoolBook.App.Attributes
+﻿namespace DigitalCoolBook.App.Attributes
 {
+    using System;
     using System.Text.RegularExpressions;
 
     public class EmailAttribute : ValidationAttribute

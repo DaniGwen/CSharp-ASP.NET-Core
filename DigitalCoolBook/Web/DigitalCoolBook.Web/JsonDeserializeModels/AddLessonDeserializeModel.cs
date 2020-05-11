@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace DigitalCoolBook.App.JsonDeserializeModels
+﻿namespace DigitalCoolBook.App.JsonDeserializeModels
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class AddLessonDeserializeModel
     {
         [FromForm]

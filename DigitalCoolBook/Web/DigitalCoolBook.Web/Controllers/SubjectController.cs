@@ -219,7 +219,7 @@
 
                 return this.Json("Промените са записани.");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return this.Json("Грешка при записването.");
             }
