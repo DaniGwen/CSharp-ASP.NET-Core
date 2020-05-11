@@ -5,23 +5,26 @@
     Layout = "_LayoutMenus";
 }
 
-<h1>Класове</h1>
+<div class="container-fluid w-50">
+    <div class="row mb-2 mt-2">
+        <div class="col d-flex justify-content-center">
+            <h2 class="col-sm-auto my-border text-white">Класове</h2>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="btn-outline-info btn-lg" href="/Teacher/GradeDetails/@item.GradeId">@item.Name</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-outline-info mb-2" href="/Home/Index">Назад</a>
+</div>
 
-<table class="table">
-    <thead>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="font-weight-bold">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td class="btn btn-sm btn-secondary text-white">
-                    @Html.ActionLink("Детайли", "GradeDetails", new { id = item.GradeId })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<a class="btn btn-outline-info mb-2" href="/Home/Index">Назад</a>

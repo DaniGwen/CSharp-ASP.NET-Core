@@ -2811,7 +2811,8 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "DigitalCoolBook.Data": "1.0.0",
-          "DigitalCoolBook.Models": "1.0.0"
+          "DigitalCoolBook.Models": "1.0.0",
+          "DigitalCoolBook.Web.Models": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DigitalCoolBook.Services.dll": {}

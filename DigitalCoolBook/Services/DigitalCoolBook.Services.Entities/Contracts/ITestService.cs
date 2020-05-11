@@ -1,5 +1,6 @@
 ﻿namespace DigitalCoolBook.Services.Contracts
 {
+    using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using System.Collections.Generic;
     using System.Linq;
@@ -31,6 +32,6 @@
 
         Task RemoveExpiredTest(string id);
 
-        Task AddTestRoom(string[] students, string teacherId);
+        Task AddTestRoomAsync(string[] students, string teacherId);
     }
 }

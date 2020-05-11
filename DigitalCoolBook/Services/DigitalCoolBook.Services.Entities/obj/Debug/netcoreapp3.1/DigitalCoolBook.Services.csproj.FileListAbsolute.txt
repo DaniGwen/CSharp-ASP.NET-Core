@@ -39,3 +39,5 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\Digita
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Entities\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Entities\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.csproj.CopyComplete
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Entities\obj\Debug\netcoreapp3.1\DigitalCoolBook.Services.csproj.CoreCompileInputs.cache
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Entities\bin\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.dll
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Services\DigitalCoolBook.Services.Entities\bin\Debug\netcoreapp3.1\DigitalCoolBook.Web.Models.pdb

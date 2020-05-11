@@ -212,6 +212,7 @@
                 if (students.Length == 0)
                 {
                     this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
+
                     return this.View(model);
                 }
 
@@ -228,7 +229,7 @@
                 var testStudentForDB = new List<TestStudent>();
 
                 // Adding students in TestRoom
-                this.testService.AddTestRoom(students, test.TeacherId);
+                await this.testService.AddTestRoomAsync(students, test.TeacherId);
 
                 // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in students)
@@ -244,9 +245,8 @@
 
                 // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudentForDB);
-                await this.testService.SaveChangesAsync();
 
-                return this.RedirectToAction("StartTest");
+                return this.RedirectToAction("StartTest", test.TestId);
             }
             catch (Exception exception)
             {
@@ -307,79 +307,9 @@
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            // Gets questions for this test
-            var questions = this.questionService
-                .GetQuestions()
-                .Include(question => question.Answers)
-                .Where(question => question.TestId == this.TempData["TestId"].ToString())
-                .ToList();
+            var result = this.ProcessTestAsync(model);
 
-            // Max points 10
-            var points = 0;
-
-            // Check for correct answer and add points
-            foreach (var question in questions)
-            {
-                var correctAnswerId = question.Answers
-                    .First(answer => answer.IsCorrect == true).AnswerId;
-
-                var modelAnswerId = model.First(q => q.QuestionId == question.QuestionId).AnswerId;
-
-                if (modelAnswerId == correctAnswerId)
-                {
-                    points += 10;
-                }
-            }
-
-            // Test from DB
-            var test = await this.testService
-                .GetTestAsync(this.TempData["TestId"].ToString());
-
-            // Create expired test to keep history
-            var expiredTest = this.mapper.Map<ExpiredTest>(test);
-            expiredTest.ExpiredTestId = Guid.NewGuid().ToString();
-            expiredTest.Date = DateTime.Now;
-            expiredTest.Result = points;
-
-            // Add expired test to DB if score is bigger then the one in the database
-            if (this.testService.GetExpiredTests().Any())
-            {
-                var expiredTestDb = this.testService.GetExpiredTests().First();
-
-                if (expiredTestDb.Result < expiredTest.Result)
-                {
-                    await this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
-                    await this.testService.AddExpiredTestAsync(expiredTest);
-                }
-            }
-            else
-            {
-                await this.testService.AddExpiredTestAsync(expiredTest);
-            }
-
-            // Create Score
-            if (this.User.IsInRole("Student"))
-            {
-                var score = new Score
-                {
-                    ScoreId = Guid.NewGuid().ToString(),
-                    ScorePoints = points,
-                    LessonId = test.LessonId,
-                };
-
-                // Create ScoreStudent
-                var scoreStudent = new ScoreStudent
-                {
-                    ScoreId = score.ScoreId,
-                    StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
-                };
-
-                // Save entities to DB
-                await this.scoreService.AddScoreAsync(score);
-                await this.scoreService.AddScoreStudentAsync(scoreStudent);
-            }
-
-            this.ViewData["Result"] = points;
+            this.ViewData["Result"] = result;
 
             return this.View("Result");
         }
@@ -646,6 +576,81 @@
                 this.TempData["ErrorMsg"] = "Грешка при обработка на заявката!";
                 return this.View("/Home/Error");
             }
+        }
+
+        private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model)
+        {
+            // Gets questions for this test
+            var questions = this.questionService
+                .GetQuestions()
+                .Include(question => question.Answers)
+                .Where(question => question.TestId == this.TempData["TestId"].ToString())
+                .ToList();
+
+            // Max points 100
+            var points = 0;
+
+            // Check for correct answer and add points
+            foreach (var question in questions)
+            {
+                var correctAnswerId = question.Answers
+                    .First(answer => answer.IsCorrect == true).AnswerId;
+
+                var modelAnswerId = model.First(q => q.QuestionId == question.QuestionId).AnswerId;
+
+                if (modelAnswerId == correctAnswerId)
+                {
+                    points += 10;
+                }
+            }
+
+            // Get Test from DB
+            var test = await this.testService
+                .GetTestAsync(this.TempData["TestId"].ToString());
+
+            // Create expired test to keep history
+            var expiredTest = this.mapper.Map<ExpiredTest>(test);
+            expiredTest.Date = DateTime.UtcNow;
+            expiredTest.Result = points;
+
+            // Add expired test to DB if score is bigger then the one in the database
+            if (this.testService.GetExpiredTests().Any())
+            {
+                var expiredTestDb = this.testService.GetExpiredTests().First();
+
+                if (expiredTestDb.Result < expiredTest.Result)
+                {
+                    await this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
+                    await this.testService.AddExpiredTestAsync(expiredTest);
+                }
+            }
+            else
+            {
+                await this.testService.AddExpiredTestAsync(expiredTest);
+            }
+
+            // Create Score
+            if (this.User.IsInRole("Student"))
+            {
+                var score = new Score
+                {
+                    ScorePoints = points,
+                    LessonId = test.LessonId,
+                };
+
+                // Create ScoreStudent
+                var scoreStudent = new ScoreStudent
+                {
+                    ScoreId = score.ScoreId,
+                    StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                };
+
+                // Save entities to DB
+                await this.scoreService.AddScoreAsync(score);
+                await this.scoreService.AddScoreStudentAsync(scoreStudent);
+            }
+
+            return points;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DigitalCoolBook.Models
 {
@@ -6,8 +7,10 @@ namespace DigitalCoolBook.Models
     {
         public Score()
         {
+            this.ScoreId = Guid.NewGuid().ToString();
             this.ScoreStudents = new LinkedList<ScoreStudent>();
         }
+
         public string ScoreId { get; set; }
 
         public int ScorePoints { get; set; }

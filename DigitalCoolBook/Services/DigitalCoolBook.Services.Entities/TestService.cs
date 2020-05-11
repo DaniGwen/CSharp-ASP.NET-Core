@@ -1,8 +1,10 @@
 ﻿namespace DigitalCoolBook.Service
 {
     using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,10 +12,12 @@
     public class TestService : ITestService
     {
         private readonly ApplicationDbContext context;
+        private readonly IQuestionService questionService;
 
-        public TestService(ApplicationDbContext context)
+        public TestService(ApplicationDbContext context, IQuestionService questionService)
         {
             this.context = context;
+            this.questionService = questionService;
         }
 
         public async Task AddExpiredTestAsync(ExpiredTest expiredTest)
@@ -85,7 +89,7 @@
         }
 
         // Add students to test room
-        public async Task AddTestRoom(string[] students, string teacherId)
+        public async Task AddTestRoomAsync(string[] students, string teacherId)
         {
             var testRoom = new TestRoom
             {
@@ -106,8 +110,9 @@
 
                 testRoomStudentsList.Add(studentForTestRoom);
             }
-            await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
+
             await this.context.TestRooms.AddAsync(testRoom);
+            await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
             await this.SaveChangesAsync();
         }
     }

@@ -2403,7 +2403,8 @@
       "DigitalCoolBook.Services/1.0.0": {
         "dependencies": {
           "DigitalCoolBook.Data": "1.0.0",
-          "DigitalCoolBook.Models": "1.0.0"
+          "DigitalCoolBook.Models": "1.0.0",
+          "DigitalCoolBook.Web.Models": "1.0.0"
         },
         "runtime": {
           "DigitalCoolBook.Services.dll": {}
