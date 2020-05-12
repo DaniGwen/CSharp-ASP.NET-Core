@@ -246,7 +246,7 @@
                 // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudentForDB);
 
-                return this.RedirectToAction("StartTest", test.TestId);
+                return this.RedirectToAction("StartTest", "Test", new { Id = test.TestId });
             }
             catch (Exception exception)
             {

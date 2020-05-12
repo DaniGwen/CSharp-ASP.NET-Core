@@ -5,27 +5,27 @@
     Layout = "_LayoutMenus";
 }
 
-<div class="container-fluid w-70">
+<div class="container-fluid w-50">
     <p class="col-form-label-lg text-center">Стартиране на тест</p>
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
         <input hidden name="TestId" value="@Model.TestId" />
-        <div class="col form-group d-flex justify-content-center">
+        <div class="col col-form-label d-flex justify-content-center">
             <div class="row">
-                <label class="col-form-label mr-1">Времетраене: </label>
-                <input asp-for="Timer" id="timerinput" min="0" max="360" class="col-form-label-sm" />
-                <small class="col-form-label-sm ml-1">минути.</small>
+                <label class="col-form-label mr-2">Времетраене: </label>
+                <input class="col-form-label-sm" asp-for="Timer" id="timerinput" min="0" max="360" />
+                <small class="col-form-label-sm ml-1 mt-1">минути.</small>
             </div>
-                <span class="text-danger" id="alertTimer"></span>
+            <span class="text-danger" id="alertTimer"></span>
         </div>
-        <div class="row form-group d-flex justify-content-center ">
+        <div class="row col-form-label d-flex justify-content-center ">
             <label class="col-form-label mt-2 mr-2">Паралелка</label>
-            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-25" })
+            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Изберете Клас..", new { @class = "form-control w-50" })
         </div>
-        <div class="row d-flex justify-content-center mb-1">
-            <small>Изберете присъстващи ученици</small>
+        <div class="row col-form-label d-flex justify-content-center mb-1">
+            <small>Добавете ученици за теста.</small>
         </div>
-        <div class="col d-flex justify-content-center">
+        <div class="col col-form-label d-flex justify-content-center">
             <a class="mb-4 mr-3">Ученици:</a>
             <div id="checkArray"></div>
         </div>
