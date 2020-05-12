@@ -7,6 +7,7 @@ namespace DigitalCoolBook.App
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Data;
+    using DigitalCoolBook.App.Hubs;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Service;
     using DigitalCoolBook.Services;
@@ -83,6 +84,8 @@ namespace DigitalCoolBook.App
             {
                 mvcOptions.EnableEndpointRouting = false;
             });
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -130,6 +133,12 @@ namespace DigitalCoolBook.App
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseEndpoints(endpoint =>
+            {
+                endpoint.MapHub<TestHub>("/DoTest");
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -1,10 +1,8 @@
 ﻿namespace DigitalCoolBook.Service
 {
     using DigitalCoolBook.App.Data;
-    using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
-    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -114,6 +112,12 @@
             await this.context.TestRooms.AddAsync(testRoom);
             await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
             await this.SaveChangesAsync();
+        }
+
+        public string IsStudentInTest(string studentId)
+        {
+            return this.context.TestRoomStudents.Where(student => student.StudentId == studentId)
+                .Select(s => s.);
         }
     }
 }

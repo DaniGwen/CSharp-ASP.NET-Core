@@ -652,5 +652,17 @@
 
             return points;
         }
+
+        public IActionResult IsStudentInTest()
+        {
+
+            var isInTest = this.testService.IsStudentInTest(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            if (isInTest)
+            {
+                return this.RedirectToAction("StartTest")
+            }
+
+        }
     }
 }
