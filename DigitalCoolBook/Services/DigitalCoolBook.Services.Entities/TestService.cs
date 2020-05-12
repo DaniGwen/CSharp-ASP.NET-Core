@@ -87,11 +87,12 @@
         }
 
         // Add students to test room
-        public async Task AddTestRoomAsync(string[] students, string teacherId)
+        public async Task AddTestRoomAsync(string[] students, string teacherId , string testId)
         {
             var testRoom = new TestRoom
             {
                 TeacherId = teacherId,
+                TestId = testId,
             };
 
             var testRoomStudentsList = new List<TestRoomStudent>();
@@ -116,8 +117,9 @@
 
         public string IsStudentInTest(string studentId)
         {
-            return this.context.TestRoomStudents.Where(student => student.StudentId == studentId)
-                .Select(s => s.);
+            return this.context.TestRoomStudents
+                .Where(student => student.StudentId == studentId)
+                .Select(student => student.TestRoom.TestId).FirstOrDefault();
         }
     }
 }

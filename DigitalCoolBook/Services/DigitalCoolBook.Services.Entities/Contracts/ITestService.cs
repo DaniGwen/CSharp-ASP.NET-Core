@@ -32,8 +32,8 @@
 
         Task RemoveExpiredTest(string id);
 
-        Task AddTestRoomAsync(string[] students, string teacherId);
+        Task AddTestRoomAsync(string[] students, string teacherId, string testId);
 
-        bool IsStudentInTest(string studentId);
+        string IsStudentInTest(string studentId);
     }
 }

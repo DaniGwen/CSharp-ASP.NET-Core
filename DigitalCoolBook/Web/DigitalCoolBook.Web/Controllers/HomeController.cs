@@ -121,7 +121,7 @@
             { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
 
-        [Authorize(Roles ="Teacher, Admin")]
+        [Authorize(Roles = "Teacher, Admin, Student")]
         public IActionResult Success()
         {
             this.Response.Headers.Add("REFRESH", "3;URL=/Home/Index");

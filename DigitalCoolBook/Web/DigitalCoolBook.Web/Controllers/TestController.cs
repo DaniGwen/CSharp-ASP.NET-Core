@@ -228,9 +228,6 @@
                 // Adding test-student in list before adding them to DB
                 var testStudentForDB = new List<TestStudent>();
 
-                // Adding students in TestRoom
-                await this.testService.AddTestRoomAsync(students, test.TeacherId);
-
                 // Adding "TestStudent" relation  between Test and Student
                 foreach (var student in students)
                 {
@@ -242,6 +239,9 @@
 
                     testStudentForDB.Add(testStudent);
                 }
+
+                // Adding students in TestRoom
+                await this.testService.AddTestRoomAsync(students, test.TeacherId, model.TestId);
 
                 // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudentForDB);
@@ -653,16 +653,21 @@
             return points;
         }
 
+        [Authorize(Roles = "Student")]
         public IActionResult IsStudentInTest()
         {
+            var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var isInTest = this.testService.IsStudentInTest(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var testId = this.testService.IsStudentInTest(studentId);
 
-            if (isInTest)
+            if (testId != null)
             {
-                return this.RedirectToAction("StartTest")
+                return this.RedirectToAction("StartTest", "Test", new { id = testId });
             }
 
+            this.TempData["SuccessMsg"] = "Няма активни тестове";
+
+            return this.Redirect("/Home/Success");
         }
     }
 }
