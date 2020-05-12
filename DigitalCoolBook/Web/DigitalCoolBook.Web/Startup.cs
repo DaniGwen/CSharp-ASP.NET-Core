@@ -85,7 +85,10 @@ namespace DigitalCoolBook.App
                 mvcOptions.EnableEndpointRouting = false;
             });
 
-            services.AddSignalR();
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            }).AddMessagePackProtocol();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -136,7 +139,7 @@ namespace DigitalCoolBook.App
 
             app.UseEndpoints(endpoint =>
             {
-                endpoint.MapHub<TestHub>("/DoTest");
+                endpoint.MapHub<TestHub>("/testhub");
             });
 
             app.UseMvc(routes =>
@@ -145,6 +148,12 @@ namespace DigitalCoolBook.App
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseCors(builder =>
+            //{
+            //    builder.WithOrigins("https://localhost:44312")
+            //    .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            //});
         }
 
         // Seed data

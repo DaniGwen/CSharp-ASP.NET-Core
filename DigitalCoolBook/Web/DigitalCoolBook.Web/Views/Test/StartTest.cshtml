@@ -62,19 +62,23 @@
             <h1 class="text-success">Теста е активен</h1>
         </div>
         <div class="col d-flex justify-content-center mt-4">
-            <div class="row form-group text-right">
+            <div class="row">
+                <label>Времетраене: @Model.Timer минути.</label>
+            </div>
+            
+            @*<div class="row form-group text-right">
                 <span class="col-form-label">Оставащо време:</span>
             </div>
             <div class="row form-group mt-3">
                 <span class="timer col-form-label" data-minutes-left="@Model.Timer"></span>
-            </div>
+            </div>*@
         </div>
-        <div id="studentList"></div>
+        <div class="row" id="studentList"></div>
+        <div class="row" id="finishedLabel"></div>
     }
 </div>
 
 <!--Script-->
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/test.js"></script>
 <script src="~/js/jquery.simple.timer.js" type="text/javascript"></script>
 

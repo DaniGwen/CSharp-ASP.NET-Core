@@ -7,12 +7,15 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
+    using DigitalCoolBook.App.Hubs;
     using DigitalCoolBook.App.Models.CategoryViewModels;
     using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Connections;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
     using Microsoft.EntityFrameworkCore;
 
     public class TestController : Controller
@@ -24,6 +27,7 @@
         private readonly IUserService userService;
         private readonly IQuestionService questionService;
         private readonly IScoreService scoreService;
+        private readonly IHubContext<TestHub> testHub;
 
         public TestController(
             ITestService testService,
@@ -32,7 +36,8 @@
             IGradeService gradeService,
             IUserService userService,
             IQuestionService questionService,
-            IScoreService scoreService)
+            IScoreService scoreService,
+            IHubContext<TestHub> testHub)
         {
             this.testService = testService;
             this.subjectService = subjectService;
@@ -41,6 +46,7 @@
             this.userService = userService;
             this.questionService = questionService;
             this.scoreService = scoreService;
+            this.testHub = testHub;
         }
 
         // Admin creates a test for a lesson
@@ -268,7 +274,6 @@
 
                 // Map test to testModel
                 var model = this.mapper.Map<TestStartViewModel>(test);
-
 
                 // Gets the questions for this test
                 var questionsDb = this.questionService
@@ -654,9 +659,11 @@
         }
 
         [Authorize(Roles = "Student")]
-        public IActionResult IsStudentInTest()
+        public async Task<IActionResult> IsStudentInTestAsync()
         {
             var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var studentName = this.User.FindFirst(ClaimTypes.Name);
 
             var testId = this.testService.IsStudentInTest(studentId);
 
