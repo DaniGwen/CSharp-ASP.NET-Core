@@ -1,6 +1,5 @@
 ﻿namespace DigitalCoolBook.Services.Contracts
 {
-    using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using System.Collections.Generic;
     using System.Linq;
@@ -35,5 +34,11 @@
         Task AddTestRoomAsync(string[] students, string teacherId, string testId);
 
         string IsStudentInTest(string studentId);
+
+        bool CheckAllFinished();
+
+        TestRoomStudent GetTestRoomStudent(string studentId);
+
+        Task RemoveTestRoomAsync(string testId);
     }
 }

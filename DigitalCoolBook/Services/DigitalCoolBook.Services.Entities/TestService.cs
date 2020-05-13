@@ -45,7 +45,7 @@
                     testStudentsForDb.Add(testStudent);
                 }
             }
-           
+
             await this.context.AddRangeAsync(testStudentsForDb);
             await this.SaveChangesAsync();
         }
@@ -101,7 +101,7 @@
         }
 
         // Add students to test room
-        public async Task AddTestRoomAsync(string[] students, string teacherId , string testId)
+        public async Task AddTestRoomAsync(string[] students, string teacherId, string testId)
         {
             var testRoom = new TestRoom
             {
@@ -134,6 +134,29 @@
             return this.context.TestRoomStudents
                 .Where(student => student.StudentId == studentId)
                 .Select(student => student.TestRoom.TestId).FirstOrDefault();
+        }
+
+        public bool CheckAllFinished()
+        {
+            return this.context.TestRoomStudents.Any(x => x.Finished == false);
+        }
+
+        public TestRoomStudent GetTestRoomStudent(string studentId)
+        {
+            return this.context.TestRoomStudents.FirstOrDefault(x => x.StudentId == studentId);
+        }
+
+        public async Task RemoveTestRoomAsync(string testId)
+        {
+            var testRoom = this.context.TestRooms.FirstOrDefault(x => x.TestId == testId);
+
+            var testRoomStudents = this.context.TestRoomStudents
+                .Where(x => x.TestRoomId == testRoom.Id)
+                .ToList();
+
+            this.context.TestRooms.Remove(testRoom);
+            this.context.TestRoomStudents.RemoveRange(testRoomStudents);
+            await this.SaveChangesAsync();
         }
     }
 }

@@ -319,6 +319,15 @@
 
             this.ViewData["Result"] = result;
 
+            // Check if all students in the test room has finished
+            bool isAllFinished = this.testService.CheckAllFinished();
+
+            if (!isAllFinished)
+            {
+                var testId = this.TempData["TestId"].ToString();
+                this.testService.RemoveTestRoomAsync(testId);
+            }
+
             return this.View("Result");
         }
 
@@ -592,6 +601,10 @@
             var testId = this.TempData["TestId"].ToString();
             var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+            // Set the student status to finished in this test
+            var testRoomStudent = this.testService.GetTestRoomStudent(studentId);
+            testRoomStudent.Finished = true;
+
             // Gets questions for this test
             var questions = this.questionService
                 .GetQuestions()
@@ -671,11 +684,11 @@
         {
             var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var studentName = this.User.FindFirst(ClaimTypes.Name);
-
             var testId = this.testService.IsStudentInTest(studentId);
 
-            if (testId != null)
+            var testRoomStudent = this.testService.GetTestRoomStudent(studentId);
+
+            if (testId != null && testRoomStudent.Finished == false)
             {
                 return this.RedirectToAction("StartTest", "Test", new { id = testId });
             }

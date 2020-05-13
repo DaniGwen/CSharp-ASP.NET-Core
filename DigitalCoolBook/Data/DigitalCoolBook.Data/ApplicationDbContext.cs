@@ -65,7 +65,8 @@ namespace DigitalCoolBook.App.Data
                 .WithMany(q => q.Answers)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Test>().HasMany(test => test.Questions)
+            builder.Entity<Test>()
+                .HasMany(test => test.Questions)
                 .WithOne(question => question.Test)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -85,6 +86,11 @@ namespace DigitalCoolBook.App.Data
 
             builder.Entity<ScoreStudent>()
                 .HasKey(scoreStudent => new { scoreStudent.ScoreId, scoreStudent.StudentId });
+
+            builder.Entity<TestRoomStudent>()
+                .HasOne(x => x.TestRoom)
+                .WithMany(x => x.Students)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
