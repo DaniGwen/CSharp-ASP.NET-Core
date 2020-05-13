@@ -32,7 +32,21 @@
 
         public async Task AddTestStudentsAsync(List<TestStudent> testStudentList)
         {
-            await this.context.AddRangeAsync(testStudentList);
+            var testStudentsForDb = new List<TestStudent>();
+
+            foreach (var testStudent in testStudentList)
+            {
+                var testStudentFromDb = this.context
+                    .TestStudents
+                    .FirstOrDefault(ts => ts.StudentId == testStudent.StudentId && ts.TestId == testStudent.TestId);
+
+                if (testStudentFromDb == null)
+                {
+                    testStudentsForDb.Add(testStudent);
+                }
+            }
+           
+            await this.context.AddRangeAsync(testStudentsForDb);
             await this.SaveChangesAsync();
         }
 

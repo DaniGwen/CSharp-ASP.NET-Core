@@ -659,7 +659,6 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCool
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\bin\Debug\netcoreapp3.1\DigitalCoolBook.App.StaticWebAssets.xml
-C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PartialTeacherNav.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PartialAdminNav.cshtml.g.cs
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PartialStudentNav.cshtml.g.cs

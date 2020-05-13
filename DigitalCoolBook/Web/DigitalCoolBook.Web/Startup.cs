@@ -148,12 +148,6 @@ namespace DigitalCoolBook.App
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            //app.UseCors(builder =>
-            //{
-            //    builder.WithOrigins("https://localhost:44312")
-            //    .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-            //});
         }
 
         // Seed data

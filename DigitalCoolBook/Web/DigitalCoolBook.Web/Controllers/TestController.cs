@@ -225,21 +225,24 @@
                 // Get test from DB
                 var test = await this.testService.GetTestAsync(model.TestId);
 
-                // Finds current Teacher Id
+                // Set current Teacher Id to test
                 test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                // Set test timer
+                // Set test timer from input model
                 test.Timer = model.Timer;
 
-                // Adding test-student in list before adding them to DB
+                // Adding TestStudent in list before adding them to DB
                 var testStudentForDB = new List<TestStudent>();
 
-                // Adding "TestStudent" relation  between Test and Student
+                // Adding "TestStudent" relation
                 foreach (var student in students)
                 {
                     var testStudent = new TestStudent()
                     {
-                        StudentId = this.userService.GetStudents().FirstOrDefault(s => s.Name == student).Id,
+                        StudentId = this.userService
+                        .GetStudents()
+                        .FirstOrDefault(s => s.Name == student).Id,
+
                         TestId = test.TestId,
                     };
 
@@ -312,7 +315,7 @@
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            var result = this.ProcessTestAsync(model);
+            var result = await this.ProcessTestAsync(model);
 
             this.ViewData["Result"] = result;
 
@@ -347,10 +350,12 @@
                 if (model.Questions.Count < 1)
                 {
                     this.ModelState.AddModelError(string.Empty, "Моля добавете поне един въпрос.");
+
                     return this.View(model);
                 }
 
-                var test = this.testService.GetTests()
+                var test = this.testService
+                    .GetTests()
                     .Include("Lesson")
                     .FirstOrDefault(t => t.LessonId == model.LessonId);
 
@@ -395,8 +400,7 @@
         [Authorize(Roles = "Admin")]
         public IActionResult GetLessons(string lessonId)
         {
-            // TODO 
-
+            // TODO
             return this.Json(string.Empty);
         }
 
@@ -585,11 +589,14 @@
 
         private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model)
         {
+            var testId = this.TempData["TestId"].ToString();
+            var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             // Gets questions for this test
             var questions = this.questionService
                 .GetQuestions()
                 .Include(question => question.Answers)
-                .Where(question => question.TestId == this.TempData["TestId"].ToString())
+                .Where(question => question.TestId == testId)
                 .ToList();
 
             // Max points 100
@@ -611,12 +618,13 @@
 
             // Get Test from DB
             var test = await this.testService
-                .GetTestAsync(this.TempData["TestId"].ToString());
+                .GetTestAsync(testId);
 
             // Create expired test to keep history
             var expiredTest = this.mapper.Map<ExpiredTest>(test);
             expiredTest.Date = DateTime.UtcNow;
             expiredTest.Result = points;
+            expiredTest.StudentId = studentId;
 
             // Add expired test to DB if score is bigger then the one in the database
             if (this.testService.GetExpiredTests().Any())
@@ -647,7 +655,7 @@
                 var scoreStudent = new ScoreStudent
                 {
                     ScoreId = score.ScoreId,
-                    StudentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                    StudentId = studentId,
                 };
 
                 // Save entities to DB
@@ -675,6 +683,15 @@
             this.TempData["SuccessMsg"] = "Няма активни тестове";
 
             return this.Redirect("/Home/Success");
+        }
+
+        [Authorize]
+        [ActionName("EndTestAllStudents")]
+        public async Task<IActionResult> EndTestAllStudentsAsync()
+        {
+            await this.testHub.Clients.All.SendAsync("SubmitAll");
+
+            return this.Redirect("/Home/Index");
         }
     }
 }
