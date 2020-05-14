@@ -25,6 +25,7 @@
     <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/main.js"></script>
 
     <!----styling-->
     <style>
@@ -146,6 +147,10 @@
     <div class="container ">
         @RenderBody()
     </div>
+
+    <!--Popup Dialog-->
+    <div title="Активни тестове" id="dialog"></div>
+
     <!--Footer-->
     <partial name="_PartialFooter" />
     <!-- Footer -->
@@ -165,8 +170,6 @@
     <script src="~/js/jquery.validate.min.js"></script>
     <script src="~/js/mail-script.js"></script>
     <script src="~/js/jquery-ui.js"></script>
-
-    <script src="~/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
