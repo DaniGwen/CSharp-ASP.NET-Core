@@ -9,6 +9,7 @@
     using DigitalCoolBook.App.Models.TeacherViewModels;
     using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
+    using DigitalCoolBook.Web.Models.TestviewModels;
 
     public class OrganizationProfile : Profile
     {
@@ -52,6 +53,7 @@
             this.CreateMap<Test, SetTimerViewModel>();
             this.CreateMap<Test, TestPreviewViewModel>();
             this.CreateMap<Test, TestDetailsViewModel>();
+            this.CreateMap<Test, ActiveTestsViewModel>();
 
             // Question mappings
             this.CreateMap<Question, QuestionsModel>();

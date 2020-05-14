@@ -158,5 +158,22 @@
             this.context.TestRoomStudents.RemoveRange(testRoomStudents);
             await this.SaveChangesAsync();
         }
+
+        public List<Test> GetActiveTestsByTeacherId(string teacherId)
+        {
+            var testRooms = this.context.TestRooms
+                .Where(x => x.TeacherId == teacherId)
+                .ToList();
+
+            var tests = new List<Test>();
+
+            foreach (var testRoom in testRooms)
+            {
+                var testFromDb = this.context.Tests.FirstOrDefault(x => x.TestId == testRoom.TestId);
+                tests.Add(testFromDb);
+            }
+
+            return tests;
+        }
     }
 }

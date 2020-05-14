@@ -40,5 +40,7 @@
         TestRoomStudent GetTestRoomStudent(string studentId);
 
         Task RemoveTestRoomAsync(string testId);
+
+        List<Test> GetActiveTestsByTeacherId(string teacherId);
     }
 }

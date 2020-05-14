@@ -12,6 +12,7 @@
     using DigitalCoolBook.App.Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using DigitalCoolBook.Web.Models.TestviewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
@@ -703,7 +704,6 @@
                     TestId = testId,
                     TestName = testName,
                 });
-                // return this.RedirectToAction("StartTest", "Test", new { id = testId });
             }
 
             return this.Json(new
@@ -711,8 +711,6 @@
                 success = false,
                 Message = "Няма активни тестове.",
             });
-
-            //this.TempData["SuccessMsg"] = "Няма активни тестове";
         }
 
         [Authorize]
@@ -722,6 +720,19 @@
             await this.testHub.Clients.All.SendAsync("SubmitAll");
 
             return this.Redirect("/Home/Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        public IActionResult ActiveTests()
+        {
+            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            List<Test> activeTests = this.testService.GetActiveTestsByTeacherId(teacherId);
+
+            var model = this.mapper.Map<List<ActiveTestsViewModel>>(activeTests);
+
+            return this.View(model);
         }
     }
 }
