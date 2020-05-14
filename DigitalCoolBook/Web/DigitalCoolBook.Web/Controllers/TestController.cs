@@ -13,7 +13,6 @@
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Connections;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.EntityFrameworkCore;
@@ -680,9 +679,12 @@
         }
 
         [Authorize(Roles = "Student")]
+        [HttpGet]
         public async Task<IActionResult> IsStudentInTestAsync()
         {
-            var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var studentId = this.User
+                .FindFirst(ClaimTypes.NameIdentifier)
+                .Value;
 
             var testId = this.testService.IsStudentInTest(studentId);
 
@@ -690,12 +692,27 @@
 
             if (testId != null && testRoomStudent.Finished == false)
             {
-                return this.RedirectToAction("StartTest", "Test", new { id = testId });
+                var testName = this.testService
+                    .GetTests()
+                    .First(x => x.TestId == testId)
+                    .TestName;
+
+                return this.Json(new
+                {
+                    success = true,
+                    TestId = testId,
+                    TestName = testName,
+                });
+                // return this.RedirectToAction("StartTest", "Test", new { id = testId });
             }
 
-            this.TempData["SuccessMsg"] = "Няма активни тестове";
+            return this.Json(new
+            {
+                success = false,
+                Message = "Няма активни тестове.",
+            });
 
-            return this.Redirect("/Home/Success");
+            //this.TempData["SuccessMsg"] = "Няма активни тестове";
         }
 
         [Authorize]
