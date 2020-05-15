@@ -1,6 +1,7 @@
 ﻿using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,7 +40,9 @@ namespace DigitalCoolBook.Services
 
         public IQueryable<ScoreStudent> GetScoreStudents()
         {
-            return this.context.ScoreStudents;
+            return this.context.ScoreStudents
+                .Include(x=>x.Score)
+                .ThenInclude(x=>x.Lesson);
         }
 
         public async Task SaveChangesAsync()

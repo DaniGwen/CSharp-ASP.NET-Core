@@ -310,22 +310,38 @@
             return this.View();
         }
 
+        /// <summary>
+        ///Checks if all students completed the test end then removes the test room.
+        ///Process the test score and creates ExpiredTest to keep history.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpPost]
         [ActionName("EndTest")]
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            var result = await this.ProcessTestAsync(model);
+            int result = 0;
+            var testId = this.TempData["TestId"].ToString();
+
+            if (this.User.IsInRole("Student"))
+            {
+                result = await this.ProcessTestAsync(model, testId);
+            }
 
             this.ViewData["Result"] = result;
 
             // Check if all students in the test room has finished
             bool isAllFinished = this.testService.CheckAllFinished();
 
-            if (!isAllFinished)
+            if (!isAllFinished || this.User.IsInRole("Teacher"))
             {
-                var testId = this.TempData["TestId"].ToString();
-                this.testService.RemoveTestRoomAsync(testId);
+                await this.testService.RemoveTestRoomAsync(testId);
+            }
+
+            if (this.User.IsInRole("Teacher"))
+            {
+                return this.Redirect("/Home/Index");
             }
 
             return this.View("Result");
@@ -596,9 +612,14 @@
             }
         }
 
-        private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model)
+        /// <summary>
+        /// Creates ExpiredTest to the current student.
+        /// Process the test score.
+        /// Rewrites score in database if the current score is better.
+        /// </summary>
+        /// <returns>Test score.</returns>
+        private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model, string testId)
         {
-            var testId = this.TempData["TestId"].ToString();
             var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             // Set the student status to finished in this test
@@ -713,6 +734,10 @@
             });
         }
 
+        /// <summary>
+        /// Ends the test for all instances.
+        /// </summary>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Authorize]
         [ActionName("EndTestAllStudents")]
         public async Task<IActionResult> EndTestAllStudentsAsync()
@@ -722,6 +747,10 @@
             return this.Redirect("/Home/Index");
         }
 
+        /// <summary>
+        /// Shows the Teacher all active tests.
+        /// </summary>
+        /// <returns>A <see cref="IActionResult"/>.</returns>
         [HttpGet]
         [Authorize(Roles = "Teacher")]
         public IActionResult ActiveTests()

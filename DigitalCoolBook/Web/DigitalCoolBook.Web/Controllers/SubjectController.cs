@@ -86,7 +86,8 @@
                         .Where(ss => ss.StudentId == studentId)
                         .ToList();
 
-                    var score = studentScores.FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
+                    var score = studentScores
+                        .FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
 
                     // Set Score if there is any
                     if (score != null)
