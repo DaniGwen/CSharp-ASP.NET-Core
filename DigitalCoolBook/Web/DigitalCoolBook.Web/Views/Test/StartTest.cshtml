@@ -59,21 +59,20 @@
     else
     {
         <div class="text-center">
-            <h1 class="text-success">Теста е активен</h1>
+            <h2 class="text-success">Теста е активен</h2>
         </div>
         <div class="d-flex justify-content-center">
             <div class="row-form-label-lg">
                 <label>Времетраене: @Model.Timer минути.</label>
             </div>
         </div>
-
         <div class="row">
             <div class="col-form-label-sm" id="studentList"></div>
             <hr />
             <div class="col-form-label-sm" id="finishedLabel"></div>
         </div>
         <div class="text-center mb-2">
-            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents">Край на теста</a>
+            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents/@Model.TestName">Край на теста</a>
         </div>
         @*<div class="row form-group text-right">
                 <span class="col-form-label">Оставащо време:</span>

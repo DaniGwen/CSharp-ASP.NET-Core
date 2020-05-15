@@ -339,11 +339,6 @@
                 await this.testService.RemoveTestRoomAsync(testId);
             }
 
-            if (this.User.IsInRole("Teacher"))
-            {
-                return this.Redirect("/Home/Index");
-            }
-
             return this.View("Result");
         }
 
@@ -738,11 +733,18 @@
         /// Ends the test for all instances.
         /// </summary>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [Authorize]
+        [Authorize(Roles = "Teacher")]
         [ActionName("EndTestAllStudents")]
-        public async Task<IActionResult> EndTestAllStudentsAsync()
+        public async Task<IActionResult> EndTestAllStudentsAsync(string id)
         {
             await this.testHub.Clients.All.SendAsync("SubmitAll");
+
+            var testId = this.testService
+                .GetTests()
+                .First(x => x.TestName == id)
+                .TestId;
+
+            await this.testService.RemoveTestRoomAsync(testId);
 
             return this.Redirect("/Home/Index");
         }

@@ -143,7 +143,8 @@
 
         public TestRoomStudent GetTestRoomStudent(string studentId)
         {
-            return this.context.TestRoomStudents.FirstOrDefault(x => x.StudentId == studentId);
+            return this.context.TestRoomStudents
+                .FirstOrDefault(x => x.StudentId == studentId);
         }
 
         public async Task RemoveTestRoomAsync(string testId)

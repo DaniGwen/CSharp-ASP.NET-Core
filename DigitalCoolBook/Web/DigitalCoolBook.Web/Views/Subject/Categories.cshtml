@@ -4,14 +4,18 @@
     Layout = "_LayoutMenus";
 }
 
-<body>
-    <div class="jumbotron mt-2">
-        <h2 class="text-white">@Model.Name</h2>
-    </div>
-    <div class="d-flex justify-content-center">
-        <h2 class="col-sm-auto text-white my-border">Раздели</h2>
-    </div>
-
+<div class="jumbotron mt-2">
+    <h2 class="text-white">@Model.Name</h2>
+</div>
+<div class="d-flex justify-content-center">
+    <h2 class="col-sm-auto text-white my-border">Раздели</h2>
+</div>
+@if (Model.Categories.Count == 0)
+{
+    <label>Няма добавени раздели.</label>
+}
+else
+{
     @foreach (var category in Model.Categories)
     {
         <div class="row form-row">
@@ -24,12 +28,12 @@
             </div>
         </div>
     }
-    <br />
+}
+<br />
 
-    <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        }
-    </script>
-</body>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    }
+</script>
 
