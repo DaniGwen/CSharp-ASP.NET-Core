@@ -9,6 +9,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="~/css/reset.map" />
+    <link rel="stylesheet" href="~/css/reset.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -23,30 +24,6 @@
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/js/main.js"></script>
-
-    <!--styling-->
-    <style>
-        @*#NAVBAR light-green lighten-2*@
-        .navbar {
-            background: #aed581;
-        }
-        @*FOOTER light-green lighten-2*@
-        .footer {
-            background: #aed581;
-        }
-        @*JUMBOTRON orange accent-1*@
-        .jumbotron {
-            background: #ffd180;
-        }
-        @*HR lighten-4*@
-        hr.hr-orange {
-            background: #ffb74d;
-        }
-        @*Text color grey*@
-        .DCB-text {
-            color: darkslategray;
-        }
-    </style>
 
 </head>
 <body>
@@ -116,48 +93,53 @@
 
         </div>
     </header>
-    <div class="container text-center mt-2">
-        <div class="jumbotron">
-            @if (!this.User.Identity.IsAuthenticated)
-            {
-                <div class="container-fluid ">
-                    <br />
-                    <div class="d-flex justify-content-center">
-                        <div class="jumbotron-fluid">
-                            <section>
-                                <h1 style="border-bottom: 2px solid;border-left: 2px solid">Добре дошли в Digital Cool Book!</h1>
-                                <span>Ученето може да бъде забавно!</span>
-                            </section>
-                            <div class="pt-4">
-                                <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
-                                    <span class="fa fa-user"></span> Вписване
-                                </a>
+    <main>
+        <section>
+            <div class="container text-center mt-2">
+                <div class="jumbotron">
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="container-fluid ">
+                            <br />
+                            <div class="d-flex justify-content-center">
+                                <div class="jumbotron-fluid">
+                                    <section>
+                                        <h1 style="border-bottom: 2px solid;border-left: 2px solid">Добре дошли в Digital Cool Book!</h1>
+                                        <span>Ученето може да бъде забавно!</span>
+                                    </section>
+                                    <div class="pt-4">
+                                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
+                                            <span class="fa fa-user"></span> Вписване
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <h2 class="DCB-text">Добре дошъл @ViewData["UserName"]!</h2>
                     }
                     else
                     {
-                        <h2 class="DCB-text">Добре дошъл в Digital Cool Book!</h2>
+                        <div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <h2 class="DCB-text">Добре дошъл @ViewData["UserName"]!</h2>
+                            }
+                            else
+                            {
+                                <h2 class="DCB-text">Добре дошъл в Digital Cool Book!</h2>
+                            }
+                        </div>
                     }
                 </div>
-            }
-        </div>
-    </div>
-    <div class="container">
-        @RenderBody()
-    </div>
+            </div>
+        </section>
 
-    <!--Popup Dialog-->
-    <div title="Активни тестове" id="dialog"></div>
+        <div class="container">
+            @RenderBody()
+        </div>
+
+        <!--Popup Dialog-->
+        <div title="Активни тестове" id="dialog"></div>
+    </main>
 
     <!--Footer-->
     <partial name="_PartialFooter" />
