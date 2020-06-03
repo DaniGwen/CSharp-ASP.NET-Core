@@ -250,7 +250,7 @@
                 }
 
                 // Adding students in TestRoom
-                await this.testService.AddTestRoomAsync(students, test.TeacherId, model.TestId);
+                string testRoomId = await this.testService.AddTestRoomAsync(students, test.TeacherId, model.TestId);
 
                 // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudentForDB);
@@ -277,6 +277,10 @@
 
                 // Map test to testModel
                 var model = this.mapper.Map<TestStartViewModel>(test);
+
+                // Gets the participating students
+                model.StudentNames = await this.testService
+                    .GetStudentsInTestRoomAsync(test.TestId);
 
                 // Gets the questions for this test
                 var questionsDb = this.questionService
@@ -311,8 +315,8 @@
         }
 
         /// <summary>
-        ///Checks if all students completed the test end then removes the test room.
-        ///Process the test score and creates ExpiredTest to keep history.
+        /// Checks if all students completed the test end then removes the test room.
+        /// Process the test score and creates ExpiredTest to keep history.
         /// </summary>
         /// <param name="model"></param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>

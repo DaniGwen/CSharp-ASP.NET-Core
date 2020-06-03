@@ -101,7 +101,7 @@
         }
 
         // Add students to test room
-        public async Task AddTestRoomAsync(string[] students, string teacherId, string testId)
+        public async Task<string> AddTestRoomAsync(string[] students, string teacherId, string testId)
         {
             var testRoom = new TestRoom
             {
@@ -127,6 +127,8 @@
             await this.context.TestRooms.AddAsync(testRoom);
             await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
             await this.SaveChangesAsync();
+
+            return testRoom.Id;
         }
 
         public string IsStudentInTest(string studentId)
@@ -175,6 +177,26 @@
             }
 
             return tests;
+        }
+
+        public async Task<List<string>> GetStudentsInTestRoomAsync(string testId)
+        {
+            var testRoom = this.context.TestRooms
+                .First(x => x.TestId == testId);
+
+            var studentsInRoom = this.context.TestRoomStudents
+                .Where(x => x.TestRoomId == testRoom.Id)
+                .ToList();
+
+            var studentNames = new List<string>();
+
+            foreach (var student in studentsInRoom)
+            {
+                var studentDb =  await this.context.Students.FindAsync(student.StudentId);
+                studentNames.Add(studentDb.Name);
+            }
+
+            return studentNames;
         }
     }
 }

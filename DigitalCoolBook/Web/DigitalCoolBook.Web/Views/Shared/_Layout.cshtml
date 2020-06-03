@@ -8,11 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="~/css/reset.map" />
-    <link rel="stylesheet" href="~/css/reset.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">*@
     <link rel="stylesheet" href="~/css/jquery-ui.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
@@ -95,40 +93,36 @@
     </header>
     <main>
         <section>
-            <div class="container text-center mt-2">
+            <div class="container mt-4">
                 <div class="jumbotron">
-                    @if (!this.User.Identity.IsAuthenticated)
-                    {
-                        <div class="container-fluid ">
-                            <br />
-                            <div class="d-flex justify-content-center">
-                                <div class="jumbotron-fluid">
-                                    <section>
-                                        <h1 style="border-bottom: 2px solid;border-left: 2px solid">Добре дошли в Digital Cool Book!</h1>
-                                        <span>Ученето може да бъде забавно!</span>
-                                    </section>
-                                    <div class="pt-4">
-                                        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
-                                            <span class="fa fa-user"></span> Вписване
-                                        </a>
-                                    </div>
-                                </div>
+                    <div class="text-center">
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <div>
+                                <h1 class="page-header">Добре дошли в Digital Cool Book!</h1>
+                                <span>Ученето може да бъде забавно!</span>
                             </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <h2 class="DCB-text">Добре дошъл @ViewData["UserName"]!</h2>
-                            }
-                            else
-                            {
-                                <h2 class="DCB-text">Добре дошъл в Digital Cool Book!</h2>
-                            }
-                        </div>
-                    }
+                            <div class="pt-4">
+                                <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
+                                    <span class="fa fa-user"></span> Вписване
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <h2 class="DCB-text">Добре дошъл @ViewData["UserName"]!</h2>
+                                }
+                                else
+                                {
+                                    <h2 class="DCB-text">Добре дошъл в Digital Cool Book!</h2>
+                                }
+                            </div>
+                        }
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -150,16 +144,10 @@
     <script src="~/js/jquery.form.js"></script>
     <script src="~/js/moment.js"></script>
     <script src="~/js/popper.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/isotope.pkgd.min.js"></script>
     <script src="~/js/ajax-form.js"></script>
-    <script src="~/js/wow.min.js"></script>
-    <script src="~/js/plugins.js"></script>
-    <script src="~/js/gijgo.min.js"></script>
     <script src="~/js/jquery.simple.timer.js"></script>
     <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/mail-script.js"></script>
     <script src="~/js/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>*@
 </body>
 </html>

@@ -20,5 +20,7 @@
         public bool IsExpired { get; set; }
 
         public string[] Answers { get; set; }
+
+        public List<string> StudentNames { get; set; }
     }
 }
