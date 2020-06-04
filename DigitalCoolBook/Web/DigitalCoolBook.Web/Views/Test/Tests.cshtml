@@ -6,7 +6,9 @@
 }
 
 <div class="container-fluid w-75">
-    <h1 class="text-center">Тестове</h1>
+    <div class="col d-flex justify-content-center mt-2">
+        <h2 class="col-sm-auto my-h2">Тестове</h2>
+    </div>
     <div class="row">
         @Html.DisplayNameFor(model => model.TestName)
     </div>
@@ -22,8 +24,8 @@
 
 
                 @*<div class="col-form-label-lg ml-3">
-                    @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "btn btn-outline-success" })
-                </div>*@
+                        @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "btn btn-outline-success" })
+                    </div>*@
 
             </div>
 
