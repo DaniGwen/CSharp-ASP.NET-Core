@@ -41,12 +41,38 @@ namespace DigitalCoolBook.Services
         public IQueryable<ScoreStudent> GetScoreStudents()
         {
             return this.context.ScoreStudents
-                .Include(x=>x.Score)
-                .ThenInclude(x=>x.Lesson);
+                .Include(x => x.Score)
+                .ThenInclude(x => x.Lesson);
         }
 
         public async Task SaveChangesAsync()
         {
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task<string> CreateScoreAsync(int points, string lessonId)
+        {
+            var score = new Score
+            {
+                ScorePoints = points,
+                LessonId = lessonId,
+            };
+
+            await this.context.Scores.AddAsync(score);
+            await this.context.SaveChangesAsync();
+
+            return score.ScoreId;
+        }
+
+        public async Task CreateScoreStudentAsync(string scoreId, string studentId)
+        {
+            var scoreStudent = new ScoreStudent
+            {
+                ScoreId = scoreId,
+                StudentId = studentId,
+            };
+
+            await this.context.ScoreStudents.AddAsync(scoreStudent);
             await this.context.SaveChangesAsync();
         }
     }

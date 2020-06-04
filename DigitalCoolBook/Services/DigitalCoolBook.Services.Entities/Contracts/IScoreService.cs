@@ -15,5 +15,9 @@ namespace DigitalCoolBook.Services.Contracts
         IQueryable<Score> GetScores();
 
         IQueryable<ScoreStudent> GetScoreStudents();
+
+        Task<string> CreateScoreAsync(int points, string lessonId);
+
+        Task CreateScoreStudentAsync(string scoreId, string studentId);
     }
 }

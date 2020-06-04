@@ -326,6 +326,7 @@
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
             int result = 0;
+            //?????
             var testId = this.TempData["TestId"].ToString();
 
             if (this.User.IsInRole("Student"))
@@ -678,22 +679,11 @@
             // Create Score
             if (this.User.IsInRole("Student"))
             {
-                var score = new Score
-                {
-                    ScorePoints = points,
-                    LessonId = test.LessonId,
-                };
+                // Create Score for student
+                var scoreId = await this.scoreService.CreateScoreAsync(points, test.LessonId);
 
                 // Create ScoreStudent
-                var scoreStudent = new ScoreStudent
-                {
-                    ScoreId = score.ScoreId,
-                    StudentId = studentId,
-                };
-
-                // Save entities to DB
-                await this.scoreService.AddScoreAsync(score);
-                await this.scoreService.AddScoreStudentAsync(scoreStudent);
+                await this.scoreService.CreateScoreStudentAsync(scoreId, studentId);
             }
 
             return points;
@@ -736,7 +726,7 @@
         /// <summary>
         /// Ends the test for all instances.
         /// </summary>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        /// <returns><see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Authorize(Roles = "Teacher")]
         [ActionName("EndTestAllStudents")]
         public async Task<IActionResult> EndTestAllStudentsAsync(string id)
@@ -756,7 +746,7 @@
         /// <summary>
         /// Shows the Teacher all active tests.
         /// </summary>
-        /// <returns>A <see cref="IActionResult"/>.</returns>
+        /// <returns>Void <see cref="IActionResult"/>.</returns>
         [HttpGet]
         [Authorize(Roles = "Teacher")]
         public IActionResult ActiveTests()
