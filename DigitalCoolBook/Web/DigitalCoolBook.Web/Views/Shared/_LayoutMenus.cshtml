@@ -57,29 +57,35 @@
                     <li>
                         @if (this.User.Identity.IsAuthenticated)
                         {
-                            if (this.User.IsInRole("Admin"))
-                            {
-                                <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
-                                    <button class="btn btn-outline-primary btn-sm">Администраторски панел</button>
-                                </form>
-                            }
-                            if (this.User.IsInRole("Student"))
-                            {
-                                <form class="nav-item" asp-area="" asp-controller="Student" asp-action="Panel">
-                                    <button class="btn btn-outline-primary btn-sm">Профил</button>
-                                </form>
-                            }
-                            if (this.User.IsInRole("Teacher"))
-                            {
-                                <form class="nav-item" asp-area="" asp-controller="Teacher" asp-action="Panel">
-                                    <button class="btn btn-outline-primary btn-sm">Профил</button>
-                                </form>
-                            }
-                            <form class="nav-item mt-1" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                <button type="submit" class="btn btn-outline-secondary btn-sm">
-                                    Отписване <span class="fa fa-user"></span>
-                                </button>
-                            </form>
+                            <div class="row">
+                                <div class="col">
+                                    @if (this.User.IsInRole("Admin"))
+                                    {
+                                        <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
+                                            <button class="btn btn-outline-primary btn-sm">Администраторски панел</button>
+                                        </form>
+                                    }
+                                    @if (this.User.IsInRole("Student"))
+                                    {
+                                        <form class="nav-item" asp-area="" asp-controller="Student" asp-action="Panel">
+                                            <button class="btn btn-outline-primary btn-sm">Профил</button>
+                                        </form>
+                                    }
+                                    @if (this.User.IsInRole("Teacher"))
+                                    {
+                                        <form class="nav-item" asp-area="" asp-controller="Teacher" asp-action="Panel">
+                                            <button class="btn btn-outline-primary btn-sm">Профил</button>
+                                        </form>
+                                    }
+                                </div>
+                                <div class="col">
+                                    <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                            Отписване <span class="fa fa-user"></span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         }
                     </li>
                 </ul>
