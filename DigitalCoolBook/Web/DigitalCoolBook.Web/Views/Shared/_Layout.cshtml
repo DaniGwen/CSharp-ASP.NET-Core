@@ -73,7 +73,7 @@
 
                                     @if (this.User.IsInRole("Teacher"))
                                     {
-                                        <form class="nav-item" asp-area="" asp-controller="Teacher" asp-action="Panel">
+                                        <form class="nav-item" asp-area="" method="get" asp-controller="Teacher" asp-action="Panel">
                                             <button class="btn btn-outline-primary btn-sm">Профил</button>
                                         </form>
                                     }

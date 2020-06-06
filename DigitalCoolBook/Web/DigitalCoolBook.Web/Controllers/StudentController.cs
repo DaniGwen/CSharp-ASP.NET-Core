@@ -243,6 +243,7 @@
 
         [Authorize(Roles = "Student, Teacher")]
         [ActionName("Panel")]
+        [HttpGet]
         public async Task<IActionResult> PanelAsync()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier);
