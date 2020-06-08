@@ -273,6 +273,7 @@
             {
                 var test = await this.testService.GetTestAsync(id);
 
+                // Keep the test Id for EndTest action
                 this.TempData["TestId"] = test.TestId;
 
                 // Map test to testModel
@@ -326,7 +327,7 @@
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
             int result = 0;
-            //?????
+         
             var testId = this.TempData["TestId"].ToString();
 
             if (this.User.IsInRole("Student"))
@@ -339,9 +340,15 @@
             // Check if all students in the test room has finished
             bool isAllFinished = this.testService.CheckAllFinished();
 
-            if (!isAllFinished || this.User.IsInRole("Teacher"))
+            if (!isAllFinished)
             {
+                // Test room is empty so we remove it along with the students in it
                 await this.testService.RemoveTestRoomAsync(testId);
+            }
+
+            if (this.User.IsInRole("Teacher"))
+            {
+                return this.Redirect("/Home/Index");
             }
 
             return this.View("Result");
@@ -685,6 +692,9 @@
                 // Create ScoreStudent
                 await this.scoreService.CreateScoreStudentAsync(scoreId, studentId);
             }
+
+            // Set the student score property and display it after all students has finished in teacher's view
+            testRoomStudent.Score = points;
 
             return points;
         }

@@ -119,6 +119,7 @@
                 {
                     StudentId = studentFromDb.Id,
                     TestRoomId = testRoom.Id,
+                    StudentName = studentFromDb.Name,
                 };
 
                 testRoomStudentsList.Add(studentForTestRoom);

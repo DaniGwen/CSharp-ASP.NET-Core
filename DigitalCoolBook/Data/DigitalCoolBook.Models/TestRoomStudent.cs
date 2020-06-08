@@ -14,6 +14,10 @@ namespace DigitalCoolBook.Models
 
         public string StudentId { get; set; }
 
+        public string StudentName { get; set; }
+
+        public int Score { get; set; }
+
         public string TestRoomId { get; set; }
 
         [ForeignKey("TestRoomId")]

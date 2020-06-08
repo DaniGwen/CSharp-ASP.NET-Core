@@ -33,9 +33,11 @@
         {
             var userName = await this.GetUserNameAsync();
 
+            await this.userService.SetStudentFinishedTestRoom(userName);
+
             if (userName != null)
             {
-                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} приключи теста.");
+                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} приключи теста.", userName);
             }
         }
 

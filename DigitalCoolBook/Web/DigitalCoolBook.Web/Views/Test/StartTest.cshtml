@@ -61,12 +61,12 @@
         <section class="row d-flex justify-content-between">
             <div>
                 <p>Добавени в теста:</p>
-                <ol class="students-inroom">
+                <ul  class="added-students-inroom" id="added-students">
                     @foreach (var studentName in Model.StudentNames)
                     {
                         <li>@studentName</li>
                     }
-                </ol>
+                </ul>
             </div>
             <div>
                 <h2 class="text-success">Активен</h2>
@@ -82,7 +82,7 @@
             <div class="disconnected-students" id="finishedLabel"></div>
         </div>
         <div class="text-center mb-2">
-            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents/@Model.TestName">Край на теста</a>
+            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents/@Model.TestName">Предаване</a>
         </div>
     }
 </div>
@@ -103,6 +103,11 @@
 
 <!--countdown function-->
 <script type="text/javascript">
+    // Alert before leaving the page
+    $(window).bind('beforeunload', function () {
+        return 'Are you sure you want to leave?';
+    });
+
     $(function () {
         $('.timer').startTimer({
             onComplete: function () {
@@ -115,10 +120,9 @@
         alert("Край на теста.");
         $("#form").submit();
     };
-</script>
 
-<!--digital-clock-->
-<script>
+
+    //digital - clock
     $(document).ready(function () {
         clockUpdate();
         setInterval(clockUpdate, 1000);
