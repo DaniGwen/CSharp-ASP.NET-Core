@@ -327,7 +327,7 @@
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
             int result = 0;
-         
+
             var testId = this.TempData["TestId"].ToString();
 
             if (this.User.IsInRole("Student"))
@@ -768,6 +768,16 @@
             var model = this.mapper.Map<List<ActiveTestsViewModel>>(activeTests);
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult TestsHistory()
+        {
+            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var tests = this.testService.GetExpiredTestsByTeacherId(teacherId);
+
+            return this.View(tests);
         }
     }
 }

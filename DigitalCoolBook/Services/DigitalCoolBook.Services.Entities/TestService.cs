@@ -3,6 +3,7 @@
     using DigitalCoolBook.App.Data;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
+    using DigitalCoolBook.Web.Models.TestviewModels;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -193,11 +194,26 @@
 
             foreach (var student in studentsInRoom)
             {
-                var studentDb =  await this.context.Students.FindAsync(student.StudentId);
+                var studentDb = await this.context.Students.FindAsync(student.StudentId);
                 studentNames.Add(studentDb.Name);
             }
 
             return studentNames;
+        }
+
+        public List<TestExpiredViewModel> GetExpiredTestsByTeacherId(string teacherId)
+        {
+            var expiredTests = this.context.ExpiredTests
+                .Where(x => x.TeacherId == teacherId)
+                .Select(x => new TestExpiredViewModel
+                {
+                    ExpiredTestName = x.TestName,
+                    ExpiredTestId = x.ExpiredTestId,
+                    ExpiredTestDate = x.Date,
+                })
+                .ToList();
+
+            return expiredTests;
         }
     }
 }

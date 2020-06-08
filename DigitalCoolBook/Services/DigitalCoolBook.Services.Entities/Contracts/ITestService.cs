@@ -1,8 +1,10 @@
 ﻿namespace DigitalCoolBook.Services.Contracts
 {
     using DigitalCoolBook.Models;
+    using DigitalCoolBook.Web.Models.TestviewModels;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     public interface ITestService
@@ -44,5 +46,7 @@
         List<Test> GetActiveTestsByTeacherId(string teacherId);
 
         Task<List<string>> GetStudentsInTestRoomAsync(string testId);
+
+        List<TestExpiredViewModel> GetExpiredTestsByTeacherId(string teacherId);
     }
 }
