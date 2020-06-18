@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v5FI+9hZFvvZ1Yxbo2G4KriX4a9yC15dfHDMjIDBvw/Lm4pV7cS80hfnGcU/yRiULL6vtoO9TKlyxjul6K7SwA==",
+  "dgSpecHash": "cPy+tngk5fBUJeOA2vFyf7kV10JdGJs4T1wd/U+d1OoKcyavWsMb0F0bCF7sHKYmc9ehb0Sg6DX/qtn/2NtqFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Message\\DigitalCoolBook.Services.Message.csproj",
   "expectedPackageFiles": [
@@ -22,8 +22,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.options\\3.1.3\\microsoft.extensions.options.3.1.3.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\sendgrid\\9.12.6\\sendgrid.9.12.6.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\AW\\.nuget\\packages\\sendgrid\\9.12.6\\sendgrid.9.12.6.nupkg.sha512"
   ],
   "logs": []
 }

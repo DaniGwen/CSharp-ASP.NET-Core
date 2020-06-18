@@ -284,7 +284,7 @@
             return this.Json(averageScore);
         }
 
-        public string HashPassword(string password)
+        private string HashPassword(string password)
         {
             // Add Salt to password
             byte[] salt = new byte[128 / 8];

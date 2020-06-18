@@ -33,8 +33,15 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Web\DigitalCoolBook.Web\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e659da2daac6ac18d747b5e3b195e8c88124dd81", @"/Views/Test/CreateTestAdmin.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a6e381d074b162879d66b39334af76ae0439e473", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"852bf3ae06bcef806392b5f03b26926dea393dba", @"/Views/_ViewImports.cshtml")]
     public class Views_Test_CreateTestAdmin : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<DigitalCoolBook.App.Models.TestviewModels.TestCreateAdminViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "AdminPanel", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -79,7 +86,7 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
             WriteLiteral("<style>\r\n    /*#dcedc8 light-green lighten-4*/\r\n    .light-green {\r\n        background: #dcedc8;\r\n    }\r\n</style>\r\n\r\n<h1 class=\"text-center\">Създаване на тест</h1>\r\n\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e659da2daac6ac18d747b5e3b195e8c88124dd815862", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e659da2daac6ac18d747b5e3b195e8c88124dd816091", async() => {
                 WriteLiteral(@"
     <div class=""container w-75"">
         <div class=""form-group text-center"">
@@ -117,7 +124,7 @@ using Microsoft.AspNetCore.Identity;
         <p class=""text-right""><small class=""col-form-label-sm"" style=""color: darksalmon"">бъдете сигурни че информацията е правилна, след натискане на бутона ""напред"" не може да се върнете.</small></p>
         <div class=""form-group row d-flex justify-content-between"">
             ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e659da2daac6ac18d747b5e3b195e8c88124dd817950", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e659da2daac6ac18d747b5e3b195e8c88124dd818179", async() => {
                     WriteLiteral("назад");
                 }
                 );

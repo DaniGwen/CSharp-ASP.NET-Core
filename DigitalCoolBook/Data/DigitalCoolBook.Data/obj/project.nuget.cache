@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "o+sgRyutKEORds0FhIRHYsY2/CQifnQG8lvI6yCZEKfzK+4sdyApYSXwc57+fohy4oIWPqDh2PTRHqRS9YPriw==",
+  "dgSpecHash": "WY9UX/m1PixUwcogdLIcKd6IqNUUIROhSrvpZGNjgADhMzQor27lZJvsPlmWOmj+iE+fdQ9zgsqrhODkGGu3dQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
   "expectedPackageFiles": [
@@ -94,8 +94,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\AW\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

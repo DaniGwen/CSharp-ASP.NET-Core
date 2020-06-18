@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Q0HAsXL4USErSWGHlLdSaXCtzByyxzTQ/hDQSPlu+2QEVa8qgRGLr9s5c5g1t6U0jIdcAgXmG3w7Vwzt/xwS6g==",
+  "dgSpecHash": "fhatc2ZLfkeIluEOsCudYuwDiTOj1lwn7JC7rr0I5wvPR2Nqv2XlwL7h7eeZfzwu0iuZNmSrEtmiaq6v1WxbdA==",
   "success": true,
   "projectFilePath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj",
   "expectedPackageFiles": [
@@ -29,8 +29,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\AW\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

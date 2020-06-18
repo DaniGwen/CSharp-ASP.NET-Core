@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gNmPXCwCvd4IZD38Xue7n4wO4xXYCNAZINGP3g9vDIWpn3Z+/esFlH33hau9lG/I4I+m/UvC5d9DTwUwv0P2gA==",
+  "dgSpecHash": "O5wl02p79/4JOuOyrBZqytp1uU3L4XvnXZvdQ/5juujuARkUaDldFnY+jCp4O+lkV78RPWYpnbpRBZX7IiY+kw==",
   "success": true,
   "projectFilePath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj",
   "expectedPackageFiles": [
@@ -17,8 +17,7 @@
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.logging\\3.1.1\\microsoft.extensions.logging.3.1.1.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.1\\microsoft.extensions.logging.abstractions.3.1.1.nupkg.sha512",
     "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.options\\3.1.1\\microsoft.extensions.options.3.1.1.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.1\\microsoft.extensions.primitives.3.1.1.nupkg.sha512",
-    "C:\\Users\\AW\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Users\\AW\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.1\\microsoft.extensions.primitives.3.1.1.nupkg.sha512"
   ],
   "logs": []
 }

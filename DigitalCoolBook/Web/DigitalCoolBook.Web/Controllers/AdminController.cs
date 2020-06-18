@@ -62,6 +62,7 @@
         [HttpPost]
         public async Task<IActionResult> LoginAdminAsync(LoginAdminViewModel inputModel, string returnUrl)
         {
+
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
             if (this.ModelState.IsValid)
