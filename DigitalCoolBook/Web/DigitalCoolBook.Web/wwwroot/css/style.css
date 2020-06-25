@@ -13,10 +13,13 @@ body {
     font-size: 16px;
     line-height: 1.5;
     background-color: #dddcdc;
-    height: 100%;
     margin: 0;
     padding: 0;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
+
 
 .img {
     max-width: 100%;
@@ -52,7 +55,15 @@ ul {
     padding: 0px;
 }
 
-/* line 1, C:/Users/SPN Graphics/Desktop/CL September/Edu mark/207 Education/HTML/scss/_btn.scss */
+.btn, .navbar-button {
+    box-shadow: 0 0 8px 1px gray;
+    border-radius: 5px;
+}
+
+.index-button {
+    margin-right: 20px;
+}
+
 .boxed-btn {
     background: #fff;
     color: #04D2C8;
@@ -312,8 +323,8 @@ input[type=number] {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 
 /*HR orange lighten-4*/
@@ -325,6 +336,7 @@ hr.hr-orange {
     background-color: rgba(255, 204, 128, 0.80);
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    box-shadow: 0 0 12px 8px gray;
 }
 
 .jumbotron-container {
