@@ -1,5 +1,6 @@
 @import "buttons.css";
 @import "navigation.css";
+@import "footer.css";
 
 @font-face {
     font-family: Manrope;
@@ -100,15 +101,7 @@ input[type=number] {
     height: 30px;
 }
 
-/*FOOTER light-green lighten-2*/
-.footer {
-    background-color: #aed581;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    width: 100%;
-    grid-row-start: row3-start;
-    grid-row-end: 3;
-}
+
 
 /*HR orange lighten-4*/
 hr.hr-orange {

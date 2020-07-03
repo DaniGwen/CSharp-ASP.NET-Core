@@ -26,7 +26,8 @@
 
 
 .brand-text {
-    color: #0094ff;
+    font-weight: bold;
+    color: #808080;
 }
 
     .brand-text:hover {
