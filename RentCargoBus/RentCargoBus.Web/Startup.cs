@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using RentCargoBus.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RentCargoBus.Data;
 
 namespace RentCargoBus.Web
 {
@@ -69,12 +69,21 @@ namespace RentCargoBus.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+                    {
+                        context.Database.EnsureCreated();
+                        this.AddAdmin(serviceProvider).Wait();
+                    }
+                }
             }
             else
             {
@@ -97,6 +106,23 @@ namespace RentCargoBus.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private async Task AddAdmin(IServiceProvider serviceProvider)
+        {
+            // initializing custom roles
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+            if (!context.Users.Any())
+            {
+                var user = new IdentityUser();
+                user.UserName = this.Configuration.GetValue<string>("AdminConfig:Username");
+                user.Email = this.Configuration.GetValue<string>("AdminConfig:Email");
+                var userPassword = this.Configuration.GetValue<string>("AdminConfig:Password");
+
+                IdentityResult addingPasswordToUser = await userManager.CreateAsync(user, userPassword);
+            }
         }
     }
 }
