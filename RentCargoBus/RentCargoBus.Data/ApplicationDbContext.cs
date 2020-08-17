@@ -10,17 +10,19 @@ namespace RentCargoBus.Data
     {
         public DbSet<Van> Vans { get; set; }
 
-        public DbSet<VanImage> VanImages { get; set; }
-
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<VanImage> VanImages { get; set; }
+
         public DbSet<CarImage> CarImages { get; set; }
+
+        public DbSet<Rent> Rents { get; set; }
 
         public DbSet<RentCar> RentCars { get; set; }
 
         public DbSet<RentVan> RentVans { get; set; }
 
-        public DbSet<Rent> Rents { get; set; }
+        
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

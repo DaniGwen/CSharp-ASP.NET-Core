@@ -1,0 +1,7 @@
+@import "../settings/_settings-colors.scss";
+@import "../settings/_settings-breakpoints.scss";
+@import "../settings/settings-shadows";
+
+.navbar {
+    box-shadow: $Shadow2dp;
+}

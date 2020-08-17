@@ -1,0 +1,19 @@
+@import "./generic/_generic-normalize.scss";
+
+@import "./settings/_settings-typography.scss";
+@import "./settings/_settings-mixins.scss";
+@import "./settings/_settings-colors.scss";
+@import "./settings/_settings-shadows.scss";
+
+@import "./objects/_objects-containers.scss";
+
+@import "./elements/_elements-links.scss";
+@import "./elements/_elements-paragraphs.scss";
+@import "./elements/_elements-lists.scss";
+@import "./elements/_elements-body.scss";
+
+@import "./components/_components-header.scss";
+@import "./components/_components-navigation.scss";
+@import "./components/_components-button.scss";
+@import "./components/_components-card.scss";
+@import "./components/_components-footer.scss";

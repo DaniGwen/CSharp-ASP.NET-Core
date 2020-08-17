@@ -1,0 +1,17 @@
+﻿.layout-main-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: auto;
+
+    .header {
+        grid-row: 1, 2;
+    }
+
+    .main {
+        grid-row: 2, 3;
+    }
+
+    .footer {
+        grid-row: 4,5;
+    }
+}
