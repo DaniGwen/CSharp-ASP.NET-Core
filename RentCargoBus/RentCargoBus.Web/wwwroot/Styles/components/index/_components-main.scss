@@ -1,0 +1,9 @@
+﻿.c-main{
+    display:grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: auto;
+
+    &__welcome{
+        text-align: center;
+    }
+}

@@ -23,9 +23,11 @@ namespace RentCargoBus.Data.Models
 
         public string PlateNumber { get; set; }
 
-        public int Weight { get; set; }
+        public int Seats { get; set; }
 
-        public int Height { get; set; }
+        public double Weight { get; set; }
+
+        public double Height { get; set; }
 
         public int MaxLoad { get; set; }
 

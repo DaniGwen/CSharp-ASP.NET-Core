@@ -11,7 +11,7 @@ namespace RentCargoBus.Data.Models
 
         public string Title { get; set; }
 
-        public byte[] ImageData { get; set; }
+        public string ImageLink { get; set; }
 
         [ForeignKey(nameof(Van))]
         public int VanId { get; set; }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +14,10 @@ using RentCargoBus.Data;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using RentCargoBus.Services;
+using RentCargoBus.Services.Contracts;
+using DataBaseSeed;
+using AutoMapper;
 
 namespace RentCargoBus.Web
 {
@@ -31,12 +34,18 @@ namespace RentCargoBus.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
+
             services.AddRazorPages();
+
+            services.AddTransient<IVanService,VanService>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -89,6 +98,10 @@ namespace RentCargoBus.Web
                     {
                         context.Database.EnsureCreated();
                         this.AddAdmin(serviceProvider).Wait();
+                        context.Vans.AddRange(Seed.SeedCargoVans());
+                        context.Vans.AddRange(Seed.SeedPassangerVans());
+                        context.Cars.AddRange(Seed.SeedCars());
+                        context.SaveChanges();
                     }
                 }
             }

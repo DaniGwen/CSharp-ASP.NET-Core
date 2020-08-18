@@ -3,5 +3,16 @@
 @import "../settings/settings-shadows";
 
 .navbar {
-    box-shadow: $Shadow2dp;
+}
+
+.navbar-brand {
+    margin-right: 20px;
+}
+
+.c-navbar {
+    justify-content: space-between;
+
+    &__item{
+        margin-left: 20px;
+    }
 }

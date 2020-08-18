@@ -202,7 +202,7 @@ summary {
 
 @font-face {
   font-family: "Lato";
-  src: url("../../assets/fonts/Lato-Regular.woff2"); }
+  src: url("../../fonts/Lato-Regular.woff2"); }
 
 html,
 * {
@@ -281,7 +281,8 @@ h5 {
 .container {
   max-width: 1400px;
   width: 100%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 0; }
 
 .container-column-centered {
   width: 100%;
@@ -301,14 +302,21 @@ p {
   line-height: 20px; }
 
 li {
-  list-style: none; }
+  list-style: none;
+  align-self: center; }
 
 body {
   background-color: #e5e5e569;
-  color: #565656; }
+  color: #565656;
+  height: 100vh; }
 
-.navbar {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); }
+.navbar-brand {
+  margin-right: 20px; }
+
+.c-navbar {
+  justify-content: space-between; }
+  .c-navbar__item {
+    margin-left: 20px; }
 
 .btn {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
@@ -550,3 +558,10 @@ body {
           line-height: 19px; } }
       .footer .footer__list-item .footer__link:hover {
         color: #41bead; }
+
+.c-main {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto; }
+  .c-main__welcome {
+    text-align: center; }
