@@ -1,7 +1,8 @@
 @import "../settings/_settings-colors.scss";
 
-body {
+body, html {
     background-color: $Grey;
     color: $Grey700;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }

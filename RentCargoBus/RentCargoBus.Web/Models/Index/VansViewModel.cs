@@ -1,4 +1,6 @@
-﻿using RentCargoBus.Data.Models.Enum;
+﻿using RentCargoBus.Data.Models;
+using RentCargoBus.Data.Models.Enum;
+using System.Collections.Generic;
 
 namespace RentCargoBus.Web.Models.Index
 {
@@ -19,5 +21,7 @@ namespace RentCargoBus.Web.Models.Index
         public decimal HirePrice { get; set; }
 
         public VanType Type { get; set; }
+
+        public List<VanImage> Images{ get; set; }
     }
 }

@@ -10,5 +10,7 @@ namespace RentCargoBus.Services.Contracts
         public Task<Van> GetVanById(string vanId);
 
         public List<Van> GetAllVans();
+
+        public List<VanImage> GetImages();
     }
 }

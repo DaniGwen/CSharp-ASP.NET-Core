@@ -30,5 +30,10 @@ namespace RentCargoBus.Services
 
             return vans;
         }
+
+        public List<VanImage> GetImages()
+        {
+            return this.context.VanImages.ToList();
+        }
     }
 }

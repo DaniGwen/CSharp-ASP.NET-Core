@@ -43,7 +43,7 @@ namespace RentCargoBus.Web
 
             services.AddRazorPages();
 
-            services.AddTransient<IVanService,VanService>();
+            services.AddTransient<IVanService, VanService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -98,10 +98,9 @@ namespace RentCargoBus.Web
                     {
                         context.Database.EnsureCreated();
                         this.AddAdmin(serviceProvider).Wait();
-                        context.Vans.AddRange(Seed.SeedCargoVans());
-                        context.Vans.AddRange(Seed.SeedPassangerVans());
-                        context.Cars.AddRange(Seed.SeedCars());
-                        context.SaveChanges();
+                        Seed.SeedCargoVans(context);
+                        Seed.SeedPassangerVans(context);
+                        Seed.SeedCars(context);
                     }
                 }
             }

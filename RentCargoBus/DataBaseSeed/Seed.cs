@@ -1,4 +1,7 @@
-﻿using RentCargoBus.Data.Models;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System.Linq;
+using RentCargoBus.Data;
+using RentCargoBus.Data.Models;
 using RentCargoBus.Data.Models.Enum;
 using System;
 using System.Collections.Generic;
@@ -7,8 +10,13 @@ namespace DataBaseSeed
 {
     public static class Seed
     {
-        public static List<Van> SeedCargoVans()
+        public static void SeedCargoVans(ApplicationDbContext context)
         {
+            if (context.Vans.Any(v => v.Type == VanType.Cargo))
+            {
+                return;
+            }
+
             var vans = new List<Van>();
 
             string[] brands = new string[] { "Ford", "Iveco", "Volkswagen", "Peugeot", "Nissan", "Skoda" };
@@ -40,11 +48,17 @@ namespace DataBaseSeed
                 });
             }
 
-            return vans;
+            context.Vans.AddRange(vans);
+            context.SaveChanges();
         }
 
-        public static List<Van> SeedPassangerVans()
+        public static void SeedPassangerVans(ApplicationDbContext context)
         {
+            if (context.Vans.Any(v => v.Type == VanType.Passenger))
+            {
+                return;
+            }
+
             var vans = new List<Van>();
 
             string[] brands = new string[] { "Ford", "Iveco", "Toyota", "Peugeot", "Nissan", "Hyndai" };
@@ -77,11 +91,17 @@ namespace DataBaseSeed
                 }); ;
             }
 
-            return vans;
+            context.Vans.AddRange(vans);
+            context.SaveChanges();
         }
 
-        public static List<Car> SeedCars()
+        public static void SeedCars(ApplicationDbContext context)
         {
+            if (context.Cars.Any())
+            {
+                return;
+            }
+
             var cars = new List<Car>();
 
             string[] brands = new string[] { "Dodge", "BMW", "Volkswagen", "Opel", "Nissan", "Dacia" };
@@ -112,7 +132,8 @@ namespace DataBaseSeed
                 });
             }
 
-            return cars;
+            context.Cars.AddRange(cars);
+            context.SaveChanges();
         }
     }
 }

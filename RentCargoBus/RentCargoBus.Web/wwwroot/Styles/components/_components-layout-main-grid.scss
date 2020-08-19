@@ -1,7 +1,8 @@
 ﻿.c-layout-main-grid {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    min-height: 100%;
 
     .header {
         grid-row: 1, 2;

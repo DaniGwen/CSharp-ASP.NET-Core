@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RentCargoBus.Data.Models;
 using RentCargoBus.Data.Models.Enum;
 using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
@@ -32,11 +33,15 @@ namespace RentCargoBus.Web.Controllers
         public IActionResult Index()
         {
             var allVans = this.vanService.GetAllVans();
-            var cargoVans = allVans.Where(van => van.Type == VanType.Cargo);
-            var passangerVans = allVans.Where(van => van.Type == VanType.Passenger);
 
+            //var cargoVans = allVans.Where(van => van.Type == VanType.Cargo);
+            //var passangerVans = allVans.Where(van => van.Type == VanType.Passenger);
 
-            return View();
+            var images = this.vanService.GetImages();
+
+            var vansDto = this.mapper.Map<List<VansViewModel>>(allVans);
+
+            return View(vansDto);
         }
 
         public IActionResult Privacy()

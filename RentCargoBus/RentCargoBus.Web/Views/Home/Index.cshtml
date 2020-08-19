@@ -1,20 +1,45 @@
-﻿@{
+﻿@model IEnumerable<RentCargoBus.Web.Models.Index.VansViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="c-main">
     <section class="c-main__welcome">
-        <h1 class="display-4">Welcome</h1>
+        <h1>Welcome</h1>
         <p>Vehicles you can lease:</p>
+    </section>
+    <article class="c-main__vehicles">
+        <h2 class="c-main__vehicles__title">Cargo</h2>
+        <section class="c-main__cargo-vans">
+            @foreach (var van in Model.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Cargo))
+            {
+                <section class="c-card">
+                    <div class="c-card__wrapper">
+                        <img class="c-card__image" src="@van.Images.FirstOrDefault().ImageLink" alt="Van" />
+                    </div>
+                    <div class="c-card__info">
+                        <h2>@van.Brand</h2>
+                        <h3>@van.Name</h3>
+                        <div class="c-card__info__details">
+                            <p>Seats: @van.Seats</p>
+                            <p>Weight: @van.Weight</p>
+                            <p>Height: @van.Height</p>
+                            <p>Lease price: @van.HirePrice</p>
+                        </div>
+                    </div>
+                </section>
+            }
+        </section>
+    </article>
+    <article class="c-main__vehicles">
+        <h2 class="c-main__vehicles__title">Passanger</h2>
+        <section class="c-main__passanger-vans">
+        </section>
+    </article>
+    <article class="c-main__vehicles">
+        <h2 class="c-main__vehicles__title">Car</h2>
+        <section class="c-main__cars">
+        </section>
+    </article>
 
-    </section>
-    <section class="c-main__cargo-vans">
-        <h2>Cargo</h2>
-    </section>
-    <section class="c-main__passanger-vans">
-        <h2>Passanger</h2>
-    </section>
-    <section class="c-main__cars">
-        <h2>Car</h2>
-    </section>
 </div>
