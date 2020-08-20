@@ -18,6 +18,9 @@ using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
 using DataBaseSeed;
 using AutoMapper;
+using RentCargoBus.Data.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace RentCargoBus.Web
 {
@@ -43,7 +46,11 @@ namespace RentCargoBus.Web
 
             services.AddRazorPages();
 
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+                                                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             services.AddTransient<IVanService, VanService>();
+            services.AddTransient<ICarService, CarService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -112,7 +119,7 @@ namespace RentCargoBus.Web
             }
             var supportedCultures = new[]
             {
-                new CultureInfo("en-US"),
+                new CultureInfo("en"),
                 new CultureInfo("fr"),
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
@@ -128,6 +135,7 @@ namespace RentCargoBus.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -146,9 +154,10 @@ namespace RentCargoBus.Web
 
             if (!context.Users.Any())
             {
-                var user = new IdentityUser();
+                var user = new User();
                 user.UserName = this.Configuration.GetValue<string>("AdminConfig:Email");
                 user.Email = this.Configuration.GetValue<string>("AdminConfig:Email");
+                user.Name = this.Configuration.GetValue<string>("AdminConfig:Name");
                 var userPassword = this.Configuration.GetValue<string>("AdminConfig:Password");
 
                 await userManager.CreateAsync(user, userPassword);

@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCargoBus.Data.Models", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCargoBus.Services", "RentCargoBus.Services\RentCargoBus.Services.csproj", "{82F7F859-4A72-4136-B177-82609F3F0811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseSeed", "DataBaseSeed\DataBaseSeed.csproj", "{56ACABB9-4C21-4282-867F-1AD4CA4FB06E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseSeed", "DataBaseSeed\DataBaseSeed.csproj", "{56ACABB9-4C21-4282-867F-1AD4CA4FB06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

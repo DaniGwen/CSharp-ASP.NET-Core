@@ -1,15 +1,18 @@
-﻿using System;
+﻿using RentCargoBus.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RentCargoBus.Web.Models.Index
 {
     public class CarsViewModel
     {
+        public CarsViewModel()
+        {
+            this.Images = new List<CarImage>();
+        }
+
         public string Brand { get; set; }
 
-        public string Name { get; set; }
+        public string Model { get; set; }
 
         public int MilesPerGallon { get; set; }
 
@@ -18,5 +21,7 @@ namespace RentCargoBus.Web.Models.Index
         public int Seats { get; set; }
 
         public decimal HirePrice { get; set; }
+
+        public List<CarImage> Images { get; set; }
     }
 }

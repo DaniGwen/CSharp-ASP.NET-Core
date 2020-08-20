@@ -11,6 +11,8 @@ namespace RentCargoBus.Services.Contracts
 
         public List<Van> GetAllVans();
 
-        public List<VanImage> GetImages();
+        public List<VanImage> GetAllImages();
+
+        Task AddVanAsync(Van van);
     }
 }

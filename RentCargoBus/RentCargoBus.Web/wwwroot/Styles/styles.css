@@ -324,7 +324,7 @@ body, html {
   border-radius: 100px;
   border: none;
   outline: none;
-  padding: 5px 22px;
+  padding: 3px 22px;
   text-transform: uppercase;
   font-size: 16px;
   line-height: 20px;
@@ -333,9 +333,10 @@ body, html {
   .btn:hover {
     cursor: pointer;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
-  .btn--secondary {
-    background: #ff9100;
-    color: #ffffff; }
+  .btn--settings {
+    width: 200px;
+    text-transform: capitalize;
+    padding: 10px 0; }
 
 .cards--wrapper {
   margin: 50px 0; }
@@ -443,19 +444,17 @@ body, html {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   min-height: 100%; }
-  .c-layout-main-grid .header {
-    grid-row: 1, 2; }
-  .c-layout-main-grid .main {
-    grid-row: 2, 3; }
-  .c-layout-main-grid .footer {
-    grid-row: 4,5; }
 
 .c-main {
   display: grid;
-  grid-template-rows: 150px max-content max-content max-content; }
+  grid-template-rows: 150px max-content max-content max-content;
+  grid-row-gap: 50px; }
   .c-main__welcome {
     text-align: center; }
-  .c-main__cargo-vans {
+  .c-main__welcome__text {
+    margin-right: 250px;
+    margin-top: 30px; }
+  .c-main__vans {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-row-gap: 50px;
@@ -466,11 +465,11 @@ body, html {
 
 .c-card {
   width: 300px;
-  height: 380px;
+  height: 430px;
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.5s ease-out; }
+  transition: 0.1s ease-out; }
   .c-card:hover {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -488,4 +487,14 @@ body, html {
     text-align: center; }
     .c-card__info__details {
       display: grid;
-      grid-template-rows: 1fr 1fr 1fr 1fr; }
+      grid-template-rows: 29px 29px 29px 29px;
+      width: 220px;
+      margin: auto; }
+    .c-card__info__details__span {
+      font-weight: bold;
+      color: #676781;
+      margin: 0 4px; }
+    .c-card__info__details__price {
+      background-color: #e3f3fd;
+      border-radius: 10px;
+      padding: 5px 0; }

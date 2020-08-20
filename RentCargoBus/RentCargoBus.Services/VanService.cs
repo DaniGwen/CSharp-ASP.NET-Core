@@ -31,9 +31,15 @@ namespace RentCargoBus.Services
             return vans;
         }
 
-        public List<VanImage> GetImages()
+        public List<VanImage> GetAllImages()
         {
             return this.context.VanImages.ToList();
+        }
+
+        public async Task AddVanAsync(Van van)
+        {
+            await this.context.Vans.AddAsync(van);
+            await this.context.SaveChangesAsync();
         }
     }
 }

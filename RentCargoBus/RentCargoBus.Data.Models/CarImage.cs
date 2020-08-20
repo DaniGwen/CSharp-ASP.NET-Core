@@ -8,9 +8,11 @@ namespace RentCargoBus.Data.Models
         [Key]
         public int ImageId { get; set; }
 
-        public string Title { get; set; }
-
         public string ImageLink { get; set; }
+
+        public string ImageName { get; set; }
+
+        public string Title { get; set; }
 
         [ForeignKey(nameof(Car))]
         public int CarId { get; set; }

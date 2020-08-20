@@ -13,6 +13,8 @@ namespace RentCargoBus.Data.Models
 
         public string ImageLink { get; set; }
 
+        public string ImageName { get; set; }
+
         [ForeignKey(nameof(Van))]
         public int VanId { get; set; }
 

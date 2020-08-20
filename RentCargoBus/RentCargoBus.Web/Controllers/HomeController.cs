@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RentCargoBus.Data.Models;
-using RentCargoBus.Data.Models.Enum;
-using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
 using RentCargoBus.Web.Models;
 using RentCargoBus.Web.Models.Index;
@@ -19,29 +13,38 @@ namespace RentCargoBus.Web.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly IVanService vanService;
+        private readonly ICarService carService;
         private readonly IMapper mapper;
 
         public HomeController(ILogger<HomeController> logger
-                             ,IVanService vanService
-                             ,IMapper mapper)
+                             , IVanService vanService
+                             , ICarService carService
+                             , IMapper mapper)
         {
             this.logger = logger;
             this.vanService = vanService;
+            this.carService = carService;
             this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
             var allVans = this.vanService.GetAllVans();
+            var allCars = this.carService.GetAllCars();
 
-            //var cargoVans = allVans.Where(van => van.Type == VanType.Cargo);
-            //var passangerVans = allVans.Where(van => van.Type == VanType.Passenger);
-
-            var images = this.vanService.GetImages();
+            var carImages = this.carService.GetAllImages();
+            var vanImages = this.vanService.GetAllImages();
 
             var vansDto = this.mapper.Map<List<VansViewModel>>(allVans);
+            var carsDto = this.mapper.Map<List<CarsViewModel>>(allCars);
 
-            return View(vansDto);
+            var viewModel = new CarsVansViewModel
+            {
+                Cars = carsDto,
+                Vans = vansDto,
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

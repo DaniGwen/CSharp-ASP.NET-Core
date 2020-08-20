@@ -6,6 +6,11 @@ namespace RentCargoBus.Web.Models.Index
 {
     public class VansViewModel
     {
+        public VansViewModel()
+        {
+            this.Images = new List<VanImage>();
+        }
+
         public string Brand { get; set; }
 
         public string Name { get; set; }

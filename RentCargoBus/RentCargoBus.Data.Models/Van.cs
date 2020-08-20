@@ -19,7 +19,7 @@ namespace RentCargoBus.Data.Models
         public string Brand { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Model { get; set; }
 
         public string PlateNumber { get; set; }
 
