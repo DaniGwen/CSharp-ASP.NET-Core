@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using RentCargoBus.Data.Models;
 using RentCargoBus.Web.Areas.Identity.Pages.Account.Manage;
+using RentCargoBus.Web.Models.EditViewModels;
 using RentCargoBus.Web.Models.Index;
 
 namespace RentCargoBus.Web.Mappings
@@ -10,6 +11,7 @@ namespace RentCargoBus.Web.Mappings
     {
         public MappingViewModels()
         {
+            this.CreateMap<Van, VanEditViewModel>();
             this.CreateMap<AddVanModel.InputModel, Van>().ReverseMap();
             this.CreateMap<IFormFile, VanImage>();
             this.CreateMap<Van, VansViewModel>();

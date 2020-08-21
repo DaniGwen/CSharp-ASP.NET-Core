@@ -47,7 +47,7 @@
             <label asp-for="Model.Seats"></label>
             <input asp-for="Model.Seats" min="1" placeholder="Брой врати" class="form-control form-control-sm" />
             <span asp-validation-for="Model.Seats" class="text-danger"></span>
-            <small>Only for passanger van.</small>
+            <small>Only for passenger van.</small>
         </div>
 
         <div class="form-group">
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label asp-for="Model.Type">Van type</label>
             <select class="form-control-sm" asp-for="Model.Type">
-                <option value="2">Passanger</option>
+                <option value="2">Passenger</option>
                 <option value="1">Cargo</option>
             </select>
         </div>
@@ -69,6 +69,6 @@
             <input asp-for="Model.Images" type="file" multiple><br><br>
         </div>
 
-        <button type="submit" class="btn">Save</button>
+        <button type="submit" class="btn btn-admin">Save</button>
     </form>
 </section>

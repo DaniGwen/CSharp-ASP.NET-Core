@@ -3,16 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RentCargoVan</title>
+    <title>@ViewData["Title"] - RentAVan</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/Styles/styles.css" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Styles/styles.css" />
 </head>
 <body>
     <div class="c-layout-main-grid">
         <header class="header">
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
+                    @*<div class="header__logo-wrapper">
+                        <img class="header__logo" src="" alt="site logo" />
+                    </div>*@
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Rent a Van</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -51,10 +57,16 @@
         </footer>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="~/lib/jquery/dist/custom.js"></script>
+    
+    @*Resolves conflict between BOOTSTRAP buttons and jQUERY UI buttons*@
+    <script type="text/javascript">
+        $.fn.bootstrapBtn = $.fn.button.noConflict();
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -36,5 +36,12 @@ namespace RentCargoBus.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public async Task RemoveCarByIdAsync(int id)
+        {
+           var car = await this.context.Cars.FindAsync(id);
+            this.context.Cars.Remove(car);
+            await this.context.SaveChangesAsync();
+        }
     }
 }

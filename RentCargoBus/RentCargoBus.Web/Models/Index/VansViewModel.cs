@@ -11,6 +11,8 @@ namespace RentCargoBus.Web.Models.Index
             this.Images = new List<VanImage>();
         }
 
+        public int VanId { get; set; }
+
         public string Brand { get; set; }
 
         public string Name { get; set; }
@@ -25,8 +27,10 @@ namespace RentCargoBus.Web.Models.Index
 
         public decimal HirePrice { get; set; }
 
+        public bool IsAvailable { get; set; }
+
         public VanType Type { get; set; }
 
-        public List<VanImage> Images{ get; set; }
+        public List<VanImage> Images { get; set; }
     }
 }

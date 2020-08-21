@@ -1,0 +1,57 @@
+﻿@model RentCargoBus.Web.Models.Index.CarsVansViewModel
+@{
+    ViewData["Title"] = "Cargo van partial";
+    var cargoVans = Model.Vans.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Cargo);
+}
+
+<article class="c-main__vehicles">
+    <h2 class="c-main__vehicles__title">Cargo vans:</h2>
+    <section class="c-main__vans">
+        @if (cargoVans.Any())
+        {
+            @foreach (var van in cargoVans)
+            {
+                <section class="c-card">
+                    <div class="c-card__wrapper">
+                        @if (van.Images.Count > 0)
+                        {
+                            <img class="c-card__image" src="/images/@van.Images.FirstOrDefault().ImageName" alt="car" />
+                        }
+                        else
+                        {
+                            <img class="c-card__image" src="/images/default-van-icon.png" alt="car" />
+                        }
+                    </div>
+                    <div class="c-card__info">
+                        <h2>@van.Brand</h2>
+                        <h3>@van.Name</h3>
+                        <div class="c-card__info__details">
+                            <p>Weight:<span class="c-card__info__details__span">@van.Weight</span>kg.</p>
+                            <p>Height:<span class="c-card__info__details__span">@van.Height</span>m.</p>
+                            <p>Max load:<span class="c-card__info__details__span">@van.MaxLoad</span>kg.</p>
+                            <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@van.HirePrice</span>Euro. / Day</p>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <a class="c-card__info__action" asp-action="EditVan" asp-controller="Admin" asp-route-id="@van.VanId">Edit</a>
+                                <a class="c-card__info__action delete-van" onclick="deleteVan(this)" id="@van.VanId">Delete</a>
+                            }
+                            @if (van.IsAvailable)
+                            {
+                                <a class="btn c-card__info__availability" href="#">Available</a>
+                            }
+                            else
+                            {
+                                <p class="c-card__info__availability c-card__info__availability--busy">Not Available</p>
+                            }
+                        </div>
+                    </div>
+                </section>
+            }
+        }
+        else
+        {
+            <h4 class="c-main__vans__no-vehicles">No vans at the moment.</h4>
+        }
+
+    </section>
+</article>

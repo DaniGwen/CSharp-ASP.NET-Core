@@ -44,7 +44,8 @@ namespace DataBaseSeed
                     HirePrice = random.Next(30, 200),
                     MaxLoad = random.Next(1000, 2000),
                     Type = VanType.Cargo,
-                    Images = new List<VanImage> { new VanImage { ImageName = images[i] } }
+                    Images = new List<VanImage> { new VanImage { ImageName = images[i] } },
+                    IsAvailable = false,
                 });
             }
 
@@ -85,7 +86,8 @@ namespace DataBaseSeed
                     HirePrice = random.Next(30, 200),
                     MaxLoad = random.Next(1000, 2000),
                     Type = VanType.Passenger,
-                    Images = new List<VanImage> { new VanImage { ImageName = images[i] } }
+                    Images = new List<VanImage> { new VanImage { ImageName = images[i] } },
+                    IsAvailable = true,
                 }); ;
             }
 
@@ -126,7 +128,8 @@ namespace DataBaseSeed
                     MilesPerGallon = random.Next(6, 20),
                     Weight = random.Next(1200, 2200),
                     HirePrice = random.Next(50, 250),
-                    Images = new List<CarImage> { new CarImage { ImageName = images[i] } }
+                    Images = new List<CarImage> { new CarImage { ImageName = images[i] } },
+                    IsAvailable = true,
                 });
             }
 

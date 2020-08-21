@@ -1,29 +1,40 @@
-﻿.c-main {
+﻿@import "../../settings/_settings-colors.scss";
+
+.c-main {
     display: grid;
-    grid-template-rows: 150px max-content max-content max-content;
+    grid-template-rows: 90px max-content max-content max-content;
     grid-row-gap: 50px;
 
     &__welcome {
         text-align: center;
     }
 
-    &__welcome__text{
+    &__welcome__text {
         margin-right: 250px;
         margin-top: 30px;
     }
 
-    &__vans {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-row-gap: 50px;
-        justify-items: center;
-    }
-
     &__vehicles {
+        justify-items: center;
+        display: grid;
+        grid-template-rows: 100px max-content;
+        grid-row-gap: 40px;
 
         &__title {
             text-align: center;
-            margin-bottom: 50px;
+            align-self: center;
+            background-color: $PrimaryColor;
+            width: 300px;
+            border-radius: 10px;
+            padding: 10px 0;
         }
+    }
+
+    &__vans {
+        display: grid;
+        grid-template-columns: max-content max-content max-content max-content;
+        grid-row-gap: 60px;
+        grid-column-gap: 50px;
+        justify-items: center;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RentCargoBus.Services.Contracts;
@@ -27,6 +28,8 @@ namespace RentCargoBus.Web.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var allVans = this.vanService.GetAllVans();

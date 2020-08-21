@@ -1,19 +1,12 @@
-﻿using RentCargoBus.Data.Models.Enum;
+﻿using RentCargoBus.Data.Models;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace RentCargoBus.Data.Models
+namespace RentCargoBus.Web.Models.EditViewModels
 {
-    public class Van
+    public class VanEditViewModel
     {
-        public Van()
-        {
-            this.Images = new HashSet<VanImage>();
-            this.Rents = new HashSet<RentVan>();
-            this.IsAvailable = true;
-        }
-
-        [Key]
         public int VanId { get; set; }
 
         [Required]
@@ -22,24 +15,33 @@ namespace RentCargoBus.Data.Models
         [Required]
         public string Model { get; set; }
 
+        [Required]
+        [DisplayName("Plate number")]
         public string PlateNumber { get; set; }
 
+        [Required]
         public int Seats { get; set; }
 
+        [Required]
         public double Weight { get; set; }
 
+        [Required]
         public double Height { get; set; }
 
+        [Required]
+        [DisplayName("Max load")]
         public int MaxLoad { get; set; }
 
+        [Required]
+        [DisplayName("Price per day")]
         public double HirePrice { get; set; }
 
-        public VanType Type { get; set; }
+        [DisplayName("Van type")]
+        public int Type { get; set; }
 
+        [DisplayName("Is available?")]
         public bool IsAvailable { get; set; }
 
-        public virtual ICollection<VanImage> Images { get; set; }
-
-        public virtual ICollection<RentVan> Rents { get; set; }
+        public List<VanImage> Images{ get; set; }
     }
 }

@@ -1,0 +1,64 @@
+﻿@model RentCargoBus.Web.Models.Index.CarsVansViewModel
+@{
+    ViewData["Title"] = "Car partial";
+}
+
+<article class="c-main__vehicles">
+    <h2 class="c-main__vehicles__title">Cars:</h2>
+    <section class="c-main__vans">
+        @if (Model.Cars.Any())
+        {
+            @foreach (var car in Model.Cars)
+            {
+                <section class="c-card">
+                    <div class="c-card__wrapper">
+                        @if (car.Images.Count > 0)
+                        {
+                            <img class="c-card__image" src="/images/@car.Images.FirstOrDefault().ImageName" alt="car" />
+                        }
+                        else
+                        {
+                            <img class="c-card__image" src="/images/default-car-icon.jpg" alt="car" />
+                        }
+                    </div>
+                    <div class="c-card__info">
+                        <h2>@car.Brand</h2>
+                        <h3>@car.Model</h3>
+                        <div class="c-card__info__details">
+                            <p>Seats:<span class="c-card__info__details__span">@car.Seats</span></p>
+                            <p>Doors:<span class="c-card__info__details__span">@car.Door</span></p>
+                            <p><span class="c-card__info__details__span">@car.MilesPerGallon</span>mpg.</p>
+                            <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@car.HirePrice</span>Euro. / Day</p>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <a class="c-card__info__action"
+                                   asp-action="EditCar"
+                                   asp-controller="Admin"
+                                   asp-route-id="@car.CarId">Edit</a>
+
+                                <a class="c-card__info__action delete-car"
+                                   onclick="deleteCar(this)"
+                                   id="@car.CarId">Delete</a>
+                            }
+                            @if (car.IsAvailable)
+                            {
+                                <a class="btn c-card__info__availability" href="#">Available</a>
+                            }
+                            else
+                            {
+                                <p class="c-card__info__availability c-card__info__availability--busy">Not Available</p>
+                            }
+                        </div>
+                    </div>
+                </section>
+            }
+        }
+        else
+        {
+            <h4 class="c-main__vans__no-vehicles">No cars at the moment.</h4>
+        }
+
+    </section>
+</article>
+
+<div id="dialog" title="Delete"></div>

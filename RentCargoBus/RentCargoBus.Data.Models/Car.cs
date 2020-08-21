@@ -11,6 +11,7 @@ namespace RentCargoBus.Data.Models
         {
             this.Images = new HashSet<CarImage>();
             this.Rents = new HashSet<RentCar>();
+            this.IsAvailable = true;
         }
 
         [Key]
@@ -33,6 +34,8 @@ namespace RentCargoBus.Data.Models
         public int Seats { get; set; }
 
         public double HirePrice { get; set; }
+
+        public bool IsAvailable { get; set; }
 
         public virtual ICollection<CarImage> Images { get; set; }
 

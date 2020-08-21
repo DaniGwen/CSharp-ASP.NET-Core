@@ -13,5 +13,7 @@ namespace RentCargoBus.Services.Contracts
         public List<CarImage> GetAllImages();
 
         public Task AddCarAsync(Car car);
+
+        Task RemoveCarByIdAsync(int id);
     }
 }

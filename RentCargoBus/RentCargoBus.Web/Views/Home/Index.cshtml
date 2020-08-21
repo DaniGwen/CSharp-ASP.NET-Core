@@ -3,103 +3,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="c-main">
-    <section class="c-main__welcome">
-        <h1 class="c-main__welcome__title">Welcome</h1>
-        <h4 class="c-main__welcome__text">Vehicles you can lease:</h4>
-    </section>
-    <article class="c-main__vehicles">
-        <h2 class="c-main__vehicles__title">Cargo</h2>
-        <section class="c-main__vans">
-            @foreach (var van in Model.Vans.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Cargo))
-            {
-                <section class="c-card">
-                    <div class="c-card__wrapper">
-                        @if (van.Images.Count > 0)
-                        {
-                            <img class="c-card__image" src="/images/@van.Images.FirstOrDefault().ImageName" alt="car" />
-                        }
-                        else
-                        {
-                            <img class="c-card__image" src="/images/default-van-icon.png" alt="car" />
-                        }
-                    </div>
-                    <div class="c-card__info">
-                        <h2>@van.Brand</h2>
-                        <h3>@van.Name</h3>
-                        <div class="c-card__info__details">
-                            <p>Weight:<span class="c-card__info__details__span">@van.Weight</span>kg.</p>
-                            <p>Height:<span class="c-card__info__details__span">@van.Height</span>m.</p>
-                            <p>Max load:<span class="c-card__info__details__span">@van.MaxLoad</span>kg.</p>
-                            <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@van.HirePrice</span>Euro. / Day</p>
-                        </div>
-                    </div>
-                </section>
-            }
+    <div class="c-main">
+        <section class="c-main__welcome">
+            <h1 class="c-main__welcome__title">Welcome</h1>
+            <h4 class="c-main__welcome__text">Vehicles you can lease:</h4>
         </section>
-    </article>
 
-    <article class="c-main__vehicles">
-        <h2 class="c-main__vehicles__title">Passanger</h2>
-        <section class="c-main__vans">
-            @foreach (var van in Model.Vans.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Passenger))
-            {
-                <section class="c-card">
-                    <div class="c-card__wrapper">
-                        @if (van.Images.Count > 0)
-                        {
-                            <img class="c-card__image" src="/images/@van.Images.FirstOrDefault().ImageName" alt="car" />
-                        }
-                        else
-                        {
-                            <img class="c-card__image" src="/images/default-van-icon.png" alt="car" />
-                        }
-                    </div>
-                    <div class="c-card__info">
-                        <h2>@van.Brand</h2>
-                        <h3>@van.Name</h3>
-                        <div class="c-card__info__details">
-                            <p>Seats:<span class="c-card__info__details__span">@van.Seats</span></p>
-                            <p>Weight:<span class="c-card__info__details__span">@van.Weight</span>kg.</p>
-                            <p>Height:<span class="c-card__info__details__span">@van.Height</span>m.</p>
-                            <p>Max load:<span class="c-card__info__details__span">@van.MaxLoad</span>kg.</p>
-                            <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@van.HirePrice</span>Euro. / Day</p>
-                        </div>
-                    </div>
-                </section>
-            }
-        </section>
-    </article>
+        <partial name="_CargoVanPartial" />
 
-    <article class="c-main__vehicles">
-        <h2 class="c-main__vehicles__title">Car</h2>
-        <section class="c-main__vans">
-            @foreach (var car in Model.Cars)
-            {
-                <section class="c-card">
-                    <div class="c-card__wrapper">
-                        @if (car.Images.Count > 0)
-                        {
-                            <img class="c-card__image" src="/images/@car.Images.FirstOrDefault().ImageName" alt="car" />
-                        }
-                        else
-                        {
-                            <img class="c-card__image" src="/images/default-car-icon.jpg" alt="car" />
-                        }
-                    </div>
-                    <div class="c-card__info">
-                        <h2>@car.Brand</h2>
-                        <h3>@car.Model</h3>
-                        <div class="c-card__info__details">
-                            <p>Seats:<span class="c-card__info__details__span">@car.Seats</span></p>
-                            <p>Doors:<span class="c-card__info__details__span">@car.Door</span></p>
-                            <p><span class="c-card__info__details__span">@car.MilesPerGallon</span>mpg.</p>
-                            <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@car.HirePrice</span>Euro. / Day</p>
-                        </div>
-                    </div>
-                </section>
-            }
-        </section>
-    </article>
+        <partial name="_PassengerVanPartial" />
 
-</div>
+        <partial name="_CarPartial" />
+        <div id="dialog" title="Delete"></div>
+    </div>
+

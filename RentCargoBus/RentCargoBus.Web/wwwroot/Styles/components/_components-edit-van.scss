@@ -1,0 +1,24 @@
+﻿.edit-van {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+
+    &__info {
+    }
+
+    &__images {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+    }
+
+    &__image-wrapper {
+        width: 250px;
+    }
+
+    &__image {
+        width: 100%;
+    }
+}

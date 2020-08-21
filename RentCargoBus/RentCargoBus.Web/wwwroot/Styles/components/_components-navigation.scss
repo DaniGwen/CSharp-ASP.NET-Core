@@ -16,3 +16,16 @@
         margin-left: 20px;
     }
 }
+
+.nav-item {
+    &__link {
+        transition: 0.2s ease-out;
+        margin-right: 20px;
+
+        &:hover {
+            text-decoration: underline;
+            font-weight: bolder;
+            transform: scale(1.1);
+        }
+    }
+}
