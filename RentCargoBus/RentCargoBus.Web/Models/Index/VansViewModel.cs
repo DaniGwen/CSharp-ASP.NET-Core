@@ -15,7 +15,7 @@ namespace RentCargoBus.Web.Models.Index
 
         public string Brand { get; set; }
 
-        public string Name { get; set; }
+        public string Model { get; set; }
 
         public double Weight { get; set; }
 

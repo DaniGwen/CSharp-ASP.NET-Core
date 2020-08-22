@@ -1,10 +1,11 @@
+@import "../settings/_settings-shadows.scss";
 .btn {
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    border-radius: 100px;
+    border-radius: 20px;
     border: none;
     outline: none;
     padding: 3px 22px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: 16px;
     line-height: 20px;
     font-style: normal;
@@ -12,7 +13,7 @@
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: $Shadow2dp;
     }
 
     &--settings {

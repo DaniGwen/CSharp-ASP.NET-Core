@@ -7,7 +7,7 @@ namespace RentCargoBus.Services.Contracts
 {
     public interface IVanService
     {
-        public Task<Van> GetVanById(int vanId);
+        public Task<Van> GetVanByIdAsync(int vanId);
 
         public List<Van> GetAllVans();
 
@@ -17,6 +17,10 @@ namespace RentCargoBus.Services.Contracts
 
         Task RemoveVanByIdAsync(int id);
 
-        List<VanImage> GetImagesById(int id);
+        List<VanImage> GetImagesByVanId(int id);
+
+        Task SaveChangesAsync();
+
+        Task RemoveVanImagesById(List<int> imagesId);
     }
 }

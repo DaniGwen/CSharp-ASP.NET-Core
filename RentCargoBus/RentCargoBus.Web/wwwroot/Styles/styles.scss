@@ -19,13 +19,13 @@
 @import "./components/_components-language-switch.scss";
 @import "./components/_components-layout-main-grid.scss";
 @import "./components/_components-icons.scss";
+@import "./components/_components-edit-vehicles.scss";
+
 
 //index styles
 @import "./components/index/_components-main.scss";
 @import "./components/index/_components-card.scss";
+@import "./components/index./_components-modal-van-details.scss";
 
 //Admin panel styles
 @import "./components/_components-admin.scss";
-
-//Edit van styles
-@import "./components/_components-edit-van.scss";

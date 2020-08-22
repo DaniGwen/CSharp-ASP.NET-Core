@@ -9,7 +9,7 @@
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Model.Brand"></label>
-            <input asp-for="Model.Brand" placeholder="Марка" class="form-control form-control-sm" />
+            <input asp-for="Model.Brand" placeholder="Марка" class="form-control form-control-sm" autofocus/>
             <span asp-validation-for="Model.Brand" class="text-danger"></span>
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Model.Images">Select files:</label>
+            <label asp-for="Model.Images">Select images:</label>
             <input asp-for="Model.Images" type="file" multiple><br><br>
         </div>
 

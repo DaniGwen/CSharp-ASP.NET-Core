@@ -11,14 +11,19 @@ namespace RentCargoBus.Web.Mappings
     {
         public MappingViewModels()
         {
+            //Van mappings
+            this.CreateMap<VanEditPostModel, Van>();
             this.CreateMap<Van, VanEditViewModel>();
             this.CreateMap<AddVanModel.InputModel, Van>().ReverseMap();
             this.CreateMap<IFormFile, VanImage>();
             this.CreateMap<Van, VansViewModel>();
+
+            //Car mappings
             this.CreateMap<Car, CarsViewModel>();
             this.CreateMap<AddCarModel.InputModel, Car>().ReverseMap();
             this.CreateMap<IFormFile, CarImage>();
-
+            this.CreateMap<Car, CarEditViewModel>();
+            this.CreateMap<CarPostViewModel, Car>();
         }
     }
 }

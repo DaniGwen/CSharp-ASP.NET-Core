@@ -10,7 +10,7 @@
         {
             @foreach (var car in Model.Cars)
             {
-                <section class="c-card">
+                <article class="c-card" href="/Home/CarDetails" route-id="@car.CarId">
                     <div class="c-card__wrapper">
                         @if (car.Images.Count > 0)
                         {
@@ -42,7 +42,7 @@
                             }
                             @if (car.IsAvailable)
                             {
-                                <a class="btn c-card__info__availability" href="#">Available</a>
+                                <p class="btn c-card__info__availability" >Available</p>
                             }
                             else
                             {
@@ -50,7 +50,7 @@
                             }
                         </div>
                     </div>
-                </section>
+                </article>
             }
         }
         else

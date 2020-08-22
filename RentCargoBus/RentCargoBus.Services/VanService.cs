@@ -17,7 +17,7 @@ namespace RentCargoBus.Services
             this.context = context;
         }
 
-        public async Task<Van> GetVanById(int vanId)
+        public async Task<Van> GetVanByIdAsync(int vanId)
         {
             var van = await this.context.Vans.FindAsync(vanId);
 
@@ -49,9 +49,31 @@ namespace RentCargoBus.Services
             await this.context.SaveChangesAsync();
         }
 
-        public List<VanImage> GetImagesById(int vanId)
+        public List<VanImage> GetImagesByVanId(int vanId)
         {
-           return this.context.VanImages.Where(i => i.VanId == vanId).ToList();
+            return this.context.VanImages
+                .Where(i => i.VanId == vanId)
+                .ToList();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task RemoveVanImagesById(List<int> imagesId)
+        {
+            var imagesToDelete = new List<VanImage>();
+
+            foreach (var id in imagesId)
+            {
+                imagesToDelete
+                    .Add(this.context.VanImages.First(i => i.ImageId == id));
+            }
+
+            this.context.VanImages.RemoveRange(imagesToDelete);
+
+            await this.SaveChangesAsync();
         }
     }
 }

@@ -11,7 +11,7 @@
         {
             @foreach (var van in cargoVans)
             {
-                <section class="c-card">
+                <article class="c-card">
                     <div class="c-card__wrapper">
                         @if (van.Images.Count > 0)
                         {
@@ -23,8 +23,8 @@
                         }
                     </div>
                     <div class="c-card__info">
-                        <h2>@van.Brand</h2>
-                        <h3>@van.Name</h3>
+                        <h2 class="c-card__van-brand">@van.Brand</h2>
+                        <h3 class="c-card__van-model">@van.Model</h3>
                         <div class="c-card__info__details">
                             <p>Weight:<span class="c-card__info__details__span">@van.Weight</span>kg.</p>
                             <p>Height:<span class="c-card__info__details__span">@van.Height</span>m.</p>
@@ -33,11 +33,12 @@
                             @if (this.User.Identity.IsAuthenticated)
                             {
                                 <a class="c-card__info__action" asp-action="EditVan" asp-controller="Admin" asp-route-id="@van.VanId">Edit</a>
+
                                 <a class="c-card__info__action delete-van" onclick="deleteVan(this)" id="@van.VanId">Delete</a>
                             }
                             @if (van.IsAvailable)
                             {
-                                <a class="btn c-card__info__availability" href="#">Available</a>
+                                <p class="btn c-card__info__availability">Available</p>
                             }
                             else
                             {
@@ -45,7 +46,7 @@
                             }
                         </div>
                     </div>
-                </section>
+                </article>
             }
         }
         else

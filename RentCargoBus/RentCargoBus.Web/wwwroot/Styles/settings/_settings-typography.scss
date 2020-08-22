@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: "Lato";
-    src: url("../../fonts/Lato-Regular.woff2");
+    src: url("/fonts/Lato-Regular.woff2");
 }
 
 html,
@@ -42,39 +42,44 @@ h6 {
     font-family: "Montserrat", sans-serif;
 }
 
-@each $header, $size in (h1: 36px, h2: 30px, h3: 24px, h4: 20px, h5: 18px, h6: 16px) {
-    #{$header} {
-        font-size: $size;
-    }
-}
-
 h1 {
-    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 600;
     line-height: 44px;
+    font-size: 36px;
 }
 
 h2 {
     font-style: normal;
     font-weight: bold;
     line-height: 36px;
+    font-size: 30px;
 }
 
 h3 {
     font-style: normal;
     font-weight: bold;
     line-height: 30px;
+    font-size: 24px;
 }
 
 h4 {
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
+    font-size: 20px;
 }
 
 h5 {
     font-style: normal;
     font-weight: bold;
     line-height: 22px;
+    font-size: 18px;
+}
+
+h6 {
+    font-style: normal;
+    font-weight: bold;
+    line-height: 18px;
+    font-size: 16px;
 }

@@ -1,4 +1,5 @@
-﻿using RentCargoBus.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RentCargoBus.Data;
 using RentCargoBus.Data.Models;
 using RentCargoBus.Services.Contracts;
 using System.Collections.Generic;
@@ -32,15 +33,44 @@ namespace RentCargoBus.Services
             return this.context.CarImages.ToList();
         }
 
-        public Task<Car> GetCarById()
+        public async Task<Car> GetCarByIdAsync(int carId)
         {
-            throw new System.NotImplementedException();
+            var car = await this.context.Cars.FindAsync(carId);
+
+            return car;
+        }
+
+        public async Task<List<CarImage>> GetImagesByCarIdAsync(int carId)
+        {
+            return await this.context
+                .CarImages
+                .Where(i => i.CarId == carId)
+                .ToListAsync();
         }
 
         public async Task RemoveCarByIdAsync(int id)
         {
-           var car = await this.context.Cars.FindAsync(id);
+            var car = await this.context.Cars.FindAsync(id);
             this.context.Cars.Remove(car);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task RemoveCarImagesByIdAsync(List<int> imagesId)
+        {
+            var imagesToDelete = new List<CarImage>();
+
+            foreach (var id in imagesId)
+            {
+                imagesToDelete.Add(await this.context.CarImages.FindAsync(id));
+            }
+
+            this.context.CarImages.RemoveRange(imagesToDelete);
+
+            await this.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
             await this.context.SaveChangesAsync();
         }
     }

@@ -11,7 +11,7 @@
         {
             @foreach (var van in passengerVans)
             {
-                <section class="c-card">
+                <article class="c-card" href="/Home/VanDetails" route-id="@van.VanId">
                     <div class="c-card__wrapper">
                         @if (van.Images.Count > 0)
                         {
@@ -25,7 +25,7 @@
 
                     <div class="c-card__info">
                         <h2>@van.Brand</h2>
-                        <h3>@van.Name</h3>
+                        <h3>@van.Model</h3>
                         <div class="c-card__info__details">
                             <p>Seats:<span class="c-card__info__details__span">@van.Seats</span></p>
                             <p>Weight:<span class="c-card__info__details__span">@van.Weight</span>kg.</p>
@@ -47,7 +47,7 @@
 
                             @if (van.IsAvailable)
                             {
-                                <a class="btn c-card__info__availability" href="#">Available</a>
+                                <p class="btn c-card__info__availability">Available</p>
                             }
                             else
                             {
@@ -55,7 +55,7 @@
                             }
                         </div>
                     </div>
-                </section>
+                </article>
             }
         }
         else

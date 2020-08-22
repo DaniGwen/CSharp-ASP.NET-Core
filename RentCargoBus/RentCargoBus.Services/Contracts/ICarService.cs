@@ -6,14 +6,20 @@ namespace RentCargoBus.Services.Contracts
 {
     public interface ICarService
     {
-        public Task<Car> GetCarById();
+        Task<Car> GetCarByIdAsync(int carId);
 
-        public List<Car> GetAllCars();
+        List<Car> GetAllCars();
 
-        public List<CarImage> GetAllImages();
+        List<CarImage> GetAllImages();
 
-        public Task AddCarAsync(Car car);
+        Task AddCarAsync(Car car);
 
         Task RemoveCarByIdAsync(int id);
+
+        Task RemoveCarImagesByIdAsync(List<int> imagesId);
+
+        Task SaveChangesAsync();
+
+        Task<List<CarImage>> GetImagesByCarIdAsync(int carId);
     }
 }
