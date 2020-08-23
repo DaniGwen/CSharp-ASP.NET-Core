@@ -31,10 +31,17 @@
     }
 
     &__vans {
+        position: relative;
         display: grid;
         grid-template-columns: max-content max-content max-content max-content;
         grid-row-gap: 60px;
         grid-column-gap: 50px;
         justify-items: center;
+
+        &__container {
+            display: grid;
+            grid-template-rows: max-content max-content;
+            grid-row-gap: 30px;
+        }
     }
 }

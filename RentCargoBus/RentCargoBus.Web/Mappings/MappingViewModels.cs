@@ -16,7 +16,7 @@ namespace RentCargoBus.Web.Mappings
             this.CreateMap<Van, VanEditViewModel>();
             this.CreateMap<AddVanModel.InputModel, Van>().ReverseMap();
             this.CreateMap<IFormFile, VanImage>();
-            this.CreateMap<Van, VansViewModel>();
+            this.CreateMap<Van, VansViewModel>().ReverseMap();
 
             //Car mappings
             this.CreateMap<Car, CarsViewModel>();

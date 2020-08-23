@@ -54,15 +54,27 @@
             padding: 5px 0;
         }
 
+        &__details__seats {
+            display: none;
+        }
+
         &__action {
             font-size: 16px;
-            margin: 6px 0;
             color: $Blue400 !important;
 
             &:hover {
                 text-decoration: underline !important;
                 cursor: pointer;
             }
+        }
+
+        &__action--delete {
+        }
+
+        &__action__wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-self: center;
         }
 
         &__availability {
@@ -77,6 +89,10 @@
 
         &__availability--busy {
             background-color: $Grey500;
+        }
+
+        &__plate-number {
+            display: none;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,18 @@ namespace RentCargoBus.Web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> VanDetails(int id)
+        {
+            var vanImages = this.vanService.GetImagesByVanId(id);
+            var vanDb = await this.vanService.GetVanByIdAsync(id);
+
+            var viewModel = this.mapper.Map<VansViewModel>(vanDb);
+
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

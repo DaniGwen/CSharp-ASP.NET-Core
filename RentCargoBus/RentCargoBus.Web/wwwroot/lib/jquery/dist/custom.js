@@ -114,30 +114,12 @@ function deleteCar(element) {
     });
 };
 
-//Modal for VAN details
-$(function (e) {
-    $('.c-card').on('click', function (event) {
-
-        $('.c-main__van-popup').addClass('active');
-
-        var elements = $(this);
-
-        var brand = elements.find('.c-card__van-brand').text();
-        var model = elements.find('.c-card__van-model').text();
-
-        $('.van-details').text(model);
-
-        $(".c-main__van-popup").dialog({
-            resizable: true,
-            height: 650,
-            width: 500,
-            modal: true,
-            buttons: {
-                "Close": function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
+//Image enlarge in VanDetails and CarDetails
+function openModal(e) {
+    var img = $(e).attr('src');
+    $('.vehicle-details__image-enlarge').addClass('active');
+    $('.vehicle-details__image-enlarge__image').attr('src', img);
+    $('.vehicle-details__image-enlarge__close').on('click', function () {
+        $('.vehicle-details__image-enlarge').removeClass('active');
     })
-
-})
+};
