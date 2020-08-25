@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentCargoBus.Web", "RentCargoBus.Web\RentCargoBus.Web.csproj", "{AB08937A-5D7C-4FED-BA45-1C83A872B6AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentAVan.Web", "RentCargoBus.Web\RentAVan.Web.csproj", "{AB08937A-5D7C-4FED-BA45-1C83A872B6AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{FCD34A2A-8F6F-40D7-BF2E-D75708AA6B5B}"
 EndProject

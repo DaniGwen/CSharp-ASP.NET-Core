@@ -34,6 +34,8 @@ namespace RentCargoBus.Data.Models
 
         public double HirePrice { get; set; }
 
+        public double KilometersPerLiter { get; set; }
+
         public VanType Type { get; set; }
 
         public bool IsAvailable { get; set; }

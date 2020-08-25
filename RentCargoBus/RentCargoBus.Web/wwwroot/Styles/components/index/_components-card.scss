@@ -4,7 +4,7 @@
 
 .c-card {
     width: 300px;
-    min-height: 410px;
+    min-height: 300px;
     background-color: $White;
     border-radius: 20px;
     box-shadow: $Shadow1dp;
@@ -13,7 +13,8 @@
 
     &:hover {
         box-shadow: $Shadow2dp;
-        transform: scale(1.1);
+        color: inherit;
+        transform: scale(0.9);
         cursor: pointer;
         text-decoration: none;
     }
@@ -37,21 +38,25 @@
 
         &__details {
             display: grid;
-            grid-template-rows: 29px 29px 29px 29px;
-            width: 220px;
+            grid-template-rows: auto;
+            grid-auto-rows: 29px;
+            width: 100%;
             margin: auto;
         }
 
         &__details__span {
             font-weight: bold;
-            color: $Blue;
-            margin: 0 4px;
+            color: $Secondary900;
+            font-size: 24px;
         }
 
         &__details__price {
             background-color: $Blue50;
-            border-radius: 10px;
+            font-weight: 700;
             padding: 5px 0;
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-row-gap: 5px;
         }
 
         &__details__seats {
@@ -79,11 +84,11 @@
 
         &__availability {
             background-color: $Primary300;
-            border-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 5px 0;
             color: $White;
             font-weight: 700;
-            padding: 5px 0;
-            margin-top: 10px;
             text-transform: capitalize;
         }
 

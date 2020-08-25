@@ -49,6 +49,11 @@
                 <span asp-validation-for="MaxLoad" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="KilometerPerLiter" class="control-label"></label>
+                <input asp-for="KilometerPerLiter" class="form-control" />
+                <span asp-validation-for="KilometerPerLiter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="HirePrice" class="control-label"></label>
                 <input asp-for="HirePrice" class="form-control" />
                 <span asp-validation-for="HirePrice" class="text-danger"></span>
@@ -105,7 +110,7 @@
 </form>
 
 <div>
-    <a class="edit-vehicle__go-back" asp-action="Index" asp-controller="Home">Back</a>
+    <a class="back-to-index" asp-action="Index" asp-controller="Home">Back</a>
 </div>
 
 @section Scripts {

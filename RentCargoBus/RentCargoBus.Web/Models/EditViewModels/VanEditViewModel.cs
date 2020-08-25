@@ -32,6 +32,9 @@ namespace RentCargoBus.Web.Models.EditViewModels
         [DisplayName("Max load")]
         public int MaxLoad { get; set; }
 
+        [DisplayName("Kilometers per liter")]
+        public double KilometerPerLiter { get; set; }
+
         [Required]
         [DisplayName("Price per day")]
         public double HirePrice { get; set; }

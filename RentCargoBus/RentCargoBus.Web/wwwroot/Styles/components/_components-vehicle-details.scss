@@ -1,0 +1,171 @@
+﻿@import "../settings/_settings-animations.scss";
+@import "../settings/_settings-shadows.scss";
+@import "../settings/_settings-colors.scss";
+
+.vehicle-details {
+    display: grid;
+    grid-template-rows: 150px min-content max-content 30px;
+
+    &__brand-info {
+        text-align: center;
+        background-color: $Grey200;
+        width: auto;
+        margin: auto;
+        border-radius: 10px;
+        padding: 5px 60px;
+    }
+
+    &__images-and-info {
+        display: grid;
+        grid-template-columns: 250px min-content;
+        grid-template-rows: 600px;
+        grid-gap: 200px;
+    }
+
+    &__item {
+        font-size: 18px;
+        font-weight: 600;
+        background-color: $Grey200;
+        padding: 10px 0;
+        border-radius: 5px;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-row-gap: 10px;
+
+        span {
+            margin-left: 10px;
+            font-size: 20px;
+            color: $Blue400;
+        }
+    }
+
+    &__price {
+        span {
+            font-size: 32px;
+            font-weight: 800;
+            color: $Secondary800;
+        }
+    }
+
+    &__info {
+        display: grid;
+        //grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+        grid-template-rows: max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content;
+        grid-row-gap: 20px;
+        text-align: center;
+        align-items: baseline;
+    }
+
+    &__images {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-auto-rows: 260px;
+        grid-gap: 20px;
+        align-content: baseline;
+    }
+
+    &__image-wrapper {
+        width: 290px;
+        height: 260px;
+        transition: 0.1s ease-out;
+        box-shadow: $Shadow1dp;
+        border-radius: 15px;
+
+        &:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        object-fit: cover;
+    }
+    // Enlarge Image on click
+    &__image-enlarge {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.9);
+
+        &__image {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            animation-duration: 0.5s;
+            animation-name: zoom;
+        }
+
+        &__close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+
+            &:hover, &focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            &__image {
+                width: 100%;
+            }
+        }
+    }
+
+    &__contact-us {
+        display: grid;
+        grid-template-rows: 40px 40px 40px;
+        align-items: center;
+        justify-items: center;
+
+        &__phone {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        &__send-email {
+
+            &:hover {
+                cursor: pointer;
+                color: $White;
+            }
+        }
+    }
+}
+
+.send-email-modal {
+
+    &__container {
+        display: grid;
+        grid-template-rows: auto;
+        grid-row-gap: 10px;
+        padding: 0 20px;
+    }
+
+    &__container__field {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+.active {
+    display: block !important;
+}

@@ -123,3 +123,77 @@ function openModal(e) {
         $('.vehicle-details__image-enlarge').removeClass('active');
     })
 };
+
+//Send Email
+$(function () {
+    $('.vehicle-details__contact-us__send-email').on('click', function () {
+        $('.send-email-modal').dialog("open");
+    });
+
+    $(function () {
+        $('.send-email-modal').dialog({
+            autoOpen: false,
+            show: {
+                effect: "clip"
+            },
+            height: 400,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Send request": function () {
+                    post();
+                    $(this).dialog("close").fadeOut("slow");
+                },
+                Cancel: function () {
+                    $(this).fadeOut("slow", function () {
+                        $(this).dialog('close');
+                    });
+                }
+            }
+        });
+    })
+
+    $(function () {
+        $('.send-email-modal__result').dialog({
+            autoOpen: false,
+            show: {
+                effect: "clip"
+            },
+            height: 250,
+            width: 300,
+            modal: true,
+            buttons: {
+                "Close": function () {
+                    $(this).hide("fast", function () {
+                        $(this).dialog('close');
+                    });
+                }
+            }
+        });
+    })
+
+    function post() {
+        var brand = $('.vehicle-details__brand').text();
+        var model = $('.vehicle-details__model').text();
+        var plate = $('.plate-number').text();
+        var sender = $("#name").val();
+        var senderEmail = $("#email").val();
+
+        $.post({
+            url: '/Home/SendEmail',
+            data: { 'brand': brand, 'model': model, 'plate': plate, 'sender': sender, 'senderEmail': senderEmail },
+            success: function () {
+                $('.send-email-modal__result').prop('title', 'Success');
+                $('.send-email-modal__result').html("<h4>Request send!</h4><br/><h5>Thank you.</h5>").css({
+                    textAlign: 'center',
+                });
+                $('.send-email-modal__result').dialog("open");
+            },
+            error: function () {
+                $('.send-email-modal__result').prop('title', 'Error');
+                $('.send-email-modal__result').html("<strong>Could not send request...</strong><br/><p>Please use the provided phone number.</p><br/><p>Thank you.</p>");
+                $('.send-email-modal__result').dialog("open");
+            }
+        })
+    }
+})

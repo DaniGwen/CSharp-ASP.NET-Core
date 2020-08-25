@@ -18,7 +18,7 @@ namespace RentCargoBus.Web.Models.EditViewModels
 
         public int Weight { get; set; }
 
-        [DisplayName("Miles per gallon")]
+        [DisplayName("Kilometers per liter")]
         public double MilesPerGallon { get; set; }
 
         public int Doors { get; set; }

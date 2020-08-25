@@ -21,6 +21,7 @@ using AutoMapper;
 using RentCargoBus.Data.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using SendGrid.Extensions.DependencyInjection;
 
 namespace RentCargoBus.Web
 {
@@ -44,10 +45,14 @@ namespace RentCargoBus.Web
 
             services.AddControllersWithViews();
 
+            services.AddSendGrid(options => { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
+
             services.AddRazorPages();
 
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
                                                  Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+            services.AddSingleton<EmailService>();
 
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();

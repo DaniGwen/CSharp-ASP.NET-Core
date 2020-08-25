@@ -7,3 +7,24 @@
         transform: scale(1)
     }
 }
+
+@keyframes revial {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+// Create zone - element and set animation
+@for $i from 1 through 10 {
+    .effect-stretch#{$i} {
+        opacity: 0;
+        animation: 0.4s revial forwards;
+        animation-delay: 0.1s * $i;
+    }
+}

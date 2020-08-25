@@ -3,7 +3,7 @@
     ViewData["Title"] = "Car partial";
 }
 
-<article class="c-main__vehicles">
+<article class="c-main__vehicles effect-stretch5">
     <h2 class="c-main__vehicles__title">Cars:</h2>
     <section class="c-main__vans">
         @if (Model.Cars.Any())
@@ -26,18 +26,21 @@
                             <h2>@car.Brand</h2>
                             <h3>@car.Model</h3>
                             <div class="c-card__info__details">
-                                <p>Seats:<span class="c-card__info__details__span">@car.Seats</span></p>
-                                <p>Doors:<span class="c-card__info__details__span">@car.Door</span></p>
-                                <p><span class="c-card__info__details__span">@car.MilesPerGallon</span>mpg.</p>
-                                <p class="c-card__info__details__price">Lease price:  <span class="c-card__info__details__span">@car.HirePrice</span>Euro. / Day</p>
+                                <p class="c-card__info__details__price">
+                                    Lease price:
+                                    <span class="c-card__info__details__span">@car.HirePrice</span>
+                                    Euro. / Day
+                                </p>
 
                                 @if (car.IsAvailable)
                                 {
-                                    <p class="btn c-card__info__availability">Available</p>
+                                    <p class="c-card__info__availability">Available</p>
                                 }
                                 else
                                 {
-                                    <p class="c-card__info__availability c-card__info__availability--busy">Not Available</p>
+                                    <p class="c-card__info__availability c-card__info__availability--busy">
+                                        Not Available
+                                    </p>
                                 }
                             </div>
                         </div>

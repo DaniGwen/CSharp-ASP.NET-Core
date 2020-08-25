@@ -13,9 +13,12 @@
 }
 
 .footer {
-    background-color: $Grey700;
+    background-color: $Grey200;
     width: 100%;
     min-height: 80px;
+    display: grid;
+    align-self: end;
+    text-align: center;
 
     @include for-phone-only {
     }

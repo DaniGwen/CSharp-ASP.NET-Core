@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
 using RentCargoBus.Web.Models;
 using RentCargoBus.Web.Models.Index;
+using SendGrid;
 
 namespace RentCargoBus.Web.Controllers
 {
@@ -17,16 +20,19 @@ namespace RentCargoBus.Web.Controllers
         private readonly IVanService vanService;
         private readonly ICarService carService;
         private readonly IMapper mapper;
+        private readonly EmailService emailService;
 
         public HomeController(ILogger<HomeController> logger
                              , IVanService vanService
                              , ICarService carService
-                             , IMapper mapper)
+                             , IMapper mapper
+                             , EmailService emailService)
         {
             this.logger = logger;
             this.vanService = vanService;
             this.carService = carService;
             this.mapper = mapper;
+            this.emailService = emailService;
         }
 
         [HttpGet]
@@ -61,6 +67,41 @@ namespace RentCargoBus.Web.Controllers
             var viewModel = this.mapper.Map<VansViewModel>(vanDb);
 
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> CarDetails(int id)
+        {
+            var carImages = await this.carService.GetImagesByCarIdAsync(id);
+            var carDb = await this.carService.GetCarByIdAsync(id);
+
+            var viewModel = this.mapper.Map<CarsViewModel>(carDb);
+
+            return this.View(viewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task SendEmail()
+        {
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> SendEmail(string senderEmail, string sender, string brand, string model, string plate)
+        {
+
+            var response = await this.emailService
+                .SendEmail(senderEmail, sender, brand, model, plate);
+
+            if (response.StatusCode == HttpStatusCode.Accepted)
+            {
+                return this.Json(true);
+            }
+
+            return this.Json(false);
         }
 
         public IActionResult Privacy()

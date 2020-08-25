@@ -23,6 +23,8 @@ namespace RentCargoBus.Web.Models.Index
 
         public decimal HirePrice { get; set; }
 
+        public string PlateNumber { get; set; }
+
         public bool IsAvailable { get; set; }
 
         public List<CarImage> Images { get; set; }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SendGrid" Version="9.21.0" />
+    <PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RentCargoBus.Data.Models\RentCargoBus.Data.Models.csproj" />
     <ProjectReference Include="..\RentCargoBus.Data\RentCargoBus.Data.csproj" />
   </ItemGroup>

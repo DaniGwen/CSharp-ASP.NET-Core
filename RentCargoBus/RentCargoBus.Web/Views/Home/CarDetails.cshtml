@@ -1,0 +1,68 @@
+﻿@model RentCargoBus.Web.Models.Index.CarsViewModel
+
+@{
+    ViewData["Title"] = "CarDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="vehicle-details">
+    <article class="vehicle-details__brand-info effect-stretch1">
+        <h1 class="vehicle-details__brand">@Model.Brand</h1>
+        <h3 class="vehicle-details__model">@Model.Model</h3>
+    </article>
+
+    <section class="vehicle-details__images-and-info">
+        <article class="vehicle-details__info effect-stretch2">
+            <p class="vehicle-details__item">Plate number<span class="plate-number">@Model.PlateNumber</span></p>
+            <p class="vehicle-details__item">Doors<span>@Model.Door</span></p>
+            <p class="vehicle-details__item">Kilometer per liter<span>@Model.MilesPerGallon km/l</span></p>
+            <p class="vehicle-details__item vehicle-details__price">
+                Price for a day
+                <span>@Model.HirePrice &euro;</span>
+            </p>
+        </article>
+
+        <article class="vehicle-details__images effect-stretch3">
+            @foreach (var image in Model.Images)
+            {
+                <div class="vehicle-details__image-wrapper">
+                    <img class="vehicle-details__image"
+                         onclick="openModal(this)"
+                         src="/images/@image.ImageName"
+                         alt="van image" />
+                </div>
+            }
+
+            <div class="vehicle-details__image-enlarge">
+                <span class="vehicle-details__image-enlarge__close">&times;</span>
+                <img class="vehicle-details__image-enlarge__image" src="" alt="van image enlarge" />
+            </div>
+
+        </article>
+    </section>
+
+    <section class="vehicle-details__contact-us effect-stretch4">
+        <h2>Contact us to rent:</h2>
+        <a class="btn btn-outline-success vehicle-details__contact-us__send-email">Send email</a>
+        <p>Or</p>
+        <p>Phone: <span class="vehicle-details__contact-us__phone">+794 45 56 65</span></p>
+    </section>
+
+    <a class="back-to-index" asp-action="Index">Back</a>
+
+</section>
+
+<div class="send-email-modal" title="Request vehicle">
+    <section class="send-email-modal__container">
+        <div><small>Send us Your details below to request this vehicle</small></div>
+        <div class="send-email-modal__container__field">
+            <label>Name:</label>
+            <input type="text" name="name" id="name" placeholder="Name.." />
+        </div>
+        <div class="send-email-modal__container__field">
+            <label>Your Email:</label>
+            <input type="text" name="email" id="email" placeholder="Email.." />
+        </div>
+    </section>
+    <div class="send-email-modal__result" title=""></div>
+</div>

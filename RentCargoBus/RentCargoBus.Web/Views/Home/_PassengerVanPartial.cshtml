@@ -4,7 +4,7 @@
     var passengerVans = Model.Vans.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Passenger);
 }
 
-<article class="c-main__vehicles">
+<article class="c-main__vehicles effect-stretch4">
     <h2 class="c-main__vehicles__title">Passenger vans:</h2>
     <section class="c-main__vans">
         @if (passengerVans.Any())
@@ -33,39 +33,17 @@
                             <h2 class="c-card__van-brand">@van.Brand</h2>
                             <h3 class="c-card__van-model">@van.Model</h3>
                             <div class="c-card__info__details">
-                                <p class="c-card__info__details__plate-number">
-                                    Plate number:
-                                    <span class="c-card__info__details__span">@van.PlateNumber</span>
-                                </p>
-
-                                <p class="c-card__info__details__seats">
-                                    Seats:
-                                    <span class="c-card__info__details__span">@van.Seats</span>
-                                </p>
-
-                                <p class="c-card__info__details__weight">
-                                    Weight:
-                                    <span class="c-card__info__details__span">@van.Weight</span>kg.
-                                </p>
-
-                                <p class="c-card__info__details__height">
-                                    Height:
-                                    <span class="c-card__info__details__span">@van.Height</span>m.
-                                </p>
-
-                                <p class="c-card__info__details__max-load">
-                                    Max load:
-                                    <span class="c-card__info__details__span">@van.MaxLoad</span>kg.
-                                </p>
 
                                 <p class="c-card__info__details__price">
                                     Lease price:
-                                    <span class="c-card__info__details__span">@van.HirePrice</span>Euro. / Day
+                                    <span class="c-card__info__details__span">
+                                        @van.HirePrice
+                                    </span>Euro. / Day
                                 </p>
 
                                 @if (van.IsAvailable)
                                 {
-                                    <p class="btn c-card__info__availability">Available</p>
+                                    <p class="c-card__info__availability">Available</p>
                                 }
                                 else
                                 {

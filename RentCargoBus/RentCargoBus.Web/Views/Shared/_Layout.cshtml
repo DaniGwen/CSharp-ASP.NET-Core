@@ -7,33 +7,39 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery/dist/jquery-ui.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Styles/styles.css" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="c-layout-main-grid">
-        <header class="header">
+        <header class="header effect-stretch1">
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
                     @*<div class="header__logo-wrapper">
-                        <img class="header__logo" src="" alt="site logo" />
-                    </div>*@
+                            <img class="header__logo" src="" alt="site logo" />
+                        </div>*@
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Rent a Van</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="c-navbar navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
+                        <section class="c-navbar__admin-toggle-container">
+                            <div class="c-navbar__toggle__container">
+                                <input type="checkbox"
+                                       data-on="FR"
+                                       data-off="EN"
+                                       data-toggle="toggle"
+                                       data-style="android"
+                                       data-size="mini">
+                            </div>
+                            <partial name="_LoginPartial" />
+                        </section>
+
                         <ul class="navbar-nav">
                             <li>
                                 <a class="nav-link" asp-action="index" asp-controller="Home">Home</a>
-                            </li>
-                            <li class="c-navbar__item">
-                                <label class="c-navbar__item__language">
-                                    <input type="checkbox" data-toggle="toggle" data-on="Fr" data-off="En">
-                                </label>
                             </li>
                         </ul>
                     </div>
@@ -49,10 +55,10 @@
             </div>
         </main>
 
-        <footer class="footer text-muted">
+        <footer class="footer text-muted effect-stretch6">
             <div class="footer__stripe"></div>
             <div class="container">
-                &copy; 2020 - RentCargoBus.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                &copy; 2020 - RentAVan - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>
     </div>
@@ -62,7 +68,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="~/lib/jquery/dist/custom.js"></script>
-    
+
     @*Resolves conflict between BOOTSTRAP buttons and jQUERY UI buttons*@
     <script type="text/javascript">
         $.fn.bootstrapBtn = $.fn.button.noConflict();
