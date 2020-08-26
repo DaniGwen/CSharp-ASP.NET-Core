@@ -1,11 +1,13 @@
 ﻿@model RentCargoBus.Web.Models.Index.CarsVansViewModel
 @{
-    ViewData["Title"] = "Passenger van partial";
+    ViewData["Title"] = "Passenger vans";
     var passengerVans = Model.Vans.Where(van => van.Type == RentCargoBus.Data.Models.Enum.VanType.Passenger);
 }
 
 <article class="c-main__vehicles effect-stretch4">
-    <h2 class="c-main__vehicles__title">Passenger vans:</h2>
+    <h2 class="c-main__vehicles__title">
+        @Localizer[ViewData["Title"].ToString()]:
+    </h2>
     <section class="c-main__vans">
         @if (passengerVans.Any())
         {
@@ -35,19 +37,23 @@
                             <div class="c-card__info__details">
 
                                 <p class="c-card__info__details__price">
-                                    Lease price:
+                                    @Localizer["Lease price"]:
                                     <span class="c-card__info__details__span">
-                                        @van.HirePrice
-                                    </span>Euro. / Day
+                                        @van.HirePrice &euro;
+                                    </span>@Localizer["Day"]
                                 </p>
 
                                 @if (van.IsAvailable)
                                 {
-                                    <p class="c-card__info__availability">Available</p>
+                                    <p class="c-card__info__availability">
+                                        @Localizer["Available"]
+                                    </p>
                                 }
                                 else
                                 {
-                                    <p class="c-card__info__availability c-card__info__availability--busy">Not Available</p>
+                                    <p class="c-card__info__availability c-card__info__availability--busy">
+                                        @Localizer["Not Available"]
+                                    </p>
                                 }
                             </div>
                         </div>
@@ -71,7 +77,9 @@
         }
         else
         {
-            <h4 class="c-main__vans__no-vehicles">No vans at the moment.</h4>
+            <h4 class="c-main__vans__no-vehicles">
+                @Localizer["No vans at the moment"].
+            </h4>
         }
     </section>
 </article>

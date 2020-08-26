@@ -3,9 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +12,7 @@ using RentCargoBus.Data;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
 using DataBaseSeed;
@@ -22,6 +21,12 @@ using RentCargoBus.Data.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using SendGrid.Extensions.DependencyInjection;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Routing.Template;
+using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Localization;
+using RentAVan.Web;
 
 namespace RentCargoBus.Web
 {
@@ -47,13 +52,10 @@ namespace RentCargoBus.Web
 
             services.AddSendGrid(options => { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
 
-            services.AddRazorPages();
-
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
                                                  Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddSingleton<EmailService>();
-
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();
 
@@ -90,10 +92,26 @@ namespace RentCargoBus.Web
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddLocalization(options => options.ResourcesPath = "");
+
+            services.AddRazorPages();
+
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization(/*options => options.DataAnnotationLocalizerProvider = (t, f) => f.Create(typeof(SharedResources))*/);
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                     new CultureInfo("en"),
+                     new CultureInfo("fr"),
+                };
+                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,23 +140,21 @@ namespace RentCargoBus.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            var supportedCultures = new[]
-            {
-                new CultureInfo("en"),
-                new CultureInfo("fr"),
-            };
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en-US"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            var localizationOptions = app.ApplicationServices
+                .GetService<IOptions<RequestLocalizationOptions>>()
+                .Value;
+
+            app.UseRequestLocalization(localizationOptions);
+
             app.UseAuthentication();
+
             app.UseAuthorization();
 
 
@@ -147,6 +163,7 @@ namespace RentCargoBus.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

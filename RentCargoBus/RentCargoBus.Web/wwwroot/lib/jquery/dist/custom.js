@@ -182,16 +182,16 @@ $(function () {
         $.post({
             url: '/Home/SendEmail',
             data: { 'brand': brand, 'model': model, 'plate': plate, 'sender': sender, 'senderEmail': senderEmail },
-            success: function () {
-                $('.send-email-modal__result').prop('title', 'Success');
-                $('.send-email-modal__result').html("<h4>Request send!</h4><br/><h5>Thank you.</h5>").css({
+            success: function (message) {
+                $('.send-email-modal__result').attr('title', 'Success');
+                $('.send-email-modal__result').html(message.message.name).css({
                     textAlign: 'center',
                 });
                 $('.send-email-modal__result').dialog("open");
             },
-            error: function () {
+            error: function (message) {
                 $('.send-email-modal__result').prop('title', 'Error');
-                $('.send-email-modal__result').html("<strong>Could not send request...</strong><br/><p>Please use the provided phone number.</p><br/><p>Thank you.</p>");
+                $('.send-email-modal__result').html(message.message.name);
                 $('.send-email-modal__result').dialog("open");
             }
         })

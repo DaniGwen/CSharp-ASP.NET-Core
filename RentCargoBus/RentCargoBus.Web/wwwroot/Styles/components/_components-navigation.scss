@@ -18,6 +18,7 @@
         display: grid;
         grid-template-columns: 100px 1fr;
         grid-column-gap: 20px;
+        align-items: baseline;
     }
 
     &__item {
@@ -58,4 +59,8 @@
 .nav-link {
     padding: 0;
     margin: 0;
+}
+
+#dropdownlang{
+    border-radius: 20px;
 }

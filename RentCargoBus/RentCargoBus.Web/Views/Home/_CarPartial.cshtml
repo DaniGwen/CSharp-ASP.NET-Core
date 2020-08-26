@@ -1,10 +1,10 @@
 ﻿@model RentCargoBus.Web.Models.Index.CarsVansViewModel
 @{
-    ViewData["Title"] = "Car partial";
+    ViewData["Title"] = "Cars";
 }
 
 <article class="c-main__vehicles effect-stretch5">
-    <h2 class="c-main__vehicles__title">Cars:</h2>
+    <h2 class="c-main__vehicles__title">@Localizer[ViewData["Title"].ToString()]:</h2>
     <section class="c-main__vans">
         @if (Model.Cars.Any())
         {
@@ -27,19 +27,19 @@
                             <h3>@car.Model</h3>
                             <div class="c-card__info__details">
                                 <p class="c-card__info__details__price">
-                                    Lease price:
-                                    <span class="c-card__info__details__span">@car.HirePrice</span>
-                                    Euro. / Day
+                                    @Localizer["Lease price"]:
+                                    <span class="c-card__info__details__span">@car.HirePrice  &euro;</span>
+                                    @Localizer["Day"]
                                 </p>
 
                                 @if (car.IsAvailable)
                                 {
-                                    <p class="c-card__info__availability">Available</p>
+                                    <p class="c-card__info__availability">@Localizer["Available"]</p>
                                 }
                                 else
                                 {
                                     <p class="c-card__info__availability c-card__info__availability--busy">
-                                        Not Available
+                                        @Localizer["Not Available"]
                                     </p>
                                 }
                             </div>
@@ -65,7 +65,9 @@
         }
         else
         {
-            <h4 class="c-main__vans__no-vehicles">No cars at the moment.</h4>
+            <h4 class="c-main__vans__no-vehicles">
+                @Localizer["No cars at the moment"].
+            </h4>
         }
 
     </section>

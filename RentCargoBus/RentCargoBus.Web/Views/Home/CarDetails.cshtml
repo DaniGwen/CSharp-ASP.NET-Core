@@ -13,11 +13,17 @@
 
     <section class="vehicle-details__images-and-info">
         <article class="vehicle-details__info effect-stretch2">
-            <p class="vehicle-details__item">Plate number<span class="plate-number">@Model.PlateNumber</span></p>
-            <p class="vehicle-details__item">Doors<span>@Model.Door</span></p>
-            <p class="vehicle-details__item">Kilometer per liter<span>@Model.MilesPerGallon km/l</span></p>
+            <p class="vehicle-details__item">
+                @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
+            </p>
+            <p class="vehicle-details__item">
+                @Localizer["Doors"]<span>@Model.Door</span>
+            </p>
+            <p class="vehicle-details__item">
+                @Localizer["Kilometer per liter"]<span>@Model.MilesPerGallon km/l</span>
+            </p>
             <p class="vehicle-details__item vehicle-details__price">
-                Price for a day
+                @Localizer["Price for a day"]
                 <span>@Model.HirePrice &euro;</span>
             </p>
         </article>
@@ -41,28 +47,9 @@
         </article>
     </section>
 
-    <section class="vehicle-details__contact-us effect-stretch4">
-        <h2>Contact us to rent:</h2>
-        <a class="btn btn-outline-success vehicle-details__contact-us__send-email">Send email</a>
-        <p>Or</p>
-        <p>Phone: <span class="vehicle-details__contact-us__phone">+794 45 56 65</span></p>
-    </section>
+    <partial name="_VehicleDetailsContactUsPartial" />
 
-    <a class="back-to-index" asp-action="Index">Back</a>
-
+    <a class="back-to-index" asp-action="Index"> @Localizer["Back"]</a>
 </section>
 
-<div class="send-email-modal" title="Request vehicle">
-    <section class="send-email-modal__container">
-        <div><small>Send us Your details below to request this vehicle</small></div>
-        <div class="send-email-modal__container__field">
-            <label>Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name.." />
-        </div>
-        <div class="send-email-modal__container__field">
-            <label>Your Email:</label>
-            <input type="text" name="email" id="email" placeholder="Email.." />
-        </div>
-    </section>
-    <div class="send-email-modal__result" title=""></div>
-</div>
+<partial name="_VehicleDetailsEmailModalPartial">

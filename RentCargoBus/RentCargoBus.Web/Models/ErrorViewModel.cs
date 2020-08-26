@@ -1,6 +1,6 @@
 using System;
 
-namespace RentCargoBus.Web.Models
+namespace RentAVan.Web.Models
 {
     public class ErrorViewModel
     {

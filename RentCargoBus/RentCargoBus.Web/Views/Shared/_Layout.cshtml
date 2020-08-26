@@ -1,15 +1,23 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var routeData = ViewContext.RouteData.Values;
+    var routeAction = $"/{routeData["controller"]}/{routeData["action"]}/{routeData["id"]}";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - RentAVan</title>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery/dist/jquery-ui.js"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Styles/styles.css" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="c-layout-main-grid">
@@ -27,12 +35,9 @@
                     <div class="c-navbar navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <section class="c-navbar__admin-toggle-container">
                             <div class="c-navbar__toggle__container">
-                                <input type="checkbox"
-                                       data-on="FR"
-                                       data-off="EN"
-                                       data-toggle="toggle"
-                                       data-style="android"
-                                       data-size="mini">
+                                @*Language switch tag helper NuGet"LazZiya.TagHelpers"*@
+                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie","/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
+                                </language-nav>
                             </div>
                             <partial name="_LoginPartial" />
                         </section>
@@ -62,7 +67,6 @@
             </div>
         </footer>
     </div>
-
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
