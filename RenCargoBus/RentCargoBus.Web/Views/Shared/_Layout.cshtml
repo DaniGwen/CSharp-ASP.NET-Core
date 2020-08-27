@@ -1,0 +1,102 @@
+﻿@{
+    var routeData = ViewContext.RouteData.Values;
+    var routeAction = $"/{routeData["controller"]}/{routeData["action"]}/{routeData["id"]}";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - RentAVan</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Styles/styles.css" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="c-layout-main-grid">
+        <header class="header effect-stretch1">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    @*<div class="header__logo-wrapper">
+                            <img class="header__logo" src="" alt="site logo" />
+                        </div>*@
+                    <h5 class="navbar-brand">Rent a Van</h5>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="c-navbar navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <section class="c-navbar__admin-login-and-toggle">
+                            <div class="c-navbar__admin-login-and-toggle__language">
+                                <i class="fas fa-globe-europe"></i>
+                                @*Language switch tag helper NuGet"LazZiya.TagHelpers"*@
+                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie","/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
+                                </language-nav>
+                            </div>
+                            <partial name="_LoginPartial" />
+                        </section>
+
+                        <ul class="navbar-nav">
+                            <li class="navbar-nav__home">
+                                <a class="navbar-nav__home__link"
+                                   asp-action="index" asp-controller="Home">
+                                    @Localizer["Home"]
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </main>
+
+        <footer class="footer text-muted effect-stretch6">
+            <div class="footer__stripe"></div>
+            <div class="footer__container container">
+                <section class="footer__container__contacts">
+                    <h4>@Localizer["Contacts"]:</h4>
+                    <p>
+                        <i class="far fa-envelope"></i>@Localizer["E-mail"]: <span class="footer__container__contacts__info">my-email@gmail.com</span>
+                    </p>
+                    <p>
+                        <i class="fas fa-mobile-alt"></i>@Localizer["Phone"]: <span class="footer__container__contacts__info">+78 87 77 66</span>
+                    </p>
+                </section>
+                <section class="footer__container__privacy">
+                    &copy; 2020 - RentAVan - <a asp-area="" asp-controller="Home" asp-action="Privacy">
+                        @Localizer["Privacy"]
+                    </a>
+                    <partial name="_CookieConsentRevokePartial" />
+                </section>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="~/lib/jquery/dist/custom.js"></script>
+
+    @*Resolves conflict between BOOTSTRAP buttons and jQUERY UI buttons*@
+    <script type="text/javascript">
+        $.fn.bootstrapBtn = $.fn.button.noConflict();
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
