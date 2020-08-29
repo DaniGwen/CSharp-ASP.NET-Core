@@ -34,12 +34,14 @@
                     </button>
                     <div class="c-navbar navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <section class="c-navbar__admin-login-and-toggle">
+
                             <div class="c-navbar__admin-login-and-toggle__language">
                                 <i class="fas fa-globe-europe"></i>
                                 @*Language switch tag helper NuGet"LazZiya.TagHelpers"*@
                                 <language-nav cookie-handler-url="@Url.Action("SetCultureCookie","/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
                                 </language-nav>
                             </div>
+
                             <partial name="_LoginPartial" />
                         </section>
 
@@ -70,16 +72,29 @@
             <div class="footer__container container">
                 <section class="footer__container__contacts">
                     <h4>@Localizer["Contacts"]:</h4>
-                    <p>
-                        <i class="far fa-envelope"></i>@Localizer["E-mail"]: <span class="footer__container__contacts__info">my-email@gmail.com</span>
-                    </p>
-                    <p>
-                        <i class="fas fa-mobile-alt"></i>@Localizer["Phone"]: <span class="footer__container__contacts__info">+78 87 77 66</span>
-                    </p>
+                    <section class="footer__container__contacts__details">
+                        <div class="footer__container__contacts__details__icons">
+                            <i class="footer__container__contacts__details__icon far fa-envelope"></i>
+                        </div>
+                        <div>
+                            @Localizer["E-mail"]: <span class="footer__container__contacts__info">my-email@gmail.com</span>
+                        </div>
+                    </section>
+                    <section class="footer__container__contacts__details">
+                        <div class="footer__container__contacts__details__icons">
+                            <i class="footer__container__contacts__details__icon fab fa-whatsapp"></i>
+                            <i class="footer__container__contacts__details__icon fab fa-viber"></i>
+                            <i class="footer__container__contacts__details__icon fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            @Localizer["Phone"]: <span class="footer__container__contacts__info">+359 883 44 44 87</span>
+                        </div>
+                    </section>
                 </section>
                 <section class="footer__container__privacy">
-                    &copy; 2020 - RentAVan - <a asp-area="" asp-controller="Home" asp-action="Privacy">
-                        @Localizer["Privacy"]
+                    &copy; 2020 - RentAVan
+                    <a asp-controller="Home" asp-action="Privacy">
+                        <p>@Localizer["Privacy"]</p>
                     </a>
                     <partial name="_CookieConsentRevokePartial" />
                 </section>

@@ -24,16 +24,32 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 70px;
-        margin: 50px auto;
+        margin: 30px auto;
     }
 
     &__container__privacy {
-        align-self: end;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: left;
     }
 
     &__container__contacts {
         display: grid;
+        grid-template: max-content max-content max-content;
         grid-row-gap: 10px;
+        justify-content: right;
+
+        &__details {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            align-items: end;
+        }
+
+        &__details__icon {
+            margin-right: 10px;
+            font-size: 22px;
+        }
 
         &__info {
             font-size: 20px;

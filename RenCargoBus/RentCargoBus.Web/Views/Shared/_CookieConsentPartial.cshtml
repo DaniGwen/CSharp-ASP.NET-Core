@@ -8,12 +8,17 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        <a href="/Home/Privacy">Check our privacy policy</a>
-        <p>We use only essential cookies needed for our site to run smooth. No personal data is collected for the purpose of advertising, analitics or social media purposes. By clicking the "Accept" button you agree on additional cookies.</p> <a asp-page="/Privacy">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
-        </button>
+    <div id="cookieConsent" class="c-cookie-consent alert alert-info alert-dismissible fade show" role="alert">
+        <div class="c-cookie-consent__info">
+            <p>@Localizer["In order to be able to change the default language we have to write one extra cookie to your browser"].<br/>@Localizer["No personal data is collected for the purpose of advertising, analitics or social media purposes"].<br/>@Localizer["By clicking the"] "@Localizer["Accept"]" @Localizer["button you agree on additional cookies"].</p>
+            <a href="/Home/Privacy">@Localizer["Check our site policy"]</a>
+</div>
+        <div class="c-cookie-consent__button-wrapper">
+            <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                <span aria-hidden="true">@Localizer["Accept"]</span>
+            </button>
+        </div>
+
     </div>
     <script>
         (function () {

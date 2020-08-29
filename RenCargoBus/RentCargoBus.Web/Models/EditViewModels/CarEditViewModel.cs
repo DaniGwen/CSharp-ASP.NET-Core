@@ -2,6 +2,7 @@
 using RentCargoBus.Data.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentCargoBus.Web.Models.EditViewModels
 {
@@ -18,15 +19,22 @@ namespace RentCargoBus.Web.Models.EditViewModels
 
         public int Weight { get; set; }
 
-        [DisplayName("Kilometers per liter")]
+        [DisplayName("Consumption")]
         public double MilesPerGallon { get; set; }
 
         public int Doors { get; set; }
 
-        public int Seats { get; set; }
+        [DisplayName("Warranty Deposit for Bulgaria")]
+        public decimal Deposit { get; set; }
 
-        [DisplayName("Price per day")]
-        public double HirePrice { get; set; }
+        [DisplayName("Warranty Deposit for Europe")]
+        public decimal DepositEu { get; set; }
+
+        [DisplayName("Price per Day")]
+        public decimal HirePrice { get; set; }
+
+        [DisplayName("Price per Month")]
+        public decimal HirePriceMonth { get; set; }
 
         [DisplayName("Is avilable?")]
         public int IsAvailable { get; set; }

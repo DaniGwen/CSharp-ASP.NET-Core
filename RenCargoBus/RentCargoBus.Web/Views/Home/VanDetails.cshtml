@@ -20,7 +20,7 @@
                     @Localizer["Seats"]<span>@Model.Seats</span>
                 </p>
                 <p class="vehicle-details__item">
-                    @Localizer["Kilometer per liter"]<span>@Model.KilometersPerLiter km/l</span>
+                    @Localizer["Consumption"]<span>@Model.KilometersPerLiter km/l</span>
                 </p>
                 <p class="vehicle-details__item">
                     @Localizer["Weight"]<span>@Model.Weight kg.</span>
@@ -35,11 +35,8 @@
                     @Localizer["Type"]<span>@Model.Type</span>
                 </p>
             </div>
-            <div  class="vehicle-details__info__details-wrapper">
-                <p class="vehicle-details__item vehicle-details__price">
-                    @Localizer["Price per day"]
-                    <span>@Model.HirePrice &euro;</span>
-                </p>
+            <div class="vehicle-details__info__details-wrapper">
+                <partial name="_VehicleDetailsPricePartial" />
             </div>
         </article>
 

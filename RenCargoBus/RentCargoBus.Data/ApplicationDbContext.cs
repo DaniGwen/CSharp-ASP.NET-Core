@@ -21,7 +21,9 @@ namespace RentCargoBus.Data
 
         public DbSet<RentVan> RentVans { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> ApplicationUsers { get; set; }
+
+        public DbSet<Delivery> VehiclesDelivery { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

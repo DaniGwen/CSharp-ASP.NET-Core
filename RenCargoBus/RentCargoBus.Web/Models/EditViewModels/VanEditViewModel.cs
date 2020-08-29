@@ -32,12 +32,22 @@ namespace RentCargoBus.Web.Models.EditViewModels
         [DisplayName("Max load")]
         public int MaxLoad { get; set; }
 
-        [DisplayName("Kilometers per liter")]
+        [DisplayName("Consumption")]
         public double KilometerPerLiter { get; set; }
 
+        [Display(Name = "Warranty Deposit for Bulgaria")]
+        public decimal Deposit { get; set; }
+
+        [Display(Name = "Warranty Deposit for Europe")]
+        public decimal DepositEu { get; set; }
+
         [Required]
-        [DisplayName("Price per day")]
-        public double HirePrice { get; set; }
+        [DisplayName("Price per Day")]
+        public decimal HirePrice { get; set; }
+
+        [Required]
+        [DisplayName("Price per Month")]
+        public decimal HirePriceMonth { get; set; }
 
         [DisplayName("Van type")]
         public int Type { get; set; }

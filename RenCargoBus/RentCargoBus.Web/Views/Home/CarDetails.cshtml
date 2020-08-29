@@ -21,14 +21,11 @@
                     @Localizer["Doors"]<span>@Model.Door</span>
                 </p>
                 <p class="vehicle-details__item">
-                    @Localizer["Kilometer per liter"]<span>@Model.MilesPerGallon km/l</span>
+                    @Localizer["Consumption"]<span>@Model.MilesPerGallon km/l</span>
                 </p>
             </div>
             <div class="vehicle-details__info__details-wrapper">
-                <p class="vehicle-details__item vehicle-details__price">
-                    @Localizer["Price for a day"]
-                    <span>@Model.HirePrice &euro;</span>
-                </p>
+                <partial name="_VehicleDetailsPricePartial" />
             </div>
         </article>
 

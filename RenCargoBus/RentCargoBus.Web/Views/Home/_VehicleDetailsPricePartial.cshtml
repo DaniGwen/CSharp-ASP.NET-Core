@@ -1,0 +1,35 @@
+﻿<div class="vehicle-details__item vehicle-details__price">
+    <label class="vehicle-details__price__availability">Prices Bulgaria</label>
+    <article class="vehicle-details__item vehicle-details__price__info">
+        <section>
+            <label>@Localizer["Price per day"]</label>
+            <span>@Model.HirePrice &euro;</span>
+        </section>
+        <section>
+            <label>@Localizer["Deposit"]</label>
+            <span>@Model.Deposit &euro;</span>
+        </section>
+        <section>
+            <label>@Localizer["Delivery"]</label>
+            <span>@Model.Delivery &euro;</span>
+        </section>
+    </article>
+</div>
+
+<div class="vehicle-details__item vehicle-details__price">
+    <label class="vehicle-details__price__availability">Prices Europe</label>
+    <article class="vehicle-details__item vehicle-details__price__info">
+        <section>
+            <label>@Localizer["Price per Month"]</label>
+            <span class="vehicle-details__price--normal">@Model.HirePriceMonth &euro;</span>
+        </section>
+        <section>
+            <label>@Localizer["Deposit"]</label>
+            <span class="vehicle-details__price--small">@Model.DepositEu &euro;</span>
+        </section>
+        <section>
+            <label>@Localizer["Delivery"]</label>
+            <span class="vehicle-details__price--small">@Model.Delivery &euro;</span>
+        </section>
+    </article>
+</div>

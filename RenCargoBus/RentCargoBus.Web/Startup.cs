@@ -43,16 +43,18 @@ namespace RentAVan.Web
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
-            services.AddSendGrid(options => { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
+            services.AddSendGrid(options =>
+            { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
 
-            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-                                                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
             services.AddSingleton<EmailService>();
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();
+            services.AddTransient<IDeliveryService, DeliveryService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -75,6 +77,8 @@ namespace RentAVan.Web
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
+
+                options.SignIn.RequireConfirmedEmail = false;
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -88,7 +92,7 @@ namespace RentAVan.Web
                 options.SlidingExpiration = true;
             });
 
-            services.AddLocalization(options => options.ResourcesPath = "");
+            //services.AddLocalization(options => options.ResourcesPath = "");
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -104,12 +108,11 @@ namespace RentAVan.Web
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                //options.ConsentCookie.IsEssential = true;
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddRazorPages();
+            //services.AddRazorPages();
 
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
@@ -133,6 +136,7 @@ namespace RentAVan.Web
                         Seed.SeedCargoVans(context);
                         Seed.SeedPassangerVans(context);
                         Seed.SeedCars(context);
+                        Seed.SeedDeliveryFees(context);
                     }
                 }
             }
@@ -143,17 +147,17 @@ namespace RentAVan.Web
                 app.UseHsts();
             }
 
+            var localizationOptions = app.ApplicationServices
+               .GetService<IOptions<RequestLocalizationOptions>>()
+               .Value;
+
+            app.UseRequestLocalization(localizationOptions);
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
-
-            var localizationOptions = app.ApplicationServices
-                .GetService<IOptions<RequestLocalizationOptions>>()
-                .Value;
-
-            app.UseRequestLocalization(localizationOptions);
 
             app.UseRouting();
 

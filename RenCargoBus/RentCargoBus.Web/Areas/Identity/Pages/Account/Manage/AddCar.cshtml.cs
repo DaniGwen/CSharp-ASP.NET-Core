@@ -10,6 +10,7 @@ using RentCargoBus.Data.Models;
 using RentCargoBus.Services.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
@@ -50,26 +51,28 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Model")]
             public string Model { get; set; }
 
-            [Required]
             [Display(Name = "Plate Number")]
             public string PlateNumber { get; set; }
 
             public int Weight { get; set; }
 
-            [Required]
-            [Display(Name = "Miles per gallon")]
+            [Display(Name = "Consumption")]
             public double MilesPerGallon { get; set; }
 
-            [Required]
             [Display(Name = "Number of doors")]
             public int Doors { get; set; }
 
-            [Display(Name = "Number of seats")]
-            public int Seats { get; set; }
+            [Display(Name ="Warranty Deposit for Bulgaria")]
+            public decimal Deposit { get; set; }
 
-            [Required]
-            [Display(Name = "Price for a day")]
+            [Display(Name = "Warranty Deposit for Europe")]
+            public decimal DepositEu { get; set; }
+
+            [Display(Name = "Price per Day")]
             public decimal HirePrice { get; set; }
+            
+            [DisplayName("Price per Month")]
+            public decimal HirePriceMonth { get; set; }
 
             [DataType(DataType.Upload)]
             public List<IFormFile> Images { get; set; }

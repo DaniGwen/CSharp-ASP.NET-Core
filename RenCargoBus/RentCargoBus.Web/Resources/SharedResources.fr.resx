@@ -117,17 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>J'accepte</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Arrière</value>
   </data>
+  <data name="button you agree on additional cookies" xml:space="preserve">
+    <value>bouton vous acceptez les cookies supplémentaires</value>
+  </data>
+  <data name="By clicking the" xml:space="preserve">
+    <value>En cliquant sur le</value>
+  </data>
   <data name="Cargo vans" xml:space="preserve">
     <value>Fourgonnettes</value>
   </data>
   <data name="Cars" xml:space="preserve">
     <value>Voitures</value>
+  </data>
+  <data name="Check our site policy" xml:space="preserve">
+    <value>Consultez la politique de notre site</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Consommation</value>
   </data>
   <data name="Contact us to rent" xml:space="preserve">
     <value>Contactez-nous pour louer</value>
@@ -139,16 +154,25 @@
     <value>Impossible d'envoyer la demande</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>journée</value>
+    <value>Journée</value>
+  </data>
+  <data name="Delivery" xml:space="preserve">
+    <value>Livraison</value>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+    <value>Dépôt</value>
   </data>
   <data name="Doors" xml:space="preserve">
     <value>Des portes</value>
   </data>
   <data name="Height" xml:space="preserve">
-    <value>la taille</value>
+    <value>La taille</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
+  </data>
+  <data name="In order to be able to change the default language we have to write one extra cookie to your browser" xml:space="preserve">
+    <value>Afin de pouvoir changer la langue par défaut, nous devons écrire un cookie supplémentaire dans votre navigateur</value>
   </data>
   <data name="Kilometer per liter" xml:space="preserve">
     <value>Kilomètre par litre</value>
@@ -164,6 +188,9 @@
   </data>
   <data name="No cars at the moment" xml:space="preserve">
     <value>Pas de voitures pour le moment</value>
+  </data>
+  <data name="No personal data is collected for the purpose of advertising, analitics or social media purposes" xml:space="preserve">
+    <value>Aucune donnée personnelle n'est collectée à des fins de publicité, d'analyse ou de médias sociaux</value>
   </data>
   <data name="No vans at the moment" xml:space="preserve">
     <value>Pas de fourgonnettes pour le moment</value>
@@ -194,6 +221,9 @@
   </data>
   <data name="Price per day" xml:space="preserve">
     <value>Prix ​​par jour</value>
+  </data>
+  <data name="Price per Month" xml:space="preserve">
+    <value>Prix ​​par mois</value>
   </data>
   <data name="Request send" xml:space="preserve">
     <value>Demande envoyée</value>

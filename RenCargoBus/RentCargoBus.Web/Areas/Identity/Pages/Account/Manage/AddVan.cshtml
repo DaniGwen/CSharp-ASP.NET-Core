@@ -9,7 +9,7 @@
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Model.Brand"></label>
-            <input asp-for="Model.Brand" placeholder="Марка" class="form-control form-control-sm" autofocus/>
+            <input asp-for="Model.Brand" placeholder="Марка" class="form-control form-control-sm" autofocus />
             <span asp-validation-for="Model.Brand" class="text-danger"></span>
         </div>
 
@@ -27,33 +27,43 @@
 
         <div class="form-group">
             <label asp-for="Model.Weight"></label>
-            <input asp-for="Model.Weight" placeholder="Маса на буса в килограми" class="form-control form-control-sm" />
-            <span asp-validation-for="Model.Weight" class="text-danger"></span>
+            <input asp-for="Model.Weight" type="number" placeholder="Маса на буса в килограми пример: 2200" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.Height"></label>
-            <input asp-for="Model.Height" placeholder="Височина на буса в метри" class="form-control form-control-sm" />
-            <span asp-validation-for="Model.Height" class="text-danger"></span>
+            <input asp-for="Model.Height" type="number" placeholder="Височина на буса в метри пример: 1.5" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.MaxLoad"></label>
-            <input asp-for="Model.MaxLoad" min="1" max="10000" placeholder="Товаримост в килограми" class="form-control form-control-sm" />
-            <span asp-validation-for="Model.MaxLoad" class="text-danger"></span>
+            <input asp-for="Model.MaxLoad" type="number" placeholder="Товаримост в килограми" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.Seats"></label>
-            <input asp-for="Model.Seats" min="1" placeholder="Брой врати" class="form-control form-control-sm" />
-            <span asp-validation-for="Model.Seats" class="text-danger"></span>
-            <small>Only for passenger van.</small>
+            <input asp-for="Model.Seats" type="number" placeholder="Брой места" class="form-control form-control-sm" />
+            <small>Само за пътнически бусове.</small>
         </div>
 
         <div class="form-group">
             <label asp-for="Model.HirePrice"></label>
-            <input asp-for="Model.HirePrice" value="" placeholder="Цена за ден" class="form-control form-control-sm" />
-            <span asp-validation-for="Model.HirePrice" class="text-danger"></span>
+            <input asp-for="Model.HirePrice" type="number" placeholder="Цена за ден в евро" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Model.HirePriceMonth"></label>
+            <input asp-for="Model.HirePriceMonth" type="number" placeholder="Цена за месец в евро" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Model.Deposit"></label>
+            <input asp-for="Model.Deposit" type="number" placeholder="Гаранционен депозит в евро за BG" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Model.DepositEu"></label>
+            <input asp-for="Model.DepositEu" type="number" placeholder="Гаранционен депозит в евро за EU" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">

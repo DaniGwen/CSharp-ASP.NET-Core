@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
@@ -27,13 +28,15 @@ namespace RentCargoBus.Web.Controllers
         private readonly IMapper mapper;
         private readonly EmailService emailService;
         private readonly IStringLocalizer localizer;
+        private readonly IDeliveryService deliveryService;
 
         public HomeController(ILogger<HomeController> logger
                              , IVanService vanService
                              , ICarService carService
                              , IMapper mapper
                              , EmailService emailService
-                             , IStringLocalizer<SharedResources> localizer)
+                             , IStringLocalizer<SharedResources> localizer
+                             , IDeliveryService deliveryService)
         {
             this.logger = logger;
             this.vanService = vanService;
@@ -41,6 +44,7 @@ namespace RentCargoBus.Web.Controllers
             this.mapper = mapper;
             this.emailService = emailService;
             this.localizer = localizer;
+            this.deliveryService = deliveryService;
         }
 
         [AllowAnonymous]
@@ -50,8 +54,13 @@ namespace RentCargoBus.Web.Controllers
 
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cltr)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(3), IsEssential = true }
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(12) /*IsEssential = true*/, Secure = true }
             );
+
+            if (returnUrl == "///")
+            {
+                return this.Redirect("/Home/Index");
+            }
 
             return this.Redirect(returnUrl);
         }
@@ -60,6 +69,7 @@ namespace RentCargoBus.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+
             var allVans = this.vanService.GetAllVans();
             var allCars = this.carService.GetAllCars();
 
@@ -84,8 +94,11 @@ namespace RentCargoBus.Web.Controllers
         {
             var vanImages = this.vanService.GetImagesByVanId(id);
             var vanDb = await this.vanService.GetVanByIdAsync(id);
+            var deliveryFeesDb = this.deliveryService.GetDeliveryFees();
 
             var viewModel = this.mapper.Map<VansViewModel>(vanDb);
+
+            viewModel.Delivery = deliveryFeesDb.VanDelivery;
 
             return this.View(viewModel);
         }
@@ -96,8 +109,11 @@ namespace RentCargoBus.Web.Controllers
         {
             var carImages = await this.carService.GetImagesByCarIdAsync(id);
             var carDb = await this.carService.GetCarByIdAsync(id);
+            var deliveryFeesDb = this.deliveryService.GetDeliveryFees();
 
             var viewModel = this.mapper.Map<CarsViewModel>(carDb);
+
+            viewModel.Delivery = deliveryFeesDb.CarDelivery;
 
             return this.View(viewModel);
         }
@@ -132,7 +148,7 @@ namespace RentCargoBus.Web.Controllers
         public IActionResult PrivacyRevoke()
         {
             HttpContext.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
-            return RedirectToAction("/Index");
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

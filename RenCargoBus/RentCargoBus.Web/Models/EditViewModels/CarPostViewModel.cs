@@ -29,9 +29,15 @@ namespace RentCargoBus.Web.Models.EditViewModels
 
         public int Doors { get; set; }
 
+        public decimal Deposit { get; set; }
+
+        public decimal DepositEu { get; set; }
+
         public int Seats { get; set; }
 
-        public double HirePrice { get; set; }
+        public decimal HirePrice { get; set; }
+
+        public decimal HirePriceMonth { get; set; }
 
         public int IsAvailable { get; set; }
 

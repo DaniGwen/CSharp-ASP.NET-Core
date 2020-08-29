@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
     <comment>Index view</comment>
@@ -124,11 +127,23 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="button you agree on additional cookies" xml:space="preserve">
+    <value>button you agree on additional cookies</value>
+  </data>
+  <data name="By clicking the" xml:space="preserve">
+    <value>By clicking the</value>
+  </data>
   <data name="Cargo vans" xml:space="preserve">
     <value>Cargo vans</value>
   </data>
   <data name="Cars" xml:space="preserve">
     <value>Cars</value>
+  </data>
+  <data name="Check our site policy" xml:space="preserve">
+    <value>Check our site policy</value>
+  </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>Consumption</value>
   </data>
   <data name="Contact us to rent" xml:space="preserve">
     <value>Contact us to rent</value>
@@ -139,6 +154,12 @@
   <data name="Day" xml:space="preserve">
     <value>Day</value>
   </data>
+  <data name="Delivery" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+    <value>Deposit</value>
+  </data>
   <data name="Doors" xml:space="preserve">
     <value>Doors</value>
   </data>
@@ -147,6 +168,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="In order to be able to change the default language we have to write one extra cookie to your browser" xml:space="preserve">
+    <value>In order to be able to change the default language we have to write one extra cookie to your browser</value>
   </data>
   <data name="Kilometer per liter" xml:space="preserve">
     <value>Kilometer per liter</value>
@@ -163,6 +187,9 @@
   </data>
   <data name="No cars at the moment" xml:space="preserve">
     <value>No cars at the moment</value>
+  </data>
+  <data name="No personal data is collected for the purpose of advertising, analitics or social media purposes" xml:space="preserve">
+    <value>No personal data is collected for the purpose of advertising, analitics or social media purposes</value>
   </data>
   <data name="No vans at the moment" xml:space="preserve">
     <value>No vans at the moment</value>
@@ -190,6 +217,9 @@
   </data>
   <data name="Price per day" xml:space="preserve">
     <value>Price per day</value>
+  </data>
+  <data name="Price per Month" xml:space="preserve">
+    <value>Price per Month</value>
   </data>
   <data name="Seats" xml:space="preserve">
     <value>Seats</value>

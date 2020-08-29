@@ -46,6 +46,8 @@ namespace DataBaseSeed
                     Type = VanType.Cargo,
                     Images = new List<VanImage> { new VanImage { ImageName = images[i] } },
                     IsAvailable = false,
+                    PlateNumber =
+                  $"CB{random.Next(1000, 2000).ToString()}BP"
                 });
             }
 
@@ -64,7 +66,7 @@ namespace DataBaseSeed
 
             string[] brands = new string[] { "Ford", "Iveco", "Toyota", "Peugeot", "Nissan", "Hyndai" };
 
-            string[] names = new string[] { "Transport", "Passanger", "Carrina", "Boxer-e", "e-NV200", "HMP" };
+            string[] names = new string[] { "Transport", "Unknown", "Carrina", "Boxer-e", "e-NV200", "Unknown" };
 
             var images = new List<string> {
                 "unnamed.png",
@@ -88,6 +90,8 @@ namespace DataBaseSeed
                     Type = VanType.Passenger,
                     Images = new List<VanImage> { new VanImage { ImageName = images[i] } },
                     IsAvailable = true,
+                    PlateNumber =
+                    $"CB{random.Next(1000, 2000).ToString()}BP"
                 }); ;
             }
 
@@ -130,11 +134,22 @@ namespace DataBaseSeed
                     HirePrice = random.Next(50, 250),
                     Images = new List<CarImage> { new CarImage { ImageName = images[i] } },
                     IsAvailable = true,
+                    PlateNumber =
+                    $"CB{random.Next(1000, 2000).ToString()}BP"
                 });
             }
 
             context.Cars.AddRange(cars);
             context.SaveChanges();
+        }
+
+        public static void SeedDeliveryFees(ApplicationDbContext context)
+        {
+            if (context.VehiclesDelivery.FirstOrDefault() == null)
+            {
+                context.VehiclesDelivery.Add(new Delivery { CarDelivery = 0, VanDelivery = 0 });
+                context.SaveChanges();
+            }
         }
     }
 }
