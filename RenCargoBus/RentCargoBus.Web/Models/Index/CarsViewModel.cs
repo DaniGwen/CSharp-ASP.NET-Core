@@ -25,7 +25,9 @@ namespace RentCargoBus.Web.Models.Index
 
         public decimal DepositEu { get; set; }
 
-        public decimal Delivery { get; set; }
+        public decimal DeliveryBg { get; set; }
+
+        public decimal DeliveryEu { get; set; }
 
         public decimal HirePrice { get; set; }
 

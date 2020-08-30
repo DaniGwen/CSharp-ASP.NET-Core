@@ -147,7 +147,8 @@ namespace DataBaseSeed
         {
             if (context.VehiclesDelivery.FirstOrDefault() == null)
             {
-                context.VehiclesDelivery.Add(new Delivery { CarDelivery = 0, VanDelivery = 0 });
+                context.VehiclesDelivery
+                    .Add(new Delivery { CarDeliveryBg = 0, CarDeliveryEu = 0, VanDeliveryEu = 0, VanDeliveryBg = 0 });
                 context.SaveChanges();
             }
         }

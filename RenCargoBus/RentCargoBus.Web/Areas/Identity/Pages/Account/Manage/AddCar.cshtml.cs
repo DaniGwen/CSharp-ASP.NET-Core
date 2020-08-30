@@ -33,6 +33,9 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             this.hostEnvironment = hostEnvironment;
         }
 
+        [ViewData]
+        public string StatusMessage { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -62,7 +65,7 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Number of doors")]
             public int Doors { get; set; }
 
-            [Display(Name ="Warranty Deposit for Bulgaria")]
+            [Display(Name = "Warranty Deposit for Bulgaria")]
             public decimal Deposit { get; set; }
 
             [Display(Name = "Warranty Deposit for Europe")]
@@ -70,7 +73,7 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Price per Day")]
             public decimal HirePrice { get; set; }
-            
+
             [DisplayName("Price per Month")]
             public decimal HirePriceMonth { get; set; }
 
@@ -80,42 +83,56 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            try
             {
-                var car = this.mapper.Map<Car>(this.Input);
-                car.Images.Clear();
-
-                if (Input.Images.Count > 0)
+                if (ModelState.IsValid)
                 {
-                    foreach (var image in Input.Images)
+                    var car = this.mapper.Map<Car>(this.Input);
+                    car.Images.Clear();
+
+                    if (Input.Images.Count > 0)
                     {
-                        var newImage = new CarImage();
-
-                        // Save image to wwwroot / image
-                        string wwwRootPath = this.hostEnvironment.WebRootPath;
-                        string fileName = Path.GetFileNameWithoutExtension(image.FileName);
-                        string extension = Path.GetExtension(image.FileName);
-                        newImage.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-
-                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        foreach (var image in Input.Images)
                         {
-                            await image.CopyToAsync(fileStream);
+                            var newImage = new CarImage();
+
+                            // Save image to wwwroot / image
+                            string wwwRootPath = this.hostEnvironment.WebRootPath;
+                            string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+                            string extension = Path.GetExtension(image.FileName);
+                            newImage.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                            string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+
+                            using (var fileStream = new FileStream(path, FileMode.Create))
+                            {
+                                await image.CopyToAsync(fileStream);
+                            }
+
+                            //Insert record
+                            car.Images.Add(newImage);
                         }
-
-                        //Insert record
-                        car.Images.Add(newImage);
                     }
-                }
 
-                await this.carService.AddCarAsync(car);
+                    await this.carService.AddCarAsync(car);
+
+                    StatusMessage = "Successfuly saved!";
+
+                    return this.Page();
+                }
+                StatusMessage = "Error. Couldn't save the Van. Check all fields and try again.";
+                return this.Page();
+            }
+            catch (Exception)
+            {
+               StatusMessage = "Error. Couldn't save the Van.";
+                return this.Page();
             }
 
-            return this.Redirect("/Identity/Account/Manage");
         }
     }
 }

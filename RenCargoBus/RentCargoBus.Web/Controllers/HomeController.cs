@@ -94,11 +94,12 @@ namespace RentCargoBus.Web.Controllers
         {
             var vanImages = this.vanService.GetImagesByVanId(id);
             var vanDb = await this.vanService.GetVanByIdAsync(id);
-            var deliveryFeesDb = this.deliveryService.GetDeliveryFees();
+            var deliveryDb = this.deliveryService.GetDeliveryFees();
 
             var viewModel = this.mapper.Map<VansViewModel>(vanDb);
 
-            viewModel.Delivery = deliveryFeesDb.VanDelivery;
+            viewModel.DeliveryEu = deliveryDb.VanDeliveryEu;
+            viewModel.DeliveryBg = deliveryDb.VanDeliveryBg;
 
             return this.View(viewModel);
         }
@@ -109,11 +110,12 @@ namespace RentCargoBus.Web.Controllers
         {
             var carImages = await this.carService.GetImagesByCarIdAsync(id);
             var carDb = await this.carService.GetCarByIdAsync(id);
-            var deliveryFeesDb = this.deliveryService.GetDeliveryFees();
+            var deliveryDb = this.deliveryService.GetDeliveryFees();
 
             var viewModel = this.mapper.Map<CarsViewModel>(carDb);
 
-            viewModel.Delivery = deliveryFeesDb.CarDelivery;
+            viewModel.DeliveryEu = deliveryDb.CarDeliveryEu;
+            viewModel.DeliveryBg = deliveryDb.CarDeliveryBg;
 
             return this.View(viewModel);
         }

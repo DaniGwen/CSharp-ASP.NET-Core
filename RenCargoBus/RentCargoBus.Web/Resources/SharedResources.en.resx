@@ -221,6 +221,9 @@
   <data name="Price per Month" xml:space="preserve">
     <value>Price per Month</value>
   </data>
+  <data name="Prices" xml:space="preserve">
+    <value>Prices</value>
+  </data>
   <data name="Seats" xml:space="preserve">
     <value>Seats</value>
   </data>

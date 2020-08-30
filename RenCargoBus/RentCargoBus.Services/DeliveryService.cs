@@ -18,22 +18,20 @@ namespace RentCargoBus.Services
             this.context = context;
         }
 
-        public void SetDeliveryFees(decimal carPrice, decimal vanPrice)
+        public void SetDeliveryFees(Delivery delivery)
         {
-            var deliveryFees = this.context.VehiclesDelivery.FirstOrDefault();
+            var deliveryDb = this.context.VehiclesDelivery.FirstOrDefault();
 
-            if (deliveryFees == null)
+            if (deliveryDb == null)
             {
-                this.context.VehiclesDelivery.Add(new Delivery
-                {
-                    CarDelivery = carPrice,
-                    VanDelivery = vanPrice
-                });
+                this.context.VehiclesDelivery.Add(delivery);
             }
             else
             {
-                deliveryFees.VanDelivery = vanPrice;
-                deliveryFees.CarDelivery = carPrice;
+                deliveryDb.VanDeliveryBg = delivery.VanDeliveryBg;
+                deliveryDb.VanDeliveryEu = delivery.VanDeliveryEu;
+                deliveryDb.CarDeliveryBg = delivery.CarDeliveryBg;
+                deliveryDb.CarDeliveryEu = delivery.CarDeliveryEu;
             }
 
             this.context.SaveChanges();

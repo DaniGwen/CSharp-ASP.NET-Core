@@ -1,5 +1,5 @@
 ﻿<div class="vehicle-details__item vehicle-details__price">
-    <label class="vehicle-details__price__availability">Prices Bulgaria</label>
+    <label class="vehicle-details__price__availability">@Localizer["Prices"] Bulgaria</label>
     <article class="vehicle-details__item vehicle-details__price__info">
         <section>
             <label>@Localizer["Price per day"]</label>
@@ -11,13 +11,13 @@
         </section>
         <section>
             <label>@Localizer["Delivery"]</label>
-            <span>@Model.Delivery &euro;</span>
+            <span>@Model.DeliveryBg &euro;</span>
         </section>
     </article>
 </div>
 
 <div class="vehicle-details__item vehicle-details__price">
-    <label class="vehicle-details__price__availability">Prices Europe</label>
+    <label class="vehicle-details__price__availability">@Localizer["Prices"] Europe</label>
     <article class="vehicle-details__item vehicle-details__price__info">
         <section>
             <label>@Localizer["Price per Month"]</label>
@@ -29,7 +29,7 @@
         </section>
         <section>
             <label>@Localizer["Delivery"]</label>
-            <span class="vehicle-details__price--small">@Model.Delivery &euro;</span>
+            <span class="vehicle-details__price--small">@Model.DeliveryEu &euro;</span>
         </section>
     </article>
 </div>

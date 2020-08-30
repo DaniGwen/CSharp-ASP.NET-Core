@@ -30,6 +30,9 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             this.hostEnvironment = hostEnvironment;
         }
 
+        [ViewData]
+        public string StatusMessage { get; set; }
+
         [BindProperty]
         public InputModel Model { get; set; }
 
@@ -87,40 +90,50 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (this.ModelState.IsValid)
+            try
             {
-                var van = this.mapper.Map<Van>(this.Model);
-                van.Images.Clear();
-
-                if (Model.Images.Count > 0)
+                if (this.ModelState.IsValid)
                 {
-                    foreach (var image in Model.Images)
+                    var van = this.mapper.Map<Van>(this.Model);
+                    van.Images.Clear();
+
+                    if (Model.Images.Count > 0)
                     {
-                        var newImage = new VanImage();
-
-                        // Save image to wwwroot / image
-                        string wwwRootPath = this.hostEnvironment.WebRootPath;
-                        string fileName = Path.GetFileNameWithoutExtension(image.FileName);
-                        string extension = Path.GetExtension(image.FileName);
-                        newImage.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-
-                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        foreach (var image in Model.Images)
                         {
-                            await image.CopyToAsync(fileStream);
-                        }
+                            var newImage = new VanImage();
 
-                        //Insert record
-                        van.Images.Add(newImage);
+                            // Save image to wwwroot / image
+                            string wwwRootPath = this.hostEnvironment.WebRootPath;
+                            string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+                            string extension = Path.GetExtension(image.FileName);
+                            newImage.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                            string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+
+                            using (var fileStream = new FileStream(path, FileMode.Create))
+                            {
+                                await image.CopyToAsync(fileStream);
+                            }
+
+                            //Insert record
+                            van.Images.Add(newImage);
+                        }
                     }
+
+                    await this.vanService.AddVanAsync(van);
+                    StatusMessage = "Successfuly saved!";
+                    return this.Page();
                 }
 
-                await this.vanService.AddVanAsync(van);
+                StatusMessage = "Error. Couldn't save the Van. Check all fields and try again.";
 
-                return Redirect("/Identity/Account/Manage");
+                return this.Page();
             }
-
-            return this.Page();
+            catch (Exception)
+            {
+                StatusMessage = "Error. Couldn't save the Van.";
+                return this.Page();
+            }
         }
     }
 }

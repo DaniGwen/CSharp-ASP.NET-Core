@@ -225,6 +225,9 @@
   <data name="Price per Month" xml:space="preserve">
     <value>Prix ​​par mois</value>
   </data>
+  <data name="Prices" xml:space="preserve">
+    <value>Des prix</value>
+  </data>
   <data name="Request send" xml:space="preserve">
     <value>Demande envoyée</value>
   </data>

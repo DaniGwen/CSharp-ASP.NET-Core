@@ -1,19 +1,28 @@
 ﻿@page
 @model RentAVan.Web.Areas.Identity.Pages.Account.Manage.EditDeliveryModel
 @{
-    ViewData["Title"] = "Edit delivery";
+    ViewData["Title"] = "Edit delivery prices";
 }
 
 <section class="c-admin">
     <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
     <form asp-area="Identity" asp-page="EditDelivery" method="post">
         <div class="form-group">
-            <label asp-for="Input.CarDelivery"></label>
-            <input asp-for="Input.CarDelivery" placeholder="Цена за доставка на автомобил" class="form-control form-control-sm" autofocus />
+            <label asp-for="Input.CarDeliveryBg"></label>
+            <input asp-for="Input.CarDeliveryBg" placeholder="Цена за доставка на автомобил в България" class="form-control form-control-sm" autofocus />
         </div>
         <div class="form-group">
-            <label asp-for="Input.VanDelivery"></label>
-            <input asp-for="Input.VanDelivery" placeholder="Цена за доставка на бус" class="form-control form-control-sm" />
+            <label asp-for="Input.CarDeliveryEu"></label>
+            <input asp-for="Input.CarDeliveryEu" placeholder="Цена за доставка на автомобил в Европа" class="form-control form-control-sm" autofocus />
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.VanDeliveryBg"></label>
+            <input asp-for="Input.VanDeliveryBg" placeholder="Цена за доставка на бус в България" class="form-control form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.VanDeliveryEu"></label>
+            <input asp-for="Input.VanDeliveryEu" placeholder="Цена за доставка на бус в Европа" class="form-control form-control-sm" />
         </div>
         <button type="submit" class="btn btn-outline-info">Save</button>
     </form>

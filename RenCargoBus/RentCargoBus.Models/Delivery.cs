@@ -4,8 +4,12 @@
     {
         public int DeliveryId { get; set; }
 
-        public decimal CarDelivery { get; set; }
+        public decimal CarDeliveryBg { get; set; }
 
-        public decimal VanDelivery { get; set; }
+        public decimal CarDeliveryEu { get; set; }
+
+        public decimal VanDeliveryBg { get; set; }
+
+        public decimal VanDeliveryEu { get; set; }
     }
 }

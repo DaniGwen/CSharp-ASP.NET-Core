@@ -1,11 +1,12 @@
 ﻿@page
 @model RentCargoBus.Web.Areas.Identity.Pages.Account.Manage.AddVanModel
 @{
-    ViewData["Title"] = "Add Van";
+    ViewData["Title"] = "Add new Van";
 }
 
 <section class="c-admin">
-    <h2>Add new van</h2>
+    <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Model.Brand"></label>
@@ -48,22 +49,22 @@
 
         <div class="form-group">
             <label asp-for="Model.HirePrice"></label>
-            <input asp-for="Model.HirePrice" type="number" placeholder="Цена за ден в евро" class="form-control form-control-sm" />
+            <input asp-for="Model.HirePrice" placeholder="Цена за ден в евро" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.HirePriceMonth"></label>
-            <input asp-for="Model.HirePriceMonth" type="number" placeholder="Цена за месец в евро" class="form-control form-control-sm" />
+            <input asp-for="Model.HirePriceMonth" placeholder="Цена за месец в евро" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.Deposit"></label>
-            <input asp-for="Model.Deposit" type="number" placeholder="Гаранционен депозит в евро за BG" class="form-control form-control-sm" />
+            <input asp-for="Model.Deposit" placeholder="Гаранционен депозит в евро за BG" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.DepositEu"></label>
-            <input asp-for="Model.DepositEu" type="number" placeholder="Гаранционен депозит в евро за EU" class="form-control form-control-sm" />
+            <input asp-for="Model.DepositEu" placeholder="Гаранционен депозит в евро за EU" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
