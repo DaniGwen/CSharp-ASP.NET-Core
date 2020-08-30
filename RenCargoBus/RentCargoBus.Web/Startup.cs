@@ -183,10 +183,10 @@ namespace RentAVan.Web
 
             if (!context.Users.Any())
             {
-                var user = new User();
+                var user = new ApplicationUser();
                 user.UserName = this.Configuration.GetValue<string>("AdminConfig:Email");
                 user.Email = this.Configuration.GetValue<string>("AdminConfig:Email");
-                user.Name = this.Configuration.GetValue<string>("AdminConfig:Name");
+                user.PersonName = this.Configuration.GetValue<string>("AdminConfig:Name");
                 var userPassword = this.Configuration.GetValue<string>("AdminConfig:Password");
 
                 await userManager.CreateAsync(user, userPassword);

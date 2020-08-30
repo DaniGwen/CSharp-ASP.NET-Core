@@ -2,8 +2,8 @@
 
 namespace RentCargoBus.Data.Models
 {
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        public string Name { get; set; }
+        public string PersonName { get; set; }
     }
 }
