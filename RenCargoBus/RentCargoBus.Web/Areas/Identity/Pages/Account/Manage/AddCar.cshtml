@@ -1,12 +1,13 @@
 ﻿@page
 @model RentCargoBus.Web.Areas.Identity.Pages.Account.Manage.AddCarModel
 @{
-    ViewData["Title"] = "Add new Car";
+    ViewData["Title"] = "New Car";
 }
 
     <section class="c-admin">
         <h2>@ViewData["Title"]</h2>
         <partial name="_StatusMessage" model="Model.StatusMessage" />
+        <hr />
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="Input.Brand"></label>
@@ -38,14 +39,6 @@
                 <span asp-validation-for="Input.Doors" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Deposit"></label>
-                <input asp-for="Input.Deposit" placeholder="Гаранционен депозит в евро за BG" class="form-control form-control-sm" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.DepositEu"></label>
-                <input asp-for="Input.DepositEu" placeholder="Гаранционен депозит в евро за EU" class="form-control form-control-sm" />
-            </div>
-            <div class="form-group">
                 <label asp-for="Input.HirePrice"></label>
                 <input asp-for="Input.HirePrice" placeholder="Цена за ден" class="form-control form-control-sm" />
                 <span asp-validation-for="Input.HirePrice" class="text-danger"></span>
@@ -61,7 +54,7 @@
                 <label asp-for="Input.Images">Select images:</label>
                 <input asp-for="Input.Images" type="file" multiple><br><br>
             </div>
-
+            <hr />
             <button type="submit" class="btn btn-outline-info">Save</button>
         </form>
     </section>

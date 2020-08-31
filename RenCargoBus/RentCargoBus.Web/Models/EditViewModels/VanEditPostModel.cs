@@ -26,10 +26,6 @@ namespace RentCargoBus.Web.Models.EditViewModels
 
         public double Height { get; set; }
 
-        public decimal Deposit { get; set; }
-
-        public decimal DepositEu { get; set; }
-
         public int MaxLoad { get; set; }
 
         public double KilometerPerLiter { get; set; }

@@ -65,12 +65,6 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Number of doors")]
             public int Doors { get; set; }
 
-            [Display(Name = "Warranty Deposit for Bulgaria")]
-            public decimal Deposit { get; set; }
-
-            [Display(Name = "Warranty Deposit for Europe")]
-            public decimal DepositEu { get; set; }
-
             [Display(Name = "Price per Day")]
             public decimal HirePrice { get; set; }
 

@@ -9,12 +9,12 @@ namespace RentAVan.Web.Areas.Identity.Pages.Account.Manage
 {
     public class EditDeliveryModel : PageModel
     {
-        private readonly IDeliveryService deliveryService;
+        private readonly IDeliveryAndDepositService deliveryAndDepositService;
         private readonly IMapper mapper;
 
-        public EditDeliveryModel(IDeliveryService deliveryService, IMapper mapper)
+        public EditDeliveryModel(IDeliveryAndDepositService deliveryAndDepositService, IMapper mapper)
         {
-            this.deliveryService = deliveryService;
+            this.deliveryAndDepositService = deliveryAndDepositService;
             this.mapper = mapper;
         }
 
@@ -37,10 +37,26 @@ namespace RentAVan.Web.Areas.Identity.Pages.Account.Manage
 
             [DisplayName("Van delivery price \"EU\"")]
             public decimal VanDeliveryEu { get; set; }
+
+            [DisplayName("Van deposit price \"EU\"")]
+            public decimal VanDepositEu { get; set; }
+
+            [DisplayName("Van deposit price \"BG\"")]
+            public decimal VanDepositBg { get; set; }
+
+            [DisplayName("Car deposit price \"BG\"")]
+            public decimal CarDepositBg { get; set; }
+
+            [DisplayName("Car deposit price \"EU\"")]
+            public decimal CarDepositEu { get; set; }
         }
 
         public IActionResult OnGet()
         {
+            var deliveryAndDepositsDb = this.deliveryAndDepositService.GetDeliveryAndDeposits();
+
+            this.Input = this.mapper.Map(deliveryAndDepositsDb, this.Input);
+
             return this.Page();
         }
 
@@ -52,9 +68,9 @@ namespace RentAVan.Web.Areas.Identity.Pages.Account.Manage
                 return this.Page();
             }
 
-            var delivery = this.mapper.Map<Delivery>(Input);
+            var deliveryDeposit = this.mapper.Map<DeliveryAndDeposit>(Input);
 
-            this.deliveryService.SetDeliveryFees(delivery);
+            this.deliveryAndDepositService.SetDeliveryFees(deliveryDeposit);
 
             StatusMessage = "Successfuly saved!";
             return this.Page();

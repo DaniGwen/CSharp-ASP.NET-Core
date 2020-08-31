@@ -54,7 +54,7 @@ namespace RentAVan.Web
             services.AddSingleton<EmailService>();
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();
-            services.AddTransient<IDeliveryService, DeliveryService>();
+            services.AddTransient<IDeliveryAndDepositService, DeliveryAndDepositService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -131,6 +131,7 @@ namespace RentAVan.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
+                        //context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
                         this.AddAdmin(serviceProvider).Wait();
                         Seed.SeedCargoVans(context);

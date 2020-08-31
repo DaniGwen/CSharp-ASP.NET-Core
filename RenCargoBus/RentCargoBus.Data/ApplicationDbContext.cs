@@ -23,7 +23,7 @@ namespace RentCargoBus.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-        public DbSet<Delivery> VehiclesDelivery { get; set; }
+        public DbSet<DeliveryAndDeposit> DeliveryAndDeposit { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

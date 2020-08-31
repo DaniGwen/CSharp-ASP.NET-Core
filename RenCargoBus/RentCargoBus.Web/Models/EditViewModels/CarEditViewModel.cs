@@ -24,12 +24,6 @@ namespace RentCargoBus.Web.Models.EditViewModels
 
         public int Doors { get; set; }
 
-        [DisplayName("Warranty Deposit for Bulgaria")]
-        public decimal Deposit { get; set; }
-
-        [DisplayName("Warranty Deposit for Europe")]
-        public decimal DepositEu { get; set; }
-
         [DisplayName("Price per Day")]
         public decimal HirePrice { get; set; }
 

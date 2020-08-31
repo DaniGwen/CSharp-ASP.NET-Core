@@ -66,12 +66,6 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
             [DisplayName("Consumption")]
             public double KilometersPerLiter { get; set; }
 
-            [Display(Name = "Warranty Deposit for Bulgaria")]
-            public decimal Deposit { get; set; }
-
-            [Display(Name = "Warranty Deposit for Europe")]
-            public decimal DepositEu { get; set; }
-
             [DisplayName("Price per Day")]
             public decimal HirePrice { get; set; }
 

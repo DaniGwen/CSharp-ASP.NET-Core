@@ -9,27 +9,32 @@ using System.Threading.Tasks;
 
 namespace RentCargoBus.Services
 {
-    public class DeliveryService : IDeliveryService
+    public class DeliveryAndDepositService : IDeliveryAndDepositService
     {
         private readonly ApplicationDbContext context;
 
-        public DeliveryService(ApplicationDbContext context)
+        public DeliveryAndDepositService(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        public void SetDeliveryFees(Delivery delivery)
+        public void SetDeliveryFees(DeliveryAndDeposit delivery)
         {
-            var deliveryDb = this.context.VehiclesDelivery.FirstOrDefault();
+            var deliveryDb = this.context.DeliveryAndDeposit.FirstOrDefault();
 
             if (deliveryDb == null)
             {
-                this.context.VehiclesDelivery.Add(delivery);
+                this.context.DeliveryAndDeposit.Add(delivery);
             }
             else
             {
                 deliveryDb.VanDeliveryBg = delivery.VanDeliveryBg;
                 deliveryDb.VanDeliveryEu = delivery.VanDeliveryEu;
+                deliveryDb.VanDepositBg = delivery.VanDepositBg;
+                deliveryDb.VanDepositEu = delivery.VanDepositEu;
+
+                deliveryDb.CarDepositBg = delivery.CarDepositBg;
+                deliveryDb.CarDepositEu = delivery.CarDepositEu;
                 deliveryDb.CarDeliveryBg = delivery.CarDeliveryBg;
                 deliveryDb.CarDeliveryEu = delivery.CarDeliveryEu;
             }
@@ -37,9 +42,9 @@ namespace RentCargoBus.Services
             this.context.SaveChanges();
         }
 
-        public Delivery GetDeliveryFees()
+        public DeliveryAndDeposit GetDeliveryAndDeposits()
         {
-            return this.context.VehiclesDelivery.FirstOrDefault();
+            return this.context.DeliveryAndDeposit.FirstOrDefault();
         }
     }
 }

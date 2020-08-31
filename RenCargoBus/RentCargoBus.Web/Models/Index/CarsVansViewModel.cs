@@ -14,6 +14,6 @@ namespace RentCargoBus.Web.Models.Index
 
         public List<CarsViewModel> Cars { get; set; }
 
-        public Delivery DeliveryFees { get; set; }
+        public DeliveryAndDeposit DeliveryFees { get; set; }
     }
 }

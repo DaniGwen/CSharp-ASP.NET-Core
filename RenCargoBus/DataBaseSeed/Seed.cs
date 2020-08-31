@@ -145,10 +145,10 @@ namespace DataBaseSeed
 
         public static void SeedDeliveryFees(ApplicationDbContext context)
         {
-            if (context.VehiclesDelivery.FirstOrDefault() == null)
+            if (context.DeliveryAndDeposit.FirstOrDefault() == null)
             {
-                context.VehiclesDelivery
-                    .Add(new Delivery { CarDeliveryBg = 0, CarDeliveryEu = 0, VanDeliveryEu = 0, VanDeliveryBg = 0 });
+                context.DeliveryAndDeposit
+                    .Add(new DeliveryAndDeposit { CarDeliveryBg = 0, CarDeliveryEu = 0, VanDeliveryEu = 0, VanDeliveryBg = 0 });
                 context.SaveChanges();
             }
         }

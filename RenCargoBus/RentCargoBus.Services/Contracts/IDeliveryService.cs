@@ -2,10 +2,10 @@
 
 namespace RentCargoBus.Services.Contracts
 {
-    public interface IDeliveryService
+    public interface IDeliveryAndDepositService
     {
-        void SetDeliveryFees(Delivery delivery);
+        void SetDeliveryFees(DeliveryAndDeposit delivery);
 
-        Delivery GetDeliveryFees();
+        DeliveryAndDeposit GetDeliveryAndDeposits();
     }
 }

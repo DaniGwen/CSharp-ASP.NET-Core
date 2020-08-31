@@ -27,7 +27,7 @@ namespace RentCargoBus.Web.Mappings
             this.CreateMap<CarPostViewModel, Car>();
 
             //Delivery mappings 
-            this.CreateMap<Delivery, EditDeliveryModel.InputModel>().ReverseMap();
+            this.CreateMap<DeliveryAndDeposit, EditDeliveryModel.InputModel>().ReverseMap();
         }
     }
 }

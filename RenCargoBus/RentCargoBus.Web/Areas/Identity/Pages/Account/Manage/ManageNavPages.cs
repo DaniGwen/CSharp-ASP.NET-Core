@@ -5,7 +5,7 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {
-        public static string EditDelivery => "EditDelivery";
+        public static string SetDeliveryAndDeposit => "SetDeliveryAndDeposit";
 
         public static string AddVan => "AddVan";
 
@@ -27,7 +27,7 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
-        public static string EditDeliveryPricesClass(ViewContext viewContext) => PageNavClass(viewContext, EditDelivery);
+        public static string EditDeliveryPricesClass(ViewContext viewContext) => PageNavClass(viewContext, SetDeliveryAndDeposit);
 
         public static string AddVanNavClass(ViewContext viewContext) => PageNavClass(viewContext, AddVan);
 

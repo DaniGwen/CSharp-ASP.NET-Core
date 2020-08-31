@@ -35,12 +35,6 @@ namespace RentCargoBus.Web.Models.EditViewModels
         [DisplayName("Consumption")]
         public double KilometerPerLiter { get; set; }
 
-        [Display(Name = "Warranty Deposit for Bulgaria")]
-        public decimal Deposit { get; set; }
-
-        [Display(Name = "Warranty Deposit for Europe")]
-        public decimal DepositEu { get; set; }
-
         [Required]
         [DisplayName("Price per Day")]
         public decimal HirePrice { get; set; }

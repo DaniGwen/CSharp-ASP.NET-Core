@@ -28,7 +28,7 @@ namespace RentCargoBus.Web.Controllers
         private readonly IMapper mapper;
         private readonly EmailService emailService;
         private readonly IStringLocalizer localizer;
-        private readonly IDeliveryService deliveryService;
+        private readonly IDeliveryAndDepositService deliveryAndDepositService;
 
         public HomeController(ILogger<HomeController> logger
                              , IVanService vanService
@@ -36,7 +36,7 @@ namespace RentCargoBus.Web.Controllers
                              , IMapper mapper
                              , EmailService emailService
                              , IStringLocalizer<SharedResources> localizer
-                             , IDeliveryService deliveryService)
+                             , IDeliveryAndDepositService deliveryService)
         {
             this.logger = logger;
             this.vanService = vanService;
@@ -44,7 +44,7 @@ namespace RentCargoBus.Web.Controllers
             this.mapper = mapper;
             this.emailService = emailService;
             this.localizer = localizer;
-            this.deliveryService = deliveryService;
+            this.deliveryAndDepositService = deliveryService;
         }
 
         [AllowAnonymous]
@@ -94,12 +94,14 @@ namespace RentCargoBus.Web.Controllers
         {
             var vanImages = this.vanService.GetImagesByVanId(id);
             var vanDb = await this.vanService.GetVanByIdAsync(id);
-            var deliveryDb = this.deliveryService.GetDeliveryFees();
+            var deliveryAndDepositDb = this.deliveryAndDepositService.GetDeliveryAndDeposits();
 
             var viewModel = this.mapper.Map<VansViewModel>(vanDb);
 
-            viewModel.DeliveryEu = deliveryDb.VanDeliveryEu;
-            viewModel.DeliveryBg = deliveryDb.VanDeliveryBg;
+            viewModel.DeliveryEu = deliveryAndDepositDb.VanDeliveryEu;
+            viewModel.DeliveryBg = deliveryAndDepositDb.VanDeliveryBg;
+            viewModel.DepositBg = deliveryAndDepositDb.VanDepositBg;
+            viewModel.DepositEu = deliveryAndDepositDb.VanDepositEu;
 
             return this.View(viewModel);
         }
@@ -110,12 +112,14 @@ namespace RentCargoBus.Web.Controllers
         {
             var carImages = await this.carService.GetImagesByCarIdAsync(id);
             var carDb = await this.carService.GetCarByIdAsync(id);
-            var deliveryDb = this.deliveryService.GetDeliveryFees();
+            var deliveryAndDepositDb = this.deliveryAndDepositService.GetDeliveryAndDeposits();
 
             var viewModel = this.mapper.Map<CarsViewModel>(carDb);
 
-            viewModel.DeliveryEu = deliveryDb.CarDeliveryEu;
-            viewModel.DeliveryBg = deliveryDb.CarDeliveryBg;
+            viewModel.DeliveryEu = deliveryAndDepositDb.CarDeliveryEu;
+            viewModel.DeliveryBg = deliveryAndDepositDb.CarDeliveryBg;
+            viewModel.DepositBg = deliveryAndDepositDb.CarDepositBg;
+            viewModel.DepositEu = deliveryAndDepositDb.CarDepositEu;
 
             return this.View(viewModel);
         }
