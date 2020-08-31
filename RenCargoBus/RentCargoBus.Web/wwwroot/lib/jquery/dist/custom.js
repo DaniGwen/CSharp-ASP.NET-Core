@@ -197,3 +197,17 @@ $(function () {
         })
     }
 })
+
+
+// Get and set email and phone fields 
+$(function () {
+    $.get('/Home/GetEmail', function (data) {
+        $(".my-email").html(data.email);
+    });
+})
+
+$(function () {
+    $.get('/Home/GetPhone', function (data) {
+        $(".my-phone").html(data.phone);
+    });
+})

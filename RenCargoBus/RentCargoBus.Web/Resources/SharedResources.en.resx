@@ -120,6 +120,12 @@
   <data name="Accept" xml:space="preserve">
     <value>Accept</value>
   </data>
+  <data name="analitics or sell/share to third parties" xml:space="preserve">
+    <value>analitics or sell/share to third parties</value>
+  </data>
+  <data name="Anti-forgery cookie" xml:space="preserve">
+    <value>Anti-forgery cookie</value>
+  </data>
   <data name="Available" xml:space="preserve">
     <value>Available</value>
     <comment>Index view</comment>
@@ -139,8 +145,17 @@
   <data name="Cars" xml:space="preserve">
     <value>Cars</value>
   </data>
+  <data name="Changes to policy" xml:space="preserve">
+    <value>Changes to policy</value>
+  </data>
   <data name="Check our site policy" xml:space="preserve">
     <value>Check our site policy</value>
+  </data>
+  <data name="Communication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="Consent cookie" xml:space="preserve">
+    <value>Consent cookie</value>
   </data>
   <data name="Consumption" xml:space="preserve">
     <value>Consumption</value>
@@ -150,6 +165,12 @@
   </data>
   <data name="Contacts" xml:space="preserve">
     <value>Contacts</value>
+  </data>
+  <data name="cookies or you choose language other than default one" xml:space="preserve">
+    <value>cookies or you choose language other than default one</value>
+  </data>
+  <data name="Culture cookie" xml:space="preserve">
+    <value>Culture cookie</value>
   </data>
   <data name="Day" xml:space="preserve">
     <value>Day</value>
@@ -163,6 +184,9 @@
   <data name="Doors" xml:space="preserve">
     <value>Doors</value>
   </data>
+  <data name="Expires after one year" xml:space="preserve">
+    <value>Expires after one year</value>
+  </data>
   <data name="Height" xml:space="preserve">
     <value>Height</value>
   </data>
@@ -171,6 +195,12 @@
   </data>
   <data name="In order to be able to change the default language we have to write one extra cookie to your browser" xml:space="preserve">
     <value>In order to be able to change the default language we have to write one extra cookie to your browser</value>
+  </data>
+  <data name="It is essential cookie" xml:space="preserve">
+    <value>It is essential cookie</value>
+  </data>
+  <data name="It is non-essential cookie and it is send only when you" xml:space="preserve">
+    <value>It is non-essential cookie and it is send only when you</value>
   </data>
   <data name="Kilometer per liter" xml:space="preserve">
     <value>Kilometer per liter</value>
@@ -194,8 +224,14 @@
   <data name="No vans at the moment" xml:space="preserve">
     <value>No vans at the moment</value>
   </data>
+  <data name="non-essential cookies" xml:space="preserve">
+    <value>non-essential cookies</value>
+  </data>
   <data name="Not Available" xml:space="preserve">
     <value>Not Available</value>
+  </data>
+  <data name="once again our cookie policy if any changes occur" xml:space="preserve">
+    <value>once again our cookie policy if any changes occur</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>Or</value>
@@ -224,6 +260,15 @@
   <data name="Prices" xml:space="preserve">
     <value>Prices</value>
   </data>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="regarding the status and other details of that vehicle" xml:space="preserve">
+    <value>regarding the status and other details of that vehicle</value>
+  </data>
+  <data name="Revoke Cookie Consent" xml:space="preserve">
+    <value>Revoke Cookie Consent</value>
+  </data>
   <data name="Seats" xml:space="preserve">
     <value>Seats</value>
   </data>
@@ -233,17 +278,50 @@
   <data name="Send us Your details below to request this vehicle" xml:space="preserve">
     <value>Send us Your details below to request this vehicle</value>
   </data>
+  <data name="This cookie we send when you" xml:space="preserve">
+    <value>This cookie we send when you</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="Vehicles you can lease" xml:space="preserve">
     <value>Vehicles you can lease</value>
   </data>
+  <data name="We can update or change our policy in the future" xml:space="preserve">
+    <value>We can update or change our policy in the future</value>
+  </data>
+  <data name="We do not use or collect any personal information for the purpose of tracking" xml:space="preserve">
+    <value>We do not use or collect any personal information for the purpose of tracking</value>
+  </data>
+  <data name="We may contact you by E-mail that you provide when you request a vehicle in the vehicle details page" xml:space="preserve">
+    <value>We may contact you by E-mail that you provide when you request a vehicle in the vehicle details page</value>
+  </data>
+  <data name="We send it to your browser so that you don't have to accept it every time you visit us" xml:space="preserve">
+    <value>We send it to your browser so that you don't have to accept it every time you visit us</value>
+  </data>
+  <data name="We send that cookie for security reasons" xml:space="preserve">
+    <value>We send that cookie for security reasons</value>
+  </data>
+  <data name="We send that cookie to your browser so you don't have to change the language every time you visit us" xml:space="preserve">
+    <value>We send that cookie to your browser so you don't have to change the language every time you visit us</value>
+  </data>
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
+  </data>
+  <data name="What cookies we send and how we use them" xml:space="preserve">
+    <value>What cookies we send and how we use them</value>
+  </data>
+  <data name="You can call or message us on the provided mobile phone number and e-mail to arrange a vehicle or discuss details" xml:space="preserve">
+    <value>You can call or message us on the provided mobile phone number and e-mail to arrange a vehicle or discuss details</value>
+  </data>
+  <data name="You can withdraw your cookie consent anytime" xml:space="preserve">
+    <value>You can withdraw your cookie consent anytime</value>
+  </data>
+  <data name="You will be prompted to" xml:space="preserve">
+    <value>You will be prompted to</value>
   </data>
   <data name="Your Email" xml:space="preserve">
     <value>Your Email</value>

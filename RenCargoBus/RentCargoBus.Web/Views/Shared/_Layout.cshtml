@@ -38,7 +38,7 @@
                             <div class="c-navbar__admin-login-and-toggle__language">
                                 <i class="fas fa-globe-europe"></i>
                                 @*Language switch tag helper NuGet"LazZiya.TagHelpers"*@
-                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie","/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
+                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie", "/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
                                 </language-nav>
                             </div>
 
@@ -77,7 +77,8 @@
                             <i class="footer__container__contacts__details__icon far fa-envelope"></i>
                         </div>
                         <div>
-                            @Localizer["E-mail"]: <span class="footer__container__contacts__info">my-email@gmail.com</span>
+                            @Localizer["E-mail"]:
+                            <span class="footer__container__contacts__info my-email"></span>
                         </div>
                     </section>
                     <section class="footer__container__contacts__details">
@@ -87,7 +88,8 @@
                             <i class="footer__container__contacts__details__icon fas fa-mobile-alt"></i>
                         </div>
                         <div>
-                            @Localizer["Phone"]: <span class="footer__container__contacts__info">+359 883 44 44 87</span>
+                            @Localizer["Phone"]:
+                            <span class="footer__container__contacts__info my-phone"></span>
                         </div>
                     </section>
                 </section>

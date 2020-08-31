@@ -25,6 +25,8 @@ namespace RentCargoBus.Data
 
         public DbSet<DeliveryAndDeposit> DeliveryAndDeposit { get; set; }
 
+        public DbSet<PhoneEmail> PhoneEmails { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

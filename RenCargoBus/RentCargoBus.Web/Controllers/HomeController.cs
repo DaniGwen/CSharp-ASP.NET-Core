@@ -29,6 +29,7 @@ namespace RentCargoBus.Web.Controllers
         private readonly EmailService emailService;
         private readonly IStringLocalizer localizer;
         private readonly IDeliveryAndDepositService deliveryAndDepositService;
+        private readonly IGeneralService generalService;
 
         public HomeController(ILogger<HomeController> logger
                              , IVanService vanService
@@ -36,7 +37,8 @@ namespace RentCargoBus.Web.Controllers
                              , IMapper mapper
                              , EmailService emailService
                              , IStringLocalizer<SharedResources> localizer
-                             , IDeliveryAndDepositService deliveryService)
+                             , IDeliveryAndDepositService deliveryService
+                             , IGeneralService generalService)
         {
             this.logger = logger;
             this.vanService = vanService;
@@ -45,6 +47,7 @@ namespace RentCargoBus.Web.Controllers
             this.emailService = emailService;
             this.localizer = localizer;
             this.deliveryAndDepositService = deliveryService;
+            this.generalService = generalService;
         }
 
         [AllowAnonymous]
@@ -161,6 +164,24 @@ namespace RentCargoBus.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetEmail()
+        {
+            var phoneEmailDb = await this.generalService.GetPhoneEmail();
+
+            return this.Json(new { email = phoneEmailDb.Email });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPhone()
+        {
+            var phoneEmailDb = await this.generalService.GetPhoneEmail();
+
+            return this.Json(new { phone = phoneEmailDb.PhoneNumber});
         }
     }
 }

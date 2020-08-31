@@ -419,7 +419,9 @@ body {
       margin-right: 10px;
       font-size: 22px; }
     .footer__container__contacts__info {
+      margin-left: 10px;
       font-size: 20px;
+      font-weight: 700;
       color: #44a9f8; }
 
 .c-layout-main-grid {
@@ -544,7 +546,6 @@ body {
   grid-row-gap: 50px; }
   .vehicle-details__brand-info {
     text-align: center;
-    background-color: #e6e6e6;
     width: auto;
     margin: auto;
     border-radius: 10px;

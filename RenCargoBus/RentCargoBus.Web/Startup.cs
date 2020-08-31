@@ -51,10 +51,11 @@ namespace RentAVan.Web
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
-            services.AddSingleton<EmailService>();
+            services.AddTransient<EmailService>();
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<IDeliveryAndDepositService, DeliveryAndDepositService>();
+            services.AddTransient<IGeneralService, GeneralService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -133,6 +134,7 @@ namespace RentAVan.Web
                     {
                         //context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
+                        Seed.SeedPhoneAndEmail(context).Wait();
                         this.AddAdmin(serviceProvider).Wait();
                         Seed.SeedCargoVans(context);
                         Seed.SeedPassangerVans(context);

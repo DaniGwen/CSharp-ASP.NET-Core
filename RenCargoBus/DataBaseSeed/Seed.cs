@@ -5,6 +5,7 @@ using RentCargoBus.Data.Models;
 using RentCargoBus.Data.Models.Enum;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataBaseSeed
 {
@@ -150,6 +151,22 @@ namespace DataBaseSeed
                 context.DeliveryAndDeposit
                     .Add(new DeliveryAndDeposit { CarDeliveryBg = 0, CarDeliveryEu = 0, VanDeliveryEu = 0, VanDeliveryBg = 0 });
                 context.SaveChanges();
+            }
+        }
+
+        public static async Task SeedPhoneAndEmail(ApplicationDbContext context)
+        {
+            var phoneEmail = context.PhoneEmails.Any();
+
+            if (!phoneEmail)
+            {
+                context.PhoneEmails.Add(new PhoneEmail
+                {
+                    Email = "sparoupbb@hotmail.com",
+                    PhoneNumber = "+359 883 44 44 87",
+                });
+
+               await context.SaveChangesAsync();
             }
         }
     }
