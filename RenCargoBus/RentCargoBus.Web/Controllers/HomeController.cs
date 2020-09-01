@@ -170,18 +170,33 @@ namespace RentCargoBus.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetEmail()
         {
+            string email = "";
+
             var phoneEmailDb = await this.generalService.GetPhoneEmail();
 
-            return this.Json(new { email = phoneEmailDb.Email });
+            if (phoneEmailDb != null)
+            {
+                email = phoneEmailDb.Email;
+            }
+
+            return this.Json(new { email = email });
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetPhone()
         {
+            string phone = "";
+
             var phoneEmailDb = await this.generalService.GetPhoneEmail();
 
-            return this.Json(new { phone = phoneEmailDb.PhoneNumber});
+
+            if (phoneEmailDb != null)
+            {
+                phone = phoneEmailDb.PhoneNumber;
+            }
+
+            return this.Json(new { phone = phone });
         }
     }
 }

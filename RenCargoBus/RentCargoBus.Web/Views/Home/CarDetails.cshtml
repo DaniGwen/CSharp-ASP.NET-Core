@@ -1,16 +1,18 @@
 ﻿@model RentCargoBus.Web.Models.Index.CarsViewModel
 
 @{
-    ViewData["Title"] = "CarDetails";
+    ViewData["Title"] = "Car Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<meta name="description" content="RentAVan - Car information" />
+<title>@ViewData["Title"]</title>
 
 <section class="vehicle-details">
     <article class="vehicle-details__brand-info effect-stretch1">
         <h1 class="vehicle-details__brand">@Model.Brand</h1>
         <h3 class="vehicle-details__model">@Model.Model</h3>
     </article>
-   
+
     <section class="vehicle-details__images-and-info">
         <article class="vehicle-details__info effect-stretch2">
             <div class="vehicle-details__info__details-wrapper">
@@ -29,15 +31,22 @@
             </div>
         </article>
 
-        <article class="vehicle-details__images">
-            @foreach (var image in Model.Images)
+        <article class="vehicle-details__images effect-stretch2">
+            @if (Model.Images.Count != 0)
             {
-                <div class="vehicle-details__image-wrapper">
-                    <img class="vehicle-details__image"
-                         onclick="openModal(this)"
-                         src="/images/@image.ImageName"
-                         alt="van image" />
-                </div>
+                @foreach (var image in Model.Images)
+                {
+                    <div class="vehicle-details__image-wrapper">
+                        <img class="vehicle-details__image"
+                             onclick="openModal(this)"
+                             src="/images/@image.ImageName"
+                             alt="van image" />
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 class="vehicle-details__images__no-images">No images at the moment.</h4>
             }
 
             <div class="vehicle-details__image-enlarge">

@@ -49,11 +49,12 @@
 
         &__details__price {
             background-color: $Blue50;
+            font-size: 18px;
             font-weight: 700;
-            padding: 5px 0;
+            padding: 7px 0;
             display: grid;
             grid-template-rows: 1fr 1fr 1fr;
-            grid-row-gap: 5px;
+            grid-row-gap: 7px;
         }
 
         &__details__seats {

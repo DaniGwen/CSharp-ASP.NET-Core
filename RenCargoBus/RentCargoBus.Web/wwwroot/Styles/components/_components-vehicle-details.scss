@@ -76,6 +76,11 @@
     &__price__info {
         text-align: left;
         padding: 0 10px;
+
+        &__delivery{
+            display: grid;
+            grid-template-rows: 20px 1fr;
+        }
     }
 
 
@@ -97,9 +102,13 @@
         grid-auto-rows: 260px;
         grid-gap: 50px;
         align-content: baseline;
+
+        &__no-images {
+            width: 300px;
+        }
     }
 
-    &__image-wrapper {
+    &__images &__image-wrapper {
         width: 290px;
         height: 260px;
         transition: 0.1s ease-out;

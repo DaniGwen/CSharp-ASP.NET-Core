@@ -44,7 +44,16 @@ namespace RentCargoBus.Services
 
         public DeliveryAndDeposit GetDeliveryAndDeposits()
         {
-            return this.context.DeliveryAndDeposit.FirstOrDefault();
+            var deliveryAndDepositDb = this.context.DeliveryAndDeposit.FirstOrDefault();
+
+            if (deliveryAndDepositDb == null)
+            {
+                deliveryAndDepositDb = new DeliveryAndDeposit();
+                this.context.DeliveryAndDeposit.Add(deliveryAndDepositDb);
+                this.context.SaveChanges();
+            }
+
+            return deliveryAndDepositDb;
         }
     }
 }

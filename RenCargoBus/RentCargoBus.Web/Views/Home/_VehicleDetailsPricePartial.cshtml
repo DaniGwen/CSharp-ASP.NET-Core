@@ -9,9 +9,12 @@
             <label>@Localizer["Deposit"]</label>
             <span>@Model.DepositBg &euro;</span>
         </section>
-        <section>
-            <label>@Localizer["Delivery"]</label>
-            <span>@Model.DeliveryBg &euro;</span>
+        <section class="vehicle-details__item__delivery">
+            <small>@Localizer["Optional"]:</small>
+            <div>
+                <label>@Localizer["Delivery"]</label>
+                <span>@Model.DeliveryBg &euro;</span>
+            </div>
         </section>
     </article>
 </div>
@@ -27,9 +30,15 @@
             <label>@Localizer["Deposit"]</label>
             <span class="vehicle-details__price--small">@Model.DepositEu &euro;</span>
         </section>
+        <sectionclass class="vehicle-details__item__delivery">
+            <small> @Localizer["Optional"]:</small>
+            <div>
+                <label>@Localizer["Delivery"]</label>
+                <span class="vehicle-details__price--small">@Model.DeliveryEu &euro;</span>
+            </div>
+        </sectionclass>
         <section>
-            <label>@Localizer["Delivery"]</label>
-            <span class="vehicle-details__price--small">@Model.DeliveryEu &euro;</span>
+            <p class="text-success">@Localizer["A 6 мonth plan is available. Contact us for more information"].</p>
         </section>
     </article>
 </div>

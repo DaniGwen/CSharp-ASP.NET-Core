@@ -17,7 +17,7 @@ namespace RentCargoBus.Services
 
         public async Task<PhoneEmail> GetPhoneEmail()
         {
-            return await this.context.PhoneEmails.FirstAsync();
+            return await this.context.PhoneEmails.FirstOrDefaultAsync();
         }
 
         public async Task SetPhoneEmail(PhoneEmail phoneEmailModel)

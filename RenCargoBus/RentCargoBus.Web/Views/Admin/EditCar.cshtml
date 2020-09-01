@@ -1,9 +1,12 @@
 ﻿@model RentCargoBus.Web.Models.EditViewModels.CarEditViewModel
 
 @{
-    ViewData["Title"] = "EditCar";
+    ViewData["Title"] = "Edit Car";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<meta name="description" content="Edit vehicle information"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>@ViewData["Title"]</title>
 
 <h1>Edit Car</h1>
 
@@ -68,7 +71,7 @@
         </section>
 
         <section class="edit-vehicle__images">
-            @if (Model.Images.Count > 0)
+            @if (Model.Images.Count != 0)
             {
                 @foreach (var img in Model.Images)
                 {

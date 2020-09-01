@@ -39,11 +39,14 @@ namespace RentAVan.Web.Areas.Identity.Pages.Account.Manage
         {
             var emailAndPhoneDb = await this.generalService.GetPhoneEmail();
 
-            this.Input = new InputModel
+            if (emailAndPhoneDb != null)
             {
-                Email = emailAndPhoneDb.Email,
-                PhoneNumber = emailAndPhoneDb.PhoneNumber
-            };
+                this.Input = new InputModel
+                {
+                    Email = emailAndPhoneDb.Email,
+                    PhoneNumber = emailAndPhoneDb.PhoneNumber
+                };
+            }
         }
 
         public IActionResult OnPost()

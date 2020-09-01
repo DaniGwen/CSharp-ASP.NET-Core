@@ -93,8 +93,6 @@ namespace RentAVan.Web
                 options.SlidingExpiration = true;
             });
 
-            //services.AddLocalization(options => options.ResourcesPath = "");
-
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
@@ -113,11 +111,11 @@ namespace RentAVan.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddRazorPages();
-
             services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                    .AddDataAnnotationsLocalization();
+
+            services.AddResponseCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -134,12 +132,12 @@ namespace RentAVan.Web
                     {
                         //context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
-                        Seed.SeedPhoneAndEmail(context).Wait();
+                        //Seed.SeedPhoneAndEmail(context).Wait();
                         this.AddAdmin(serviceProvider).Wait();
-                        Seed.SeedCargoVans(context);
-                        Seed.SeedPassangerVans(context);
-                        Seed.SeedCars(context);
-                        Seed.SeedDeliveryFees(context);
+                        //Seed.SeedCargoVans(context);
+                        //Seed.SeedPassangerVans(context);
+                        //Seed.SeedCars(context);
+                        //Seed.SeedDeliveryFees(context);
                     }
                 }
             }
@@ -148,7 +146,11 @@ namespace RentAVan.Web
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
+                this.AddAdmin(serviceProvider).Wait();
             }
+
+            app.UseResponseCompression();
 
             var localizationOptions = app.ApplicationServices
                .GetService<IOptions<RequestLocalizationOptions>>()

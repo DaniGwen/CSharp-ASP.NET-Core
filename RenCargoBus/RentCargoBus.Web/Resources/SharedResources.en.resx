@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="A 6 мonth plan is available. Contact us for more information" xml:space="preserve">
+    <value>A 6 мonth plan is available. Contact us for more information</value>
+  </data>
   <data name="Accept" xml:space="preserve">
     <value>Accept</value>
   </data>
@@ -205,8 +208,8 @@
   <data name="Kilometer per liter" xml:space="preserve">
     <value>Kilometer per liter</value>
   </data>
-  <data name="Lease price" xml:space="preserve">
-    <value>Lease price</value>
+  <data name="Lease price from" xml:space="preserve">
+    <value>Lease price from</value>
     <comment>Details car/van</comment>
   </data>
   <data name="Max load" xml:space="preserve">
@@ -232,6 +235,9 @@
   </data>
   <data name="once again our cookie policy if any changes occur" xml:space="preserve">
     <value>once again our cookie policy if any changes occur</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>Optional</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>Or</value>
