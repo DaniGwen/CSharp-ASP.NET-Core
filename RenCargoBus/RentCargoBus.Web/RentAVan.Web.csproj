@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-RentCargoBus.Web-CBCA6AAA-F301-455C-A2AE-42BE9A86293B</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <StartupObject>RentCargoBus.Web.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewComponents\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="wwwroot\Styles\utilities\" />
   </ItemGroup>

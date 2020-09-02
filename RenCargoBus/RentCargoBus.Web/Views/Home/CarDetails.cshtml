@@ -20,7 +20,7 @@
                     @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
                 </p>
                 <p class="vehicle-details__item">
-                    @Localizer["Doors"]<span>@Model.Door</span>
+                    @Localizer["Doors"]<span>@Model.Doors</span>
                 </p>
                 <p class="vehicle-details__item">
                     @Localizer["Consumption"]<span>@Model.MilesPerGallon km/l</span>
@@ -31,7 +31,7 @@
             </div>
         </article>
 
-        <article class="vehicle-details__images effect-stretch2">
+        <article class="vehicle-details__images">
             @if (Model.Images.Count != 0)
             {
                 @foreach (var image in Model.Images)

@@ -402,17 +402,17 @@ body {
   .footer__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 70px;
+    grid-column-gap: 100px;
     margin: 30px auto; }
   .footer__container__privacy {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 15px;
     align-items: center;
     justify-content: left; }
   .footer__container__contacts {
     display: grid;
     grid-template: max-content max-content max-content;
-    grid-row-gap: 10px;
     justify-content: right; }
     .footer__container__contacts__details {
       display: grid;
@@ -421,9 +421,11 @@ body {
     .footer__container__contacts__details__icon {
       margin-right: 10px;
       font-size: 22px; }
+    .footer__container__contacts .fa-whatsapp {
+      font-size: 25px; }
     .footer__container__contacts__info {
       margin-left: 10px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       color: #44a9f8; }
 
@@ -724,7 +726,7 @@ body {
   grid-template-rows: 90px max-content max-content max-content;
   grid-row-gap: 50px; }
   .c-main__hr {
-    height: 2px;
+    height: 1px;
     width: 100%;
     background-color: #919191; }
   .c-main__welcome {

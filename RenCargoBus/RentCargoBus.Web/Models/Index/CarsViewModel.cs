@@ -18,7 +18,7 @@ namespace RentCargoBus.Web.Models.Index
 
         public int MilesPerGallon { get; set; }
 
-        public int Door { get; set; }
+        public int Doors { get; set; }
 
         public int Seats { get; set; }
 
