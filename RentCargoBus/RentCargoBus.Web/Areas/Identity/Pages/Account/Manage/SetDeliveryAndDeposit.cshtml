@@ -1,0 +1,60 @@
+﻿@page
+@model RentAVan.Web.Areas.Identity.Pages.Account.Manage.EditDeliveryModel
+@{
+    ViewData["Title"] = "Delivery and Deposit";
+}
+
+<section class="c-admin effect-stretch2">
+    <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <hr />
+    <form asp-area="Identity" asp-page="SetDeliveryAndDeposit" method="post">
+        <h4>Car delivery and deposit</h4>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Input.CarDeliveryBg"></label>
+            <input asp-for="Input.CarDeliveryBg" min="0" class="form-control form-control-sm" autofocus />
+            <small>Доставка на кола в България</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.CarDeliveryEu"></label>
+            <input asp-for="Input.CarDeliveryEu" min="0" class="form-control form-control-sm" autofocus />
+            <small>Доставка на кола в Европа</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.CarDepositBg"></label>
+            <input asp-for="Input.CarDepositBg" min="0" class="form-control form-control-sm" />
+            <small>Депозит за кола в BG</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.CarDepositEu"></label>
+            <input asp-for="Input.CarDepositEu" min="0" class="form-control form-control-sm" />
+            <small>Депозит за кола в EU</small>
+        </div>
+        <hr />
+        <h4>Van deposit and delivery</h4>
+        <hr />
+        <div class="form-group">
+            <label asp-for="Input.VanDeliveryBg"></label>
+            <input asp-for="Input.VanDeliveryBg" min="0" class="form-control form-control-sm" />
+            <small>Доставка на бус в България</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.VanDeliveryEu"></label>
+            <input asp-for="Input.VanDeliveryEu" min="0" class="form-control form-control-sm" />
+            <small>Доставка на бус в Европа</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.VanDepositBg"></label>
+            <input asp-for="Input.VanDepositBg" min="0" class="form-control form-control-sm" />
+            <small>Депозит на бус в BG</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.VanDepositEu"></label>
+            <input asp-for="Input.VanDepositEu" min="0" class="form-control form-control-sm" />
+            <small>Депозит на Бус в EU</small>
+        </div>
+        <hr />
+        <button type="submit" class="btn btn-outline-info">Save</button>
+    </form>
+</section>

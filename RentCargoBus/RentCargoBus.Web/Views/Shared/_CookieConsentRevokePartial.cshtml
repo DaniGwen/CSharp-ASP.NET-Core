@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+@{
+    bool showRevoke = false;
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    if (consentFeature != null && consentFeature.IsConsentNeeded)
+    {
+        showRevoke = consentFeature.CanTrack;
+    }
+}
+@if (showRevoke)
+{
+    <form style="display:inline" asp-controller="Home" asp-action="PrivacyRevoke" method="post">
+        <button type="submit" class="btn btn-link">@Localizer["Revoke Cookie Consent"]</button>
+</form>
+}

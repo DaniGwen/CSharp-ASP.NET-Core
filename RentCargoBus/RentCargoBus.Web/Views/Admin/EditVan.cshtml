@@ -1,0 +1,129 @@
+﻿@model RentCargoBus.Web.Models.EditViewModels.VanEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Van";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<meta name="description" content="Edit vehicle information" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>@ViewData["Title"]</title>
+<h1>Edit Van</h1>
+
+<hr />
+<form asp-action="EditVan" method="post" enctype="multipart/form-data">
+    <article class="edit-vehicle">
+        <section class="edit-vehicle__info">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VanId" />
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" autofocus />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlateNumber" class="control-label"></label>
+                <input asp-for="PlateNumber" class="form-control" />
+                <span asp-validation-for="PlateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seats" class="control-label"></label>
+                <input asp-for="Seats" type="number" class="form-control" />
+                <span asp-validation-for="Seats" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" type="number" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" type="number" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxLoad" class="control-label"></label>
+                <input asp-for="MaxLoad" type="number" class="form-control" />
+                <span asp-validation-for="MaxLoad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KilometerPerLiter" class="control-label"></label>
+                <input asp-for="KilometerPerLiter" type="number" class="form-control" />
+                <span asp-validation-for="KilometerPerLiter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HirePrice" class="control-label"></label>
+                <input asp-for="HirePrice" type="number" class="form-control" />
+                <span asp-validation-for="HirePrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HirePriceMonth" class="control-label"></label>
+                <input asp-for="HirePriceMonth" type="number" class="form-control" />
+                <span asp-validation-for="HirePriceMonth" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control">
+                    <option value="1">Cargo</option>
+                    <option value="2">Passenger</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAvailable" class="control-label"></label>
+                <select asp-for="IsAvailable" class="form-control">
+                    <option value="0">Not Available</option>
+                    <option value="1">Available</option>
+                </select>
+                <span asp-validation-for="IsAvailable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Images">Select images:</label>
+                <input asp-for="Images" type="file" multiple><br><br>
+            </div>
+        </section>
+
+        <section class="edit-vehicle__images">
+            @if (Model.Images.Count != 0)
+            {
+                @foreach (var img in Model.Images)
+                {
+                    <article class="edit-vehicle__image-container">
+                        <div class="edit-vehicle__image-wrapper">
+                            <img class="edit-vehicle__image" src="~/images/@img.ImageName" alt="van image" />
+                        </div>
+                        <i class="edit-vehicle__images__delete-icon fas fa-trash-alt"></i>
+                        <input class="edit-vehicle__images__checkbox"
+                               type="checkbox"
+                               name="image[]"
+                               value="@img.ImageId" />
+                    </article>
+                }
+            }
+            else
+            {
+                <p>No images to display.</p>
+            }
+        </section>
+    </article>
+
+    <hr />
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <hr />
+</form>
+
+<div>
+    <a class="back-to-index" asp-action="Index" asp-controller="Home">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
