@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RentCargoBus.Data.Models;
-using System;
 
 namespace RentCargoBus.Data
 {
@@ -22,7 +21,11 @@ namespace RentCargoBus.Data
 
         public DbSet<RentVan> RentVans { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<DeliveryAndDeposit> DeliveryAndDeposit { get; set; }
+
+        public DbSet<PhoneEmail> PhoneEmails { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

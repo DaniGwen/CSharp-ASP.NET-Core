@@ -1,9 +1,12 @@
 ﻿@model RentCargoBus.Web.Models.EditViewModels.CarEditViewModel
 
 @{
-    ViewData["Title"] = "EditCar";
+    ViewData["Title"] = "Edit Car";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<meta name="description" content="Edit vehicle information"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>@ViewData["Title"]</title>
 
 <h1>Edit Car</h1>
 
@@ -15,7 +18,7 @@
             <input type="hidden" asp-for="CarId" />
             <div class="form-group">
                 <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" autofocus/>
+                <input asp-for="Brand" class="form-control" autofocus />
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,14 +47,14 @@
                 <span asp-validation-for="Doors" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Seats" class="control-label"></label>
-                <input asp-for="Seats" class="form-control" />
-                <span asp-validation-for="Seats" class="text-danger"></span>
+                <label asp-for="HirePrice" class="control-label"></label>
+                <input asp-for="HirePrice" type="number" class="form-control" />
+                <span asp-validation-for="HirePrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HirePrice" class="control-label"></label>
-                <input asp-for="HirePrice" class="form-control" />
-                <span asp-validation-for="HirePrice" class="text-danger"></span>
+                <label asp-for="HirePriceMonth" class="control-label"></label>
+                <input asp-for="HirePriceMonth" type="number" class="form-control" />
+                <span asp-validation-for="HirePriceMonth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IsAvailable" class="control-label"></label>
@@ -68,7 +71,7 @@
         </section>
 
         <section class="edit-vehicle__images">
-            @if (Model.Images.Count > 0)
+            @if (Model.Images.Count != 0)
             {
                 @foreach (var img in Model.Images)
                 {
@@ -91,9 +94,11 @@
         </section>
     </article>
 
+    <hr />
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
     </div>
+    <hr />
 </form>
 
 <div>

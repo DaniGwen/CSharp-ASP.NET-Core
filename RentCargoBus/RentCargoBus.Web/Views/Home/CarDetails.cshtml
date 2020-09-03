@@ -1,9 +1,11 @@
 ﻿@model RentCargoBus.Web.Models.Index.CarsViewModel
 
 @{
-    ViewData["Title"] = "CarDetails";
+    ViewData["Title"] = "Car Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<meta name="description" content="RentAVan - Car information" />
+<title>@ViewData["Title"]</title>
 
 <section class="vehicle-details">
     <article class="vehicle-details__brand-info effect-stretch1">
@@ -13,30 +15,38 @@
 
     <section class="vehicle-details__images-and-info">
         <article class="vehicle-details__info effect-stretch2">
-            <p class="vehicle-details__item">
-                @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Doors"]<span>@Model.Door</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Kilometer per liter"]<span>@Model.MilesPerGallon km/l</span>
-            </p>
-            <p class="vehicle-details__item vehicle-details__price">
-                @Localizer["Price for a day"]
-                <span>@Model.HirePrice &euro;</span>
-            </p>
+            <div class="vehicle-details__info__details-wrapper">
+                <p class="vehicle-details__item">
+                    @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Doors"]<span>@Model.Doors</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Consumption"]<span>@Model.MilesPerGallon km/l</span>
+                </p>
+            </div>
+            <div class="vehicle-details__info__details-wrapper">
+                <partial name="_VehicleDetailsPricePartial" />
+            </div>
         </article>
 
-        <article class="vehicle-details__images effect-stretch3">
-            @foreach (var image in Model.Images)
+        <article class="vehicle-details__images">
+            @if (Model.Images.Count != 0)
             {
-                <div class="vehicle-details__image-wrapper">
-                    <img class="vehicle-details__image"
-                         onclick="openModal(this)"
-                         src="/images/@image.ImageName"
-                         alt="van image" />
-                </div>
+                @foreach (var image in Model.Images)
+                {
+                    <div class="vehicle-details__image-wrapper">
+                        <img class="vehicle-details__image"
+                             onclick="openModal(this)"
+                             src="/images/@image.ImageName"
+                             alt="van image" />
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 class="vehicle-details__images__no-images">No images at the moment.</h4>
             }
 
             <div class="vehicle-details__image-enlarge">

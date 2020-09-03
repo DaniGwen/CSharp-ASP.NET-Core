@@ -4,11 +4,11 @@
 
 .vehicle-details {
     display: grid;
-    grid-template-rows: 150px min-content max-content 30px;
+    grid-template-rows: 150px min-content max-content 60px;
+    grid-row-gap: 50px;
 
     &__brand-info {
         text-align: center;
-        background-color: $Grey200;
         width: auto;
         margin: auto;
         border-radius: 10px;
@@ -18,15 +18,23 @@
     &__images-and-info {
         display: grid;
         grid-template-columns: 250px min-content;
-        grid-template-rows: 600px;
-        grid-gap: 200px;
+        grid-template-rows: max-content;
+        grid-gap: 120px;
+    }
+
+    &__info {
+        display: grid;
+        grid-template-rows: auto;
+        grid-auto-rows: max-content;
+        grid-row-gap: 20px;
+        align-content: space-between;
     }
 
     &__item {
         font-size: 18px;
         font-weight: 600;
         background-color: $Grey200;
-        padding: 10px 0;
+        padding: 7px 0;
         border-radius: 5px;
         display: grid;
         grid-template-rows: 1fr 1fr;
@@ -40,19 +48,50 @@
     }
 
     &__price {
+        display: grid;
+        grid-template-rows: 40px max-content;
+
         span {
-            font-size: 32px;
-            font-weight: 800;
             color: $Secondary800;
+        }
+
+        &__availability {
+            font-size: 20px;
+            color: $Primary400;
+            align-self: center;
         }
     }
 
-    &__info {
+    &__price--normal {
+        font-size: 28px;
+        font-weight: 800;
+        font-weight: 600;
+    }
+
+    &__price--small {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    &__price__info {
+        text-align: left;
+        padding: 0 10px;
+
+        &__delivery{
+            display: grid;
+            grid-template-rows: 20px 1fr;
+        }
+    }
+
+
+
+    &__info__details-wrapper {
         display: grid;
-        //grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-        grid-template-rows: max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content;
+        grid-template-rows: auto;
+        grid-auto-rows: max-content;
         grid-row-gap: 20px;
         text-align: center;
+        align-content: baseline;
         align-items: baseline;
     }
 
@@ -61,11 +100,15 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
         grid-auto-rows: 260px;
-        grid-gap: 20px;
+        grid-gap: 50px;
         align-content: baseline;
+
+        &__no-images {
+            width: 300px;
+        }
     }
 
-    &__image-wrapper {
+    &__images &__image-wrapper {
         width: 290px;
         height: 260px;
         transition: 0.1s ease-out;
@@ -73,7 +116,7 @@
         border-radius: 15px;
 
         &:hover {
-            transform: scale(0.9);
+            box-shadow: $Shadow2dp;
             cursor: pointer;
         }
     }
@@ -101,8 +144,8 @@
         &__image {
             margin: auto;
             display: block;
-            width: 80%;
-            max-width: 700px;
+            width: 100%;
+            max-width: 720px;
             animation-duration: 0.5s;
             animation-name: zoom;
         }
@@ -132,7 +175,7 @@
 
     &__contact-us {
         display: grid;
-        grid-template-rows: 40px 40px 40px;
+        grid-template-rows: 40px 40px 40px 40px;
         align-items: center;
         justify-items: center;
 
@@ -142,11 +185,30 @@
         }
 
         &__send-email {
+            margin-top: 10px;
 
             &:hover {
                 cursor: pointer;
                 color: $White;
             }
+        }
+
+        &__icon {
+            font-size: 24px;
+            margin-right: 10px;
+            background-color: $Green200;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .fa-viber {
+            background-color: $ViberPurple;
+            color: $White;
+        }
+
+        .fa-whatsapp {
+            color: $White;
+            background-color: $WhatsappGreen;
         }
     }
 }

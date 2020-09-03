@@ -23,6 +23,7 @@
                 <span class="mr-3 font-weight-bold">@numberQuestion.</span>
                 <input hidden name="[@indexQuestion].QuestionId" value="@question.QuestionId" />
                 <input class="font-weight-bold mt-2 mb-3" name="[@indexQuestion].Question" asp-for="@question.Title" value="@question.Title" />
+
                 @foreach (var answer in question.Answers)
                 {
                     <div class="row form-group">

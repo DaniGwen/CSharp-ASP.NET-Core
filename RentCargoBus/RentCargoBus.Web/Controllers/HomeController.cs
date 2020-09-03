@@ -5,16 +5,18 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using RentAVan.Web.Models;
 using RentCargoBus.Services;
 using RentCargoBus.Services.Contracts;
 using RentCargoBus.Web.Models.Index;
+using Resources;
 
 namespace RentCargoBus.Web.Controllers
 {
@@ -25,14 +27,18 @@ namespace RentCargoBus.Web.Controllers
         private readonly ICarService carService;
         private readonly IMapper mapper;
         private readonly EmailService emailService;
-        private readonly IHtmlLocalizer localizer;
+        private readonly IStringLocalizer localizer;
+        private readonly IDeliveryAndDepositService deliveryAndDepositService;
+        private readonly IGeneralService generalService;
 
         public HomeController(ILogger<HomeController> logger
                              , IVanService vanService
                              , ICarService carService
                              , IMapper mapper
                              , EmailService emailService
-                             , IHtmlLocalizer<Resources.SharedResources> localizer)
+                             , IStringLocalizer<SharedResources> localizer
+                             , IDeliveryAndDepositService deliveryService
+                             , IGeneralService generalService)
         {
             this.logger = logger;
             this.vanService = vanService;
@@ -40,15 +46,24 @@ namespace RentCargoBus.Web.Controllers
             this.mapper = mapper;
             this.emailService = emailService;
             this.localizer = localizer;
+            this.deliveryAndDepositService = deliveryService;
+            this.generalService = generalService;
         }
 
+        [AllowAnonymous]
         public IActionResult SetCultureCookie(string cltr, string returnUrl)
         {
             Response.Cookies.Append(
+
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cltr)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(3) }
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(12) /*IsEssential = true*/, Secure = true }
             );
+
+            if (returnUrl == "///")
+            {
+                return this.Redirect("/Home/Index");
+            }
 
             return this.Redirect(returnUrl);
         }
@@ -57,6 +72,7 @@ namespace RentCargoBus.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+
             var allVans = this.vanService.GetAllVans();
             var allCars = this.carService.GetAllCars();
 
@@ -81,8 +97,14 @@ namespace RentCargoBus.Web.Controllers
         {
             var vanImages = this.vanService.GetImagesByVanId(id);
             var vanDb = await this.vanService.GetVanByIdAsync(id);
+            var deliveryAndDepositDb = this.deliveryAndDepositService.GetDeliveryAndDeposits();
 
             var viewModel = this.mapper.Map<VansViewModel>(vanDb);
+
+            viewModel.DeliveryEu = deliveryAndDepositDb.VanDeliveryEu;
+            viewModel.DeliveryBg = deliveryAndDepositDb.VanDeliveryBg;
+            viewModel.DepositBg = deliveryAndDepositDb.VanDepositBg;
+            viewModel.DepositEu = deliveryAndDepositDb.VanDepositEu;
 
             return this.View(viewModel);
         }
@@ -93,8 +115,14 @@ namespace RentCargoBus.Web.Controllers
         {
             var carImages = await this.carService.GetImagesByCarIdAsync(id);
             var carDb = await this.carService.GetCarByIdAsync(id);
+            var deliveryAndDepositDb = this.deliveryAndDepositService.GetDeliveryAndDeposits();
 
             var viewModel = this.mapper.Map<CarsViewModel>(carDb);
+
+            viewModel.DeliveryEu = deliveryAndDepositDb.CarDeliveryEu;
+            viewModel.DeliveryBg = deliveryAndDepositDb.CarDeliveryBg;
+            viewModel.DepositBg = deliveryAndDepositDb.CarDepositBg;
+            viewModel.DepositEu = deliveryAndDepositDb.CarDepositEu;
 
             return this.View(viewModel);
         }
@@ -105,7 +133,7 @@ namespace RentCargoBus.Web.Controllers
         {
             if (string.IsNullOrEmpty(senderEmail) || string.IsNullOrEmpty(sender))
             {
-                return this.Json(new { message = this.localizer["Please provide Name and Email.."] });
+                return this.Json(new { message = this.localizer["Please provide Name and Email"] });
             }
 
             var response = await this.emailService
@@ -113,10 +141,10 @@ namespace RentCargoBus.Web.Controllers
 
             if (response.StatusCode == HttpStatusCode.Accepted)
             {
-                return this.Json(new { message = this.localizer["<h4>Request send!</h4><br/><h5>Thank you.</h5>"] });
+                return this.Json(new { message = this.localizer["Request send! Thank you."] });
             }
 
-            return this.Json(new { message = this.localizer["<strong>Could not send request...</strong><br/><p>Please use the provided phone number.<br/>Thank you.</p>"] });
+            return this.Json(new { message = this.localizer["Could not send request...Please use the provided phone number. Thank you."] });
         }
 
         public IActionResult Privacy()
@@ -124,10 +152,51 @@ namespace RentCargoBus.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult PrivacyRevoke()
+        {
+            HttpContext.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
+            return RedirectToAction("Index");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetEmail()
+        {
+            string email = "";
+
+            var phoneEmailDb = await this.generalService.GetPhoneEmail();
+
+            if (phoneEmailDb != null)
+            {
+                email = phoneEmailDb.Email;
+            }
+
+            return this.Json(new { email = email });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPhone()
+        {
+            string phone = "";
+
+            var phoneEmailDb = await this.generalService.GetPhoneEmail();
+
+
+            if (phoneEmailDb != null)
+            {
+                phone = phoneEmailDb.PhoneNumber;
+            }
+
+            return this.Json(new { phone = phone });
         }
     }
 }

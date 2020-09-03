@@ -21,14 +21,9 @@ using RentCargoBus.Data.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using SendGrid.Extensions.DependencyInjection;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.AspNetCore.Routing.Template;
-using Microsoft.AspNetCore.Localization.Routing;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Localization;
-using RentAVan.Web;
+using Microsoft.AspNetCore.Http;
 
-namespace RentCargoBus.Web
+namespace RentAVan.Web
 {
     public class Startup
     {
@@ -48,16 +43,19 @@ namespace RentCargoBus.Web
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
-            services.AddSendGrid(options => { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
+            services.AddSendGrid(options =>
+            { options.ApiKey = Environment.GetEnvironmentVariable("rent-a-van_ApiKey") ?? Configuration["SendGrid:rent-a-van_ApiKey"]; });
 
-            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-                                                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
-            services.AddSingleton<EmailService>();
+            services.AddTransient<EmailService>();
             services.AddTransient<IVanService, VanService>();
             services.AddTransient<ICarService, CarService>();
+            services.AddTransient<IDeliveryAndDepositService, DeliveryAndDepositService>();
+            services.AddTransient<IGeneralService, GeneralService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -80,6 +78,8 @@ namespace RentCargoBus.Web
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
+
+                options.SignIn.RequireConfirmedEmail = false;
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -93,14 +93,6 @@ namespace RentCargoBus.Web
                 options.SlidingExpiration = true;
             });
 
-            services.AddLocalization(options => options.ResourcesPath = "");
-
-            services.AddRazorPages();
-
-            services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization(/*options => options.DataAnnotationLocalizerProvider = (t, f) => f.Create(typeof(SharedResources))*/);
-
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
@@ -112,6 +104,18 @@ namespace RentCargoBus.Web
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddMvc()
+                    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                    .AddDataAnnotationsLocalization();
+
+            services.AddResponseCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,11 +130,14 @@ namespace RentCargoBus.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
+                        //context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
+                        //Seed.SeedPhoneAndEmail(context).Wait();
                         this.AddAdmin(serviceProvider).Wait();
-                        Seed.SeedCargoVans(context);
-                        Seed.SeedPassangerVans(context);
-                        Seed.SeedCars(context);
+                        //Seed.SeedCargoVans(context);
+                        //Seed.SeedPassangerVans(context);
+                        //Seed.SeedCars(context);
+                        //Seed.SeedDeliveryFees(context);
                     }
                 }
             }
@@ -139,24 +146,29 @@ namespace RentCargoBus.Web
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
+                //this.AddAdmin(serviceProvider).Wait();
             }
+
+            app.UseResponseCompression();
+
+            var localizationOptions = app.ApplicationServices
+               .GetService<IOptions<RequestLocalizationOptions>>()
+               .Value;
+
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseRouting();
-
-            var localizationOptions = app.ApplicationServices
-                .GetService<IOptions<RequestLocalizationOptions>>()
-                .Value;
-
-            app.UseRequestLocalization(localizationOptions);
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {
@@ -176,10 +188,10 @@ namespace RentCargoBus.Web
 
             if (!context.Users.Any())
             {
-                var user = new User();
+                var user = new ApplicationUser();
                 user.UserName = this.Configuration.GetValue<string>("AdminConfig:Email");
                 user.Email = this.Configuration.GetValue<string>("AdminConfig:Email");
-                user.Name = this.Configuration.GetValue<string>("AdminConfig:Name");
+                user.PersonName = this.Configuration.GetValue<string>("AdminConfig:Name");
                 var userPassword = this.Configuration.GetValue<string>("AdminConfig:Password");
 
                 await userManager.CreateAsync(user, userPassword);

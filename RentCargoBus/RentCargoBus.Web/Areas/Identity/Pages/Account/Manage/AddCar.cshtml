@@ -1,11 +1,13 @@
 ﻿@page
 @model RentCargoBus.Web.Areas.Identity.Pages.Account.Manage.AddCarModel
 @{
-    ViewData["Title"] = "Add Car";
+    ViewData["Title"] = "New Car";
 }
 
-<section class="c-admin">
-    <h2>Add new car</h2>
+<section class="c-admin effect-stretch2">
+    <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <hr />
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Input.Brand"></label>
@@ -15,39 +17,48 @@
 
         <div class="form-group">
             <label asp-for="Input.Model"></label>
-            <input asp-for="Input.Model" value="" placeholder="Модел" class="form-control form-control-sm"/>
+            <input asp-for="Input.Model" value="" placeholder="Модел" class="form-control form-control-sm" />
             <span asp-validation-for="Input.Model" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Input.PlateNumber"></label>
-            <input asp-for="Input.PlateNumber" value="" placeholder="Регистрационен номер" class="form-control form-control-sm"/>
+            <input asp-for="Input.PlateNumber" value="" placeholder="Регистрационен номер" class="form-control form-control-sm" />
             <span asp-validation-for="Input.PlateNumber" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Input.MilesPerGallon"></label>
-            <input asp-for="Input.MilesPerGallon" value="" placeholder="Разход" class="form-control form-control-sm"/>
+            <input asp-for="Input.MilesPerGallon" type="number" placeholder="Разход" class="form-control form-control-sm" />
             <span asp-validation-for="Input.MilesPerGallon" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Input.Doors"></label>
-            <input asp-for="Input.Doors" min="1" max="10" placeholder="Брой врати" class="form-control form-control-sm"/>
+            <input asp-for="Input.Doors" type="number" placeholder="Брой врати" class="form-control form-control-sm" />
             <span asp-validation-for="Input.Doors" class="text-danger"></span>
         </div>
-
         <div class="form-group">
             <label asp-for="Input.HirePrice"></label>
-            <input asp-for="Input.HirePrice" value="" placeholder="Цена за ден" class="form-control form-control-sm"/>
+            <input asp-for="Input.HirePrice" placeholder="Цена за ден" class="form-control form-control-sm" />
             <span asp-validation-for="Input.HirePrice" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Input.Images">Select images:</label>
-            <input asp-for="Input.Images" type="file"  multiple><br><br>
+            <label asp-for="Input.HirePriceMonth"></label>
+            <input asp-for="Input.HirePriceMonth" placeholder="Цена за месец" class="form-control form-control-sm" />
+            <span asp-validation-for="Input.HirePriceMonth" class="text-danger"></span>
         </div>
 
+        <div class="form-group">
+            <label asp-for="Input.Images">Select images:</label>
+            <input asp-for="Input.Images" type="file" multiple><br><br>
+        </div>
+        <hr />
         <button type="submit" class="btn btn-outline-info">Save</button>
     </form>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RentCargoBus.Data.Models\RentCargoBus.Data.Models.csproj" />
     <ProjectReference Include="..\RentCargoBus.Data\RentCargoBus.Data.csproj" />
   </ItemGroup>
 

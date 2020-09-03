@@ -25,7 +25,17 @@ namespace RentCargoBus.Web.Models.Index
 
         public int MaxLoad { get; set; }
 
+        public decimal DepositBg { get; set; }
+
+        public decimal DepositEu { get; set; }
+
+        public decimal DeliveryBg { get; set; }
+
+        public decimal DeliveryEu { get; set; }
+
         public decimal HirePrice { get; set; }
+
+        public decimal HirePriceMonth { get; set; }
 
         public double KilometersPerLiter { get; set; }
 

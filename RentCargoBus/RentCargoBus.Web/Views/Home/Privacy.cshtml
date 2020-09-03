@@ -1,6 +1,83 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<meta name="description" content="RentAVan - Privacy policy" />
+<title>@ViewData["Title"]</title>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h1>
+    @Localizer["Privacy Policy"]
+</h1>
+
+<h4>@Localizer["What cookies we send and how we use them"]</h4>
+<hr />
+<ol>
+    <li>
+        <h4>
+            1. @Localizer["Consent cookie"]
+        </h4>
+        <p>
+            @Localizer["This cookie we send when you"] "@Localizer["Accept"]" @Localizer["non - essential cookies"].@Localizer["We send it to your browser so that you don't have to accept it every time you visit us"]. @Localizer["Expires after one year"].
+        </p>
+        <hr />
+    </li>
+
+    <li>
+        <h4>
+            2. @Localizer["Anti-forgery cookie"]
+        </h4>
+        <p>
+            @Localizer["We send that cookie for security reasons"]. @Localizer["It is essential cookie"].
+        </p>
+        <hr />
+    </li>
+
+    <li>
+        <h4>
+            3. @Localizer["Culture cookie"]
+        </h4>
+        <p>
+            @Localizer["We send that cookie to your browser so you don't have to change the language every time you visit us"]. @Localizer["It is non-essential cookie and it is send only when you"] "@Localizer["Accept"]" @Localizer["cookies or you choose language other than default one"].
+            @Localizer["Expires after one year"].
+        </p>
+    </li>
+</ol>
+<hr />
+<h4>
+    @Localizer["Communication"]
+</h4>
+<ol>
+    <li>
+        <p>
+            @Localizer["We may contact you by E-mail that you provide when you request a vehicle in the vehicle details page"], @Localizer["regarding the status and other details of that vehicle"].
+            <br />
+        </p>
+    </li>
+    <li>
+        <p>
+            @Localizer["You can call or message us on the provided mobile phone number and e-mail to arrange a vehicle or discuss details"].
+        </p>
+    </li>
+</ol>
+<hr />
+<h4>
+    @Localizer["Changes to policy"]
+</h4>
+<ol>
+    <li>
+        <p>
+            @Localizer["We can update or change our policy in the future"].
+            <br />
+            @Localizer["You will be prompted to"] "@Localizer["Accept"]" @Localizer["once again our cookie policy if any changes occur"].
+        </p>
+    </li>
+</ol>
+
+<hr />
+<h5>
+    @Localizer["We do not use or collect any personal information for the purpose of tracking"], @Localizer["analitics or sell/share to third parties"].
+</h5>
+<hr />
+<h4>
+    @Localizer["You can withdraw your cookie consent anytime"].
+</h4>
+<partial name="_CookieConsentRevokePartial" />

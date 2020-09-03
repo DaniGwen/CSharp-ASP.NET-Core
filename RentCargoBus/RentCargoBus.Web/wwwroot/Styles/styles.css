@@ -6,7 +6,6 @@ Document
 /**
 Use a better box model (opinionated).
 */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css");
 *, *::before, *::after {
   box-sizing: border-box; }
@@ -204,6 +203,10 @@ summary {
   font-family: "Lato";
   src: url("/fonts/Lato-Regular.woff2"); }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Regular.ttf"); }
+
 html,
 * {
   font-family: "Lato", sans-serif; }
@@ -314,26 +317,36 @@ body {
   height: 100%; }
 
 .navbar-brand {
-  margin-right: 20px; }
+  margin: 0 20px 0 0;
+  padding: 0; }
 
 .c-navbar {
   justify-content: space-between; }
-  .c-navbar__toggle__container {
-    width: 80px;
-    height: 20px; }
-  .c-navbar__admin-toggle-container {
+  .c-navbar__admin-login-and-toggle {
     display: grid;
-    grid-template-columns: 100px 1fr;
-    grid-column-gap: 20px;
-    align-items: baseline; }
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 60px;
+    align-items: center; }
+    .c-navbar__admin-login-and-toggle__language {
+      display: grid;
+      grid-template-columns: 40px max-content; }
+    .c-navbar__admin-login-and-toggle .fas {
+      justify-self: center;
+      font-size: 24px; }
   .c-navbar__item {
     margin-left: 20px;
     width: 60px; }
 
 .navbar-nav {
   display: grid;
-  grid-template-columns: 1fr 100px;
-  justify-items: right; }
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 15px; }
+  .navbar-nav__home__link {
+    color: inherit;
+    font-size: 16px; }
+    .navbar-nav__home__link:hover {
+      color: inherit;
+      text-decoration: none; }
 
 .nav-item__link {
   transition: 0.2s ease-out;
@@ -349,14 +362,8 @@ body {
   background-color: #F7F7F7; }
 
 .btn-admin {
+  border: none;
   padding: 2px 15px; }
-
-.nav-link {
-  padding: 0;
-  margin: 0; }
-
-#dropdownlang {
-  border-radius: 20px; }
 
 .customBtn {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
@@ -371,7 +378,7 @@ body {
   font-weight: 800; }
   .customBtn:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75); }
+    box-shadow: 6px 10px 25px -4px rgba(0, 0, 0, 0.75); }
   .customBtn--settings {
     width: 200px;
     text-transform: capitalize;
@@ -392,6 +399,35 @@ body {
   display: grid;
   align-self: end;
   text-align: center; }
+  .footer__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 100px;
+    margin: 30px auto; }
+  .footer__container__privacy {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+    align-items: center;
+    justify-content: left; }
+  .footer__container__contacts {
+    display: grid;
+    grid-template: max-content max-content max-content;
+    justify-content: right; }
+    .footer__container__contacts__details {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      align-items: end; }
+    .footer__container__contacts__details__icon {
+      margin-right: 10px;
+      font-size: 22px; }
+    .footer__container__contacts .fa-whatsapp {
+      font-size: 25px; }
+    .footer__container__contacts__info {
+      margin-left: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #44a9f8; }
 
 .c-layout-main-grid {
   display: grid;
@@ -425,7 +461,7 @@ body {
     align-content: baseline; }
   .edit-vehicle__image-container {
     position: relative;
-    box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 6px 10px 25px -4px rgba(0, 0, 0, 0.75);
     border-radius: 10px; }
   .edit-vehicle__images__checkbox {
     position: absolute;
@@ -511,10 +547,10 @@ body {
 
 .vehicle-details {
   display: grid;
-  grid-template-rows: 150px min-content max-content 30px; }
+  grid-template-rows: 150px min-content max-content 60px;
+  grid-row-gap: 50px; }
   .vehicle-details__brand-info {
     text-align: center;
-    background-color: #e6e6e6;
     width: auto;
     margin: auto;
     border-radius: 10px;
@@ -522,13 +558,19 @@ body {
   .vehicle-details__images-and-info {
     display: grid;
     grid-template-columns: 250px min-content;
-    grid-template-rows: 600px;
-    grid-gap: 200px; }
+    grid-template-rows: max-content;
+    grid-gap: 120px; }
+  .vehicle-details__info {
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-rows: max-content;
+    grid-row-gap: 20px;
+    align-content: space-between; }
   .vehicle-details__item {
     font-size: 18px;
     font-weight: 600;
     background-color: #e6e6e6;
-    padding: 10px 0;
+    padding: 7px 0;
     border-radius: 5px;
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -537,31 +579,53 @@ body {
       margin-left: 10px;
       font-size: 20px;
       color: #44a9f8; }
-  .vehicle-details__price span {
-    font-size: 32px;
-    font-weight: 800;
-    color: #ff9100; }
-  .vehicle-details__info {
+  .vehicle-details__price {
     display: grid;
-    grid-template-rows: max-content max-content max-content max-content max-content max-content max-content max-content max-content max-content;
+    grid-template-rows: 40px max-content; }
+    .vehicle-details__price span {
+      color: #ff9100; }
+    .vehicle-details__price__availability {
+      font-size: 20px;
+      color: #00af9b;
+      align-self: center; }
+  .vehicle-details__price--normal {
+    font-size: 28px;
+    font-weight: 800;
+    font-weight: 600; }
+  .vehicle-details__price--small {
+    font-size: 22px;
+    font-weight: 600; }
+  .vehicle-details__price__info {
+    text-align: left;
+    padding: 0 10px; }
+    .vehicle-details__price__info__delivery {
+      display: grid;
+      grid-template-rows: 20px 1fr; }
+  .vehicle-details__info__details-wrapper {
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-rows: max-content;
     grid-row-gap: 20px;
     text-align: center;
+    align-content: baseline;
     align-items: baseline; }
   .vehicle-details__images {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-auto-rows: 260px;
-    grid-gap: 20px;
+    grid-gap: 50px;
     align-content: baseline; }
-  .vehicle-details__image-wrapper {
+    .vehicle-details__images__no-images {
+      width: 300px; }
+  .vehicle-details__images .vehicle-details__image-wrapper {
     width: 290px;
     height: 260px;
     transition: 0.1s ease-out;
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
     border-radius: 15px; }
-    .vehicle-details__image-wrapper:hover {
-      transform: scale(0.9);
+    .vehicle-details__images .vehicle-details__image-wrapper:hover {
+      box-shadow: 6px 10px 25px -4px rgba(0, 0, 0, 0.75);
       cursor: pointer; }
   .vehicle-details__image {
     width: 100%;
@@ -583,8 +647,8 @@ body {
     .vehicle-details__image-enlarge__image {
       margin: auto;
       display: block;
-      width: 80%;
-      max-width: 700px;
+      width: 100%;
+      max-width: 720px;
       animation-duration: 0.5s;
       animation-name: zoom; }
     .vehicle-details__image-enlarge__close {
@@ -604,15 +668,29 @@ body {
         width: 100%; } }
   .vehicle-details__contact-us {
     display: grid;
-    grid-template-rows: 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px 40px;
     align-items: center;
     justify-items: center; }
     .vehicle-details__contact-us__phone {
       font-size: 20px;
       font-weight: 600; }
-    .vehicle-details__contact-us__send-email:hover {
-      cursor: pointer;
+    .vehicle-details__contact-us__send-email {
+      margin-top: 10px; }
+      .vehicle-details__contact-us__send-email:hover {
+        cursor: pointer;
+        color: #ffffff; }
+    .vehicle-details__contact-us__icon {
+      font-size: 24px;
+      margin-right: 10px;
+      background-color: #B3E0BE;
+      padding: 5px;
+      border-radius: 5px; }
+    .vehicle-details__contact-us .fa-viber {
+      background-color: #583EBC;
       color: #ffffff; }
+    .vehicle-details__contact-us .fa-whatsapp {
+      color: #ffffff;
+      background-color: #00E676; }
 
 .send-email-modal__container {
   display: grid;
@@ -627,12 +705,28 @@ body {
 .active {
   display: block !important; }
 
+.c-cookie-consent {
+  width: 67%;
+  margin: auto; }
+  .c-cookie-consent__info {
+    width: 95%; }
+
+.c-admin {
+  width: 600px; }
+
+.btn-admin {
+  text-transform: capitalize; }
+
+.nav-link {
+  font-size: 16px;
+  margin-bottom: 5px; }
+
 .c-main {
   display: grid;
   grid-template-rows: 90px max-content max-content max-content;
   grid-row-gap: 50px; }
   .c-main__hr {
-    height: 2px;
+    height: 1px;
     width: 100%;
     background-color: #919191; }
   .c-main__welcome {
@@ -673,14 +767,14 @@ body {
   width: 300px;
   min-height: 300px;
   background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
   color: inherit;
-  transition: 0.1s ease-out; }
+  transition: 0.1s ease-out;
+  overflow: hidden; }
   .c-card:hover {
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 6px 10px 25px -4px rgba(0, 0, 0, 0.75);
     color: inherit;
-    transform: scale(0.9);
     cursor: pointer;
     text-decoration: none; }
   .c-card__wrapper {
@@ -689,16 +783,13 @@ body {
     background-size: cover; }
   .c-card__image {
     width: 100%;
-    height: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px; }
+    height: 100%; }
   .c-card__info {
     text-align: center;
     margin-top: 10px; }
     .c-card__info__details {
       display: grid;
       grid-template-rows: auto;
-      grid-auto-rows: 29px;
       width: 100%;
       margin: auto; }
     .c-card__info__details__span {
@@ -707,11 +798,12 @@ body {
       font-size: 24px; }
     .c-card__info__details__price {
       background-color: #e3f3fd;
+      font-size: 18px;
       font-weight: 700;
-      padding: 5px 0;
+      padding: 7px 0;
       display: grid;
       grid-template-rows: 1fr 1fr 1fr;
-      grid-row-gap: 5px; }
+      grid-row-gap: 7px; }
     .c-card__info__details__seats {
       display: none; }
     .c-card__info__action {
@@ -726,9 +818,7 @@ body {
       justify-self: center; }
     .c-card__info__availability {
       background-color: #41bead;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      padding: 5px 0;
+      padding: 10px 0;
       color: #ffffff;
       font-weight: 700;
       text-transform: capitalize; }
@@ -736,13 +826,3 @@ body {
       background-color: #919191; }
     .c-card__info__plate-number {
       display: none; }
-
-.c-admin {
-  width: 600px; }
-
-.btn-admin {
-  text-transform: capitalize; }
-
-.nav-link {
-  font-size: 16px;
-  margin-bottom: 5px; }

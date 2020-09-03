@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using RentAVan.Web.Areas.Identity.Pages.Account.Manage;
 using RentCargoBus.Data.Models;
 using RentCargoBus.Web.Areas.Identity.Pages.Account.Manage;
 using RentCargoBus.Web.Models.EditViewModels;
@@ -24,6 +25,9 @@ namespace RentCargoBus.Web.Mappings
             this.CreateMap<IFormFile, CarImage>();
             this.CreateMap<Car, CarEditViewModel>();
             this.CreateMap<CarPostViewModel, Car>();
+
+            //Delivery mappings 
+            this.CreateMap<DeliveryAndDeposit, EditDeliveryModel.InputModel>().ReverseMap();
         }
     }
 }

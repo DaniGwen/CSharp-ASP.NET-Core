@@ -6,15 +6,15 @@
     width: 300px;
     min-height: 300px;
     background-color: $White;
-    border-radius: 20px;
-    box-shadow: $Shadow2dp;
+    border-radius: 10px;
+    box-shadow: $Shadow1dp;
     color: inherit;
     transition: 0.1s ease-out;
+    overflow: hidden;
 
     &:hover {
-        box-shadow: $Shadow1dp;
+        box-shadow: $Shadow2dp;
         color: inherit;
-        transform: scale(0.9);
         cursor: pointer;
         text-decoration: none;
     }
@@ -28,8 +28,6 @@
     &__image {
         width: 100%;
         height: 100%;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
     }
 
     &__info {
@@ -39,7 +37,6 @@
         &__details {
             display: grid;
             grid-template-rows: auto;
-            grid-auto-rows: 29px;
             width: 100%;
             margin: auto;
         }
@@ -52,11 +49,12 @@
 
         &__details__price {
             background-color: $Blue50;
+            font-size: 18px;
             font-weight: 700;
-            padding: 5px 0;
+            padding: 7px 0;
             display: grid;
             grid-template-rows: 1fr 1fr 1fr;
-            grid-row-gap: 5px;
+            grid-row-gap: 7px;
         }
 
         &__details__seats {
@@ -73,9 +71,6 @@
             }
         }
 
-        &__action--delete {
-        }
-
         &__action__wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -84,9 +79,7 @@
 
         &__availability {
             background-color: $Primary300;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            padding: 5px 0;
+            padding: 10px 0;
             color: $White;
             font-weight: 700;
             text-transform: capitalize;

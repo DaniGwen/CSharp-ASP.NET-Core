@@ -1,53 +1,62 @@
 ﻿@model RentCargoBus.Web.Models.Index.VansViewModel
 @{
-    ViewData["Title"] = "VanDetails";
+    ViewData["Title"] = "Van Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<meta name="description" content="RentAVan - Van information" />
+<title>@ViewData["Title"]</title>
 
 <section class="vehicle-details">
     <article class="vehicle-details__brand-info effect-stretch1">
         <h1 class="vehicle-details__brand">@Model.Brand</h1>
         <h3 class="vehicle-details__model">@Model.Model</h3>
     </article>
-
     <section class="vehicle-details__images-and-info">
         <article class="vehicle-details__info effect-stretch2">
-            <p class="vehicle-details__item">
-                @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Seats"]<span>@Model.Seats</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Kilometer per liter"]<span>@Model.KilometersPerLiter km/l</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Weight"]<span>@Model.Weight kg.</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Height"]<span>@Model.Height m.</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Max load"]<span>@Model.MaxLoad kg.</span>
-            </p>
-            <p class="vehicle-details__item">
-                @Localizer["Type"]<span>@Model.Type</span>
-            </p>
-            <p class="vehicle-details__item vehicle-details__price">
-                @Localizer["Price per day"]
-                <span>@Model.HirePrice &euro;</span>
-            </p>
+            <div class="vehicle-details__info__details-wrapper">
+                <p class="vehicle-details__item">
+                    @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Seats"]<span>@Model.Seats</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Consumption"]<span>@Model.KilometersPerLiter km/l</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Weight"]<span>@Model.Weight kg.</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Height"]<span>@Model.Height m.</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Max load"]<span>@Model.MaxLoad kg.</span>
+                </p>
+                <p class="vehicle-details__item">
+                    @Localizer["Type"]<span>@Model.Type</span>
+                </p>
+            </div>
+            <div class="vehicle-details__info__details-wrapper">
+                <partial name="_VehicleDetailsPricePartial" />
+            </div>
         </article>
 
-        <article class="vehicle-details__images effect-stretch3">
-            @foreach (var image in Model.Images)
+        <article class="vehicle-details__images ">
+            @if (Model.Images.Count != 0)
             {
-                <div class="vehicle-details__image-wrapper">
-                    <img class="vehicle-details__image"
-                         onclick="openModal(this)"
-                         src="/images/@image.ImageName"
-                         alt="van image" />
-                </div>
+                @foreach (var image in Model.Images)
+                {
+                    <div class="vehicle-details__image-wrapper">
+                        <img class="vehicle-details__image"
+                             onclick="openModal(this)"
+                             src="/images/@image.ImageName"
+                             alt="van image" />
+                    </div>
+                }
+            }
+            else
+            {
+                <h4 class="vehicle-details__images__no-images">No images at the moment.</h4>
             }
 
             <div class="vehicle-details__image-enlarge">
@@ -65,4 +74,3 @@
 </section>
 
 <partial name="_VehicleDetailsEmailModalPartial">
-

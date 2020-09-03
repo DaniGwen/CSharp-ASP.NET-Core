@@ -9,6 +9,7 @@ namespace RentCargoBus.Web.Models.Index
         {
             this.Images = new List<CarImage>();
         }
+
         public int CarId { get; set; }
 
         public string Brand { get; set; }
@@ -17,11 +18,21 @@ namespace RentCargoBus.Web.Models.Index
 
         public int MilesPerGallon { get; set; }
 
-        public int Door { get; set; }
+        public int Doors { get; set; }
 
         public int Seats { get; set; }
 
+        public decimal DepositBg { get; set; }
+
+        public decimal DepositEu { get; set; }
+
+        public decimal DeliveryBg { get; set; }
+
+        public decimal DeliveryEu { get; set; }
+
         public decimal HirePrice { get; set; }
+
+        public decimal HirePriceMonth { get; set; }
 
         public string PlateNumber { get; set; }
 

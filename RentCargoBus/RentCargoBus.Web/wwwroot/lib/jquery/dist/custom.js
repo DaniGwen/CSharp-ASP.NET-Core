@@ -142,7 +142,7 @@ $(function () {
             buttons: {
                 "Send request": function () {
                     post();
-                    $(this).dialog("close").fadeOut("slow");
+                    //$(this).dialog("close");
                 },
                 Cancel: function () {
                     $(this).fadeOut("slow", function () {
@@ -164,9 +164,7 @@ $(function () {
             modal: true,
             buttons: {
                 "Close": function () {
-                    $(this).hide("fast", function () {
-                        $(this).dialog('close');
-                    });
+                    $(this).dialog('close');
                 }
             }
         });
@@ -183,17 +181,33 @@ $(function () {
             url: '/Home/SendEmail',
             data: { 'brand': brand, 'model': model, 'plate': plate, 'sender': sender, 'senderEmail': senderEmail },
             success: function (message) {
-                $('.send-email-modal__result').attr('title', 'Success');
-                $('.send-email-modal__result').html(message.message.name).css({
-                    textAlign: 'center',
-                });
-                $('.send-email-modal__result').dialog("open");
-            },
-            error: function (message) {
-                $('.send-email-modal__result').prop('title', 'Error');
-                $('.send-email-modal__result').html(message.message.name);
+                if (message.message.value.substring(0, 4) == "<h4>") {
+                    $('.send-email-modal').dialog('close');
+                    $('.send-email-modal__result').attr("title", "Success");
+                    $('.send-email-modal__result').html(message.message.value).css({
+                        textAlign: 'center',
+                    });
+                }
+                else {
+                    $('.send-email-modal__result').attr("title", "Error");
+                    $('.send-email-modal__result').html(message.message.value);
+                }
                 $('.send-email-modal__result').dialog("open");
             }
         })
     }
+})
+
+
+// Get and set email and phone fields 
+$(function () {
+    $.get('/Home/GetEmail', function (data) {
+        $(".my-email").html(data.email);
+    });
+})
+
+$(function () {
+    $.get('/Home/GetPhone', function (data) {
+        $(".my-phone").html(data.phone);
+    });
 })

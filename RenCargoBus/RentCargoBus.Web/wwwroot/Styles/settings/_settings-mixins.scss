@@ -1,5 +1,0 @@
-@mixin position($type, $top-bottom, $left-right) {
-    position: #{$type};
-    top: #{$top-bottom};
-    left: #{$left-right};
-}

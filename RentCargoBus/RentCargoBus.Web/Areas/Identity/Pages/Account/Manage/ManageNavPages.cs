@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {
+        public static string ChangePhoneAndEmail => "ChangePhoneAndEmail";
+
+        public static string SetDeliveryAndDeposit => "SetDeliveryAndDeposit";
+
         public static string AddVan => "AddVan";
 
         public static string AddCar => "AddCar";
@@ -27,6 +28,10 @@ namespace RentCargoBus.Web.Areas.Identity.Pages.Account.Manage
         public static string PersonalData => "PersonalData";
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
+
+        public static string ChangePhoneAndEmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePhoneAndEmail);
+
+        public static string EditDeliveryPricesClass(ViewContext viewContext) => PageNavClass(viewContext, SetDeliveryAndDeposit);
 
         public static string AddVanNavClass(ViewContext viewContext) => PageNavClass(viewContext, AddVan);
 

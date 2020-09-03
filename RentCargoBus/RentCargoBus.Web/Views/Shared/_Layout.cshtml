@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Styles/styles.css" />
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
 </head>
 <body>
     <div class="c-layout-main-grid">
@@ -27,24 +25,30 @@
                     @*<div class="header__logo-wrapper">
                             <img class="header__logo" src="" alt="site logo" />
                         </div>*@
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Rent a Van</a>
+                    <h5 class="navbar-brand">Rent a Van</h5>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="c-navbar navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <section class="c-navbar__admin-toggle-container">
-                            <div class="c-navbar__toggle__container">
+                        <section class="c-navbar__admin-login-and-toggle">
+
+                            <div class="c-navbar__admin-login-and-toggle__language">
+                                <i class="fas fa-globe-europe"></i>
                                 @*Language switch tag helper NuGet"LazZiya.TagHelpers"*@
-                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie","/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
+                                <language-nav cookie-handler-url="@Url.Action("SetCultureCookie", "/Home", new { area = "", cltr = "{0}", returnUrl = routeAction })">
                                 </language-nav>
                             </div>
+
                             <partial name="_LoginPartial" />
                         </section>
 
                         <ul class="navbar-nav">
-                            <li>
-                                <a class="nav-link" asp-action="index" asp-controller="Home">Home</a>
+                            <li class="navbar-nav__home">
+                                <a class="navbar-nav__home__link"
+                                   asp-action="index" asp-controller="Home">
+                                    @Localizer["Home"]
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -54,6 +58,7 @@
 
         <main class="main">
             <div class="container">
+                <partial name="_CookieConsentPartial" />
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
@@ -62,8 +67,37 @@
 
         <footer class="footer text-muted effect-stretch6">
             <div class="footer__stripe"></div>
-            <div class="container">
-                &copy; 2020 - RentAVan - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="footer__container container">
+                <section class="footer__container__contacts">
+                    <h4>@Localizer["Contacts"]:</h4>
+                    <section class="footer__container__contacts__details">
+                        <div class="footer__container__contacts__details__icons">
+                            <i class="footer__container__contacts__details__icon far fa-envelope"></i>
+                        </div>
+                        <div>
+                            @Localizer["E-mail"]:
+                            <span class="footer__container__contacts__info my-email"></span>
+                        </div>
+                    </section>
+                    <section class="footer__container__contacts__details">
+                        <div class="footer__container__contacts__details__icons">
+                            <i class="footer__container__contacts__details__icon fab fa-whatsapp"></i>
+                            <i class="footer__container__contacts__details__icon fab fa-viber"></i>
+                            <i class="footer__container__contacts__details__icon fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            @Localizer["Phone"]:
+                            <span class="footer__container__contacts__info my-phone"></span>
+                        </div>
+                    </section>
+                </section>
+                <section class="footer__container__privacy">
+                    <a asp-controller="Home" asp-action="Privacy">
+                        <p>@Localizer["Privacy Policy"]</p>
+                    </a>
+                    <partial name="_CookieConsentRevokePartial" />
+                    &copy; 2020 - RentAVan
+                </section>
             </div>
         </footer>
     </div>
