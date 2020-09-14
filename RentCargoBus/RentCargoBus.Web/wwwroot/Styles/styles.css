@@ -306,6 +306,13 @@ body {
   width: 99vw;
   height: 100vh; }
 
+small {
+  background-color: #BBE1ED;
+  padding: 5px 5px;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid #41bead; }
+
 .header__logo-wrapper {
   max-width: 60px;
   background-size: contain;

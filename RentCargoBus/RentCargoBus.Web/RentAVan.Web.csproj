@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <StartupObject>RentCargoBus.Web.Program</StartupObject>
+    <UserSecretsId>72a71ce0-4b63-460a-b47b-2ea249d33ffe</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

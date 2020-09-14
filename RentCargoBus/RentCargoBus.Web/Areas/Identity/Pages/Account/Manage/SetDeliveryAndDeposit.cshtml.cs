@@ -26,28 +26,28 @@ namespace RentAVan.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [DisplayName("Car delivery price \"BG\"")]
+            [DisplayName("Car delivery price for BG")]
             public decimal CarDeliveryBg { get; set; }
 
-            [DisplayName("Car delivery price \"EU\"")]
+            [DisplayName("Car delivery price for EU")]
             public decimal CarDeliveryEu { get; set; }
 
-            [DisplayName("Van delivery price \"BG\"")]
+            [DisplayName("Van delivery price for BG")]
             public decimal VanDeliveryBg { get; set; }
 
-            [DisplayName("Van delivery price \"EU\"")]
+            [DisplayName("Van delivery price for EU")]
             public decimal VanDeliveryEu { get; set; }
 
-            [DisplayName("Van deposit price \"EU\"")]
+            [DisplayName("Van deposit price for EU")]
             public decimal VanDepositEu { get; set; }
 
-            [DisplayName("Van deposit price \"BG\"")]
+            [DisplayName("Van deposit price for BG")]
             public decimal VanDepositBg { get; set; }
 
-            [DisplayName("Car deposit price \"BG\"")]
+            [DisplayName("Car deposit price for BG")]
             public decimal CarDepositBg { get; set; }
 
-            [DisplayName("Car deposit price \"EU\"")]
+            [DisplayName("Car deposit price for EU")]
             public decimal CarDepositEu { get; set; }
         }
 

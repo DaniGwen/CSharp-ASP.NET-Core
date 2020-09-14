@@ -136,8 +136,8 @@ $(function () {
             show: {
                 effect: "clip"
             },
-            height: 400,
-            width: 350,
+            height: 420,
+            width: 400,
             modal: true,
             buttons: {
                 "Send request": function () {

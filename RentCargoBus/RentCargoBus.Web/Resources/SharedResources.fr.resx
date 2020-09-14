@@ -222,6 +222,9 @@
   <data name="No cars at the moment" xml:space="preserve">
     <value>Pas de voitures pour le moment</value>
   </data>
+  <data name="No images at the moment" xml:space="preserve">
+    <value>Aucune image pour le moment</value>
+  </data>
   <data name="No personal data is collected for the purpose of advertising, analitics or social media purposes" xml:space="preserve">
     <value>Aucune donnée personnelle n'est collectée à des fins de publicité, d'analyse ou de médias sociaux</value>
   </data>
