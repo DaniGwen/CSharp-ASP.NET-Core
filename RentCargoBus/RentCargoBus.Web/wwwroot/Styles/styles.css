@@ -199,6 +199,12 @@ Add the correct display in Chrome and Safari.
 summary {
   display: list-item; }
 
+.o-bold-title {
+  background-color: #565656;
+  color: #ff9100 !important;
+  padding: 3px 10px;
+  border-radius: 10px; }
+
 @font-face {
   font-family: "Lato";
   src: url("/fonts/Lato-Regular.woff2"); }
@@ -324,8 +330,7 @@ small {
   height: 100%; }
 
 .navbar-brand {
-  margin: 0 20px 0 0;
-  padding: 0; }
+  margin: 0 20px 0 0; }
 
 .c-navbar {
   justify-content: space-between; }
@@ -352,8 +357,7 @@ small {
     color: inherit;
     font-size: 16px; }
     .navbar-nav__home__link:hover {
-      color: inherit;
-      text-decoration: none; }
+      color: inherit; }
 
 .nav-item__link {
   transition: 0.2s ease-out;
@@ -733,14 +737,19 @@ small {
   grid-template-rows: 90px max-content max-content max-content;
   grid-row-gap: 50px; }
   .c-main__hr {
-    height: 1px;
     width: 100%;
     background-color: #919191; }
   .c-main__welcome {
     text-align: center; }
   .c-main__welcome__text {
+    background-color: #e3f3fd;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px;
+    width: 300px;
+    margin: auto;
     margin-right: 250px;
-    margin-top: 30px; }
+    margin-top: 20px; }
   .c-main__vehicles {
     justify-items: center;
     display: grid;
@@ -751,7 +760,7 @@ small {
       align-self: center;
       background-color: #BBE1ED;
       width: 300px;
-      border-radius: 10px;
+      border-radius: 5px;
       padding: 7px 0; }
   .c-main__vans {
     position: relative;

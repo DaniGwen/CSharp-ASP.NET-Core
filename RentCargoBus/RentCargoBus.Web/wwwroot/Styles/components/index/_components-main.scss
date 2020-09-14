@@ -6,7 +6,6 @@
     grid-row-gap: 50px;
 
     &__hr {
-        height: 1px;
         width: 100%;
         background-color: $Grey500;
     }
@@ -16,8 +15,14 @@
     }
 
     &__welcome__text {
+        background-color: $Blue50;
+        border-radius: 5px;
+        display: inline-block;
+        padding: 5px;
+        width: 300px;
+        margin: auto;
         margin-right: 250px;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     &__vehicles {
@@ -31,7 +36,7 @@
             align-self: center;
             background-color: $PrimaryColor;
             width: 300px;
-            border-radius: 10px;
+            border-radius: 5px;
             padding: 7px 0;
         }
     }

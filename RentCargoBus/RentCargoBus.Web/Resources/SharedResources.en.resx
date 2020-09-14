@@ -215,9 +215,6 @@
   <data name="Max load" xml:space="preserve">
     <value>Max load</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="No cars at the moment" xml:space="preserve">
     <value>No cars at the moment</value>
   </data>
@@ -281,11 +278,11 @@
   <data name="Seats" xml:space="preserve">
     <value>Seats</value>
   </data>
-  <data name="Send email" xml:space="preserve">
-    <value>Send email</value>
+  <data name="Send request" xml:space="preserve">
+    <value>Send request</value>
   </data>
-  <data name="Send us Your details below to request this vehicle" xml:space="preserve">
-    <value>Send us Your details below to request this vehicle</value>
+  <data name="Send us Your details to request this vehicle and we will contact you" xml:space="preserve">
+    <value>Send us Your details to request this vehicle and we will contact you</value>
   </data>
   <data name="This cookie we send when you" xml:space="preserve">
     <value>This cookie we send when you</value>
@@ -334,5 +331,8 @@
   </data>
   <data name="Your Email" xml:space="preserve">
     <value>Your Email</value>
+  </data>
+  <data name="Your Name" xml:space="preserve">
+    <value>Your Name</value>
   </data>
 </root>
