@@ -17,9 +17,12 @@
                 <p class="vehicle-details__item">
                     @Localizer["Plate number"]<span class="plate-number">@Model.PlateNumber</span>
                 </p>
-                <p class="vehicle-details__item">
-                    @Localizer["Seats"]<span>@Model.Seats</span>
-                </p>
+                @if (Model.Type == RentCargoBus.Data.Models.Enum.VanType.Passenger)
+                {
+                    <p class="vehicle-details__item">
+                        @Localizer["Seats"]<span>@Model.Seats</span>
+                    </p>
+                }
                 <p class="vehicle-details__item">
                     @Localizer["Consumption"]<span>@Model.KilometersPerLiter km/l</span>
                 </p>

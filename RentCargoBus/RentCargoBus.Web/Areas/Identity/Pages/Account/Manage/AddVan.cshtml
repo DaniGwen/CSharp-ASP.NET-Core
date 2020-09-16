@@ -29,39 +29,39 @@
 
         <div class="form-group">
             <label asp-for="Model.Weight"></label>
-            <input asp-for="Model.Weight" type="number" placeholder="Маса на буса в килограми" class="form-control form-control-sm" />
+            <input asp-for="Model.Weight" type="number" min="0" placeholder="Маса на буса в килограми" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.Height"></label>
-            <input asp-for="Model.Height" type="number" placeholder="Височина на буса в метри" class="form-control form-control-sm" />
+            <input asp-for="Model.Height" type="number" min="0" placeholder="Височина на буса в метри" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.MaxLoad"></label>
-            <input asp-for="Model.MaxLoad" type="number" placeholder="Товаримост в килограми" class="form-control form-control-sm" />
+            <input asp-for="Model.MaxLoad" type="number" min="0" placeholder="Товаримост в килограми" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.Seats"></label>
-            <input asp-for="Model.Seats" type="number" placeholder="Брой места" class="form-control form-control-sm" />
+            <input asp-for="Model.Seats" type="number" value="0" min="0" placeholder="Брой места" class="form-control form-control-sm" />
             <small>Само за пътнически бусове.</small>
         </div>
 
         <div class="form-group">
             <label asp-for="Model.KilometersPerLiter"></label>
-            <input asp-for="Model.KilometersPerLiter" type="number" placeholder="Разход" class="form-control form-control-sm" />
+            <input asp-for="Model.KilometersPerLiter" type="number" min="0" placeholder="Разход" class="form-control form-control-sm" />
             <span asp-validation-for="Model.KilometersPerLiter" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Model.HirePrice"></label>
-            <input asp-for="Model.HirePrice" placeholder="Цена за ден в евро" class="form-control form-control-sm" />
+            <input asp-for="Model.HirePrice" type="number" placeholder="Цена за ден в евро" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">
             <label asp-for="Model.HirePriceMonth"></label>
-            <input asp-for="Model.HirePriceMonth" placeholder="Цена за месец в евро" class="form-control form-control-sm" />
+            <input asp-for="Model.HirePriceMonth" type="number" placeholder="Цена за месец в евро" class="form-control form-control-sm" />
         </div>
 
         <div class="form-group">

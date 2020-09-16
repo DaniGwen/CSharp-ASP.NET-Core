@@ -1,0 +1,9 @@
+@import "../settings/_settings-colors.scss";
+
+small {
+    background-color: $PrimaryColor;
+    padding: 5px 5px;
+    color: black;
+    border-radius: 5px;
+    border: 1px solid $Primary300;
+}

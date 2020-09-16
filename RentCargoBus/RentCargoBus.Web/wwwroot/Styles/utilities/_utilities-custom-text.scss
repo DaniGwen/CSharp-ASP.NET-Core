@@ -1,0 +1,8 @@
+@import "../settings/_settings-colors.scss";
+
+.o-bold-title {
+    background-color: $Grey700;
+    color: $Secondary800 !important;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
