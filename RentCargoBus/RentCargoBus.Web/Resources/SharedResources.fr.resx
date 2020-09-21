@@ -252,11 +252,11 @@
   <data name="Plate number" xml:space="preserve">
     <value>Numéro de la plaque</value>
   </data>
-  <data name="Please provide Name and Email" xml:space="preserve">
-    <value>Veuillez fournir votre nom et votre adresse e-mail</value>
+  <data name="Please fill all fields" xml:space="preserve">
+    <value>Merci de compléter tous les champs</value>
   </data>
   <data name="Please use the provided phone number" xml:space="preserve">
-    <value>Veuillez utiliser le numéro de téléphone fourni.</value>
+    <value>Veuillez utiliser le numéro de téléphone fourni</value>
   </data>
   <data name="Price for a day" xml:space="preserve">
     <value>Prix ​​pour une journée</value>

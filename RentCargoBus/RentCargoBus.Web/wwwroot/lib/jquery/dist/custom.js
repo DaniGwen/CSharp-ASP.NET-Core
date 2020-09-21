@@ -124,7 +124,7 @@ function openModal(e) {
     })
 };
 
-//Send Email
+//User Sends Email
 $(function () {
     $('.vehicle-details__contact-us__send-email').on('click', function () {
         $('.send-email-modal').dialog("open");
@@ -136,7 +136,7 @@ $(function () {
             show: {
                 effect: "clip"
             },
-            height: 390,
+            height: 450,
             width: 580,
             modal: true,
             buttons: {
@@ -176,21 +176,35 @@ $(function () {
         var plate = $('.plate-number').text();
         var sender = $("#name").val();
         var senderEmail = $("#email").val();
+        var senderCountry = $("input[name='optradio']:checked").val();
 
         $.post({
             url: '/Home/SendEmail',
-            data: { 'brand': brand, 'model': model, 'plate': plate, 'sender': sender, 'senderEmail': senderEmail },
+            data: {
+                'brand': brand,
+                'model': model,
+                'plate': plate,
+                'sender': sender,
+                'senderEmail': senderEmail,
+                'senderCountry': senderCountry
+            },
             success: function (message) {
-                if (message.message.value.substring(0, 4) == "<h4>") {
+                if (message.message.substring(0, 7) == "Request") {
                     $('.send-email-modal').dialog('close');
-                    $('.send-email-modal__result').attr("title", "Success");
-                    $('.send-email-modal__result').html(message.message.value).css({
+                    $('.send-email-modal__result').dialog('option', 'title', 'Success');
+                    $('.send-email-modal__result').html(message.message).css({
                         textAlign: 'center',
+                        color: 'inherit',
+                        marginTop: '40px',
                     });
                 }
                 else {
-                    $('.send-email-modal__result').attr("title", "Error");
-                    $('.send-email-modal__result').html(message.message.value);
+                    $('.send-email-modal__result').dialog('option', 'title', 'Error');
+                    $('.send-email-modal__result').html(message.message).css({
+                        textAlign: 'center',
+                        color: 'red',
+                        marginTop: '40px',
+                    });
                 }
                 $('.send-email-modal__result').dialog("open");
             }

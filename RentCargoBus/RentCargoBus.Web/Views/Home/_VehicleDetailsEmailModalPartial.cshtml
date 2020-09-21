@@ -1,22 +1,37 @@
 ﻿<div class="send-email-modal" title=" @Localizer["Request vehicle"]">
     <section class="send-email-modal__container">
+
         <div>
             <small>
                 @Localizer["Send us Your details to request this vehicle and we will contact you"].
             </small>
         </div>
+
         <div class="send-email-modal__container__field">
             <label>
                 @Localizer["Your Name"]:
             </label>
             <input type="text" name="name" id="name" placeholder="Name.." />
         </div>
+
         <div class="send-email-modal__container__field">
             <label>
                 @Localizer["Your Email"]:
             </label>
             <input type="text" name="email" id="email" placeholder="Email.." />
         </div>
+
+        <div class="send-email-modal__container__field">
+            <label class="col-form-label">Please select:</label>
+            <label class="radio-inline mr-1">
+                <input type="radio" name="optradio" value="Europe" checked>Europe
+            </label>
+            <label class="radio-inline mr-1">
+                <input type="radio" name="optradio" value="Bulgaria">Bulgaria
+            </label>
+        </div>
     </section>
+
     <div class="send-email-modal__result" title="@Localizer["Message"]"></div>
+
 </div>

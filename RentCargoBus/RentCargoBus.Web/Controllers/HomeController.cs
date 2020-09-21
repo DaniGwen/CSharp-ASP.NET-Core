@@ -129,22 +129,37 @@ namespace RentCargoBus.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> SendEmail(string senderEmail, string sender, string brand, string model, string plate)
+        public async Task<IActionResult> SendEmail(string senderEmail,
+                                                   string sender,
+                                                   string brand,
+                                                   string model,
+                                                   string plate,
+                                                   string senderCountry)
         {
-            if (string.IsNullOrEmpty(senderEmail) || string.IsNullOrEmpty(sender))
+            if (string.IsNullOrEmpty(senderEmail) ||
+                string.IsNullOrEmpty(sender) ||
+                string.IsNullOrEmpty(senderCountry))
             {
-                return this.Json(new { message = this.localizer["Please provide Name and Email"] });
+                return this.Json(new { message = this.localizer["Please fill all fields"] + "." });
             }
 
             var response = await this.emailService
-                .SendEmail(senderEmail, sender, brand, model, plate);
+                .SendEmail(senderEmail, sender, brand, model, plate, senderCountry);
 
             if (response.StatusCode == HttpStatusCode.Accepted)
             {
-                return this.Json(new { message = this.localizer["Request send! Thank you."] });
+                return this.Json(new
+                {
+                    message =
+                    this.localizer["Request send"] + "!" + this.localizer[" Thank you"] + "."
+                });
             }
 
-            return this.Json(new { message = this.localizer["Could not send request...Please use the provided phone number. Thank you."] });
+            return this.Json(new
+            {
+                message =
+                this.localizer["Could not send request"] + "." + this.localizer[" Please use the provided phone number"] + "." + this.localizer[" Thank you"] + "."
+            });
         }
 
         public IActionResult Privacy()
