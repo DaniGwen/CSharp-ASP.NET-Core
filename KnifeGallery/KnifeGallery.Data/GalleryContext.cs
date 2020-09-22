@@ -1,9 +1,9 @@
-﻿using KnifeGallery.Data.Models;
+﻿using KniveGallery.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace KnifeGallery.Data
+namespace KniveGallery.Data
 {
     public class GalleryDbContext : IdentityDbContext<IdentityUser>
     {
@@ -11,7 +11,7 @@ namespace KnifeGallery.Data
         {
         }
 
-        public DbSet<Knife> Knifes { get; set; }
+        public DbSet<Knive> Knives { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

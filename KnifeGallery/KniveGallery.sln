@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnifeGallery.Web", "KnifeGallery\KnifeGallery.Web.csproj", "{3618E230-DF8B-40EF-A1B5-23522D5BEDAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KniveGallery.Web", "KnifeGallery\KniveGallery.Web.csproj", "{3618E230-DF8B-40EF-A1B5-23522D5BEDAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnifeGallery.Data", "KnifeGallery.Data\KnifeGallery.Data.csproj", "{8ECDDA27-7F0A-4C5F-B223-978F9746DB08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KniveGallery.Data", "KnifeGallery.Data\KniveGallery.Data.csproj", "{8ECDDA27-7F0A-4C5F-B223-978F9746DB08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnifeGallery.Data.Models", "KnifeGallery.Data.Models\KnifeGallery.Data.Models.csproj", "{5BB55E3C-579B-4C45-9672-9B825D0BD3BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KniveGallery.Data.Models", "KnifeGallery.Data.Models\KniveGallery.Data.Models.csproj", "{5BB55E3C-579B-4C45-9672-9B825D0BD3BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

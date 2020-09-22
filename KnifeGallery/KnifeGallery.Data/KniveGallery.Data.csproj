@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KnifeGallery.Data.Models\KnifeGallery.Data.Models.csproj" />
+    <ProjectReference Include="..\KnifeGallery.Data.Models\KniveGallery.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

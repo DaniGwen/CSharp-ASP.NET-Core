@@ -1,17 +1,15 @@
-using KnifeGallery.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Http;
+using KniveGallery.Data;
+using KniveGallery.Data.Models;
 
 namespace KnifeGallery
 {
@@ -33,7 +31,6 @@ namespace KnifeGallery
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<GalleryDbContext>();
 
-            services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -107,6 +104,11 @@ namespace KnifeGallery
                         {
                             SeedAdmin(context, serviceProvider);
                         }
+
+                        if (!context.Knives.Any())
+                        {
+                            SeedKnives(context);
+                        }
                     }
                 }
 
@@ -119,8 +121,8 @@ namespace KnifeGallery
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -128,29 +130,18 @@ namespace KnifeGallery
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
-
             app.UseCors("CorsPolicy");
 
-            app.UseSpa(spa =>
+            app.UseHttpsRedirection();
+
+            app.UseEndpoints(endpoints =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
+        // Seed
         private void SeedAdmin(GalleryDbContext context, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
@@ -166,6 +157,47 @@ namespace KnifeGallery
             };
 
             userManager.CreateAsync(user, password).Wait();
+        }
+        private void SeedKnives(GalleryDbContext context)
+        {
+            var knifes = new Knive[4]
+            {
+                new Knive
+                {
+                    HandleType = "plastic",
+                    EdgeLength = 6,
+                    BladeType = "Steel",
+                    Type = "Tanto blade",
+                    Price = 40,
+                },
+                new Knive
+                {
+                    HandleType = "Polimer",
+                    EdgeLength = 5.5,
+                    BladeType = "Steel",
+                    Type = "Straight blade",
+                    Price = 45,
+                },
+                new Knive
+                {
+                     HandleType = "Mixed alloy",
+                    EdgeLength = 7,
+                    BladeType = "Titanium",
+                    Type = "Jagged blade",
+                    Price = 70,
+                },
+                new Knive
+                {
+                    HandleType = "Elephant tusk",
+                    EdgeLength = 6.5,
+                    BladeType = "Stainless steel",
+                    Type = "Curved blade",
+                    Price = 85,
+                }
+            };
+
+            context.Knives.AddRangeAsync(knifes).Wait();
+            context.SaveChangesAsync().Wait();
         }
     }
 }
