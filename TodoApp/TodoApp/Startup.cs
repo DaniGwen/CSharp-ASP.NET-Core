@@ -37,11 +37,9 @@ namespace TodoApp
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddTransient<HttpClient>();
-            services.AddSingleton<WeatherForecastService>();
             services.AddTransient<ITaskService, TaskService>();
+
             services.AddHttpContextAccessor();
-            //services
-            //    .AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
 
             services.AddCors(options =>
             {
