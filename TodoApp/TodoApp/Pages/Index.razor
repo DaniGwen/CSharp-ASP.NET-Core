@@ -1,0 +1,61 @@
+﻿@page "/"
+@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject IHttpContextAccessor HttpContextAccessor
+
+<h1>Simple ToDo Application</h1>
+<hr />
+<AuthorizeView>
+    <Authorized>
+        @if (todoTasks.Count == 0)
+        {
+            <h3>No Tasks</h3>
+            <hr />
+            <NavLink class="btn btn-primary" href="addtask">Create new task</NavLink>
+        }
+        else
+        {
+            foreach (var task in todoTasks)
+            {
+                <div>
+                    <h3>@task.Title</h3>
+                    <button class="btn btn-outline-danger" @onclick="@(() => DeleteTask(task.TaskId))">Delete</button>
+                    <button class="btn btn-outline-warning" href="/edittask">Edit</button>
+                </div>
+                if (@task.Todos == null || task.Todos.Count == 0)
+                {
+                    <p>No ToDo's.</p>
+                }
+                else
+                {
+                    <p>@task.Todos.Count</p>
+                }
+            }
+        }
+    </Authorized>
+    <NotAuthorized>
+        <p>
+            Please <a href="Identity/Account/Register"><strong>Register</strong></a> or
+            <a href="Identity/Account/Login"><strong>Log in</strong></a>
+        </p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private List<TodoTask> todoTasks = new List<TodoTask>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (this.HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            string userId = this.HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            todoTasks = await this.Http.GetFromJsonAsync<List<TodoTask>>(this.Configuration["ApiUrl"] + "TodoApi/" + userId);
+        }
+    }
+
+    private void DeleteTask(int todoTaskId)
+    {
+        this.Http.DeleteAsync(this.Configuration["ApiUrl"] + "TodoTask" + todoTaskId);
+    }
+}

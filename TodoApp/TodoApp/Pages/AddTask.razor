@@ -1,0 +1,28 @@
+﻿@page "/addtask"
+@inject IHttpContextAccessor httpContextAccessor
+@inject HttpClient Http
+@inject IConfiguration Configuration
+
+<h3>Add new Task</h3>
+<hr />
+
+<EditForm Model="@TaskInputModel" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>Task name</label>
+    <input id="title" @bind="this.TaskInputModel.Title" />
+
+    <button type="submit">Save</button>
+</EditForm>
+
+@code{
+    private TaskInputModel TaskInputModel = new TaskInputModel();
+
+    private async Task Submit()
+    {
+        this.TaskInputModel.UserId =
+            this.httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+        await this.Http.PostAsJsonAsync<TaskInputModel>(this.Configuration["ApiUrl"] + "TodoTask", this.TaskInputModel);
+    }
+}
