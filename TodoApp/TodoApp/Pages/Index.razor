@@ -2,34 +2,87 @@
 @inject HttpClient Http
 @inject IConfiguration Configuration
 @inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager NavigationManager
 
 <h1>Simple ToDo Application</h1>
 <hr />
 <AuthorizeView>
     <Authorized>
+        <NavLink class="btn btn-primary" href="addtask">Create new task</NavLink>
+        <br />
         @if (todoTasks.Count == 0)
         {
             <h3>No Tasks</h3>
             <hr />
-            <NavLink class="btn btn-primary" href="addtask">Create new task</NavLink>
         }
         else
         {
+            <br />
+            <button class="btn btn-sm btn-secondary" @onclick="ToggleHidden">
+                Show/Hide Todo's
+            </button>
+            <hr />
             foreach (var task in todoTasks)
             {
-                <div>
+                <div class="form-group">
                     <h3>@task.Title</h3>
-                    <button class="btn btn-outline-danger" @onclick="@(() => DeleteTask(task.TaskId))">Delete</button>
-                    <button class="btn btn-outline-warning" href="/edittask">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteTask(task.TaskId)">
+                        Delete
+                    </button>
+                    <NavLink class="btn btn-sm btn-outline-info"
+                             @onclick="()=> { EditTaskTitle(task.TaskId, task.Title); }">
+                        Edit title
+                    </NavLink>
                 </div>
-                if (@task.Todos == null || task.Todos.Count == 0)
+                <hr />
+                if (hidden)
                 {
-                    <p>No ToDo's.</p>
+                    <button class="btn btn-sm btn-outline-info" @onclick="()=> { AddTodo(task.TaskId); }">
+                        Add Todo
+                    </button>
+                    <br />
+                    <br />
+                    if (todos.Where(t => t.TodoTaskId == task.TaskId).Count() == 0)
+                    {
+                        <p>No ToDo's.</p>
+                    }
+                    else
+                    {
+                        foreach (var todo in this.todos.Where(t => t.TodoTaskId == task.TaskId))
+                        {
+                            <div class="col">
+                                @if (todo.IsDone)
+                                {
+                                    <button class="btn btn-sm btn-success" @onclick="async () => {await SetTodoStatus(false, todo.TodoId); }">
+                                        Done
+                                    </button>
+                                    <span>@todo.Content</span>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-sm btn-light"
+                                            @onclick="async () => {await SetTodoStatus(true, todo.TodoId); }">
+                                        Pending
+                                    </button>
+                                    <span>@todo.Content</span>
+                                }
+                            </div>
+
+                            <div class="col">
+                                <NavLink class="text-danger"
+                                         @onclick="async ()=> { await DeleteTodo(todo.TodoId); } " href="">
+                                    Delete
+                                </NavLink>
+                                <NavLink class="text-primary"
+                                         @onclick="() => {EditTodo(todo.TodoId, todo.Content); }" href="">
+                                    Edit
+                                </NavLink>
+                            </div>
+                            <br />
+                        }
+                    }
                 }
-                else
-                {
-                    <p>@task.Todos.Count</p>
-                }
+                <hr />
             }
         }
     </Authorized>
@@ -44,18 +97,81 @@
 @code{
     private List<TodoTask> todoTasks = new List<TodoTask>();
 
+    private List<Todo> todos = new List<Todo>();
+
+    bool hidden = true;
+
     protected override async Task OnInitializedAsync()
     {
         if (this.HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
         {
-            string userId = this.HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = this.HttpContextAccessor
+                .HttpContext
+                .User
+                .FindFirst(ClaimTypes.NameIdentifier)
+                .Value;
 
-            todoTasks = await this.Http.GetFromJsonAsync<List<TodoTask>>(this.Configuration["ApiUrl"] + "TodoApi/" + userId);
+            var apiUrlTask = this.Configuration["ApiUrl"] + "TodoTask/" + userId;
+            var apiUrlTodo = this.Configuration["ApiUrl"] + "Todo/";
+
+            this.todoTasks = await this.Http.GetFromJsonAsync<List<TodoTask>>(apiUrlTask);
+            this.todos = await this.Http.GetFromJsonAsync<List<Todo>>(apiUrlTodo);
         }
     }
 
-    private void DeleteTask(int todoTaskId)
+    async Task DeleteTask(int todoTaskId)
     {
-        this.Http.DeleteAsync(this.Configuration["ApiUrl"] + "TodoTask" + todoTaskId);
+        var apiUrl = this.Configuration["ApiUrl"] + "TodoTask/" + todoTaskId;
+
+        await this.Http.DeleteAsync(apiUrl);
+
+        await OnInitializedAsync();
+    }
+
+    void ToggleHidden()
+    {
+        hidden = !hidden;
+    }
+
+    void EditTaskTitle(int taskId, string taskTitle)
+    {
+        this.NavigationManager.NavigateTo($"edittask/{taskId}/{taskTitle}");
+    }
+
+    void AddTodo(int taskId)
+    {
+        this.NavigationManager.NavigateTo($"addtodo/{taskId}");
+    }
+
+    async Task SetTodoStatus(bool isDone, int todoId)
+    {
+        var todo = this.todos.FirstOrDefault(t => t.TodoId == todoId);
+
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo";
+
+        if (isDone)
+        {
+            todo.IsDone = true;
+        }
+        else
+        {
+            todo.IsDone = false;
+        }
+
+        await this.Http.PutAsJsonAsync<Todo>(apiUrl, todo);
+    }
+
+    async Task DeleteTodo(int todoId)
+    {
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo/" + todoId;
+
+        await this.Http.DeleteAsync(apiUrl);
+
+        await this.OnInitializedAsync();
+    }
+
+    void EditTodo(int todoId, string content)
+    {
+        this.NavigationManager.NavigateTo($"/edittodo/{todoId}/{content}");
     }
 }

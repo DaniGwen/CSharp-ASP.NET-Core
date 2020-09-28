@@ -2,6 +2,7 @@
 @inject IHttpContextAccessor httpContextAccessor
 @inject HttpClient Http
 @inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
 
 <h3>Add new Task</h3>
 <hr />
@@ -9,10 +10,11 @@
 <EditForm Model="@TaskInputModel" OnValidSubmit="@Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <label>Task name</label>
-    <input id="title" @bind="this.TaskInputModel.Title" />
 
-    <button type="submit">Save</button>
+    <label class="">Task title</label>
+    <input class="" id="title" @bind="this.TaskInputModel.Title" />
+
+    <button class="btn btn-sm btn-primary" type="submit">Save</button>
 </EditForm>
 
 @code{
@@ -21,8 +23,16 @@
     private async Task Submit()
     {
         this.TaskInputModel.UserId =
-            this.httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            this.httpContextAccessor
+            .HttpContext
+            .User
+            .FindFirst(ClaimTypes.NameIdentifier)
+            .Value;
 
-        await this.Http.PostAsJsonAsync<TaskInputModel>(this.Configuration["ApiUrl"] + "TodoTask", this.TaskInputModel);
+        var apiUrl = this.Configuration["ApiUrl"] + "TodoTask";
+
+        await this.Http.PostAsJsonAsync<TaskInputModel>(apiUrl, this.TaskInputModel);
+
+        this.NavigationManager.NavigateTo("/");
     }
 }

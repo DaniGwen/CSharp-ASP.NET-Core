@@ -11,6 +11,8 @@ namespace TodoApp.Data.Models
         [Required]
         public string Content { get; set; }
 
+        public bool IsDone { get; set; } = false;
+
         [ForeignKey(nameof(TodoTask))]
         public int TodoTaskId { get; set; }
 

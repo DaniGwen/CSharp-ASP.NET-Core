@@ -18,13 +18,12 @@ namespace TodoApp.Controllers
             this.taskService = taskService;
         }
 
-        [Route("{userId}")]
-        [HttpGet]
-        public IActionResult GetAllTasks(string userId)
+        [HttpGet("{userId}")]
+        public ActionResult<IEnumerable<TodoTask>> GetAllTasks(string userId)
         {
             var todoTasks = this.taskService.GetAllTasks(userId);
 
-            return Ok(todoTasks);
+            return this.Ok(todoTasks);
         }
 
         [HttpPost]
@@ -34,7 +33,7 @@ namespace TodoApp.Controllers
             return Ok();
         }
 
-        
+
         [HttpPut]
         public IActionResult EditTask(TodoTask todoTask)
         {

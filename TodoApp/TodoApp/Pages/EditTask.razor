@@ -1,13 +1,33 @@
-﻿@page "/edittask"
+﻿@page "/edittask/{TaskId:int}/{Title}"
 @inject HttpClient Http
 @inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
 
-<h3>EditTask</h3>
-<button class="btn btn-primary" @onclick="@(() => EditTask(task))">Save</button>
+<h3>Edit task title</h3>
+<input name="title" @bind-value="Title" @bind-value:event="oninput" />
+<button class="btn btn-primary" @onclick="Submit">Save</button>
 
 @code {
-    private void EditTask(TodoTask task)
+    public TodoTask todoTask { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public int TaskId { get; set; }
+
+    async Task Submit()
     {
-        this.Http.PutAsJsonAsync<TodoTask>(this.Configuration["ApiUrl"] + "TodoTask", task);
+        var todoTask = new TodoTask
+        {
+            Title = this.Title,
+            TaskId = this.TaskId,
+        };
+
+        var apiUrl = this.Configuration["ApiUrl"] + "TodoTask";
+
+        await this.Http.PutAsJsonAsync<TodoTask>(apiUrl, todoTask);
+
+        this.NavigationManager.NavigateTo("/");
     }
 }

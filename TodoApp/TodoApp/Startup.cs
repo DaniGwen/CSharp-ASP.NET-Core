@@ -38,6 +38,7 @@ namespace TodoApp
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddTransient<HttpClient>();
             services.AddTransient<ITaskService, TaskService>();
+            services.AddTransient<ITodoService, TodoService>();
 
             services.AddHttpContextAccessor();
 
@@ -45,12 +46,9 @@ namespace TodoApp
             {
                 options.AddPolicy("MyPolicy", builder =>
                 {
-                    builder.WithOrigins("https://localhost:5001", "http://localhost:53719");
+                    builder.WithOrigins("http://localhost:53719");
                 });
             });
-
-            services.AddHttpContextAccessor();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -71,7 +69,6 @@ namespace TodoApp
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

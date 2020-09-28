@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,6 @@ namespace TodoApp.Services
             {
                 Title = task.Title,
                 UserId = task.UserId,
-                IsDone = false
             };
 
             await this.dbContext.TodoTasks.AddAsync(newTask);
@@ -36,17 +36,22 @@ namespace TodoApp.Services
 
         public async Task DeleteTask(int todoTaskId)
         {
-            var todoTask = await this.dbContext.TodoTasks.FindAsync(todoTaskId);
+            var todoTaskDb = this.dbContext
+                .TodoTasks
+                .SingleOrDefault(t => t.TaskId == todoTaskId);
 
-            this.dbContext.TodoTasks.Remove(todoTask);
+            this.dbContext.TodoTasks.Remove(todoTaskDb);
+
             await this.dbContext.SaveChangesAsync();
         }
 
         public async Task EditTask(TodoTask todoTask)
         {
-            var todoTaskDb = await this.dbContext.TodoTasks.FindAsync(todoTask.TaskId);
+            var todoTaskDb = this.dbContext
+                .TodoTasks
+                .SingleOrDefault(t => t.TaskId == todoTask.TaskId);
 
-            todoTaskDb = todoTask;
+            todoTaskDb.Title = todoTask.Title;
 
             await this.dbContext.SaveChangesAsync();
         }

@@ -1,0 +1,31 @@
+﻿@page "/addtodo/{taskId:int}"
+@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<h3>Add ToDo</h3>
+<EditForm Model="@todo" OnValidSubmit="Submit">
+    <div>
+        <textarea type="text" @bind="todo.Content" />
+    </div>
+    <hr />
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+@code {
+    public Todo todo { get; set; } = new Todo();
+
+    [Parameter]
+    public int taskId { get; set; }
+
+    async Task Submit()
+    {
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo";
+
+        this.todo.TodoTaskId = taskId;
+
+        await this.Http.PostAsJsonAsync<Todo>(apiUrl, todo);
+
+        this.NavigationManager.NavigateTo("/");
+    }
+}
