@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TodoApp.Data.Migrations
+namespace TodoApp.Migrations
 {
     public partial class init : Migration
     {
@@ -159,7 +159,6 @@ namespace TodoApp.Data.Migrations
                     TaskId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(nullable: false),
-                    IsDone = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -180,6 +179,7 @@ namespace TodoApp.Data.Migrations
                     TodoId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Content = table.Column<string>(nullable: false),
+                    IsDone = table.Column<bool>(nullable: false),
                     TodoTaskId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

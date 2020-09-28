@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.Data;
 
-namespace TodoApp.Data.Migrations
+namespace TodoApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -222,6 +222,9 @@ namespace TodoApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("TodoTaskId")
                         .HasColumnType("INTEGER");
 
@@ -236,9 +239,6 @@ namespace TodoApp.Data.Migrations
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsDone")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")

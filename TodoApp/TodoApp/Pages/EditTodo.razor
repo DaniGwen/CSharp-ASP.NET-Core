@@ -4,8 +4,11 @@
 @inject NavigationManager NavigationManager
 
 <h3>Edit Todo</h3>
-<textarea name="title" @bind-value="Content" @bind-value:event="oninput" />
-<button class="btn btn-primary" @onclick="Submit">Save</button>
+<div class="form-group col-7">
+    <label class="font-weight-bold">Content</label>
+    <textarea class="form-control" name="title" @bind-value="Content" @bind-value:event="oninput" rows="3" />
+</div>
+<button class="btn btn-sm btn-primary ml-3" @onclick="Submit">Save</button>
 
 @code {
     public Todo todo { get; set; }

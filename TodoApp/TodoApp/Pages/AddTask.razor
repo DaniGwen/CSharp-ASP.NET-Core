@@ -4,17 +4,17 @@
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
 
-<h3>Add new Task</h3>
+<h3>Add new ToDo list</h3>
 <hr />
-
 <EditForm Model="@TaskInputModel" OnValidSubmit="@Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <label class="">Task title</label>
-    <input class="" id="title" @bind="this.TaskInputModel.Title" />
-
-    <button class="btn btn-sm btn-primary" type="submit">Save</button>
+    <div class="form-group col-7">
+        <label class="font-weight-bold">Title</label>
+        <input type="text" class="form-control" @bind="this.TaskInputModel.Title">
+    </div>
+    <button class="btn btn-sm btn-primary ml-3" type="submit">Save</button>
 </EditForm>
 
 @code{

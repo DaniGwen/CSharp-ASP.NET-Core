@@ -18,7 +18,7 @@ namespace TodoApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
+        public ActionResult<IEnumerable<Todo>> GetTodos()
         {
             var todos = this.todoService.GetAllTodos();
 

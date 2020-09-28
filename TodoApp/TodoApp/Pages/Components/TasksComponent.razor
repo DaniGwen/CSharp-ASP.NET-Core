@@ -1,0 +1,42 @@
+﻿@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<div class="task-wrapper form-group">
+    <h4 class="task__title">@TodoTask.Title</h4>
+    <section class="task__links">
+        <NavLink class="link-small text-danger" @onclick="() => DeleteTask(TodoTask.TaskId)" href="">
+            Delete
+        </NavLink>
+        <NavLink class="link-small text-info" @onclick="()=> { EditTaskTitle(TodoTask.TaskId, TodoTask.Title); }" href="">
+            Edit title
+        </NavLink>
+    </section>
+</div>
+<hr />
+
+@code {
+    [Parameter]
+    public TodoTask TodoTask { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChanged { get; set; }
+
+    protected async Task DeleteTask(int todoTaskId)
+    {
+        var apiUrl = this.Configuration["ApiUrl"] + "TodoTask/" + todoTaskId;
+
+        await this.Http.DeleteAsync(apiUrl);
+
+        // Invokes method in parent component in order to refresh content
+        await this.OnChanged.InvokeAsync("info");
+    }
+
+    protected void EditTaskTitle(int taskId, string taskTitle)
+    {
+        this.NavigationManager.NavigateTo($"edittask/{taskId}/{taskTitle}");
+    }
+}

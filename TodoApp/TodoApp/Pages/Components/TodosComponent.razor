@@ -1,0 +1,102 @@
+﻿@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+@if (this.Todos.Where(t => t.TodoTaskId == TaskId).Count() == 0)
+{
+    <p>No ToDos..</p>
+}
+else
+{
+    <section class="to-do-container">
+        @foreach (var todo in this.Todos.Where(t => t.TodoTaskId == TaskId))
+        {
+            <div class="to-do-wrapper">
+                <article class="to-do">
+                    <section class="to-do__status">
+                        @if (todo.IsDone)
+                        {
+                            <button class="btn-custom btn btn-sm btn-success" @onclick="async () => {await SetTodoStatus(false, todo.TodoId); }">
+                                Done
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn-custom btn-custom--pending btn btn-sm"
+                                    @onclick="async () => {await SetTodoStatus(true, todo.TodoId); }">
+                                Pending
+                            </button>
+                        }
+                    </section>
+                    <section class="to-do__links">
+                        <NavLink class="link-small text-info"
+                                 @onclick="() => {EditTodo(todo.TodoId, todo.Content); }" href="">
+                            Edit content
+                        </NavLink>
+                        <NavLink class="link-small text-danger"
+                                 @onclick="async ()=> { await DeleteTodo(todo.TodoId); } " href="">
+                            Delete
+                        </NavLink>
+                    </section>
+                </article>
+                @if (todo.IsDone)
+                {
+                    <p class="to-do__content to-do__content--is-done">@todo.Content</p>
+                }
+                else
+                {
+                    <p class="to-do__content">@todo.Content</p>
+                }
+            </div>
+        }
+    </section>
+}
+
+@code {
+    private List<Todo> Todos = new List<Todo>();
+
+    [Parameter]
+    public int TaskId { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo";
+
+        this.Todos = await this.Http.GetFromJsonAsync<List<Todo>>(apiUrl);
+    }
+
+    protected async Task SetTodoStatus(bool isDone, int todoId)
+    {
+        var todo = this.Todos.FirstOrDefault(t => t.TodoId == todoId);
+
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo";
+
+        if (isDone)
+        {
+            todo.IsDone = true;
+        }
+        else
+        {
+            todo.IsDone = false;
+        }
+
+        await this.Http.PutAsJsonAsync<Todo>(apiUrl, todo);
+    }
+
+    protected async Task DeleteTodo(int todoId)
+    {
+        var apiUrl = this.Configuration["ApiUrl"] + "Todo/" + todoId;
+
+        await this.Http.DeleteAsync(apiUrl);
+
+        await this.OnInitializedAsync();
+    }
+
+    protected void EditTodo(int todoId, string content)
+    {
+        this.NavigationManager.NavigateTo($"/edittodo/{todoId}/{content}");
+    }
+}

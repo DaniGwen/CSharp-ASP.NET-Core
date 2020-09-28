@@ -3,9 +3,13 @@
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
 
-<h3>Edit task title</h3>
-<input name="title" @bind-value="Title" @bind-value:event="oninput" />
-<button class="btn btn-primary" @onclick="Submit">Save</button>
+<h3>Edit ToDo list</h3>
+<hr />
+<div class="form-group col-7">
+    <label class="font-weight-bold">Title</label>
+    <input type="text" class="form-control" @bind-value="Title" @bind-value:event="oninput">
+</div>
+<button class="btn btn-sm btn-primary ml-3" @onclick="Submit">Save</button>
 
 @code {
     public TodoTask todoTask { get; set; }
