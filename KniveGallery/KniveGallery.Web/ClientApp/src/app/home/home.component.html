@@ -1,0 +1,39 @@
+<div class="home-container" >
+  <article>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Category
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="home__knives-wrapper">
+    <section *ngFor="let knive of knives">
+      <div class="card text-white bg-info mb-3" style="max-width: 24rem;">
+        <img src="assets/images/default.jpg" class="card-img-top" alt="image">
+        <div class="card-header">{{knive.kniveName}}</div>
+        <div class="card-body">
+          <h5 class="card-title">Type: {{knive.type}}</h5>
+          <p class="card-text">Total length: {{knive.length}}</p>
+          <p class="card-text">Edge length: {{knive.edgeLength}}</p>
+          <p class="card-text">Handle type: {{knive.handleType}}</p>
+          <p class="card-text">Blade made: {{knive.bladeType}}</p>
+          <h4 class="card-title">Price: {{knive.price}}</h4>
+
+          <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
+            <button class="btn btn-sm btn-outline-secondary">edit</button>
+            <button class="btn btn-sm btn-outline-danger">delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+</div>
