@@ -1,4 +1,4 @@
-<div class="home-container" >
+<div class="home-container">
   <article>
     <div class="btn-group">
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,7 +17,10 @@
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">
       <div class="card text-white bg-info mb-3" style="max-width: 24rem;">
-        <img src="assets/images/default.jpg" class="card-img-top" alt="image">
+        <div class="home__image-wrapper">
+          <img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/{{knive.imagePath}}' alt="image">
+          <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg" alt="default image" />
+        </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
           <h5 class="card-title">Type: {{knive.type}}</h5>

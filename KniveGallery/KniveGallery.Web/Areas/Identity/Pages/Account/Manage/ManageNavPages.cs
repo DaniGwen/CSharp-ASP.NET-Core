@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KniveGallery.Web.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {
+        public static string AddKnive => "AddKnive";
+
         public static string Index => "Index";
 
         public static string Email => "Email";
@@ -24,6 +23,8 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
+        public static string AddKniveNavClass(ViewContext viewContext) => PageNavClass(viewContext, AddKnive);
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
@@ -34,11 +35,7 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account.Manage
 
         public static string DeletePersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, DeletePersonalData);
 
-        public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
-
         public static string PersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, PersonalData);
-
-        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {

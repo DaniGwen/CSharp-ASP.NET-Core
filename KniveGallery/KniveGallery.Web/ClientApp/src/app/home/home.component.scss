@@ -16,3 +16,13 @@
     grid-template-columns: 100px 100px;
     grid-column-gap: 10px;
 }
+
+.home__image-wrapper{
+    width:inherit;
+    height: auto;
+
+    &__img{
+        width: inherit;
+        height:inherit;
+    }
+}

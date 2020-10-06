@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Knive } from '../../Models/knive';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,10 @@ export class HomeComponent implements OnInit {
   imagePath: string;
   public isAuthenticated: Observable<boolean>;
 
-  constructor(private authorizeService: AuthorizeService,public http: HttpClient, private knivesService: KnivesService) { }
+  constructor(private authorizeService: AuthorizeService,
+    public http: HttpClient,
+    private knivesService: KnivesService,
+    private sanitize: DomSanitizer) { }
 
   public ngOnInit() {
     this.knivesService.getAllknives().subscribe((data: any) => {

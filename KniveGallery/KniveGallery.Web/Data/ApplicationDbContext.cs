@@ -15,5 +15,7 @@ namespace KniveGallery.Web.Data
         }
 
         public DbSet<Knive> Knives { get; set; }
+
+        public DbSet<KniveImage> Images { get;set; }
     }
 }

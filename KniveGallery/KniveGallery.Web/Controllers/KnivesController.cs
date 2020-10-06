@@ -23,6 +23,18 @@ namespace KniveGallery.Web.Controllers
         public async Task<ActionResult<IEnumerable<Knive>>> GetKnives()
         {
             var knives = await _context.Knives.ToArrayAsync();
+            var images = await this._context.Images.ToListAsync();
+
+            foreach (var knive in knives)
+            {
+              var image = images.FirstOrDefault(i => i.KniveId == knive.KniveId);
+
+                if (image != null)
+                {
+                    knive.ImagePath = image.ImagePath;
+                }
+            }
+
             return Ok(knives);
         }
 

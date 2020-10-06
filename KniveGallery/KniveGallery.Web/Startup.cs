@@ -87,7 +87,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        context.Database.EnsureDeletedAsync().Wait();
+                        //context.Database.EnsureDeletedAsync().Wait();
                         context.Database.EnsureCreatedAsync().Wait();
 
                         if (!context.Users.Any())
@@ -175,8 +175,8 @@ namespace KniveGallery.Web
                     KniveName = "The Rush",
                     HandleType = "plastic",
                     EdgeLength = 6,
-                    BladeType = "Steel",
-                    Type = "Tanto blade",
+                    BladeMade = "Steel",
+                    BladeType = "Tanto blade",
                     Price = 40,
                 },
                 new Knive
@@ -184,8 +184,8 @@ namespace KniveGallery.Web
                     KniveName="Stealthy",
                     HandleType = "Polimer",
                     EdgeLength = 5.5,
-                    BladeType = "Steel",
-                    Type = "Straight blade",
+                    BladeMade = "Steel",
+                    BladeType = "Straight blade",
                     Price = 45,
                 },
                 new Knive
@@ -193,8 +193,8 @@ namespace KniveGallery.Web
                     KniveName="The Tough",
                      HandleType = "Mixed alloy",
                     EdgeLength = 7,
-                    BladeType = "Titanium",
-                    Type = "Jagged blade",
+                    BladeMade = "Titanium",
+                    BladeType = "Jagged blade",
                     Price = 70,
                 },
                 new Knive
@@ -202,8 +202,8 @@ namespace KniveGallery.Web
                     KniveName = "Curvy",
                     HandleType = "Elephant tusk",
                     EdgeLength = 6.5,
-                    BladeType = "Stainless steel",
-                    Type = "Curved blade",
+                    BladeMade = "Stainless steel",
+                    BladeType = "Curved blade",
                     Price = 85,
                 },
                  new Knive
@@ -211,8 +211,8 @@ namespace KniveGallery.Web
                      KniveName= "Straight cut",
                     HandleType = "plastic",
                     EdgeLength = 12,
-                    BladeType = "Steel",
-                    Type = "Tanto blade",
+                    BladeMade = "Steel",
+                    BladeType = "Tanto blade",
                     Price = 90,
                 },
                 new Knive
@@ -220,8 +220,8 @@ namespace KniveGallery.Web
                     KniveName="Long and sharp",
                     HandleType = "Polimer + Plastic",
                     EdgeLength = 10.5,
-                    BladeType = "Steel",
-                    Type = "Straight blade",
+                    BladeMade = "Steel",
+                    BladeType = "Straight blade",
                     Price = 90,
                 },
                 new Knive
@@ -229,8 +229,8 @@ namespace KniveGallery.Web
                     KniveName = "Pointy",
                     HandleType = "Mixed alloy",
                     EdgeLength = 7.5,
-                    BladeType = "Titanium",
-                    Type = "Jagged blade",
+                    BladeMade = "Titanium",
+                    BladeType = "Jagged blade",
                     Price = 70,
                 },
                 new Knive
@@ -238,8 +238,8 @@ namespace KniveGallery.Web
                     KniveName = "Blood rain",
                     HandleType = "Elephant tusk",
                     EdgeLength = 6.5,
-                    BladeType = "Stainless steel",
-                    Type = "Curved blade",
+                    BladeMade = "Stainless steel",
+                    BladeType = "Curved blade",
                     Price = 130,
                 }
             };

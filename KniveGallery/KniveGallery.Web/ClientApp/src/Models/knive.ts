@@ -1,4 +1,4 @@
-export interface Knive {
+export class Knive {
   kniveId: number;
   kniveName: string;
   type: string;
@@ -7,4 +7,5 @@ export interface Knive {
   handleType: string;
   bladeType: string;
   price: number;
+  imagePath: string;
 }
