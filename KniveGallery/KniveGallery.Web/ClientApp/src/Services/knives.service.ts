@@ -20,6 +20,10 @@ export class KnivesService {
     return this.http.get(this.Url);
   }
 
+  getKniveById(kniveId: number) {
+    return this.http.get(this.Url + "/" + kniveId);
+  }
+
   public get() {
     return this.http.get(this.Url);
   }

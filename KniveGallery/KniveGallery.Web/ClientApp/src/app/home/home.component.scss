@@ -1,8 +1,13 @@
-.home-container{
-    display: grid;
-    grid-auto-columns: max-content;
-    grid-row-gap: 30px;
+.home-container {
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-row-gap: 30px;
 }
+
+.home__category-btn {
+  margin-right: 20px;
+}
+
 .home__knives-wrapper {
   display: grid;
   grid-auto-rows: max-content;
@@ -11,18 +16,18 @@
   grid-column-gap: 30px;
 }
 
-.home__knives__card-admin{
-    display:grid;
-    grid-template-columns: 100px 100px;
-    grid-column-gap: 10px;
+.home__knives__card-admin {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-column-gap: 10px;
 }
 
-.home__image-wrapper{
-    width:inherit;
-    height: auto;
+.home__image-wrapper {
+  width: inherit;
+  height: auto;
 
-    &__img{
-        width: inherit;
-        height:inherit;
-    }
+  &__img {
+    width: inherit;
+    height: inherit;
+  }
 }
