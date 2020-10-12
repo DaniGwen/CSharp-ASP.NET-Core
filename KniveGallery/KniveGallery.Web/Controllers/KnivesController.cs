@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KniveGallery.Web.Data;
+using KniveGallery.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,23 +17,25 @@ namespace KniveGallery.Web.Controllers
     [ApiController]
     public class KnivesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
+        private readonly IWebHostEnvironment hostEnvironment;
 
-        public KnivesController(ApplicationDbContext context)
+        public KnivesController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
-            _context = context;
+            this.context = context;
+            this.hostEnvironment = hostEnvironment;
         }
 
         // GET: api/Knives
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Knive>>> GetKnives()
         {
-            var knives = await _context.Knives.ToArrayAsync();
-            var images = await this._context.Images.ToListAsync();
+            var knives = await context.Knives.ToArrayAsync();
+            var images = await this.context.Images.ToListAsync();
 
             foreach (var knive in knives)
             {
-              var image = images.FirstOrDefault(i => i.KniveId == knive.KniveId);
+                var image = images.FirstOrDefault(i => i.KniveId == knive.KniveId);
 
                 if (image != null)
                 {
@@ -42,7 +50,7 @@ namespace KniveGallery.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Knive>> GetKnive(int id)
         {
-            var knive = await _context.Knives.FindAsync(id);
+            var knive = await context.Knives.FindAsync(id);
 
             if (knive == null)
             {
@@ -52,9 +60,7 @@ namespace KniveGallery.Web.Controllers
             return knive;
         }
 
-        // PUT: api/Knives/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutKnife(int id, Knive knive)
         {
@@ -63,11 +69,11 @@ namespace KniveGallery.Web.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(knive).State = EntityState.Modified;
+            context.Entry(knive).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,37 +90,86 @@ namespace KniveGallery.Web.Controllers
             return NoContent();
         }
 
-        // POST: api/Knives
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Knive>> PostKnife(Knive knive)
         {
-            _context.Knives.Add(knive);
-            await _context.SaveChangesAsync();
+            context.Knives.Add(knive);
+            await context.SaveChangesAsync();
 
             return CreatedAtAction("GetKnife", new { id = knive.KniveId }, knive);
         }
 
-        // DELETE: api/Knives/5
+        [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Knive>> DeleteKnife(int id)
+        public async Task<IActionResult> DeleteKnife(int id)
         {
-            var knive = await _context.Knives.FindAsync(id);
+            var knive = await context.Knives.FindAsync(id);
             if (knive == null)
             {
                 return NotFound();
             }
 
-            _context.Knives.Remove(knive);
-            await _context.SaveChangesAsync();
+            context.Knives.Remove(knive);
+            await context.SaveChangesAsync();
 
-            return knive;
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("AddImage/{kniveId}")]
+        public async Task<IActionResult> AddImage(int kniveId)
+        {
+            var image = this.Request.Form.Files[0];
+
+            await this.ProcessImage(image, kniveId);
+
+            return Ok();
+        }
+
+        [Route("AllKniveImages/{kniveId}")]
+        [HttpGet]
+        public async Task<IActionResult> AllKniveImages(int kniveId)
+        {
+            var images = this.context.Images
+                .Where(i => i.KniveId == kniveId)
+                .Select(i => new
+                {
+                    imagePath = i.ImagePath,
+                })
+                .ToList();
+
+            return this.Ok(images);
         }
 
         private bool KniveExists(int id)
         {
-            return _context.Knives.Any(e => e.KniveId == id);
+            return this.context.Knives.Any(e => e.KniveId == id);
+        }
+
+        private async Task ProcessImage(IFormFile image, int kniveId)
+        {
+            Knive knive = await this.context.Knives.FindAsync(kniveId);
+
+            var newImage = new KniveImage();
+
+            // Save image to wwwroot / image
+            string clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets/images/";
+            string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+            string extension = Path.GetExtension(image.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            string path = Path.Combine(clientAppAssets, fileName);
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await image.CopyToAsync(fileStream);
+            }
+
+            newImage.ImagePath = fileName;
+            knive.Images.Add(newImage);
+
+            await this.context.SaveChangesAsync();
         }
     }
 }

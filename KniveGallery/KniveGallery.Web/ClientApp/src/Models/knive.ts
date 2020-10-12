@@ -1,6 +1,6 @@
 export class Knive {
-  kniveId: number;
   kniveName: string;
+  kniveId: number;
   length: number;
   edgeLength: number;
   handleType: string;

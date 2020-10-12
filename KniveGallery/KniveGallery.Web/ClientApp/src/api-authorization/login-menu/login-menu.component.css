@@ -1,0 +1,7 @@
+.nav-admin {
+    transition: linear 0.1s;
+}
+
+.nav-admin:hover{
+    transform: scale(0.9);
+}

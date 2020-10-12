@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css");
+
 .home-container {
   display: grid;
   grid-auto-columns: max-content;
@@ -20,6 +22,7 @@
   display: grid;
   grid-template-columns: 100px 100px;
   grid-column-gap: 10px;
+  justify-content: center;
 }
 
 .home__image-wrapper {
@@ -30,4 +33,27 @@
     width: inherit;
     height: inherit;
   }
+}
+
+.btn-custom {
+  border-radius: 5px;
+  background-color: deepskyblue;
+  color: white;
+  padding: 2px 0px;
+  transition: ease-out 0.1s;
+  transform: scale(0.8);
+  font-weight: 600;
+
+  &:hover {
+    transform: scale(0.7);
+  }
+}
+
+.card-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.card-header {
+  text-align: center;
 }

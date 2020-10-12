@@ -1,9 +1,22 @@
-<div class="card-header">{{knive.kniveName}}</div>
-<h5 class="card-title">Type: {{knive.bladeType}}</h5>
-<p class="card-text">Total length: {{knive.length}}</p>
-<p class="card-text">Edge length: {{knive.edgeLength}}</p>
-<p class="card-text">Handle type: {{knive.handleType}}</p>
-<p class="card-text">Blade made: {{knive.bladeMade}}</p>
-<h4 class="card-title">Price: {{knive.price}}</h4>
+<h3 class="knive-title">{{knive.kniveName}}</h3>
 
+<article class="container">
+  <section class="knive-details">
+    <p class="">Type: {{knive.bladeType}}</p>
+    <p class="">Total length: {{knive.length}}</p>
+    <p class="">Edge length: {{knive.edgeLength}}</p>
+    <p class="">Handle type: {{knive.handleType}}</p>
+    <p class="">Blade made: {{knive.bladeMade}}</p>
+    <h4 class="">Price: {{knive.price}}</h4>
+  </section>
+
+  <section class="knive-details__images" *ngIf="kniveImages">
+    <div *ngFor="let image of kniveImages">
+      <div class="images__image-wrapper">
+        <img class="image-wrapper__image" src="../../assets/images/{{image.imagePath}}" alt="knive image">
+      </div>
+    </div>
+  </section>
+</article>
+<hr />
 <a href="" [routerLink]="['/']">back</a>

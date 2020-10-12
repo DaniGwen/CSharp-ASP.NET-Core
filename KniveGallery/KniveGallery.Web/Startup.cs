@@ -12,6 +12,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace KniveGallery.Web
 {
@@ -49,10 +50,11 @@ namespace KniveGallery.Web
 
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
+                options.AddPolicy("AllowSpecific", policyBuilder =>
+                policyBuilder
+                .WithOrigins("https://localhost:44379")
+                .AllowAnyMethod()
+                .AllowAnyHeader());
             });
 
             services.Configure<IdentityOptions>(options =>
@@ -76,6 +78,12 @@ namespace KniveGallery.Web
                 options.User.RequireUniqueEmail = true;
 
                 options.SignIn.RequireConfirmedEmail = false;
+            });
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
             });
         }
 
@@ -113,6 +121,7 @@ namespace KniveGallery.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -120,11 +129,12 @@ namespace KniveGallery.Web
 
             app.UseRouting();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowSpecific");
 
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -13,20 +13,26 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class HomeComponent implements OnInit {
-  knives: Knive[];
+  public knives: Knive[];
   imagePath: string;
   public isAuthenticated: Observable<boolean>;
 
   constructor(private authorizeService: AuthorizeService,
     public http: HttpClient,
-    private knivesService: KnivesService,
-    private sanitize: DomSanitizer) { }
+    private knivesService: KnivesService) { }
 
   public ngOnInit() {
-    this.knivesService.getAllknives().subscribe((data: any) => {
+    this.knivesService.getAllknives()
+      .subscribe((data: any) => {
       this.knives = data;
     });
 
     this.isAuthenticated = this.authorizeService.isAuthenticated();
+  }
+
+  deleteKnive(kniveId: number) {
+    this.knivesService.removeKnive(kniveId).subscribe(data => {
+      this.ngOnInit();
+    });
   }
 }

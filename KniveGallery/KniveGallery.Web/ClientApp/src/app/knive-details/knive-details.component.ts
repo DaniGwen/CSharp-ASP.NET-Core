@@ -12,7 +12,8 @@ import { Knive } from '../../Models/knive';
 export class KniveDetailsComponent {
 
   kniveId: any;
-  knive: Knive;
+  knive = new Knive();
+  kniveImages: string[];
 
   constructor(private route: ActivatedRoute,
     private knivesService: KnivesService) { }
@@ -22,8 +23,12 @@ export class KniveDetailsComponent {
       this.kniveId = params.get('id');
 
       this.knivesService.getKniveById(this.kniveId).subscribe((data: any) => {
-        this.knive = data
+        this.knive = data;
       })
+
+      this.knivesService.getKniveImages(this.kniveId).subscribe((data: any)=>{
+        this.kniveImages = data;
+      });
     });
   }
 }

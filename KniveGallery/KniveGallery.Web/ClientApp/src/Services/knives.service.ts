@@ -1,9 +1,6 @@
-import { Injectable, Component, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Knive } from '../Models/knive';
-import { from, Observable, throwError } from 'rxjs';
-
-import { map, catchError } from 'rxjs/operators';
+import { ImageFile } from '../Models/imageFile';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 
 export class KnivesService {
 
-  private headers: HttpHeaders;
+  private headers = new HttpHeaders();
   Url = 'https://localhost:44379/api/knives';
 
   constructor(private http: HttpClient) { }
@@ -21,7 +18,7 @@ export class KnivesService {
   }
 
   getKniveById(kniveId: number) {
-    return this.http.get(this.Url + "/" + kniveId);
+    return this.http.get(`${this.Url}/${kniveId}`);
   }
 
   public get() {
@@ -32,11 +29,19 @@ export class KnivesService {
     return this.http.post(this.Url, knive, { headers: this.headers });
   }
 
-  public remove(knive) {
-    return this.http.delete(this.Url + '/' + knive.id, { headers: this.headers });
+  public removeKnive(kniveId) {
+    return this.http.delete(`${this.Url}/${kniveId}`, { headers: this.headers });
   }
 
-  public update(knive) {
-    return this.http.put(this.Url + '/' + knive.id, { headers: this.headers });
+  public updateKnive(knive) {
+    return this.http.put(`${this.Url}/${knive.kniveId}`, knive, { headers: this.headers });
+  }
+
+  public uploadImage(form: FormData, kniveId: number) {
+    return this.http.post(`${this.Url}/AddImage/${kniveId}`, form, { headers: this.headers });
+  }
+
+  public getKniveImages(kniveId: number) {
+    return this.http.get(`${this.Url}/AllKniveImages/${kniveId}`, { headers: this.headers });
   }
 }

@@ -5,6 +5,10 @@
     <button class="home__category-btn btn btn-primary">category 1</button>
   </article>
 
+  <section *ngIf="!knives?.length">
+    <h5>No knives in this category...</h5>
+  </section>
+
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">
       <div class="card text-white bg-info mb-3" [routerLink]="['/knive-details', knive.kniveId]" routerLinkActive="active" style="max-width: 24rem;">
@@ -16,12 +20,11 @@
         <div class="card-body">
           <h5 class="card-title">Type: {{knive.bladeType}}</h5>
           <h4 class="card-title">Price: {{knive.price}}</h4>
-
-          <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
-            <button class="btn btn-sm btn-outline-secondary">edit</button>
-            <button class="btn btn-sm btn-outline-danger">delete</button>
-          </div>
         </div>
+      </div>
+      <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
+        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">edit <i class="far fa-edit"></i></button>
+        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">delete <i class="far fa-trash-alt"></i></button>
       </div>
     </section>
   </article>

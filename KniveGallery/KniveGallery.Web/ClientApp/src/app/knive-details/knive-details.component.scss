@@ -1,1 +1,45 @@
-﻿
+.container {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 20px;
+}
+
+.knive-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.knive-details {
+  display: grid;
+  grid-template-rows: auto;
+  grid-auto-rows: max-content;
+  grid-row-gap: 10px;
+  align-content: baseline;
+}
+
+.knive-details__images {
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  grid-template-rows: auto;
+  grid-auto-rows: max-content;
+  grid-row-gap: 30px;
+  grid-column-gap: 15px;
+  text-align: center;
+}
+
+.images__image-wrapper {
+  width: 300px;
+  height: 170px;
+  overflow: hidden;
+  transition: linear 0.2s;
+
+  &:hover {
+    transform: scale(2);
+  }
+}
+
+.image-wrapper__image {
+  max-width: inherit;
+  height: inherit;
+  border-radius: 10px;
+}
