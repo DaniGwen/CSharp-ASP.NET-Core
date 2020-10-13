@@ -18,6 +18,15 @@
   grid-column-gap: 30px;
 }
 
+.card {
+  transition: linear 0.1s;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 3px 4px 17px 0px rgba(0,0,0,0.75);
+  }
+}
+
 .home__knives__card-admin {
   display: grid;
   grid-template-columns: 100px 100px;
@@ -27,7 +36,7 @@
 
 .home__image-wrapper {
   width: inherit;
-  height: auto;
+  height: 180px;
 
   &__img {
     width: inherit;
@@ -56,4 +65,9 @@
 
 .card-header {
   text-align: center;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
 }

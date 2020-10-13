@@ -10,6 +10,7 @@
     <h4 class="">Price: {{knive.price}}</h4>
   </section>
 
+  <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length">No images..</h5>
   <section class="knive-details__images" *ngIf="kniveImages">
     <div *ngFor="let image of kniveImages">
       <div class="knive-details__image-wrapper">
