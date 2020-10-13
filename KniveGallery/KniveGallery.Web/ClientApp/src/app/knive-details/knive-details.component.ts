@@ -26,7 +26,7 @@ export class KniveDetailsComponent {
         this.knive = data;
       })
 
-      this.knivesService.getKniveImages(this.kniveId).subscribe((data: any)=>{
+      this.knivesService.getKniveImages(this.kniveId).subscribe((data: any) => {
         this.kniveImages = data;
       });
     });

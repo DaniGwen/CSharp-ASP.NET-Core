@@ -12,11 +12,16 @@
 
   <section class="knive-details__images" *ngIf="kniveImages">
     <div *ngFor="let image of kniveImages">
-      <div class="images__image-wrapper">
-        <img class="image-wrapper__image" src="../../assets/images/{{image.imagePath}}" alt="knive image">
+      <div class="knive-details__image-wrapper">
+        <img class="knive-details__image" onclick="openModal(this)" src="../../assets/images/{{image.imagePath}}" alt="knive image">
       </div>
     </div>
   </section>
 </article>
 <hr />
 <a href="" [routerLink]="['/']">back</a>
+
+<div class="knive-details__image-enlarge">
+  <span class="knive-details__image-enlarge__close">&times;</span>
+  <img class="knive-details__image-enlarge__image" src="" alt="knive image" />
+</div>
