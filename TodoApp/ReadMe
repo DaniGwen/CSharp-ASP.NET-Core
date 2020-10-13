@@ -1,0 +1,7 @@
+Simple To-Do application.
+
+Build with ASP.Net Core 3 and BLAZOR
+
+Users can login in order to save their todos.
+
+Users can create, edit, delete and set to "done" their todos.
