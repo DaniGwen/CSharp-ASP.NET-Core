@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Knive } from '../../Models/knive';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +16,16 @@ export class HomeComponent implements OnInit {
   imagePath: string;
   public isAuthenticated: Observable<boolean>;
 
-  constructor(private authorizeService: AuthorizeService,
+  constructor(
+    private authorizeService: AuthorizeService,
     public http: HttpClient,
     private knivesService: KnivesService) { }
 
   public ngOnInit() {
     this.knivesService.getAllknives()
       .subscribe((data: any) => {
-      this.knives = data;
-    });
+        this.knives = data;
+      });
 
     this.isAuthenticated = this.authorizeService.isAuthenticated();
   }
@@ -33,6 +33,13 @@ export class HomeComponent implements OnInit {
   deleteKnive(kniveId: number) {
     this.knivesService.removeKnive(kniveId).subscribe(data => {
       this.ngOnInit();
+    });
+  }
+
+  getKnivesByClass(kniveClass: string) {
+    this.knivesService.getKnivesByClass(kniveClass)
+    .subscribe((data: any) => {
+      this.knives = data;
     });
   }
 }

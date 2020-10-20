@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KniveGallery.Web.Data;
 using KniveGallery.Web.Models;
+using KniveGallery.Web.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -42,6 +43,19 @@ namespace KniveGallery.Web.Controllers
                     knive.ImagePath = image.ImagePath;
                 }
             }
+
+            return Ok(knives);
+        }
+
+        [Route("KniveClass/{kniveClass}")]
+        [HttpGet]
+        public async Task<IActionResult> GetKnivesByClass(string kniveClass)
+        {
+            var kniveType = (KniveType)Enum.Parse(typeof(KniveType), kniveClass);
+
+            var knives = this.context.Knives
+                .Where(knive => knive.KniveType == kniveType)
+                .ToList();
 
             return Ok(knives);
         }

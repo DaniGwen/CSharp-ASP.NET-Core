@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
+using KniveGallery.Web.Models.Enums;
 
 namespace KniveGallery.Web
 {
@@ -80,7 +81,8 @@ namespace KniveGallery.Web
                 options.SignIn.RequireConfirmedEmail = false;
             });
 
-            services.Configure<FormOptions>(o => {
+            services.Configure<FormOptions>(o =>
+            {
                 o.ValueLengthLimit = int.MaxValue;
                 o.MultipartBodyLengthLimit = int.MaxValue;
                 o.MemoryBufferThreshold = int.MaxValue;
@@ -188,6 +190,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Tanto blade",
                     Price = 40,
+                    KniveType = KniveType.HighClass,
                 },
                 new Knive
                 {
@@ -197,6 +200,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Straight blade",
                     Price = 45,
+                    KniveType = KniveType.MiddleClass,
                 },
                 new Knive
                 {
@@ -206,6 +210,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     BladeType = "Jagged blade",
                     Price = 70,
+                    KniveType = KniveType.HighClass,
                 },
                 new Knive
                 {
@@ -215,6 +220,7 @@ namespace KniveGallery.Web
                     BladeMade = "Stainless steel",
                     BladeType = "Curved blade",
                     Price = 85,
+                    KniveType = KniveType.KitchenClass,
                 },
                  new Knive
                 {
@@ -224,6 +230,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Tanto blade",
                     Price = 90,
+                    KniveType = KniveType.MiddleClass,
                 },
                 new Knive
                 {
@@ -233,6 +240,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Straight blade",
                     Price = 90,
+                    KniveType = KniveType.HighClass,
                 },
                 new Knive
                 {
@@ -242,6 +250,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     BladeType = "Jagged blade",
                     Price = 70,
+                    KniveType = KniveType.KitchenClass,
                 },
                 new Knive
                 {
@@ -251,6 +260,7 @@ namespace KniveGallery.Web
                     BladeMade = "Stainless steel",
                     BladeType = "Curved blade",
                     Price = 130,
+                    KniveType = KniveType.HighClass,
                 }
             };
 

@@ -1,47 +1,47 @@
 <form #formValidation (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label>Knive name</label>
+        <label i18n>Knive name</label>
         <input name="knive.kniveName" required [(ngModel)]="knive.kniveName"   class="form-control form-control-sm" autofocus />
     </div>
 
     <div class="form-group">
-        <label>Blade type</label>
+        <label i18n>Blade type</label>
         <input name="knive.bladeType" required [(ngModel)]="knive.bladeType"  placeholder="тип на острието" class="form-control form-control-sm" />
     </div>
 
     <div class="form-group">
-        <label>Blade made</label>
+        <label i18n>Blade made</label>
         <input name="knive.bladeMade" required [(ngModel)]="knive.bladeMade" placeholder="сплав на острието" class="form-control form-control-sm" />
     </div>
 
     <div class="form-group">
-        <label>Edge length</label>
+        <label i18n>Edge length</label>
         <input name="knive.edgeLength" [(ngModel)]="knive.edgeLength" type="number" placeholder="дължина на острието"
             class="form-control form-control-sm" />
     </div>
 
     <div class="form-group">
-        <label>Handle type</label>
+        <label i18n>Handle type</label>
         <input name="knive.handleType" required [(ngModel)]="knive.handleType" placeholder="тип на дръжката" class="form-control form-control-sm" />
     </div>
 
     <div class="form-group">
-        <label>Total length</label>
+        <label i18n>Total length</label>
         <input name="knive.length" [(ngModel)]="knive.length" type="number" placeholder="пълна дължина на ножа"
             class="form-control form-control-sm" />
     </div>
     <div class="form-group">
-        <label >Price</label>
+        <label i18n>Price</label>
         <input name="knive.price" [(ngModel)]="knive.price" type="number" placeholder="цена" class="form-control form-control-sm" />
     </div>
     <div class="form-group">
-        <label>Select images:</label>
+        <label i18n>Select images:</label>
         <input  accept="image/*" type="file" multiple (change)="selectFiles($event)">
         <br>
         <br>
     </div>
-    <button class="btn btn-sm btn-success" (click)="uploadFiles()">Upload images</button>
+    <button class="btn btn-sm btn-success" (click)="uploadFiles()" i18n>Upload images</button>
     <hr />
-    <button type="submit" [disabled]="!formValidation.valid" class="btn btn-outline-info">Save</button>
+    <button type="submit" [disabled]="!formValidation.valid" class="btn btn-outline-info" i18n>Save</button>
     <p *ngIf="status">{{status}}</p>
 </form>

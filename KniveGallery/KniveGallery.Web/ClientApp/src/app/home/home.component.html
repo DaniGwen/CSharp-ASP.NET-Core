@@ -1,30 +1,34 @@
 <div class="home-container">
   <article>
-    <button class="home__category-btn btn btn-primary">category 2</button>
-    <button class="home__category-btn btn btn-primary">category 3</button>
-    <button class="home__category-btn btn btn-primary">category 1</button>
+    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('MiddleClass')" i18n>Middle class</button>
+    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('HighClass')" i18n>High end class</button>
+    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('KitchenClass')" i18n>Kitchen knives</button>
   </article>
 
   <section *ngIf="!knives?.length">
-    <h5>No knives in this category...</h5>
+    <h5 i18n>No knives in this category...</h5>
   </section>
 
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">
-      <div class="card text-white bg-info mb-3" [routerLink]="['/knive-details', knive.kniveId]" routerLinkActive="active" style="max-width: 24rem;">
+      <div class="card text-white bg-info mb-3" [routerLink]="['/knive-details', knive.kniveId]"
+        routerLinkActive="active" style="max-width: 24rem;">
         <div class="home__image-wrapper">
           <img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/{{knive.imagePath}}' alt="image">
-          <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg" alt="default image" />
+          <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg"
+            alt="default image" />
         </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
-          <h5 class="card-title">Type: {{knive.bladeType}}</h5>
-          <h4 class="card-title">Price: {{knive.price}}</h4>
+          <h5 class="card-title" i18n>Type: {{knive.bladeType}}</h5>
+          <h4 class="card-title" i18n>Price: {{knive.price}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
-        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">edit <i class="far fa-edit"></i></button>
-        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">delete <i class="far fa-trash-alt"></i></button>
+        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]" i18n>Edit <i
+            class="far fa-edit"></i></button>
+        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)" i18n>Delete <i
+            class="far fa-trash-alt"></i></button>
       </div>
     </section>
   </article>

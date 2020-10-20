@@ -3,11 +3,11 @@
     <a class="nav-admin nav-link text-dark" [routerLink]='["/authentication/profile"]' title="Manage"><i class="fas fa-user"></i> Hello <strong>{{ userName | async }}</strong></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+    <a class="nav-link text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout" i18n>Logout</a>
   </li>
 </ul>
 <ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
   <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>Login</a>
+    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]' i18n>Admin</a>
   </li>
 </ul>

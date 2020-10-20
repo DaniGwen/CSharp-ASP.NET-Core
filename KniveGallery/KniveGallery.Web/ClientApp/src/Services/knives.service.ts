@@ -13,6 +13,10 @@ export class KnivesService {
 
   constructor(private http: HttpClient) { }
 
+  getKnivesByClass(kniveClass: string){
+    return this.http.get(`${this.Url}/KniveClass/${kniveClass}`);
+  }
+
   getAllknives() {
     return this.http.get(this.Url);
   }

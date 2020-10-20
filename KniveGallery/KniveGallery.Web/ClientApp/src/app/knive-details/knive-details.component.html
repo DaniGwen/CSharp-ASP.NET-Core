@@ -2,15 +2,15 @@
 
 <article class="container">
   <section class="knive-details">
-    <p class="">Type: {{knive.bladeType}}</p>
-    <p class="">Total length: {{knive.length}}</p>
-    <p class="">Edge length: {{knive.edgeLength}}</p>
-    <p class="">Handle type: {{knive.handleType}}</p>
-    <p class="">Blade made: {{knive.bladeMade}}</p>
-    <h4 class="">Price: {{knive.price}}</h4>
+    <p class="" i18n>Type: {{knive.bladeType}}</p>
+    <p class="" i18n>Total length: {{knive.length}}</p>
+    <p class="" i18n>Edge length: {{knive.edgeLength}}</p>
+    <p class="" i18n>Handle type: {{knive.handleType}}</p>
+    <p class="" i18n>Blade made: {{knive.bladeMade}}</p>
+    <h4 class="" i18n>Price: {{knive.price}}</h4>
   </section>
 
-  <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length">No images..</h5>
+  <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length" i18n>No images..</h5>
   <section class="knive-details__images" *ngIf="kniveImages">
     <div *ngFor="let image of kniveImages">
       <div class="knive-details__image-wrapper">
@@ -20,7 +20,7 @@
   </section>
 </article>
 <hr />
-<a href="" [routerLink]="['/']">back</a>
+<a href="" [routerLink]="['/']" i18n>back</a>
 
 <div class="knive-details__image-enlarge">
   <span class="knive-details__image-enlarge__close">&times;</span>

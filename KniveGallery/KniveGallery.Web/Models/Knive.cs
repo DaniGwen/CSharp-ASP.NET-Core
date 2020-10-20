@@ -1,4 +1,5 @@
 ﻿using KniveGallery.Web.Models;
+using KniveGallery.Web.Models.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
@@ -34,6 +35,8 @@ namespace KniveGallery.Web.Data
         public double Price { get; set; }
 
         public string ImagePath { get; set; }
+
+        public KniveType KniveType { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<KniveImage> Images { get; set; }
