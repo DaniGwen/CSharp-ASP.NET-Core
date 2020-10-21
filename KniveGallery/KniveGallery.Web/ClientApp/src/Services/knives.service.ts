@@ -13,7 +13,7 @@ export class KnivesService {
 
   constructor(private http: HttpClient) { }
 
-  getKnivesByClass(kniveClass: string){
+  getKnivesByClass(kniveClass: string) {
     return this.http.get(`${this.Url}/KniveClass/${kniveClass}`);
   }
 
@@ -47,5 +47,9 @@ export class KnivesService {
 
   public getKniveImages(kniveId: number) {
     return this.http.get(`${this.Url}/AllKniveImages/${kniveId}`, { headers: this.headers });
+  }
+
+  public getAdminDetails() {
+    return this.http.get(`${this.Url}/AdminDetails`, { headers: this.headers });
   }
 }

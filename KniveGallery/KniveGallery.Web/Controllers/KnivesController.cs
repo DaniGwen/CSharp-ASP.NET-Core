@@ -51,10 +51,10 @@ namespace KniveGallery.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetKnivesByClass(string kniveClass)
         {
-            var kniveType = (KniveType)Enum.Parse(typeof(KniveType), kniveClass);
+            var kniveType = (KniveClass)Enum.Parse(typeof(KniveClass), kniveClass);
 
             var knives = this.context.Knives
-                .Where(knive => knive.KniveType == kniveType)
+                .Where(knive => knive.KniveClass == kniveType)
                 .ToList();
 
             return Ok(knives);

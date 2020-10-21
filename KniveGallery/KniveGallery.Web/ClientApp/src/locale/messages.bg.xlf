@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">api-authorization/login-menu/login-menu.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="408cb6073e60c5d966296a3207fc596adca75e01" datatype="html">
+        <source>Admin</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">api-authorization/login-menu/login-menu.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="92eee6be6de0b11c924e3ab27db30257159c0a7c" datatype="html">
+        <source>Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/nav-menu/nav-menu.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2ea5962e03a5d30f442bfa0e5c8b2f78a4003234" datatype="html">
+        <source>Middle class</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="58a8b5de3a223fff0f53278a7223ca8cbc8732ff" datatype="html">
+        <source>High end class</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2aa0df9740c82e7bfe1bd17f11699aaeaff5b193" datatype="html">
+        <source>Kitchen knives</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c39f7a95c59e3c292e57166704ae3e36653384ed" datatype="html">
+        <source>No knives in this category...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd597e14d845897e4afeeafa9be8c7ff64b7a4d5" datatype="html">
+        <source>Type: <x id="INTERPOLATION" equiv-text="{{knive.bladeType}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f0e93c352cf5fd59d9e199cf730afd65df164a5d" datatype="html">
+        <source>Price: <x id="INTERPOLATION" equiv-text="{{knive.price}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="90e368ce3d430a55c1ae964efd36ad03458f8a3e" datatype="html">
+        <source>Edit <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7714681b4c6f17fdb0910fe739e90216dc8a51a9" datatype="html">
+        <source>Delete <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/home/home.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aa4d7f7d71b3379565098a571774165b8a8b1650" datatype="html">
+        <source>Total length: <x id="INTERPOLATION" equiv-text="{{knive.length}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6e04981d7eeb69c1ed6f91696213d1f7a226b1d3" datatype="html">
+        <source>Edge length: <x id="INTERPOLATION" equiv-text="{{knive.edgeLength}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3514ad13aae644e090d8c83aeb93f1af215afe30" datatype="html">
+        <source>Handle type: <x id="INTERPOLATION" equiv-text="{{knive.handleType}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fa7c5a55aaba5b92e0ae25ee0184aba4cecc0fcc" datatype="html">
+        <source>Blade made: <x id="INTERPOLATION" equiv-text="{{knive.bladeMade}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f869023bcf4be029418d284d0e8d38fe0bf89bae" datatype="html">
+        <source>No images..</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3923c7ee91836570ff8c5cc870a63cd5e2e61564" datatype="html">
+        <source>back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/knive-details/knive-details.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d0146e3d0d13e321083dcd842b232fc24e34232" datatype="html">
+        <source>Knive name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="92450157694e282bda066adf2d5a6329f008a288" datatype="html">
+        <source>Blade type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9af43fbf10a6c491ea4fecb69108e97d94f45dbd" datatype="html">
+        <source>Blade made</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="36ffd69d9bdd632a89a21123d2063af7452b2d3c" datatype="html">
+        <source>Edge length</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f19b49c89c04e6650c1956d56f5b11e107f5467d" datatype="html">
+        <source>Handle type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3cb5800b49933febe7e3cf75775cccdc4241d941" datatype="html">
+        <source>Total length</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d6ee53858628de558a18623894a03c8673bce9e" datatype="html">
+        <source>Price</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b063acd7b9ce1a9103c62ca49161a9cf3d54c85f" datatype="html">
+        <source>Select images:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db4db69467887255506a6530ea5054cf3248796d" datatype="html">
+        <source>Upload images</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/edit-knive/edit-knive.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
