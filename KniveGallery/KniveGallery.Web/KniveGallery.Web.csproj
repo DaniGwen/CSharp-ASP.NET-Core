@@ -33,8 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Images\default.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
-    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\default.jpg" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

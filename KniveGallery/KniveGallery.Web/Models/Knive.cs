@@ -36,7 +36,7 @@ namespace KniveGallery.Web.Data
 
         public string ImagePath { get; set; }
 
-        public KniveType KniveType { get; set; }
+        public KniveClass KniveClass { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<KniveImage> Images { get; set; }

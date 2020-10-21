@@ -12,20 +12,18 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 
 import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
-import { KnivesService } from '../Services/knives.service';
+import { KnivesService } from 'src/Services/knives.service';
+import { FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     KniveDetailsComponent,
-    FetchDataComponent,
     EditKniveComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,8 +33,6 @@ import { KnivesService } from '../Services/knives.service';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'knive-details/:id', component: KniveDetailsComponent },
       { path: 'edit-knive/:id', component: EditKniveComponent },
     ])

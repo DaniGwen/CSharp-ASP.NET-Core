@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KniveGallery.Web.Data;
 using KniveGallery.Web.Models;
+using KniveGallery.Web.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -49,24 +50,23 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
             public double Length { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Type")]
-            public string BladeType { get; set; }
-
-            [Required(ErrorMessage = "Fill out the input field")]
             [Display(Name = "Edge length")]
             public double EdgeLength { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Handle type")]
+            [Display(Name = "Handle material")]
             public string HandleType { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Blade type")]
+            [Display(Name = "Blade material")]
             public string BladeMade { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
             [Display(Name = "Price")]
             public double Price { get; set; }
+
+            [Required]
+            public string KniveClass { get; set; }
 
             [DataType(DataType.Upload)]
             public List<IFormFile> Images { get; set; }
@@ -84,12 +84,12 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                     var knive = new Knive
                     {
                         BladeMade = Input.BladeMade,
-                        BladeType= Input.BladeType,
                         EdgeLength = Input.EdgeLength,
                         HandleType = Input.HandleType,
                         KniveName = Input.KniveName,
                         Length = Input.Length,
-                        Price = Input.Price
+                        Price = Input.Price,
+                        KniveClass = (KniveClass)Enum.Parse(typeof(KniveClass), Input.KniveClass)
                     };
 
                     knive.Images.Clear();
@@ -124,7 +124,7 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
 
                     return this.Page();
                 }
-                StatusMessage = "Error. Couldn't save the Van. Check all fields and try again.";
+                StatusMessage = "Error. Couldn't save the knive. Check all fields and try again.";
                 return this.Page();
             }
             catch (Exception e)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KniveGallery.Web.Models.Enums
 {
-    public enum KniveType
+    public enum KniveClass
     {
         MiddleClass = 1,
         HighClass = 2,

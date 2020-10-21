@@ -4,7 +4,6 @@ export class Knive {
   length: number;
   edgeLength: number;
   handleType: string;
-  bladeType: string;
   bladeMade: string;
   price: number;
   imagePath: string;

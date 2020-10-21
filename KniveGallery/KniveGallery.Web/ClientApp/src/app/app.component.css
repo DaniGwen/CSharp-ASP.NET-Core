@@ -1,0 +1,8 @@
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.container{
+    padding-bottom: 5rem;
+}

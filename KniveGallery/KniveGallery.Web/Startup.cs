@@ -97,7 +97,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        //context.Database.EnsureDeletedAsync().Wait();
+                        context.Database.EnsureDeletedAsync().Wait();
                         context.Database.EnsureCreatedAsync().Wait();
 
                         if (!context.Users.Any())
@@ -190,7 +190,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Tanto blade",
                     Price = 40,
-                    KniveType = KniveType.HighClass,
+                    KniveClass = KniveClass.HighClass,
                 },
                 new Knive
                 {
@@ -200,7 +200,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Straight blade",
                     Price = 45,
-                    KniveType = KniveType.MiddleClass,
+                    KniveClass = KniveClass.MiddleClass,
                 },
                 new Knive
                 {
@@ -210,7 +210,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     BladeType = "Jagged blade",
                     Price = 70,
-                    KniveType = KniveType.HighClass,
+                    KniveClass = KniveClass.HighClass,
                 },
                 new Knive
                 {
@@ -220,7 +220,7 @@ namespace KniveGallery.Web
                     BladeMade = "Stainless steel",
                     BladeType = "Curved blade",
                     Price = 85,
-                    KniveType = KniveType.KitchenClass,
+                    KniveClass = KniveClass.KitchenClass,
                 },
                  new Knive
                 {
@@ -230,7 +230,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Tanto blade",
                     Price = 90,
-                    KniveType = KniveType.MiddleClass,
+                    KniveClass = KniveClass.MiddleClass,
                 },
                 new Knive
                 {
@@ -240,7 +240,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     BladeType = "Straight blade",
                     Price = 90,
-                    KniveType = KniveType.HighClass,
+                    KniveClass = KniveClass.HighClass,
                 },
                 new Knive
                 {
@@ -250,7 +250,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     BladeType = "Jagged blade",
                     Price = 70,
-                    KniveType = KniveType.KitchenClass,
+                    KniveClass = KniveClass.KitchenClass,
                 },
                 new Knive
                 {
@@ -260,7 +260,7 @@ namespace KniveGallery.Web
                     BladeMade = "Stainless steel",
                     BladeType = "Curved blade",
                     Price = 130,
-                    KniveType = KniveType.HighClass,
+                    KniveClass = KniveClass.HighClass,
                 }
             };
 
