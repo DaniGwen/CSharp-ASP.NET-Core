@@ -1,12 +1,39 @@
 <div class="home-container">
   <article>
-    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('MiddleClass')" i18n>Middle class</button>
-    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('HighClass')" i18n>High end class</button>
-    <button class="home__category-btn btn btn-primary" (click)="getKnivesByClass('KitchenClass')" i18n>Kitchen knives</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option1" (click)="ngOnInit()" i18n> All knives
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')" i18n>Middle
+        class
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option3" (click)="getKnivesByClass('HighClass')" i18n>High end
+        class
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')" i18n>Kitchen
+        knives
+      </label>
+    </div>
   </article>
 
   <section *ngIf="!knives?.length">
     <h5 i18n>No knives in this category...</h5>
+  </section>
+
+  <section *ngIf="kniveCl === 'MiddleClass'">
+    <h5>Middle class knives</h5>
+  </section>
+  <section *ngIf="kniveCl === 'HighClass'">
+    <h5>High end knives</h5>
+  </section>
+  <section *ngIf="kniveCl === 'KitchenClass'">
+    <h5>Kitchen knives</h5>
+  </section>
+  <section *ngIf="kniveCl === 'All'">
+    <h5>All knives</h5>
   </section>
 
   <article class="home__knives-wrapper">

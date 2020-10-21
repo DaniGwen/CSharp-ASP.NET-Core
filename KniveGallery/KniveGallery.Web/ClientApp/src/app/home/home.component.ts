@@ -14,6 +14,7 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
 export class HomeComponent implements OnInit {
   public knives: Knive[];
   imagePath: string;
+  public kniveCl: string;
   public isAuthenticated: Observable<boolean>;
 
   constructor(
@@ -22,6 +23,8 @@ export class HomeComponent implements OnInit {
     private knivesService: KnivesService) { }
 
   public ngOnInit() {
+    this.kniveCl = "All";
+    
     this.knivesService.getAllknives()
       .subscribe((data: any) => {
         this.knives = data;
@@ -37,9 +40,10 @@ export class HomeComponent implements OnInit {
   }
 
   getKnivesByClass(kniveClass: string) {
+    this.kniveCl = kniveClass;
     this.knivesService.getKnivesByClass(kniveClass)
-    .subscribe((data: any) => {
-      this.knives = data;
-    });
+      .subscribe((data: any) => {
+        this.knives = data;
+      });
   }
 }
