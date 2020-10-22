@@ -7,5 +7,4 @@ export class Knive {
   bladeMade: string;
   price: number;
   imagePath: string;
-  kniveClass: string;
 }
