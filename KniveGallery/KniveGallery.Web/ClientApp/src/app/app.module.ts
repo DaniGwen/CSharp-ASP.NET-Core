@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
 import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
 import { KnivesService } from 'src/Services/knives.service';
-import { FooterComponent} from './footer/footer.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { FooterComponent} from './footer/footer.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    { provide: KnivesService, useClass: KnivesService }
+    { provide: KnivesService, useClass: KnivesService },
+    { provide: LOCALE_ID, useValue: 'bg' }
   ],
   bootstrap: [AppComponent]
 })

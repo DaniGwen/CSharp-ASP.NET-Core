@@ -2,7 +2,7 @@
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
 //import '@angular/localize/init';
-import { enableProdMode } from '@angular/core';
+import { enableProdMode, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
@@ -20,5 +20,14 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic(providers).bootstrapModule(AppModule)
+declare const require;
+
+const translations = require('raw-loader!./locale/messages.bg.xlf').default;
+
+platformBrowserDynamic(providers).bootstrapModule(AppModule, {
+  providers: [
+    { provide: TRANSLATIONS, useValue: translations },
+    { provide: TRANSLATIONS_FORMAT, useValue: 'xlf' }
+  ]
+})
   .catch(err => console.log(err));

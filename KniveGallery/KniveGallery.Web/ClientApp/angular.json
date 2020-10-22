@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "progress": false,
             "extractCss": true,
             "outputPath": "dist",
@@ -32,6 +33,15 @@
             ]
           },
           "configurations": {
+            "bg": {
+              "aot": true,
+              "outputPath": "KniveGallery.Web/locale-bg/",
+              "baseHref": "/bg/",
+              "i18nFile": "src/locale/messages.bg.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "bg",
+              "i18nMissingTranslation": "warn"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -57,6 +67,9 @@
             "browserTarget": "KniveGallery.Web:build"
           },
           "configurations": {
+            "bg": {
+              "browserTarget": "KniveGallery.Web:build:bg"
+            },
             "production": {
               "browserTarget": "KniveGallery.Web:build:production"
             }
@@ -121,12 +134,6 @@
               "vendorChunk": false
             }
           }
-        }
-      },
-      "i18n": {
-        "sourceLocale": "en",
-        "locales": {
-          "fr": "src/locale/messages.bg.xlf"
         }
       }
     },
