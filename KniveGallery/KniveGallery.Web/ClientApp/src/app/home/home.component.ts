@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Knive } from '../../Models/knive';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -20,17 +21,23 @@ export class HomeComponent implements OnInit {
   constructor(
     private authorizeService: AuthorizeService,
     public http: HttpClient,
-    private knivesService: KnivesService) { }
+    private knivesService: KnivesService,
+    public translate: TranslateService) {
+  }
 
   public ngOnInit() {
     this.kniveCl = "All";
-    
+
     this.knivesService.getAllknives()
       .subscribe((data: any) => {
         this.knives = data;
       });
 
     this.isAuthenticated = this.authorizeService.isAuthenticated();
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
   }
 
   deleteKnive(kniveId: number) {

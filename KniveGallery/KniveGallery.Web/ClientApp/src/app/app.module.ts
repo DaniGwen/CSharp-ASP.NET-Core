@@ -1,8 +1,12 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -26,8 +30,15 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory, // exported factory function needed for AoT compilation
+        deps: [HttpClient]
+      }
+    }),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
     ApiAuthorizationModule,
     ReactiveFormsModule,
@@ -38,11 +49,15 @@ import { FooterComponent } from './footer/footer.component';
     ])
   ],
   providers: [
+    { provide: TranslateService, useClass: TranslateService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    { provide: KnivesService, useClass: KnivesService },
-    { provide: LOCALE_ID, useValue: 'bg' }
+    { provide: KnivesService, useClass: KnivesService }
   ],
   bootstrap: [AppComponent]
 })
 
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

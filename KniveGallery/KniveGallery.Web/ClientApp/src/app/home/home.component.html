@@ -2,38 +2,47 @@
   <article>
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option1" (click)="ngOnInit()" i18n> All knives
+        <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
       </label>
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')" i18n>Middle
-        class
+        <input type="radio" name="options" id="option2"
+          (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option3" (click)="getKnivesByClass('HighClass')" i18n>High end
-        class
+        <input type="radio" name="options" id="option3"
+          (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
       </label>
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')" i18n>Kitchen
-        knives
+        <input type="radio" name="options" id="option4"
+          (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
     </div>
+
+    <label>
+      Language
+      <select #langSelect (change)="translate.use(langSelect.value)">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+          {{ lang }}
+        </option>
+      </select>
+    </label>
   </article>
 
   <section *ngIf="!knives?.length">
-    <h5 i18n>No knives in this category...</h5>
+    <h5>{{'home.NoKnive'| translate}}...</h5>
   </section>
 
   <section *ngIf="kniveCl === 'MiddleClass'">
-    <h5 i18n>Middle class knives</h5>
+    <h5 translate>home.MiddleClass</h5>
   </section>
   <section *ngIf="kniveCl === 'HighClass'">
-    <h5 i18n>High end knives</h5>
+    <h5 translate>home.HighEndClass</h5>
   </section>
   <section *ngIf="kniveCl === 'KitchenClass'">
-    <h5 i18n>Kitchen knives</h5>
+    <h5 translate="">home.KitchenKnives</h5>
   </section>
   <section *ngIf="kniveCl === 'All'">
-    <h5 i18n>All knives</h5>
+    <h5 translate>home.All</h5>
   </section>
 
   <article class="home__knives-wrapper">
@@ -47,15 +56,15 @@
         </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
-          <h6 class="card-title" i18n>Steel: {{knive.bladeMade}}</h6>
-          <h6 class="card-title" i18n>Handle: {{knive.handleType}}</h6>
-          <h4 class="card-title" i18n>Price: {{knive.price}}</h4>
+          <h6 class="card-title">{{home.BladeMade | translate}}: {{knive.bladeMade}}</h6>
+          <h6 class="card-title">{{home.HandleType | translate}}: {{knive.handleType}}</h6>
+          <h4 class="card-title">{{home.Price | translate}}: {{knive.price}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
         <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]" i18n>Edit <i
             class="far fa-edit"></i></button>
-        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)" i18n>Delete <i
+        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">{{'home.Delete'|translate}}<i
             class="far fa-trash-alt"></i></button>
       </div>
     </section>

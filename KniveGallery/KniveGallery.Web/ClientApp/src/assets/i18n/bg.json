@@ -1,0 +1,27 @@
+{
+  "home": {
+    "Logout": "Изход",
+    "Admin": "Админ",
+    "Home": "Начало",
+    "All": "Всички",
+    "MiddleClass": "Среден клас",
+    "HighEndClass": "Висок клас",
+    "KitchenKnives": "Кухнески ножове",
+    "NoKnive": "Празно",
+    "Type": "Тип",
+    "Price": "Цена",
+    "Edit": "Редакция",
+    "Delete": "Изтриване",
+    "TotalLength": "Обща дължина",
+    "EdgeLength": "Дължина на острието",
+    "HandleType": "Тип на дръжката",
+    "BladeMade": "Изработка на острието",
+    "NoImages": "Няма изображения",
+    "back": "назад",
+    "KniveName": "Име",
+    "BladeType": "Тип",
+    "SelectImages": "Избери изображения",
+    "UploadImages": "Качи",
+    "Save": "Запамети"
+  }
+}

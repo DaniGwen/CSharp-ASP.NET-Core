@@ -1,0 +1,27 @@
+{
+  "home": {
+    "Logout": "Logout",
+    "Admin": "Admin",
+    "Home": "Home",
+    "All": "All knives",
+    "MiddleClass": "Middle class",
+    "HighEndClass": "Top line",
+    "KitchenKnives": "Kitchen knives",
+    "NoKnives": "No knives in this category",
+    "Type": "Type",
+    "Price": "Price",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "TotalLength": "Total length",
+    "EdgeLength": "Edge length",
+    "HandleType": "Handle type",
+    "BladeMade": "Blade made",
+    "NoImages": "No images",
+    "back": "back",
+    "KniveName": "Knive name",
+    "BladeType": "Blade type",
+    "SelectImages": "Select images",
+    "UploadImages": "Upload images",
+    "Save": "Save"
+  }
+}
