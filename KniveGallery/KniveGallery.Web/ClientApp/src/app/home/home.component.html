@@ -1,5 +1,5 @@
 <div class="home-container">
-  <article>
+  <article class="home__buttons">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-secondary">
         <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
@@ -17,15 +17,15 @@
           (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
     </div>
-
-    <label>
-      Language
-      <select #langSelect (change)="translate.use(langSelect.value)">
-        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
-          {{ lang }}
-        </option>
-      </select>
-    </label>
+    <div>
+      <label>
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+            {{ lang }}
+          </option>
+        </select>
+      </label>
+    </div>
   </article>
 
   <section *ngIf="!knives?.length">
@@ -39,7 +39,7 @@
     <h5 translate>home.HighEndClass</h5>
   </section>
   <section *ngIf="kniveCl === 'KitchenClass'">
-    <h5 translate="">home.KitchenKnives</h5>
+    <h5 translate>home.KitchenKnives</h5>
   </section>
   <section *ngIf="kniveCl === 'All'">
     <h5 translate>home.All</h5>
@@ -56,9 +56,9 @@
         </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
-          <h6 class="card-title" >: {{knive.bladeMade}}</h6>
-          <h6 class="card-title" translate="home.HandleType">: {{knive.handleType}}</h6>
-          <h4 class="card-title" translate="home.Price">: {{knive.price}}</h4>
+          <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.bladeMade}}</h6>
+          <h6 class="card-title">{{'home.HandleType' | translate}}: {{knive.handleType}}</h6>
+          <h4 class="card-title">{{'home.Price' | translate}}: {{knive.price}}{{'home.Currency' | translate}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">

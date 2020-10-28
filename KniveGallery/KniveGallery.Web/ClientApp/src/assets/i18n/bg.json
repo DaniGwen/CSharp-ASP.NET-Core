@@ -14,14 +14,22 @@
     "Delete": "Изтриване",
     "TotalLength": "Обща дължина",
     "EdgeLength": "Дължина на острието",
-    "HandleType": "Тип на дръжката",
-    "BladeMade": "Изработка на острието",
+    "HandleType": "Дръжка",
+    "BladeMade": "Острие",
     "NoImages": "Няма изображения",
     "back": "назад",
     "KniveName": "Име",
-    "BladeType": "Тип",
+    "BladeType": "Острие",
     "SelectImages": "Избери изображения",
     "UploadImages": "Качи",
-    "Save": "Запамети"
+    "Save": "Запамети",
+    "Currency":"лв."
+  },
+  "footer": {
+    "Mobile": "Мобилен",
+    "Email": "Имейл"
+  },
+  "nav": {
+    "Home": "Начало"
   }
 }

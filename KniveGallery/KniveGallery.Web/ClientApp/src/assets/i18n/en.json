@@ -14,14 +14,22 @@
     "Delete": "Delete",
     "TotalLength": "Total length",
     "EdgeLength": "Edge length",
-    "HandleType": "Handle type",
-    "BladeMade": "Blade made",
+    "HandleType": "Handle",
+    "BladeMade": "Blade",
     "NoImages": "No images",
     "back": "back",
     "KniveName": "Knive name",
-    "BladeType": "Blade type",
+    "BladeType": "Blade",
     "SelectImages": "Select images",
     "UploadImages": "Upload images",
-    "Save": "Save"
+    "Save": "Save",
+    "Currency":"lv."
+  },
+  "footer": {
+    "Mobile" : "Mobile",
+    "Email" : "Email"
+  },
+  "Nav": {
+    "Home" : "Home"
   }
 }
