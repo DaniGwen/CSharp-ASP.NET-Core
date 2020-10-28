@@ -56,9 +56,9 @@
         </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
-          <h6 class="card-title">{{home.BladeMade | translate}}: {{knive.bladeMade}}</h6>
-          <h6 class="card-title">{{home.HandleType | translate}}: {{knive.handleType}}</h6>
-          <h4 class="card-title">{{home.Price | translate}}: {{knive.price}}</h4>
+          <h6 class="card-title" >: {{knive.bladeMade}}</h6>
+          <h6 class="card-title" translate="home.HandleType">: {{knive.handleType}}</h6>
+          <h4 class="card-title" translate="home.Price">: {{knive.price}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
