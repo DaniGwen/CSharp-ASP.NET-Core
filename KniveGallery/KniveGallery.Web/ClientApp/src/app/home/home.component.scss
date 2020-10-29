@@ -6,6 +6,12 @@
   grid-row-gap: 30px;
 }
 
+.home__buttons{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+}
+
 .home__category-btn {
   margin-right: 20px;
 }

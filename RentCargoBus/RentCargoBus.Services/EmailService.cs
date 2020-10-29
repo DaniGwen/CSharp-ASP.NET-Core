@@ -32,7 +32,7 @@ namespace RentCargoBus.Services
             var apiKey = this.Apikey;
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(senderEmail, sender);
-            var subject = "Hire a vehicle";
+            var subject = "Hire vehicle";
             var to = new EmailAddress(this.configuration.GetSection("AdminConfig:Email").Value /*recipient*/, "rentavan.azurewebsites.net");
             var plainTextContent = "";
             var htmlContent =
@@ -41,7 +41,7 @@ namespace RentCargoBus.Services
                 $"<p>Sender country: {senderCountry}</p><br/>" +
                 "<small><strong>Rent-A-Van</strong><small>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg).ConfigureAwait(true);
+            var response = await client.SendEmailAsync(msg)/*.ConfigureAwait(true)*/;
 
             return response;
         }
