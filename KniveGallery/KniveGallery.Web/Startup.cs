@@ -167,12 +167,16 @@ namespace KniveGallery.Web
             var username = this.Configuration.GetValue<string>("AdminConfig:Username");
             var email = this.Configuration.GetValue<string>("AdminConfig:Email");
             var password = this.Configuration.GetValue<string>("AdminConfig:Password");
+            var phoneNumber = this.Configuration.GetValue<string>("AdminConfig:PhoneNumber");
+            var role = this.Configuration.GetValue<string>("AdminConfig:Role");
 
             var user = new ApplicationUser
             {
+                PhoneNumber = phoneNumber,
                 Email = email,
                 UserName = username,
                 EmailConfirmed = true,
+                Role = role,
             };
 
             await userManager.CreateAsync(user, password);

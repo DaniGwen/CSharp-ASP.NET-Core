@@ -185,5 +185,18 @@ namespace KniveGallery.Web.Controllers
 
             await this.context.SaveChangesAsync();
         }
+
+        [Route("AdminDetails")]
+        [HttpGet]
+        public async Task<ActionResult<object>> GetAdminInfo()
+        {
+            var admin = await this.context.Users.Where(u => u.Role == "Admin").Select(x => new
+            {
+                phoneNumber = x.PhoneNumber,
+                email = x.Email
+            }).FirstAsync();
+
+            return admin;
+        }
     }
 }

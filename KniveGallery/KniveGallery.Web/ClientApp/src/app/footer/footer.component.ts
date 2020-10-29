@@ -6,18 +6,18 @@ import { KnivesService } from '../../Services/knives.service'
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss']
 })
-/** footer component*/
+
 export class FooterComponent {
     public adminEmail: string;
     public adminPhone: string;
-    /** footer ctor */
+
     constructor(private knivesService: KnivesService) {
     }
 
     ngOnInit() {
-        this.knivesService.getAdminDetails().subscribe((data: object)=>{
-            this.adminEmail = data[0],
-            this.adminPhone = data[1]
+        this.knivesService.getAdminDetails().subscribe((data: any)=>{
+            this.adminEmail = data.phoneNumber,
+            this.adminPhone = data.email
         });
     }
 }
