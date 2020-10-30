@@ -6,15 +6,15 @@
       </label>
       <label class="btn btn-secondary">
         <input type="radio" name="options" id="option2"
-          (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
+               (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
       <label class="btn btn-secondary">
         <input type="radio" name="options" id="option3"
-          (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
+               (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
       </label>
       <label class="btn btn-secondary">
         <input type="radio" name="options" id="option4"
-          (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
+               (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
     </div>
     <div>
@@ -48,11 +48,11 @@
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">
       <div class="card text-white bg-info mb-3" [routerLink]="['/knive-details', knive.kniveId]"
-        routerLinkActive="active" style="max-width: 24rem;">
+           routerLinkActive="active" style="max-width: 24rem;">
         <div class="home__image-wrapper">
           <img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/{{knive.imagePath}}' alt="image">
           <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg"
-            alt="default image" />
+               alt="default image" />
         </div>
         <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
@@ -62,10 +62,12 @@
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
-        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]" i18n>Edit <i
-            class="far fa-edit"></i></button>
-        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">{{'home.Delete'|translate}}<i
-            class="far fa-trash-alt"></i></button>
+        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">
+          {{'home.Edit' | translate }} <i class="far fa-edit"></i>
+        </button>
+        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">
+          {{'home.Delete'|translate}}<i class="far fa-trash-alt"></i>
+        </button>
       </div>
     </section>
   </article>

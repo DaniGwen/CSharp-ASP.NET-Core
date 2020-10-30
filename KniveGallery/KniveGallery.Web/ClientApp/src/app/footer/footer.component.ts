@@ -8,7 +8,8 @@ import { KnivesService } from '../../Services/knives.service'
 })
 
 export class FooterComponent {
-    public adminEmail: string;
+
+    public adminEmail: string[];
     public adminPhone: string;
 
     constructor(private knivesService: KnivesService) {
