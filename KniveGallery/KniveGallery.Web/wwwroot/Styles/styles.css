@@ -1,0 +1,16 @@
+﻿a {
+    font-weight: 500;
+    color: black;
+}
+
+    a:hover {
+        text-decoration: none;
+        transform: scale(1.1);
+    }
+
+.brand-home-wrapper{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 15px;
+    align-items: baseline;
+}

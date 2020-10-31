@@ -1,20 +1,20 @@
 <div class="home-container">
   <article class="home__buttons">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary">
+      <label class="btn btn-scale btn-secondary">
         <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
       </label>
-      <label class="btn btn-secondary">
+      <label class="btn btn-scale btn-secondary">
+        <input type="radio" name="options" id="option4"
+               (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
+      </label>
+      <label class="btn btn-scale btn-secondary">
         <input type="radio" name="options" id="option2"
                (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
-      <label class="btn btn-secondary">
+      <label class="btn btn-scale btn-secondary">
         <input type="radio" name="options" id="option3"
                (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option4"
-               (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
     </div>
   </article>
@@ -23,18 +23,21 @@
     <h5>{{'home.NoKnive'| translate}}...</h5>
   </section>
 
-  <section *ngIf="kniveCl === 'MiddleClass'">
-    <h5 translate>home.MiddleClass</h5>
+  <section>
+    <section class="home__knives-heading" *ngIf="kniveCl === 'KitchenClass'">
+      <h5 translate>home.KitchenKnives</h5>
+    </section>
+    <section class="home__knives-heading" *ngIf="kniveCl === 'MiddleClass'">
+      <h5 translate>home.MiddleClass</h5>
+    </section>
+    <section class="home__knives-heading" *ngIf="kniveCl === 'HighClass'">
+      <h5 translate>home.HighEndClass</h5>
+    </section>
+    <section class="home__knives-heading" *ngIf="kniveCl === 'All'">
+      <h5 translate>home.All</h5>
+    </section>
   </section>
-  <section *ngIf="kniveCl === 'HighClass'">
-    <h5 translate>home.HighEndClass</h5>
-  </section>
-  <section *ngIf="kniveCl === 'KitchenClass'">
-    <h5 translate>home.KitchenKnives</h5>
-  </section>
-  <section *ngIf="kniveCl === 'All'">
-    <h5 translate>home.All</h5>
-  </section>
+
 
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">

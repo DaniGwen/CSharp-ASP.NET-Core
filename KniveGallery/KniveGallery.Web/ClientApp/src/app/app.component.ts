@@ -25,11 +25,11 @@ export class AppComponent {
       this.navigationInterceptor(event)
     });
 
-    this.translate.addLangs(['en', 'bg']);
-    this.translate.setDefaultLang('bg');
+    this.translate.addLangs(['EN', 'BG']);
+    this.translate.setDefaultLang('BG');
 
     const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang.match(/en|bg/) ? browserLang : 'en');
+    this.translate.use(browserLang.match(/EN|BG/) ? browserLang : 'BG');
   }
 
   // Shows and hides the loading spinner during RouterEvent changes

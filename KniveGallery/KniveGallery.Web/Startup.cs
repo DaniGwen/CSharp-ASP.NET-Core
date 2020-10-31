@@ -53,7 +53,7 @@ namespace KniveGallery.Web
             {
                 options.AddPolicy("AllowSpecific", policyBuilder =>
                 policyBuilder
-                .WithOrigins("https://localhost:44379")
+                .WithOrigins("https://localhost:44379", "https://localhost:5001", "https://localhost:5000")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
@@ -97,7 +97,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        context.Database.EnsureDeletedAsync().Wait();
+                        //context.Database.EnsureDeletedAsync().Wait();
                         context.Database.EnsureCreatedAsync().Wait();
 
                         if (!context.Users.Any())
@@ -184,7 +184,7 @@ namespace KniveGallery.Web
 
         private void SeedKnives(ApplicationDbContext context)
         {
-            var knifes = new Knive[8]
+            var knifes = new Knive[9]
             {
                 new Knive
                 {
@@ -194,6 +194,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     Price = 40,
                     KniveClass = KniveClass.HighClass,
+                    ImagePath = "high1.jpg",
                 },
                 new Knive
                 {
@@ -203,6 +204,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     Price = 45,
                     KniveClass = KniveClass.MiddleClass,
+                    ImagePath = "middle1.jpg",
                 },
                 new Knive
                 {
@@ -212,6 +214,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     Price = 70,
                     KniveClass = KniveClass.HighClass,
+                    ImagePath = "high2.jpg"
                 },
                 new Knive
                 {
@@ -221,6 +224,7 @@ namespace KniveGallery.Web
                     BladeMade = "Stainless steel",
                     Price = 85,
                     KniveClass = KniveClass.KitchenClass,
+                    ImagePath = "kitchen1.jpg",
                 },
                  new Knive
                 {
@@ -230,6 +234,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     Price = 90,
                     KniveClass = KniveClass.MiddleClass,
+                    ImagePath = "middle2.jpg",
                 },
                 new Knive
                 {
@@ -239,6 +244,7 @@ namespace KniveGallery.Web
                     BladeMade = "Steel",
                     Price = 90,
                     KniveClass = KniveClass.HighClass,
+                    ImagePath = "high3.jpg",
                 },
                 new Knive
                 {
@@ -248,6 +254,7 @@ namespace KniveGallery.Web
                     BladeMade = "Titanium",
                     Price = 70,
                     KniveClass = KniveClass.KitchenClass,
+                    ImagePath = "kitchen2.jpg",
                 },
                 new Knive
                 {
@@ -256,7 +263,18 @@ namespace KniveGallery.Web
                     EdgeLength = 6.5,
                     BladeMade = "Stainless steel",
                     Price = 130,
-                    KniveClass = KniveClass.HighClass,
+                    KniveClass = KniveClass.KitchenClass,
+                    ImagePath = "kitchen3.jpg",
+                },
+                   new Knive
+                {
+                     KniveName= "Bad luck",
+                    HandleType = "plastic ",
+                    EdgeLength = 12,
+                    BladeMade = "Steel",
+                    Price = 65,
+                    KniveClass = KniveClass.MiddleClass,
+                    ImagePath = "middle3.jpg",
                 }
             };
 
