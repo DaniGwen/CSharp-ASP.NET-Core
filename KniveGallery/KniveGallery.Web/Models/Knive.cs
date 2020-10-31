@@ -17,9 +17,6 @@ namespace KniveGallery.Web.Data
         public int KniveId { get; set; }
 
         [Required]
-        public string BladeType { get; set; }
-
-        [Required]
         public string KniveName { get; set; }
 
         public double Length { get; set; }

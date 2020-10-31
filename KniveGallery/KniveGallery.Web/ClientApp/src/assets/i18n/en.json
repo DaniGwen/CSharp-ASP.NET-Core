@@ -17,13 +17,13 @@
     "HandleType": "Handle",
     "BladeMade": "Blade",
     "NoImages": "No images",
-    "back": "back",
+    "Back": "back",
     "KniveName": "Knive name",
     "BladeType": "Blade",
     "SelectImages": "Select images",
     "UploadImages": "Upload images",
     "Save": "Save",
-    "Currency":"lv."
+    "Currency": "lv."
   },
   "footer": {
     "Mobile" : "Mobile",

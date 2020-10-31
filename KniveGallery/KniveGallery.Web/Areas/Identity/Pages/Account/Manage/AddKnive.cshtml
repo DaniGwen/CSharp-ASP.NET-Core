@@ -1,0 +1,71 @@
+﻿@page
+@model KniveGallery.Web.Areas.Identity.Pages.Account.AddKniveModel
+
+@{
+    ViewData["Title"] = "Add Knive";
+}
+
+<section class="c-admin effect-stretch2">
+    <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <hr />
+    <div class="col-md-6 mb-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Input.KniveName"></label>
+                <input asp-for="Input.KniveName" placeholder="Име" class="form-control form-control-sm" autofocus />
+                <span asp-validation-for="Input.KniveName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.BladeMade"></label>
+                <input asp-for="Input.BladeMade" placeholder="Сплав на острието" class="form-control form-control-sm" />
+                <span asp-validation-for="Input.BladeMade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.EdgeLength"></label>
+                <input asp-for="Input.EdgeLength" type="number" placeholder="дължина на острието" class="form-control form-control-sm" />
+                <span asp-validation-for="Input.EdgeLength" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.HandleType"></label>
+                <input asp-for="Input.HandleType" placeholder="Материал на дръжката" class="form-control form-control-sm" />
+                <span asp-validation-for="Input.HandleType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Length"></label>
+                <input asp-for="Input.Length" type="number" placeholder="пълна дължина на ножа" class="form-control form-control-sm" />
+                <span asp-validation-for="Input.Length" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Price"></label>
+                <input asp-for="Input.Price" type="number" placeholder="Цена" class="form-control form-control-sm" />
+                <span asp-validation-for="Input.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Knife class</label>
+                <select asp-for="Input.KniveClass" class="form-control" id="classSelect">
+                    <option value="MiddleClass">Middle class</option>
+                    <option value="HighClass">High class</option>
+                    <option value="KitchenClass">Kitchen class</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Images">Select images:</label>
+                <input asp-for="Input.Images" type="file" multiple><br><br>
+            </div>
+
+            <hr />
+            <button type="submit" class="btn btn-outline-info">Save</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

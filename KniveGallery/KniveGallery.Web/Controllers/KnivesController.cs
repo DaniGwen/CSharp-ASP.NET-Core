@@ -93,7 +93,7 @@ namespace KniveGallery.Web.Controllers
             {
                 if (!KniveExists(id))
                 {
-                    return NotFound();
+                    return BadRequest("Error!");
                 }
                 else
                 {
@@ -101,7 +101,7 @@ namespace KniveGallery.Web.Controllers
                 }
             }
 
-            return NoContent();
+            return new JsonResult("Knive saved!");
         }
 
         [Authorize]

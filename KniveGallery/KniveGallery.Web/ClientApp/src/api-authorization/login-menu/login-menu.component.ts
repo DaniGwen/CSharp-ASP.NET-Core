@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthorizeService } from '../authorize.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { map, tap } from 'rxjs/operators';
   templateUrl: './login-menu.component.html',
   styleUrls: ['./login-menu.component.css']
 })
-export class LoginMenuComponent implements OnInit {
+export class LoginMenuComponent implements OnInit{
+
   public isAuthenticated: Observable<boolean>;
   public userName: Observable<string>;
 

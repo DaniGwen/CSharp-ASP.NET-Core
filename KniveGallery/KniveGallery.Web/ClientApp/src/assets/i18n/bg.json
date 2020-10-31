@@ -17,13 +17,13 @@
     "HandleType": "Дръжка",
     "BladeMade": "Острие",
     "NoImages": "Няма изображения",
-    "back": "назад",
+    "Back": "назад",
     "KniveName": "Име",
     "BladeType": "Острие",
     "SelectImages": "Избери изображения",
     "UploadImages": "Качи",
     "Save": "Запамети",
-    "Currency":"лв."
+    "Currency": "лв."
   },
   "footer": {
     "Mobile": "Мобилен",

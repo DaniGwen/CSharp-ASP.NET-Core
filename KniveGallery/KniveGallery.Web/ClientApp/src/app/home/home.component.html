@@ -17,15 +17,6 @@
                (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
     </div>
-    <div>
-      <label>
-        <select #langSelect (change)="translate.use(langSelect.value)">
-          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
-            {{ lang }}
-          </option>
-        </select>
-      </label>
-    </div>
   </article>
 
   <section *ngIf="!knives?.length">

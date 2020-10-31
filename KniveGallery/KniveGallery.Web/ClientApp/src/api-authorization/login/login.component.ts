@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthorizeService, AuthenticationResultStatus } from '../authorize.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -14,6 +14,7 @@ import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } fr
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   public message = new BehaviorSubject<string>(null);
 
   constructor(
@@ -44,7 +45,6 @@ export class LoginComponent implements OnInit {
         throw new Error(`Invalid action '${action}'`);
     }
   }
-
 
   private async login(returnUrl: string): Promise<void> {
     const state: INavigationState = { returnUrl };

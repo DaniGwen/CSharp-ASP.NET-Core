@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KnivesService } from '../../Services/knives.service';
 import { Knive } from '../../Models/knive';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { ImageFile } from '../../Models/imageFile';
 
 @Component({
@@ -13,13 +12,14 @@ import { ImageFile } from '../../Models/imageFile';
 /** edit-knive component*/
 export class EditKniveComponent {
   selectedFiles: FileList;
-  status: any;
+  public status: any;
   kniveId: any;
-  knive = new Knive();
+  public knive = new Knive();
   imageFile = new ImageFile();
 
   constructor(private route: ActivatedRoute,
-    private kniveService: KnivesService) {
+    private kniveService: KnivesService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -34,9 +34,9 @@ export class EditKniveComponent {
 
   onSubmit() {
     this.kniveService.updateKnive(this.knive)
-      .subscribe((data: string) => {
+      .subscribe((data: any) => {
         this.status = data;
-      })
+      });
   }
 
   selectFiles(event) {
