@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class KnivesService {
 
   private headers = new HttpHeaders();
-  Url = 'https://localhost:44379/api/knives';
+  Url = environment.apiUrl + '/api/knives';
 
   constructor(private http: HttpClient) { }
 

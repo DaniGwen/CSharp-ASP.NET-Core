@@ -99,9 +99,17 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                         foreach (var image in Input.Images)
                         {
                             var newImage = new KniveImage();
-
+                            string clientAppAssets = string.Empty;
                             // Save image to wwwroot / image
-                            string clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets";
+                            if (hostEnvironment.EnvironmentName == "Development")
+                            {
+                                clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets";
+                            }
+                            else
+                            {
+                                clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/dist/assets";
+                            }
+
                             string fileName = Path.GetFileNameWithoutExtension(image.FileName);
                             string extension = Path.GetExtension(image.FileName);
                             newImage.ImagePath = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -127,7 +135,7 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                 StatusMessage = "Error. Couldn't save the knive. Check all fields and try again.";
                 return this.Page();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 StatusMessage = "Error. Could not save the knive.";
                 return this.Page();

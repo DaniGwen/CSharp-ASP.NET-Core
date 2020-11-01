@@ -19,33 +19,38 @@
     </div>
   </article>
 
-  <section *ngIf="!knives?.length">
-    <h5>{{'home.NoKnive'| translate}}...</h5>
-  </section>
-
   <section>
-    <section class="home__knives-heading" *ngIf="kniveCl === 'KitchenClass'">
+    <section class="fadein-animation" *ngIf="kniveCl === 'KitchenClass'">
       <h5 translate>home.KitchenKnives</h5>
     </section>
-    <section class="home__knives-heading" *ngIf="kniveCl === 'MiddleClass'">
+    <section class="fadein-animation" *ngIf="kniveCl === 'MiddleClass'">
       <h5 translate>home.MiddleClass</h5>
     </section>
-    <section class="home__knives-heading" *ngIf="kniveCl === 'HighClass'">
+    <section class="fadein-animation" *ngIf="kniveCl === 'HighClass'">
       <h5 translate>home.HighEndClass</h5>
     </section>
-    <section class="home__knives-heading" *ngIf="kniveCl === 'All'">
+    <section class="fadein-animation" *ngIf="kniveCl === 'All'">
       <h5 translate>home.All</h5>
     </section>
   </section>
 
+  <section class="fadein-animation" *ngIf="!knives?.length">
+    <h5 translate>home.NoKnives<label>..</label></h5>
+  </section>
 
   <article class="home__knives-wrapper">
     <section *ngFor="let knive of knives">
       <div class="card text-white bg-info mb-3" [routerLink]="['/knive-details', knive.kniveId]"
            routerLinkActive="active" style="max-width: 24rem;">
         <div class="home__image-wrapper">
-          <img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/{{knive.imagePath}}' alt="image">
+
+          <!-- Development -->
+          <!--<img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/knive.imagePath' alt="image">
           <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg"
+               alt="default image" />-->
+          <!-- Production -->
+          <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
+          <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
                alt="default image" />
         </div>
         <div class="card-header">{{knive.kniveName}}</div>

@@ -27,7 +27,6 @@ namespace KniveGallery.Web.Controllers
             this.hostEnvironment = hostEnvironment;
         }
 
-        // GET: api/Knives
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Knive>>> GetKnives()
         {
@@ -52,15 +51,25 @@ namespace KniveGallery.Web.Controllers
         public async Task<IActionResult> GetKnivesByClass(string kniveClass)
         {
             var kniveType = (KniveClass)Enum.Parse(typeof(KniveClass), kniveClass);
+            var images = await this.context.Images.ToListAsync();
 
             var knives = this.context.Knives
                 .Where(knive => knive.KniveClass == kniveType)
                 .ToList();
 
+            foreach (var knive in knives)
+            {
+                var image = images.FirstOrDefault(i => i.KniveId == knive.KniveId);
+
+                if (image != null)
+                {
+                    knive.ImagePath = image.ImagePath;
+                }
+            }
+
             return Ok(knives);
         }
 
-        // GET: api/Knives/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Knive>> GetKnive(int id)
         {
@@ -137,9 +146,14 @@ namespace KniveGallery.Web.Controllers
         {
             var image = this.Request.Form.Files[0];
 
-            await this.ProcessImage(image, kniveId);
+            bool isSucceeded = await this.ProcessImage(image, kniveId);
 
-            return Ok();
+            if (!isSucceeded)
+            {
+                return BadRequest("Something went wrong!");
+            }
+
+            return Ok("Images added!");
         }
 
         [Route("AllKniveImages/{kniveId}")]
@@ -157,35 +171,6 @@ namespace KniveGallery.Web.Controllers
             return this.Ok(images);
         }
 
-        private bool KniveExists(int id)
-        {
-            return this.context.Knives.Any(e => e.KniveId == id);
-        }
-
-        private async Task ProcessImage(IFormFile image, int kniveId)
-        {
-            Knive knive = await this.context.Knives.FindAsync(kniveId);
-
-            var newImage = new KniveImage();
-
-            // Save image to wwwroot / image
-            string clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets/images/";
-            string fileName = Path.GetFileNameWithoutExtension(image.FileName);
-            string extension = Path.GetExtension(image.FileName);
-            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string path = Path.Combine(clientAppAssets, fileName);
-
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                await image.CopyToAsync(fileStream);
-            }
-
-            newImage.ImagePath = fileName;
-            knive.Images.Add(newImage);
-
-            await this.context.SaveChangesAsync();
-        }
-
         [Route("AdminDetails")]
         [HttpGet]
         public async Task<ActionResult<object>> GetAdminInfo()
@@ -197,6 +182,54 @@ namespace KniveGallery.Web.Controllers
             }).FirstAsync();
 
             return admin;
+        }
+
+        private bool KniveExists(int id)
+        {
+            return this.context.Knives.Any(e => e.KniveId == id);
+        }
+
+        private async Task<bool> ProcessImage(IFormFile image, int kniveId)
+        {
+            try
+            {
+                Knive knive = await this.context.Knives.FindAsync(kniveId);
+
+                var newImage = new KniveImage();
+                string clientAppAssets = string.Empty;
+
+                // Save image to wwwroot / image
+                if (hostEnvironment.EnvironmentName == "Development")
+                {
+                    clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets/images/";
+                }
+                else
+                {
+                    clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/dist/assets/images/";
+                }
+
+                string fileName = Path.GetFileNameWithoutExtension(image.FileName);
+                string extension = Path.GetExtension(image.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(clientAppAssets, fileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+
+                newImage.ImagePath = fileName;
+                knive.Images.Add(newImage);
+
+                await this.context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

@@ -53,7 +53,8 @@ namespace KniveGallery.Web
             {
                 options.AddPolicy("AllowSpecific", policyBuilder =>
                 policyBuilder
-                .WithOrigins("https://localhost:44379", "https://localhost:5001", "https://localhost:5000")
+                .WithOrigins("https://localhost:44379",
+                "http://localhost:61728")
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
@@ -79,13 +80,6 @@ namespace KniveGallery.Web
                 options.User.RequireUniqueEmail = true;
 
                 options.SignIn.RequireConfirmedEmail = false;
-            });
-
-            services.Configure<FormOptions>(o =>
-            {
-                o.ValueLengthLimit = int.MaxValue;
-                o.MultipartBodyLengthLimit = int.MaxValue;
-                o.MemoryBufferThreshold = int.MaxValue;
             });
         }
 

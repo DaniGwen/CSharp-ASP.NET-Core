@@ -1,7 +1,9 @@
-.nav-admin {
-    transition: linear 0.1s;
+a {
+    transition: ease-in 0.1s;
+    color: black;
 }
 
-.nav-admin:hover{
-    transform: scale(0.9);
+a:hover{
+    transform: scale(1.1);
+    text-decoration: none;
 }

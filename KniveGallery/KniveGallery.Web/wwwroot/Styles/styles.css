@@ -1,6 +1,7 @@
 ﻿a {
     font-weight: 500;
     color: black;
+    transition: ease-in 0.1s;
 }
 
     a:hover {
