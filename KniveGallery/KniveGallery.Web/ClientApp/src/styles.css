@@ -5,6 +5,11 @@ a {
   color: #0366d6;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
 code {
   color: #e01a76;
 }
@@ -13,4 +18,9 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+body {
+  background: rgb(117,117,117);
+  background: linear-gradient(0deg, rgba(117,117,117,1) 22%, rgba(158,158,158,1) 59%, rgba(224,224,224,1) 95%);
 }

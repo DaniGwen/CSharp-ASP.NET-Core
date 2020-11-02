@@ -2,13 +2,13 @@
 
 <article class="container">
   <section class="knive-details">
-    <p class="">{{'home.EdgeLength' | translate}}: {{knive.edgeLength}}</p>
-    <p class="">{{'home.HandleType' | translate}}: {{knive.handleType}}</p>
-    <p class="">{{'home.BladeMade' | translate}}: {{knive.bladeMade}}</p>
-    <h4 class="">{{'home.Price' | translate}}: {{knive.price}}{{'home.Currency' | translate}}</h4>
+    <p class="knive-details__field knive-details__fieldOne"><label>{{'home.EdgeLength' | translate}}:</label> <strong>{{knive.edgeLength}}</strong></p>
+    <p class="knive-details__field knive-details__fieldTwo"><label>{{'home.HandleType' | translate}}:</label> <strong>{{knive.handleType}}</strong></p>
+    <p class="knive-details__field knive-details__fieldThree"><label>{{'home.BladeMade' | translate}}:</label> <strong>{{knive.bladeMade}}</strong></p>
+    <h4 class="knive-details__field knive-details__fieldFour"><label>{{'home.Price' | translate}}:</label> <strong>{{knive.price}}{{'home.Currency' | translate}}</strong></h4>
   </section>
 
-  <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length" >{{'home.NoImages' | translate}}..</h5>
+  <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length">{{'home.NoImages' | translate}}..</h5>
   <section class="knive-details__images" *ngIf="kniveImages">
     <div *ngFor="let image of kniveImages">
       <div class="knive-details__image-wrapper">
@@ -18,7 +18,7 @@
   </section>
 </article>
 <hr />
-<a href="" [routerLink]="['/']">{{'home.Back' | translate}}</a>
+<a class="" href="" [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
 
 <div class="knive-details__image-enlarge">
   <span class="knive-details__image-enlarge__close">&times;</span>

@@ -1,3 +1,17 @@
+$grey200: #EEEEEE;
+$grey300: #E0E0E0;
+$grey400: #BDBDBD;
+$grey500: #9E9E9E;
+$grey600: #757575;
+$grey700: #616161;
+$grey800: #424242;
+$gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,158,158,1) 59%, rgba(117,117,117,1) 95%);
+
+@for $i from 1 through 10 {
+  .knive-details__field#{$i} {
+  }
+}
+
 .container {
   display: grid;
   grid-template-columns: max-content max-content;
@@ -15,6 +29,32 @@
   grid-auto-rows: max-content;
   grid-row-gap: 10px;
   align-content: baseline;
+
+  &__field {
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  &__fieldOne {
+    background-color: $grey700;
+  }
+
+  &__fieldTwo {
+    background-color: $grey600;
+  }
+
+  &__fieldThree {
+    background-color: $grey500;
+  }
+
+  &__fieldFour {
+    background-color: $grey400;
+  }
+
+  &__fieldFive {
+    background-color: $grey300;
+  }
 }
 
 .knive-details__images {
@@ -98,4 +138,14 @@
 .knive-details__images__no-images {
   text-align: center;
   margin-left: 300px;
+}
+
+.back-button {
+  font-size: 2rem;
+  color: $grey200;
+  transition: ease-out 0.1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
