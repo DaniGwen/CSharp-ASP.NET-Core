@@ -19,6 +19,7 @@ import { KniveDetailsComponent } from './knive-details/knive-details.component';
 import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
 import { KnivesService } from 'src/Services/knives.service';
 import { FooterComponent } from './footer/footer.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     KniveDetailsComponent,
     EditKniveComponent,
-    FooterComponent
+    FooterComponent,
+    PrivacyComponent
   ],
   imports: [
     HttpClientModule,
@@ -45,7 +47,8 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'knive-details/:id', component: KniveDetailsComponent },
-      { path: 'edit-knive/:id', component: EditKniveComponent }
+      { path: 'edit-knive/:id', component: EditKniveComponent },
+      { path: 'privacy', component: PrivacyComponent }
     ])
   ],
   providers: [
