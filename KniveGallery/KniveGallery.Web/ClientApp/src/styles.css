@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+/*$grey200: #EEEEEE;
+$grey300: #E0E0E0;*/
 a {
   color: #0366d6;
 }
@@ -21,6 +23,5 @@ code {
 }
 
 body {
-  background: rgb(117,117,117);
-  background: linear-gradient(0deg, rgba(117,117,117,1) 22%, rgba(158,158,158,1) 59%, rgba(224,224,224,1) 95%);
+  background-color: #EEEEEE;
 }

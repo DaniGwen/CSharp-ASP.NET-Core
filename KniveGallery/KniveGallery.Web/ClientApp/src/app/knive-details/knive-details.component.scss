@@ -21,6 +21,7 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
 .knive-title {
   text-align: center;
   margin-bottom: 30px;
+  font-weight: 600;
 }
 
 .knive-details {
@@ -34,6 +35,12 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
     border-radius: 5px;
     padding: 10px;
     text-align: center;
+    color: white;
+  }
+
+  &__field__label {
+    font-weight: 600;
+    margin-right: 10px;
   }
 
   &__fieldOne {
@@ -142,7 +149,7 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
 
 .back-button {
   font-size: 2rem;
-  color: $grey200;
+  color: $grey500;
   transition: ease-out 0.1s;
 
   &:hover {

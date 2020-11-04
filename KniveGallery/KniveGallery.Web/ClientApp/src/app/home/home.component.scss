@@ -1,4 +1,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css");
+$lightRedBerry3: #dd7e6b;
+$lightRedBerry2: #dd7e6b;
+$lightOrange: #f9cb9c;
+$darkCyan3: #0c343d;
+$darkBlue3: #073763;
+$cornflowerBlue3: #c9daf8;
 
 .home-container {
   display: grid;
@@ -33,6 +39,8 @@
   transition: linear 0.1s;
   animation-name: slideIn;
   animation-duration: 0.5s;
+  background-color: $cornflowerBlue3;
+  color: $darkBlue3;
 
   &:hover {
     cursor: pointer;
@@ -81,12 +89,21 @@
 }
 
 .card-body {
-  padding: 10px;
+  padding: 10px 0 0;
   text-align: center;
 }
 
 .card-header {
   text-align: center;
+  font-weight: 600;
+}
+
+.card-title__price {
+  background-color: $lightRedBerry2;
+  width: 100%;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
 }
 
 .card-img-top {
