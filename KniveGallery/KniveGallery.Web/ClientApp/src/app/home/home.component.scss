@@ -5,6 +5,9 @@ $lightOrange: #f9cb9c;
 $darkCyan3: #0c343d;
 $darkBlue3: #073763;
 $lightBlue: #007eb9;
+$gunmetal: #232F3E;
+$charcoal: #37475A;
+$mellowApricot: #FEBD69;
 $cornflowerBlue3: #c9daf8;
 
 .home-container {
@@ -40,8 +43,8 @@ $cornflowerBlue3: #c9daf8;
   transition: linear 0.1s;
   animation-name: slideIn;
   animation-duration: 0.5s;
-  background-color: $lightBlue;
-  color: #ffffff;
+  background-color: $charcoal;
+  color: $mellowApricot;
 
   &:hover {
     cursor: pointer;
@@ -89,6 +92,13 @@ $cornflowerBlue3: #c9daf8;
   }
 }
 
+.home__btn-filter {
+  background-color: $gunmetal;
+  color: $mellowApricot;
+  font-weight: 400;
+  border:1px solid $mellowApricot;
+}
+
 .card-body {
   padding: 10px 0 0;
   text-align: center;
@@ -99,12 +109,16 @@ $cornflowerBlue3: #c9daf8;
   font-weight: 600;
 }
 
-.card-title__price {
+.card-title__price-field {
   background-color: $lightRedBerry2;
   width: 100%;
   color: white;
   margin: 0;
   padding: 10px 0;
+}
+
+.card-title__price {
+  font-weight: 700;
 }
 
 .card-img-top {

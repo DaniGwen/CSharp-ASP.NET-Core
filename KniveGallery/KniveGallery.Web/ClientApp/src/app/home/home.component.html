@@ -1,18 +1,18 @@
 <div class="home-container">
   <article class="home__buttons">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-scale btn-secondary">
+      <label class="btn btn-scale home__btn-filter">
         <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
       </label>
-      <label class="btn btn-scale btn-secondary">
+      <label class="btn btn-scale home__btn-filter">
         <input type="radio" name="options" id="option4"
                (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
-      <label class="btn btn-scale btn-secondary">
+      <label class="btn btn-scale home__btn-filter">
         <input type="radio" name="options" id="option2"
                (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
-      <label class="btn btn-scale btn-secondary">
+      <label class="btn btn-scale home__btn-filter">
         <input type="radio" name="options" id="option3"
                (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
       </label>
@@ -57,7 +57,7 @@
         <div class="card-body">
           <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.bladeMade}}</h6>
           <h6 class="card-title">{{'home.HandleType' | translate}}: {{knive.handleType}}</h6>
-          <h4 class="card-title card-title__price">{{'home.Price' | translate}}: {{knive.price}}{{'home.Currency' | translate}}</h4>
+          <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">

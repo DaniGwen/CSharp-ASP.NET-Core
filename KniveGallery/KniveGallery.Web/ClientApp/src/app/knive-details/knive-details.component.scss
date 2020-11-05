@@ -5,10 +5,34 @@ $grey500: #9E9E9E;
 $grey600: #757575;
 $grey700: #616161;
 $grey800: #424242;
+$charcoal: #37475A;
+$coralRed: #FF4040;
+$mellowApricot: #FEBD69;
 $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,158,158,1) 59%, rgba(117,117,117,1) 95%);
 
 @for $i from 1 through 10 {
   .knive-details__field#{$i} {
+  }
+}
+
+@keyframes revial {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+// Create element and set animation
+@for $i from 1 through 10 {
+  .knive-details__field#{$i} {
+    opacity: 0;
+    animation: 0.4s revial forwards;
+    animation-delay: 0.1s * $i;
   }
 }
 
@@ -35,32 +59,17 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
     border-radius: 5px;
     padding: 10px;
     text-align: center;
-    color: white;
+    color: $mellowApricot;
+    background-color: $charcoal;
+  }
+
+  &__field__price {
+    color: $coralRed;
   }
 
   &__field__label {
     font-weight: 600;
     margin-right: 10px;
-  }
-
-  &__fieldOne {
-    background-color: $grey700;
-  }
-
-  &__fieldTwo {
-    background-color: $grey600;
-  }
-
-  &__fieldThree {
-    background-color: $grey500;
-  }
-
-  &__fieldFour {
-    background-color: $grey400;
-  }
-
-  &__fieldFive {
-    background-color: $grey300;
   }
 }
 

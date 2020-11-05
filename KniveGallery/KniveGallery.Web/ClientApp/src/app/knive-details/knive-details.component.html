@@ -2,10 +2,10 @@
 
 <article class="container">
   <section class="knive-details">
-    <p class="knive-details__field knive-details__fieldOne"><label class="knive-details__field__label">{{'home.EdgeLength' | translate}}: </label> <strong>{{knive.edgeLength}}</strong></p>
-    <p class="knive-details__field knive-details__fieldTwo"><label class="knive-details__field__label">{{'home.HandleType' | translate}}: </label> <strong>{{knive.handleType}}</strong></p>
-    <p class="knive-details__field knive-details__fieldThree"><label class="knive-details__field__label">{{'home.BladeMade' | translate}}: </label> <strong>{{knive.bladeMade}}</strong></p>
-    <h4 class="knive-details__field knive-details__fieldFour"><label class="knive-details__field__label">{{'home.Price' | translate}}: </label> <strong>{{knive.price}}{{'home.Currency' | translate}}</strong></h4>
+    <p class="knive-details__field knive-details__field1"><label class="knive-details__field__label">{{'home.EdgeLength' | translate}}: </label> <strong>{{knive.edgeLength}}</strong></p>
+    <p class="knive-details__field knive-details__field2"><label class="knive-details__field__label">{{'home.HandleType' | translate}}: </label> <strong>{{knive.handleType}}</strong></p>
+    <p class="knive-details__field knive-details__field3"><label class="knive-details__field__label">{{'home.BladeMade' | translate}}: </label> <strong>{{knive.bladeMade}}</strong></p>
+    <h4 class="knive-details__field knive-details__field4"><label class="knive-details__field__label">{{'home.Price' | translate}}: </label> <strong class="knive-details__field__price">{{knive.price}}{{'home.Currency' | translate}}</strong></h4>
   </section>
 
   <h5 class="knive-details__images__no-images" *ngIf="!kniveImages.length">{{'home.NoImages' | translate}}..</h5>
