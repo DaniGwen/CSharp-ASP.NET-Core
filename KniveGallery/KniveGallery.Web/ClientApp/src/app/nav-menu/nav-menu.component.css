@@ -4,8 +4,13 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.navbar {
+  background-color: #37475a !important;
+  color: #ffffff;
+}
+
 a {
-  color: black;
+  color: #ffffff;
   transition: ease-in 0.1s;
 }
 

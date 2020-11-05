@@ -4,6 +4,7 @@ $lightRedBerry2: #dd7e6b;
 $lightOrange: #f9cb9c;
 $darkCyan3: #0c343d;
 $darkBlue3: #073763;
+$lightBlue: #007eb9;
 $cornflowerBlue3: #c9daf8;
 
 .home-container {
@@ -39,8 +40,8 @@ $cornflowerBlue3: #c9daf8;
   transition: linear 0.1s;
   animation-name: slideIn;
   animation-duration: 0.5s;
-  background-color: $cornflowerBlue3;
-  color: $darkBlue3;
+  background-color: $lightBlue;
+  color: #ffffff;
 
   &:hover {
     cursor: pointer;
