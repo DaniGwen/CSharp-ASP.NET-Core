@@ -92,7 +92,7 @@ namespace KniveGallery.Web
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
                         //context.Database.EnsureDeletedAsync().Wait();
-                        //context.Database.EnsureCreatedAsync().Wait();
+                        context.Database.EnsureCreatedAsync().Wait();
 
                         if (!context.Users.Any())
                         {
@@ -182,90 +182,104 @@ namespace KniveGallery.Web
             {
                 new Knive
                 {
-                    KniveName = "The Rush",
-                    HandleType = "plastic",
-                    EdgeLength = 6,
-                    BladeMade = "Steel",
+                     HandleDescription = "Elephant tusk",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 40,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high1.jpg",
+                     EdgeMade = "Steel",
+                    TotalLength= 9,
                 },
                 new Knive
                 {
-                    KniveName="Stealthy",
-                    HandleType = "Polimer",
-                    EdgeLength = 5.5,
-                    BladeMade = "Steel",
+                     HandleDescription = "Mixed Polimer",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 45,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle1.jpg",
+                     EdgeMade = "Stone",
+                    TotalLength= 18,
                 },
                 new Knive
                 {
-                    KniveName="The Tough",
-                     HandleType = "Mixed alloy",
-                    EdgeLength = 7,
-                    BladeMade = "Titanium",
+                     HandleDescription = "Mixed type",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 70,
                     KniveClass = KniveClass.HighClass,
-                    ImagePath = "high2.jpg"
+                    ImagePath = "high2.jpg",
+                     EdgeMade = "Carbon-Ceramic",
+                    TotalLength= 15,
                 },
                 new Knive
                 {
-                    KniveName = "Curvy",
-                    HandleType = "Elephant tusk",
+                     HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
-                    BladeMade = "Stainless steel",
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 85,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen1.jpg",
+                     EdgeMade = "Ceramic",
+                    TotalLength= 10,
                 },
                  new Knive
                 {
-                     KniveName= "Straight cut",
-                    HandleType = "plastic",
-                    EdgeLength = 12,
-                    BladeMade = "Steel",
+                     HandleDescription = "Plastic",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 90,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle2.jpg",
-                },
+                    EdgeMade = "Carbon-Ceramic",
+                    TotalLength= 10,
+        },
                 new Knive
                 {
-                    KniveName="Long and sharp",
-                    HandleType = "Polimer + Plastic",
-                    EdgeLength = 10.5,
-                    BladeMade = "Steel",
+                    HandleDescription = "Polymer and Plastic",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 90,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high3.jpg",
+                    EdgeMade = "Aluminum"
                 },
                 new Knive
                 {
-                    KniveName = "Pointy",
-                    HandleType = "Mixed alloy",
-                    EdgeLength = 7.5,
-                    BladeMade = "Titanium",
+                    HandleDescription = "Mixed alloy",
+                    EdgeLength = 6.5,
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
                     Price = 70,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen2.jpg",
+                    EdgeMade = "Carbon"
                 },
                 new Knive
                 {
-                    KniveName = "Blood rain",
-                    HandleType = "Elephant tusk",
+                    HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
-                    BladeMade = "Stainless steel",
+                    EdgeWidth = 4,
+                    EdgeTickness =3,
+                    EdgeMade = "Stainless steel",
                     Price = 130,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen3.jpg",
                 },
                    new Knive
                 {
-                     KniveName= "Bad luck",
-                    HandleType = "plastic ",
+                    HandleDescription = "plastic ",
                     EdgeLength = 12,
-                    BladeMade = "Steel",
+                    EdgeTickness = 2,
+                    EdgeWidth = 8,
+                    EdgeMade = "Steel",
                     Price = 65,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle3.jpg",

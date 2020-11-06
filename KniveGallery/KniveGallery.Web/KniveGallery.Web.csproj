@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\assets\images\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

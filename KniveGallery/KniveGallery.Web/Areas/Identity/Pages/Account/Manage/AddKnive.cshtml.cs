@@ -41,28 +41,23 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                 this.Images = new List<IFormFile>();
             }
 
-            [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Knive name")]
-            public string KniveName { get; set; }
+            public double EdgeWidth { get; set; }
+
+            public double EdgeTickness { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Total length")]
-            public double Length { get; set; }
+            public double TotalLength { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Edge length")]
             public double EdgeLength { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Handle material")]
-            public string HandleType { get; set; }
+            public string HandleDescription { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Blade material")]
-            public string BladeMade { get; set; }
+            public string EdgeMade { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
-            [Display(Name = "Price")]
             public double Price { get; set; }
 
             [Required]
@@ -83,11 +78,12 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                 {
                     var knive = new Knive
                     {
-                        BladeMade = Input.BladeMade,
+                        EdgeWidth = Input.EdgeWidth,
+                        EdgeTickness = Input.EdgeTickness,
+                        EdgeMade = Input.EdgeMade,
                         EdgeLength = Input.EdgeLength,
-                        HandleType = Input.HandleType,
-                        KniveName = Input.KniveName,
-                        Length = Input.Length,
+                        HandleDescription = Input.HandleDescription,
+                        TotalLength = Input.TotalLength,
                         Price = Input.Price,
                         KniveClass = (KniveClass)Enum.Parse(typeof(KniveClass), Input.KniveClass)
                     };

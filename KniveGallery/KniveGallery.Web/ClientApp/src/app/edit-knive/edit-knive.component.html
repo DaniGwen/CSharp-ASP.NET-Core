@@ -1,35 +1,44 @@
 <form #formValidation (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label i18n>Knive name</label>
-    <input name="knive.kniveName" required [(ngModel)]="knive.kniveName" class="form-control form-control-sm"
-           autofocus />
-  </div>
+  <section class="edit-knive__edge-info">
+    <div class="form-group">
+      <label>Edge width</label>
+      <input name="knive.edgeWidth" required [(ngModel)]="knive.edgeWidth" class="form-control form-control-sm" placeholder="Широчина"
+             autofocus />
+    </div>
+
+    <div class="form-group">
+      <label>Edge tickness</label>
+      <input name="knive.edgeTickness" required [(ngModel)]="knive.edgeTickness" placeholder="Дебелина"
+             class="form-control form-control-sm" />
+    </div>
+
+    <div class="form-group">
+      <label>Edge length</label>
+      <input name="knive.edgeLength" [(ngModel)]="knive.edgeLength" type="number" placeholder="Дължина"
+             class="form-control form-control-sm" />
+    </div>
+
+    <div class="form-group">
+      <label>Edge made</label>
+      <input name="knive.edgeMade" required [(ngModel)]="knive.edgeMade" placeholder="Сплав"
+             class="form-control form-control-sm" />
+    </div>
+  </section>
 
   <div class="form-group">
-    <label i18n>Blade made</label>
-    <input name="knive.bladeMade" required [(ngModel)]="knive.bladeMade" placeholder="сплав на острието"
+    <label>Total length</label>
+    <input name="knive.totalLength" [(ngModel)]="knive.totalLength" type="number" placeholder="Обща дължина на ножа"
            class="form-control form-control-sm" />
   </div>
 
   <div class="form-group">
-    <label i18n>Handle type</label>
-    <input name="knive.handleType" required [(ngModel)]="knive.handleType" placeholder="тип на дръжката"
+    <label>Handle type</label>
+    <input name="knive.handleDescription" required [(ngModel)]="knive.handleDescription" placeholder="Тип на дръжката"
            class="form-control form-control-sm" />
   </div>
 
   <div class="form-group">
-    <label i18n>Edge length</label>
-    <input name="knive.edgeLength" [(ngModel)]="knive.edgeLength" type="number" placeholder="дължина на острието"
-           class="form-control form-control-sm" />
-  </div>
-
-  <div class="form-group">
-    <label i18n>Total length</label>
-    <input name="knive.length" [(ngModel)]="knive.length" type="number" placeholder="пълна дължина на ножа"
-           class="form-control form-control-sm" />
-  </div>
-  <div class="form-group">
-    <label i18n>Price</label>
+    <label>Price</label>
     <input name="knive.price" [(ngModel)]="knive.price" type="number" placeholder="цена"
            class="form-control form-control-sm" />
   </div>

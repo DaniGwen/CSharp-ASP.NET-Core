@@ -23,7 +23,9 @@
     "SelectImages": "Избери изображения",
     "UploadImages": "Качи",
     "Save": "Запамети",
-    "Currency": "лв."
+    "Currency": "лв.",
+    "EdgeWidth": "Широчина на острието",
+    "EdgeTickness" :  "Дебелина на острието"
   },
   "footer": {
     "Mobile": "Мобилен",

@@ -1,10 +1,11 @@
 export class Knive {
-  kniveName: string;
   kniveId: number;
-  length: number;
+  edgeMade: string;
+  totalLength: number;
   edgeLength: number;
-  handleType: string;
-  bladeMade: string;
+  edgeWidth: number;
+  edgeTickness: number;
+  handleDescription: string;
   price: number;
   imagePath: string;
 }

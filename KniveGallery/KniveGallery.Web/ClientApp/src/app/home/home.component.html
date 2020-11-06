@@ -44,19 +44,17 @@
            routerLinkActive="active" style="max-width: 24rem;">
         <div class="home__image-wrapper">
 
-          <!-- Development -->
-          <!--<img class="card-img-top" *ngIf="knive.imagePath" src='../../assets/images/knive.imagePath' alt="image">
-          <img class="card-img-top" *ngIf="!knive.imagePath" src="../../assets/images/default.jpg"
-               alt="default image" />-->
-          <!-- Production -->
-          <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
+          <!--Development-->
+          <img class="card-img-top" *ngIf="knive.imagePath" src='assets/images/{{knive.imagePath}}' alt="image">
           <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
                alt="default image" />
+          <!--Production-->
+          <!--<img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
+          <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
+               alt="default image" />-->
         </div>
-        <div class="card-header">{{knive.kniveName}}</div>
         <div class="card-body">
-          <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.bladeMade}}</h6>
-          <h6 class="card-title">{{'home.HandleType' | translate}}: {{knive.handleType}}</h6>
+          <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.edgeMade}}</h6>
           <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
         </div>
       </div>

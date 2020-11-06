@@ -23,7 +23,9 @@
     "SelectImages": "Select images",
     "UploadImages": "Upload images",
     "Save": "Save",
-    "Currency": "lv."
+    "Currency": "lv.",
+    "EdgeWidth": "Edge width",
+    "EdgeTickness": "Edge tickness"
   },
   "footer": {
     "Mobile" : "Mobile",

@@ -17,17 +17,18 @@ namespace KniveGallery.Web.Data
         public int KniveId { get; set; }
 
         [Required]
-        public string KniveName { get; set; }
+        public string EdgeMade { get; set; }
 
-        public double Length { get; set; }
+        public double TotalLength { get; set; }
 
         public double EdgeLength { get; set; }
 
-        [Required]
-        public string HandleType { get; set; }
+        public double? EdgeWidth { get; set; }
+
+        public double? EdgeTickness { get; set; }
 
         [Required]
-        public string BladeMade { get; set; }
+        public string HandleDescription { get; set; }
 
         public double Price { get; set; }
 
