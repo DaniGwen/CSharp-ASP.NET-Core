@@ -1,5 +1,33 @@
 $grey500: #9E9E9E;
 
+.edit-knive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+  margin: 0 auto;
+
+  &__buttons {
+    text-align: center;
+  }
+
+  &__info-lable {
+    background-color: #c9daf8;
+    color: #232F3E;
+    border-radius: 5px;
+    padding: 3px 7px;
+  }
+
+  &__info-wrapper {
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 30%;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+
 .back-button {
   font-size: 2rem;
   color: $grey500;
