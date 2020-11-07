@@ -1,4 +1,11 @@
-﻿a {
+﻿/*$lightBlue: #007eb9;
+$gunmetal: #232F3E;
+$charcoal: #37475A;
+$mellowApricot: #FEBD69;
+$cornflowerBlue3: #c9daf8;
+$whatsupGreen: #4CC15B;*/
+
+a {
     font-weight: 500;
     color: black;
     transition: ease-in 0.1s;
@@ -9,9 +16,37 @@
         transform: scale(1.1);
     }
 
-.brand-home-wrapper{
+.brand-home-wrapper {
     display: grid;
     grid-template-columns: max-content max-content;
     grid-column-gap: 15px;
     align-items: baseline;
+}
+
+.navbar {
+    background-color: #37475A !important;
+}
+
+.navbar__brand {
+    color: white;
+}
+
+.navbar__home-page {
+    color: #FEBD69;
+}
+
+    .navbar__home-page:hover {
+        color: inherit;
+    }
+
+.nav-link {
+    color: #FEBD69;
+}
+
+    .nav-link:hover {
+        color: inherit;
+    }
+
+.footer {
+    background-color: #37475A;
 }

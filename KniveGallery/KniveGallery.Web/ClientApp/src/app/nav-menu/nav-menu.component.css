@@ -1,3 +1,10 @@
+/*$lightBlue: #007eb9;
+$gunmetal: #232F3E;
+$charcoal: #37475A;
+$mellowApricot: #FEBD69;
+$cornflowerBlue3: #c9daf8;
+$whatsupGreen: #4CC15B;*/
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -8,7 +15,9 @@ a.navbar-brand {
   background-color: #37475a !important;
   color: #ffffff;
 }
-
+.nav-link {
+  color: #FEBD69;
+}
 a {
   color: #ffffff;
   transition: ease-in 0.1s;

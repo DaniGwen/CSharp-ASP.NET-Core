@@ -20,6 +20,7 @@ import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
 import { KnivesService } from 'src/Services/knives.service';
 import { FooterComponent } from './footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { ContactInfoComponent } from "./contact-info/contact-info.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     KniveDetailsComponent,
     EditKniveComponent,
     FooterComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    ContactInfoComponent
   ],
   imports: [
     HttpClientModule,

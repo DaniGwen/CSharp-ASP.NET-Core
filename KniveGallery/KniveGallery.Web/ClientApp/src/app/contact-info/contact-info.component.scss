@@ -1,0 +1,53 @@
+$lightBlue: #007eb9;
+$charcoal: #37475A;
+$mellowApricot: #FEBD69;
+$cornflowerBlue3: #c9daf8;
+$whatsupGreen: #4CC15B;
+
+.container {
+  text-align: center;
+  margin: 20px auto;
+  margin-bottom: 70px;
+  background-color: $charcoal;
+  border-radius: 20px;
+  padding: 20px;
+  width: 60%;
+}
+
+.contact-info {
+  &__header {
+    font-size: 22px;
+    color: $mellowApricot;
+    font-weight: 500;
+  }
+
+  &__icon {
+    font-size: 30px;
+    color: $mellowApricot;
+    margin-right: 2%;
+  }
+
+  &__icon--phone {
+    color: $whatsupGreen;
+  }
+
+  &__icon--messenger {
+    color: $lightBlue
+  }
+
+  &__details {
+    margin-top: 20px;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 250px;
+    grid-template-rows: max-content max-content;
+    grid-row-gap: 15px;
+    justify-content: center;
+  }
+
+  &__detail {
+    color: $lightBlue;
+    font-size: 20px;
+    font-weight: 600;
+  }
+}

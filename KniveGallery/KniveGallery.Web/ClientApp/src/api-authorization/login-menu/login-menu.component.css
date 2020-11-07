@@ -1,9 +1,13 @@
 a {
-    transition: ease-in 0.1s;
-    color: black;
+  transition: ease-in 0.1s;
+  color: black;
 }
 
-a:hover{
+  a:hover {
     transform: scale(1.1);
     text-decoration: none;
+  }
+
+.nav-link {
+  color: #FEBD69;
 }
