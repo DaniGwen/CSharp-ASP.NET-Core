@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KniveGallery.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201031171444_init")]
-    partial class init
+    [Migration("20201106121018_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,14 +110,20 @@ namespace KniveGallery.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BladeMade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("EdgeLength")
                         .HasColumnType("float");
 
-                    b.Property<string>("HandleType")
+                    b.Property<string>("EdgeMade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("EdgeTickness")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("EdgeWidth")
+                        .HasColumnType("float");
+
+                    b.Property<string>("HandleDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -127,14 +133,10 @@ namespace KniveGallery.Web.Data.Migrations
                     b.Property<int>("KniveClass")
                         .HasColumnType("int");
 
-                    b.Property<string>("KniveName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Length")
+                    b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<double>("Price")
+                    b.Property<double>("TotalLength")
                         .HasColumnType("float");
 
                     b.HasKey("KniveId");

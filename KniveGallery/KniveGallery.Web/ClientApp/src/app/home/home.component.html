@@ -43,15 +43,9 @@
       <div class="card mb-3" [routerLink]="['/knive-details', knive.kniveId]"
            routerLinkActive="active" style="max-width: 24rem;">
         <div class="home__image-wrapper">
-
-          <!--Development-->
-          <img class="card-img-top" *ngIf="knive.imagePath" src='assets/images/{{knive.imagePath}}' alt="image">
+          <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
           <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
                alt="default image" />
-          <!--Production-->
-          <!--<img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
-          <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
-               alt="default image" />-->
         </div>
         <div class="card-body">
           <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.edgeMade}}</h6>
