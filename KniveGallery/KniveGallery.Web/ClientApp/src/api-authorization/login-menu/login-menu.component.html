@@ -3,7 +3,7 @@
     <a class="nav-admin nav-link" [routerLink]='["/authentication/profile"]' title="Manage"><i class="fas fa-user"></i> Hello <strong>{{ userName | async }}</strong></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+    <a class="nav-link" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
   </li>
 </ul>
 <ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">

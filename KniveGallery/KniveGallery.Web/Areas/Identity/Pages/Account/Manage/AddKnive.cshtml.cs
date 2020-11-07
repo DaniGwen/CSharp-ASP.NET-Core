@@ -41,25 +41,32 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                 this.Images = new List<IFormFile>();
             }
 
+            [Display(Name ="Edge width")]
             public double EdgeWidth { get; set; }
 
+            [Display(Name = "Edge tickness")]
             public double EdgeTickness { get; set; }
 
+            [Display(Name = "Total length")]
             [Required(ErrorMessage = "Fill out the input field")]
             public double TotalLength { get; set; }
 
+            [Display(Name = "Edge length")]
             [Required(ErrorMessage = "Fill out the input field")]
             public double EdgeLength { get; set; }
 
+            [Display(Name = "Handle description")]
             [Required(ErrorMessage = "Fill out the input field")]
             public string HandleDescription { get; set; }
 
+            [Display(Name = "Edge made")]
             [Required(ErrorMessage = "Fill out the input field")]
             public string EdgeMade { get; set; }
 
             [Required(ErrorMessage = "Fill out the input field")]
             public double Price { get; set; }
 
+            [Display(Name = "Knive category")]
             [Required]
             public string KniveClass { get; set; }
 

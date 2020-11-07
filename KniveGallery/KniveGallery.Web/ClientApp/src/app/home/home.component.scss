@@ -54,7 +54,7 @@ $cornflowerBlue3: #c9daf8;
 
 .home__knives__card-admin {
   display: grid;
-  grid-template-columns: 100px 100px;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
   justify-content: center;
 }
@@ -70,9 +70,11 @@ $cornflowerBlue3: #c9daf8;
 }
 
 .btn-custom {
-  border-radius: 5px;
-  background-color: deepskyblue;
-  color: white;
+  animation-name: slideIn;
+  animation-duration: 0.5s;
+  border-radius: 10px;
+  background-color: $cornflowerBlue3;
+  color: $charcoal;
   padding: 2px 0px;
   animation-name: slideIn;
   transition: ease-out 0.1s;
@@ -93,10 +95,10 @@ $cornflowerBlue3: #c9daf8;
 }
 
 .home__btn-filter {
-  background-color: $gunmetal;
+  background-color: $charcoal;
   color: $mellowApricot;
   font-weight: 400;
-  border:1px solid $mellowApricot;
+  border:1px solid $cornflowerBlue3;
 }
 
 .card-body {

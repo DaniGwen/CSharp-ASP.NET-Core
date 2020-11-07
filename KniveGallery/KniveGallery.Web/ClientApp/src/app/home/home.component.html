@@ -48,16 +48,16 @@
                alt="default image" />
         </div>
         <div class="card-body">
-          <h6 class="card-title">{{'home.BladeMade' | translate}}: {{knive.edgeMade}}</h6>
+          <h5>{{knive.edgeMade}}</h5>
           <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
         </div>
       </div>
       <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
         <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">
-          {{'home.Edit' | translate }} <i class="far fa-edit"></i>
+          <i class="far fa-edit"></i> {{'home.Edit' | translate }}
         </button>
         <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">
-          {{'home.Delete'|translate}}<i class="far fa-trash-alt"></i>
+          <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
         </button>
       </div>
     </section>

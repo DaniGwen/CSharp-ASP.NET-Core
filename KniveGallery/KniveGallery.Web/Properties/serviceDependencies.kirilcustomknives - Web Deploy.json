@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/knivegallery-db-server/databases/KniveGallery_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/knivegallery-db-server/databases/KniveGallery_db",
       "type": "mssql.azure",
       "connectionId": "DefaultConnection",
       "secretStore": "AzureAppSettings"

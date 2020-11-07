@@ -8,7 +8,9 @@ $grey800: #424242;
 $charcoal: #37475A;
 $coralRed: #FF4040;
 $mellowApricot: #FEBD69;
-$gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,158,158,1) 59%, rgba(117,117,117,1) 95%);
+$lightRedBerry3: #dd7e6b;
+$lightRedBerry2: #dd7e6b;
+$lightOrange: #f9cb9c;
 
 @keyframes revial {
   from {
@@ -34,7 +36,11 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
 .container {
   display: grid;
   grid-template-columns: max-content max-content;
-  grid-column-gap: 20px;
+  grid-column-gap: 50px;
+}
+
+label {
+  margin: 0;
 }
 
 .knive-title {
@@ -45,6 +51,7 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
 
 .knive-details {
   display: grid;
+  grid-template-columns: 260px;
   grid-template-rows: auto;
   grid-auto-rows: max-content;
   grid-row-gap: 10px;
@@ -54,12 +61,14 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
     font-size: 22px;
   }
 
-  &__handle {
+  &__value {
     font-size: 18px;
     color: $grey300;
   }
 
   &__field {
+    display: grid;
+    grid-template-rows: max-content max-content;
     border-radius: 5px;
     padding: 10px;
     text-align: center;
@@ -68,23 +77,23 @@ $gradientDarkToLight: linear-gradient(0deg, rgba(224,224,224,1) 22%, rgba(158,15
   }
 
   &__field__price {
-    color: $coralRed;
+    color: $lightRedBerry3;
   }
 
   &__field__label {
     font-weight: 600;
-    margin-right: 10px;
   }
 }
 
 .knive-details__images {
   display: grid;
-  grid-template-columns: max-content max-content max-content;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  grid-auto-rows: max-content;
-  grid-row-gap: 30px;
+  grid-auto-rows: 180px;
+  grid-row-gap: 15px;
   grid-column-gap: 15px;
   text-align: center;
+  align-content: baseline;
 }
 
 .knive-details__image-wrapper {

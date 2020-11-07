@@ -4,6 +4,11 @@ $charcoal: #37475A;
 $mellowApricot: #FEBD69;
 $cornflowerBlue3: #c9daf8;
 $whatsupGreen: #4CC15B;*/
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css ";
+
+body {
+    background-color: #EEEEEE;
+}
 
 a {
     font-weight: 500;
@@ -36,7 +41,7 @@ a {
 }
 
     .navbar__home-page:hover {
-        color: inherit;
+        color: initial;
     }
 
 .nav-link {
@@ -44,9 +49,36 @@ a {
 }
 
     .nav-link:hover {
-        color: inherit;
+        color: initial;
     }
+
+.nav-link__nav {
+    color: #232F3E;
+    margin-bottom: 10px;
+}
 
 .footer {
     background-color: #37475A;
+}
+
+.add-knive__input-container {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 30px;
+}
+
+.add-knive__info-lable {
+    background-color: #c9daf8;
+    color: #232F3E;
+    border-radius: 5px;
+    padding: 3px 7px;
+}
+
+.add-knive__info-wrapper {
+    margin-bottom: 15px;
+}
+
+.fas {
+    font-size: 20px;
+    color: #4CC15B;
 }

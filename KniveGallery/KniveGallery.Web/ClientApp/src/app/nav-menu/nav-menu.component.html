@@ -20,8 +20,8 @@
         <app-login-menu></app-login-menu>
         <section class="navbar-lang-homepage">
           <section class="lang-select-box">
-            <label class="lang-box">
-              <select #langSelect (change)="translate.use(langSelect.value)">
+            <label>
+              <select class="lang-box" #langSelect (change)="translate.use(langSelect.value)">
                 <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
                   {{ lang }}
                 </option>

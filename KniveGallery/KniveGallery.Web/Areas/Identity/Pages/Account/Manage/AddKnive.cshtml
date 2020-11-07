@@ -9,67 +9,80 @@
     <h2>@ViewData["Title"]</h2>
     <partial name="_StatusMessage" model="Model.StatusMessage" />
     <hr />
-    <div class="col-md-6 mb-4">
+    <div class="add-knive__info-wrapper add-knive__info-lable">
+        <i class="fas fa-info-circle"></i>
+        <small>Всички размери са в милиметри.</small>
+    </div>
+    <div class="col-lg-8 mb-4">
         <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="Input.EdgeWidth"></label>
-                <input asp-for="Input.EdgeWidth" placeholder="Широчина на острието" class="form-control form-control-sm" autofocus />
-                <span asp-validation-for="Input.EdgeWidth" class="text-danger"></span>
-            </div>
+            <article class="add-knive__input-container">
+                <section>
+                    <div class="form-group">
+                        <label asp-for="Input.EdgeWidth"></label>
+                        <input asp-for="Input.EdgeWidth" placeholder="Широчина на острието" class="form-control form-control-sm" autofocus />
+                        <span asp-validation-for="Input.EdgeWidth" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.EdgeTickness"></label>
-                <input asp-for="Input.EdgeTickness" placeholder="Дебелина на острието" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.EdgeTickness" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Input.EdgeTickness"></label>
+                        <input asp-for="Input.EdgeTickness" placeholder="Дебелина на острието" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.EdgeTickness" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.EdgeLength"></label>
-                <input asp-for="Input.EdgeLength" type="number" min="0" placeholder="Дължина на острието" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.EdgeLength" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Input.EdgeLength"></label>
+                        <input asp-for="Input.EdgeLength" type="number" min="0" placeholder="Дължина на острието" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.EdgeLength" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.TotalLength"></label>
-                <input asp-for="Input.TotalLength" type="number" min="0" placeholder="Пълна дължина на ножа" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.TotalLength" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Input.TotalLength"></label>
+                        <input asp-for="Input.TotalLength" type="number" min="0" placeholder="Пълна дължина на ножа" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.TotalLength" class="text-danger"></span>
+                    </div>
+                </section>
+                <section>
+                    <div class="form-group">
+                        <label asp-for="Input.EdgeMade"></label>
+                        <input asp-for="Input.EdgeMade" placeholder="Сплав на острието" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.EdgeMade" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.EdgeMade"></label>
-                <input asp-for="Input.EdgeMade" placeholder="Сплав на острието" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.EdgeMade" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Input.HandleDescription"></label>
+                        <input asp-for="Input.HandleDescription" placeholder="Описание на дръжката" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.HandleDescription" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.HandleDescription"></label>
-                <input asp-for="Input.HandleDescription" placeholder="Описание на дръжката" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.HandleDescription" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Price"></label>
+                        <input asp-for="Input.Price" type="number" min="0" placeholder="Цена" class="form-control form-control-sm" />
+                        <span asp-validation-for="Input.Price" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Input.Price"></label>
-                <input asp-for="Input.Price" type="number" min="0" placeholder="Цена" class="form-control form-control-sm" />
-                <span asp-validation-for="Input.Price" class="text-danger"></span>
-            </div>
+                    <small class="add-knive__info-lable">Избери категория.</small>
+                    <div class="form-group">
+                        <label asp-for="Input.KniveClass"></label>
+                        <select asp-for="Input.KniveClass" class="form-control" id="classSelect">
+                            <option value="MiddleClass">Middle class</option>
+                            <option value="HighClass">High class</option>
+                            <option value="KitchenClass">Kitchen class</option>
+                        </select>
+                    </div>
+                </section>
+            </article>
 
-            <div class="form-group">
-                <small class="add-knive__info-lable">Избери категория.</small>
-                <label>Knife class</label>
-                <select asp-for="Input.KniveClass" class="form-control" id="classSelect">
-                    <option value="MiddleClass">Middle class</option>
-                    <option value="HighClass">High class</option>
-                    <option value="KitchenClass">Kitchen class</option>
-                </select>
+            <div class="add-knive__info-lable">
+                <i class="fas fa-info-circle"></i>
+                <small>За да добавиш повече снимки в прозореца задръж <strong>ctrl</strong> + <strong>ляв бутон</strong> на мишката.</small>
             </div>
-
             <div class="form-group">
                 <label asp-for="Input.Images">Select images:</label>
                 <input asp-for="Input.Images" type="file" multiple><br><br>
             </div>
 
             <hr />
-            <button type="submit" class="btn btn-outline-info">Save</button>
+            <button type="submit" class="btn btn-lg btn-outline-info">Save</button>
         </form>
     </div>
 </section>

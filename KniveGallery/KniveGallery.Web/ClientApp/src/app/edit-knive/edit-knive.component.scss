@@ -1,1 +1,11 @@
-﻿
+$grey500: #9E9E9E;
+
+.back-button {
+  font-size: 2rem;
+  color: $grey500;
+  transition: ease-out 0.1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

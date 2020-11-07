@@ -15,9 +15,11 @@ a.navbar-brand {
   background-color: #37475a !important;
   color: #ffffff;
 }
+
 .nav-link {
   color: #FEBD69;
 }
+
 a {
   color: #ffffff;
   transition: ease-in 0.1s;
@@ -50,9 +52,14 @@ html {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-.lang-box:hover {
-  box-shadow: 10px 10px 24px -12px rgba(0,0,0,0.75);
+.lang-box {
+  border-radius: 5px;
+  border: 1px solid #FEBD69;
 }
+
+  .lang-box:hover {
+    border-width: 2px;
+  }
 
 .lang-select-box {
   align-self: self-end;
