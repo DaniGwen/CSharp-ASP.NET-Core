@@ -21,6 +21,7 @@ import { KnivesService } from 'src/Services/knives.service';
 import { FooterComponent } from './footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ContactInfoComponent } from "./contact-info/contact-info.component";
+import { KniveCardComponent } from './knive-card/knive-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ContactInfoComponent } from "./contact-info/contact-info.component";
     EditKniveComponent,
     FooterComponent,
     PrivacyComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    KniveCardComponent
   ],
   imports: [
     HttpClientModule,

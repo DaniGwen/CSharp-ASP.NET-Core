@@ -1,10 +1,11 @@
+@import '../shared-styles/colors';
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: auto;
   box-shadow: 0px -1px 12px -7px rgba(0,0,0,0.75);
-  background-color: #37475a;
+  background-color: $charcoal;
   color: #ffffff;
 
   &__content__wrapper {

@@ -35,15 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\nav-menu\nav-menu.component.scss" />
+    <None Remove="ClientApp\src\app\nav-menu\nav-menu.component.css" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="ClientApp\src\app\nav-menu\nav-menu.component.scss" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

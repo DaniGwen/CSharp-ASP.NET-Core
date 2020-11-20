@@ -158,7 +158,7 @@ namespace KniveGallery.Web.Controllers
 
         [Route("AllKniveImages/{kniveId}")]
         [HttpGet]
-        public async Task<IActionResult> AllKniveImages(int kniveId)
+        public IActionResult AllKniveImages(int kniveId)
         {
             var images = this.context.Images
                 .Where(i => i.KniveId == kniveId)

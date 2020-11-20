@@ -38,28 +38,13 @@
     <h5 translate>home.NoKnives<label>..</label></h5>
   </section>
 
+  <section class="home__knive-deleted-message" *ngIf="isKniveDeleted">
+    <p>Knive has been deleted!</p>
+    <button class="btn btn-custom btn-confirm-message" (click)="hideMessage()">ok</button>
+  </section>
+
   <article class="home__knives-wrapper">
-    <section *ngFor="let knive of knives">
-      <div class="card mb-3" [routerLink]="['/knive-details', knive.kniveId]"
-           routerLinkActive="active" style="max-width: 24rem;">
-        <div class="home__image-wrapper">
-          <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
-          <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
-               alt="default image" />
-        </div>
-        <div class="card-body">
-          <h5>{{knive.edgeMade}}</h5>
-          <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
-        </div>
-      </div>
-      <div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
-        <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">
-          <i class="far fa-edit"></i> {{'home.Edit' | translate }}
-        </button>
-        <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">
-          <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
-        </button>
-      </div>
-    </section>
+    <app-knive-card *ngFor="let knive of knives" [knive]="knive" [isAuthenticated]="isAuthenticated" (deleteKniveRequest)="onDelete($event)">
+    </app-knive-card>
   </article>
 </div>

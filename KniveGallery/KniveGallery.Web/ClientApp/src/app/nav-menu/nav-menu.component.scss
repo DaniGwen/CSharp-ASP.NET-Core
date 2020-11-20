@@ -1,0 +1,61 @@
+@import '../shared-styles/colors';
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.navbar {
+  background-color: #37475a !important;
+  color: $white;
+}
+
+.nav-link {
+  color: $mellowApricot;
+}
+
+a {
+  color: $white;
+  transition: ease-in 0.1s;
+}
+
+a:hover {
+  transform: scale(1.1);
+  text-decoration: none;
+}
+
+.navbar-lang-homepage {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 15px;
+  align-self: flex-end;
+  margin-right: 15px;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.lang-box {
+  border-radius: 5px;
+  border: 1px solid $mellowApricot;
+}
+
+.lang-box:hover {
+  border-width: 2px;
+}
+
+.lang-select-box {
+  align-self: self-end;
+}

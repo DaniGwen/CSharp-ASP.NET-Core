@@ -1,0 +1,60 @@
+@import '../shared-styles/colors';
+@import '../shared-styles/animations';
+@import '../shared-styles/custom-buttons';
+
+.card {
+  transition: linear 0.1s;
+  animation-name: slideIn;
+  animation-duration: 0.5s;
+  background-color: $charcoal;
+  color: $mellowApricot;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 3px 4px 17px 0px rgba(0, 0, 0, 0.75);
+  }
+}
+
+.home__image-wrapper {
+  width: inherit;
+  height: 180px;
+
+  &__img {
+    width: inherit;
+    height: inherit;
+  }
+}
+
+.card-body {
+  padding: 10px 0 0;
+  text-align: center;
+}
+
+.card-header {
+  text-align: center;
+  font-weight: 600;
+}
+
+.card-title__price-field {
+  background-color: $lightRedBerry2;
+  width: 100%;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.card-title__price {
+  font-weight: 700;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+}
+
+.home__knives__card-admin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  justify-content: center;
+}

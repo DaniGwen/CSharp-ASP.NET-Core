@@ -1,14 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css");
-$lightRedBerry3: #dd7e6b;
-$lightRedBerry2: #dd7e6b;
-$lightOrange: #f9cb9c;
-$darkCyan3: #0c343d;
-$darkBlue3: #073763;
-$lightBlue: #007eb9;
-$gunmetal: #232F3E;
-$charcoal: #37475A;
-$mellowApricot: #FEBD69;
-$cornflowerBlue3: #c9daf8;
+@import '../shared-styles/colors';
+@import '../shared-styles/animations';
+@import '../shared-styles/custom-buttons';
 
 .home-container {
   display: grid;
@@ -39,53 +32,6 @@ $cornflowerBlue3: #c9daf8;
   grid-column-gap: 30px;
 }
 
-.card {
-  transition: linear 0.1s;
-  animation-name: slideIn;
-  animation-duration: 0.5s;
-  background-color: $charcoal;
-  color: $mellowApricot;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: 3px 4px 17px 0px rgba(0, 0, 0, 0.75);
-  }
-}
-
-.home__knives__card-admin {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  justify-content: center;
-}
-
-.home__image-wrapper {
-  width: inherit;
-  height: 180px;
-
-  &__img {
-    width: inherit;
-    height: inherit;
-  }
-}
-
-.btn-custom {
-  animation-name: slideIn;
-  animation-duration: 0.5s;
-  border-radius: 10px;
-  background-color: $cornflowerBlue3;
-  color: $charcoal;
-  padding: 2px 0px;
-  animation-name: slideIn;
-  transition: ease-out 0.1s;
-  transform: scale(0.8);
-  font-weight: 600;
-
-  &:hover {
-    transform: scale(0.9);
-  }
-}
-
 .btn-scale {
   transition: linear 0.1s;
 
@@ -98,57 +44,14 @@ $cornflowerBlue3: #c9daf8;
   background-color: $charcoal;
   color: $mellowApricot;
   font-weight: 400;
-  border:1px solid $cornflowerBlue3;
+  border: 1px solid $cornflowerBlue3;
 }
 
-.card-body {
-  padding: 10px 0 0;
-  text-align: center;
-}
-
-.card-header {
-  text-align: center;
-  font-weight: 600;
-}
-
-.card-title__price-field {
-  background-color: $lightRedBerry2;
-  width: 100%;
-  color: white;
-  margin: 0;
-  padding: 10px 0;
-}
-
-.card-title__price {
-  font-weight: 700;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 100%;
-}
-
-// Animations
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    left: -300px;
-  }
-
-  100% {
-    opacity: 1;
-    left: 0px;
-  }
-}
-
-@keyframes slideInHeadings {
-  0% {
-    opacity: 0.3;
-    top: -200px;
-  }
-
-  100% {
-    opacity: 1;
-    top: 0px;
-  }
+.home__knive-deleted-message {
+  background-color: $whatsupGreen;
+  color: $gunmetal;
+  font-weight: 500;
+  max-width: 25%;
+  padding: 5px 15px;
+  border-radius: 10px;
 }

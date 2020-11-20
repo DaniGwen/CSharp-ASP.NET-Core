@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Knive } from '../../Models/knive';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,11 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   public knives: Knive[];
-  imagePath: string;
   public kniveCl: string;
   public isAuthenticated: Observable<boolean>;
-  public isLoading: boolean;
+  public isKniveDeleted = false;
 
   constructor(
     private authorizeService: AuthorizeService,
@@ -24,26 +24,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private knivesService: KnivesService) {
   }
 
-  public ngOnInit() {
-    this.isLoading = true;
-    this.kniveCl = "All";
+  ngOnInit() {
+    this.kniveCl = 'All';
 
     this.knivesService.getAllknives()
-      .subscribe((data: any) => {
-        this.knives = data;
+      .subscribe((knives: Knive[]) => {
+        this.knives = knives;
       });
 
     this.isAuthenticated = this.authorizeService.isAuthenticated();
   }
 
-  public ngAfterViewInit() {
-    this.isLoading = false;
+  onDelete(kniveId: number) {
+    this.knivesService.removeKnive(kniveId).subscribe(() => {
+      this.isKniveDeleted = true;
+      this.ngOnInit();
+    })
   }
 
-  deleteKnive(kniveId: number) {
-    this.knivesService.removeKnive(kniveId).subscribe(data => {
-      this.ngOnInit();
-    });
+  hideMessage() {
+    this.isKniveDeleted = false;
   }
 
   getKnivesByClass(kniveClass: string) {
