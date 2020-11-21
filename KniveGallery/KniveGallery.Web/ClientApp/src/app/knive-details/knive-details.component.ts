@@ -8,12 +8,12 @@ import { Knive } from '../../Models/knive';
   templateUrl: './knive-details.component.html',
   styleUrls: ['./knive-details.component.scss']
 })
-/** knife-details component*/
 export class KniveDetailsComponent {
 
   kniveId: any;
   knive = new Knive();
   kniveImages: string[];
+  isOrder: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private knivesService: KnivesService) { }
@@ -30,5 +30,13 @@ export class KniveDetailsComponent {
         this.kniveImages = data;
       });
     });
+  }
+
+  toggleOrder() {
+    this.isOrder = !this.isOrder;
+  }
+
+  hideOrderHandler() {
+    this.isOrder = false;
   }
 }

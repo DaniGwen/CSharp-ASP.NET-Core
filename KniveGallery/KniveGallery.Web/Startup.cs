@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
 using KniveGallery.Web.Models.Enums;
+using KniveGallery.Web.Services.EmailService;
 
 namespace KniveGallery.Web
 {
@@ -39,9 +40,10 @@ namespace KniveGallery.Web
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            services.AddAuthentication().AddIdentityServerJwt();
+
             services.AddControllersWithViews();
+
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -58,6 +60,8 @@ namespace KniveGallery.Web
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
+
+            services.AddTransient<EmailService>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -91,7 +95,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        context.Database.EnsureDeleted();
+                       // context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
 
                         if (!context.Users.Any())

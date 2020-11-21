@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, ROUTES } from '@angular/router';
-
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 
+import { AppComponent } from './app.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
 import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
@@ -22,6 +21,9 @@ import { FooterComponent } from './footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ContactInfoComponent } from "./contact-info/contact-info.component";
 import { KniveCardComponent } from './knive-card/knive-card.component';
+import { OrderComponent } from './order/order.component';
+import { OrderService } from '../Services/orders.service';
+import { OrderSummaryComponent } from './order-summary/order-summary.component'
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { KniveCardComponent } from './knive-card/knive-card.component';
     FooterComponent,
     PrivacyComponent,
     ContactInfoComponent,
-    KniveCardComponent
+    KniveCardComponent,
+    OrderComponent,
+    OrderSummaryComponent
   ],
   imports: [
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory, // exported factory function needed for AoT compilation
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     }),
@@ -52,17 +56,18 @@ import { KniveCardComponent } from './knive-card/knive-card.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'knive-details/:id', component: KniveDetailsComponent },
       { path: 'edit-knive/:id', component: EditKniveComponent },
-      { path: 'privacy', component: PrivacyComponent }
+      { path: 'privacy', component: PrivacyComponent },
+      { path: 'order-summary', component: OrderSummaryComponent }
     ])
   ],
   providers: [
     { provide: TranslateService, useClass: TranslateService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    { provide: KnivesService, useClass: KnivesService }
+    { provide: KnivesService, useClass: KnivesService },
+    { provide: OrderService, useClass: OrderService }
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient) {

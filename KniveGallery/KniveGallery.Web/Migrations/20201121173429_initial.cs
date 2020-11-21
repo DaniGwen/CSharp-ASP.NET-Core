@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KniveGallery.Web.Migrations
 {
-    public partial class init2 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,11 +78,35 @@ namespace KniveGallery.Web.Migrations
                     HandleDescription = table.Column<string>(nullable: false),
                     Price = table.Column<double>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
                     KniveClass = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Knives", x => x.KniveId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    KniveId = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    Neighbourhood = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    IsDelivered = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -316,6 +340,9 @@ namespace KniveGallery.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "PersistedGrants");

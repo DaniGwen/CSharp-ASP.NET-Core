@@ -34,6 +34,8 @@ namespace KniveGallery.Web.Data
 
         public string ImagePath { get; set; }
 
+        public int Quantity { get; set; }
+
         public KniveClass KniveClass { get; set; }
 
         [JsonIgnore]

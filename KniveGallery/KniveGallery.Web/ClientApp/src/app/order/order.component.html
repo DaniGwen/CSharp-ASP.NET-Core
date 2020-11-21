@@ -1,0 +1,55 @@
+<article class="text-center">
+  <form [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
+    <h3 class="text-center mb-2">Your details</h3>
+    <div class="form-row justify-content-center">
+      <div class="col-md-3 mb-3">
+        <label>First name</label>
+        <input class="form-control" type="text" formControlName="firstName" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Last name</label>
+        <input class="form-control" type="text" formControlName="lastName" />
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-md-3 mb-3">
+        <label>Email</label>
+        <input class="form-control" type="text" formControlName="email" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Phone number</label>
+        <input class="form-control" type="number" min="0" formControlName="phoneNumber" />
+      </div>
+    </div>
+    <hr />
+    <h3 class="text-center mb-2">Address</h3>
+    <div class="form-row justify-content-center">
+      <div class="col-md-3 mb-3">
+        <label>City</label>
+        <input type="text" class="form-control" formControlName="city">
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Neighbourhood</label>
+        <input class="form-control" type="text" formControlName="neighbourhood" />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Street</label>
+        <input class="form-control" type="text" formControlName="street" />
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-sm-1 mb-3">
+        <label>Quantity</label>
+        <input class="form-control" type="number" min="1" value="1" formControlName="quantity" #quantity (click)="calculateKnivePrice(quantity.value)" />
+      </div>
+    </div>
+    <hr />
+    <h3 class="text-center">Price <label formControlName="price">{{totalPrice}}</label></h3>
+    <hr />
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-lg btn-outline-secondary" type="submit" [disabled]="!orderForm.valid">Order</button>
+      <a href="" (click)="hideOrder"><i class="back-button fas fa-arrow-circle-left"></i></a>
+    </div>
+  </form>
+</article>
+
