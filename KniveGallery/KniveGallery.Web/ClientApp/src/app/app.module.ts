@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
@@ -24,6 +24,8 @@ import { KniveCardComponent } from './knive-card/knive-card.component';
 import { OrderComponent } from './order/order.component';
 import { OrderService } from '../Services/orders.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component'
+import { OrderManagerComponent } from './order-manager/order-manager.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component'
     ContactInfoComponent,
     KniveCardComponent,
     OrderComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    OrderManagerComponent,
+    LoadingScreenComponent
   ],
   imports: [
     HttpClientModule,
@@ -57,7 +61,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component'
       { path: 'knive-details/:id', component: KniveDetailsComponent },
       { path: 'edit-knive/:id', component: EditKniveComponent },
       { path: 'privacy', component: PrivacyComponent },
-      { path: 'order-summary', component: OrderSummaryComponent }
+      { path: 'order-summary', component: OrderSummaryComponent },
+      { path: 'order-manager', component: OrderManagerComponent }
     ])
   ],
   providers: [

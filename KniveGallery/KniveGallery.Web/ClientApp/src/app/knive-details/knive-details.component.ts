@@ -14,11 +14,13 @@ export class KniveDetailsComponent {
   knive = new Knive();
   kniveImages: string[];
   isOrder: boolean = false;
+  public showLoader: boolean;
 
   constructor(private route: ActivatedRoute,
     private knivesService: KnivesService) { }
 
   ngOnInit() {
+    this.showLoader = true;
     this.route.paramMap.subscribe(params => {
       this.kniveId = params.get('id');
 
@@ -27,6 +29,9 @@ export class KniveDetailsComponent {
       })
 
       this.knivesService.getKniveImages(this.kniveId).subscribe((data: any) => {
+        if (data) {
+          this.showLoader = false;
+        }
         this.kniveImages = data;
       });
     });
@@ -34,9 +39,5 @@ export class KniveDetailsComponent {
 
   toggleOrder() {
     this.isOrder = !this.isOrder;
-  }
-
-  hideOrderHandler() {
-    this.isOrder = false;
   }
 }

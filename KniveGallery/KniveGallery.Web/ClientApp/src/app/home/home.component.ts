@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public kniveCl: string;
   public isAuthenticated: Observable<boolean>;
   public isKniveDeleted = false;
+  public showLoader: boolean;
 
   constructor(
     private authorizeService: AuthorizeService,
@@ -25,10 +26,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showLoader = true;
+
     this.kniveCl = 'All';
 
     this.knivesService.getAllknives()
       .subscribe((knives: Knive[]) => {
+        if (knives) {
+          this.showLoader = false;
+        }
         this.knives = knives;
       });
 
@@ -36,6 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   onDelete(kniveId: number) {
+    this.showLoader = true;
     this.knivesService.removeKnive(kniveId).subscribe(() => {
       this.isKniveDeleted = true;
       this.ngOnInit();
@@ -47,9 +54,14 @@ export class HomeComponent implements OnInit {
   }
 
   getKnivesByClass(kniveClass: string) {
+    this.showLoader = true;
+
     this.kniveCl = kniveClass;
     this.knivesService.getKnivesByClass(kniveClass)
       .subscribe((data: any) => {
+        if (data) {
+          this.showLoader = false;
+        }
         this.knives = data;
       });
   }

@@ -1,0 +1,51 @@
+<section class="container">
+  <h3 class="text-center">{{orderTitle}}</h3>
+  <hr />
+  <article class="filter__buttons">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-scale filter__btn-filter active">
+        <input type="radio" name="options" id="option1" checked (click)="filterOrders('Pending orders')">Pending orders
+      </label>
+      <label class="btn btn-scale filter__btn-filter">
+        <input type="radio" name="options" id="option2"
+               (click)="filterOrders('Send orders')">Send orders
+      </label>
+    </div>
+  </article>
+
+  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
+
+  <h4 class="text-center mt-5" *ngIf="orders.length === 0">No orders..</h4>
+
+  <article *ngIf="orders" class="d-flex justify-content-center">
+    <div class="row row-cols-3 mt-4 justify-content-around">
+      <section *ngFor="let order of orders">
+        <div class="col">
+          <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Knive id - <strong>{{order.kniveId}}</strong></h5>
+              <p class="card-text">Name - <strong>{{order.firstName}} {{order.lastName}}</strong></p>
+              <p class="card-text">Email - <strong>{{order.email}}</strong></p>
+              <p class="card-text">Phone number - <strong>{{order.phoneNumber}}</strong></p>
+              <p class="card-text">City - <strong>{{order.city}}</strong></p>
+              <p class="card-text">Residential aria - <strong>{{order.neighbourhood}}</strong></p>
+              <p class="card-text">Street - <strong>{{order.street}}</strong></p>
+              <div class="d-flex justify-content-around mt-3">
+                <button class="btn btn-sm btn-secondary" (click)="deleteOrder(order.orderId)"><i class="fas fa-trash mr-1"></i>Remove</button>
+                <button *ngIf="!order.isDelivered" class="btn btn-sm btn-success" (click)="dispatchOrder(order.orderId)"><i class="fas fa-paper-plane mr-1"></i>Confirm order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </article>
+
+  <div class="text-center mt-5">
+    <a class=" mr-5" [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
+  </div>
+</section>
+
+<div *ngIf="!errorMessage">{{errorMessage}}</div>
+

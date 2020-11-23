@@ -7,7 +7,7 @@
   background-color: $charcoal;
   border-radius: 20px;
   padding: 10px;
-  width: 60%;
+  width: 35%;
 }
 
 .contact-info {
@@ -15,10 +15,11 @@
     font-size: 20px;
     color: $mellowApricot;
     font-weight: 500;
+    margin-right: 15px
   }
 
   &__icon {
-    font-size: 28px;
+    font-size: 22px;
     color: $mellowApricot;
     margin-right: 2%;
   }
@@ -32,7 +33,7 @@
   }
 
   &__details {
-    margin-top: 15px;
+    margin-top: 5px;
     text-align: left;
     display: grid;
     grid-template-columns: 250px;

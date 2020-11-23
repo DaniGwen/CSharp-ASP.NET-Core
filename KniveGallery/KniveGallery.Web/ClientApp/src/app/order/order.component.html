@@ -1,4 +1,4 @@
-<article class="text-center">
+<article class="text-center mb-5">
   <form [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
     <h3 class="text-center mb-2">Your details</h3>
     <div class="form-row justify-content-center">
@@ -40,16 +40,18 @@
     <div class="form-row justify-content-center">
       <div class="col-sm-1 mb-3">
         <label>Quantity</label>
-        <input class="form-control" type="number" min="1" value="1" formControlName="quantity" #quantity (click)="calculateKnivePrice(quantity.value)" />
+        <input class="form-control" type="number" min="1" value="1" formControlName="quantity" #quantity (focusout)="calculateKnivePrice(quantity.value)" />
       </div>
     </div>
     <hr />
     <h3 class="text-center">Price <label formControlName="price">{{totalPrice}}</label></h3>
     <hr />
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-lg btn-outline-secondary" type="submit" [disabled]="!orderForm.valid">Order</button>
-      <a href="" (click)="hideOrder"><i class="back-button fas fa-arrow-circle-left"></i></a>
+    <div class="d-flex justify-content-center" *ngIf="!showLoader">
+      <a class="back-button mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
+      <button class="btn btn-lg btn-outline-info" type="submit" [disabled]="!orderForm.valid">Order</button>
+      <p *ngIf="!errorMessage">{{errorMessage}}</p>
     </div>
+    <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
   </form>
 </article>
 

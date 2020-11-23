@@ -11,7 +11,7 @@ namespace KniveGallery.Web.Services.EmailService
     {
         private readonly IConfiguration configuration;
 
-        private string Apikey => configuration.GetValue<string>("SendGrid:kniveGallery_ApiKey");
+        private string Apikey => configuration.GetValue<string>("SendGrid:KniveGallery_ApiKey");
 
         public EmailService(IConfiguration configuration)
         {

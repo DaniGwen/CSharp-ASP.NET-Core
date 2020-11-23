@@ -1,25 +1,25 @@
-<div class="home-container">
-  <article class="home__buttons">
+<div class="home-container mb-5">
+  <article class="filter__buttons mt-3">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-scale home__btn-filter">
+      <label class="btn btn-scale filter__btn-filter">
         <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
       </label>
-      <label class="btn btn-scale home__btn-filter">
+      <label class="btn btn-scale filter__btn-filter">
         <input type="radio" name="options" id="option4"
                (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
-      <label class="btn btn-scale home__btn-filter">
+      <label class="btn btn-scale filter__btn-filter">
         <input type="radio" name="options" id="option2"
                (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
-      <label class="btn btn-scale home__btn-filter">
+      <label class="btn btn-scale filter__btn-filter">
         <input type="radio" name="options" id="option3"
                (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
       </label>
     </div>
   </article>
 
-  <section>
+  <section *ngIf="!showLoader" class="text-center">
     <section class="fadein-animation" *ngIf="kniveCl === 'KitchenClass'">
       <h5 translate>home.KitchenKnives</h5>
     </section>
@@ -33,6 +33,8 @@
       <h5 translate>home.All</h5>
     </section>
   </section>
+
+  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
 
   <section class="fadein-animation" *ngIf="!knives?.length">
     <h5 translate>home.NoKnives<label>..</label></h5>

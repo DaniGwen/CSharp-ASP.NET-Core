@@ -39,9 +39,8 @@ a {
 .navbar__home-page {
     color: #FEBD69;
 }
-
     .navbar__home-page:hover {
-        color: initial;
+        color: #FEBD69;
     }
 
 .nav-link {
@@ -49,7 +48,7 @@ a {
 }
 
     .nav-link:hover {
-        color: initial;
+        color: #FEBD69;
     }
 
 .nav-link__nav {
@@ -76,9 +75,4 @@ a {
 
 .add-knive__info-wrapper {
     margin-bottom: 15px;
-}
-
-.fas {
-    font-size: 20px;
-    color: #4CC15B;
 }

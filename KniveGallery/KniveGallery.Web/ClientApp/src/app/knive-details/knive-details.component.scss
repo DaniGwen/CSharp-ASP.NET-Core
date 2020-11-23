@@ -1,28 +1,6 @@
-$grey200: #EEEEEE;
-$grey300: #E0E0E0;
-$grey400: #BDBDBD;
-$grey500: #9E9E9E;
-$grey600: #757575;
-$grey700: #616161;
-$grey800: #424242;
-$charcoal: #37475A;
-$coralRed: #FF4040;
-$mellowApricot: #FEBD69;
-$lightRedBerry3: #dd7e6b;
-$lightRedBerry2: #dd7e6b;
-$lightOrange: #f9cb9c;
-
-@keyframes revial {
-  from {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-
-  to {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-}
+@import "../shared-styles/custom-buttons.scss";
+@import "../shared-styles/colors.scss";
+@import "../shared-styles//animations.scss";
 
 // Create element and set animation
 @for $i from 1 through 10 {
@@ -167,14 +145,4 @@ label {
 .knive-details__images__no-images {
   text-align: center;
   margin-left: 300px;
-}
-
-.back-button {
-  font-size: 2rem;
-  color: $grey500;
-  transition: ease-out 0.1s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 }

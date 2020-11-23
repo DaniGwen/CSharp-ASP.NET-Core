@@ -1,5 +1,6 @@
 <div class="card mb-3" [routerLink]="['/knive-details', knive.kniveId]"
      routerLinkActive="active" style="max-width: 24rem;">
+  <p class="bg-secondary text-center" *ngIf="isAuthenticated | async"><small>Knive id - </small><strong class="text-xl-center">{{knive.kniveId}}</strong></p>
   <div class="home__image-wrapper">
     <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
     <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
@@ -11,11 +12,11 @@
   </div>
 </div>
 
-<div class="home__knives__card-admin" *ngIf="isAuthenticated | async">
-  <button class="btn btn-custom" [routerLink]="['/edit-knive', knive.kniveId]">
-    <i class="far fa-edit"></i> {{'home.Edit' | translate }}
-  </button>
-  <button class="btn btn-custom" (click)="deleteKnive(knive.kniveId)">
+<div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated | async">
+  <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteKnive(knive.kniveId)">
     <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
+  </button>
+  <button class="btn btn-custom btn-sm btn-outline-info" [routerLink]="['/edit-knive', knive.kniveId]">
+    <i class="far fa-edit"></i> {{'home.Edit' | translate }}
   </button>
 </div>

@@ -1,4 +1,6 @@
 export class Order {
+  orderId: number;
+  kniveId: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -9,5 +11,5 @@ export class Order {
   city: string;
   quantity: number;
   price: number;
-  kniveId: number;
+  isDelivered: boolean;
 }

@@ -14,4 +14,16 @@ export class OrderService {
   public postOrder(order: Order) {
     return this.http.post<Order>(`${this.Url}/AddOrder`, order, { headers: this.headers });
   }
+
+  public getOrders() {
+    return this.http.get<Order[]>(this.Url, { headers: this.headers });
+  }
+
+  public deleteOrder(orderId: number) {
+    return this.http.delete(`${this.Url}/${orderId}`, { headers: this.headers });
+  }
+
+  public dispatchOrder(orderId: number) {
+    return this.http.post(`${this.Url}/DispatchOrder/${orderId}`, { headers: this.headers });
+  }
 }

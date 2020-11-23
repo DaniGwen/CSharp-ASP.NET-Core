@@ -13,20 +13,21 @@ import { OrderService } from '../../Services/orders.service';
 })
 export class OrderComponent implements OnInit {
   @Input() public knive: Knive;
-  @Output() hideOrderComponent = new EventEmitter<boolean>();
   public totalPrice: number;
   private order = new Order();
+  public errorMessage: string;
+  public showLoader: boolean;
 
   orderForm = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', Validators.required],
-    phoneNumber: [0, Validators.required],
+    phoneNumber: ['', Validators.required],
     city: ['', Validators.required],
     neighbourhood: [''],
     street: ['', Validators.required],
     quantity: [1],
-    price: [0]
+    price: ['']
   });
 
   constructor(private formBuilder: FormBuilder,
@@ -43,16 +44,20 @@ export class OrderComponent implements OnInit {
   }
 
   OnSubmit() {
+    this.showLoader = true;
+
     this.order = this.orderForm.value;
     this.order.price = this.totalPrice;
     this.order.kniveId = this.knive.kniveId;
+
     this.orderService.postOrder(this.order)
-      .subscribe();
+      .subscribe((order) => {
+        if (order) {
+          this.showLoader = false;
+        }
+        this.router.navigateByUrl("/order-summary");
+      });
 
-    this.router.navigateByUrl("/order-summary");
-  }
 
-  hideOrder() {
-    this.hideOrderComponent.emit(true);
   }
 }

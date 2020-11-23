@@ -9,6 +9,9 @@ a.navbar-brand {
 .navbar {
   background-color: #37475a !important;
   color: $white;
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-gap: 20px;
 }
 
 .nav-link {
@@ -50,10 +53,6 @@ html {
 .lang-box {
   border-radius: 5px;
   border: 1px solid $mellowApricot;
-}
-
-.lang-box:hover {
-  border-width: 2px;
 }
 
 .lang-select-box {

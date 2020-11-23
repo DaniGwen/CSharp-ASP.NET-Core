@@ -1,22 +1,48 @@
 @import 'colors';
+@import 'animations.scss';
+
+.filter__buttons {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: space-evenly;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filter__btn-filter {
+  background-color: $charcoal;
+  color: $mellowApricot;
+  font-weight: 400;
+  border: 1px solid $cornflowerBlue3;
+}
+
+.btn-scale {
+  transition: linear 0.1s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
 
 .btn-custom {
   animation-name: slideIn;
   animation-duration: 0.5s;
-  border-radius: 10px;
-  background-color: $cornflowerBlue3;
-  color: $charcoal;
-  padding: 2px 0px;
-  animation-name: slideIn;
   transition: ease-out 0.1s;
   transform: scale(0.8);
-  font-weight: 600;
-
-  &:hover {
-    transform: scale(0.9);
-  }
 }
 
-.btn-confirm-message{
-    padding: 3px 10px;
+.btn-confirm-message {
+  padding: 3px 10px;
+}
+
+.back-button {
+  font-size: 2rem;
+  color: $grey500;
+  transition: ease-out 0.1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }

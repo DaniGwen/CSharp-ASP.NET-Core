@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
   Router,
@@ -15,7 +15,7 @@ import {
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  public showOverlay = true;
+  public showOverlay: boolean = true;
   title = 'app';
 
   constructor(private translate: TranslateService,

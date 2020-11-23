@@ -45,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\loading-screen\loading-screen.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\order-manager\order-manager.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\order-summary\order-summary.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\Services\orders.service.ts" />
   </ItemGroup>
