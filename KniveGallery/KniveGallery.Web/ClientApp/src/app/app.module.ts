@@ -7,25 +7,56 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
+import { AuthorizeGuard } from '../api-authorization/authorize.guard';
+import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
-import { EditKniveComponent } from 'src/app/edit-knive/edit-knive.component';
-import { KnivesService } from 'src/Services/knives.service';
+import { EditKniveComponent } from './edit-knive/edit-knive.component';
+import { KnivesService } from '../Services/knives.service';
 import { FooterComponent } from './footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ContactInfoComponent } from "./contact-info/contact-info.component";
 import { KniveCardComponent } from './knive-card/knive-card.component';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './orders/order/order.component';
 import { OrderService } from '../Services/orders.service';
-import { OrderSummaryComponent } from './order-summary/order-summary.component'
-import { OrderManagerComponent } from './order-manager/order-manager.component';
+import { OrderSummaryComponent } from './orders/order-summary/order-summary.component'
+import { OrderManagerComponent } from './orders/order-manager/order-manager.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
+import { environment } from '../environments/environment';
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: environment.apiUrl
+  },
+  "position": "bottom-right",
+  "theme": "classic",
+  "palette": {
+    "popup": {
+      "background": "#000000",
+      "text": "#ffffff",
+      "link": "#ffffff"
+    },
+    "button": {
+      "background": "#f1d600",
+      "text": "#000000",
+      "border": "transparent"
+    }
+  },
+  "type": "info",
+  "content": {
+    "message": "This website uses cookies to ensure you get the best experience on our website.",
+    "dismiss": "Got it!",
+    "deny": "Refuse cookies",
+    "link": "Learn more",
+    "href": "https://cookiesandyou.com",
+    "policy": "Cookie Policy"
+  }
+};
 
 @NgModule({
   declarations: [
@@ -45,6 +76,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
   ],
   imports: [
     HttpClientModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -26,6 +26,12 @@
   }
 }
 
+.btn-shadow {
+  &:hover {
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.78);
+  }
+}
+
 .btn-custom {
   animation-name: slideIn;
   animation-duration: 0.5s;

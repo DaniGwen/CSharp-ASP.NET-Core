@@ -95,7 +95,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        context.Database.EnsureDeleted();
+                        //context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
 
                         if (!context.Users.Any())

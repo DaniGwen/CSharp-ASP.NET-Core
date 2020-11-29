@@ -3,19 +3,23 @@
   <hr />
   <article class="filter__buttons">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-scale filter__btn-filter active">
+      <label class="btn btn-shadow filter__btn-filter">
+        <input type="radio" name="options" id="option3"
+               (click)="filterOrders('All')">All
+      </label>
+      <label class="btn btn-shadow filter__btn-filter active">
         <input type="radio" name="options" id="option1" checked (click)="filterOrders('Pending orders')">Pending orders
       </label>
-      <label class="btn btn-scale filter__btn-filter">
+      <label class="btn btn-shadow filter__btn-filter">
         <input type="radio" name="options" id="option2"
                (click)="filterOrders('Send orders')">Send orders
       </label>
     </div>
   </article>
 
-  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
-
   <h4 class="text-center mt-5" *ngIf="orders.length === 0">No orders..</h4>
+
+  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
 
   <article *ngIf="orders" class="d-flex justify-content-center">
     <div class="row row-cols-3 mt-4 justify-content-around">

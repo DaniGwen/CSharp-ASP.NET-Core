@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../../Models/order';
-import { OrderService } from '../../Services/orders.service';
+import { Order } from '../../../Models/order';
+import { OrderService } from '../../../Services/orders.service';
 
 @Component({
   selector: 'app-order-manager',
@@ -22,6 +22,7 @@ export class OrderManagerComponent implements OnInit {
     this.ordersService.getOrders().subscribe((orders: Order[]) => {
       this.orders = orders;
       this.showLoader = false;
+      this.orderTitle = "All orders"
     });
   }
 
@@ -30,10 +31,15 @@ export class OrderManagerComponent implements OnInit {
 
     this.ordersService.deleteOrder(orderId).subscribe((data) => {
       this.ordersService.getOrders().subscribe((orders: Order[]) => {
-        if (orders) {
-          this.showLoader = false;
+        success => {
+          if (orders) {
+            this.showLoader = false;
+          }
+          this.orders = orders;
         }
-        this.orders = orders;
+        err => {
+          this.errorMessage = "Could not delete order.";
+        }
       });
     });
   }
@@ -57,7 +63,7 @@ export class OrderManagerComponent implements OnInit {
       });
       this.orderTitle = orderStatus;
     }
-    else {
+    else if (orderStatus === "Send orders" || orderStatus === "Изпратени поръчки") {
       this.ordersService.getOrders().subscribe((orders: Order[]) => {
         if (orders) {
           this.showLoader = false;
@@ -66,7 +72,8 @@ export class OrderManagerComponent implements OnInit {
       });
       this.orderTitle = orderStatus;
     }
-
-    this.ngOnInit();
+    else {
+      this.ngOnInit();
+    }
   }
 }

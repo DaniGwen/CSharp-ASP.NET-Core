@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventEmitter } from '@angular/core';
-import { Knive } from '../../Models/knive';
-import { Order } from '../../Models/order';
-import { OrderService } from '../../Services/orders.service';
+import { Knive } from '../../../Models/knive';
+import { Order } from '../../../Models/order';
+import { OrderService } from '../../../Services/orders.service';
 
 @Component({
   selector: 'app-order',

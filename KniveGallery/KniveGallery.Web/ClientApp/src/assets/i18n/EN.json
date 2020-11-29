@@ -29,10 +29,35 @@
     "ContactInfo": "For more information"
   },
   "footer": {
-    "Mobile" : "Mobile",
-    "Email" : "Email"
+    "Mobile": "Mobile",
+    "Email": "Email"
   },
   "Nav": {
-    "Home" : "Home"
+    "Home": "Home"
+  },
+  "order": {
+    "Your details": "Your details",
+    "First name": "First name",
+    "Name is required.": "Name is required.",
+    "Name must be atleast 3 letters.": "Name must be atleast 3 letters.",
+    "Last name": "Last name",
+    "Last name is required.": "Last name is required.",
+    "Last name must be atleast 3 letters.": "Last name must be atleast 3 letters.",
+    "Email": "Email",
+    "Email is required.": "Email is required.",
+    "Phone number": "Phone number",
+    "Phone number is required.": "Phone number is required.",
+    "Phone number must be atleast 4 digits.": "Phone number must be atleast 4 digits.",
+    "Address": "Address",
+    "City": "City",
+    "City is required.": "City is required.",
+    "City must be atleast 3 letters.": "City must be atleast 3 letters.",
+    "Neighbourhood": "Neighbourhood",
+    "Street": "Street",
+    "Street is required.": "Street is required.",
+    "Street must be atleast 3 letters.": "Street must be atleast 3 letters.",
+    "Quantity": "Quantity",
+    "Price": "Price",
+    "Order": "Order"
   }
 }
