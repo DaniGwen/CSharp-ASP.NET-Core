@@ -1,4 +1,5 @@
-<form #formValidation (ngSubmit)="onSubmit()">
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <h3 class="text-center">Knive Id {{knive.kniveId}}</h3>
   <div class="edit-knive__info-wrapper edit-knive__info-lable">
     <i class="fas fa-info-circle"></i>
     <small>Всички размери са в милиметри.</small>
@@ -7,41 +8,103 @@
     <section class="edit-knive__edge-info">
       <div class="form-group">
         <label>Edge width</label>
-        <input name="knive.edgeWidth" required [(ngModel)]="knive.edgeWidth" class="form-control form-control-sm" placeholder="Широчина"
+        <input name="edgewidth"
+               type="number"
+               min="0"
+               [(ngModel)]="knive.edgeWidth"
+               class="form-control form-control-sm"
+               placeholder="Широчина"
+               required
+               ngModel
+               #edgewidth="ngModel"
                autofocus />
+        <label class="alert alert-danger" *ngIf="edgewidth.invalid && edgewidth.touched">
+          Полето е задължително.
+        </label>
       </div>
       <div class="form-group">
         <label>Edge tickness</label>
-        <input name="knive.edgeTickness" required [(ngModel)]="knive.edgeTickness" placeholder="Дебелина"
-               class="form-control form-control-sm" />
+        <input name="edgethickness"
+               type="number"
+               min="0"
+               [(ngModel)]="knive.edgeThickness"
+               placeholder="Дебелина"
+               class="form-control form-control-sm"
+               ngModel
+               required
+               #edgethickness="ngModel" />
+        <label class="alert alert-danger" *ngIf="edgethickness.invalid && edgethickness.touched">
+          Полето е задължително.
+        </label>
       </div>
       <div class="form-group">
         <label>Edge length</label>
-        <input name="knive.edgeLength" [(ngModel)]="knive.edgeLength" type="number" placeholder="Дължина"
-               class="form-control form-control-sm" />
+        <input name="edgelength"
+               type="number"
+               min="0"
+               [(ngModel)]="knive.edgeLength"
+               placeholder="Дължина"
+               class="form-control form-control-sm"
+               required
+               ngModel
+               #edgelength="ngModel" />
+        <label class="alert alert-danger" *ngIf="edgelength.invalid && edgelength.touched">
+          Полето е задължително.
+        </label>
       </div>
       <div class="form-group">
         <label>Total length</label>
-        <input name="knive.totalLength" [(ngModel)]="knive.totalLength" type="number" placeholder="Обща дължина на ножа"
-               class="form-control form-control-sm" />
+        <input name="totallength"
+               type="number"
+               min="0"
+               [(ngModel)]="knive.totalLength"
+               placeholder="Обща дължина на ножа"
+               class="form-control form-control-sm"
+               required
+               ngModel
+               #totallength="ngModel" />
+        <label class="alert alert-danger" *ngIf="totallength.invalid && totallength.touched">
+          Полето е задължително.
+        </label>
       </div>
     </section>
     <section>
       <div class="form-group">
         <label>Edge made</label>
-        <input name="knive.edgeMade" required [(ngModel)]="knive.edgeMade" placeholder="Сплав"
-               class="form-control form-control-sm" />
+        <input name="edgemade"
+               required
+               [(ngModel)]="knive.edgeMade"
+               placeholder="Сплав на острието"
+               class="form-control form-control-sm"
+               ngModel
+               #edgemade="ngModel" />
+        <label class="alert alert-danger" *ngIf="edgemade.invalid && edgemade.touched">
+          Полето е задължително.
+        </label>
       </div>
       <div class="form-group">
         <label>Handle type</label>
-        <input name="knive.handleDescription" required [(ngModel)]="knive.handleDescription" placeholder="Тип на дръжката"
-               class="form-control form-control-sm" />
+        <input name="handledescription"
+               required
+               [(ngModel)]="knive.handleDescription"
+               placeholder="Тип (описание) на дръжката"
+               class="form-control form-control-sm"
+               ngModel
+               #handledescription />
+        <label class="alert alert-danger" *ngIf="handledescription.invalid && handledescription.touched">
+          Полето е задължително.
+        </label>
       </div>
       <div class="form-group">
         <label>Price</label>
-        <input name="knive.price" [(ngModel)]="knive.price" type="number" placeholder="цена"
+        <input name="knive.price"
+               [(ngModel)]="knive.price"
+               type="number"
+               placeholder="цена"
                class="form-control form-control-sm" />
       </div>
+    </section>
+    <section>
       <div class="form-group">
         <label>{{'home.SelectImages'|translate}}:</label>
         <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
@@ -52,9 +115,9 @@
     </section>
   </article>
   <article class="edit-knive__buttons">
-    <p *ngIf="status">{{status}}</p>
+    <h4 class="edit-knive__status" *ngIf="status">{{status}}</h4>
     <hr />
-    <button type="submit" class="btn btn-lg btn-outline-info">{{'home.Save' | translate}}</button>
+    <button type="submit" [disabled]="!form.valid" class="btn btn-outline-info">{{'home.Save' | translate}}</button>
     <hr />
     <a [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
   </article>

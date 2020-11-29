@@ -4,7 +4,7 @@ export class Knive {
   totalLength: number;
   edgeLength: number;
   edgeWidth: number;
-  edgeTickness: number;
+  edgeThickness: number;
   handleDescription: string;
   price: number;
   imagePath: string;

@@ -95,7 +95,7 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                       // context.Database.EnsureDeleted();
+                        context.Database.EnsureDeleted();
                         context.Database.EnsureCreated();
 
                         if (!context.Users.Any())
@@ -189,7 +189,7 @@ namespace KniveGallery.Web
                      HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 40,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high1.jpg",
@@ -201,7 +201,7 @@ namespace KniveGallery.Web
                      HandleDescription = "Mixed Polimer",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 45,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle1.jpg",
@@ -213,7 +213,7 @@ namespace KniveGallery.Web
                      HandleDescription = "Mixed type",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 70,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high2.jpg",
@@ -225,7 +225,7 @@ namespace KniveGallery.Web
                      HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 85,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen1.jpg",
@@ -237,7 +237,7 @@ namespace KniveGallery.Web
                      HandleDescription = "Plastic",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 90,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle2.jpg",
@@ -249,7 +249,7 @@ namespace KniveGallery.Web
                     HandleDescription = "Polymer and Plastic",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 90,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high3.jpg",
@@ -260,7 +260,7 @@ namespace KniveGallery.Web
                     HandleDescription = "Mixed alloy",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     Price = 70,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen2.jpg",
@@ -271,7 +271,7 @@ namespace KniveGallery.Web
                     HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
-                    EdgeTickness =3,
+                    EdgeThickness =3,
                     EdgeMade = "Stainless steel",
                     Price = 130,
                     KniveClass = KniveClass.KitchenClass,
@@ -281,7 +281,7 @@ namespace KniveGallery.Web
                 {
                     HandleDescription = "plastic ",
                     EdgeLength = 12,
-                    EdgeTickness = 2,
+                    EdgeThickness = 2,
                     EdgeWidth = 8,
                     EdgeMade = "Steel",
                     Price = 65,

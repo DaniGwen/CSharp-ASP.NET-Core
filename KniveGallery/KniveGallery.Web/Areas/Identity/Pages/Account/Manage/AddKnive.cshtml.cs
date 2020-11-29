@@ -45,7 +45,7 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
             public double EdgeWidth { get; set; }
 
             [Display(Name = "Edge tickness")]
-            public double EdgeTickness { get; set; }
+            public double EdgeThickness { get; set; }
 
             [Display(Name = "Total length")]
             [Required(ErrorMessage = "Fill out the input field")]
@@ -86,7 +86,7 @@ namespace KniveGallery.Web.Areas.Identity.Pages.Account
                     var knive = new Knive
                     {
                         EdgeWidth = Input.EdgeWidth,
-                        EdgeTickness = Input.EdgeTickness,
+                        EdgeThickness = Input.EdgeThickness,
                         EdgeMade = Input.EdgeMade,
                         EdgeLength = Input.EdgeLength,
                         HandleDescription = Input.HandleDescription,

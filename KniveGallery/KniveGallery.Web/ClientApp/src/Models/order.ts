@@ -12,4 +12,6 @@ export class Order {
   quantity: number;
   price: number;
   isDelivered: boolean;
+  orderDate: string;
+  dispatchDate: string;
 }

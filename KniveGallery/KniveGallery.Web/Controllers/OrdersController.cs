@@ -26,8 +26,10 @@ namespace KniveGallery.Web.Controllers
         [Route("AddOrder")]
         public async Task<IActionResult> AddOrder([FromBody] Order order)
         {
-            var message = "Ok";
+            var message = "Successful order.";
             order.IsDelivered = false;
+            order.OrderDate = DateTime.Now.ToString("d-MM-yyyy H:mm");
+
             try
             {
                 await this.dbContext.AddAsync(order);
@@ -41,7 +43,7 @@ namespace KniveGallery.Web.Controllers
                 message = "Order could not be processed.";
             }
 
-            return Ok(order);
+            return new JsonResult(message);
         }
 
         [HttpGet]
@@ -78,6 +80,7 @@ namespace KniveGallery.Web.Controllers
 
                 if (orderDb != null)
                 {
+                    orderDb.DispatchDate = DateTime.Now.ToString("d-MM-yyyy H:mm");
                     orderDb.IsDelivered = true;
                     await this.dbContext.SaveChangesAsync();
                 }

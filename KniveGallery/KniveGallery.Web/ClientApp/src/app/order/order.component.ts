@@ -19,15 +19,15 @@ export class OrderComponent implements OnInit {
   public showLoader: boolean;
 
   orderForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', Validators.required],
-    phoneNumber: ['', Validators.required],
-    city: ['', Validators.required],
+    firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    email: ['', [Validators.required, Validators.email]],
+    phoneNumber: ['', [Validators.required, Validators.min(4)]],
+    city: ['', [Validators.required, Validators.minLength(3)]],
     neighbourhood: [''],
-    street: ['', Validators.required],
+    street: ['', [Validators.required, Validators.minLength(3)]],
     quantity: [1],
-    price: ['']
+    price: []
   });
 
   constructor(private formBuilder: FormBuilder,

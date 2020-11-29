@@ -4,21 +4,52 @@
     <div class="form-row justify-content-center">
       <div class="col-md-3 mb-3">
         <label>First name</label>
-        <input class="form-control" type="text" formControlName="firstName" />
+        <input class="form-control" type="text" formControlName="firstName" id="firstName" />
+        <div *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty)
+             && orderForm.get('firstName').errors">
+          <label *ngIf="orderForm.get('firstName').errors.required" class="alert alert-danger">
+            Name is required.
+          </label>
+          <label *ngIf="orderForm.get('firstName').errors.minlength" class="alert alert-danger">
+            Name must be atleast 3 letters.
+          </label>
+        </div>
       </div>
       <div class="col-md-3 mb-3">
         <label>Last name</label>
         <input class="form-control" type="text" formControlName="lastName" />
+        <div *ngIf="(orderForm.get('lastName').touched || orderForm.get('lastName').dirty)
+             && orderForm.get('lastName').errors">
+          <label *ngIf="orderForm.get('lastName').errors.required" class="alert alert-danger">
+            Last name is required.
+          </label>
+          <label *ngIf="orderForm.get('lastName').errors.minlength" class="alert alert-danger">
+            Last name must be atleast 3 letters.
+          </label>
+        </div>
       </div>
     </div>
     <div class="form-row justify-content-center">
       <div class="col-md-3 mb-3">
         <label>Email</label>
         <input class="form-control" type="text" formControlName="email" />
+        <label *ngIf="(orderForm.get('email').touched || orderForm.get('email').dirty)
+             && orderForm.get('email').errors" class="alert alert-danger">
+          Email is required.
+        </label>
       </div>
       <div class="col-md-3 mb-3">
         <label>Phone number</label>
         <input class="form-control" type="number" min="0" formControlName="phoneNumber" />
+        <div *ngIf="(orderForm.get('phoneNumber').touched || orderForm.get('phoneNumber').dirty)
+             && orderForm.get('phoneNumber').errors">
+          <label *ngIf="orderForm.get('phoneNumber').errors.required" class="alert alert-danger">
+            Phone number is required.
+          </label>
+          <label *ngIf="orderForm.get('phoneNumber').errors.minlength" class="alert alert-danger">
+            Phone number must be atleast 4 digits.
+          </label>
+        </div>
       </div>
     </div>
     <hr />
@@ -27,16 +58,37 @@
       <div class="col-md-3 mb-3">
         <label>City</label>
         <input type="text" class="form-control" formControlName="city">
+        <div *ngIf="(orderForm.get('city').touched || orderForm.get('city').dirty)
+             && orderForm.get('city').errors">
+          <label *ngIf="orderForm.get('city').errors.required" class="alert alert-danger">
+            City is required.
+          </label>
+          <label *ngIf="orderForm.get('city').errors.minlength" class="alert alert-danger">
+            City must be atleast 3 letters.
+          </label>
+        </div>
       </div>
       <div class="col-md-3 mb-3">
         <label>Neighbourhood</label>
         <input class="form-control" type="text" formControlName="neighbourhood" />
       </div>
+    </div>
+    <div class="form-row justify-content-center">
       <div class="col-md-3 mb-3">
         <label>Street</label>
         <input class="form-control" type="text" formControlName="street" />
+        <div *ngIf="(orderForm.get('street').touched || orderForm.get('street').dirty)
+             && orderForm.get('street').errors">
+          <label *ngIf="orderForm.get('street').errors.required" class="alert alert-danger">
+            Street is required.
+          </label>
+          <label *ngIf="orderForm.get('street').errors.minlength" class="alert alert-danger">
+            Street must be atleast 3 letters.
+          </label>
+        </div>
       </div>
     </div>
+
     <div class="form-row justify-content-center">
       <div class="col-sm-1 mb-3">
         <label>Quantity</label>
@@ -46,9 +98,13 @@
     <hr />
     <h3 class="text-center">Price <label formControlName="price">{{totalPrice}}</label></h3>
     <hr />
-    <div class="d-flex justify-content-center" *ngIf="!showLoader">
-      <a class="back-button mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
-      <button class="btn btn-lg btn-outline-info" type="submit" [disabled]="!orderForm.valid">Order</button>
+    <div  *ngIf="!showLoader">
+      <div class="row justify-content-center">
+        <button class="btn-round btn-round--order btn-custom" type="submit" [disabled]="!orderForm.valid">Order</button>
+      </div>
+      <div class="row justify-content-center ml-4 mt-2">
+        <a class="back-button mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
+      </div>
       <p *ngIf="!errorMessage">{{errorMessage}}</p>
     </div>
     <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>

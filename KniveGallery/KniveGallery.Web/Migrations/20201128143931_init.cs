@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KniveGallery.Web.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,7 +74,7 @@ namespace KniveGallery.Web.Migrations
                     TotalLength = table.Column<double>(nullable: false),
                     EdgeLength = table.Column<double>(nullable: false),
                     EdgeWidth = table.Column<double>(nullable: true),
-                    EdgeTickness = table.Column<double>(nullable: true),
+                    EdgeThickness = table.Column<double>(nullable: true),
                     HandleDescription = table.Column<string>(nullable: false),
                     Price = table.Column<double>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true),
@@ -102,7 +102,9 @@ namespace KniveGallery.Web.Migrations
                     City = table.Column<string>(nullable: true),
                     Neighbourhood = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
-                    IsDelivered = table.Column<bool>(nullable: false)
+                    IsDelivered = table.Column<bool>(nullable: false),
+                    OrderDate = table.Column<string>(nullable: true),
+                    DispatchDate = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

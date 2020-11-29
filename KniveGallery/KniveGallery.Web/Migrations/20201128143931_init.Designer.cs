@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KniveGallery.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201121173429_initial")]
-    partial class initial
+    [Migration("20201128143931_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,7 +117,7 @@ namespace KniveGallery.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("EdgeTickness")
+                    b.Property<double?>("EdgeThickness")
                         .HasColumnType("float");
 
                     b.Property<double?>("EdgeWidth")
@@ -245,6 +245,9 @@ namespace KniveGallery.Web.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DispatchDate")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -261,6 +264,9 @@ namespace KniveGallery.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Neighbourhood")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderDate")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PhoneNumber")

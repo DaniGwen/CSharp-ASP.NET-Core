@@ -57,15 +57,40 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     ApiAuthorizationModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'knive-details/:id', component: KniveDetailsComponent },
-      { path: 'edit-knive/:id', component: EditKniveComponent },
-      { path: 'privacy', component: PrivacyComponent },
-      { path: 'order-summary', component: OrderSummaryComponent },
-      { path: 'order-manager', component: OrderManagerComponent }
+      {
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'knive-details/:id',
+        component: KniveDetailsComponent
+      },
+
+      {
+        path: 'privacy',
+        component: PrivacyComponent
+      },
+      {
+        path: 'order-summary',
+        component: OrderSummaryComponent
+      },
+      {
+        path: 'order-manager',
+        component: OrderManagerComponent,
+        canActivate: [AuthorizeGuard],
+        data: { isAuthenticated: true }
+      },
+      {
+        path: 'edit-knive/:id',
+        component: EditKniveComponent,
+        canActivate: [AuthorizeGuard],
+        data: { isAuthenticated: true }
+      }
     ])
   ],
   providers: [
+    { provide: AuthorizeGuard, useClass: AuthorizeGuard },
     { provide: TranslateService, useClass: TranslateService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     { provide: KnivesService, useClass: KnivesService },

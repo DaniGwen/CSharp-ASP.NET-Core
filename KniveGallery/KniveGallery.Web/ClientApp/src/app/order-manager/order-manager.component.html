@@ -30,6 +30,8 @@
               <p class="card-text">City - <strong>{{order.city}}</strong></p>
               <p class="card-text">Residential aria - <strong>{{order.neighbourhood}}</strong></p>
               <p class="card-text">Street - <strong>{{order.street}}</strong></p>
+              <p class="card-text">Order date - <strong>{{order.orderDate}}</strong></p>
+              <p class="card-text" *ngIf="order.dispatchDate">Dispatched - <strong>{{order.dispatchDate}}</strong> </p>
               <div class="d-flex justify-content-around mt-3">
                 <button class="btn btn-sm btn-secondary" (click)="deleteOrder(order.orderId)"><i class="fas fa-trash mr-1"></i>Remove</button>
                 <button *ngIf="!order.isDelivered" class="btn btn-sm btn-success" (click)="dispatchOrder(order.orderId)"><i class="fas fa-paper-plane mr-1"></i>Confirm order</button>

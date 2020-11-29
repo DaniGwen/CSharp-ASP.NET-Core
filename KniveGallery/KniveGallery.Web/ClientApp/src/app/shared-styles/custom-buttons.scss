@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'colors.scss';
 @import 'animations.scss';
 
 .filter__buttons {
@@ -45,4 +45,36 @@
   &:hover {
     transform: scale(1.2);
   }
+}
+
+.btn-round {
+  border-radius: 50%;
+  border-color: $charcoal;
+  padding: 30px 20px;
+  font-weight: 600;
+  font-size: 20px;
+  color: $gunmetal;
+  background-color: $grey200;
+
+  &:disabled {
+    background-color: $grey400;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: $charcoal;
+    color: $mellowApricot;
+  }
+}
+
+.btn-round--order {
+  &:hover:not(:disabled) {
+    background-color: $mellowApricot;
+    color: $charcoal;
+  }
+}
+
+.btn-arrow {
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-right: 5px solid $whatsupGreen;
 }

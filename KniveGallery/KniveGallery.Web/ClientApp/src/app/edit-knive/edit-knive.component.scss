@@ -1,4 +1,5 @@
 @import '../shared-styles/colors';
+@import '../shared-styles/custom-buttons.scss';
 
 .edit-knive {
   display: grid;
@@ -28,12 +29,15 @@
   }
 }
 
-.back-button {
-  font-size: 2rem;
-  color: $grey500;
-  transition: ease-out 0.1s;
+input.ng-valid{
+    border-left: 5px solid green;
+}
 
-  &:hover {
-    transform: scale(1.2);
-  }
+input.ng-invalid.ng-touched{
+    border-left: 5px solid red;
+}
+
+.edit-knive__status{
+    border-left: 5px solid green;
+    width: 300px;
 }

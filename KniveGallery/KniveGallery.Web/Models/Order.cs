@@ -1,4 +1,6 @@
-﻿namespace KniveGallery.Web.Models
+﻿using System;
+
+namespace KniveGallery.Web.Models
 {
     public class Order
     {
@@ -14,5 +16,7 @@
         public string Neighbourhood { get; set; }
         public string Street { get; set; }
         public bool IsDelivered { get; set; }
+        public string OrderDate { get; set; }
+        public string DispatchDate { get; set; }
     }
 }
