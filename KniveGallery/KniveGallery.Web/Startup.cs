@@ -186,6 +186,7 @@ namespace KniveGallery.Web
             {
                 new Knive
                 {
+                    KniveId= 10,
                      HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -198,6 +199,7 @@ namespace KniveGallery.Web
                 },
                 new Knive
                 {
+                     KniveId= 20,
                      HandleDescription = "Mixed Polimer",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -210,6 +212,7 @@ namespace KniveGallery.Web
                 },
                 new Knive
                 {
+                     KniveId= 30,
                      HandleDescription = "Mixed type",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -222,6 +225,7 @@ namespace KniveGallery.Web
                 },
                 new Knive
                 {
+                     KniveId= 40,
                      HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -234,6 +238,7 @@ namespace KniveGallery.Web
                 },
                  new Knive
                 {
+                      KniveId= 50,
                      HandleDescription = "Plastic",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -246,6 +251,7 @@ namespace KniveGallery.Web
         },
                 new Knive
                 {
+                     KniveId= 60,
                     HandleDescription = "Polymer and Plastic",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -257,6 +263,7 @@ namespace KniveGallery.Web
                 },
                 new Knive
                 {
+                     KniveId= 70,
                     HandleDescription = "Mixed alloy",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -268,6 +275,7 @@ namespace KniveGallery.Web
                 },
                 new Knive
                 {
+                     KniveId= 80,
                     HandleDescription = "Elephant tusk",
                     EdgeLength = 6.5,
                     EdgeWidth = 4,
@@ -279,6 +287,7 @@ namespace KniveGallery.Web
                 },
                    new Knive
                 {
+                    KniveId= 90,
                     HandleDescription = "plastic ",
                     EdgeLength = 12,
                     EdgeThickness = 2,

@@ -11,6 +11,7 @@ export class KniveCardComponent {
 
   @Input() public knive: Knive;
   @Input() public isAuthenticated: boolean;
+  @Input() public isAdmin: boolean;
   @Output() public deleteKniveRequest = new EventEmitter<number>();
 
   constructor() {

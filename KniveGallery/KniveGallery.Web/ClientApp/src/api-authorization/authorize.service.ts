@@ -31,18 +31,20 @@ export enum AuthenticationResultStatus {
 
 export interface IUser {
   name?: string;
+  role?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizeService {
-  // By default pop ups are disabled because they don't work properly on Edge.
-  // If you want to enable pop up authentication simply set this flag to false.
 
   private popUpDisabled = true;
   private userManager: UserManager;
   private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
+
+  public adminEmail: string = "drug_boy@abv.bg";
+  public isAdmin: boolean = false;
 
   public isAuthenticated(): Observable<boolean> {
     return this.getUser().pipe(map(u => !!u));
@@ -61,14 +63,6 @@ export class AuthorizeService {
         map(user => user && user.access_token));
   }
 
-  // We try to authenticate the user in three different ways:
-  // 1) We try to see if we can authenticate the user silently. This happens
-  //    when the user is already logged in on the IdP and is done using a hidden iframe
-  //    on the client.
-  // 2) We try to authenticate the user using a PopUp Window. This might fail if there is a
-  //    Pop-Up blocker or the user has disabled PopUps.
-  // 3) If the two methods above fail, we redirect the browser to the IdP to perform a traditional
-  //    redirect flow.
   public async signIn(state: any): Promise<IAuthenticationResult> {
     await this.ensureUserManagerInitialized();
     let user: User = null;
@@ -111,6 +105,9 @@ export class AuthorizeService {
     try {
       await this.ensureUserManagerInitialized();
       const user = await this.userManager.signinCallback(url);
+      if (user.profile.name === this.adminEmail) {
+        this.isAdmin = true;
+      }
       this.userSubject.next(user && user.profile);
       return this.success(user && user.state);
     } catch (error) {

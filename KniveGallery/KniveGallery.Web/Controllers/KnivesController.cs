@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KniveGallery.Web.Data;
+using KniveGallery.Web.DTOs;
 using KniveGallery.Web.Models;
 using KniveGallery.Web.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -102,7 +103,7 @@ namespace KniveGallery.Web.Controllers
             {
                 if (!KniveExists(id))
                 {
-                    return BadRequest("Error!");
+                   return BadRequest("Error!");
                 }
                 else
                 {
@@ -113,14 +114,53 @@ namespace KniveGallery.Web.Controllers
             return new JsonResult("Knive saved!");
         }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<ActionResult<Knive>> PostKnife(Knive knive)
-        {
-            context.Knives.Add(knive);
-            await context.SaveChangesAsync();
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<ActionResult<Knive>> PostKnife(Knive knive)
+        //{
+        //    context.Knives.Add(knive);
+        //    await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetKnife", new { id = knive.KniveId }, knive);
+        //    return CreatedAtAction("GetKnife", new { id = knive.KniveId }, knive);
+        //}
+
+        [Authorize]
+        [Route("AddKnive")]
+        [HttpPost]
+        public async Task<ActionResult<Knive>> AddKnive(KniveDto knive)
+        {
+            try
+            {
+                var maxId = this.context.Knives
+                    .OrderByDescending(x => x.KniveId)
+                    .Take(1)
+                    .Select(x =>  x.KniveId )
+                    .SingleOrDefault();
+
+                maxId += 10;
+
+                var newKnive = new Knive
+                {
+                    KniveId = maxId,
+                    EdgeWidth = knive.EdgeWidth,
+                    EdgeThickness = knive.EdgeThickness,
+                    EdgeMade = knive.EdgeMade,
+                    EdgeLength = knive.EdgeLength,
+                    HandleDescription = knive.HandleDescription,
+                    TotalLength = knive.TotalLength,
+                    Price = knive.Price,
+                    KniveClass = (KniveClass)Enum.Parse(typeof(KniveClass), knive.KniveClass)
+                };
+
+                await this.context.Knives.AddAsync(newKnive);
+                await this.context.SaveChangesAsync();
+
+                return Ok(newKnive);
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
         }
 
         [Authorize]
@@ -229,7 +269,6 @@ namespace KniveGallery.Web.Controllers
             {
                 return false;
             }
-
         }
     }
 }

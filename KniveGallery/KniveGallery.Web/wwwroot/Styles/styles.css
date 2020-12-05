@@ -59,20 +59,3 @@ a {
 .footer {
     background-color: #37475A;
 }
-
-.add-knive__input-container {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    grid-column-gap: 30px;
-}
-
-.add-knive__info-lable {
-    background-color: #c9daf8;
-    color: #232F3E;
-    border-radius: 5px;
-    padding: 3px 7px;
-}
-
-.add-knive__info-wrapper {
-    margin-bottom: 15px;
-}

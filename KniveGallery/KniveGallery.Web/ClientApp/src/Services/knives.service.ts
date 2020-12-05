@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment'
+import { Observable } from 'rxjs';
+import { Knive } from '../Models/knive';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +31,8 @@ export class KnivesService {
     return this.http.get(this.Url);
   }
 
-  public add(knive) {
-    return this.http.post(this.Url, knive, { headers: this.headers });
+  public add(knive: Knive): Observable<Knive> {
+    return this.http.post<Knive>(`${this.Url}/AddKnive`, knive, { headers: this.headers });
   }
 
   public removeKnive(kniveId) {

@@ -1,3 +1,7 @@
+<div *ngIf="isAuthenticated">
+  <button [routerLink]="['/add-knive']">Add knive</button>
+</div>
+
 <div class="home-container mb-5">
   <article class="filter__buttons mt-3">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -46,7 +50,11 @@
   </section>
 
   <article class="home__knives-wrapper">
-    <app-knive-card *ngFor="let knive of knives" [knive]="knive" [isAuthenticated]="isAuthenticated" (deleteKniveRequest)="onDelete($event)">
+    <app-knive-card *ngFor="let knive of knives"
+                    [knive]="knive"
+                    [isAuthenticated]="isAuthenticated"
+                    (deleteKniveRequest)="onDelete($event)"
+                    [isAdmin]="isAdmin">
     </app-knive-card>
   </article>
 </div>

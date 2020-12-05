@@ -1,0 +1,99 @@
+<section class="container">
+  <h2>Add knive</h2>
+  <div *ngIf="responceMessage">{{responceMessage}}</div>
+  <hr />
+  <div class="add-knive__info-wrapper">
+    <i class="fas fa-info-circle"></i>
+    <small class="add-knive__info-lable">Всички размери са в милиметри.</small>
+  </div>
+  <form [formGroup]="addKniveForm" (ngSubmit)="onSubmit()">
+    <section class="row row-cols-2">
+      <div class="form-group col-5">
+        <label>Широчина на острието</label>
+        <input formControlName="edgeWidth"
+               type="number"
+               min="0"
+               class="form-control form-control-sm"
+               autofocus />
+        <span asp-validation-for="Input.EdgeWidth" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <label>Дебелина на острието</label>
+        <input formControlName="edgeThickness"
+               type="number"
+               min="0"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.EdgeThickness" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <label>Дължина на острието</label>
+        <input formControlName="edgeLength"
+               type="number"
+               min="0"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.EdgeLength" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <label>Пълна дължина на ножа</label>
+        <input formControlName="totalLength"
+               type="number"
+               min="0"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.TotalLength" class="text-danger"></span>
+      </div>
+      <div class="form-group col-5">
+        <label>Изработка на острието</label>
+        <input formControlName="edgeMade"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.EdgeMade" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <label>Описание на дръжката</label>
+        <input formControlName="handleDescription"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.HandleDescription" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <label>Цена</label>
+        <input formControlName="price"
+               type="number"
+               min="0"
+               class="form-control form-control-sm" />
+        <span asp-validation-for="Input.Price" class="text-danger"></span>
+      </div>
+
+      <div class="form-group col-5">
+        <small class="add-knive__info-lable">Избери категория.</small>
+        <label>Knive class</label>
+        <select formControlName="kniveClass" class="form-control" id="classSelect">
+          <option value="MiddleClass">Middle class</option>
+          <option value="HighClass">High class</option>
+          <option value="KitchenClass">Kitchen class</option>
+        </select>
+      </div>
+
+
+      <div class="form-group col-5">
+        <section>
+          <div class="form-group">
+            <label>{{'home.SelectImages'|translate}}:</label>
+            <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <hr />
+    <div *ngIf="isLoading">
+      <app-loading-screen></app-loading-screen>
+    </div>
+    <div *ngIf="!isLoading">
+      <button type="submit" class="btn btn-outline-info">Save</button>
+    </div>
+  </form>
+</section>

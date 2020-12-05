@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   public knives: Knive[];
   public kniveCl: string;
   public isAuthenticated: Observable<boolean>;
+  public isAdmin: boolean;
   public isKniveDeleted = false;
   public showLoader: boolean;
 
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
         this.knives = knives;
       });
 
+    this.isAdmin = this.authorizeService.isAdmin;
     this.isAuthenticated = this.authorizeService.isAuthenticated();
   }
 

@@ -28,6 +28,7 @@ import { OrderManagerComponent } from './orders/order-manager/order-manager.comp
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { environment } from '../environments/environment';
+import { AddKniveComponent } from './add-knive/add-knive.component'
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -72,7 +73,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     OrderComponent,
     OrderSummaryComponent,
     OrderManagerComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    AddKniveComponent
   ],
   imports: [
     HttpClientModule,
@@ -111,13 +113,19 @@ const cookieConfig: NgcCookieConsentConfig = {
         path: 'order-manager',
         component: OrderManagerComponent,
         canActivate: [AuthorizeGuard],
-        data: { isAuthenticated: true }
+        data: { isAdmin: true }
       },
       {
         path: 'edit-knive/:id',
         component: EditKniveComponent,
         canActivate: [AuthorizeGuard],
-        data: { isAuthenticated: true }
+        data: { isAdmin: true }
+      },
+      {
+        path: 'add-knive',
+        component: AddKniveComponent,
+        canActivate: [AuthorizeGuard],
+        data: {isAdmin: true}
       }
     ])
   ],

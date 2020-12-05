@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated | async">
+<div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated">
   <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteKnive(knive.kniveId)">
     <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
   </button>
