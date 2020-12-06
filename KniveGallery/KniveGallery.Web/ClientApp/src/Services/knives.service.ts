@@ -31,8 +31,8 @@ export class KnivesService {
     return this.http.get(this.Url);
   }
 
-  public add(knive: Knive): Observable<Knive> {
-    return this.http.post<Knive>(`${this.Url}/AddKnive`, knive, { headers: this.headers });
+  public add(knive: Knive): Observable<number> {
+    return this.http.post<number>(`${this.Url}/AddKnive`, knive, { headers: this.headers });
   }
 
   public removeKnive(kniveId) {
@@ -53,5 +53,9 @@ export class KnivesService {
 
   public getAdminDetails() {
     return this.http.get(`${this.Url}/AdminDetails`, { headers: this.headers });
+  }
+
+  public updateKniveLikes(isLiked: boolean, kniveId: number): Observable<Knive> {
+    return this.http.post<Knive>(`${this.Url}/UpdateKniveLikes/${kniveId}/${isLiked}`, { headers: this.headers })
   }
 }

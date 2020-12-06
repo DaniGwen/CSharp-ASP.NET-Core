@@ -39,6 +39,8 @@ namespace KniveGallery.Web.Data
 
         public int Quantity { get; set; }
 
+        public int Likes { get; set; }
+
         public KniveClass KniveClass { get; set; }
 
         [JsonIgnore]

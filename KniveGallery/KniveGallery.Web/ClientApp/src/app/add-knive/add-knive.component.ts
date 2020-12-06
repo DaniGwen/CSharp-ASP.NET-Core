@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImageFile } from '../../Models/imageFile';
@@ -40,16 +40,14 @@ export class AddKniveComponent {
 
     this.knive = this.addKniveForm.value;
 
-    this.kniveService.add(this.knive).subscribe((knive: Knive) => {
-      this.knive = knive;
-      this.responceMessage = `Knive with ID ${this.knive.kniveId} was added.`;
+    this.kniveService.add(this.knive).subscribe((kniveId: number) => {
+      if (kniveId != null) {
+        this.kniveId = kniveId;
+        this.uploadFiles();
+        this.responceMessage = `Knive with ID ${this.knive.kniveId} was added.`;
+        this.isLoading = false;
+      }
     });
-
-    var temp = this.knive.kniveId;
-
-    this.uploadFiles()
-
-    this.isLoading = false;
   }
 
   selectFiles(event) {
@@ -93,7 +91,7 @@ export class AddKniveComponent {
     const formData = new FormData();
 
     formData.append('file', <File>file, file.name);
-    this.kniveService.uploadImage(formData, this.knive.kniveId).subscribe(data => {
+    this.kniveService.uploadImage(formData, this.kniveId).subscribe(data => {
       this.responceMessage = data;
     });
   }

@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
       this.isKniveDeleted = true;
       this.ngOnInit();
     })
+
+    setInterval(() => { this.isKniveDeleted = false }, 5000);
   }
 
   hideMessage() {

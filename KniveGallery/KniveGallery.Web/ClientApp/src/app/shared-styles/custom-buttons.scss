@@ -4,18 +4,24 @@
 .filter__buttons {
   display: grid;
   grid-template-columns: auto;
-  justify-content: space-evenly;
+  justify-content: normal;
+}
 
+.btn {
   &:hover {
     cursor: pointer;
   }
 }
 
-.filter__btn-filter {
+.btn-theme {
   background-color: $charcoal;
   color: $mellowApricot;
   font-weight: 400;
   border: 1px solid $cornflowerBlue3;
+
+  &:hover {
+    color: whitesmoke;
+  }
 }
 
 .btn-scale {
@@ -83,4 +89,6 @@
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
   border-right: 5px solid $whatsupGreen;
+  max-height: 60px !important;
+  padding: 2px 10px;
 }

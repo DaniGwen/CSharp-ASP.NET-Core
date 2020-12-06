@@ -8,4 +8,5 @@ export class Knive {
   handleDescription: string;
   price: number;
   imagePath: string;
+  likes: number;
 }

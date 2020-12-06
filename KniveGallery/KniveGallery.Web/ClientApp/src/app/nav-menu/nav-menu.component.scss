@@ -16,6 +16,10 @@ a.navbar-brand {
 
 .nav-link {
   color: $mellowApricot;
+
+  &:hover {
+    color: whitesmoke;
+  }
 }
 
 a {

@@ -59,3 +59,12 @@
   grid-column-gap: 10px;
   justify-content: space-around;
 }
+
+.like-btn {
+  border: none;
+  background-color: $charcoal;
+}
+
+.fas, .far {
+  color: $mellowApricot;
+}

@@ -1,16 +1,29 @@
-<div class="card mb-3" [routerLink]="['/knive-details', knive.kniveId]"
-     routerLinkActive="active" style="max-width: 24rem;">
-  <p class="bg-secondary text-center" *ngIf="isAuthenticated | async"><small>Knive id - </small><strong class="text-xl-center">{{knive.kniveId}}</strong></p>
-  <div class="home__image-wrapper">
-    <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
-    <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
-         alt="default image" />
+<div class="card mb-3">
+  <div [routerLink]="['/knive-details', knive.kniveId]"
+       routerLinkActive="active" style="max-width: 24rem;">
+    <p class="bg-secondary text-center" *ngIf="isAuthenticated | async"><small>Knive id - </small><strong class="text-xl-center">{{knive.kniveId}}</strong></p>
+    <div class="home__image-wrapper">
+      <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
+      <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
+           alt="default image" />
+    </div>
+    <div class="card-body">
+      <h5>{{knive.edgeMade}}</h5>
+      <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
+    </div>
   </div>
-  <div class="card-body">
-    <h5>{{knive.edgeMade}}</h5>
-    <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
+  <div class="card-body row justify-content-between">
+    <div class="col-4">
+      <small><i class="far fa-thumbs-up"></i> {{knive.likes}}</small>
+    </div>
+    <div class="col-4">
+      <button class="like-btn" (click)="addLike()"><i class="{{iconClass}}"></i></button>
+    </div>
   </div>
+  <small *ngIf="message.length > 0">{{message}}</small>
 </div>
+
+
 
 <div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated">
   <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteKnive(knive.kniveId)">

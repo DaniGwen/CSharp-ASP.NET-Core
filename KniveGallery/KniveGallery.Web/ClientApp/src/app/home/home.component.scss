@@ -27,10 +27,11 @@
 }
 
 .home__knive-deleted-message {
-  background-color: $whatsupGreen;
-  color: $gunmetal;
+  background-color: mediumseagreen;
+  color: $charcoal;
   font-weight: 500;
-  max-width: 25%;
+  max-width: 29%;
   padding: 5px 15px;
   border-radius: 10px;
+  transition: ease-out 0.5s;
 }

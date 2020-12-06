@@ -1,4 +1,5 @@
 <app-contact-info></app-contact-info>
+<app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
 <article *ngIf="!isOrder" class="mb-5">
   <article class="container">
     <section class="knive-details">
@@ -18,7 +19,7 @@
     </section>
 
     <h5 class="knive-details__images__no-images knive-details__anim8" *ngIf="!kniveImages.length">{{'home.NoImages' | translate}}..</h5>
-    <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
+    
     <section class="knive-details__images knive-details__anim8" *ngIf="kniveImages">
       <div *ngFor="let image of kniveImages">
         <div class="knive-details__image-wrapper">
@@ -31,7 +32,7 @@
   <div class="d-flex justify-content-center">
     <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i>
     </a>
-    <button class="btn btn-arrow btn-outline-secondary font-weight-bold" (click)="toggleOrder()">To order</button>
+    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold" (click)="toggleOrder()">To order</button>
   </div>
 
   <div class="knive-details__image-enlarge">

@@ -103,7 +103,7 @@ namespace KniveGallery.Web.Controllers
             {
                 if (!KniveExists(id))
                 {
-                   return BadRequest("Error!");
+                    return BadRequest("Error!");
                 }
                 else
                 {
@@ -127,14 +127,14 @@ namespace KniveGallery.Web.Controllers
         [Authorize]
         [Route("AddKnive")]
         [HttpPost]
-        public async Task<ActionResult<Knive>> AddKnive(KniveDto knive)
+        public async Task<IActionResult> AddKnive(KniveDto knive)
         {
             try
             {
                 var maxId = this.context.Knives
                     .OrderByDescending(x => x.KniveId)
                     .Take(1)
-                    .Select(x =>  x.KniveId )
+                    .Select(x => x.KniveId)
                     .SingleOrDefault();
 
                 maxId += 10;
@@ -155,11 +155,51 @@ namespace KniveGallery.Web.Controllers
                 await this.context.Knives.AddAsync(newKnive);
                 await this.context.SaveChangesAsync();
 
-                return Ok(newKnive);
+                return Ok(newKnive.KniveId);
             }
             catch (Exception e)
             {
                 return this.BadRequest(e.Message);
+            }
+        }
+
+        [Route("UpdateKniveLikes/{kniveId}/{isLiked}")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateKniveLikes(bool isLiked, int kniveId)
+        {
+            try
+            {
+                var result = string.Empty;
+                var kniveDb = await this.context.Knives.FirstOrDefaultAsync(x => x.KniveId == kniveId);
+
+                if (kniveDb != null)
+                {
+                    if (kniveDb.Likes > 0)
+                    {
+                        if (isLiked)
+                        {
+                            kniveDb.Likes += 1;
+                        }
+                        else
+                        {
+                            kniveDb.Likes -= 1;
+                        }
+                    }
+                    else if (kniveDb.Likes == 0)
+                    {
+                        if (isLiked)
+                        {
+                            kniveDb.Likes += 1;
+                        }
+                    }
+                }
+
+                await this.context.SaveChangesAsync();
+                return Ok(kniveDb);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
 

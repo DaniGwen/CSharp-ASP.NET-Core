@@ -1,22 +1,18 @@
-<div *ngIf="isAuthenticated">
-  <button [routerLink]="['/add-knive']">Add knive</button>
-</div>
-
 <div class="home-container mb-5">
   <article class="filter__buttons mt-3">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-shadow filter__btn-filter">
+      <label class="btn btn-shadow btn-theme">
         <input type="radio" name="options" id="option1" (click)="ngOnInit()">{{'home.All'| translate}}
       </label>
-      <label class="btn btn-shadow filter__btn-filter">
+      <label class="btn btn-shadow btn-theme">
         <input type="radio" name="options" id="option4"
                (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
-      <label class="btn btn-shadow filter__btn-filter">
+      <label class="btn btn-shadow btn-theme">
         <input type="radio" name="options" id="option2"
                (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
       </label>
-      <label class="btn btn-shadow filter__btn-filter">
+      <label class="btn btn-shadow btn-theme">
         <input type="radio" name="options" id="option3"
                (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
       </label>
@@ -46,7 +42,6 @@
 
   <section class="home__knive-deleted-message" *ngIf="isKniveDeleted">
     <p>Knive has been deleted!</p>
-    <button class="btn btn-custom btn-confirm-message" (click)="hideMessage()">ok</button>
   </section>
 
   <article class="home__knives-wrapper">
