@@ -8,8 +8,10 @@
            alt="default image" />
     </div>
     <div class="card-body">
-      <h5>{{knive.edgeMade}}</h5>
-      <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}}</label>{{'home.Currency' | translate}}</h4>
+      <div class="card-body__header">
+        <p >{{knive.edgeMade}}</p>
+      </div>
+      <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}} {{'home.Currency' | translate}}</label></h4>
     </div>
   </div>
   <div class="card-body row justify-content-between">
@@ -22,8 +24,6 @@
   </div>
   <small *ngIf="message.length > 0">{{message}}</small>
 </div>
-
-
 
 <div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated">
   <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteKnive(knive.kniveId)">

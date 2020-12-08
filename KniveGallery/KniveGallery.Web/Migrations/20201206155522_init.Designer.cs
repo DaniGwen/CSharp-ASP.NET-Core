@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KniveGallery.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201128143931_init")]
+    [Migration("20201206155522_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,9 +106,7 @@ namespace KniveGallery.Web.Migrations
             modelBuilder.Entity("KniveGallery.Web.Data.Knive", b =>
                 {
                     b.Property<int>("KniveId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<double>("EdgeLength")
                         .HasColumnType("float");
@@ -131,6 +129,9 @@ namespace KniveGallery.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("KniveClass")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Likes")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")

@@ -19,15 +19,15 @@ export class AddKniveComponent {
   private knive: Knive;
   public responceMessage: any;
 
-  addKniveForm = this.formBuilder.group({
-    edgeWidth: [],
-    edgeThickness: [],
-    edgeLength: [],
-    totalLength: [],
+  public addKniveForm = this.formBuilder.group({
+    edgeWidth: ['', [Validators.required]],
+    edgeThickness: ['', [Validators.required]],
+    edgeLength: ['', [Validators.required]],
+    totalLength: ['', [Validators.required]],
     edgeMade: ['', Validators.required],
     handleDescription: ['', Validators.required],
     kniveClass: ['', Validators.required],
-    price: []
+    price: ['', [Validators.required]]
   });
 
   constructor(private formBuilder: FormBuilder,
@@ -41,12 +41,10 @@ export class AddKniveComponent {
     this.knive = this.addKniveForm.value;
 
     this.kniveService.add(this.knive).subscribe((kniveId: number) => {
-      if (kniveId != null) {
-        this.kniveId = kniveId;
-        this.uploadFiles();
-        this.responceMessage = `Knive with ID ${this.knive.kniveId} was added.`;
-        this.isLoading = false;
-      }
+      this.kniveId = kniveId;
+      this.uploadFiles();
+      this.responceMessage = `Knive with ID ${this.knive.kniveId} was added.`;
+      this.isLoading = false;
     });
   }
 

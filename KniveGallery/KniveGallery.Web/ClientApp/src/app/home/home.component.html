@@ -48,8 +48,7 @@
     <app-knive-card *ngFor="let knive of knives"
                     [knive]="knive"
                     [isAuthenticated]="isAuthenticated"
-                    (deleteKniveRequest)="onDelete($event)"
-                    [isAdmin]="isAdmin">
-    </app-knive-card>
+                    (deleteKniveRequest)="onDelete($event)">
+                    </app-knive-card>
   </article>
 </div>

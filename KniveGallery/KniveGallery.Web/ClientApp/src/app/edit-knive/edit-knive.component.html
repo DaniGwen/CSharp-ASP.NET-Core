@@ -108,16 +108,14 @@
       <div class="form-group">
         <label>{{'home.SelectImages'|translate}}:</label>
         <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
-        <br />
-        <br />
-        <button class="btn btn-sm btn-outline-success" (click)="uploadFiles()">{{'home.UploadImages'|translate}}</button>
       </div>
     </section>
   </article>
   <article class="edit-knive__buttons">
     <h4 class="edit-knive__status" *ngIf="status">{{status}}</h4>
     <hr />
-    <button type="submit" [disabled]="!form.valid" class="btn btn-outline-info">{{'home.Save' | translate}}</button>
+    <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
+    <button *ngIf="!isLoading" type="submit" [disabled]="!form.valid" class="btn btn-outline-info">{{'home.Save' | translate}}</button>
     <hr />
     <a [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
   </article>

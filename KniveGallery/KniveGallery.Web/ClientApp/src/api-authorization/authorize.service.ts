@@ -31,7 +31,6 @@ export enum AuthenticationResultStatus {
 
 export interface IUser {
   name?: string;
-  role?: string;
 }
 
 @Injectable({
@@ -43,8 +42,7 @@ export class AuthorizeService {
   private userManager: UserManager;
   private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
 
-  public adminEmail: string = "drug_boy@abv.bg";
-  public isAdmin: boolean = false;
+  public adminEmail: string = "";
 
   public isAuthenticated(): Observable<boolean> {
     return this.getUser().pipe(map(u => !!u));

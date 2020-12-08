@@ -16,6 +16,7 @@ export class EditKniveComponent {
   kniveId: any;
   public knive = new Knive();
   imageFile = new ImageFile();
+  public isLoading: boolean;
 
   constructor(private route: ActivatedRoute,
     private kniveService: KnivesService,
@@ -33,10 +34,14 @@ export class EditKniveComponent {
   }
 
   onSubmit() {
-    this.kniveService.updateKnive(this.knive)
-      .subscribe((data: any) => {
+    this.isLoading = true;
+
+    this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
         this.status = data;
+        this.isLoading = false;
       });
+
+    this.uploadFiles();
   }
 
   selectFiles(event) {

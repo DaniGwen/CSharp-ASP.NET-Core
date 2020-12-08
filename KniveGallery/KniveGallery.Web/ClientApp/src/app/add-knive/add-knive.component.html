@@ -15,7 +15,10 @@
                min="0"
                class="form-control form-control-sm"
                autofocus />
-        <span asp-validation-for="Input.EdgeWidth" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('edgeWidth').touched || addKniveForm.get('edgeWidth').dirty)
+             && addKniveForm.get('edgeWidth').errors">
+          <label *ngIf="addKniveForm.get('edgeWidth').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
@@ -24,7 +27,10 @@
                type="number"
                min="0"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.EdgeThickness" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('edgeThickness').touched || addKniveForm.get('edgeThickness').dirty)
+             && addKniveForm.get('edgeThickness').errors">
+          <label *ngIf="addKniveForm.get('edgeThickness').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
@@ -33,7 +39,10 @@
                type="number"
                min="0"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.EdgeLength" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('edgeLength').touched || addKniveForm.get('edgeLength').dirty)
+             && addKniveForm.get('edgeLength').errors">
+          <label *ngIf="addKniveForm.get('edgeLength').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
@@ -42,20 +51,30 @@
                type="number"
                min="0"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.TotalLength" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('totalLength').touched || addKniveForm.get('totalLength').dirty)
+             && addKniveForm.get('totalLength').errors">
+          <label *ngIf="addKniveForm.get('totalLength').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
+
       <div class="form-group col-5">
         <label>Изработка на острието</label>
         <input formControlName="edgeMade"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.EdgeMade" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('edgeMade').touched || addKniveForm.get('edgeMade').dirty)
+             && addKniveForm.get('edgeMade').errors">
+          <label *ngIf="addKniveForm.get('edgeMade').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
         <label>Описание на дръжката</label>
         <input formControlName="handleDescription"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.HandleDescription" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('handleDescription').touched || addKniveForm.get('handleDescription').dirty)
+             && addKniveForm.get('handleDescription').errors">
+          <label *ngIf="addKniveForm.get('handleDescription').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
@@ -64,7 +83,10 @@
                type="number"
                min="0"
                class="form-control form-control-sm" />
-        <span asp-validation-for="Input.Price" class="text-danger"></span>
+        <div *ngIf="(addKniveForm.get('price').touched || addKniveForm.get('price').dirty)
+             && addKniveForm.get('price').errors">
+          <label *ngIf="addKniveForm.get('price').errors.required" class="alert alert-danger">Field is required.</label>
+        </div>
       </div>
 
       <div class="form-group col-5">
@@ -77,7 +99,6 @@
         </select>
       </div>
 
-
       <div class="form-group col-5">
         <section>
           <div class="form-group">
@@ -87,13 +108,13 @@
         </section>
       </div>
     </section>
-
     <hr />
-    <div *ngIf="isLoading">
-      <app-loading-screen></app-loading-screen>
-    </div>
-    <div *ngIf="!isLoading">
-      <button type="submit" class="btn btn-outline-info">Save</button>
+    <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
+    <div class="justify-content-around">
+      <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
+        <i class="fas fa-arrow-circle-left"></i>
+      </a>
+      <button *ngIf="!isLoading" type="submit" class="btn btn-outline-info">Save</button>
     </div>
   </form>
 </section>

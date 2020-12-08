@@ -68,8 +68,7 @@ namespace KniveGallery.Web.Migrations
                 name: "Knives",
                 columns: table => new
                 {
-                    KniveId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    KniveId = table.Column<int>(nullable: false),
                     EdgeMade = table.Column<string>(nullable: false),
                     TotalLength = table.Column<double>(nullable: false),
                     EdgeLength = table.Column<double>(nullable: false),
@@ -79,6 +78,7 @@ namespace KniveGallery.Web.Migrations
                     Price = table.Column<double>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
+                    Likes = table.Column<int>(nullable: false),
                     KniveClass = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
