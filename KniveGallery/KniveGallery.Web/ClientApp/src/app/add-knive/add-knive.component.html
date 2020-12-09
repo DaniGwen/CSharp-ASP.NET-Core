@@ -1,5 +1,5 @@
 <section class="container">
-  <h2>Add knive</h2>
+  <h2 class="custom-heading text-center">Add knive</h2>
   <div *ngIf="responceMessage">{{responceMessage}}</div>
   <hr />
   <div class="add-knive__info-wrapper">
@@ -7,14 +7,13 @@
     <small class="add-knive__info-lable">Всички размери са в милиметри.</small>
   </div>
   <form [formGroup]="addKniveForm" (ngSubmit)="onSubmit()">
-    <section class="row row-cols-2">
+    <section class="form-container row row-cols-2">
       <div class="form-group col-5">
         <label>Широчина на острието</label>
         <input formControlName="edgeWidth"
                type="number"
                min="0"
-               class="form-control form-control-sm"
-               autofocus />
+               class="form-control form-control-sm"/>
         <div *ngIf="(addKniveForm.get('edgeWidth').touched || addKniveForm.get('edgeWidth').dirty)
              && addKniveForm.get('edgeWidth').errors">
           <label *ngIf="addKniveForm.get('edgeWidth').errors.required" class="alert alert-danger">Field is required.</label>
@@ -110,7 +109,7 @@
     </section>
     <hr />
     <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
-    <div class="justify-content-around">
+    <div class="buttons-container">
       <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
         <i class="fas fa-arrow-circle-left"></i>
       </a>

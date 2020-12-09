@@ -47,7 +47,6 @@
   <article class="home__knives-wrapper">
     <app-knive-card *ngFor="let knive of knives"
                     [knive]="knive"
-                    [isAuthenticated]="isAuthenticated"
                     (deleteKniveRequest)="onDelete($event)">
                     </app-knive-card>
   </article>

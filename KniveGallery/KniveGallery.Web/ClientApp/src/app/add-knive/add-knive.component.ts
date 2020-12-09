@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastService } from 'angular-toastify';
 import { ImageFile } from '../../Models/imageFile';
 import { Knive } from '../../Models/knive'
 import { KnivesService } from '../../Services/knives.service';
@@ -37,7 +38,6 @@ export class AddKniveComponent {
 
   onSubmit() {
     this.isLoading = true;
-
     this.knive = this.addKniveForm.value;
 
     this.kniveService.add(this.knive).subscribe((kniveId: number) => {

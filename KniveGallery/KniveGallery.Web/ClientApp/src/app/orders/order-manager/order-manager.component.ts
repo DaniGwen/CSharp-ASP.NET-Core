@@ -47,9 +47,11 @@ export class OrderManagerComponent implements OnInit {
   dispatchOrder(orderId: number) {
     this.showLoader = true;
     this.ordersService.dispatchOrder(orderId).subscribe(() => {
-      this.showLoader = false;
+      this.ordersService.getOrders().subscribe((orders: Order[]) => {
+        this.orders = orders;
+        this.showLoader = false;
+      })
     });
-    this.ngOnInit();
   }
 
   filterOrders(orderStatus: string) {

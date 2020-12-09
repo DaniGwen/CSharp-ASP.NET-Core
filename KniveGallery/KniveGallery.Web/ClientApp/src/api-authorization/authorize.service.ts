@@ -103,9 +103,6 @@ export class AuthorizeService {
     try {
       await this.ensureUserManagerInitialized();
       const user = await this.userManager.signinCallback(url);
-      if (user.profile.name === this.adminEmail) {
-        this.isAdmin = true;
-      }
       this.userSubject.next(user && user.profile);
       return this.success(user && user.state);
     } catch (error) {

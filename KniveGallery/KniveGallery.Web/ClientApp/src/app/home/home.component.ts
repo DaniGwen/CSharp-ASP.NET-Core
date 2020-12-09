@@ -14,12 +14,10 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
 export class HomeComponent implements OnInit {
   public knives: Knive[];
   public kniveCl: string;
-  public isAuthenticated: Observable<boolean>;
   public isKniveDeleted = false;
   public showLoader: boolean;
 
   constructor(
-    private authorizeService: AuthorizeService,
     public http: HttpClient,
     private knivesService: KnivesService) {
   }
@@ -36,8 +34,6 @@ export class HomeComponent implements OnInit {
         }
         this.knives = knives;
       });
-
-    this.isAuthenticated = this.authorizeService.isAuthenticated();
   }
 
   onDelete(kniveId: number) {

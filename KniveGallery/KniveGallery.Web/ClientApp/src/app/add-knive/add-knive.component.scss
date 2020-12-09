@@ -1,4 +1,5 @@
 @import '../shared-styles/custom-buttons.scss';
+@import '../shared-styles/headings.scss';
 
 .add-knive__input-container {
   display: grid;
@@ -15,6 +16,7 @@
 
 .add-knive__info-wrapper {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 input.ng-valid {
@@ -23,4 +25,13 @@ input.ng-valid {
 
 input.ng-invalid.ng-touched {
   border-left: 5px solid red;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-container {
+  justify-content: space-evenly;
 }

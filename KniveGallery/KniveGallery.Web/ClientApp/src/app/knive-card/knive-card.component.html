@@ -25,7 +25,7 @@
   <small *ngIf="message.length > 0">{{message}}</small>
 </div>
 
-<div class="home__knives__card-admin mb-4" *ngIf="isAuthenticated">
+<div *ngIf="isAuthenticated" class="home__knives__card-admin mb-4">
   <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteKnive(knive.kniveId)">
     <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
   </button>

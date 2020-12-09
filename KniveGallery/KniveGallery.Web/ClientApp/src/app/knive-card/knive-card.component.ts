@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Knive } from '../../Models/knive';
 import { KnivesService } from '../../Services/knives.service';
 
@@ -11,13 +13,18 @@ import { KnivesService } from '../../Services/knives.service';
 export class KniveCardComponent {
 
   @Input() public knive: Knive;
-  @Input() public isAuthenticated: boolean;
+  public isAuthenticated: Observable<boolean>;
   @Output() public deleteKniveRequest = new EventEmitter<number>();
   public message: string = '';
   private isLiked: boolean = false;
   public iconClass: string = "far fa-heart";
 
-  constructor(private kniveService: KnivesService) {
+  constructor(private kniveService: KnivesService,
+    private authService: AuthorizeService) {
+  }
+
+  ngOnInit() {
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   deleteKnive(kniveId: number) {

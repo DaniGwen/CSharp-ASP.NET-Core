@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { KnivesService } from '../../Services/knives.service';
 import { Knive } from '../../Models/knive';
 import { ImageFile } from '../../Models/imageFile';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-edit-knive',
@@ -35,14 +36,15 @@ export class EditKniveComponent {
 
   onSubmit() {
     this.isLoading = true;
-
+   
     this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
         this.status = data;
-        this.isLoading = false;
+      this.isLoading = false;
       });
 
     this.uploadFiles();
   }
+
 
   selectFiles(event) {
 

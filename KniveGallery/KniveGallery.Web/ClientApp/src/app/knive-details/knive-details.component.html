@@ -1,5 +1,6 @@
 <app-contact-info></app-contact-info>
 <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
+<h5 class="knive-details__images__no-images knive-details__anim8" *ngIf="!kniveImages.length && !isOrder">{{'home.NoImages' | translate}}..</h5>
 <article *ngIf="!isOrder" class="mb-5">
   <article class="container">
     <section class="knive-details">
@@ -15,11 +16,9 @@
 
       <p class="knive-details__field knive-details__anim6"><label class="knive-details__field__label">{{'home.HandleType' | translate}} </label> <strong class="knive-details__value">{{knive.handleDescription}}</strong></p>
 
-      <h4 class="knive-details__field knive-details__anim7"><label class="knive-details__field__label">{{'home.Price' | translate}} </label> <strong class="knive-details__field__price">{{knive.price}}{{'home.Currency' | translate}}</strong></h4>
+      <h4 class="knive-details__field knive-details__anim7 custom-heading"><label class="knive-details__field__label">{{'home.Price' | translate}}  </label><strong class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong></h4>
     </section>
 
-    <h5 class="knive-details__images__no-images knive-details__anim8" *ngIf="!kniveImages.length">{{'home.NoImages' | translate}}..</h5>
-    
     <section class="knive-details__images knive-details__anim8" *ngIf="kniveImages">
       <div *ngFor="let image of kniveImages">
         <div class="knive-details__image-wrapper">
@@ -30,7 +29,8 @@
   </article>
   <hr />
   <div class="d-flex justify-content-center">
-    <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i>
+    <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
+      <i class="fas fa-arrow-circle-left"></i>
     </a>
     <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold" (click)="toggleOrder()">To order</button>
   </div>
