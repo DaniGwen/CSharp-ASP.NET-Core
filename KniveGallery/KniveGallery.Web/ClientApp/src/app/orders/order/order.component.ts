@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Knive } from '../../../Models/knive';
 import { Order } from '../../../Models/order';
+import { KnivesService } from '../../../Services/knives.service';
 import { OrderService } from '../../../Services/orders.service';
 
 @Component({
@@ -11,10 +12,11 @@ import { OrderService } from '../../../Services/orders.service';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  @Input() public knive: Knive;
+  public knive: Knive;
+  private kniveId: any;
   public totalPrice: number;
   private order = new Order();
-  public errorMessage: string;
+  public errorMessage: boolean = false;
   public showLoader: boolean;
 
   orderForm = this.formBuilder.group({
@@ -31,10 +33,22 @@ export class OrderComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private orderService: OrderService,
-    private router: Router) {
+    private kniveService: KnivesService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.showLoader = true;
+    this.route.paramMap.subscribe(params => {
+      this.kniveId = params.get('id');
+    });
+
+    this.kniveService.getKniveById(this.kniveId).subscribe((knive: Knive) => {
+      this.knive = knive;
+      this.showLoader = false;
+    })
+
     this.totalPrice = this.knive.price;
   }
 
@@ -56,7 +70,5 @@ export class OrderComponent implements OnInit {
         }
         this.router.navigateByUrl("/order-summary");
       });
-
-
   }
 }

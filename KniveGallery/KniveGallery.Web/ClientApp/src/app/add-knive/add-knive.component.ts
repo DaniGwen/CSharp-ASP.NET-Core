@@ -41,11 +41,15 @@ export class AddKniveComponent {
     this.knive = this.addKniveForm.value;
 
     this.kniveService.add(this.knive).subscribe((kniveId: number) => {
-      this.kniveId = kniveId;
-      this.uploadFiles();
-      this.responceMessage = `Knive with ID ${this.knive.kniveId} was added.`;
-      this.isLoading = false;
+      if (kniveId) {
+        this.kniveId = kniveId;
+        this.responceMessage = `Knive with ID ${this.kniveId} was added.`;
+        this.isLoading = false;
+        this.uploadFiles();
+      }
     });
+
+    setInterval(() => { this.responceMessage = false }, 6000);
   }
 
   selectFiles(event) {

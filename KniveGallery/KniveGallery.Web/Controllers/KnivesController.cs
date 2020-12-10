@@ -114,16 +114,6 @@ namespace KniveGallery.Web.Controllers
             return new JsonResult("Knive saved!");
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<ActionResult<Knive>> PostKnife(Knive knive)
-        //{
-        //    context.Knives.Add(knive);
-        //    await context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetKnife", new { id = knive.KniveId }, knive);
-        //}
-
         [Authorize]
         [Route("AddKnive")]
         [HttpPost]

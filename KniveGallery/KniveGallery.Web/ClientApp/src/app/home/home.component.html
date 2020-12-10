@@ -40,14 +40,19 @@
     <h5 translate>home.NoKnives<label>..</label></h5>
   </section>
 
-  <section class="home__knive-deleted-message" *ngIf="isKniveDeleted">
-    <p>Knive has been deleted!</p>
+  <section class="popup-message" *ngIf="isKniveDeleted">
+    <div class="toast-header">
+      <strong class="mr-auto">Message</strong>
+    </div>
+    <div class="toast-body">
+      Knive has been deleted!
+    </div>
   </section>
 
   <article class="home__knives-wrapper">
     <app-knive-card *ngFor="let knive of knives"
                     [knive]="knive"
                     (deleteKniveRequest)="onDelete($event)">
-                    </app-knive-card>
+    </app-knive-card>
   </article>
 </div>

@@ -106,26 +106,27 @@ const cookieConfig: NgcCookieConsentConfig = {
         component: PrivacyComponent
       },
       {
+        path: 'order/:id',
+        component: OrderComponent
+      },
+      {
         path: 'order-summary',
         component: OrderSummaryComponent
       },
       {
         path: 'order-manager',
         component: OrderManagerComponent,
-        canActivate: [AuthorizeGuard],
-        data: { isAdmin: true }
+        canActivate: [AuthorizeGuard]
       },
       {
         path: 'edit-knive/:id',
         component: EditKniveComponent,
-        canActivate: [AuthorizeGuard],
-        data: { isAdmin: true }
+        canActivate: [AuthorizeGuard]
       },
       {
         path: 'add-knive',
         component: AddKniveComponent,
-        canActivate: [AuthorizeGuard],
-        data: {isAdmin: true}
+        canActivate: [AuthorizeGuard]
       }
     ])
   ],

@@ -1,8 +1,8 @@
 <article class="text-center mb-5">
   <form [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
-    <h4 class="text-center custom-heading mb-3">{{'order.Your details'| translate}}</h4>
+    <h4 class="text-center custom-heading mb-3 order__anim1">{{'order.Your details'| translate}}</h4>
     <div class="form-row justify-content-center">
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim2">
         <label>{{'order.First name' | translate}}</label>
         <input class="form-control" type="text" formControlName="firstName" id="firstName" />
         <div *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty)
@@ -15,7 +15,7 @@
           </label>
         </div>
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim3">
         <label>{{'order.Last name' | translate}}</label>
         <input class="form-control" type="text" formControlName="lastName" />
         <div *ngIf="(orderForm.get('lastName').touched || orderForm.get('lastName').dirty)
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="form-row justify-content-center">
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim4">
         <label>{{'order.Email' | translate}}</label>
         <input class="form-control" type="text" formControlName="email" />
         <label *ngIf="(orderForm.get('email').touched || orderForm.get('email').dirty)
@@ -38,7 +38,7 @@
           {{'order.Email is required.' | translate}}
         </label>
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim5">
         <label>{{'order.Phone number' | translate}}</label>
         <input class="form-control" type="number" min="0" formControlName="phoneNumber" />
         <div *ngIf="(orderForm.get('phoneNumber').touched || orderForm.get('phoneNumber').dirty)
@@ -53,9 +53,9 @@
       </div>
     </div>
     <hr />
-    <h3 class="text-center mb-2">{{'order.Address' | translate}}</h3>
+    <h3 class="text-center mb-2 order__anim6">{{'order.Address' | translate}}</h3>
     <div class="form-row justify-content-center">
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim7">
         <label>{{'order.City' | translate}}</label>
         <input type="text" class="form-control" formControlName="city">
         <div *ngIf="(orderForm.get('city').touched || orderForm.get('city').dirty)
@@ -68,13 +68,13 @@
           </label>
         </div>
       </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim8">
         <label>{{'order.Neighbourhood' | translate}}</label>
         <input class="form-control" type="text" formControlName="neighbourhood" />
       </div>
     </div>
     <div class="form-row justify-content-center">
-      <div class="col-md-3 mb-3">
+      <div class="col-md-3 mb-3 order__anim9">
         <label>{{'order.Street' | translate}}</label>
         <input class="form-control" type="text" formControlName="street" />
         <div *ngIf="(orderForm.get('street').touched || orderForm.get('street').dirty)
@@ -89,23 +89,26 @@
       </div>
     </div>
 
-    <div class="form-row justify-content-center">
+    <div class="form-row justify-content-center order__anim10">
       <div class="col-sm-1 mb-3">
         <label>{{'order.Quantity' | translate}}</label>
         <input class="form-control" type="number" min="1" value="1" formControlName="quantity" #quantity (focusout)="calculateKnivePrice(quantity.value)" />
       </div>
+      <div class="col-sm-1 mb-3">
+        <label>{{'order.KniveQuantity' | translate}}</label>
+        <p>{{knive.quantity}}</p>
+      </div>
     </div>
     <hr />
-    <h3 class="text-center">{{'order.Price' | translate}}<label formControlName="price">{{totalPrice}}</label></h3>
+    <h3 class="text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price"> {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
     <hr />
-    <div  *ngIf="!showLoader">
-      <div class="row justify-content-center">
-        <button class="btn btn-outline-info btn-custom" type="submit" [disabled]="!orderForm.valid">{{'order.Order' | translate}}</button>
+    <div *ngIf="!showLoader">
+      <div class="row justify-content-center order__anim11">
+        <button class="btn btn-shadow btn-theme" type="submit" [disabled]="!orderForm.valid">{{'order.Order' | translate}}</button>
       </div>
-      <div class="row justify-content-center ml-4 mt-2">
+      <div class="row justify-content-center ml-4 mt-2 order__anim12">
         <a class="back-button mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
       </div>
-      <p *ngIf="!errorMessage">{{errorMessage}}</p>
     </div>
     <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
   </form>

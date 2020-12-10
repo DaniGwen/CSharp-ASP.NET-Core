@@ -1,0 +1,18 @@
+@import 'colors.scss';
+@import 'animations.scss';
+
+.popup-message {
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  z-index: 3;
+  background-color: $charcoal;
+  color: $mellowApricot;
+  font-weight: 500;
+  min-width: 200px;
+  text-align: center;
+  transition: ease-out 0.4s;
+  animation: slideIn 0.4s ease-out;
+  border-radius: 5px;
+  overflow: hidden;
+}

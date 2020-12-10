@@ -4,19 +4,28 @@
 <article *ngIf="!isOrder" class="mb-5">
   <article class="container">
     <section class="knive-details">
-      <p *ngIf="knive.edgeWidth" class="knive-details__field knive-details__anim1"><label class="knive-details__field__label">{{'home.EdgeWidth' | translate}} </label> <strong class="knive-details__value">{{knive.edgeWidth}} mm.</strong></p>
+      <div *ngIf="knive.edgeWidth" class="knive-details__field knive-details__anim1">
+      <label class="knive-details__field__label">{{'home.EdgeWidth' | translate}} </label>
+      <strong class="knive-details__value">{{knive.edgeWidth}} mm.</strong>
+      </div>
 
-      <p *ngIf="knive.edgeTickness" class="knive-details__field knive-details__anim2"><label class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong class="knive-details__value">{{knive.edgeTickness}} mm.</strong></p>
+      <div *ngIf="knive.edgeTickness" class="knive-details__field knive-details__anim2"><label class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong class="knive-details__value">{{knive.edgeTickness}} mm.</strong></div>
 
-      <p class="knive-details__field knive-details__anim3"><label class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong class="knive-details__value">{{knive.edgeLength}} mm.</strong></p>
+      <div class="knive-details__field knive-details__anim3"><label class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong class="knive-details__value">{{knive.edgeLength}} mm.</strong></div>
 
-      <p class="knive-details__field knive-details__anim4"><label class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong class="knive-details__value">{{knive.totalLength}} mm.</strong></p>
+      <div class="knive-details__field knive-details__anim4"><label class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong class="knive-details__value">{{knive.totalLength}} mm.</strong></div>
 
-      <p class="knive-details__field knive-details__anim5"><label class="knive-details__field__label">{{'home.BladeMade' | translate}} </label> <strong class="knive-details__value">{{knive.edgeMade}}</strong></p>
+      <div class="knive-details__field knive-details__anim5">
+      <label class="knive-details__field__label">{{'home.BladeMade' | translate}} </label>
+      <p class="knive-details__value">{{knive.edgeMade}}</p>
+      </div>
 
-      <p class="knive-details__field knive-details__anim6"><label class="knive-details__field__label">{{'home.HandleType' | translate}} </label> <strong class="knive-details__value">{{knive.handleDescription}}</strong></p>
+      <div class="knive-details__field knive-details__anim6">
+      <label class="knive-details__field__label">{{'home.HandleType' | translate}} </label>
+      <p class="knive-details__value">{{knive.handleDescription}}</p>
+      </div>
 
-      <h4 class="knive-details__field knive-details__anim7 custom-heading"><label class="knive-details__field__label">{{'home.Price' | translate}}  </label><strong class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong></h4>
+      <div class="knive-details__field knive-details__anim7 custom-heading"><label class="knive-details__field__label">{{'home.Price' | translate}}  </label><strong class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong></div>
     </section>
 
     <section class="knive-details__images knive-details__anim8" *ngIf="kniveImages">
@@ -32,7 +41,7 @@
     <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
-    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold" (click)="toggleOrder()">To order</button>
+    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold" [routerLink]="['/order', knive.kniveId]">To order</button>
   </div>
 
   <div class="knive-details__image-enlarge">
@@ -40,5 +49,3 @@
     <img class="knive-details__image-enlarge__image" src="" alt="knive image" />
   </div>
 </article>
-
-<app-order [knive]="knive" *ngIf="isOrder"></app-order>

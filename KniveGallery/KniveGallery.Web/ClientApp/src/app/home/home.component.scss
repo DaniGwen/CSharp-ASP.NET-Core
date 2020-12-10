@@ -1,6 +1,7 @@
 @import '../shared-styles/colors';
 @import '../shared-styles/animations';
 @import '../shared-styles/custom-buttons';
+@import '../shared-styles/popups.scss';
 
 .home-container {
   display: grid;
@@ -24,14 +25,4 @@
   grid-template-columns: 240px 240px 240px 240px;
   grid-row-gap: 20px;
   grid-column-gap: 30px;
-}
-
-.home__knive-deleted-message {
-  background-color: mediumseagreen;
-  color: $charcoal;
-  font-weight: 500;
-  max-width: 29%;
-  padding: 5px 15px;
-  border-radius: 10px;
-  transition: ease-out 0.5s;
 }

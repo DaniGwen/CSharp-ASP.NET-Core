@@ -58,6 +58,7 @@
     "Street must be atleast 3 letters.": "Полето трябва да съдържа поне 3 символа.",
     "Quantity": "Брой",
     "Price": "Цена",
-    "Order": "Поръчай"
+    "Order": "Поръчай",
+    "KniveQuantity":  "Наличност"
   }
 }

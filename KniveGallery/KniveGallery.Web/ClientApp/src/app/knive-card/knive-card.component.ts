@@ -12,8 +12,8 @@ import { KnivesService } from '../../Services/knives.service';
 
 export class KniveCardComponent {
 
-  @Input() public knive: Knive;
   public isAuthenticated: Observable<boolean>;
+  @Input() public knive: Knive;
   @Output() public deleteKniveRequest = new EventEmitter<number>();
   public message: string = '';
   private isLiked: boolean = false;

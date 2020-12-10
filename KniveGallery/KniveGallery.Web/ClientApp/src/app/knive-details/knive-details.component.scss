@@ -15,7 +15,7 @@
 .container {
   display: grid;
   grid-template-columns: max-content max-content;
-  grid-column-gap: 50px;
+  grid-column-gap: 100px;
 }
 
 label {
@@ -43,6 +43,7 @@ label {
   &__value {
     font-size: 18px;
     color: $grey300;
+    width: auto;
   }
 
   &__field {
@@ -53,6 +54,7 @@ label {
     text-align: center;
     color: $mellowApricot;
     background-color: $charcoal;
+    word-break: break-all;
   }
 
   &__field__price {
