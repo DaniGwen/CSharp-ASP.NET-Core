@@ -194,7 +194,7 @@ namespace KniveGallery.Web
                     Price = 100,
                     KniveClass = KniveClass.HighClass,
                     ImagePath = "high1.jpg",
-                     EdgeMade = "Marlin man  е с острие от пет модулен мозаечен дамаск",
+                    EdgeMade = "Marlin man  е с острие от пет модулен мозаечен дамаск",
                     TotalLength= 252,
                 },
                 new Knive

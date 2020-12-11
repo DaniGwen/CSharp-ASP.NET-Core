@@ -18,6 +18,7 @@ export class OrderComponent implements OnInit {
   private order = new Order();
   public errorMessage: boolean = false;
   public showLoader: boolean;
+  private quantityOrdered: number;
 
   orderForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -53,6 +54,10 @@ export class OrderComponent implements OnInit {
   }
 
   calculateKnivePrice(value: number) {
+    if (value > this.knive.quantity) {
+      return;
+    }
+    this.quantityOrdered = value;
     this.totalPrice = this.knive.price * value;
   }
 
@@ -62,6 +67,10 @@ export class OrderComponent implements OnInit {
     this.order = this.orderForm.value;
     this.order.price = this.totalPrice;
     this.order.kniveId = this.knive.kniveId;
+
+    this.knive.quantity -= this.quantityOrdered;
+
+    this.kniveService.updateKnive(this.knive).subscribe();
 
     this.orderService.postOrder(this.order)
       .subscribe((order) => {

@@ -10,7 +10,7 @@ import { ToastService } from 'angular-toastify';
   templateUrl: './edit-knive.component.html',
   styleUrls: ['./edit-knive.component.scss']
 })
-/** edit-knive component*/
+
 export class EditKniveComponent {
   selectedFiles: FileList;
   public status: any;
@@ -36,7 +36,7 @@ export class EditKniveComponent {
 
   onSubmit() {
     this.isLoading = true;
-   
+
     this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
         this.status = data;
       this.isLoading = false;

@@ -1,6 +1,16 @@
 @import '../shared-styles/colors';
 @import '../shared-styles/custom-buttons.scss';
 @import '../shared-styles/headings.scss';
+@import '../shared-styles/animations.scss';
+@import '../shared-styles/popups.scss';
+
+@for $i from 1 through 12 {
+  .edit-knive__anim#{$i} {
+    opacity: 0;
+    animation: 0.4s revial forwards;
+    animation-delay: 0.1s * $i;
+  }
+}
 
 .edit-knive {
   display: grid;

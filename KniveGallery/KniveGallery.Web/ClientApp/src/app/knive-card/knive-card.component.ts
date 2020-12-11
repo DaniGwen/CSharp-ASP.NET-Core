@@ -12,7 +12,7 @@ import { KnivesService } from '../../Services/knives.service';
 
 export class KniveCardComponent {
 
-  public isAuthenticated: Observable<boolean>;
+  public isAuthenticated: boolean;
   @Input() public knive: Knive;
   @Output() public deleteKniveRequest = new EventEmitter<number>();
   public message: string = '';
@@ -24,7 +24,9 @@ export class KniveCardComponent {
   }
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
+    this.authService.isAuthenticated().subscribe((auth: boolean) => {
+      this.isAuthenticated = auth;
+    });
   }
 
   deleteKnive(kniveId: number) {

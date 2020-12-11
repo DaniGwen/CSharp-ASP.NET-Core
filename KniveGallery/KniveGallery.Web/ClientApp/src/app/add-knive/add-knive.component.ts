@@ -28,6 +28,7 @@ export class AddKniveComponent {
     edgeMade: ['', Validators.required],
     handleDescription: ['', Validators.required],
     kniveClass: ['', Validators.required],
+    quantity: [''],
     price: ['', [Validators.required]]
   });
 

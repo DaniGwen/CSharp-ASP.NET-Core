@@ -84,7 +84,6 @@ namespace KniveGallery.Web.Controllers
             return knive;
         }
 
-        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutKnife(int id, Knive knive)
         {
@@ -139,6 +138,7 @@ namespace KniveGallery.Web.Controllers
                     HandleDescription = knive.HandleDescription,
                     TotalLength = knive.TotalLength,
                     Price = knive.Price,
+                    Quantity = knive.Quantity,
                     KniveClass = (KniveClass)Enum.Parse(typeof(KniveClass), knive.KniveClass)
                 };
 

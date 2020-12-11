@@ -1,12 +1,12 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
-  <h3 class="text-center custom-heading">Knive Id {{knive.kniveId}}</h3>
-  <div class="edit-knive__info-wrapper edit-knive__info-lable mt-4">
+  <h3 class="text-center custom-heading edit-knive__anim1">Knive Id {{knive.kniveId}}</h3>
+  <div class="edit-knive__info-wrapper edit-knive__info-lable mt-4 edit-knive__anim2">
     <i class="fas fa-info-circle"></i>
     <small>Всички размери са в милиметри.</small>
   </div>
   <article class="edit-knive col-md-7">
     <section class="edit-knive__edge-info">
-      <div class="form-group">
+      <div class="form-group edit-knive__anim3">
         <label>Edge width</label>
         <input name="edgewidth"
                type="number"
@@ -22,7 +22,7 @@
           Полето е задължително.
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim4">
         <label>Edge tickness</label>
         <input name="edgethickness"
                type="number"
@@ -37,7 +37,7 @@
           Полето е задължително.
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim5">
         <label>Edge length</label>
         <input name="edgelength"
                type="number"
@@ -52,7 +52,7 @@
           Полето е задължително.
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim5">
         <label>Total length</label>
         <input name="totallength"
                type="number"
@@ -69,7 +69,7 @@
       </div>
     </section>
     <section>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim6">
         <label>Edge made</label>
         <input name="edgemade"
                required
@@ -82,12 +82,11 @@
           Полето е задължително.
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim7">
         <label>Handle type</label>
         <input name="handledescription"
                required
                [(ngModel)]="knive.handleDescription"
-               placeholder="Тип (описание) на дръжката"
                class="form-control form-control-sm"
                ngModel
                #handledescription />
@@ -95,7 +94,7 @@
           Полето е задължително.
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group edit-knive__anim8">
         <label>Price</label>
         <input name="knive.price"
                [(ngModel)]="knive.price"
@@ -103,28 +102,41 @@
                placeholder="цена"
                class="form-control form-control-sm" />
       </div>
+      <div class="form-group edit-knive__anim9">
+        <label>Quantity</label>
+        <input name="quantity"
+               [(ngModel)]="knive.quantity"
+               type="number"
+               min="1"
+               class="form-control form-control-sm"
+               ngModel
+               #quantity />
+        <label class="alert alert-danger" *ngIf="quantity.invalid && quantity.touched">
+          Минимум 1 бройка.
+        </label>
+      </div>
     </section>
-    <section>
+    <section class="edit-knive__anim10">
       <div class="form-group">
         <label>{{'home.SelectImages'|translate}}:</label>
         <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
       </div>
     </section>
   </article>
-  <article class="edit-knive__buttons">
-    <section class="popup-message" *ngIf="status">
-      <div class="toast-header">
-        <strong class="mr-auto">Message</strong>
-      </div>
-      <div class="toast-body">
-        {{status}}
-      </div>
-    </section>
+  <article class="edit-knive__buttons edit-knive__anim11">
     <hr />
     <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
     <button *ngIf="!isLoading" type="submit" [disabled]="!form.valid" class="btn btn-theme btn-shadow">{{'home.Save' | translate}}</button>
     <hr />
     <a [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
   </article>
+  <section class="popup-message" *ngIf="status">
+    <div class="toast-header">
+      <strong class="mr-auto">Message</strong>
+    </div>
+    <div class="toast-body">
+      {{status}}
+    </div>
+  </section>
 </form>
 
