@@ -18,11 +18,17 @@ export class OrderManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllOrders();
+  }
+
+  getAllOrders() {
     this.showLoader = true;
     this.ordersService.getOrders().subscribe((orders: Order[]) => {
-      this.orders = orders;
-      this.showLoader = false;
-      this.orderTitle = "All orders"
+      if (orders) {
+        this.orders = orders;
+        this.showLoader = false;
+        this.orderTitle = "All orders"
+      }
     });
   }
 
@@ -48,10 +54,7 @@ export class OrderManagerComponent implements OnInit {
     this.showLoader = true;
     this.ordersService.dispatchOrder(orderId).subscribe();
 
-    this.ordersService.getOrders().subscribe((orders: Order[]) => {
-      this.orders = orders;
-      this.showLoader = false;
-    })
+    this.getAllOrders();
   }
 
   filterOrders(orderStatus: string) {
@@ -75,7 +78,7 @@ export class OrderManagerComponent implements OnInit {
       this.orderTitle = orderStatus;
     }
     else {
-      this.ngOnInit();
+      this.getAllOrders();
     }
   }
 }

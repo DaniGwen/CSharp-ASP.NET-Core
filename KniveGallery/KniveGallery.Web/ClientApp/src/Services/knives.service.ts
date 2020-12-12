@@ -38,7 +38,7 @@ export class KnivesService {
     return this.http.delete(`${this.Url}/${kniveId}`, { headers: this.headers });
   }
 
-  public updateKnive(knive) {
+  public updateKnive(knive: Knive) {
     return this.http.put(`${this.Url}/${knive.kniveId}`, knive, { headers: this.headers });
   }
 

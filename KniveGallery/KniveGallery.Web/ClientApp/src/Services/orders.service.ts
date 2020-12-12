@@ -12,7 +12,7 @@ export class OrderService {
   }
 
   public postOrder(order: Order) {
-    return this.http.post<Order>(`${this.Url}/AddOrder`, order, { headers: this.headers });
+    return this.http.post(`${this.Url}/AddOrder`, order, { headers: this.headers });
   }
 
   public getOrders() {

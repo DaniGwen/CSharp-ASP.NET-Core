@@ -110,7 +110,7 @@ namespace KniveGallery.Web.Controllers
                 }
             }
 
-            return new JsonResult("Knive saved!");
+            return Ok("Knive saved!");
         }
 
         [Authorize]

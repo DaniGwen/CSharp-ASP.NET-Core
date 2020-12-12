@@ -60,6 +60,9 @@ export class OrderComponent implements OnInit {
   }
 
   OnSubmit() {
+    if (this.quantityOrdered > this.knive.quantity) {
+      return;
+    }
     this.showLoader = true;
 
     this.order = this.orderForm.value;
@@ -68,14 +71,11 @@ export class OrderComponent implements OnInit {
 
     this.knive.quantity -= this.quantityOrdered;
 
-    this.kniveService.updateKnive(this.knive).subscribe();
+    this.kniveService.updateKnive(this.knive).subscribe(data => { });
 
-    this.orderService.postOrder(this.order)
-      .subscribe((order) => {
-        if (order) {
-          this.showLoader = false;
-        }
-        this.router.navigateByUrl("/order-summary");
-      });
+    this.orderService.postOrder(this.order).subscribe((message) => {
+    });
+
+    this.router.navigateByUrl("/order-summary");
   }
 }
