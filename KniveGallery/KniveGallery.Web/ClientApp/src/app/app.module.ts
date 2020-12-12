@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -12,12 +11,12 @@ import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { NavMenuComponent } from './core/nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
 import { EditKniveComponent } from './edit-knive/edit-knive.component';
 import { KnivesService } from '../Services/knives.service';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './core/footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ContactInfoComponent } from "./contact-info/contact-info.component";
 import { KniveCardComponent } from './knive-card/knive-card.component';
@@ -29,6 +28,12 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
 import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { environment } from '../environments/environment';
 import { AddKniveComponent } from './add-knive/add-knive.component'
+import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from './app.routing.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AsideCarouselComponent } from './aside-carousel/aside-carousel.component';
+import { ImageService } from 'src/Services/images.service';
+import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -62,11 +67,9 @@ const cookieConfig: NgcCookieConsentConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
     KniveDetailsComponent,
     EditKniveComponent,
-    FooterComponent,
     PrivacyComponent,
     ContactInfoComponent,
     KniveCardComponent,
@@ -74,9 +77,13 @@ const cookieConfig: NgcCookieConsentConfig = {
     OrderSummaryComponent,
     OrderManagerComponent,
     LoadingScreenComponent,
-    AddKniveComponent
+    AddKniveComponent,
+    NotFoundComponent,
+    AsideCarouselComponent,
+    AddCarouselImagesComponent
   ],
   imports: [
+    CoreModule,
     HttpClientModule,
     NgcCookieConsentModule.forRoot(cookieConfig),
     TranslateModule.forRoot({
@@ -90,54 +97,21 @@ const cookieConfig: NgcCookieConsentConfig = {
     FormsModule,
     ApiAuthorizationModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'knive-details/:id',
-        component: KniveDetailsComponent
-      },
-
-      {
-        path: 'privacy',
-        component: PrivacyComponent
-      },
-      {
-        path: 'order/:id',
-        component: OrderComponent
-      },
-      {
-        path: 'order-summary',
-        component: OrderSummaryComponent
-      },
-      {
-        path: 'order-manager',
-        component: OrderManagerComponent,
-        canActivate: [AuthorizeGuard]
-      },
-      {
-        path: 'edit-knive/:id',
-        component: EditKniveComponent,
-        canActivate: [AuthorizeGuard]
-      },
-      {
-        path: 'add-knive',
-        component: AddKniveComponent,
-        canActivate: [AuthorizeGuard]
-      }
-    ])
+    AppRoutingModule
   ],
   providers: [
+    { provide: ImageService, useClass: ImageService },
     { provide: AuthorizeGuard, useClass: AuthorizeGuard },
     { provide: TranslateService, useClass: TranslateService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     { provide: KnivesService, useClass: KnivesService },
     { provide: OrderService, useClass: OrderService }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    NavMenuComponent,
+    FooterComponent
+  ]
 })
 export class AppModule { }
 

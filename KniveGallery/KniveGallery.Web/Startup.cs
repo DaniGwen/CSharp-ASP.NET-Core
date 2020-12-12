@@ -145,9 +145,6 @@ namespace KniveGallery.Web
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
@@ -196,6 +193,7 @@ namespace KniveGallery.Web
                     ImagePath = "high1.jpg",
                     EdgeMade = "Marlin man  е с острие от пет модулен мозаечен дамаск",
                     TotalLength= 252,
+                    Quantity = 3
                 },
                 new Knive
                 {
@@ -209,6 +207,7 @@ namespace KniveGallery.Web
                     ImagePath = "high2.jpg",
                      EdgeMade = "немска неръж. стомана М68",
                     TotalLength= 245,
+                     Quantity = 3
                 },
                 new Knive
                 {
@@ -222,6 +221,7 @@ namespace KniveGallery.Web
                     ImagePath = "high3.jpg",
                      EdgeMade = "Острието на ножът направих от масат на марката Zwilling от началото на миналия век.",
                     TotalLength= 275,
+                     Quantity = 3
                 },
                 new Knive
                 {
@@ -235,6 +235,7 @@ namespace KniveGallery.Web
                     ImagePath = "kitchen1.jpg",
                      EdgeMade = "френска нерж.стомана ‘Т5’",
                     TotalLength= 320,
+                     Quantity = 2
                 },
                  new Knive
                 {
@@ -248,6 +249,7 @@ namespace KniveGallery.Web
                     ImagePath = "kitchen2.jpg",
                     EdgeMade = "френска стомана ‘Т5’",
                     TotalLength= 320,
+                     Quantity = 4
         },
                 new Knive
                 {
@@ -260,7 +262,8 @@ namespace KniveGallery.Web
                     Price = 90,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle1.jpg",
-                    EdgeMade = "Стоманата е ‘Sweden AK5’"
+                    EdgeMade = "Стоманата е ‘Sweden AK5’",
+                     Quantity = 3
                 },
                 new Knive
                 {
@@ -272,7 +275,8 @@ namespace KniveGallery.Web
                     Price = 70,
                     KniveClass = KniveClass.KitchenClass,
                     ImagePath = "kitchen2.jpg",
-                    EdgeMade = "Carbon"
+                    EdgeMade = "Carbon",
+                     Quantity = 6
                 },
                 new Knive
                 {
@@ -286,6 +290,7 @@ namespace KniveGallery.Web
                     Price = 130,
                     KniveClass = KniveClass.MiddleClass,
                     ImagePath = "middle2.jpg",
+                     Quantity = 3
                 }
             };
 

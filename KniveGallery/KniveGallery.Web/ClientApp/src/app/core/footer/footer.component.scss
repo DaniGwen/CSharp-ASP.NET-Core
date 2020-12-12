@@ -1,11 +1,11 @@
-@import '../shared-styles/colors';
+@import "../../shared-styles/colors.scss";
 
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: auto;
-  box-shadow: 0px -1px 12px -7px rgba(0,0,0,0.75);
+  box-shadow: 0px -1px 12px -7px rgba(0, 0, 0, 0.75);
   background-color: $charcoal;
   color: #ffffff;
 
@@ -28,11 +28,15 @@
   }
 }
 
-.footer__contact__detail{
-    margin: 0;
-    color: $mellowApricot;
+.footer__contact__detail {
+  margin: 0;
+  color: $mellowApricot;
 }
 
-.footer_link{
-    color: $lightBlue;
+.footer_link {
+  color: $lightBlue;
+}
+
+.footer_contact__facebook {
+  font-size: 20px;
 }

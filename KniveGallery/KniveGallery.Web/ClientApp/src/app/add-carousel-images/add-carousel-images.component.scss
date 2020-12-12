@@ -1,0 +1,30 @@
+﻿@import "../shared-styles/headings.scss";
+@import "../shared-styles//popups.scss";
+@import "../shared-styles/custom-buttons.scss";
+
+.buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.images-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 40px;
+    justify-items: center;
+}
+.image-container {
+    width: 250px;
+    height: auto;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.images-select {
+    justify-content: center;
+}

@@ -1,5 +1,8 @@
 <ul class="navbar-nav" *ngIf="isAuthenticated | async">
   <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/add-carousel-images']"><i class="fas fa-plus"></i> Slides</a>
+</li>
+  <li class="nav-item">
       <a class="nav-link" [routerLink]="['/add-knive']"><i class="fas fa-plus"></i> Knive</a>
   </li>
   <li class="nav-item">
@@ -9,11 +12,11 @@
     <a class="nav-admin nav-link" [routerLink]='["/authentication/profile"]' title="Manage"><i class="fas fa-user mr-1"></i> Hello <strong>{{ userName | async }}</strong></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+    <a class="nav-link" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
   </li>
 </ul>
 <ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]='["/authentication/login"]'><i class="fas fa-user-cog mr-1"></i>Admin</a>
+    <a class="nav-link" [routerLink]='["/authentication/login"]'><i class="fas fa-user-cog mr-1"></i> Admin</a>
   </li>
 </ul>

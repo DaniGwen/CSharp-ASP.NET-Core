@@ -1,0 +1,46 @@
+﻿<section *ngIf="message" class="popup-message">
+    <div class="toast-header">
+        <strong class="mr-auto">Message</strong>
+    </div>
+    <div class="toast-body">
+        {{message}}
+    </div>
+</section>
+
+<section class="container">
+    <h2 class="custom-heading text-center add-knive__anim1">Slideshow images</h2>
+    <hr />
+
+    <section class="images-container">
+        <div class="image-container" *ngFor="let image of allCarouselImages">
+            <img class="img" src="../../assets/images/{{image.imagePath}}" alt="image">
+            <button class="btn btn-custom btn-sm btn-outline-danger" (click)="deleteImage(image.imageId)">
+                <i class="far fa-trash-alt"></i> {{'home.Delete'|translate}}
+            </button>
+        </div>
+
+    </section>
+
+    <form (ngSubmit)="onSubmit()">
+        <section class="images-select row row-cols-2">
+
+            <div class="form-group col-5 add-knive__anim12">
+                <section>
+                    <div class="mt-4 form-group">
+                        <label>{{'home.SelectImages'|translate}}:</label>
+                        <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
+                    </div>
+                </section>
+            </div>
+
+        </section>
+        <hr />
+        <div class="buttons-container mb-5 add-knive__anim13">
+            <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
+                <i class="fas fa-arrow-circle-left"></i>
+            </a>
+            <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
+            <button *ngIf="!isLoading" type="submit" class="btn btn-theme btn-shadow">Save</button>
+        </div>
+    </form>
+</section>

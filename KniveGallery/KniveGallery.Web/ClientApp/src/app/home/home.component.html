@@ -1,4 +1,17 @@
+<div class="jumbotron">
+  <section class="jumbotron__title-container">
+    <h1 class="display-6">Welcome to my knive gallery!</h1>
+    <app-aside-carousel></app-aside-carousel>
+  </section>
+  <hr class="my-4">
+  <p class="lead">Please look around and buy if you like my work.</p>
+  <p>Check out my <a class="btn btn-sm btn-theme btn-shadow mb-1" href="https://facebook.com" role="button">
+      <i class="fab fa-facebook-f"></i>acebook
+    </a> too.</p>
+</div>
+
 <div class="home-container mb-5">
+
   <article class="filter__buttons mt-3">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-shadow btn-theme">
@@ -6,15 +19,15 @@
       </label>
       <label class="btn btn-shadow btn-theme">
         <input type="radio" name="options" id="option4"
-               (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
+          (click)="getKnivesByClass('KitchenClass')">{{'home.KitchenKnives'| translate}}
       </label>
       <label class="btn btn-shadow btn-theme">
-        <input type="radio" name="options" id="option2"
-               (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'| translate}}
+        <input type="radio" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')">{{'home.MiddleClass'|
+        translate}}
       </label>
       <label class="btn btn-shadow btn-theme">
-        <input type="radio" name="options" id="option3"
-               (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'| translate}}
+        <input type="radio" name="options" id="option3" (click)="getKnivesByClass('HighClass')">{{'home.HighEndClass'|
+        translate}}
       </label>
     </div>
   </article>
@@ -50,9 +63,7 @@
   </section>
 
   <article class="home__knives-wrapper">
-    <app-knive-card *ngFor="let knive of knives"
-                    [knive]="knive"
-                    (deleteKniveRequest)="onDelete($event)">
+    <app-knive-card *ngFor="let knive of knives" [knive]="knive" (deleteKniveRequest)="onDelete($event)">
     </app-knive-card>
   </article>
 </div>

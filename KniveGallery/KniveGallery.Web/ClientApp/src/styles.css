@@ -1,8 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/* Provide sufficient contrast against white background */
-/*$grey200: #EEEEEE;
-$grey300: #E0E0E0;*/
+html{
+  font-family: 'Roboto', sans-serif !important;
+}
+
 a {
   color: #0366d6;
 }
@@ -24,4 +25,9 @@ code {
 
 body {
   background-color: #EEEEEE;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
 }

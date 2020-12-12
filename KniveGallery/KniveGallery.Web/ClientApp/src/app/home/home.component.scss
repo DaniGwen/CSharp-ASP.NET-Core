@@ -1,7 +1,7 @@
-@import '../shared-styles/colors';
-@import '../shared-styles/animations';
-@import '../shared-styles/custom-buttons';
-@import '../shared-styles/popups.scss';
+@import "../shared-styles/colors";
+@import "../shared-styles/animations";
+@import "../shared-styles/custom-buttons";
+@import "../shared-styles/popups.scss";
 
 .home-container {
   display: grid;
@@ -25,4 +25,14 @@
   grid-template-columns: 240px 240px 240px 240px;
   grid-row-gap: 20px;
   grid-column-gap: 30px;
+}
+
+.jumbotron {
+  padding: 30px;
+
+  &__title-container {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 10%;
+  }
 }

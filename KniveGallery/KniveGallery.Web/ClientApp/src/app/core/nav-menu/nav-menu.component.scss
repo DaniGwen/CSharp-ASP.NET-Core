@@ -1,4 +1,4 @@
-@import '../shared-styles/colors';
+@import '../../shared-styles/colors';
 
 a.navbar-brand {
   white-space: normal;
@@ -9,9 +9,6 @@ a.navbar-brand {
 .navbar {
   background-color: #37475a !important;
   color: $white;
-  display: grid;
-  grid-template-columns: auto;
-  grid-column-gap: 20px;
 }
 
 .nav-link {
@@ -61,4 +58,8 @@ html {
 
 .lang-select-box {
   align-self: self-end;
+}
+
+.header-title{
+  color: $mellowApricot;
 }

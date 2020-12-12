@@ -7,7 +7,6 @@ import { Knive } from '../Models/knive';
 @Injectable({
   providedIn: 'root'
 })
-
 export class KnivesService {
 
   private headers = new HttpHeaders();

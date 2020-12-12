@@ -19,5 +19,7 @@ namespace KniveGallery.Web.Data
         public DbSet<KniveImage> Images { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<CarouselImage> CarouselImages { get; set; }
     }
 }
