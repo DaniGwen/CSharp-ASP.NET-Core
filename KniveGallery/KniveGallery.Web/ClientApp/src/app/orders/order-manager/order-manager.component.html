@@ -24,9 +24,7 @@
 
   <h4 class="text-center mt-5" *ngIf="orders.length === 0">No orders..</h4>
 
-  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
-
-  <article *ngIf="orders" class="d-flex justify-content-center">
+  <article *ngIf="orders" class="orders-container d-flex justify-content-center">
     <div class="row row-cols-3 mt-4 justify-content-around">
       <section *ngFor="let order of orders">
         <div class="col">
@@ -56,6 +54,10 @@
   <div class="text-center mt-5">
     <a class=" mr-5" [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
   </div>
+  <div class="text-center mt-4">
+     <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
+  </div>
+ 
 </section>
 
 <div *ngIf="!errorMessage">{{errorMessage}}</div>

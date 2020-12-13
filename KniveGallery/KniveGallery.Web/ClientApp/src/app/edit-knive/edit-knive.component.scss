@@ -23,16 +23,13 @@
   }
 
   &__info-lable {
-    background-color: #c9daf8;
-    color: $gunmetal;
-    border-radius: 5px;
-    padding: 3px 7px;
+    color: $mellowApricot;
   }
 
   &__info-wrapper {
     margin: 0 auto;
     margin-bottom: 15px;
-    width: 30%;
+    text-align: center;
 
     i {
       margin-right: 5px;

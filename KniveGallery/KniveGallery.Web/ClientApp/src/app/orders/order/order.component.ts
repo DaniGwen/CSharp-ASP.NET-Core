@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
   private kniveId: any;
   public totalPrice: number;
   private order = new Order();
-  public errorMessage: boolean = false;
+  public message: boolean = false;
   public showLoader: boolean;
   private quantityOrdered: number;
 
@@ -59,7 +59,7 @@ export class OrderComponent implements OnInit {
     this.totalPrice = this.knive.price * value;
   }
 
-  OnSubmit() {
+  async OnSubmit() {
     if (this.quantityOrdered > this.knive.quantity) {
       return;
     }
@@ -70,12 +70,25 @@ export class OrderComponent implements OnInit {
     this.order.kniveId = this.knive.kniveId;
 
     this.knive.quantity -= this.quantityOrdered;
-
-    this.kniveService.updateKnive(this.knive).subscribe(data => { });
-
     this.orderService.postOrder(this.order).subscribe((message) => {
+      if (message) {
+        this.message = message;
+      }
+    });
+
+    await this.delay(1000);
+
+    this.kniveService.updateKnive(this.knive).subscribe(message => {
+      if (message) {
+        this.message = message;
+        this.showLoader = false;
+      }     
     });
 
     this.router.navigateByUrl("/order-summary");
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

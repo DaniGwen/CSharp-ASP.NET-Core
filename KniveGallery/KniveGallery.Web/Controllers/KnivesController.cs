@@ -85,7 +85,7 @@ namespace KniveGallery.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutKnife(int id, Knive knive)
+        public async Task<ActionResult> PutKnife(int id, Knive knive)
         {
             if (id != knive.KniveId)
             {

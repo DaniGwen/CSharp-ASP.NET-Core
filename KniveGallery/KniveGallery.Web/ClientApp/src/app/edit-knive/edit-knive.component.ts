@@ -38,11 +38,14 @@ export class EditKniveComponent {
     this.isLoading = true;
 
     this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
-        this.status = data;
-      this.isLoading = false;
-      });
+        this.status = "Knive saved";
+    });
+    this.isLoading = false;
 
-    this.uploadFiles();
+    if (this.selectedFiles.length > 0) {
+      this.uploadFiles();
+      this.status = "Images added"
+    }
   }
 
 

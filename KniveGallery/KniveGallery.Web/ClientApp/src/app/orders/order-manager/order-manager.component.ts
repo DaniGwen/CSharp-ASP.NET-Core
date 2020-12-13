@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from '../../../Models/order';
 import { OrderService } from '../../../Services/orders.service';
 
@@ -14,7 +15,8 @@ export class OrderManagerComponent implements OnInit {
   public orderTitle: string = "Pending orders";
   public showLoader: boolean;
 
-  constructor(private ordersService: OrderService) {
+  constructor(private ordersService: OrderService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -37,10 +39,8 @@ export class OrderManagerComponent implements OnInit {
 
     this.ordersService.deleteOrder(orderId).subscribe((data) => {
       this.ordersService.getOrders().subscribe((orders: Order[]) => {
-        success => {
-          if (orders) {
-            this.showLoader = false;
-          }
+        if (orders) {
+          this.showLoader = false;
           this.orders = orders;
         }
         err => {
@@ -51,10 +51,11 @@ export class OrderManagerComponent implements OnInit {
   }
 
   dispatchOrder(orderId: number) {
-    this.showLoader = true;
-    this.ordersService.dispatchOrder(orderId).subscribe();
-
-    this.getAllOrders();
+    this.ordersService.dispatchOrder(orderId).subscribe((message) => {
+      if(message){
+         this.getAllOrders();
+      }
+    });
   }
 
   filterOrders(orderStatus: string) {
@@ -63,8 +64,8 @@ export class OrderManagerComponent implements OnInit {
       this.ordersService.getOrders().subscribe((orders: Order[]) => {
         if (orders) {
           this.showLoader = false;
+          this.orders = orders.filter(o => o.isDelivered === false);
         }
-        this.orders = orders.filter(o => o.isDelivered === false);
       });
       this.orderTitle = orderStatus;
     }
@@ -72,8 +73,8 @@ export class OrderManagerComponent implements OnInit {
       this.ordersService.getOrders().subscribe((orders: Order[]) => {
         if (orders) {
           this.showLoader = false;
+          this.orders = orders.filter(o => o.isDelivered === true);
         }
-        this.orders = orders.filter(o => o.isDelivered === true);
       });
       this.orderTitle = orderStatus;
     }
