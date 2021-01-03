@@ -67,7 +67,7 @@
     &__vans {
         @include for-phone-only {
             grid-template-columns: max-content;
-            grid-row-gap: 10px;
+            grid-row-gap: 25px;
         }
 
         position: relative;
@@ -78,6 +78,10 @@
         justify-items: center;
 
         &__container {
+            @include for-phone-only {
+                grid-row-gap: 10px;
+            }
+
             display: grid;
             grid-template-rows: max-content max-content;
             grid-row-gap: 30px;
@@ -88,5 +92,5 @@
 .back-to-index {
     font-size: 18px;
     text-align: center;
-    align-self: end;
+    align-self: center;
 }

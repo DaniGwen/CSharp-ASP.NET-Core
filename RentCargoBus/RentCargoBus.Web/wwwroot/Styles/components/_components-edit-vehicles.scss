@@ -1,17 +1,40 @@
 ﻿@import "../settings/_settings-shadows.scss";
 @import "../settings/_settings-colors.scss";
+@import "../settings/_settings-breakpoints.scss";
 
 .edit-vehicle {
+    @include for-phone-only {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        justify-items: center;
+    }
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 20px;
 
+    &__title {
+        @include for-phone-only {
+            font-size: 26px;
+            text-align: center;
+        }
+    }
+
     &__info {
+        @include for-phone-only {
+            width: 90%;
+        }
+
         width: 500px;
     }
 
     &__images {
+        @include for-phone-only {
+            grid-template-columns: 1fr;
+            grid-gap: 5px;
+        }
+
         display: grid;
         grid-template-columns: max-content max-content max-content;
         grid-template-rows: auto;

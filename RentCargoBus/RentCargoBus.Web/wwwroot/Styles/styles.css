@@ -484,14 +484,30 @@ small {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 20px; }
+  @media (max-width: 599px) {
+    .edit-vehicle {
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+      justify-items: center; } }
+  @media (max-width: 599px) {
+    .edit-vehicle__title {
+      font-size: 26px;
+      text-align: center; } }
   .edit-vehicle__info {
     width: 500px; }
+    @media (max-width: 599px) {
+      .edit-vehicle__info {
+        width: 90%; } }
   .edit-vehicle__images {
     display: grid;
     grid-template-columns: max-content max-content max-content;
     grid-template-rows: auto;
     grid-gap: 10px;
     align-content: baseline; }
+    @media (max-width: 599px) {
+      .edit-vehicle__images {
+        grid-template-columns: 1fr;
+        grid-gap: 5px; } }
   .edit-vehicle__image-container {
     position: relative;
     box-shadow: 6px 10px 25px -4px rgba(0, 0, 0, 0.75);
@@ -685,9 +701,10 @@ small {
     align-content: baseline; }
     @media (max-width: 599px) {
       .vehicle-details__images {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-column-gap: 3px;
-        grid-row-gap: 5px; } }
+        grid-row-gap: 5px;
+        justify-items: center; } }
     .vehicle-details__images__no-images {
       width: 300px; }
   .vehicle-details__images .vehicle-details__image-wrapper {
@@ -743,6 +760,9 @@ small {
     grid-template-rows: 40px 40px 40px 40px;
     align-items: center;
     justify-items: center; }
+    @media (max-width: 599px) {
+      .vehicle-details__contact-us {
+        margin-top: 20px; } }
     .vehicle-details__contact-us__phone {
       font-size: 20px;
       font-weight: 600; }
@@ -869,16 +889,19 @@ small {
     @media (max-width: 599px) {
       .c-main__vans {
         grid-template-columns: max-content;
-        grid-row-gap: 10px; } }
+        grid-row-gap: 25px; } }
     .c-main__vans__container {
       display: grid;
       grid-template-rows: max-content max-content;
       grid-row-gap: 30px; }
+      @media (max-width: 599px) {
+        .c-main__vans__container {
+          grid-row-gap: 10px; } }
 
 .back-to-index {
   font-size: 18px;
   text-align: center;
-  align-self: end; }
+  align-self: center; }
 
 .c-card {
   width: 300px;

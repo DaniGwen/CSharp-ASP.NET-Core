@@ -142,9 +142,10 @@
 
     &__images {
         @include for-phone-only {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             grid-column-gap: 3px;
             grid-row-gap: 5px;
+            justify-items: center;
         }
 
         display: grid;
@@ -225,6 +226,10 @@
     }
 
     &__contact-us {
+        @include for-phone-only {
+            margin-top: 20px;
+        }
+
         display: grid;
         grid-template-rows: 40px 40px 40px 40px;
         align-items: center;
