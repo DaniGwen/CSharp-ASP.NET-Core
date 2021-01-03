@@ -468,9 +468,6 @@ small {
   grid-template-columns: 100%;
   min-height: 100%;
   grid-row-gap: 30px; }
-  @media (max-width: 599px) {
-    .c-layout-main-grid {
-      max-width: 375px; } }
   .c-layout-main-grid .header {
     grid-row: 1 / 2; }
   .c-layout-main-grid .main {
@@ -962,4 +959,5 @@ small {
       grid-template-rows: auto;
       grid-template-columns: 1fr;
       grid-row-gap: 10px;
-      max-width: 375px; } }
+      max-width: 375px;
+      margin: 0 auto; } }

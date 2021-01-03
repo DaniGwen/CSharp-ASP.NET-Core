@@ -1,9 +1,6 @@
 ﻿@import "../settings/_settings-breakpoints.scss";
 
 .c-layout-main-grid {
-    @include for-phone-only {
-        max-width: 375px;
-    }
 
     display: grid;
     grid-template-rows: auto 1fr auto;
