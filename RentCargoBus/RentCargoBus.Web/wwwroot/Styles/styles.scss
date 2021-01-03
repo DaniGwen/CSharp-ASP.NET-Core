@@ -30,3 +30,7 @@
 //index styles
 @import "./components/index/_components-main.scss";
 @import "./components/index/_components-card.scss";
+
+//account styles
+@import "./components/account/login.scss";
+@import "./components/account/layout.scss";

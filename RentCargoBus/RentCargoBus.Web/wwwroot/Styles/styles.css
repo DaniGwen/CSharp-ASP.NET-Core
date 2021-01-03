@@ -343,7 +343,8 @@ small {
       .c-navbar__admin-login-and-toggle {
         margin-top: 15px;
         justify-content: center;
-        align-items: end; } }
+        align-items: end;
+        grid-template-columns: max-content; } }
     .c-navbar__admin-login-and-toggle__language {
       display: grid;
       grid-template-columns: 40px max-content; }
@@ -467,6 +468,9 @@ small {
   grid-template-columns: 100%;
   min-height: 100%;
   grid-row-gap: 30px; }
+  @media (max-width: 599px) {
+    .c-layout-main-grid {
+      max-width: 375px; } }
   .c-layout-main-grid .header {
     grid-row: 1 / 2; }
   .c-layout-main-grid .main {
@@ -584,7 +588,8 @@ small {
   @media (max-width: 599px) {
     .vehicle-details {
       grid-row-gap: 20px;
-      grid-template-rows: 100px min-content max-content 60px; } }
+      grid-template-rows: 100px min-content max-content 60px;
+      justify-content: center; } }
   .vehicle-details__brand-info {
     text-align: center;
     width: auto;
@@ -797,6 +802,11 @@ small {
 
 .c-admin {
   width: 600px; }
+  @media (max-width: 599px) {
+    .c-admin {
+      max-width: 360px;
+      margin: 0;
+      padding-left: 5px; } }
 
 .btn-admin {
   text-transform: capitalize; }
@@ -811,7 +821,8 @@ small {
   grid-row-gap: 50px; }
   @media (max-width: 599px) {
     .c-main {
-      grid-row-gap: 20px; } }
+      grid-row-gap: 20px;
+      justify-content: center; } }
   .c-main__hr {
     width: 100%;
     background-color: #919191; }
@@ -935,3 +946,20 @@ small {
       background-color: #919191; }
     .c-card__info__plate-number {
       display: none; }
+
+@media (max-width: 599px) {
+  .login-form {
+    max-width: 375px;
+    margin: 0 auto;
+    text-align: center; } }
+
+.account__layout__container {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 4em; }
+  @media (max-width: 599px) {
+    .account__layout__container {
+      grid-template-rows: auto;
+      grid-template-columns: 1fr;
+      grid-row-gap: 10px;
+      max-width: 375px; } }

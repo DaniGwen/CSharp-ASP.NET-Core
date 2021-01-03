@@ -1,9 +1,15 @@
-﻿.c-layout-main-grid {
+﻿@import "../settings/_settings-breakpoints.scss";
+
+.c-layout-main-grid {
+    @include for-phone-only {
+        max-width: 375px;
+    }
+
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 100%;
     min-height: 100%;
-    grid-row-gap:30px;
+    grid-row-gap: 30px;
 
     .header {
         grid-row: 1 / 2;

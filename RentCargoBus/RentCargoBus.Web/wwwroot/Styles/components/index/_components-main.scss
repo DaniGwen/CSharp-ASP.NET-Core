@@ -5,6 +5,7 @@
 .c-main {
     @include for-phone-only {
         grid-row-gap: 20px;
+        justify-content: center;
     }
 
     display: grid;
