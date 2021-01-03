@@ -1,8 +1,14 @@
 ﻿@import "../settings/_settings-animations.scss";
 @import "../settings/_settings-shadows.scss";
 @import "../settings/_settings-colors.scss";
+@import "../settings/_settings-breakpoints.scss";
 
 .vehicle-details {
+    @include for-phone-only {
+        grid-row-gap: 20px;
+        grid-template-rows: 100px min-content max-content 60px;
+    }
+
     display: grid;
     grid-template-rows: 150px min-content max-content 60px;
     grid-row-gap: 50px;
@@ -13,9 +19,31 @@
         margin: auto;
         border-radius: 10px;
         padding: 5px 60px;
+        background-color: $Grey700;
+        color: $Secondary800;
+    }
+
+    &__brand {
+        @include for-phone-only {
+            font-size: 26px;
+            margin: 0;
+        }
+    }
+
+    &__model {
+        @include for-phone-only {
+            font-size: 20px;
+            margin: 0;
+        }
     }
 
     &__images-and-info {
+        @include for-phone-only {
+            grid-template-columns: 375px;
+            grid-row-gap: 10px;
+            grid-template-rows: auto;
+        }
+
         display: grid;
         grid-template-columns: 250px min-content;
         grid-template-rows: max-content;
@@ -23,6 +51,10 @@
     }
 
     &__info {
+        @include for-phone-only {
+            grid-row-gap: 5px;
+        }
+
         display: grid;
         grid-template-rows: auto;
         grid-auto-rows: max-content;
@@ -48,6 +80,10 @@
     }
 
     &__price {
+        @include for-phone-only {
+            justify-content: center;
+        }
+
         display: grid;
         grid-template-rows: 40px max-content;
 
@@ -74,6 +110,12 @@
     }
 
     &__price__info {
+        @include for-phone-only {
+            justify-content: center;
+            text-align: center;
+            padding: 0;
+        }
+
         text-align: left;
         padding: 0 10px;
 
@@ -83,9 +125,11 @@
         }
     }
 
-
-
     &__info__details-wrapper {
+        @include for-phone-only {
+            grid-row-gap: 5px;
+        }
+
         display: grid;
         grid-template-rows: auto;
         grid-auto-rows: max-content;
@@ -96,6 +140,12 @@
     }
 
     &__images {
+        @include for-phone-only{
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 3px;
+            grid-row-gap: 5px;
+        }
+
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
