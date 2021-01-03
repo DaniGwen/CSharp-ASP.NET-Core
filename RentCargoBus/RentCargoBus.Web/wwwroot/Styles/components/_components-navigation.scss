@@ -10,6 +10,12 @@
     justify-content: space-between;
 
     &__admin-login-and-toggle {
+        @include for-phone-only {
+            margin-top: 15px;
+            justify-content: center;
+            align-items: end;
+        }
+
         display: grid;
         grid-template-columns: max-content max-content;
         grid-column-gap: 60px;
@@ -33,6 +39,11 @@
 }
 
 .navbar-nav {
+    @include for-phone-only {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
     display: grid;
     grid-template-columns: max-content max-content;
     grid-column-gap: 15px;

@@ -21,6 +21,10 @@
     text-align: center;
 
     &__container {
+        @include for-phone-only {
+            grid-template-columns: 1fr;
+        }
+
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 100px;
@@ -28,6 +32,12 @@
     }
 
     &__container__privacy {
+        @include for-phone-only {
+            justify-content: center;
+            grid-row-gap: 0;
+            margin-top: 10px;
+        }
+
         display: grid;
         grid-template-rows: 1fr 1fr 1fr;
         grid-row-gap: 15px;
@@ -36,6 +46,11 @@
     }
 
     &__container__contacts {
+        @include for-phone-only {
+            justify-content: center;
+            grid-row-gap: 5px;
+        }
+
         display: grid;
         grid-template: max-content max-content max-content;
         justify-content: right;

@@ -339,6 +339,11 @@ small {
     grid-template-columns: max-content max-content;
     grid-column-gap: 60px;
     align-items: center; }
+    @media (max-width: 599px) {
+      .c-navbar__admin-login-and-toggle {
+        margin-top: 15px;
+        justify-content: center;
+        align-items: end; } }
     .c-navbar__admin-login-and-toggle__language {
       display: grid;
       grid-template-columns: 40px max-content; }
@@ -353,6 +358,10 @@ small {
   display: grid;
   grid-template-columns: max-content max-content;
   grid-column-gap: 15px; }
+  @media (max-width: 599px) {
+    .navbar-nav {
+      justify-content: center;
+      margin-top: 10px; } }
   .navbar-nav__home__link {
     color: inherit;
     font-size: 16px; }
@@ -415,16 +424,28 @@ small {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 100px;
     margin: 30px auto; }
+    @media (max-width: 599px) {
+      .footer__container {
+        grid-template-columns: 1fr; } }
   .footer__container__privacy {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row-gap: 15px;
     align-items: center;
     justify-content: left; }
+    @media (max-width: 599px) {
+      .footer__container__privacy {
+        justify-content: center;
+        grid-row-gap: 0;
+        margin-top: 10px; } }
   .footer__container__contacts {
     display: grid;
     grid-template: max-content max-content max-content;
     justify-content: right; }
+    @media (max-width: 599px) {
+      .footer__container__contacts {
+        justify-content: center;
+        grid-row-gap: 5px; } }
     .footer__container__contacts__details {
       display: grid;
       grid-template-columns: max-content max-content;
@@ -736,6 +757,9 @@ small {
   display: grid;
   grid-template-rows: 90px max-content max-content max-content;
   grid-row-gap: 50px; }
+  @media (max-width: 599px) {
+    .c-main {
+      grid-row-gap: 20px; } }
   .c-main__hr {
     width: 100%;
     background-color: #919191; }
@@ -750,11 +774,19 @@ small {
     margin: auto;
     margin-right: 250px;
     margin-top: 20px; }
+    @media (max-width: 599px) {
+      .c-main__welcome__text {
+        width: 100%;
+        margin-right: 0; } }
   .c-main__vehicles {
     justify-items: center;
     display: grid;
     grid-template-rows: 60px max-content;
     grid-row-gap: 40px; }
+    @media (max-width: 599px) {
+      .c-main__vehicles {
+        grid-row-gap: 20px;
+        max-width: 375px; } }
     .c-main__vehicles__title {
       text-align: center;
       align-self: center;
@@ -762,6 +794,11 @@ small {
       width: 300px;
       border-radius: 5px;
       padding: 7px 0; }
+      @media only screen and (max-width: 415px) {
+        .c-main__vehicles__title {
+          font-size: 18px;
+          padding: 4px 20px;
+          width: auto; } }
   .c-main__vans {
     position: relative;
     display: grid;
@@ -769,6 +806,10 @@ small {
     grid-row-gap: 60px;
     grid-column-gap: 50px;
     justify-items: center; }
+    @media (max-width: 599px) {
+      .c-main__vans {
+        grid-template-columns: max-content;
+        grid-row-gap: 10px; } }
     .c-main__vans__container {
       display: grid;
       grid-template-rows: max-content max-content;

@@ -1,6 +1,12 @@
 ﻿@import "../../settings/_settings-colors.scss";
+@import "../../settings/_settings-mixins.scss";
+@import "../../settings/_settings-breakpoints.scss";
 
 .c-main {
+    @include for-phone-only {
+        grid-row-gap: 20px;
+    }
+
     display: grid;
     grid-template-rows: 90px max-content max-content max-content;
     grid-row-gap: 50px;
@@ -15,6 +21,11 @@
     }
 
     &__welcome__text {
+        @include for-phone-only {
+            width: 100%;
+            margin-right: 0;
+        }
+
         background-color: $Blue50;
         border-radius: 5px;
         display: inline-block;
@@ -26,12 +37,23 @@
     }
 
     &__vehicles {
+        @include for-phone-only {
+            grid-row-gap: 20px;
+            max-width: 375px;
+        }
+
         justify-items: center;
         display: grid;
         grid-template-rows: 60px max-content;
         grid-row-gap: 40px;
 
         &__title {
+            @media only screen and (max-width: 415px) {
+                font-size: 18px;
+                padding: 4px 20px;
+                width: auto;
+            }
+
             text-align: center;
             align-self: center;
             background-color: $PrimaryColor;
@@ -42,6 +64,11 @@
     }
 
     &__vans {
+        @include for-phone-only {
+            grid-template-columns: max-content;
+            grid-row-gap: 10px;
+        }
+
         position: relative;
         display: grid;
         grid-template-columns: max-content max-content max-content max-content;
