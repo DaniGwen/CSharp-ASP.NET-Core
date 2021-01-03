@@ -762,6 +762,10 @@ small {
       color: #ffffff;
       background-color: #00E676; }
 
+@media (max-width: 599px) {
+  .send-email-modal {
+    max-width: 375px; } }
+
 .send-email-modal__container {
   display: grid;
   grid-template-rows: auto;
@@ -775,11 +779,21 @@ small {
 .active {
   display: block !important; }
 
+@media (max-width: 599px) {
+  .ui-dialog {
+    max-width: 375px; } }
+
 .c-cookie-consent {
   width: 67%;
   margin: auto; }
+  @media (max-width: 599px) {
+    .c-cookie-consent {
+      width: 90%; } }
   .c-cookie-consent__info {
     width: 95%; }
+    @media (max-width: 599px) {
+      .c-cookie-consent__info {
+        width: 90%; } }
 
 .c-admin {
   width: 600px; }

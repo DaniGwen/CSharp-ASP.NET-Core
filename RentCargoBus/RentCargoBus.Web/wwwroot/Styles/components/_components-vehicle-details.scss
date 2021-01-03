@@ -140,7 +140,7 @@
     }
 
     &__images {
-        @include for-phone-only{
+        @include for-phone-only {
             grid-template-columns: 1fr 1fr;
             grid-column-gap: 3px;
             grid-row-gap: 5px;
@@ -264,6 +264,9 @@
 }
 
 .send-email-modal {
+    @include for-phone-only {
+        max-width: 375px;
+    }
 
     &__container {
         display: grid;
@@ -280,4 +283,10 @@
 
 .active {
     display: block !important;
+}
+
+.ui-dialog {
+    @include for-phone-only {
+        max-width: 375px;
+    }
 }
