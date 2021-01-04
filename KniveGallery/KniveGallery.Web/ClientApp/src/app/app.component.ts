@@ -20,7 +20,6 @@ export class AppComponent {
 
   constructor(private translate: TranslateService,
     private router: Router) {
-
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     });

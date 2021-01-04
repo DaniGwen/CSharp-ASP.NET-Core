@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { KnivesService } from '../../../Services/knives.service'
 
 @Component({
@@ -6,7 +6,7 @@ import { KnivesService } from '../../../Services/knives.service'
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
+export class FooterComponent implements  OnInit {
 
   public adminEmail: string;
   public adminPhone: string;
@@ -16,8 +16,10 @@ export class FooterComponent {
 
   ngOnInit() {
     this.knivesService.getAdminDetails().subscribe((data: any) => {
-      this.adminEmail = data.email,
+      if (data) {
+        this.adminEmail = data.email,
         this.adminPhone = data.phoneNumber
+      }
     });
   }
 }

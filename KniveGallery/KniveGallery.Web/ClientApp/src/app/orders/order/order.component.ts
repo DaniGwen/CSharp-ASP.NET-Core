@@ -17,6 +17,7 @@ export class OrderComponent implements OnInit {
   public totalPrice: number;
   private order = new Order();
   public message: boolean = false;
+  public status: any;
   public showLoader: boolean;
   private quantityOrdered: number;
 
@@ -76,11 +77,11 @@ export class OrderComponent implements OnInit {
       }
     });
 
-    await this.delay(1000);
+    await this.delay(500);
 
     this.kniveService.updateKnive(this.knive).subscribe(message => {
       if (message) {
-        this.message = message;
+        this.status = message;
         this.showLoader = false;
       }     
     });

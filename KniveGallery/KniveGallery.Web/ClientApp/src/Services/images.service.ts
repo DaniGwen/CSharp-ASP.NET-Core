@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
 import { CarouselImage } from "../Models/carouselImage";
 
@@ -13,8 +14,8 @@ export class ImageService {
     constructor(private http: HttpClient) {
     }
 
-    public getCarouselImages() {
-        return this.http.get<CarouselImage[]>(this.Url);
+    public getCarouselImages(): Observable<CarouselImage[]> {
+        return this.http.get<CarouselImage[]>(this.Url, { headers: this.headers });
     }
 
     public addCarouselImage(form: FormData) {

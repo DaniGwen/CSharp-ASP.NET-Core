@@ -38,7 +38,7 @@ export class KnivesService {
     return this.http.delete(`${this.Url}/${kniveId}`, { headers: this.headers });
   }
 
-  public updateKnive(knive: Knive): Observable<any> {
+  public updateKnive(knive: Knive) {
     return this.http.put(`${this.Url}/${knive.kniveId}`, knive, { headers: this.headers });
   }
 
@@ -50,7 +50,7 @@ export class KnivesService {
     return this.http.get(`${this.Url}/AllKniveImages/${kniveId}`, { headers: this.headers });
   }
 
-  public getAdminDetails() {
+  public getAdminDetails() : Observable<any> {
     return this.http.get(`${this.Url}/AdminDetails`, { headers: this.headers });
   }
 

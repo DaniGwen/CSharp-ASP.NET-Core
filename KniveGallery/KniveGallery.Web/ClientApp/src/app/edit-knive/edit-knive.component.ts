@@ -35,22 +35,18 @@ export class EditKniveComponent {
   }
 
   onSubmit() {
-    this.isLoading = true;
-
     this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
-        this.status = "Knive saved";
     });
-    this.isLoading = false;
+    this.status = "Knive saved!";
+    setInterval(() => { this.status = false }, 6000);
 
-    if (this.selectedFiles.length > 0) {
+    if (this.selectedFiles != null && this.selectedFiles.length > 0) {
       this.uploadFiles();
       this.status = "Images added"
     }
   }
 
-
   selectFiles(event) {
-
     const files = event.target.files;
     let isImage = true;
 

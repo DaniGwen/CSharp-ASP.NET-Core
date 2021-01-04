@@ -29,10 +29,11 @@
 
 .jumbotron {
   padding: 30px;
-
-  &__title-container {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    grid-column-gap: 10%;
-  }
+  max-width: 80%;
+  margin: 0 auto;
+}
+.carousel-and-info-wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-column-gap: 10%;
 }

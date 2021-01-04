@@ -1,9 +1,10 @@
 ﻿.my-carousel {
-    max-height: 280px;
-    max-width: 280px;
     opacity: 0.9;
 }
-
+.carousel-item {
+    max-height: 280px;
+    max-width: 280px;
+}
 .img {
     overflow: hidden;
     border-radius: 10px;

@@ -1,7 +1,12 @@
 <div class="card mb-3">
   <div [routerLink]="['/knive-details', knive.kniveId]"
-       routerLinkActive="active" class="knive-details__img-and-card-body-container" style="max-width: 24rem;">
-    <p class="bg-secondary text-center" *ngIf="isAuthenticated | async"><small>Knive id - </small><strong class="text-xl-center">{{knive.kniveId}}</strong></p>
+       routerLinkActive="active" 
+       class="knive-details__img-and-card-body-container" 
+       style="max-width: 24rem;">
+    <p class="bg-secondary text-center" *ngIf="isAuthenticated">
+      <small>Knive id - </small>
+      <strong class="text-xl-center">{{knive.kniveId}}</strong>
+    </p>
     <div class="home__image-wrapper">
       <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
       <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"

@@ -87,12 +87,8 @@ namespace KniveGallery.Web.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> PutKnife(int id, Knive knive)
         {
-            if (id != knive.KniveId)
-            {
-                return BadRequest();
-            }
-
-            context.Entry(knive).State = EntityState.Modified;
+            var kniveDb = context.Knives.First(x => x.KniveId == id);
+            kniveDb = knive;
 
             try
             {

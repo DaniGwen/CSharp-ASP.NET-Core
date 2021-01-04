@@ -24,7 +24,7 @@ export class OrderService {
     return this.http.delete(`${this.Url}/${orderId}`, { headers: this.headers });
   }
 
-  public dispatchOrder(orderId: number) {
+  public dispatchOrder(orderId: number) : Observable<any> {
     return this.http.post(`${this.Url}/DispatchOrder/${orderId}`, { headers: this.headers });
   }
 }

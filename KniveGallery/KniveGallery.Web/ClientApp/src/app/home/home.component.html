@@ -1,41 +1,41 @@
 <div class="jumbotron">
-  <section class="jumbotron__title-container">
-    <h1 class="display-6">Welcome to my knife gallery!</h1>
-    <app-aside-carousel></app-aside-carousel>
+  <section>
+    <h1 class="display-6">Welcome to my custom knives gallery!</h1>
   </section>
   <hr class="my-4">
-  <p class="lead">Please look around and buy if you like my work.</p>
-  <p>
-    Check out my <a class="btn btn-sm btn-theme btn-shadow mb-1" href="https://facebook.com" role="button">
-      <i class="fab fa-facebook-f"></i>acebook
-    </a> too.
-  </p>
+  <section class="carousel-and-info-wrapper">
+    <section>
+      <p class="lead">Please look around and buy if you like my work.</p>
+      <p>
+        Check out my <a class="btn btn-sm btn-theme btn-shadow mb-1" href="https://facebook.com" role="button">
+          <i class="fab fa-facebook-f"></i>acebook
+        </a> too.
+      </p>
+    </section>
+    <section>
+      <app-aside-carousel></app-aside-carousel>
+    </section>
+  </section>
 </div>
 
 <div class="home-container mb-5">
-
   <article class="filter__buttons mt-3">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <button class="btn btn-shadow btn-theme" name="options" id="option1"
-              (click)="ngOnInit()">
+      <button class="btn btn-shadow btn-theme" name="options" id="option1" (click)="ngOnInit()">
         {{'home.All'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option4"
-              (click)="getKnivesByClass('KitchenClass')">
+      <button class="btn btn-shadow btn-theme" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')">
         {{'home.KitchenKnives'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option2"
-              (click)="getKnivesByClass('MiddleClass')">
+      <button class="btn btn-shadow btn-theme" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')">
         {{'home.MiddleClass'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option3"
-              (click)="getKnivesByClass('HighClass')">
+      <button class="btn btn-shadow btn-theme" name="options" id="option3" (click)="getKnivesByClass('HighClass')">
         {{'home.HighEndClass'| translate}}
       </button>
-
     </div>
   </article>
 

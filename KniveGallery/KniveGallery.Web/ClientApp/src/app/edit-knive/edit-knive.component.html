@@ -8,61 +8,33 @@
     <section class="edit-knive__edge-info">
       <div class="form-group edit-knive__anim3">
         <label>Edge width</label>
-        <input name="edgewidth"
-               type="number"
-               min="0"
-               [(ngModel)]="knive.edgeWidth"
-               class="form-control form-control-sm"
-               placeholder="Широчина"
-               required
-               ngModel
-               #edgewidth="ngModel"
-               autofocus />
+        <input name="edgewidth" type="number" min="0" [(ngModel)]="knive.edgeWidth" class="form-control form-control-sm"
+          placeholder="Широчина" required ngModel #edgewidth="ngModel" autofocus />
         <label class="alert alert-danger" *ngIf="edgewidth.invalid && edgewidth.touched">
           Полето е задължително.
         </label>
       </div>
       <div class="form-group edit-knive__anim4">
         <label>Edge tickness</label>
-        <input name="edgethickness"
-               type="number"
-               min="0"
-               [(ngModel)]="knive.edgeThickness"
-               placeholder="Дебелина"
-               class="form-control form-control-sm"
-               ngModel
-               required
-               #edgethickness="ngModel" />
+        <input name="edgethickness" type="number" min="0" [(ngModel)]="knive.edgeThickness" placeholder="Дебелина"
+          class="form-control form-control-sm" ngModel required #edgethickness="ngModel" />
         <label class="alert alert-danger" *ngIf="edgethickness.invalid && edgethickness.touched">
           Полето е задължително.
         </label>
       </div>
       <div class="form-group edit-knive__anim5">
         <label>Edge length</label>
-        <input name="edgelength"
-               type="number"
-               min="0"
-               [(ngModel)]="knive.edgeLength"
-               placeholder="Дължина"
-               class="form-control form-control-sm"
-               required
-               ngModel
-               #edgelength="ngModel" />
+        <input name="edgelength" type="number" min="0" [(ngModel)]="knive.edgeLength" placeholder="Дължина"
+          class="form-control form-control-sm" required ngModel #edgelength="ngModel" />
         <label class="alert alert-danger" *ngIf="edgelength.invalid && edgelength.touched">
           Полето е задължително.
         </label>
       </div>
       <div class="form-group edit-knive__anim5">
         <label>Total length</label>
-        <input name="totallength"
-               type="number"
-               min="0"
-               [(ngModel)]="knive.totalLength"
-               placeholder="Обща дължина на ножа"
-               class="form-control form-control-sm"
-               required
-               ngModel
-               #totallength="ngModel" />
+        <input name="totallength" type="number" min="0" [(ngModel)]="knive.totalLength"
+          placeholder="Обща дължина на ножа" class="form-control form-control-sm" required ngModel
+          #totallength="ngModel" />
         <label class="alert alert-danger" *ngIf="totallength.invalid && totallength.touched">
           Полето е задължително.
         </label>
@@ -71,46 +43,29 @@
     <section>
       <div class="form-group edit-knive__anim6">
         <label>Edge made</label>
-        <input name="edgemade"
-               required
-               [(ngModel)]="knive.edgeMade"
-               placeholder="Сплав на острието"
-               class="form-control form-control-sm"
-               ngModel
-               #edgemade="ngModel" />
+        <input name="edgemade" required [(ngModel)]="knive.edgeMade" placeholder="Сплав на острието"
+          class="form-control form-control-sm" ngModel #edgemade="ngModel" />
         <label class="alert alert-danger" *ngIf="edgemade.invalid && edgemade.touched">
           Полето е задължително.
         </label>
       </div>
       <div class="form-group edit-knive__anim7">
         <label>Handle type</label>
-        <input name="handledescription"
-               required
-               [(ngModel)]="knive.handleDescription"
-               class="form-control form-control-sm"
-               ngModel
-               #handledescription />
+        <input name="handledescription" required [(ngModel)]="knive.handleDescription"
+          class="form-control form-control-sm" ngModel #handledescription />
         <label class="alert alert-danger" *ngIf="handledescription.invalid && handledescription.touched">
           Полето е задължително.
         </label>
       </div>
       <div class="form-group edit-knive__anim8">
         <label>Price</label>
-        <input name="knive.price"
-               [(ngModel)]="knive.price"
-               type="number"
-               placeholder="цена"
-               class="form-control form-control-sm" />
+        <input name="knive.price" [(ngModel)]="knive.price" type="number" placeholder="цена"
+          class="form-control form-control-sm" />
       </div>
       <div class="form-group edit-knive__anim9">
         <label>Quantity</label>
-        <input name="quantity"
-               [(ngModel)]="knive.quantity"
-               type="number"
-               min="1"
-               class="form-control form-control-sm"
-               ngModel
-               #quantity />
+        <input name="quantity" [(ngModel)]="knive.quantity" type="number" min="1" class="form-control form-control-sm"
+          ngModel #quantity />
         <label class="alert alert-danger" *ngIf="quantity.invalid && quantity.touched">
           Минимум 1 бройка.
         </label>
@@ -123,20 +78,22 @@
       </div>
     </section>
   </article>
+  <hr />
   <article class="edit-knive__buttons edit-knive__anim11">
-    <hr />
-    <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
-    <button *ngIf="!isLoading" type="submit" [disabled]="!form.valid" class="btn btn-theme btn-shadow">{{'home.Save' | translate}}</button>
-    <hr />
-    <a [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
+    <button *ngIf="!isLoading" type="submit" [disabled]="!form.valid" class="btn btn-theme btn-shadow">
+      {{'home.Save'|translate}}
+    </button>
+    <a class="mt-4" [routerLink]="['/']"><i class="back-button fas fa-arrow-circle-left"></i></a>
   </article>
-  <section class="popup-message" *ngIf="status">
-    <div class="toast-header">
-      <strong class="mr-auto">Message</strong>
-    </div>
-    <div class="toast-body">
-      {{status}}
-    </div>
-  </section>
 </form>
 
+<app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
+
+<section class="popup-message" *ngIf="status">
+  <div class="toast-header">
+    <strong class="mr-auto">Message</strong>
+  </div>
+  <div class="toast-body">
+    {{status}}
+  </div>
+</section>

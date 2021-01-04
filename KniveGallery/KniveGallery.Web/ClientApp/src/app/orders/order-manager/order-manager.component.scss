@@ -1,5 +1,5 @@
 @import "../../shared-styles/custom-buttons.scss";
-@import '../../shared-styles/headings.scss';
+@import "../../shared-styles/headings.scss";
 
 .container {
   margin-bottom: 50px;
@@ -7,4 +7,8 @@
 
 .orders-container {
   text-align: -webkit-center;
+}
+
+.card-text {
+  margin: 0;
 }

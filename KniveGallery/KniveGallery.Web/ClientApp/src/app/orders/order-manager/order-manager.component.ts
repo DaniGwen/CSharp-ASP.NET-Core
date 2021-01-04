@@ -51,11 +51,9 @@ export class OrderManagerComponent implements OnInit {
   }
 
   dispatchOrder(orderId: number) {
-    this.ordersService.dispatchOrder(orderId).subscribe((message) => {
-      if(message){
-         this.getAllOrders();
-      }
-    });
+    this.ordersService.dispatchOrder(orderId).subscribe();
+    this.getAllOrders();
+    this.filterOrders("Send orders");
   }
 
   filterOrders(orderStatus: string) {
