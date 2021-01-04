@@ -1,6 +1,7 @@
 ﻿using RentCargoBus.Data.Models;
 using RentCargoBus.Data.Models.Enum;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentCargoBus.Web.Models.Index
 {
@@ -10,12 +11,23 @@ namespace RentCargoBus.Web.Models.Index
         {
             this.Images = new List<VanImage>();
         }
+        private string model;
+        private string brand;
+        private string plateNumber;
 
         public int VanId { get; set; }
 
-        public string Brand { get; set; }
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value.First().ToString().ToUpper() + value.Substring(1); }
+        }
 
-        public string Model { get; set; }
+        public string Model
+        {
+            get { return model; }
+            set { model = value.First().ToString().ToUpper() + value.Substring(1); }
+        }
 
         public double Weight { get; set; }
 
@@ -39,7 +51,11 @@ namespace RentCargoBus.Web.Models.Index
 
         public double KilometersPerLiter { get; set; }
 
-        public string PlateNumber { get; set; }
+        public string PlateNumber
+        {
+            get { return plateNumber; }
+            set { plateNumber = value.ToUpper(); }
+        }
 
         public bool IsAvailable { get; set; }
 

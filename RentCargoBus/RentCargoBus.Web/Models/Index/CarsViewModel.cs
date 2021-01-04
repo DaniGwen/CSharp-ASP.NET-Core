@@ -1,5 +1,6 @@
 ﻿using RentCargoBus.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentCargoBus.Web.Models.Index
 {
@@ -9,12 +10,23 @@ namespace RentCargoBus.Web.Models.Index
         {
             this.Images = new List<CarImage>();
         }
+        private string model;
+        private string brand;
+        private string plateNumber;
 
         public int CarId { get; set; }
 
-        public string Brand { get; set; }
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value.First().ToString().ToUpper() + value.Substring(1); }
+        }
 
-        public string Model { get; set; }
+        public string Model
+        {
+            get { return model; }
+            set { model = value.First().ToString().ToUpper() + value.Substring(1); }
+        }
 
         public int MilesPerGallon { get; set; }
 
@@ -34,7 +46,11 @@ namespace RentCargoBus.Web.Models.Index
 
         public decimal HirePriceMonth { get; set; }
 
-        public string PlateNumber { get; set; }
+        public string PlateNumber
+        {
+            get { return plateNumber; }
+            set { plateNumber = value.ToUpper(); }
+        }
 
         public bool IsAvailable { get; set; }
 
