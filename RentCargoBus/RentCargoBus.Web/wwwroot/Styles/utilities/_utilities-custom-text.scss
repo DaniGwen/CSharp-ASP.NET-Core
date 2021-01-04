@@ -1,8 +1,22 @@
 @import "../settings/_settings-colors.scss";
+@import "../settings/_settings-breakpoints.scss";
 
-.o-bold-title {
+.u-bold-title {
     background-color: $Grey700;
     color: $Secondary800 !important;
     padding: 3px 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+.title {
+    @include for-phone-only {
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+.info-text {
+    @include for-phone-only {
+        font-size: 12px;
+    }
 }

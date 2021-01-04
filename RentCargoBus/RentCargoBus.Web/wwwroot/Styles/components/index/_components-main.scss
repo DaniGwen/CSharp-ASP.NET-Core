@@ -68,6 +68,10 @@
         @include for-phone-only {
             grid-template-columns: max-content;
             grid-row-gap: 25px;
+
+            &__no-vehicles {
+                font-size: 18px;
+            }
         }
 
         position: relative;

@@ -199,11 +199,20 @@ Add the correct display in Chrome and Safari.
 summary {
   display: list-item; }
 
-.o-bold-title {
+.u-bold-title {
   background-color: #565656;
   color: #ff9100 !important;
   padding: 3px 10px;
-  border-radius: 10px; }
+  border-radius: 5px; }
+
+@media (max-width: 599px) {
+  .title {
+    font-size: 20px;
+    text-align: center; } }
+
+@media (max-width: 599px) {
+  .info-text {
+    font-size: 12px; } }
 
 @font-face {
   font-family: "Lato";
@@ -331,6 +340,9 @@ small {
 
 .navbar-brand {
   margin: 0 20px 0 0; }
+  @media (max-width: 599px) {
+    .navbar-brand {
+      font-size: 20px !important; } }
 
 .c-navbar {
   justify-content: space-between; }
@@ -343,7 +355,7 @@ small {
       .c-navbar__admin-login-and-toggle {
         margin-top: 15px;
         justify-content: center;
-        align-items: end;
+        justify-items: center;
         grid-template-columns: max-content; } }
     .c-navbar__admin-login-and-toggle__language {
       display: grid;
@@ -793,6 +805,9 @@ small {
   grid-template-rows: auto;
   grid-row-gap: 10px;
   padding: 0 20px; }
+  @media (max-width: 599px) {
+    .send-email-modal__container {
+      padding: 10px; } }
 
 .send-email-modal__container__field {
   display: grid;
@@ -804,6 +819,10 @@ small {
 @media (max-width: 599px) {
   .ui-dialog {
     max-width: 375px; } }
+
+@media (max-width: 599px) {
+  .u-bold-title {
+    font-size: 24px; } }
 
 .c-cookie-consent {
   width: 67%;
@@ -889,7 +908,9 @@ small {
     @media (max-width: 599px) {
       .c-main__vans {
         grid-template-columns: max-content;
-        grid-row-gap: 25px; } }
+        grid-row-gap: 25px; }
+        .c-main__vans__no-vehicles {
+          font-size: 18px; } }
     .c-main__vans__container {
       display: grid;
       grid-template-rows: max-content max-content;
@@ -981,6 +1002,11 @@ small {
     .account__layout__container {
       grid-template-rows: auto;
       grid-template-columns: 1fr;
-      grid-row-gap: 10px;
+      grid-row-gap: 20px;
       max-width: 375px;
       margin: 0 auto; } }
+
+@media (max-width: 599px) {
+  .change-password-form {
+    max-width: 350px;
+    margin: 0 auto; } }

@@ -3,6 +3,10 @@
 @import "../settings/settings-shadows";
 
 .navbar-brand {
+    @include for-phone-only {
+        font-size: 20px !important;
+    }
+
     margin: 0 20px 0 0;
 }
 
@@ -13,7 +17,7 @@
         @include for-phone-only {
             margin-top: 15px;
             justify-content: center;
-            align-items: end;
+            justify-items: center;
             grid-template-columns: max-content;
         }
 

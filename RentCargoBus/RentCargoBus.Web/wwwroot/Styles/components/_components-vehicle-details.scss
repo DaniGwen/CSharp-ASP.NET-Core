@@ -275,6 +275,10 @@
     }
 
     &__container {
+        @include for-phone-only {
+            padding: 10px;
+        }
+
         display: grid;
         grid-template-rows: auto;
         grid-row-gap: 10px;
@@ -294,5 +298,11 @@
 .ui-dialog {
     @include for-phone-only {
         max-width: 375px;
+    }
+}
+
+@include for-phone-only {
+    .u-bold-title {
+        font-size: 24px;
     }
 }
