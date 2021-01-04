@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   public knives: Knive[];
   public kniveCl: string;
   public isKniveDeleted = false;
-  public showLoader: boolean;
+  public showLoader: boolean = false;
 
   constructor(
     public http: HttpClient,
@@ -23,24 +23,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showLoader = true;
-
-    this.kniveCl = 'All';
-
-    this.knivesService.getAllknives()
-      .subscribe((knives: Knive[]) => {
-        if (knives) {
-          this.showLoader = false;
-        }
-        this.knives = knives;
-      });
+    this.getAllKnives();
   }
 
   onDelete(kniveId: number) {
     this.showLoader = true;
     this.knivesService.removeKnive(kniveId).subscribe(() => {
       this.isKniveDeleted = true;
-      this.ngOnInit();
+      this.showLoader = false;
+      this.getAllKnives();
     })
 
     setInterval(() => { this.isKniveDeleted = false }, 5000);
@@ -58,8 +49,21 @@ export class HomeComponent implements OnInit {
       .subscribe((data: any) => {
         if (data) {
           this.showLoader = false;
+          this.knives = data;
         }
-        this.knives = data;
+      });
+  }
+
+  getAllKnives() {
+    this.showLoader = true;
+    this.kniveCl = 'All';
+
+    this.knivesService.getAllknives()
+      .subscribe((knives: Knive[]) => {
+        if (knives) {
+          this.knives = knives;
+          this.showLoader = false;
+        }
       });
   }
 }

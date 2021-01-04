@@ -20,13 +20,13 @@ namespace RentCargoBus.Web.Models.Index
         public string Brand
         {
             get { return brand; }
-            set { brand = value.First().ToString().ToUpper() + value.Substring(1); }
+            set { brand = value.First().ToString().ToUpper() + value.Substring(1).ToLower(); }
         }
 
         public string Model
         {
             get { return model; }
-            set { model = value.First().ToString().ToUpper() + value.Substring(1); }
+            set { model = value.First().ToString().ToUpper() + value.Substring(1).ToLower(); }
         }
 
         public double Weight { get; set; }
