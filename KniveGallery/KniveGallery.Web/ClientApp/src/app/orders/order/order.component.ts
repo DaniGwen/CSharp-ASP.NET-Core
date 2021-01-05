@@ -29,7 +29,7 @@ export class OrderComponent implements OnInit {
     city: ['', [Validators.required, Validators.minLength(3)]],
     neighbourhood: [''],
     street: ['', [Validators.required, Validators.minLength(3)]],
-    quantity: [1],
+    quantity: [''],
     price: ['']
   });
 
@@ -49,6 +49,8 @@ export class OrderComponent implements OnInit {
       this.knive = knive;
       this.showLoader = false;
     })
+    this.totalPrice = this.knive.price;
+
     this.totalPrice = this.knive.price;
   }
 

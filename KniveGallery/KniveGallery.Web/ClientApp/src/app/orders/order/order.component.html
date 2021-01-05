@@ -92,7 +92,9 @@
     <div class="form-row justify-content-center order__anim10">
       <div class="col-sm-1 mb-3">
         <label>{{'order.Quantity' | translate}}</label>
-        <input class="form-control" type="number" min="1" value="0" formControlName="quantity" #quantity (focusout)="calculateKnivePrice(quantity.value)" />
+        <input class="form-control" type="number" min="1" value="1"
+        formControlName="quantity" 
+        #quantity (focusout)="calculateKnivePrice(quantity.value)" />
       </div>
       <div class="order__knive-quantity-wrapper col-sm-2 mb-3">
         <label>{{'order.KniveQuantity' | translate}}</label>

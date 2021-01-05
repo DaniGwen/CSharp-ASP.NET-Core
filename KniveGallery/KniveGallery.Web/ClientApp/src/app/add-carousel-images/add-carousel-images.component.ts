@@ -15,7 +15,7 @@ export class AddCarouselImagesComponent {
     public isLoading: boolean = false;
     selectedFiles: FileList;
     imageFile = new ImageFile();
-    public message: string;
+    public message: any;
     public allCarouselImages: CarouselImage[];
 
     constructor(private imageService: ImageService,
@@ -27,18 +27,20 @@ export class AddCarouselImagesComponent {
     }
 
     onSubmit() {
+        this.isLoading = true;
         this.uploadFiles();
     }
 
     deleteImage(imageId: number) {
-
-        this.imageService.deleteImageById(imageId).subscribe((message: string) => {
+        this.isLoading = true;
+        this.imageService.deleteImageById(imageId).subscribe((message: any) => {
             if (message) {
                 this.message = message;
             }
+            this.isLoading = false;
         });
-        
-        this.getAllImages();
+        //setInterval(() => { this.message = null }, 5000)
+        this.reload("add-carousel-images");
     }
 
     getAllImages() {
@@ -77,8 +79,10 @@ export class AddCarouselImagesComponent {
     }
 
     uploadFiles() {
-        for (let i = 0; i < this.selectedFiles.length; i++) {
-            this.upload(i, this.selectedFiles[i]);
+        if (this.selectedFiles != null) {
+            for (let i = 0; i < this.selectedFiles.length; i++) {
+                this.upload(i, this.selectedFiles[i]);
+            }
         }
     }
 
@@ -92,8 +96,11 @@ export class AddCarouselImagesComponent {
         const formData = new FormData();
 
         formData.append('file', <File>file, file.name);
-        this.imageService.addCarouselImage(formData).subscribe((data: any) => {
-            this.message = data;
-        });
+        this.imageService.addCarouselImage(formData).subscribe();
     }
+
+    async reload(url: string): Promise<boolean> {
+        await this.router.navigateByUrl('.', { skipLocationChange: true });
+        return this.router.navigateByUrl(url);
+      }
 }

@@ -1,7 +1,7 @@
-@import '../shared-styles/custom-buttons.scss';
-@import '../shared-styles/headings.scss';
-@import '../shared-styles/popups.scss';
-@import '../shared-styles/animations.scss';
+@import "../shared-styles/custom-buttons.scss";
+@import "../shared-styles/headings.scss";
+@import "../shared-styles/popups.scss";
+@import "../shared-styles/animations.scss";
 
 @for $i from 1 through 12 {
   .add-knive__anim#{$i} {
@@ -9,6 +9,9 @@
     animation: 0.4s revial forwards;
     animation-delay: 0.1s * $i;
   }
+}
+.add-knive-container {
+  margin-bottom: 8em;
 }
 
 .add-knive__input-container {
@@ -36,5 +39,27 @@ input.ng-invalid.ng-touched {
 }
 
 .form-container {
+  @media (max-width: 599px) {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
   justify-content: space-evenly;
+}
+
+label {
+  @media (max-width: 599px) {
+    font-size: 14px;
+  }
+}
+.form-group {
+  @media (max-width: 599px) {
+    min-width: 250px;
+  }
+}
+.alert {
+  @media (max-width: 599px) {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
 }

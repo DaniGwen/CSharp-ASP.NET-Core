@@ -28,9 +28,7 @@ export class KniveDetailsComponent {
       })
 
       this.knivesService.getKniveImages(this.kniveId).subscribe((data: any) => {
-        if (data) {
-          this.showLoader = false;
-        }
+        this.showLoader = false;
         this.kniveImages = data;
       });
     });

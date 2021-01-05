@@ -40,13 +40,13 @@ namespace KniveGallery.Web.Controllers
 
             if (imageDb == null)
             {
-                return BadRequest("Error deleting knive.");
+                return Json("Error deleting knive");
             }
 
             this.context.CarouselImages.Remove(imageDb);
             await this.context.SaveChangesAsync();
 
-            return Ok("Image deleted!");
+            return Json("Image deleted");
         }
 
         [Authorize]

@@ -50,11 +50,10 @@ export class AddKniveComponent {
       }
     });
 
-    setInterval(() => { this.responceMessage = false }, 6000);
+    setInterval(() => { this.responceMessage = false }, 5000);
   }
 
   selectFiles(event) {
-
     const files = event.target.files;
     let isImage = true;
 

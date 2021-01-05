@@ -85,7 +85,7 @@ namespace KniveGallery.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutKnife(int id, Knive knive)
+        public async Task<IActionResult> PutKnife(int id, Knive knive)
         {
             var kniveDb = context.Knives.First(x => x.KniveId == id);
             kniveDb = knive;
@@ -98,7 +98,7 @@ namespace KniveGallery.Web.Controllers
             {
                 if (!KniveExists(id))
                 {
-                    return BadRequest("Error!");
+                    return new JsonResult("Error");
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace KniveGallery.Web.Controllers
                 }
             }
 
-            return Ok("Knive saved!");
+            return new JsonResult("Knive saved");
         }
 
         [Authorize]

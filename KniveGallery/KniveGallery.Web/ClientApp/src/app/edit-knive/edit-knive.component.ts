@@ -28,17 +28,17 @@ export class EditKniveComponent {
     this.route.paramMap.subscribe(params => {
       this.kniveId = params.get("id");
     });
-
     this.kniveService.getKniveById(this.kniveId).subscribe((data: any) => {
       this.knive = data
     });
   }
 
   onSubmit() {
-    this.kniveService.updateKnive(this.knive).subscribe((data: any) => {
+    this.kniveService.updateKnive(this.knive).subscribe((message: string) => {
+      this.status = message;
     });
-    this.status = "Knive saved!";
-    setInterval(() => { this.status = false }, 6000);
+
+    setInterval(() => { this.status = false }, 5000);
 
     if (this.selectedFiles != null && this.selectedFiles.length > 0) {
       this.uploadFiles();

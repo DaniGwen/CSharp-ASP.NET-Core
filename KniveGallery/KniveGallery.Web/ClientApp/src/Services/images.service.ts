@@ -22,7 +22,7 @@ export class ImageService {
         return this.http.post(`${this.Url}/AddCarouselImage`, form, { headers: this.headers });
     }
 
-    public deleteImageById(imageId: number) {
+    public deleteImageById(imageId: number): Observable<string> {
         return this.http.post<string>(`${this.Url}/deleteImage/${imageId}`, { headers: this.headers });
     }
 }

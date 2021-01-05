@@ -11,14 +11,25 @@
     animation-delay: 0.1s * $i;
   }
 }
+.edit-knive-container {
+  margin-bottom: 8em;
+}
 
 .edit-knive {
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+  }
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 30px;
   margin: 0 auto;
 
   &__buttons {
+    @media (max-width: 599px) {
+      grid-row-gap: 5px;
+    }
+
     text-align: center;
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -53,4 +64,17 @@ input.ng-invalid.ng-touched {
 .edit-knive__status {
   border-left: 5px solid green;
   width: 300px;
+}
+
+.alert {
+  @media (max-width: 599px) {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+}
+
+.popup-message {
+  @media (max-width: 599px) {
+    margin-top: 200px;
+  }
 }

@@ -2,7 +2,7 @@
 @import "../../shared-styles/headings.scss";
 
 .container {
-  margin-bottom: 50px;
+  margin-bottom: 9em;
 }
 
 .orders-container {
@@ -11,4 +11,16 @@
 
 .card-text {
   margin: 0;
+}
+.orders-wrapper {
+  @media (max-width: 599px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 5px;
+    justify-content: center;
+  }
+}
+
+.card-body{
+  padding: 10px;
 }

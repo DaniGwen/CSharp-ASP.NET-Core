@@ -1,4 +1,4 @@
-<section class="container">
+<section class="add-knive-container">
   <h2 class="custom-heading text-center add-knive__anim1">Add knive</h2>
   <section *ngIf="responceMessage" class="popup-message">
     <div class="toast-header">
@@ -11,91 +11,76 @@
   <hr />
   <div class="add-knive__info-wrapper add-knive__anim2">
     <i class="fas fa-info-circle"></i>
-    <span class="badge badge-secondary">Всички размери/дължини са в милиметри</span>
+    <span class="badge badge-secondary">Всички размери са в милиметри</span>
   </div>
   <form [formGroup]="addKniveForm" (ngSubmit)="onSubmit()">
     <section class="form-container row row-cols-2">
-      <div class="form-group col-5 add-knive__anim3">
-        <label>Широчина на острието</label>
-        <input formControlName="edgeWidth"
-               type="number"
-               min="0"
-               class="form-control form-control-sm" />
+      <div class="form-group add-knive__anim3">
+        <label>Широчина на острието (мм.)</label>
+        <input formControlName="edgeWidth" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeWidth').touched || addKniveForm.get('edgeWidth').dirty)
              && addKniveForm.get('edgeWidth').errors">
-          <label *ngIf="addKniveForm.get('edgeWidth').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('edgeWidth').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim4">
-        <label>Дебелина на острието</label>
-        <input formControlName="edgeThickness"
-               type="number"
-               min="0"
-               class="form-control form-control-sm" />
+      <div class="form-group add-knive__anim4">
+        <label>Дебелина на острието (мм.)</label>
+        <input formControlName="edgeThickness" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeThickness').touched || addKniveForm.get('edgeThickness').dirty)
              && addKniveForm.get('edgeThickness').errors">
-          <label *ngIf="addKniveForm.get('edgeThickness').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('edgeThickness').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim5">
-        <label>Дължина на острието</label>
-        <input formControlName="edgeLength"
-               type="number"
-               min="0"
-               class="form-control form-control-sm" />
+      <div class="form-group add-knive__anim5">
+        <label>Дължина на острието (мм.)</label>
+        <input formControlName="edgeLength" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeLength').touched || addKniveForm.get('edgeLength').dirty)
              && addKniveForm.get('edgeLength').errors">
-          <label *ngIf="addKniveForm.get('edgeLength').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('edgeLength').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim6">
-        <label>Пълна дължина на ножа</label>
-        <input formControlName="totalLength"
-               type="number"
-               min="0"
-               class="form-control form-control-sm" />
+      <div class="form-group add-knive__anim6">
+        <label>Пълна дължина на ножа (мм.)</label>
+        <input formControlName="totalLength" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('totalLength').touched || addKniveForm.get('totalLength').dirty)
              && addKniveForm.get('totalLength').errors">
-          <label *ngIf="addKniveForm.get('totalLength').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('totalLength').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim7">
+      <div class="form-group add-knive__anim7">
         <label>Изработка на острието</label>
-        <input formControlName="edgeMade"
-               class="form-control form-control-sm" />
+        <textarea formControlName="edgeMade" class="form-control form-control-sm" rows="3" placeholder="описание..">
+        </textarea>
         <div *ngIf="(addKniveForm.get('edgeMade').touched || addKniveForm.get('edgeMade').dirty)
              && addKniveForm.get('edgeMade').errors">
-          <label *ngIf="addKniveForm.get('edgeMade').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('edgeMade').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim8">
-        <label>Описание на дръжката</label>
-        <input formControlName="handleDescription"
-               class="form-control form-control-sm" />
+      <div class="form-group add-knive__anim8">
+        <label>Изработка на дръжката</label>
+        <textarea formControlName="handleDescription" class="form-control form-control-sm" placeholder="описание.."
+          rows="3"></textarea>
         <div *ngIf="(addKniveForm.get('handleDescription').touched || addKniveForm.get('handleDescription').dirty)
              && addKniveForm.get('handleDescription').errors">
-          <label *ngIf="addKniveForm.get('handleDescription').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('handleDescription').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim9">
+      <div class="form-group add-knive__anim9">
         <label>Цена</label>
-        <input formControlName="price"
-               type="number"
-               min="0"
-               class="form-control form-control-sm" />
+        <input formControlName="price" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('price').touched || addKniveForm.get('price').dirty)
              && addKniveForm.get('price').errors">
-          <label *ngIf="addKniveForm.get('price').errors.required" class="alert alert-danger">Field is required.</label>
+          <label *ngIf="addKniveForm.get('price').errors.required" class="alert alert-danger">полето е задължително</label>
         </div>
       </div>
 
-      <div class="form-group col-5 add-knive__anim10">
+      <div class="form-group add-knive__anim10">
         <small class="add-knive__info-lable">Избери категория.</small>
         <label>Knive class</label>
         <select formControlName="kniveClass" class="form-control" id="classSelect">
@@ -105,15 +90,12 @@
         </select>
       </div>
 
-      <div class="form-group col-5 add-knive__anim11">
+      <div class="form-group add-knive__anim11">
         <label>Quantity</label>
-        <input formControlName="quantity"
-               type="number"
-               min="1"
-               class="form-control form-control-sm" />
+        <input formControlName="quantity" type="number" min="1" class="form-control form-control-sm" />
       </div>
 
-      <div class="form-group col-5 add-knive__anim12">
+      <div class="form-group add-knive__anim12">
         <section>
           <div class="form-group">
             <label>{{'home.SelectImages'|translate}}:</label>
@@ -128,7 +110,8 @@
         <i class="fas fa-arrow-circle-left"></i>
       </a>
       <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
-      <button *ngIf="!isLoading" type="submit" [disabled]="!addKniveForm.valid" class="btn btn-theme btn-shadow">Save</button>
+      <button *ngIf="!isLoading" type="submit" [disabled]="!addKniveForm.valid"
+        class="btn btn-theme btn-shadow">Save</button>
     </div>
   </form>
 </section>

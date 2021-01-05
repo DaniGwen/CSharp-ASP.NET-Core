@@ -6,46 +6,56 @@
   <article class="knive-details-container">
     <section class="knive-details">
       <div *ngIf="knive.edgeWidth" class="knive-details__field knive-details__anim1">
-      <label class="knive-details__field__label">{{'home.EdgeWidth' | translate}} </label>
-      <strong class="knive-details__value">{{knive.edgeWidth}} mm.</strong>
+        <label class="knive-details__field__label">{{'home.EdgeWidth' | translate}} </label>
+        <strong class="knive-details__value">{{knive.edgeWidth}} mm.</strong>
       </div>
 
-      <div *ngIf="knive.edgeThickness" class="knive-details__field knive-details__anim2"><label class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong class="knive-details__value">{{knive.edgeThickness}} mm.</strong></div>
+      <div *ngIf="knive.edgeThickness" class="knive-details__field knive-details__anim2"><label
+          class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong
+          class="knive-details__value">{{knive.edgeThickness}} mm.</strong></div>
 
-      <div class="knive-details__field knive-details__anim3"><label class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong class="knive-details__value">{{knive.edgeLength}} mm.</strong></div>
+      <div class="knive-details__field knive-details__anim3"><label
+          class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong
+          class="knive-details__value">{{knive.edgeLength}} mm.</strong></div>
 
-      <div class="knive-details__field knive-details__anim4"><label class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong class="knive-details__value">{{knive.totalLength}} mm.</strong></div>
+      <div class="knive-details__field knive-details__anim4"><label
+          class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong
+          class="knive-details__value">{{knive.totalLength}} mm.</strong></div>
 
       <div class="knive-details__field knive-details__anim5">
-      <label class="knive-details__field__label">{{'home.BladeMade' | translate}} </label>
-      <p class="knive-details__value">{{knive.edgeMade}}</p>
+        <label class="knive-details__field__label">{{'home.BladeMade' | translate}} </label>
+        <p class="knive-details__value">{{knive.edgeMade}}</p>
       </div>
 
       <div class="knive-details__field knive-details__anim6">
-      <label class="knive-details__field__label">{{'home.HandleType' | translate}} </label>
-      <p class="knive-details__value">{{knive.handleDescription}}</p>
+        <label class="knive-details__field__label">{{'home.HandleType' | translate}} </label>
+        <p class="knive-details__value">{{knive.handleDescription}}</p>
       </div>
 
-      <div class="knive-details__field knive-details__anim7 custom-heading"><label class="knive-details__field__label">{{'home.Price' | translate}}  </label><strong class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong></div>
+      <div class="knive-details__field knive-details__anim7 custom-heading"><label
+          class="knive-details__field__label">{{'home.Price' | translate}} </label><strong
+          class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong></div>
     </section>
 
     <section class="knive-details__images knive-details__anim8" *ngIf="kniveImages">
       <div *ngFor="let image of kniveImages">
         <div class="knive-details__image-wrapper">
-          <img class="knive-details__image" onclick="openModal(this)" src="../../assets/images/{{image.imagePath}}" alt="knive image">
+          <img class="knive-details__image" onclick="openModal(this)" src="../../assets/images/{{image.imagePath}}"
+            alt="knive image">
         </div>
       </div>
     </section>
-    <h5 class="knive-details__images__no-images knive-details__anim8" *ngIf="!kniveImages">
-      {{'home.NoImages' | translate}}..
-    </h5>
   </article>
+  <h5 class="knive-details__images__no-images knive-details__anim8" *ngIf="kniveImages === null">
+    {{'home.NoImages' | translate}}..
+  </h5>
   <hr />
-  <div class="d-flex justify-content-center">
-    <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
+  <div class="buttons-wrapper">
+    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold"
+      [routerLink]="['/order', knive.kniveId]">{{'order.Order' | translate}}</button>
+    <a class="back-button knive-details__anim9" [routerLink]="['/']">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
-    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold" [routerLink]="['/order', knive.kniveId]">{{'order.Order' | translate}}</button>
   </div>
 
   <div class="knive-details__image-enlarge">

@@ -2,12 +2,22 @@
 @import "../shared-styles//popups.scss";
 @import "../shared-styles/custom-buttons.scss";
 
+.add-carousel-container {
+    margin-bottom: 7em;
+}
+
 .buttons-container {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-row-gap: 20px;
+    justify-content: center;
+    justify-items: center;
 }
 
 .images-container {
+    @media (max-width: 599px) {
+        grid-template-columns: 1fr;
+    }
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 10px;
@@ -16,7 +26,7 @@
 }
 .image-container {
     width: 250px;
-    height: auto;
+    height: 250px;
 }
 
 .img {
@@ -26,5 +36,6 @@
 }
 
 .images-select {
+    margin-top: 5em;
     justify-content: center;
 }
