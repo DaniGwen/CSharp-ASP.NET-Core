@@ -10,6 +10,12 @@
   color: #ffffff;
 
   &__content__wrapper {
+    @media (max-width: 599px) {
+      grid-template-columns: 1fr;
+      grid-row-gap: 20px;
+      justify-items: center;
+    }
+
     padding: 10px 0;
     display: grid;
     grid-template-columns: max-content max-content;

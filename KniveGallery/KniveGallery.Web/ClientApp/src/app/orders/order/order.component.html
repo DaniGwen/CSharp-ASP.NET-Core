@@ -1,4 +1,4 @@
-<article class="text-center mb-5">
+<article class="order-container text-center">
   <form [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
     <h4 class="text-center custom-heading mb-3 order__anim1">{{'order.Your details'| translate}}</h4>
     <div class="form-row justify-content-center">
@@ -100,7 +100,7 @@
       </div>
     </div>
     <hr />
-    <h3 class="text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price"> {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
+    <h3 class="form__price text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price"> {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
     <hr />
     <div class="order__buttons-container row row-cols-2" *ngIf="!showLoader">
       <div class="col order__anim12">

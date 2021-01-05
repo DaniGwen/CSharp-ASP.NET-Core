@@ -20,20 +20,60 @@
 }
 
 .home__knives-wrapper {
+  @media (max-width: 599px) {
+    grid-template-columns: 60%;
+    row-gap: 15px;
+    justify-content: center;
+    margin-bottom: 5em;
+  }
+
   display: grid;
   grid-auto-rows: min-content;
   grid-template-columns: 240px 240px 240px 240px;
-  grid-row-gap: 20px;
-  grid-column-gap: 30px;
+  row-gap: 20px;
+  column-gap: 30px;
 }
 
 .jumbotron {
+  @media (max-width: 599px) {
+    max-width: 100%;
+    padding: 10px;
+  }
+
   padding: 30px;
   max-width: 80%;
   margin: 0 auto;
+
+  .jumbotron-heading {
+    @media (max-width: 599px) {
+      font-size: 26px;
+    }
+  }
 }
+
 .carousel-and-info-wrapper {
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
   display: grid;
   grid-template-columns: max-content max-content;
-  grid-column-gap: 10%;
+  column-gap: 10%;
+}
+
+.btn-group {
+  @media (max-width: 599px) {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 5px;
+    max-width: 35%;
+  }
+}
+
+.filter__buttons {
+  @media (max-width: 599px) {
+    justify-content: center;
+  }
 }

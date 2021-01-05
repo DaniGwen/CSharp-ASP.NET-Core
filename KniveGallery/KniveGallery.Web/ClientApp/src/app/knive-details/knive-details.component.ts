@@ -13,7 +13,6 @@ export class KniveDetailsComponent {
   kniveId: any;
   knive = new Knive();
   kniveImages: string[];
-  isOrder: boolean = false;
   public showLoader: boolean;
 
   constructor(private route: ActivatedRoute,
@@ -35,9 +34,5 @@ export class KniveDetailsComponent {
         this.kniveImages = data;
       });
     });
-  }
-
-  toggleOrder() {
-    this.isOrder = !this.isOrder;
   }
 }

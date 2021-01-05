@@ -1,6 +1,10 @@
 @import "colors.scss";
 
 .custom-heading {
+  @media (max-width: 599px) {
+    font-size: 20px;
+  }
+
   width: auto;
   background-color: $charcoal;
   color: $mellowApricot;

@@ -1,4 +1,4 @@
-@import '../../shared-styles/colors';
+@import "../../shared-styles/colors";
 
 a.navbar-brand {
   white-space: normal;
@@ -30,6 +30,10 @@ a:hover {
 }
 
 .navbar-lang-homepage {
+  @media (max-width: 599px) {
+    justify-content: center;
+  }
+  
   display: grid;
   grid-template-columns: max-content max-content;
   grid-column-gap: 15px;
@@ -48,7 +52,7 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
 
 .lang-box {
@@ -60,6 +64,6 @@ html {
   align-self: self-end;
 }
 
-.header-title{
+.header-title {
   color: $mellowApricot;
 }

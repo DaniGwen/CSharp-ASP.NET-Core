@@ -1,5 +1,5 @@
-@import 'colors.scss';
-@import 'animations.scss';
+@import "colors.scss";
+@import "animations.scss";
 
 .filter__buttons {
   display: grid;
@@ -24,7 +24,7 @@
   }
 }
 
-.btn-theme--no-bg{
+.btn-theme--no-bg {
   background-color: inherit;
 }
 
@@ -90,6 +90,10 @@
 }
 
 .btn-arrow {
+  @media (max-width: 599px) {
+    padding: 0px 10px;
+  }
+  
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
   border-right: 5px solid $whatsupGreen;

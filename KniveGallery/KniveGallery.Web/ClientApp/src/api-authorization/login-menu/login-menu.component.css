@@ -15,3 +15,14 @@ a:hover {
 .nav-link:hover {
   color: whitesmoke !important;
 }
+
+@media (max-width: 599px) {
+  .navbar-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+  .nav-link {
+    text-align: center;
+  }
+}
