@@ -10,12 +10,15 @@
     animation-delay: 0.1s * $i;
   }
 }
+
 .order-container {
   @media (max-width: 599px) {
     margin-bottom: 10em;
   }
+
   margin-bottom: 5em;
 }
+
 input.ng-valid {
   border-left: 5px solid green;
 }
@@ -33,16 +36,22 @@ input.ng-invalid.ng-touched {
   background-color: $charcoal;
   color: $mellowApricot;
   width: 50px;
+  height: 30px;
   font-weight: 600;
   font-size: 18px;
 }
 
 .order__knive-quantity-wrapper {
   text-align: -webkit-center;
+  max-width: 110px;
 }
 
 .form__price {
   @media (max-width: 599px) {
     font-size: 20px;
   }
+}
+
+.h-30 {
+  max-height: 30px;
 }

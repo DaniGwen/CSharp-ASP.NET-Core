@@ -51,11 +51,12 @@ export class OrderComponent implements OnInit {
     })
     this.totalPrice = this.knive.price;
 
-    this.totalPrice = this.knive.price;
+    this.calculateKnivePrice(1);
   }
 
   calculateKnivePrice(value: number) {
     if (value > this.knive.quantity) {
+      this.totalPrice = 0;
       return;
     }
     this.quantityOrdered = value;
@@ -85,7 +86,7 @@ export class OrderComponent implements OnInit {
       if (message) {
         this.status = message;
         this.showLoader = false;
-      }     
+      }
     });
 
     this.router.navigateByUrl("/order-summary");

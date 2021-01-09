@@ -39,7 +39,7 @@ export class KnivesService {
   }
 
   public updateKnive(knive: Knive) {
-    return this.http.put(`${this.Url}/${knive.kniveId}`, knive, { headers: this.headers });
+    return this.http.put(`${this.Url}`, knive, { headers: this.headers });
   }
 
   public uploadImage(form: FormData, kniveId: number) {

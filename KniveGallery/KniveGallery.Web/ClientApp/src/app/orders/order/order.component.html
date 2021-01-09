@@ -4,7 +4,7 @@
     <div class="form-row justify-content-center">
       <div class="col-md-3 mb-3 order__anim2">
         <label>{{'order.First name' | translate}}</label>
-        <input class="form-control" type="text" formControlName="firstName" id="firstName" />
+        <input class="form-control" type="text" formControlName="firstName" id="firstName" autofocus />
         <div *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty)
              && orderForm.get('firstName').errors">
           <label *ngIf="orderForm.get('firstName').errors.required" class="alert alert-danger">
@@ -92,9 +92,9 @@
     <div class="form-row justify-content-center order__anim10">
       <div class="col-sm-1 mb-3">
         <label>{{'order.Quantity' | translate}}</label>
-        <input class="form-control" type="number" min="1" value="1"
-        formControlName="quantity" 
-        #quantity (focusout)="calculateKnivePrice(quantity.value)" />
+        <input class="form-control h-30" type="number" min="1" value="1"
+               formControlName="quantity"
+               #quantity (focusout)="calculateKnivePrice(quantity.value)" />
       </div>
       <div class="order__knive-quantity-wrapper col-sm-2 mb-3">
         <label>{{'order.KniveQuantity' | translate}}</label>
@@ -104,12 +104,16 @@
     <hr />
     <h3 class="form__price text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price"> {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
     <hr />
-    <div class="order__buttons-container row row-cols-2" *ngIf="!showLoader">
-      <div class="col order__anim12">
-        <a class="back-button mr-5" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
+    <div class="order__buttons-container" *ngIf="!showLoader">
+      <div class="order__anim11 mb-3">
+        <button class="btn btn-shadow btn-theme"
+                type="submit"
+                [disabled]="!orderForm.valid">
+          {{'order.Order' | translate}}
+        </button>
       </div>
-      <div class="col order__anim11">
-        <button class="btn btn-shadow btn-theme" type="submit" [disabled]="!orderForm.valid">{{'order.Order' | translate}}</button>
+      <div class="order__anim12">
+        <a class="back-button" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
       </div>
     </div>
     <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>

@@ -36,6 +36,9 @@
     "Home": "Home"
   },
   "order": {
+    "Name": "Name",
+    "OrderDate": "Order date",
+    "Dispatched": "Dispatched",
     "Your details": "Your details",
     "First name": "First name",
     "Name is required.": "Name is required.",

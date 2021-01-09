@@ -20,20 +20,20 @@
 
 <div class="home-container mb-5">
   <article class="filter__buttons mt-3">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <button class="btn btn-shadow btn-theme" name="options" id="option1" (click)="ngOnInit()">
+    <div class="text-center" data-toggle="buttons">
+      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option1" (click)="ngOnInit()">
         {{'home.All'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')">
+      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')">
         {{'home.KitchenKnives'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')">
+      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')">
         {{'home.MiddleClass'| translate}}
       </button>
 
-      <button class="btn btn-shadow btn-theme" name="options" id="option3" (click)="getKnivesByClass('HighClass')">
+      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option3" (click)="getKnivesByClass('HighClass')">
         {{'home.HighEndClass'| translate}}
       </button>
     </div>

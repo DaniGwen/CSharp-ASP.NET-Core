@@ -11,10 +11,12 @@
     animation-delay: 0.1s * $i;
   }
 }
+
 .container {
   @media (max-width: 599px) {
     margin-bottom: 9em;
   }
+
   margin-bottom: 7em;
 }
 
@@ -186,12 +188,12 @@ label {
   }
 
   text-align: center;
-  margin-left: 300px;
 }
+
 .buttons-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   justify-items: center;
-    grid-row-gap: 20px;
+  grid-row-gap: 20px;
 }

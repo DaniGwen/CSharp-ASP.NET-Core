@@ -2,7 +2,7 @@
   <h3 class="text-center custom-heading">{{orderTitle}}</h3>
   <hr />
   <article class="filter__buttons">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <div class="text-center" data-toggle="buttons">
 
       <button class="btn btn-shadow btn-theme" name="options" id="option3" (click)="filterOrders('All')">
         All
@@ -28,19 +28,23 @@
           <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Knive id - <strong>{{order.kniveId}}</strong></h5>
-              <p class="card-text">Name - <strong>{{order.firstName}} {{order.lastName}}</strong></p>
-              <p class="card-text">Email - <strong>{{order.email}}</strong></p>
-              <p class="card-text">Phone number - <strong>{{order.phoneNumber}}</strong></p>
-              <p class="card-text">City - <strong>{{order.city}}</strong></p>
-              <p class="card-text">Residential aria - <strong>{{order.neighbourhood}}</strong></p>
-              <p class="card-text">Street - <strong>{{order.street}}</strong></p>
-              <p class="card-text">Order date - <strong>{{order.orderDate}}</strong></p>
-              <p class="card-text" *ngIf="order.dispatchDate">Dispatched - <strong>{{order.dispatchDate}}</strong> </p>
+              <p class="card-text">
+              {{'order.Name'| translate}} - <strong>{{order.firstName}} {{order.lastName}}</strong></p>
+              <p class="card-text">{{'order.Email'| translate}} - <strong>{{order.email}}</strong></p>
+              <p class="card-text">{{'order.Phone number'| translate}} - <strong>{{order.phoneNumber}}</strong></p>
+              <p class="card-text">{{'order.City'| translate}} - <strong>{{order.city}}</strong></p>
+              <p class="card-text">{{'order.Neighbourhood'| translate}} - <strong>{{order.neighbourhood}}</strong></p>
+              <p class="card-text">{{'order.Street'| translate}} - <strong>{{order.street}}</strong></p>
+              <p class="card-text">{{'order.OrderDate'| translate}} - <strong>{{order.orderDate}}</strong></p>
+              <p class="card-text" *ngIf="order.dispatchDate">{{'order.Dispatched'| translate}} - <strong>{{order.dispatchDate}}</strong> </p>
+              <p class="card-text">{{'order.Quantity'| translate}} - <strong>{{order.quantity}}</strong></p>
               <div class="d-flex justify-content-around mt-3">
                 <button class="btn btn-sm btn-secondary" (click)="deleteOrder(order.orderId)"><i
                     class="fas fa-trash mr-1"></i>Remove</button>
                 <button *ngIf="!order.isDelivered" class="btn btn-sm btn-success"
-                  (click)="dispatchOrder(order.orderId)"><i class="fas fa-paper-plane mr-1"></i>Confirm order</button>
+                        (click)="dispatchOrder(order.orderId)">
+                  <i class="fas fa-paper-plane mr-1"></i>{{'order.Dispatched'| translate}}
+                </button>
               </div>
             </div>
           </div>

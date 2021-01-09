@@ -18,13 +18,21 @@
 
 .contact-info {
   &__header {
+    @media(max-width: 599px) {
+      font-size: 18px;
+    }
+
     font-size: 20px;
     color: $mellowApricot;
     font-weight: 500;
-    margin-right: 15px;
+    margin: 0;
   }
 
   &__icon {
+    @media(max-width: 599px) {
+      font-size: 18px;
+    }
+
     font-size: 22px;
     color: $mellowApricot;
     margin-right: 2%;
@@ -44,22 +52,21 @@
       margin: 0px;
     }
 
-    margin-top: 5px;
     text-align: left;
     display: grid;
     grid-template-columns: 250px;
-    grid-template-rows: max-content max-content;
+    grid-template-rows: max-content max-content max-content;
     justify-content: center;
   }
 
   &__detail {
     @media (max-width: 599px) {
-      font-size: 18px;
-      padding-bottom: 5px;
+      font-size: 16px;
     }
 
     color: $lightBlue;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
+    margin: 0;
   }
 }

@@ -14,6 +14,7 @@ export class KniveDetailsComponent {
   knive = new Knive();
   kniveImages: string[];
   public showLoader: boolean;
+  public hideImageGrid: string = "d-block";
 
   constructor(private route: ActivatedRoute,
     private knivesService: KnivesService) { }
@@ -32,5 +33,9 @@ export class KniveDetailsComponent {
         this.kniveImages = data;
       });
     });
+
+    if (this.kniveImages == null || this.kniveImages.length == 0) {
+      this.hideImageGrid = "d-none";
+    }
   }
 }

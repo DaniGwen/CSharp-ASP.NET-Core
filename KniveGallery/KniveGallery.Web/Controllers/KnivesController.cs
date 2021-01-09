@@ -84,19 +84,31 @@ namespace KniveGallery.Web.Controllers
             return knive;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutKnife(int id, Knive knive)
+        [HttpPut]
+        public async Task<IActionResult> PutKnife(Knive knive)
         {
-            var kniveDb = context.Knives.First(x => x.KniveId == id);
-            kniveDb = knive;
+            var kniveDb = context.Knives.First(x => x.KniveId == knive.KniveId);
 
+            kniveDb.EdgeLength = knive.EdgeLength;
+            kniveDb.EdgeMade = knive.EdgeMade;
+            kniveDb.EdgeThickness = knive.EdgeThickness;
+            kniveDb.EdgeWidth = knive.EdgeWidth;
+            kniveDb.HandleDescription = knive.HandleDescription;
+            kniveDb.ImagePath = knive.ImagePath;
+            kniveDb.Images = knive.Images;
+            kniveDb.KniveClass = knive.KniveClass;
+            kniveDb.Likes = knive.Likes;
+            kniveDb.Price = knive.Price;
+            kniveDb.Quantity = knive.Quantity;
+            kniveDb.TotalLength = knive.TotalLength;
+            
             try
             {
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!KniveExists(id))
+                if (!KniveExists(knive.KniveId))
                 {
                     return new JsonResult("Error");
                 }
