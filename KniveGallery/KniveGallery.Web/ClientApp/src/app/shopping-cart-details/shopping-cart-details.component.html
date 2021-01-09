@@ -1,0 +1,143 @@
+<form class="mb-5" [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
+    <div class="mb-5 mt-3">
+        <section class="mb-3">
+            <h2 class="text-center custom-heading">Your items</h2>
+        </section>
+        <section class="card-wrapper justify-content-center" *ngIf="knives?.length > 0">
+            <div class="card" *ngFor="let knive of knives">
+                <p><strong>Handle:</strong> {{knive.handleDescription}}</p>
+                <p><strong>Edge:</strong> {{knive.edgeMade}}</p>
+                <div class="img-wrapper mb-1 mt-1">
+                    <img src="../../assets/images/{{knive.imagePath}}" alt="image">
+                </div>
+                <div class="quantities-wrapper row mb-2">
+                    <div class="col-sm-4">
+                        <label>{{'order.KniveQuantity' | translate}}</label>
+                        <p class="order__knive-quantity">{{knive.quantity}}</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <label>{{'order.Quantity' | translate}}</label>
+                        <input class="form-control h-30" type="number" min="1" value="1" formControlName="quantity"
+                            #quantity (focusout)="calculateTotalPrice(quantity.value)" />
+                    </div>
+                </div>
+                <p class="text-center price"><strong>Price:</strong> {{knive.price}}</p>
+            </div>
+            <hr>
+        </section>
+        <section *ngIf="knives?.length == 0 || knives == null">
+            <h2 class="text-center mt-5">No items in your cart</h2>
+        </section>
+    </div>
+
+    <article *ngIf="knives?.length > 0" class="text-center">
+        <h4 class="text-center custom-heading mb-3 order__anim1">{{'order.Your details'| translate}}</h4>
+        <div class="form-row justify-content-center">
+            <div class="col-md-3 mb-3 order__anim2">
+                <label>{{'order.First name' | translate}}</label>
+                <input class="form-control" type="text" formControlName="firstName" id="firstName" autofocus />
+                <div *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty)
+             && orderForm.get('firstName').errors">
+                    <label *ngIf="orderForm.get('firstName').errors.required" class="alert alert-danger">
+                        {{'order.Name is required.' | translate}}
+                    </label>
+                    <label *ngIf="orderForm.get('firstName').errors.minlength" class="alert alert-danger">
+                        {{'order.Name must be atleast 3 letters.' | translate}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3 order__anim3">
+                <label>{{'order.Last name' | translate}}</label>
+                <input class="form-control" type="text" formControlName="lastName" />
+                <div *ngIf="(orderForm.get('lastName').touched || orderForm.get('lastName').dirty)
+             && orderForm.get('lastName').errors">
+                    <label *ngIf="orderForm.get('lastName').errors.required" class="alert alert-danger">
+                        {{'order.Last name is required.' | translate}}
+                    </label>
+                    <label *ngIf="orderForm.get('lastName').errors.minlength" class="alert alert-danger">
+                        {{'order.Last name must be atleast 3 letters.' | translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row justify-content-center">
+            <div class="col-md-3 mb-3 order__anim4">
+                <label>{{'order.Email' | translate}}</label>
+                <input class="form-control" type="text" formControlName="email" />
+                <label *ngIf="(orderForm.get('email').touched || orderForm.get('email').dirty)
+             && orderForm.get('email').errors" class="alert alert-danger">
+                    {{'order.Email is required.' | translate}}
+                </label>
+            </div>
+
+            <div class="col-md-3 mb-3 order__anim5">
+                <label>{{'order.Phone number' | translate}}</label>
+                <input class="form-control" type="number" min="0" formControlName="phoneNumber" />
+                <div *ngIf="(orderForm.get('phoneNumber').touched || orderForm.get('phoneNumber').dirty)
+             && orderForm.get('phoneNumber').errors">
+                    <label *ngIf="orderForm.get('phoneNumber').errors.required" class="alert alert-danger">
+                        {{'order.Phone number is required.' | translate}}
+                    </label>
+                    <label *ngIf="orderForm.get('phoneNumber').errors.minlength" class="alert alert-danger">
+                        {{'order.Phone number must be atleast 4 digits.' | translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <h3 class="text-center mb-2 order__anim6">{{'order.Address' | translate}}</h3>
+        <div class="form-row justify-content-center">
+            <div class="col-md-3 mb-3 order__anim7">
+                <label>{{'order.City' | translate}}</label>
+                <input type="text" class="form-control" formControlName="city">
+                <div *ngIf="(orderForm.get('city').touched || orderForm.get('city').dirty)
+             && orderForm.get('city').errors">
+                    <label *ngIf="orderForm.get('city').errors.required" class="alert alert-danger">
+                        {{'order.City is required.' | translate}}
+                    </label>
+                    <label *ngIf="orderForm.get('city').errors.minlength" class="alert alert-danger">
+                        {{'order.City must be atleast 3 letters.' | translate}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3 order__anim8">
+                <label>{{'order.Neighbourhood' | translate}}</label>
+                <input class="form-control" type="text" formControlName="neighbourhood" />
+            </div>
+        </div>
+
+        <div class="form-row justify-content-center">
+            <div class="col-md-3 mb-3 order__anim9">
+                <label>{{'order.Street' | translate}}</label>
+                <input class="form-control" type="text" formControlName="street" />
+                <div *ngIf="(orderForm.get('street').touched || orderForm.get('street').dirty)
+             && orderForm.get('street').errors">
+                    <label *ngIf="orderForm.get('street').errors.required" class="alert alert-danger">
+                        {{'order.Street is required.' | translate}}
+                    </label>
+                    <label *ngIf="orderForm.get('street').errors.minlength" class="alert alert-danger">
+                        {{'order.Street must be atleast 3 letters.' | translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <h3 class="form__price text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price">
+                {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
+        <hr />
+        <div class="order__buttons-container" *ngIf="!showLoader">
+            <div class="order__anim11 mb-3">
+                <button class="btn btn-shadow btn-theme" type="submit" [disabled]="!orderForm.valid">
+                    {{'order.Order' | translate}}
+                </button>
+            </div>
+            <div class="order__anim12">
+                <a class="back-button" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
+            </div>
+        </div>
+        <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
+    </article>
+</form>

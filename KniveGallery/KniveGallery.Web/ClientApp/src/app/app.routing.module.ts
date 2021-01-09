@@ -10,9 +10,14 @@ import { OrderManagerComponent } from './orders/order-manager/order-manager.comp
 import { OrderSummaryComponent } from './orders/order-summary/order-summary.component';
 import { OrderComponent } from './orders/order/order.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
 
 
 const routes: Routes = [
+    {
+        path: "shopping-cart-details",
+        component: ShoppingCartDetailsComponent
+    },
     {
         path: "add-carousel-images",
         component: AddCarouselImagesComponent,
@@ -64,4 +69,4 @@ const routes: Routes = [
     }
 ];
 
-export const AppRoutingModule = RouterModule.forRoot(routes, { scrollPositionRestoration:'enabled' });
+export const AppRoutingModule = RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' });

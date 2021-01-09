@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Knive } from 'src/Models/knive';
+import { ShoppingCartService } from 'src/Services/shopping-cart.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,8 +10,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  itemsCount: number = 0;
 
-  constructor(public translate: TranslateService) { }
+  constructor(public translate: TranslateService,
+    private cartService: ShoppingCartService) {
+  }
+  
+  ngOnInit() {
+    this.cartService.$itemsChange.subscribe((items: Knive[]) => {
+      this.itemsCount = items.length;
+    });
+  }
 
   collapse() {
     this.isExpanded = false;

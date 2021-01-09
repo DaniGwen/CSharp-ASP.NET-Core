@@ -1,6 +1,7 @@
 export class Order {
   orderId: number;
   kniveId: number;
+  kniveIds = new Array<number>();
   firstName: string;
   lastName: string;
   email: string;

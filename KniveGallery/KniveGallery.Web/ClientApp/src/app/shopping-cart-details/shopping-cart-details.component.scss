@@ -1,0 +1,43 @@
+﻿.img-wrapper {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+p {
+    height: 70px;
+    margin: 0;
+    overflow: auto;
+    text-overflow: ellipsis;
+    border-radius: 1px solid gray;
+    margin-bottom: 5px;
+}
+.card-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.card {
+    display: grid;
+    padding: 8px;
+    max-width: 310px;
+}
+.price {
+    font-size: 20px;
+    font-weight: 500;
+    height: 40px;
+}
+
+.quantities-wrapper {
+    justify-content: space-evenly;
+}

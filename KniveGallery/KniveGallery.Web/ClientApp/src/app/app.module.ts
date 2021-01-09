@@ -34,6 +34,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AsideCarouselComponent } from './aside-carousel/aside-carousel.component';
 import { ImageService } from 'src/Services/images.service';
 import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
+import { ShoppingCartService } from 'src/Services/shopping-cart.service';
+import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -80,7 +82,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     AddKniveComponent,
     NotFoundComponent,
     AsideCarouselComponent,
-    AddCarouselImagesComponent
+    AddCarouselImagesComponent,
+    ShoppingCartDetailsComponent
   ],
   imports: [
     CoreModule,
@@ -105,7 +108,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     { provide: TranslateService, useClass: TranslateService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     { provide: KnivesService, useClass: KnivesService },
-    { provide: OrderService, useClass: OrderService }
+    { provide: OrderService, useClass: OrderService },
+    { provide: ShoppingCartService, useClass: ShoppingCartService }
   ],
   bootstrap: [
     AppComponent,

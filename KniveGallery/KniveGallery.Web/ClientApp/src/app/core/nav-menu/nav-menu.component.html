@@ -5,24 +5,19 @@
         <h5 class="header-title">Knife Gallery</h5>
       </section>
       <section>
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target=".navbar-collapse"
-                aria-label="Toggle navigation"
-                [attr.aria-expanded]="isExpanded"
-                (click)="toggle()">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+          aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
           <span class="navbar-toggler-icon"></span>
         </button>
       </section>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-           [ngClass]="{ show: isExpanded }">
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
         <app-login-menu></app-login-menu>
         <section class="navbar-lang-homepage">
           <section class="lang-select-box">
             <label>
               <select class="lang-box" #langSelect (change)="translate.use(langSelect.value)">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+                <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                  [selected]="lang === translate.currentLang">
                   {{ lang }}
                 </option>
               </select>
@@ -30,6 +25,11 @@
           </section>
           <section>
             <a class="nav-link" [routerLink]="['/']"><i class="fas fa-home mr-1"></i>Home</a>
+          </section>
+          <section>
+            <a class="nav-link nav-link-shopping-cart" [routerLink]="['/shopping-cart-details']">
+              <p class="badge" *ngIf="itemsCount > 0">{{itemsCount}}</p>
+              <i class="fas fa-shopping-cart"></i></a>
           </section>
         </section>
       </div>

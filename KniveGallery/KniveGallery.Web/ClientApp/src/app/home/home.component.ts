@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Knive } from '../../Models/knive';
 import { Observable } from 'rxjs';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { ShoppingCartService } from 'src/Services/shopping-cart.service';
 
 @Component({
   selector: 'app-home',

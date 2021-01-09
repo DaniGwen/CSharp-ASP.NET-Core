@@ -33,9 +33,9 @@ a:hover {
   @media (max-width: 599px) {
     justify-content: center;
   }
-  
+
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: max-content max-content max-content;
   grid-column-gap: 15px;
   align-self: flex-end;
   margin-right: 15px;
@@ -66,4 +66,27 @@ html {
 
 .header-title {
   color: $mellowApricot;
+}
+
+//shopping cart styles
+.nav-link-shopping-cart {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  background: #ff6600;
+  height: 1.2rem;
+  width: 1.2rem;
+  top: 0;
+  right: 2px;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  color: white;
+  border: 1px solid #ff6600;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 3px;
+  margin: 0;
 }
