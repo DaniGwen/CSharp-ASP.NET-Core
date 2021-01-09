@@ -6,7 +6,7 @@
 .home-container {
   display: grid;
   grid-auto-columns: max-content;
-  grid-row-gap: 30px;
+  grid-row-gap: 20px;
   justify-content: center;
 }
 
@@ -79,12 +79,19 @@
     margin: 0 auto;
     width: 360px;
   }
+
+  .buttons {
+    @media(max-width: 599px) {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+  }
 }
 
 .filter-btn {
   @media (max-width: 599px) {
     padding: 5px 40px !important;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
   }
 }
 
