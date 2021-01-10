@@ -27,22 +27,29 @@
         <div class="col">
           <div class="card text-white bg-secondary mb-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Knive id - <strong>{{order.kniveId}}</strong></h5>
+              <div *ngFor="let kniveId of order.kniveIds">
+                <h5 class="card-title">Knive id <strong>{{kniveId}}</strong> -
+                  <label><strong>{{order.quantity}}</strong></label>
+                  {{'order.Quantity'|
+                  translate}}
+                </h5>
+              </div>
               <p class="card-text">
-              {{'order.Name'| translate}} - <strong>{{order.firstName}} {{order.lastName}}</strong></p>
+                {{'order.Name'| translate}} - <strong>{{order.firstName}} {{order.lastName}}</strong></p>
               <p class="card-text">{{'order.Email'| translate}} - <strong>{{order.email}}</strong></p>
               <p class="card-text">{{'order.Phone number'| translate}} - <strong>{{order.phoneNumber}}</strong></p>
               <p class="card-text">{{'order.City'| translate}} - <strong>{{order.city}}</strong></p>
               <p class="card-text">{{'order.Neighbourhood'| translate}} - <strong>{{order.neighbourhood}}</strong></p>
               <p class="card-text">{{'order.Street'| translate}} - <strong>{{order.street}}</strong></p>
               <p class="card-text">{{'order.OrderDate'| translate}} - <strong>{{order.orderDate}}</strong></p>
-              <p class="card-text" *ngIf="order.dispatchDate">{{'order.Dispatched'| translate}} - <strong>{{order.dispatchDate}}</strong> </p>
-              <p class="card-text">{{'order.Quantity'| translate}} - <strong>{{order.quantity}}</strong></p>
+              <p class="card-text" *ngIf="order.dispatchDate">{{'order.Dispatched'| translate}} -
+                <strong>{{order.dispatchDate}}</strong>
+              </p>
               <div class="d-flex justify-content-around mt-3">
                 <button class="btn btn-sm btn-secondary" (click)="deleteOrder(order.orderId)"><i
                     class="fas fa-trash mr-1"></i>Remove</button>
                 <button *ngIf="!order.isDelivered" class="btn btn-sm btn-success"
-                        (click)="dispatchOrder(order.orderId)">
+                  (click)="dispatchOrder(order.orderId)">
                   <i class="fas fa-paper-plane mr-1"></i>{{'order.Dispatched'| translate}}
                 </button>
               </div>

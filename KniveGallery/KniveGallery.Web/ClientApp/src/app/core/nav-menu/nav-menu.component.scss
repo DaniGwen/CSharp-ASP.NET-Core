@@ -9,6 +9,7 @@ a.navbar-brand {
 .navbar {
   background-color: #37475a !important;
   color: $white;
+  overflow: hidden;
 }
 
 .nav-link {
@@ -32,6 +33,7 @@ a:hover {
 .navbar-lang-homepage {
   @media (max-width: 599px) {
     justify-content: center;
+    margin: 0;
   }
 
   display: grid;
@@ -56,8 +58,9 @@ html {
 }
 
 .lang-box {
-  border-radius: 5px;
+  border-radius: 2px;
   border: 1px solid $mellowApricot;
+  font-size: 14px;
 }
 
 .lang-select-box {
@@ -78,15 +81,18 @@ html {
   background: #ff6600;
   height: 1.2rem;
   width: 1.2rem;
-  top: 0;
-  right: 2px;
+  top: -3px;
+  right: 39px;
   text-align: center;
   font-size: 0.7rem;
   border-radius: 50%;
   color: white;
   border: 1px solid #ff6600;
   font-family: sans-serif;
-  font-weight: bold;
-  padding: 3px;
+  padding: 4px;
   margin: 0;
+}
+
+.fixed-top{
+  margin-top: 20px;
 }

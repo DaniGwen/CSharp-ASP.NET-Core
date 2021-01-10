@@ -7,3 +7,4 @@ function openModal(e) {
     $('.knive-details__image-enlarge').clearQueue();
   });
 };
+

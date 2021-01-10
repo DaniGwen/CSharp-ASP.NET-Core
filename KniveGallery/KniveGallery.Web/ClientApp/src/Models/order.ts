@@ -1,7 +1,8 @@
+import { Knive } from "./knive";
+
 export class Order {
   orderId: number;
-  kniveId: number;
-  kniveIds = new Array<number>();
+  kniveIds: number[];
   firstName: string;
   lastName: string;
   email: string;

@@ -32,7 +32,7 @@ namespace KniveGallery.Web
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("MyConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -102,14 +102,12 @@ namespace KniveGallery.Web
                         {
                             SeedAdmin(serviceProvider).Wait();
                         }
-
                         if (!context.Knives.Any())
                         {
                             SeedKnives(context);
                         }
                     }
                 }
-
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }

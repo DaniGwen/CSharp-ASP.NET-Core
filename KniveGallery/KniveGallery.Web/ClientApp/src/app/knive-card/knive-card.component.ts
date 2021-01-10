@@ -30,9 +30,9 @@ export class KniveCardComponent {
   ngOnInit() {
     this.authService.isAuthenticated().subscribe((auth: boolean) => {
       this.isAuthenticated = auth;
-
+      this.knive.quantityOrdered = 1;
       //REMOVE just for testing
-      this.addToCart();
+      //this.addToCart();
     });
 
     var addedKnive = this.cartService.getItems().find((knive) => this.knive.kniveId == knive.kniveId)
@@ -66,5 +66,23 @@ export class KniveCardComponent {
   addToCart() {
     this.cartService.addToCart(this.knive);
     this.isAddedToCart = true;
+  }
+
+  quantityOrdered(quantity: number) {
+    this.knive.quantityOrdered = quantity;
+  }
+
+  checkQuantityValid(knive: Knive, quantityOrdered: number) {
+    if (quantityOrdered > knive.quantity) {
+      return;
+    }
+    else {
+      knive.quantity -= quantityOrdered;
+    }
+  }
+
+  removeFromCart(){
+      this.cartService.removeFromCart(this.knive);
+      this.isAddedToCart = false;
   }
 }

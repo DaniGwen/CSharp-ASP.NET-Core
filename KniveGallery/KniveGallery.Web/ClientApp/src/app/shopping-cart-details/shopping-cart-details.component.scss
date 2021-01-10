@@ -1,4 +1,16 @@
-﻿.img-wrapper {
+﻿@import "../shared-styles/custom-buttons.scss";
+
+.form {
+    @media (max-width: 599px) {
+        margin-bottom: 140px;
+        &__price{
+            font-size: 20px;
+        }
+    }
+    margin-bottom: 50px;
+}
+
+.img-wrapper {
     width: 150px;
     height: 150px;
     margin: 0 auto;
@@ -12,6 +24,9 @@ img {
 }
 
 p {
+    @media (max-width: 599px) {
+       max-height: 40px;
+    }
     height: 70px;
     margin: 0;
     overflow: auto;
@@ -20,6 +35,10 @@ p {
     margin-bottom: 5px;
 }
 .card-wrapper {
+    @media (max-width: 599px) {
+        grid-template-columns: 1fr;
+    }
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
@@ -38,6 +57,19 @@ p {
     height: 40px;
 }
 
-.quantities-wrapper {
-    justify-content: space-evenly;
+.alert {
+    padding: 2px 5px;
+    margin: 0;
+    font-size: 12px;
+}
+
+.form-control {
+    padding: 3px 5px;
+    max-height: 30px;
+}
+
+.no-items{
+    @media(max-width: 599px) {
+       font-size: 18px;
+    }
 }

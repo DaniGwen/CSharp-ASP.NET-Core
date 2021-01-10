@@ -19,6 +19,13 @@ export class ShoppingCartService {
         return this.items;
     }
 
+    removeFromCart(knive: Knive) {
+        var index = this.items.indexOf(knive);
+         this.items.splice(index, 1);
+
+        this.$itemsChange.next(this.items);
+    }
+
     clearCart() {
         this.items = [];
         return this.$itemsChange.next(this.items);

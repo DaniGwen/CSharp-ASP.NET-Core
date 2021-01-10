@@ -28,7 +28,8 @@ namespace KniveGallery.Web.Controllers
         [HttpGet]
         public List<CarouselImage> GetCarouselImages()
         {
-            return this.context.CarouselImages.ToList();
+            var carouselImages = this.context.CarouselImages.ToList();
+            return carouselImages;
         }
 
         [Authorize]

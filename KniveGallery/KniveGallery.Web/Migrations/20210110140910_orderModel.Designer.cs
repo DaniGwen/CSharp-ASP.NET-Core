@@ -4,14 +4,16 @@ using KniveGallery.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KniveGallery.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210110140910_orderModel")]
+    partial class orderModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,6 +134,9 @@ namespace KniveGallery.Web.Migrations
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -142,6 +147,8 @@ namespace KniveGallery.Web.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("KniveId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Knives");
                 });
@@ -297,26 +304,6 @@ namespace KniveGallery.Web.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("KniveGallery.Web.Models.OrderedKniveIds", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("KniveId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderedKniveIds");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -452,20 +439,18 @@ namespace KniveGallery.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("KniveGallery.Web.Data.Knive", b =>
+                {
+                    b.HasOne("KniveGallery.Web.Models.Order", null)
+                        .WithMany("Knives")
+                        .HasForeignKey("OrderId");
+                });
+
             modelBuilder.Entity("KniveGallery.Web.Models.KniveImage", b =>
                 {
                     b.HasOne("KniveGallery.Web.Data.Knive", "Knive")
                         .WithMany("Images")
                         .HasForeignKey("KniveId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("KniveGallery.Web.Models.OrderedKniveIds", b =>
-                {
-                    b.HasOne("KniveGallery.Web.Models.Order", "Order")
-                        .WithMany("OrderedKniveIds")
-                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

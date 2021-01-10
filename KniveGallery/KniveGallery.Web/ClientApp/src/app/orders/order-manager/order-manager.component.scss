@@ -21,6 +21,13 @@
   }
 }
 
-.card-body{
+.card-body {
   padding: 10px;
+}
+.card-title {
+  margin-bottom: 5px;
+
+  label {
+    font-size: 14px;
+  }
 }

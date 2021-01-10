@@ -1,20 +1,18 @@
-<div class="card mb-3">
-  <div [routerLink]="['/knive-details', knive.kniveId]"
-       routerLinkActive="active" 
-       class="knive-details__img-and-card-body-container" 
-       style="max-width: 24rem;">
+<div class="card mb-1">
+  <div [routerLink]="['/knive-details', knive.kniveId]" routerLinkActive="active"
+    class="knive-details__img-and-card-body-container" style="max-width: 24rem;">
     <p class="bg-secondary text-center" *ngIf="isAuthenticated">
       <small>Knive id - </small>
       <strong class="text-xl-center">{{knive.kniveId}}</strong>
     </p>
     <div class="home__image-wrapper">
       <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
-      <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg"
-           alt="default image" />
+      <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg" alt="default image" />
     </div>
     <section class="card-body">
       <div class="card-body__header">{{knive.edgeMade}}</div>
-      <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label class="card-title__price">{{knive.price}} {{'home.Currency' | translate}}</label></h4>
+      <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label
+          class="card-title__price">{{knive.price}} {{'home.Currency' | translate}}</label></h4>
     </section>
   </div>
   <div class="card-body row justify-content-between">
@@ -23,7 +21,7 @@
     </div>
     <div class="col-4">
       <button *ngIf="!isLoading" class="like-btn" (click)="addLike()"><i class="{{iconClass}}"></i></button>
-      <app-loading-screen *ngIf="isLoading" [showOverlay]="isLoading" ></app-loading-screen>
+      <app-loading-screen *ngIf="isLoading" [showOverlay]="isLoading"></app-loading-screen>
     </div>
   </div>
   <small *ngIf="message.length > 0">{{message}}</small>
@@ -38,6 +36,16 @@
   </button>
 </div>
 
-<div *ngIf="!isAuthenticated && !isAddedToCart">
-  <button class="btn btn-custom" (click)="addToCart()"><i class="fas fa-shopping-cart"></i> Add to cart</button>
-</div>
+<section *ngIf="!isAuthenticated" class="cart-and-quantity-wrapper">
+  <div *ngIf="!isAddedToCart">
+    <button class="btn btn-custom" (click)="addToCart()"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+  </div>
+  <div *ngIf="!isAddedToCart" class="quantity">
+    <label class="mr-1">{{'order.Quantity' | translate}}</label>
+    <input class="form-control h-30" type="number" min="1" value="1" #quantity
+      (change)="quantityOrdered(quantity.value)" />
+  </div>
+  <div *ngIf="isAddedToCart" class="remove-from-cart">
+    <button class="btn btn-custom" (click)="removeFromCart()"><i class="fas fa-shopping-cart"></i> Remove</button>
+  </div>
+</section>

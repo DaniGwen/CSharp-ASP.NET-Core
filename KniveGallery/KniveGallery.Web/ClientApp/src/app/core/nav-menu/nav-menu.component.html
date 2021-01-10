@@ -1,4 +1,4 @@
-<header>
+<header class="fixed-top">
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
     <div class="container">
       <section>
@@ -26,10 +26,11 @@
           <section>
             <a class="nav-link" [routerLink]="['/']"><i class="fas fa-home mr-1"></i>Home</a>
           </section>
-          <section>
+          <section *ngIf="!isAuthenticated">
             <a class="nav-link nav-link-shopping-cart" [routerLink]="['/shopping-cart-details']">
               <p class="badge" *ngIf="itemsCount > 0">{{itemsCount}}</p>
-              <i class="fas fa-shopping-cart"></i></a>
+              <i class="fas fa-shopping-cart"></i> cart
+            </a>
           </section>
         </section>
       </div>

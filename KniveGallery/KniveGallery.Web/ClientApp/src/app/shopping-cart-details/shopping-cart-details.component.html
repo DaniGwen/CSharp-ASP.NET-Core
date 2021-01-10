@@ -1,4 +1,4 @@
-<form class="mb-5" [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
+<form class="form" [formGroup]="orderForm" (ngSubmit)="OnSubmit()">
     <div class="mb-5 mt-3">
         <section class="mb-3">
             <h2 class="text-center custom-heading">Your items</h2>
@@ -10,23 +10,19 @@
                 <div class="img-wrapper mb-1 mt-1">
                     <img src="../../assets/images/{{knive.imagePath}}" alt="image">
                 </div>
-                <div class="quantities-wrapper row mb-2">
-                    <div class="col-sm-4">
-                        <label>{{'order.KniveQuantity' | translate}}</label>
-                        <p class="order__knive-quantity">{{knive.quantity}}</p>
-                    </div>
-                    <div class="col-sm-4">
-                        <label>{{'order.Quantity' | translate}}</label>
-                        <input class="form-control h-30" type="number" min="1" value="1" formControlName="quantity"
-                            #quantity (focusout)="calculateTotalPrice(quantity.value)" />
-                    </div>
+                <div class="d-flex justify-content-center">
+                    <label><strong>{{'order.Quantity' | translate}}</strong>: </label>
+                    <p class="order__knive-quantity">{{knive.quantityOrdered}}</p>
                 </div>
                 <p class="text-center price"><strong>Price:</strong> {{knive.price}}</p>
             </div>
             <hr>
         </section>
-        <section *ngIf="knives?.length == 0 || knives == null">
-            <h2 class="text-center mt-5">No items in your cart</h2>
+        <section class="text-center" *ngIf="knives?.length == 0 || knives == null">
+            <h2 class="no-items text-center mt-5">No items in your cart..</h2>
+            <div class="order__anim12">
+                <a class="back-button" [routerLink]="['/']"><i class="fas fa-arrow-circle-left"></i></a>
+            </div>
         </section>
     </div>
 
@@ -35,7 +31,7 @@
         <div class="form-row justify-content-center">
             <div class="col-md-3 mb-3 order__anim2">
                 <label>{{'order.First name' | translate}}</label>
-                <input class="form-control" type="text" formControlName="firstName" id="firstName" autofocus />
+                <input class="form-control" type="text" formControlName="firstName" id="firstName" />
                 <div *ngIf="(orderForm.get('firstName').touched || orderForm.get('firstName').dirty)
              && orderForm.get('firstName').errors">
                     <label *ngIf="orderForm.get('firstName').errors.required" class="alert alert-danger">
@@ -125,8 +121,11 @@
                 </div>
             </div>
         </div>
-        <h3 class="form__price text-center order__anim11">{{'order.Price' | translate}} <label formControlName="price">
-                {{totalPrice}} {{'home.Currency' | translate}}</label></h3>
+        <h3 class="form__price text-center order__anim11">{{'order.Price' | translate}}
+            <label>
+                {{totalPrice}} {{'home.Currency' | translate}}
+            </label>
+        </h3>
         <hr />
         <div class="order__buttons-container" *ngIf="!showLoader">
             <div class="order__anim11 mb-3">

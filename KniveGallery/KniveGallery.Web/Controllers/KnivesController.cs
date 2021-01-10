@@ -81,7 +81,7 @@ namespace KniveGallery.Web.Controllers
                 return NotFound();
             }
 
-            return knive;
+            return Ok(knive);
         }
 
         [HttpPut]

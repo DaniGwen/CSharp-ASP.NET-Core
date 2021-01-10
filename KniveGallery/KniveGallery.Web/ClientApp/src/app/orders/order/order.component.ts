@@ -12,7 +12,7 @@ import { OrderService } from '../../../Services/orders.service';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  public knive: Knive;
+  public knive = new Knive();
   private kniveId: any;
   public totalPrice: number;
   private order = new Order();
@@ -44,11 +44,12 @@ export class OrderComponent implements OnInit {
     this.showLoader = true;
     this.route.paramMap.subscribe(params => {
       this.kniveId = params.get('id');
+      this.kniveService.getKniveById(this.kniveId).subscribe((data: any) => {
+        this.knive = data;
+        this.showLoader = false;
+      })
     });
-    this.kniveService.getKniveById(this.kniveId).subscribe((knive: Knive) => {
-      this.knive = knive;
-      this.showLoader = false;
-    })
+
     this.totalPrice = this.knive.price;
 
     this.calculateKnivePrice(1);
@@ -68,12 +69,12 @@ export class OrderComponent implements OnInit {
       return;
     }
     this.showLoader = true;
-
     this.order = this.orderForm.value;
     this.order.price = this.totalPrice;
-    this.order.kniveId = this.knive.kniveId;
-
+    this.order.kniveIds = new Array<number>();
+    this.order.kniveIds.push(this.knive.kniveId);
     this.knive.quantity -= this.quantityOrdered;
+
     this.orderService.postOrder(this.order).subscribe((message) => {
       if (message) {
         this.message = message;

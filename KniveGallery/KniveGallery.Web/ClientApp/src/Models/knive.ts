@@ -10,4 +10,5 @@ export class Knive {
   imagePath: string;
   likes: number;
   quantity: number;
+  quantityOrdered: number;
 }

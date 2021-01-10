@@ -2,6 +2,7 @@
 using KniveGallery.Web.Models;
 using KniveGallery.Web.Services.EmailService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,18 @@ namespace KniveGallery.Web.Controllers
         public async Task<IActionResult> AddOrder([FromBody] Order order)
         {
             var message = "Successful order";
+            foreach (var kniveId in order.KniveIds)
+            {
+                var kniveOrderDto = new OrderedKniveIds
+                {
+                    KniveId = kniveId,
+                    OrderId = order.OrderId,
+                    Order = order
+                };
+                order.OrderedKniveIds.Add(kniveOrderDto);
+            }
             order.IsDelivered = false;
             order.OrderDate = DateTime.Now.ToString("d-MM-yyyy H:mm");
-
             try
             {
                 await this.dbContext.AddAsync(order);
@@ -38,18 +48,25 @@ namespace KniveGallery.Web.Controllers
 
                 //await this.emailService.SendEmail(order.Email, senderName, order.KniveId, order.Quantity);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 message = "Order could not be processed.";
             }
-
-            return Ok(message);
+            return Json(message);
         }
 
         [HttpGet]
         public ActionResult<List<Order>> GetOrders()
         {
-            return this.dbContext.Orders.ToList();
+            var ordersDb = this.dbContext.Orders.Include("OrderedKniveIds").ToList();
+            foreach (var order in ordersDb)
+            {
+                foreach (var knive in order.OrderedKniveIds)
+                {
+                    order.KniveIds.Add(knive.KniveId);
+                }
+            }
+            return ordersDb;
         }
 
         [HttpDelete("{orderId}")]
