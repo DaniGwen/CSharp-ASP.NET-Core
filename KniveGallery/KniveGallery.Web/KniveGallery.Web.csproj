@@ -12,6 +12,7 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <UserSecretsId>0701a35f-ad31-4916-98c2-748ebdfa2982</UserSecretsId>
     <SignAssembly>false</SignAssembly>
+    <TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
   </PropertyGroup>
 
   <ItemGroup>

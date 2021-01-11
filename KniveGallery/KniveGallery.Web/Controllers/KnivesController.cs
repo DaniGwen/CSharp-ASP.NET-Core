@@ -101,7 +101,7 @@ namespace KniveGallery.Web.Controllers
             kniveDb.Price = knive.Price;
             kniveDb.Quantity = knive.Quantity;
             kniveDb.TotalLength = knive.TotalLength;
-            
+
             try
             {
                 await context.SaveChangesAsync();
@@ -236,17 +236,18 @@ namespace KniveGallery.Web.Controllers
 
         [Route("AllKniveImages/{kniveId}")]
         [HttpGet]
-        public IActionResult AllKniveImages(int kniveId)
+        public List<string> AllKniveImages(int kniveId)
         {
             var images = this.context.Images
                 .Where(i => i.KniveId == kniveId)
-                .Select(i => new
-                {
-                    imagePath = i.ImagePath,
-                })
                 .ToList();
+            var imagePaths = new List<string>();
+            foreach (var image in images)
+            {
+                imagePaths.Add(image.ImagePath);
+            }
 
-            return this.Ok(images);
+            return imagePaths;
         }
 
         [Route("AdminDetails")]

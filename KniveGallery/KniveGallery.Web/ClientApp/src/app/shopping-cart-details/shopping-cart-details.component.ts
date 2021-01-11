@@ -1,11 +1,11 @@
 ﻿import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Knive } from 'src/Models/knive';
-import { Order } from 'src/Models/order';
-import { KnivesService } from 'src/Services/knives.service';
-import { OrderService } from 'src/Services/orders.service';
-import { ShoppingCartService } from 'src/Services/shopping-cart.service';
+import { Knive } from '../../Models/knive';
+import { Order } from '../../Models/order';
+import { KnivesService } from '../../Services/knives.service';
+import { OrderService } from '../../Services/orders.service';
+import { ShoppingCartService } from '../../Services/shopping-cart.service';
 
 @Component({
   selector: 'app-shopping-cart-details',
@@ -72,7 +72,7 @@ export class ShoppingCartDetailsComponent {
   }
 
   calculateTotalPrice(): number {
-    this.totalPrice = this.knives.reduce((sum, knive) => sum + knive.price, 0);
+    this.totalPrice = this.knives.reduce((sum, knive) => sum + (knive.price * knive.quantityOrdered), 0);
     return this.totalPrice;
   }
 

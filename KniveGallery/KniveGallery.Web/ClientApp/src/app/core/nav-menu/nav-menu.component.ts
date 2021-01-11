@@ -10,7 +10,7 @@ import { ShoppingCartService } from 'src/Services/shopping-cart.service';
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  isExpanded = true;
   itemsCount: number = 0;
   isAuthenticated: boolean;
 
@@ -21,14 +21,16 @@ export class NavMenuComponent {
 
   ngOnInit() {
     this.cartService.$itemsChange.subscribe((items: Knive[]) => {
-      if(items){
+      if (items) {
         this.itemsCount = items.length;
       }
     });
-
     this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
       this.isAuthenticated = isAuth;
     });
+    if (this.isAuthenticated) {
+      this.isExpanded = false;
+    }
   }
 
   collapse() {

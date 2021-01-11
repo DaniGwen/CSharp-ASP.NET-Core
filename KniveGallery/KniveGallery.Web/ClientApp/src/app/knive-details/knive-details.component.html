@@ -11,15 +11,18 @@
       </div>
 
       <div *ngIf="knive.edgeThickness" class="knive-details__field knive-details__anim2">
-        <label class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong class="knive-details__value">{{knive.edgeThickness}} mm.</strong>
+        <label class="knive-details__field__label">{{'home.EdgeTickness' | translate}} </label> <strong
+          class="knive-details__value">{{knive.edgeThickness}} mm.</strong>
       </div>
 
       <div class="knive-details__field knive-details__anim3">
-        <label class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong class="knive-details__value">{{knive.edgeLength}} mm.</strong>
+        <label class="knive-details__field__label">{{'home.EdgeLength' | translate}} </label> <strong
+          class="knive-details__value">{{knive.edgeLength}} mm.</strong>
       </div>
 
       <div class="knive-details__field knive-details__anim4">
-        <label class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong class="knive-details__value">{{knive.totalLength}} mm.</strong>
+        <label class="knive-details__field__label">{{'home.TotalLength' | translate}} </label> <strong
+          class="knive-details__value">{{knive.totalLength}} mm.</strong>
       </div>
 
       <div class="knive-details__field knive-details__anim5">
@@ -33,7 +36,8 @@
       </div>
 
       <div class="knive-details__field knive-details__anim7 ">
-        <label class="knive-details__field__label">{{'home.Price' | translate}} </label><strong class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong>
+        <label class="knive-details__field__label">{{'home.Price' | translate}} </label><strong
+          class="knive-details__field__price"> {{knive.price}}{{'home.Currency' | translate}}</strong>
       </div>
     </section>
 
@@ -45,7 +49,7 @@
         <div *ngFor="let image of kniveImages">
           <div class="knive-details__image-wrapper">
             <img class="knive-details__image" onclick="openModal(this)" src="../../assets/images/{{image}}"
-                 alt="knive image">
+              alt="knive image">
           </div>
         </div>
       </div>
@@ -54,7 +58,7 @@
   <hr />
   <div class="buttons-wrapper">
     <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold"
-            [routerLink]="['/order', knive.kniveId]">
+      [routerLink]="['/order', knive.kniveId]">
       {{'order.Order' | translate}}
     </button>
     <a class="back-button knive-details__anim9" [routerLink]="['/']">

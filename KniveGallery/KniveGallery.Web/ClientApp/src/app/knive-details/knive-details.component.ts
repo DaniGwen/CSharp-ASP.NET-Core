@@ -12,7 +12,7 @@ export class KniveDetailsComponent {
 
   kniveId: any;
   knive = new Knive();
-  kniveImages: string[];
+  kniveImages = Array<string>();
   public showLoader: boolean;
   public hideImageGrid: string = "d-block";
 
@@ -28,9 +28,9 @@ export class KniveDetailsComponent {
         this.knive = data;
       })
 
-      this.knivesService.getKniveImages(this.kniveId).subscribe((data: any) => {
+      this.knivesService.getKniveImages(this.kniveId).subscribe((imagePaths: string[]) => {
         this.showLoader = false;
-        this.kniveImages = data;
+        this.kniveImages = imagePaths;
       });
     });
 

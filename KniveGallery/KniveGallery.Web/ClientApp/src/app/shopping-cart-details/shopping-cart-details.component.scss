@@ -1,9 +1,10 @@
 ﻿@import "../shared-styles/custom-buttons.scss";
+@import "../shared-styles/colors.scss";
 
 .form {
     @media (max-width: 599px) {
         margin-bottom: 140px;
-        &__price{
+        &__price {
             font-size: 20px;
         }
     }
@@ -25,9 +26,9 @@ img {
 
 p {
     @media (max-width: 599px) {
-       max-height: 40px;
+        max-height: 40px;
     }
-    height: 70px;
+    max-height: 70px;
     margin: 0;
     overflow: auto;
     text-overflow: ellipsis;
@@ -40,16 +41,19 @@ p {
     }
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 10px;
     align-content: center;
+    justify-items: center;
 }
 
 .card {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 8px;
-    max-width: 310px;
+    max-width: 410px;
+    background-color: $grey300;
+    border-radius: 5px;
 }
 .price {
     font-size: 20px;
@@ -68,8 +72,14 @@ p {
     max-height: 30px;
 }
 
-.no-items{
-    @media(max-width: 599px) {
-       font-size: 18px;
+.no-items {
+    @media (max-width: 599px) {
+        font-size: 18px;
     }
+}
+
+.knive-quantity {
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: 600;
 }

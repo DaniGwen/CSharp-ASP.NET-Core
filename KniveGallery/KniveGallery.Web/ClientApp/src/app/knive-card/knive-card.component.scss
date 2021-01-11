@@ -66,6 +66,10 @@
 }
 
 .home__knives__card-admin {
+  @media (max-width: 599px) {
+    width: 100%;
+  }
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
@@ -126,12 +130,13 @@
     font-size: 14px;
   }
   .h-30 {
-    max-height: 25px;
-    max-width: 50px;
+    max-height: 22px;
+    max-width: 55px;
   }
 }
 .remove-from-cart {
-  button, i {
+  button,
+  i {
     color: #dd7e6b;
   }
 }

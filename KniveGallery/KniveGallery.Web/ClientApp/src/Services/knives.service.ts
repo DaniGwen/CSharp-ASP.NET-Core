@@ -50,7 +50,7 @@ export class KnivesService {
     return this.http.get(`${this.Url}/AllKniveImages/${kniveId}`, { headers: this.headers });
   }
 
-  public getAdminDetails() : Observable<any> {
+  public getAdminDetails(): Observable<any> {
     return this.http.get(`${this.Url}/AdminDetails`, { headers: this.headers });
   }
 

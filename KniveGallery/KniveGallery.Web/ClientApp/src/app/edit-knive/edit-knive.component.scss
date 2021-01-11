@@ -67,10 +67,9 @@ input.ng-invalid.ng-touched {
 }
 
 .alert {
-  @media (max-width: 599px) {
-    font-size: 14px;
-    padding: 5px 15px;
-  }
+  padding: 2px 5px;
+  margin: 0;
+  font-size: 12px;
 }
 
 .popup-message {

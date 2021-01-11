@@ -77,7 +77,7 @@ export class LogoutComponent implements OnInit {
         // is when we are doing a redirect sign in flow.
         throw new Error('Should not redirect.');
       case AuthenticationResultStatus.Success:
-        await this.navigateToReturnUrl(this.getReturnUrl(result.state));
+        await this.navigateToReturnUrl('/'/*this.getReturnUrl(result.state)*/);
         break;
       case AuthenticationResultStatus.Fail:
         this.message.next(result.message);

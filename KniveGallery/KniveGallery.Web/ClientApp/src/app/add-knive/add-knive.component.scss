@@ -34,8 +34,11 @@ input.ng-invalid.ng-touched {
 }
 
 .buttons-container {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-rows: max-content max-content;
+  grid-row-gap: 20px;
+  align-items: center;
+  justify-items: center;
 }
 
 .form-container {
@@ -58,8 +61,7 @@ label {
   }
 }
 .alert {
-  @media (max-width: 599px) {
-    font-size: 14px;
-    padding: 5px 15px;
-  }
+  padding: 2px 5px;
+  margin: 0;
+  font-size: 12px;
 }

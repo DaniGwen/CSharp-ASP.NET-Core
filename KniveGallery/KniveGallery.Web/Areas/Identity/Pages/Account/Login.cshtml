@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Admin log in";
+    ViewData["Title"] = "Admin Login";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -33,11 +33,11 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Log in</button>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
-                </div>
+                </div>*@
             </form>
         </section>
     </div>

@@ -15,7 +15,7 @@
   </div>
   <form [formGroup]="addKniveForm" (ngSubmit)="onSubmit()">
     <section class="form-container row row-cols-2">
-      <div class="form-group add-knive__anim3">
+      <div class="form-group col-sm-4 add-knive__anim3">
         <label>Широчина на острието (мм.)</label>
         <input formControlName="edgeWidth" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeWidth').touched || addKniveForm.get('edgeWidth').dirty)
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim4">
+      <div class="form-group col-sm-4 add-knive__anim4">
         <label>Дебелина на острието (мм.)</label>
         <input formControlName="edgeThickness" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeThickness').touched || addKniveForm.get('edgeThickness').dirty)
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim5">
+      <div class="form-group col-sm-4 add-knive__anim5">
         <label>Дължина на острието (мм.)</label>
         <input formControlName="edgeLength" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('edgeLength').touched || addKniveForm.get('edgeLength').dirty)
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim6">
+      <div class="form-group col-sm-4 add-knive__anim6">
         <label>Пълна дължина на ножа (мм.)</label>
         <input formControlName="totalLength" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('totalLength').touched || addKniveForm.get('totalLength').dirty)
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim7">
+      <div class="form-group col-sm-4 add-knive__anim7">
         <label>Изработка на острието</label>
         <textarea formControlName="edgeMade" class="form-control form-control-sm" rows="3" placeholder="описание..">
         </textarea>
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim8">
+      <div class="form-group col-sm-4 add-knive__anim8">
         <label>Изработка на дръжката</label>
         <textarea formControlName="handleDescription" class="form-control form-control-sm" placeholder="описание.."
           rows="3"></textarea>
@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim9">
+      <div class="form-group col-sm-4 add-knive__anim9">
         <label>Цена</label>
         <input formControlName="price" type="number" min="0" class="form-control form-control-sm" />
         <div *ngIf="(addKniveForm.get('price').touched || addKniveForm.get('price').dirty)
@@ -80,7 +80,7 @@
         </div>
       </div>
 
-      <div class="form-group add-knive__anim10">
+      <div class="form-group col-sm-4 add-knive__anim10">
         <small class="add-knive__info-lable">Избери категория.</small>
         <label>Knive class</label>
         <select formControlName="kniveClass" class="form-control" id="classSelect">
@@ -90,12 +90,12 @@
         </select>
       </div>
 
-      <div class="form-group add-knive__anim11">
+      <div class="form-group col-sm-4 add-knive__anim11">
         <label>Quantity</label>
         <input formControlName="quantity" type="number" min="1" class="form-control form-control-sm" />
       </div>
 
-      <div class="form-group add-knive__anim12">
+      <div class="form-group col-sm-4 add-knive__anim12">
         <section>
           <div class="form-group">
             <label>{{'home.SelectImages'|translate}}:</label>
@@ -106,12 +106,14 @@
     </section>
     <hr />
     <div class="buttons-container add-knive__anim13">
-      <a class="back-button knive-details__anim9 mr-5" [routerLink]="['/']">
+      <button *ngIf="!isLoading" type="submit" [disabled]="!addKniveForm.valid"
+              class="btn btn-theme btn-shadow">
+        Save
+      </button>
+      <a class="back-button knive-details__anim9" [routerLink]="['/']">
         <i class="fas fa-arrow-circle-left"></i>
       </a>
       <app-loading-screen [showOverlay]="isLoading"></app-loading-screen>
-      <button *ngIf="!isLoading" type="submit" [disabled]="!addKniveForm.valid"
-        class="btn btn-theme btn-shadow">Save</button>
     </div>
   </form>
 </section>
