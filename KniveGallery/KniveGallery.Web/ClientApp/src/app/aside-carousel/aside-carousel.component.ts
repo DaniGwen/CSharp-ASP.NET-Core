@@ -9,7 +9,7 @@ import { ImageService } from '../../Services/images.service';
 })
 
 export class AsideCarouselComponent {
-  public images: CarouselImage[];
+  public images = Array<CarouselImage>();
   public activeImage: CarouselImage;
 
   constructor(private imageService: ImageService) {

@@ -2,8 +2,7 @@
 
 .container {
   @media (max-width: 599px) {
-    width: 90%;
-    border-radius: 10px;
+    width: 88%;
     margin: 30px 20px;
   }
 
@@ -18,7 +17,7 @@
 
 .contact-info {
   &__header {
-    @media(max-width: 599px) {
+    @media (max-width: 599px) {
       font-size: 18px;
     }
 
@@ -29,7 +28,7 @@
   }
 
   &__icon {
-    @media(max-width: 599px) {
+    @media (max-width: 599px) {
       font-size: 18px;
     }
 
