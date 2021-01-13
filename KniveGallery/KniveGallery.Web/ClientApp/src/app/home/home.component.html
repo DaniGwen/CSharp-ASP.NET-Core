@@ -1,76 +1,10 @@
-<div class="jumbotron">
-  <section>
-    <h1 class="display-6 jumbotron-heading">Welcome to my custom knives gallery!</h1>
-  </section>
-  <hr class="my-4">
-  <section class="carousel-and-info-wrapper">
-    <section>
-      <p class="lead">Please look around and buy if you like my work.</p>
-      <p>
-        Check out my <a class="btn btn-sm btn-theme btn-shadow mb-1" href="https://facebook.com" role="button">
-          <i class="fab fa-facebook-f"></i>acebook
-        </a> too.
-      </p>
-    </section>
-    <section>
-      <app-aside-carousel></app-aside-carousel>
-    </section>
-  </section>
-</div>
-
-<div class="home-container mb-5">
-  <article class="filter__buttons mt-3">
-    <div class="buttons text-center" data-toggle="buttons">
-      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option1" (click)="ngOnInit()">
-        {{'home.All'| translate}}
-      </button>
-
-      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option4" (click)="getKnivesByClass('KitchenClass')">
-        {{'home.KitchenKnives'| translate}}
-      </button>
-
-      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option2" (click)="getKnivesByClass('MiddleClass')">
-        {{'home.MiddleClass'| translate}}
-      </button>
-
-      <button class="btn filter-btn btn-shadow btn-theme" name="options" id="option3" (click)="getKnivesByClass('HighClass')">
-        {{'home.HighEndClass'| translate}}
-      </button>
-    </div>
-  </article>
-
-  <section *ngIf="!showLoader" class="knive-tier text-center">
-    <section class="fadein-animation" *ngIf="kniveCl === 'KitchenClass'">
-      <h5 translate>home.KitchenKnives</h5>
-    </section>
-    <section class="fadein-animation" *ngIf="kniveCl === 'MiddleClass'">
-      <h5 translate>home.MiddleClass</h5>
-    </section>
-    <section class="fadein-animation" *ngIf="kniveCl === 'HighClass'">
-      <h5 translate>home.HighEndClass</h5>
-    </section>
-    <section class="fadein-animation" *ngIf="kniveCl === 'All'">
-      <h5 translate>home.All</h5>
-    </section>
-  </section>
-
-  <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>
-
-  <section class="fadein-animation" *ngIf="!knives?.length">
-    <h5 translate>home.NoKnives<label>..</label></h5>
-  </section>
-
-  <section class="popup-message" *ngIf="isKniveDeleted">
-    <div class="toast-header">
-      <strong class="mr-auto">Message</strong>
-    </div>
-    <div class="toast-body">
-      Knive has been deleted!
-    </div>
-  </section>
-
-  <article class="home__knives-wrapper">
-    <app-knive-card *ngFor="let knive of knives" [knive]="knive" (deleteKniveRequest)="onDelete($event)">
-    </app-knive-card>
-  </article>
+<div class="main-title text-center">
+  <h1>KIRIL CUSTOM KNIVES</h1>
+  <hr>
+  <h2>Please check out my amazing work.</h2>
+  <p>
+    Check out my <a class="btn btn-sm btn-theme btn-shadow mb-1" href="https://facebook.com" role="button">
+      <i class="fab fa-facebook-f"></i>acebook
+    </a> too.
+  </p>
 </div>

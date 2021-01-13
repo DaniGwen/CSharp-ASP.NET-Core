@@ -7,7 +7,7 @@ $whatsupGreen: #4CC15B;*/
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css ";
 
 body {
-    background-color: #EEEEEE;
+    background-color: #000000;
 }
 
 a {
@@ -29,7 +29,7 @@ a {
 }
 
 .navbar {
-    background-color: #37475A !important;
+    background-color: #000000 !important;
 }
 
 .navbar__brand {
@@ -44,11 +44,11 @@ a {
     }
 
 .nav-link {
-    color: #FEBD69;
+    color: whitesmoke;
 }
 
     .nav-link:hover {
-        color: #FEBD69;
+        color: #8a8a8a;
     }
 
 .nav-link__nav {

@@ -1,0 +1,17 @@
+@import url("../shared-styles/colors.scss");
+
+.main-title {
+  height: 400px;
+  width: 600px;
+  margin: 0 auto;
+  
+  h1,
+  p,
+  h2 {
+    color: whitesmoke;
+  }
+
+  h1 {
+    font-size: 60px;
+  }
+}

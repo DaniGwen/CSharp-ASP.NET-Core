@@ -5,6 +5,7 @@ import { AddKniveComponent } from './add-knive/add-knive.component';
 import { EditKniveComponent } from './edit-knive/edit-knive.component';
 import { HomeComponent } from './home/home.component';
 import { KniveDetailsComponent } from './knive-details/knive-details.component';
+import { KnivesComponent } from './knives/knives.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { OrderManagerComponent } from './orders/order-manager/order-manager.component';
 import { OrderSummaryComponent } from './orders/order-summary/order-summary.component';
@@ -14,6 +15,10 @@ import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-c
 
 
 const routes: Routes = [
+    {
+        path: "knives/:kniveClass",
+        component: KnivesComponent
+    },
     {
         path: "shopping-cart-details",
         component: ShoppingCartDetailsComponent

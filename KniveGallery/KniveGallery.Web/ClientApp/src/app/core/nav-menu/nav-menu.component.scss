@@ -1,95 +1,66 @@
 @import "../../shared-styles/colors";
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
 .navbar {
-  background-color: #37475a !important;
-  color: $white;
-  overflow: hidden;
-}
+  box-shadow: 0px 3px 2px 0px rgba(255, 0, 0, 0.6);
 
-.nav-link {
-  color: $mellowApricot;
-
-  &:hover {
+  a {
+    transition: 0.1s;
     color: whitesmoke;
+    font-size: 20px;
+  }
+  a:hover {
+    color: $red;
   }
 }
-
-a {
-  color: $white;
-  transition: ease-in 0.1s;
-}
-
-a:hover {
-  transform: scale(1.1);
-  text-decoration: none;
-}
-
-.navbar-lang-homepage {
-  @media (max-width: 599px) {
-    justify-content: center;
-    margin: 0;
+.dropdown {
+  .btn {
+    color: whitesmoke;
+    font-size: 20px;
   }
-
-  display: grid;
-  grid-template-columns: max-content max-content max-content;
-  grid-column-gap: 15px;
-  align-self: flex-end;
-  margin-right: 15px;
-}
-
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+  .btn:hover {
+    color: $red !important;
   }
 }
-
-.box-shadow {
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+.dropdown-item {
+  color: whitesmoke !important;
+}
+.dropdown-item:hover {
+  background-color: $red;
+}
+.dropdown-menu {
+  background-color: black;
 }
 
 .lang-box {
-  border-radius: 2px;
-  border: 1px solid $mellowApricot;
-  font-size: 14px;
-}
-
-.lang-select-box {
-  align-self: self-end;
-}
-
-.header-title {
-  color: $mellowApricot;
+  background-color: black;
+  color: whitesmoke;
+  option {
+    color: whitesmoke;
+    background-color: black;
+  }
+  option:hover {
+    background-color: $red !important;
+  }
 }
 
 //shopping cart styles
-.nav-link-shopping-cart {
-  position: relative;
-}
+// .nav-link-shopping-cart {
+//   position: relative;
+// }
 
-.badge {
-  position: absolute;
-  background: #ff6600;
-  height: 1.2rem;
-  width: 1.2rem;
-  top: -3px;
-  right: 39px;
-  text-align: center;
-  font-size: 0.7rem;
-  border-radius: 50%;
-  color: white;
-  border: 1px solid #ff6600;
-  font-family: sans-serif;
-  padding: 4px;
-  margin: 0;
-}
-
+// .badge {
+//   position: absolute;
+//   background: #ff6600;
+//   height: 1.2rem;
+//   width: 1.2rem;
+//   top: -3px;
+//   right: 39px;
+//   text-align: center;
+//   font-size: 0.7rem;
+//   border-radius: 50%;
+//   color: white;
+//   border: 1px solid #ff6600;
+//   font-family: sans-serif;
+//   padding: 4px;
+//   margin: 0;
+// }

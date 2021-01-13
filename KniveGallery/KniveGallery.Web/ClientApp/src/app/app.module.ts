@@ -36,6 +36,7 @@ import { ImageService } from 'src/Services/images.service';
 import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
 import { ShoppingCartService } from 'src/Services/shopping-cart.service';
 import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
+import { KnivesComponent } from './knives/knives.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -83,7 +84,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     NotFoundComponent,
     AsideCarouselComponent,
     AddCarouselImagesComponent,
-    ShoppingCartDetailsComponent
+    ShoppingCartDetailsComponent,
+    KnivesComponent
   ],
   imports: [
     CoreModule,

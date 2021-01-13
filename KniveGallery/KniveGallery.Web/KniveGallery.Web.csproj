@@ -51,6 +51,8 @@
     <TypeScriptCompile Remove="ClientApp\src\app\add-knive\add-knive.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\aside-carousel\aside-carousel.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\aside-carousel\aside-carousel.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\knives\knives.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\knives\knives.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\loading-screen\loading-screen.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\order-manager\order-manager.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\order-summary\order-summary.component.ts" />
