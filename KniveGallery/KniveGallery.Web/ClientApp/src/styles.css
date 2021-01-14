@@ -30,6 +30,7 @@ code {
 body {
   background-color: #000000 !important;
   position: relative;
+  opacity: 1;
 }
 
 .page-container {
@@ -45,10 +46,11 @@ body {
 
 @media only screen and (max-width: 599px) {
   .container {
-      padding: 0px 10px;
-      padding-bottom: 4rem;
-      margin: 0 auto;
-      margin-top: 39%;
-      width: 90%;
+    padding: 0px 10px;
+    padding-bottom: 4rem;
+    margin: 0 auto;
+    margin-top: 39%;
+    width: 90%;
   }
 }
+

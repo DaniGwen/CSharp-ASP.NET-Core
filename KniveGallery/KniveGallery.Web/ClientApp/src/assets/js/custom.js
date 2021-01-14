@@ -8,3 +8,7 @@ function openModal(e) {
   });
 };
 
+window.onload = function () {
+  var element = document.getElementById('homepage-video');
+  element.muted = "muted";
+}
