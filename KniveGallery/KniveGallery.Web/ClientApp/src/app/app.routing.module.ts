@@ -12,9 +12,19 @@ import { OrderSummaryComponent } from './orders/order-summary/order-summary.comp
 import { OrderComponent } from './orders/order/order.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 
 
 const routes: Routes = [
+    {
+        path: "about-page",
+        component: AboutPageComponent
+    },
+    {
+        path: "contact-page",
+        component: ContactPageComponent
+    },
     {
         path: "knives/:kniveClass",
         component: KnivesComponent

@@ -1,14 +1,14 @@
 export class Knive {
-  kniveId: number;
-  edgeMade: string;
-  totalLength: number;
-  edgeLength: number;
-  edgeWidth: number;
-  edgeThickness: number;
-  handleDescription: string;
-  price: number;
-  imagePath: string;
-  likes: number;
-  quantity: number;
-  quantityOrdered: number;
+  public kniveId: number;
+  public edgeMade: string;
+  public totalLength: number;
+  public edgeLength: number;
+  public edgeWidth: number;
+  public edgeThickness: number;
+  public handleDescription: string;
+  public price: number;
+  public imagePath: string;
+  public likes: number;
+  public quantity: number;
+  public quantityOrdered: number;
 }

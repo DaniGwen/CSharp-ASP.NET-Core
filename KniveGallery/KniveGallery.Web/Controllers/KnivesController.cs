@@ -205,13 +205,13 @@ namespace KniveGallery.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteKnife(int id)
         {
-            var knive = await context.Knives.FindAsync(id);
-            if (knive == null)
+            var knife = await context.Knives.FindAsync(id);
+            if (knife == null)
             {
                 return NotFound();
             }
 
-            context.Knives.Remove(knive);
+            context.Knives.Remove(knife);
             await context.SaveChangesAsync();
 
             return Ok();

@@ -2,7 +2,7 @@
 
 .navbar {
   box-shadow: 0px 1px 4px 0px rgba(255, 0, 0, 0.76);
-  background-color:rgba(0, 0, 0, 0.733);
+  background-color: rgba(0, 0, 0, 0.733);
   a {
     transition: 0.1s;
     color: whitesmoke;
@@ -42,7 +42,13 @@
     background-color: $red !important;
   }
 }
-
+.navbar-brand{
+  display: grid;
+  grid-template-rows: min-content min-content;
+}
+p {
+  margin: 0;
+}
 //shopping cart styles
 // .nav-link-shopping-cart {
 //   position: relative;

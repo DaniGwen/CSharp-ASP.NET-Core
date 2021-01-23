@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { KnivesService } from '../../Services/knives.service';
 import { Knive } from '../../Models/knive';
 import { ImageFile } from '../../Models/imageFile';
-import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-edit-knive',

@@ -9,21 +9,23 @@
       <img class="card-img-top" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
       <img class="card-img-top" *ngIf="!knive.imagePath" src="assets/images/default.jpg" alt="default image" />
     </div>
-    <section class="card-body">
+  </div>
+  <section class="card-body">
+    <section>
       <div class="card-body__header">{{knive.edgeMade}}</div>
       <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label
           class="card-title__price">{{knive.price}} {{'home.Currency' | translate}}</label></h4>
     </section>
-  </div>
-  <div class="card-body row justify-content-between">
-    <div class="col-4">
-      <small><i class="far fa-thumbs-up"></i> {{knive.likes}}</small>
-    </div>
-    <div class="col-4">
-      <button *ngIf="!isLoading" class="like-btn" (click)="addLike()"><i class="{{iconClass}}"></i></button>
-      <app-loading-screen *ngIf="isLoading" [showOverlay]="isLoading"></app-loading-screen>
-    </div>
-  </div>
+    <section class="card-body row justify-content-between">
+      <div class="col-4">
+        <small><i class="far fa-thumbs-up"></i> {{knive.likes}}</small>
+      </div>
+      <div class="col-4">
+        <button *ngIf="!isLoading" class="like-btn" (click)="addLike()"><i class="{{iconClass}}"></i></button>
+        <app-loading-screen *ngIf="isLoading" [showOverlay]="isLoading"></app-loading-screen>
+      </div>
+    </section>
+  </section>
   <small *ngIf="message.length > 0">{{message}}</small>
 </div>
 
@@ -36,7 +38,8 @@
   </button>
 </div>
 
-<section *ngIf="!isAuthenticated" class="cart-and-quantity-wrapper">
+<!-- ADD TO CART -->
+<!-- <section *ngIf="!isAuthenticated" class="cart-and-quantity-wrapper">
   <div *ngIf="!isAddedToCart">
     <button class="btn btn-custom" (click)="addToCart()"><i class="fas fa-shopping-cart"></i> Add to cart</button>
   </div>
@@ -48,4 +51,4 @@
   <div *ngIf="isAddedToCart" class="remove-from-cart">
     <button class="btn btn-custom" (click)="removeFromCart()"><i class="fas fa-shopping-cart"></i> Remove</button>
   </div>
-</section>
+</section> -->

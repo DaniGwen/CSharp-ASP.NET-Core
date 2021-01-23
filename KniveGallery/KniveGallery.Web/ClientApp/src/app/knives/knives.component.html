@@ -1,6 +1,6 @@
 ﻿<div class="home-container mb-5">
-    <section class="fadein-animation" *ngIf="kniveCl === 'KitchenClass'">
-        <h5 translate>home.KitchenKnives</h5>
+    <section class="fadein-animation">
+        <h5 translate>{{kniveCl}}</h5>
     </section>
 
     <app-loading-screen [showOverlay]="showLoader"></app-loading-screen>

@@ -25,7 +25,7 @@ import { OrderService } from '../Services/orders.service';
 import { OrderSummaryComponent } from './orders/order-summary/order-summary.component'
 import { OrderManagerComponent } from './orders/order-manager/order-manager.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
-import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
+// import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { environment } from '../environments/environment';
 import { AddKniveComponent } from './add-knive/add-knive.component'
 import { CoreModule } from './core/core.module';
@@ -37,38 +37,42 @@ import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-i
 import { ShoppingCartService } from 'src/Services/shopping-cart.service';
 import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
 import { KnivesComponent } from './knives/knives.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 
-const cookieConfig: NgcCookieConsentConfig = {
-  cookie: {
-    domain: environment.apiUrl
-  },
-  "position": "bottom-right",
-  "theme": "classic",
-  "palette": {
-    "popup": {
-      "background": "#000000",
-      "text": "#ffffff",
-      "link": "#ffffff"
-    },
-    "button": {
-      "background": "#f1d600",
-      "text": "#000000",
-      "border": "transparent"
-    }
-  },
-  "type": "info",
-  "content": {
-    "message": "This website uses cookies to ensure you get the best experience on our website.",
-    "dismiss": "Got it!",
-    "deny": "Refuse cookies",
-    "link": "Learn more",
-    "href": "https://cookiesandyou.com",
-    "policy": "Cookie Policy"
-  }
-};
+// const cookieConfig: NgcCookieConsentConfig = {
+//   cookie: {
+//     domain: environment.apiUrl
+//   },
+//   "position": "bottom-right",
+//   "theme": "classic",
+//   "palette": {
+//     "popup": {
+//       "background": "#000000",
+//       "text": "#ffffff",
+//       "link": "#ffffff"
+//     },
+//     "button": {
+//       "background": "#f1d600",
+//       "text": "#000000",
+//       "border": "transparent"
+//     }
+//   },
+//   "type": "info",
+//   "content": {
+//     "message": "This website uses cookies to ensure you get the best experience on our website.",
+//     "dismiss": "Got it!",
+//     "deny": "Refuse cookies",
+//     "link": "Learn more",
+//     "href": "https://cookiesandyou.com",
+//     "policy": "Cookie Policy"
+//   }
+// };
 
 @NgModule({
   declarations: [
+    ContactPageComponent,
+    AboutPageComponent,
     AppComponent,
     HomeComponent,
     KniveDetailsComponent,
@@ -85,12 +89,12 @@ const cookieConfig: NgcCookieConsentConfig = {
     AsideCarouselComponent,
     AddCarouselImagesComponent,
     ShoppingCartDetailsComponent,
-    KnivesComponent
+    KnivesComponent,
   ],
   imports: [
     CoreModule,
     HttpClientModule,
-    NgcCookieConsentModule.forRoot(cookieConfig),
+    // NgcCookieConsentModule.forRoot(cookieConfig),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

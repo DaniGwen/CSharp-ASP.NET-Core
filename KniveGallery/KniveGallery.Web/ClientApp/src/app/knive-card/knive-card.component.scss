@@ -3,23 +3,29 @@
 @import "../shared-styles/custom-buttons";
 
 .card {
+  position: relative;
   transition: linear 0.1s;
   animation-name: slideIn;
   animation-duration: 0.5s;
-  background-color: $charcoal;
+  background-color: initial;
   color: $mellowApricot;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  height: 350px;
 
   &:hover {
     cursor: pointer;
     box-shadow: 3px 4px 17px 0px rgba(0, 0, 0, 0.75);
+
+    .card-body {
+      opacity: 1;
+    }
   }
 }
 
 .home__image-wrapper {
   width: auto;
-  height: 190px;
+  height: auto;
 
   &__img {
     width: inherit;
@@ -36,6 +42,11 @@
 .card-body {
   text-align: center;
   padding: 0;
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  opacity: 0;
+  transition: 0.2s ease;
 
   &__header {
     padding: 15px 5px;

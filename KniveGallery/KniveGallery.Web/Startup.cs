@@ -32,7 +32,7 @@ namespace KniveGallery.Web
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("MyConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -95,8 +95,8 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        //context.Database.EnsureDeleted();
-                        //context.Database.EnsureCreated();
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
 
                         if (!context.Users.Any())
                         {

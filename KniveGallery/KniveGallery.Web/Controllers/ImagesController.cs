@@ -16,19 +16,19 @@ namespace KniveGallery.Web.Controllers
     [ApiController]
     public class ImagesController : Controller
     {
-        private readonly ApplicationDbContext context;
-        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public ImagesController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
-            this.context = context;
-            this.hostEnvironment = hostEnvironment;
+            _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         [HttpGet]
         public List<CarouselImage> GetCarouselImages()
         {
-            var carouselImages = this.context.CarouselImages.ToList();
+            var carouselImages = _context.CarouselImages.ToList();
             return carouselImages;
         }
 
@@ -37,15 +37,15 @@ namespace KniveGallery.Web.Controllers
         [Route("DeleteImage/{imageId}")]
         public async Task<IActionResult> DeleteImage(int imageId)
         {
-            var imageDb = this.context.CarouselImages.FirstOrDefault(x => x.ImageId == imageId);
+            var imageDb = _context.CarouselImages.FirstOrDefault(x => x.ImageId == imageId);
 
             if (imageDb == null)
             {
                 return Json("Error deleting knive");
             }
 
-            this.context.CarouselImages.Remove(imageDb);
-            await this.context.SaveChangesAsync();
+            _context.CarouselImages.Remove(imageDb);
+            await _context.SaveChangesAsync();
 
             return Json("Image deleted");
         }
@@ -55,9 +55,9 @@ namespace KniveGallery.Web.Controllers
         [Route("AddCarouselImage")]
         public async Task<IActionResult> AddImage()
         {
-            var image = this.Request.Form.Files[0];
+            var image = Request.Form.Files[0];
 
-            bool isSucceeded = await this.ProcessImage(image);
+            bool isSucceeded = await ProcessImage(image);
 
             if (!isSucceeded)
             {
@@ -75,13 +75,13 @@ namespace KniveGallery.Web.Controllers
                 string clientAppAssets = string.Empty;
 
                 // Save image to wwwroot / image
-                if (hostEnvironment.EnvironmentName == "Development")
+                if (_hostEnvironment.EnvironmentName == "Development")
                 {
-                    clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/src/assets/images/";
+                    clientAppAssets = _hostEnvironment.ContentRootPath + "/ClientApp/src/assets/images/";
                 }
                 else
                 {
-                    clientAppAssets = this.hostEnvironment.ContentRootPath + "/ClientApp/dist/assets/images/";
+                    clientAppAssets = _hostEnvironment.ContentRootPath + "/ClientApp/dist/assets/images/";
                 }
 
                 string fileName = Path.GetFileNameWithoutExtension(image.FileName);
@@ -96,8 +96,8 @@ namespace KniveGallery.Web.Controllers
 
                 newImage.ImagePath = fileName;
 
-                this.context.CarouselImages.Add(newImage);
-                await this.context.SaveChangesAsync();
+                _context.CarouselImages.Add(newImage);
+                await _context.SaveChangesAsync();
 
                 return true;
             }
