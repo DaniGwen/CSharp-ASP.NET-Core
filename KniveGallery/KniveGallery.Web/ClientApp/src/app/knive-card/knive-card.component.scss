@@ -1,6 +1,18 @@
-@import "../shared-styles/colors";
-@import "../shared-styles/animations";
-@import "../shared-styles/custom-buttons";
+@import "../shared-styles/colors.scss";
+@import "../shared-styles/animations.scss";
+@import "../shared-styles/custom-buttons.scss";
+
+@keyframes revial {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
 
 .card {
   position: relative;
@@ -11,42 +23,45 @@
   color: $mellowApricot;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  height: 350px;
 
   &:hover {
     cursor: pointer;
     box-shadow: 3px 4px 17px 0px rgba(0, 0, 0, 0.75);
-
+    .card-img {
+      transform: scale(1.2);
+    }
     .card-body {
       opacity: 1;
+      animation: revial 0.2s;
     }
   }
 }
 
-.home__image-wrapper {
-  width: auto;
-  height: auto;
-
-  &__img {
-    width: inherit;
-    height: inherit;
-  }
+.image-wrapper {
+  overflow: hidden;
+  width: 300px;
+  height: 350px;
 }
 
-.card-img-top {
+.card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.2s ease;
 }
 
 .card-body {
+  display: grid;
+  grid-template-rows: min-content min-content;
   text-align: center;
   padding: 0;
   position: absolute;
-  top: 200px;
-  left: 10px;
+  top: 212px;
+  left: 0;
   opacity: 0;
-  transition: 0.2s ease;
+  transition: 0.4s;
+  width: 300px;
+  background: rgba(0, 0, 0, 0.64);
 
   &__header {
     padding: 15px 5px;
@@ -64,7 +79,6 @@
 }
 
 .card-title__price-field {
-  background-color: $gunmetal;
   width: 100%;
   color: white;
   margin: 0;
@@ -93,9 +107,15 @@
   animation-duration: 0.5s;
 }
 
+.likes-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+}
 .like-btn {
   border: none;
-  background-color: $charcoal;
+  background: rgba(0, 0, 0, 0.80);
 }
 
 .fas,

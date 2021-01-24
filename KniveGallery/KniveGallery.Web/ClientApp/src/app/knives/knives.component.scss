@@ -28,8 +28,8 @@
   }
 
   display: grid;
-  grid-template-columns: repeat(4, 300px);
-  grid-auto-rows: min-content;
+  grid-template-columns: repeat(3, 300px);
+  grid-auto-rows: 350px;
   grid-row-gap: 30px;
   column-gap: 30px;
   justify-content: center;

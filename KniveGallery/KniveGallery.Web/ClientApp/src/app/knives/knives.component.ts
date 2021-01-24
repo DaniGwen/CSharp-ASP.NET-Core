@@ -21,7 +21,7 @@ export class KnivesComponent {
         this.route.paramMap.subscribe(params => {
             this.kniveCl = params.get('kniveClass');
         })
-        this.getKnivesByClass(this.kniveCl);
+        //this.getKnivesByClass(this.kniveCl);
 
         //DEMO 
         this.knives = [{
