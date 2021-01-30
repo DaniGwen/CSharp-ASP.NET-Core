@@ -1,23 +1,21 @@
 @import "../shared-styles/colors";
 
-.container {
+.contact-info {
   @media (max-width: 599px) {
     width: 88%;
-    margin: 30px 20px;
   }
 
   text-align: center;
   margin: 20px auto;
-  margin-bottom: 70px;
-  background-color: $charcoal;
+  margin-bottom: 30px;
   border-radius: 5px;
   padding: 10px;
   width: 300px;
-}
 
-.contact-info {
   &__header {
     @media (max-width: 599px) {
+      width: 88%;
+      margin: 30px 20px;
       font-size: 18px;
     }
 

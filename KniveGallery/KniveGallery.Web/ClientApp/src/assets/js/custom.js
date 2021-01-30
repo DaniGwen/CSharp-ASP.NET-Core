@@ -8,7 +8,7 @@ function openModal(e) {
   });
 };
 
-window.onload = function () {
+document.ready = function () {
   var element = document.getElementById('homepage-video');
   element.muted = "muted";
 }

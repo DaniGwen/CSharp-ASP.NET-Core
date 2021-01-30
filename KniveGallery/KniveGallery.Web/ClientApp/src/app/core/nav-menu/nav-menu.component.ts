@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { Knive } from 'src/Models/knive';
-import { ShoppingCartService } from 'src/Services/shopping-cart.service';
+import { AuthorizeService } from "../../../api-authorization/authorize.service";
+import { ShoppingCartService } from "../../../Services/shopping-cart.service";
+import { Knive } from "../../../Models/knive";
 
 @Component({
   selector: 'app-nav-menu',

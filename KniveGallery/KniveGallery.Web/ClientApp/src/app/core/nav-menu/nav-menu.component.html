@@ -53,26 +53,32 @@
     <p>Knives</p>
     <p>Gallery</p>
   </a>
-  <a class="active" [routerLink]="['/']"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a class="active" routerLink="/"><i class="fa fa-fw fa-home"></i> Home</a>
   <div class="dropdown">
     <button class="btn" type="button" id="navbarDarkDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">
+            aria-expanded="false">
       Knives
     </button>
     <div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-      <a class="dropdown-item" [routerLink]="['knives/KitchenClass']">Kitchen knives</a>
-      <a class="dropdown-item" [routerLink]="['knives/MiddleClass']">Middle class</a>
-      <a class="dropdown-item" [routerLink]="['knives/HighClass']">High class</a>
+      <a class="dropdown-item" href="/knives/KitchenClass" routerLinkActive="active">Kitchen knives</a>
+      <a class="dropdown-item" href="/knives/MiddleClass" routerLinkActive="active">Middle class</a>
+      <a class="dropdown-item" href="/knives/HighClass" routerLinkActive="active">High class</a>
     </div>
   </div>
-  <a [routerLink]="['contact-page']"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-  <a [routerLink]="['about-page']"><i class="fas fa-info"> About</i></a>
-  <div>
-    <select class="lang-box" #langSelect (change)="translate.use(langSelect.value)">
+  <a routerLink="contact-page"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+  <a routerLink="about-page"><i class="fas fa-info"> About</i></a>
+  <div class="flags-container">
+    <div class="flag-wrapper" (click)="useLanguage('EN')">
+      <img src="assets/icons/en_flag.png" alt="flag" />
+    </div>
+    <div class="flag-wrapper" (click)="useLanguage('BG')">
+      <img src="assets/icons/bg_flag.png" alt="flag" />
+    </div>
+    <!--<select class="lang-box" #langSelect (change)="translate.use(langSelect.value)">
       <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
         {{ lang }}
       </option>
-    </select>
+    </select>-->
   </div>
   <app-login-menu></app-login-menu>
 </div>

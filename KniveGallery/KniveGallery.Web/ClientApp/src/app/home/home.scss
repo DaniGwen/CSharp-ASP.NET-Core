@@ -1,11 +1,9 @@
 @import url("../shared-styles/colors.scss");
 
 .main-title {
-  display: grid;
-  grid-row-gap: 20px;
   height: 400px;
   width: 600px;
-  margin: 0 auto;
+  margin: 10% 0 auto;
 
   h1,
   p,
@@ -26,12 +24,14 @@
   min-width: 100%;
   min-height: 93%;
 }
+
 .video-wrapper {
   position: fixed;
   background-color: black;
   opacity: 0.5;
   z-index: -1;
 }
+
 .btn-custom {
   font-size: 28px;
   padding: 5px 20px;

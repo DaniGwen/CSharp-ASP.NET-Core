@@ -4,9 +4,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { ApiAuthorizationModule } from "src/api-authorization/api-authorization.module";
 import { FooterComponent } from "./footer/footer.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
+import { ApiAuthorizationModule } from "../../api-authorization/api-authorization.module";
 
 
 @NgModule({

@@ -12,19 +12,19 @@
   }
 }
 
-.container {
+.details-container {
   @media (max-width: 599px) {
     margin-bottom: 9em;
   }
 
-  margin-bottom: 7em;
+  padding-bottom: 7em;
 }
 
-.knive-details-container {
+.knive-details-wrapper {
   @media (max-width: 599px) {
     grid-template-columns: 280px;
     justify-content: center;
-    margin-bottom: 4em;
+    margin-bottom: 6em;
   }
 
   display: grid;

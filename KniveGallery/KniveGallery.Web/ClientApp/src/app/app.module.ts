@@ -26,19 +26,18 @@ import { OrderSummaryComponent } from './orders/order-summary/order-summary.comp
 import { OrderManagerComponent } from './orders/order-manager/order-manager.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 // import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
-import { environment } from '../environments/environment';
 import { AddKniveComponent } from './add-knive/add-knive.component'
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AsideCarouselComponent } from './aside-carousel/aside-carousel.component';
-import { ImageService } from 'src/Services/images.service';
 import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
-import { ShoppingCartService } from 'src/Services/shopping-cart.service';
 import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
 import { KnivesComponent } from './knives/knives.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { ImageService } from "../Services/images.service";
+import { ShoppingCartService } from "../Services/shopping-cart.service";
 
 // const cookieConfig: NgcCookieConsentConfig = {
 //   cookie: {
