@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -24,10 +24,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.1.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="newtonsoft.json" Version="12.0.3" />
     <PackageReference Include="SendGrid" Version="9.21.2" />
   </ItemGroup>
@@ -40,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\home\home.component.scss" />
     <None Remove="ClientApp\src\app\nav-menu\nav-menu.component.css" />
     <None Remove="ClientApp\src\Models\order.ts" />
   </ItemGroup>
@@ -63,6 +60,10 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\locale\" />
     <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ClientApp\src\app\home\home.component.scss" />
   </ItemGroup>
 
   <ItemGroup>

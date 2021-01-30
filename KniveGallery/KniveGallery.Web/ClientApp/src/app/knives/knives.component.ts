@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Knive } from 'src/Models/knive';
 import { KnivesService } from 'src/Services/knives.service';
@@ -21,51 +21,51 @@ export class KnivesComponent {
         this.route.paramMap.subscribe(params => {
             this.kniveCl = params.get('kniveClass');
         })
-        //this.getKnivesByClass(this.kniveCl);
+        this.getKnivesByClass(this.kniveCl);
 
         //DEMO 
-        this.knives = [{
-            edgeLength: 100,
-            edgeMade: "TestTest",
-            edgeThickness: 3,
-            edgeWidth: 10,
-            handleDescription: "SomeDescription for handle",
-            imagePath: "high1.jpg",
-            kniveId: 10,
-            price: 50,
-            quantity: 2,
-            totalLength: 230,
-            likes: 0,
-            quantityOrdered: 0
-        },
-        {
-            edgeLength: 100,
-            edgeMade: "TestTest",
-            edgeThickness: 3,
-            edgeWidth: 10,
-            handleDescription: "SomeDescription for handle",
-            imagePath: "middle2.jpg",
-            kniveId: 10,
-            price: 50,
-            quantity: 2,
-            totalLength: 230,
-            likes: 0,
-            quantityOrdered: 0
-        },
-        {
-            edgeLength: 100,
-            edgeMade: "TestTest",
-            edgeThickness: 3,
-            edgeWidth: 10,
-            handleDescription: "SomeDescription for handle",
-            imagePath: "kitchen2.jpg",
-            kniveId: 10,
-            price: 50,
-            quantity: 2,
-            totalLength: 230,
-            likes: 0,
-            quantityOrdered: 0
-        }];
+        //this.knives = [{
+        //    edgeLength: 100,
+        //    edgeMade: "TestTest",
+        //    edgeThickness: 3,
+        //    edgeWidth: 10,
+        //    handleDescription: "SomeDescription for handle",
+        //    imagePath: "high1.jpg",
+        //    kniveId: 10,
+        //    price: 50,
+        //    quantity: 2,
+        //    totalLength: 230,
+        //    likes: 0,
+        //    quantityOrdered: 0
+        //},
+        //{
+        //    edgeLength: 100,
+        //    edgeMade: "TestTest",
+        //    edgeThickness: 3,
+        //    edgeWidth: 10,
+        //    handleDescription: "SomeDescription for handle",
+        //    imagePath: "middle2.jpg",
+        //    kniveId: 10,
+        //    price: 50,
+        //    quantity: 2,
+        //    totalLength: 230,
+        //    likes: 0,
+        //    quantityOrdered: 0
+        //},
+        //{
+        //    edgeLength: 100,
+        //    edgeMade: "TestTest",
+        //    edgeThickness: 3,
+        //    edgeWidth: 10,
+        //    handleDescription: "SomeDescription for handle",
+        //    imagePath: "kitchen2.jpg",
+        //    kniveId: 10,
+        //    price: 50,
+        //    quantity: 2,
+        //    totalLength: 230,
+        //    likes: 0,
+        //    quantityOrdered: 0
+        //}];
     }
 
     onDelete(kniveId: number) {

@@ -95,8 +95,8 @@ namespace KniveGallery.Web
                 {
                     using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                     {
-                        context.Database.EnsureDeleted();
-                        context.Database.EnsureCreated();
+                        //context.Database.EnsureDeleted();
+                        //context.Database.EnsureCreated();
 
                         if (!context.Users.Any())
                         {
@@ -116,7 +116,6 @@ namespace KniveGallery.Web
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -124,15 +123,11 @@ namespace KniveGallery.Web
             {
                 app.UseSpaStaticFiles();
             }
-
             app.UseRouting();
-
             app.UseCors("AllowSpecific");
-
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -140,7 +135,6 @@ namespace KniveGallery.Web
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

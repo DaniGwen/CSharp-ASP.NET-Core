@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 @font-face {
   font-family: 'Mailart';
   src: url('/assets/fonts/MailartRubberstamp-Regular.woff') format('woff');
@@ -38,10 +39,10 @@ body {
 }
 
 .container {
-  padding-bottom: 7rem;
+  margin-top: 100px;
+  margin-bottom: 20px;
   width: 80%;
   display: grid;
-  gap: 50px;
 }
 
 @media only screen and (max-width: 599px) {
@@ -53,4 +54,3 @@ body {
     width: 90%;
   }
 }
-

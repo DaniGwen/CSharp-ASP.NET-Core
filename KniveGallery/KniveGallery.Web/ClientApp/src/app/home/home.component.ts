@@ -11,6 +11,5 @@ export class HomeComponent {
   }
 
   navigateToKnives() {
-
   }
 }
