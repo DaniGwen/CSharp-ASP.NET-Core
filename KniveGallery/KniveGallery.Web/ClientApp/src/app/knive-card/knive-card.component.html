@@ -1,19 +1,21 @@
 <div class="card mb-1">
-  <div [routerLink]="['/knive-details', knive.kniveId]" routerLinkActive="active"
-    class="knive-details__img-and-card-body-container" style="max-width: 24rem;">
+  <div class="knive-details__img-and-card-body-container" style="max-width: 24rem;">
     <p class="bg-secondary text-center" *ngIf="isAuthenticated">
       <small>Knive id - </small>
       <strong class="text-xl-center">{{knive.kniveId}}</strong>
     </p>
-    <div class="image-wrapper">
+    <div class="image-wrapper"
+         [routerLink]="['/knive-details/', knive.kniveId, kniveClass ]"
+         routerLinkActive="active">
       <img class="card-img" *ngIf="knive.imagePath" src="assets/images/{{knive.imagePath}}" alt="image" />
       <img class="card-img" *ngIf="!knive.imagePath" src="assets/images/default.jpg" alt="default image" />
     </div>
     <section class="card-body">
       <section class="knive-details-wrapper">
         <div class="card-body__header">{{knive.edgeMade}}</div>
-        <h4 class="card-title card-title__price-field">{{'home.Price' | translate}}: <label
-            class="card-title__price">{{knive.price}} {{'home.Currency' | translate}}
+        <h4 class="card-title card-title__price-field">
+          {{'home.Price' | translate}}: <label class="card-title__price">
+            {{knive.price}} {{'home.Currency' | translate}}
           </label>
         </h4>
       </section>

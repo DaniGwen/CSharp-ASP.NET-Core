@@ -257,7 +257,8 @@ namespace KniveGallery.Web.Controllers
             var admin = await this.context.Users.Where(u => u.Role == "Admin").Select(x => new
             {
                 phoneNumber = x.PhoneNumber,
-                email = x.Email
+                email = x.Email,
+                facebook = x.Facebook,
             }).FirstAsync();
 
             return admin;

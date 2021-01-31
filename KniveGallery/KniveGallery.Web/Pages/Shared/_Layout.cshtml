@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KniveGallery</title>
+    <title>@ViewData["Title"] - KnifeGallery</title>
     <link rel="stylesheet" href="~/Identity/css/site.css" />
     <link href="~/Styles/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -27,8 +27,11 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container">
                 <div class="brand-home-wrapper">
-                    <h5 class="navbar__brand">KniveGallery</h5>
-                    <a class="navbar__home-page" href="~/"><i class="fas fa-home mr-1"></i>Home page</a>
+                    <div class="brand-wrapper">
+                        <h5 class="navbar__brand">Knife</h5>
+                        <h5 class="navbar__brand">gallery</h5>
+                    </div>
+                    <a class="navbar__home-page" href="~/"><i class="fas fa-home mr-1"></i>Home</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +63,7 @@
     </div>
     <footer class="footer border-top text-muted">
         <div class="container">
-            &copy; 2020 - KniveGallery - <a asp-area="" asp-page="Privacy">Privacy</a>
+            &copy; 2020 - KnifeGallery - <a asp-area="" asp-page="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>

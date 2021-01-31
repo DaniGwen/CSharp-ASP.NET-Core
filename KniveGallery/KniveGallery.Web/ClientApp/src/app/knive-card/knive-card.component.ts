@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ShoppingCartService } from 'src/Services/shopping-cart.service';
+import {Router } from '@angular/router';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Knive } from '../../Models/knive';
 import { KnivesService } from '../../Services/knives.service';
+import { ShoppingCartService } from "../../Services/shopping-cart.service";
 
 
 @Component({
@@ -14,6 +14,7 @@ import { KnivesService } from '../../Services/knives.service';
 
 export class KniveCardComponent {
   public isAuthenticated: boolean;
+  @Input() kniveClass: string;
   @Input() public knive: Knive;
   @Output() public deleteKniveRequest = new EventEmitter<number>();
   public message: string = '';
@@ -24,15 +25,14 @@ export class KniveCardComponent {
 
   constructor(private kniveService: KnivesService,
     private authService: AuthorizeService,
-    private cartService: ShoppingCartService) {
+    private cartService: ShoppingCartService,
+    private router: Router) {
   }
 
   ngOnInit() {
     this.authService.isAuthenticated().subscribe((auth: boolean) => {
       this.isAuthenticated = auth;
       this.knive.quantityOrdered = 1;
-      //REMOVE just for testing
-      //this.addToCart();
     });
 
     var addedKnive = this.cartService.getItems().find((knive) => this.knive.kniveId == knive.kniveId)
@@ -81,8 +81,8 @@ export class KniveCardComponent {
     }
   }
 
-  removeFromCart(){
-      this.cartService.removeFromCart(this.knive);
-      this.isAddedToCart = false;
+  removeFromCart() {
+    this.cartService.removeFromCart(this.knive);
+    this.isAddedToCart = false;
   }
 }

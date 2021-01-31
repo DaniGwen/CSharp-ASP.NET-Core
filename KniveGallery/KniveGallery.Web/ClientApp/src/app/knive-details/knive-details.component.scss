@@ -67,7 +67,7 @@ label {
     }
 
     font-size: 18px;
-    color: $grey300;
+    color: $mellowApricot;
     width: auto;
   }
 
@@ -77,9 +77,9 @@ label {
     border-radius: 5px;
     padding: 10px;
     text-align: center;
-    color: $mellowApricot;
-    background-color: $charcoal;
+    color: $red;
     word-break: break-all;
+    font-size: 20px;
   }
 
   &__field__price {
@@ -189,7 +189,8 @@ label {
   @media (max-width: 599px) {
     margin: 0;
   }
-
+  color: $red;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -204,5 +205,22 @@ label {
 .knive-details-images {
   @media (max-width: 599px) {
     margin-top: 20px;
+  }
+}
+
+//PAGE BACKGROUND IMAGE 
+.background-image-wrapper {
+  position: fixed;
+  background-color: black;
+  opacity: 0.2;
+  z-index: -1;
+
+  img {
+    object-position: top;
+    position: fixed;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
 }

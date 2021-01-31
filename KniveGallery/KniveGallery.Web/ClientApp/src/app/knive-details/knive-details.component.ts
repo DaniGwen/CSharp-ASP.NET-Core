@@ -9,10 +9,10 @@ import { Knive } from '../../Models/knive';
   styleUrls: ['./knive-details.component.scss']
 })
 export class KniveDetailsComponent {
-
   kniveId: any;
   knive = new Knive();
   kniveImages = Array<string>();
+  public kniveClass: string;
   public showLoader: boolean;
   public hideImageGrid: string = "d-block";
 
@@ -23,18 +23,17 @@ export class KniveDetailsComponent {
     this.showLoader = true;
     this.route.paramMap.subscribe(params => {
       this.kniveId = params.get('id');
-
+      this.kniveClass = params.get('kniveClass');
       this.knivesService.getKniveById(this.kniveId).subscribe((data: any) => {
         this.knive = data;
-      })
-
+      });
       this.knivesService.getKniveImages(this.kniveId).subscribe((imagePaths: string[]) => {
         this.showLoader = false;
         this.kniveImages = imagePaths;
       });
     });
 
-    if (this.kniveImages == null || this.kniveImages.length == 0) {
+    if (this.kniveImages == null || this.kniveImages.length === 0) {
       this.hideImageGrid = "d-none";
     }
   }

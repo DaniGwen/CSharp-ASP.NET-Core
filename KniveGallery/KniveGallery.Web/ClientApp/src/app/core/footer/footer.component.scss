@@ -37,6 +37,9 @@
 .footer__contact__detail {
   margin: 0;
   color: $mellowApricot;
+  display:grid;
+  grid-template-columns: max-content max-content max-content;
+  grid-column-gap: 6px;
 }
 
 .footer_link {
@@ -45,4 +48,17 @@
 
 .footer_contact__facebook {
   font-size: 20px;
+}
+
+.contact-info__icon {
+  font-size: 22px;
+  margin-right: 3%;
+
+  &--phone {
+    color: $whatsupGreen;
+  }
+
+  &--messenger {
+    color: $lightBlue;
+  }
 }

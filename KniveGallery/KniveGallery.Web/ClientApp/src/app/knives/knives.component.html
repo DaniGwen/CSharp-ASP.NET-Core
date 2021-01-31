@@ -13,13 +13,18 @@
       <strong class="mr-auto">Message</strong>
     </div>
     <div class="toast-body">
-      Knive has been deleted!
+      Knife has been deleted!
     </div>
   </section>
   <article class="home__knives-wrapper">
     <app-knive-card *ngFor="let knive of knives"
                     [knive]="knive"
-                    (deleteKniveRequest)="onDelete($event)">
+                    (deleteKniveRequest)="onDelete($event)"
+                    [kniveClass]="kniveCl">
     </app-knive-card>
   </article>
+</div>
+
+<div class="background-image-wrapper">
+  <img src="../../assets/images/kiril-custom-knives.jpg" alt="logo image" />
 </div>

@@ -58,10 +58,10 @@
   <hr />
   <div class="buttons-wrapper">
     <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold"
-      [routerLink]="['/order', knive.kniveId]">
+      [routerLink]="['/order', knive.kniveId, kniveClass ]">
       {{'order.Order' | translate}}
     </button>
-    <a class="back-button knive-details__anim9" [routerLink]="['/']">
+    <a class="back-button knive-details__anim9" routerLink="/knives/{{kniveClass}}">
       <i class="fas fa-arrow-circle-left"></i>
     </a>
   </div>
@@ -71,3 +71,7 @@
     <img class="knive-details__image-enlarge__image" src="" alt="knive image" />
   </div>
 </article>
+
+<div class="background-image-wrapper">
+  <img src="../../assets/images/kiril-custom-knives.jpg" alt="logo image" />
+</div>

@@ -14,6 +14,7 @@ import { OrderService } from '../../../Services/orders.service';
 export class OrderComponent implements OnInit {
   public knive = new Knive();
   private kniveId: any;
+  public kniveClass: string;
   public totalPrice: number;
   private order = new Order();
   public message: boolean = false;
@@ -44,6 +45,7 @@ export class OrderComponent implements OnInit {
     this.showLoader = true;
     this.route.paramMap.subscribe(params => {
       this.kniveId = params.get('id');
+      this.kniveClass = params.get('kniveClass');
       this.kniveService.getKniveById(this.kniveId).subscribe((data: any) => {
         this.knive = data;
         this.showLoader = false;

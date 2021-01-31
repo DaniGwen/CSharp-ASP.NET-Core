@@ -1,9 +1,12 @@
 <section class="footer">
     <section class="footer__content__wrapper">
-        <article class="footer__contact">
-            <p class="footer__contact__detail">{{'footer.Mobile' | translate}} : {{adminPhone}}</p>
-            <p class="footer__contact__detail">{{'footer.Email' | translate}} : {{adminEmail}}</p>
-            <a class="footer_contact__facebook" href="" ><i class="fab fa-facebook-square"></i></a>
+      <article class="footer__contact">
+        <p class="footer__contact__detail">
+          <i class="contact-info__icon contact-info__icon--phone fas fa-phone-square"></i>
+          <i class="contact-info__icon contact-info__icon--messenger fab fa-facebook-messenger"></i> {{adminPhone}}
+        </p>
+            <p class="footer__contact__detail"><i class="far fa-envelope"></i> {{adminEmail}}</p>
+            <a class="footer_contact__facebook" href=""><i class="fab fa-facebook-square"></i> {{adminFacebook}}</a>
         </article>
         <article class="footer__policy">
             <div>

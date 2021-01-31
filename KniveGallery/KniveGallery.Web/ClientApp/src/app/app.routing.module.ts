@@ -44,7 +44,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'knive-details/:id',
+    path: 'knive-details/:id/:kniveClass',
     component: KniveDetailsComponent
   },
 
@@ -53,7 +53,7 @@ const routes: Routes = [
     component: PrivacyComponent
   },
   {
-    path: 'order/:id',
+    path: 'order/:id/:kniveClass',
     component: OrderComponent
   },
   {

@@ -1,18 +1,11 @@
-﻿/*$lightBlue: #007eb9;
-$gunmetal: #232F3E;
-$charcoal: #37475A;
-$mellowApricot: #FEBD69;
-$cornflowerBlue3: #c9daf8;
-$whatsupGreen: #4CC15B;*/
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css ";
+﻿@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css ";
 
-body {
-    background-color: #000000;
+body, html, .container {
+    background-color: #000000 !important;
 }
 
 a {
     font-weight: 500;
-    color: black;
     transition: ease-in 0.1s;
 }
 
@@ -24,12 +17,19 @@ a {
 .brand-home-wrapper {
     display: grid;
     grid-template-columns: max-content max-content;
-    grid-column-gap: 15px;
+    grid-column-gap: 50px;
     align-items: baseline;
 }
 
+.brand-wrapper {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-column-gap: 5px;
+}
+
 .navbar {
-    background-color: #000000 !important;
+    box-shadow: 0px 2px 5px 0px rgba(255, 0, 0, 0.76);
+    background-color: rgba(0, 0, 0, 0.900);
 }
 
 .navbar__brand {
@@ -37,10 +37,12 @@ a {
 }
 
 .navbar__home-page {
-    color: #FEBD69;
+    color: whitesmoke;
 }
+
     .navbar__home-page:hover {
-        color: #FEBD69;
+        color: #AF3535;
+        text-decoration: none;
     }
 
 .nav-link {
@@ -48,7 +50,7 @@ a {
 }
 
     .nav-link:hover {
-        color: #8a8a8a;
+        color: #AF3535;
     }
 
 .nav-link__nav {
@@ -57,5 +59,14 @@ a {
 }
 
 .footer {
-    background-color: #37475A;
+    background-color: rgba(0, 0, 0, 0.733);
+    box-shadow: 0px -2px 5px 0px rgba(255, 0, 0, 0.76);
+}
+
+#text {
+    color: whitesmoke;
+}
+
+h1, label {
+    color: whitesmoke;
 }
