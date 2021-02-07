@@ -93,23 +93,23 @@ p {
   }
 }
 //shopping cart styles
-// .nav-link-shopping-cart {
-//   position: relative;
-// }
+.nav-link-shopping-cart {
+  position: relative;
+  padding: 0;
+  font-size: 1rem;
+}
 
-// .badge {
-//   position: absolute;
-//   background: #ff6600;
-//   height: 1.2rem;
-//   width: 1.2rem;
-//   top: -3px;
-//   right: 39px;
-//   text-align: center;
-//   font-size: 0.7rem;
-//   border-radius: 50%;
-//   color: white;
-//   border: 1px solid #ff6600;
-//   font-family: sans-serif;
-//   padding: 4px;
-//   margin: 0;
-// }
+.badge {
+  position: absolute;
+  color: black;
+  top: -4px;
+  right: 47px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 4px 5px;
+  background-color: $red;
+  border-radius: 50%;
+}

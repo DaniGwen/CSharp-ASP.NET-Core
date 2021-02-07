@@ -1,9 +1,9 @@
 @import url("../shared-styles/colors.scss");
 
-.main-title {
-  height: 400px;
-  width: 600px;
-  margin: 10% 0 auto;
+.home-main-title {
+  margin: 0 auto;
+  padding-top: 15% !important;
+  text-align: center;
 
   h1,
   p,
@@ -12,7 +12,7 @@
   }
 
   h1 {
-    font-size: 98px;
+    font-size: 105px;
   }
 }
 

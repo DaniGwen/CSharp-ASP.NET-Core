@@ -35,8 +35,10 @@ export class KniveCardComponent {
       this.knive.quantityOrdered = 1;
     });
 
-    var addedKnive = this.cartService.getItems().find((knive) => this.knive.kniveId == knive.kniveId)
-    if (addedKnive != null) {
+    var isKnifeAdded = this.cartService
+      .getItems()
+      .find((knive) => this.knive.kniveId === knive.kniveId);
+    if (isKnifeAdded != null) {
       this.isAddedToCart = true;
     }
   }

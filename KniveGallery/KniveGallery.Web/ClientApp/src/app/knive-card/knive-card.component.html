@@ -46,16 +46,24 @@
 </div>
 
 <!-- ADD TO CART -->
-<!-- <section *ngIf="!isAuthenticated" class="cart-and-quantity-wrapper">
+<section *ngIf="!isAuthenticated" class="cart-and-quantity-wrapper">
   <div *ngIf="!isAddedToCart">
-    <button class="btn btn-custom" (click)="addToCart()"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+    <button class="btn btn-custom" (click)="addToCart()">
+      <i class="fas fa-shopping-cart"></i>
+      {{'order.AddToCart' | translate}}
+    </button>
   </div>
   <div *ngIf="!isAddedToCart" class="quantity">
     <label class="mr-1">{{'order.Quantity' | translate}}</label>
-    <input class="form-control h-30" type="number" min="1" value="1" #quantity
-      (change)="quantityOrdered(quantity.value)" />
+    <input class="form-control h-30"
+           type="number"
+           min="1"
+           max="{{knive.quantity}}"
+           value="1"
+           #quantity
+           (change)="quantityOrdered(quantity.value)" />
   </div>
   <div *ngIf="isAddedToCart" class="remove-from-cart">
-    <button class="btn btn-custom" (click)="removeFromCart()"><i class="fas fa-shopping-cart"></i> Remove</button>
+    <button class="btn btn-custom" (click)="removeFromCart()"><i class="fas fa-shopping-cart"></i> {{'order.Remove'|translate}}</button>
   </div>
-</section> -->
+</section>

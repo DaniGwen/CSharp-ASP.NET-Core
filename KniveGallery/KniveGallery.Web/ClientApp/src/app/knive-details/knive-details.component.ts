@@ -32,7 +32,6 @@ export class KniveDetailsComponent {
         this.kniveImages = imagePaths;
       });
     });
-
     if (this.kniveImages == null || this.kniveImages.length === 0) {
       this.hideImageGrid = "d-none";
     }

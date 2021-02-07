@@ -32,7 +32,7 @@
     "Mobile": "Mobile",
     "Email": "Email"
   },
-  "Nav": {
+  "nav": {
     "Home": "Home"
   },
   "order": {
@@ -62,6 +62,9 @@
     "Quantity": "Quantity",
     "Price": "Price",
     "Order": "Order",
-    "KniveQuantity": "Quantity available"
+    "KniveQuantity": "Quantity available",
+    "AddToCart": "Add",
+    "Remove": "Remove",
+    "NotAvailable": "not available"
   }
 }

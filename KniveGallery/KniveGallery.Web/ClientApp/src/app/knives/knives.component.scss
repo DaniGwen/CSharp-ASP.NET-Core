@@ -1,4 +1,4 @@
-
+@import "../shared-styles/custom-elements.scss";
 @import "../shared-styles/colors";
 @import "../shared-styles/animations";
 @import "../shared-styles/custom-buttons";
@@ -31,21 +31,4 @@
 }
 .knive-class{
     color:$red;
-}
-
-//PAGE BACKGROUND IMAGE
-.background-image-wrapper {
-  position: fixed;
-  background-color: black;
-  opacity: 0.1;
-  z-index: -1;
-
-  img {
-    object-position: top;
-    position: fixed;
-    right: 0;
-    top: 0;
-    min-width: 100%;
-    min-height: 100%;
-  }
 }

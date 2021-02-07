@@ -57,10 +57,11 @@
   </article>
   <hr />
   <div class="buttons-wrapper">
-    <button class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold"
-      [routerLink]="['/order', knive.kniveId, kniveClass ]">
+    <button *ngIf="knive.quantity > 0" class="btn btn-sm btn-arrow btn-outline-secondary font-weight-bold"
+            [routerLink]="['/order', knive.kniveId, kniveClass ]">
       {{'order.Order' | translate}}
     </button>
+    <p *ngIf="knive.quantity === 0">{{'order.NotAvailable'| translate}}</p>
     <a class="back-button knive-details__anim9" routerLink="/knives/{{kniveClass}}">
       <i class="fas fa-arrow-circle-left"></i>
     </a>

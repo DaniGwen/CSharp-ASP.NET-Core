@@ -189,6 +189,7 @@ label {
   @media (max-width: 599px) {
     margin: 0;
   }
+
   color: $red;
   font-weight: bold;
   text-align: center;
@@ -200,6 +201,10 @@ label {
   justify-content: center;
   justify-items: center;
   grid-row-gap: 20px;
+
+  p {
+    color: whitesmoke;
+  }
 }
 
 .knive-details-images {
@@ -208,7 +213,7 @@ label {
   }
 }
 
-//PAGE BACKGROUND IMAGE 
+//PAGE BACKGROUND IMAGE
 .background-image-wrapper {
   position: fixed;
   background-color: black;

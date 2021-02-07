@@ -140,21 +140,16 @@
 
 .cart-and-quantity-wrapper {
   display: grid;
-  grid-template-columns: min-content max-content;
+  grid-template-columns: max-content max-content;
   justify-content: space-around;
   align-items: center;
   color: $mellowApricot !important;
-  background-color: $charcoal;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   font-size: 16px;
   transition: linear 0.1s;
   animation-name: slideIn;
   animation-duration: 0.5s;
-
-  &:hover {
-    box-shadow: 3px 4px 17px 0px rgba(0, 0, 0, 0.75);
-  }
 
   i {
     font-size: 20px;
@@ -182,8 +177,12 @@
   }
 
   .h-30 {
-    max-height: 22px;
-    max-width: 55px;
+    max-height: 24px;
+    max-width: 57px;
+  }
+
+  input {
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 

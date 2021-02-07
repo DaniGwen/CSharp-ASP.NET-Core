@@ -62,6 +62,9 @@
     "Quantity": "Брой",
     "Price": "Цена",
     "Order": "Поръчай",
-    "KniveQuantity": "Наличност"
+    "KniveQuantity": "Наличност",
+    "AddToCart": "Добави",
+    "Remove": "Премахни",
+    "NotAvailable":  "Не е наличен" 
   }
 }

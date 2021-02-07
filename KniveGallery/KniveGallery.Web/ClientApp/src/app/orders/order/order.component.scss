@@ -16,7 +16,12 @@
     margin-bottom: 10em;
   }
 
+  color: whitesmoke;
   margin-bottom: 5em;
+}
+
+input {
+  background-color: inherit;
 }
 
 input.ng-valid {
@@ -56,13 +61,13 @@ input.ng-invalid.ng-touched {
   max-height: 30px;
 }
 
-.alert{
+.alert {
   padding: 2px 5px;
   margin: 0;
   font-size: 12px;
 }
 
-.form-control{
+.form-control {
   padding: 3px 5px;
   max-height: 30px;
 }

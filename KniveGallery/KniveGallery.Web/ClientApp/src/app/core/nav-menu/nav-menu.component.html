@@ -65,6 +65,12 @@
       <a class="dropdown-item" href="/knives/HighClass" routerLinkActive="active">High class</a>
     </div>
   </div>
+  <section *ngIf="!isAuthenticated">
+    <a class="nav-link nav-link-shopping-cart" [routerLink]="['/shopping-cart-details']">
+      <p class="badge" *ngIf="itemsCount > 0">{{itemsCount}}</p>
+      <i class="fas fa-shopping-cart"></i> cart
+    </a>
+  </section>
   <a routerLink="contact-page">Contact</a>
   <a routerLink="about-page">About</a>
   <div class="flags-container">

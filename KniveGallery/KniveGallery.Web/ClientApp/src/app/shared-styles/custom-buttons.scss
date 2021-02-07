@@ -65,20 +65,22 @@
 
 .btn-round {
   border-radius: 50%;
-  border-color: $charcoal;
-  padding: 30px 20px;
+  width: 150px;
+  height: 140px;
+  border-color: $red;
+  padding: 10px;
   font-weight: 600;
-  font-size: 20px;
-  color: $gunmetal;
-  background-color: $grey200;
+  font-size: 24px;
+  color: $red;
+  background-color: inherit;
 
   &:disabled {
     background-color: $grey400;
   }
 
   &:hover:not(:disabled) {
-    background-color: $charcoal;
-    color: $mellowApricot;
+    color: whitesmoke;
+    border: 5px solid $red;
   }
 }
 
