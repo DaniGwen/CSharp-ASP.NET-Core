@@ -1,3 +1,9 @@
+.navbar-wrapper {
+  position: absolute;
+  top: 90px;
+  right: 50px;
+}
+
 a {
   transition: ease-in 0.1s;
   color: whitesmoke;

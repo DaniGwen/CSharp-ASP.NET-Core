@@ -4,12 +4,6 @@
 @import "../shared-styles/custom-buttons";
 @import "../shared-styles/popups.scss";
 
-.home-container {
-  display: grid;
-  grid-auto-columns: max-content;
-  grid-row-gap: 20px;
-  justify-content: center;
-}
 
 .fadein-animation {
   animation-name: slideInHeadings;

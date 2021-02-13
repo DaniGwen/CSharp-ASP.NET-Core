@@ -13,6 +13,7 @@ export class NavMenuComponent {
   isExpanded = true;
   itemsCount: number = 0;
   isAuthenticated: boolean;
+  classes: string = "hidden";
 
   constructor(public translate: TranslateService,
     private cartService: ShoppingCartService,
@@ -21,16 +22,22 @@ export class NavMenuComponent {
 
   ngOnInit() {
     this.cartService.$itemsChange.subscribe((items: Knive[]) => {
-      if (items) {
+      if (items)
         this.itemsCount = items.length;
-      }
+
+      if (this.itemsCount > 0)
+        this.classes = "active";
+      else
+        this.classes = "hidden";
     });
     this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
       this.isAuthenticated = isAuth;
     });
-    if (this.isAuthenticated) {
+
+    if (this.isAuthenticated)
       this.isExpanded = false;
-    }
+
+
   }
 
   collapse() {

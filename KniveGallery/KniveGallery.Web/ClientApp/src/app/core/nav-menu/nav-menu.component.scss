@@ -8,14 +8,14 @@
   z-index: 1;
   box-shadow: 0px 1px 4px 0px rgba(255, 0, 0, 0.76);
   background-color: rgba(0, 0, 0, 0.900);
+}
 
-  a {
-    transition: 0.1s;
-    color: whitesmoke;
-    font-size: 24px;
-  }
+a {
+  transition: 0.1s;
+  color: whitesmoke;
+  font-size: 24px;
 
-  a:hover {
+  &:hover {
     color: $red;
     text-decoration: none;
   }
@@ -93,23 +93,39 @@ p {
   }
 }
 //shopping cart styles
-.nav-link-shopping-cart {
-  position: relative;
+.shopping-cart {
+  position: absolute;
+  top: 32px;
+  left: 88%;
   padding: 0;
-  font-size: 1rem;
+  font-size: 1.7rem;
+  z-index: 3;
 }
 
 .badge {
   position: absolute;
   color: black;
-  top: -4px;
-  right: 47px;
+  top: -2px;
+  right: 0;
   text-align: center;
   font-size: 0.8rem;
   font-weight: 700;
   font-family: sans-serif;
   margin: 0;
-  padding: 4px 5px;
-  background-color: $red;
+  padding: 4px 6px;
+  background-color: $mellowApricot;
   border-radius: 50%;
+}
+
+.shopping-cart:hover > .badge {
+  background-color: $red;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
 }

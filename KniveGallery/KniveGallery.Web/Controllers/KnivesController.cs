@@ -254,12 +254,15 @@ namespace KniveGallery.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<object>> GetAdminInfo()
         {
-            var admin = await this.context.Users.Where(u => u.Role == "Admin").Select(x => new
-            {
-                phoneNumber = x.PhoneNumber,
-                email = x.Email,
-                facebook = x.Facebook,
-            }).FirstAsync();
+            var admin = await this.context.Users
+                .Where(u => u.Role == "Admin")
+                .Select(x => new
+                {
+                    phoneNumber = x.PhoneNumber,
+                    email = x.Email,
+                    facebook = x.Facebook,
+                })
+                .FirstAsync();
 
             return admin;
         }

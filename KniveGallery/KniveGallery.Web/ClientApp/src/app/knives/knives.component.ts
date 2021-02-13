@@ -13,15 +13,16 @@ export class KnivesComponent {
   public kniveCl: string;
   public isKniveDeleted = false;
   public showLoader: boolean = false;
+
   constructor(private knivesService: KnivesService,
     private route: ActivatedRoute) {
+    this.route.paramMap.subscribe(params => {
+      this.kniveCl = params.get('kniveClass');
+      this.getKnivesByClass(this.kniveCl);
+    });
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.kniveCl = params.get('kniveClass');
-    });
-    this.getKnivesByClass(this.kniveCl);
   }
 
   onDelete(kniveId: number) {
