@@ -11,6 +11,16 @@
     animation-delay: 0.1s * $i;
   }
 }
+
+label {
+  color: whitesmoke;
+}
+
+input, textarea {
+  background-color: black;
+  color: whitesmoke;
+}
+
 .edit-knive-container {
   margin-bottom: 8em;
 }

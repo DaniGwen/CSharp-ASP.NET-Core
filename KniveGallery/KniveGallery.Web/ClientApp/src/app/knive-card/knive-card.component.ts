@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Knive } from '../../Models/knive';
 import { KnivesService } from '../../Services/knives.service';
@@ -38,9 +38,8 @@ export class KniveCardComponent {
     var isKnifeAdded = this.cartService
       .getItems()
       .find((knive) => this.knive.kniveId === knive.kniveId);
-    if (isKnifeAdded != null) {
+    if (isKnifeAdded != null)
       this.isAddedToCart = true;
-    }
   }
 
   deleteKnive(kniveId: number) {
@@ -75,12 +74,10 @@ export class KniveCardComponent {
   }
 
   checkQuantityValid(knive: Knive, quantityOrdered: number) {
-    if (quantityOrdered > knive.quantity) {
+    if (quantityOrdered > knive.quantity)
       return;
-    }
-    else {
+    else
       knive.quantity -= quantityOrdered;
-    }
   }
 
   removeFromCart() {

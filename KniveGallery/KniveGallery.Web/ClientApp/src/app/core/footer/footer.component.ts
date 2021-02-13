@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { KnivesService } from '../../../Services/knives.service'
+import { KnivesService } from '../../../Services/knives.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
@@ -11,6 +12,8 @@ export class FooterComponent implements OnInit {
   public adminEmail: string;
   public adminPhone: string;
   public adminFacebook: string;
+  public currentYear = new Date().getFullYear();
+  public year: number;
 
   constructor(private knivesService: KnivesService) {
   }

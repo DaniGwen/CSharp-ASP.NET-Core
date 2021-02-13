@@ -10,6 +10,15 @@
     animation-delay: 0.1s * $i;
   }
 }
+
+label, input, textarea {
+  color: whitesmoke;
+}
+
+input, textarea, select {
+  background-color: black;
+}
+
 .add-knive-container {
   margin-bottom: 8em;
 }
@@ -47,6 +56,7 @@ input.ng-invalid.ng-touched {
     grid-template-columns: 1fr;
     justify-items: center;
   }
+
   justify-content: space-evenly;
 }
 
@@ -55,11 +65,13 @@ label {
     font-size: 14px;
   }
 }
+
 .form-group {
   @media (max-width: 599px) {
     min-width: 250px;
   }
 }
+
 .alert {
   padding: 2px 5px;
   margin: 0;

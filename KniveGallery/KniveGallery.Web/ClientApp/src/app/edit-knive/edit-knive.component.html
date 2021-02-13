@@ -1,5 +1,5 @@
 <form class="edit-knive-container" #form="ngForm" (ngSubmit)="onSubmit()">
-  <h3 class="text-center custom-heading edit-knive__anim1">Knive Id {{knive.kniveId}}</h3>
+  <h3 class="text-center custom-heading edit-knive__anim1">Артикул: {{knive.kniveId}}</h3>
   <div class="edit-knive__info-wrapper edit-knive__info-lable mt-4 edit-knive__anim2">
     <i class="fas fa-info-circle"></i>
     <span class="badge badge-secondary">Всички размери/дължини са в милиметри</span>
@@ -40,7 +40,7 @@
         </label>
       </div>
       <div class="form-group edit-knive__anim7">
-        <label>Quantity</label>
+        <label>Наличност</label>
         <input name="quantity" [(ngModel)]="knive.quantity" type="number" min="1" class="form-control form-control-sm"
           ngModel #quantity />
         <label class="alert alert-danger" *ngIf="quantity.invalid && quantity.touched">

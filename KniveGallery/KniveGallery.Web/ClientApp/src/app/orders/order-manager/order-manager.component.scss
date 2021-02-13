@@ -9,9 +9,22 @@
   text-align: -webkit-center;
 }
 
+.card {
+  color: whitesmoke;
+  border: 1px solid $red;
+  background-color: inherit;
+}
+
 .card-text {
   margin: 0;
 }
+
+strong {
+  font-weight: 500;
+  border-bottom: $red;
+  font-size: 1.2rem;
+}
+
 .orders-wrapper {
   @media (max-width: 599px) {
     display: grid;
@@ -24,6 +37,7 @@
 .card-body {
   padding: 10px;
 }
+
 .card-title {
   margin-bottom: 5px;
 

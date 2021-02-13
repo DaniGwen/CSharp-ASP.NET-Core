@@ -1,7 +1,8 @@
 .navbar-wrapper {
   position: absolute;
-  top: 90px;
-  right: 50px;
+  top: 100px;
+  right: 14px;
+  z-index: 20;
 }
 
 a {
@@ -9,18 +10,18 @@ a {
   color: whitesmoke;
 }
 
-a:hover {
-  transform: scale(1.1);
-  text-decoration: none;
-}
+  a:hover {
+    transform: scale(1.1);
+    text-decoration: none;
+  }
 
 .nav-link {
   color: whitesmoke !important;
 }
 
-.nav-link:hover {
-  color: #8a8a8a !important;
-}
+  .nav-link:hover {
+    color: #8a8a8a !important;
+  }
 
 @media (max-width: 599px) {
   .navbar-nav {
@@ -28,6 +29,7 @@ a:hover {
     grid-template-columns: 1fr;
     justify-content: center;
   }
+
   .nav-link {
     text-align: center;
   }
