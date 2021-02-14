@@ -1,4 +1,4 @@
-﻿<section *ngIf="message" class="popup-message">
+<section *ngIf="message" class="popup-message">
     <div class="toast-header">
         <strong class="mr-auto">Message</strong>
     </div>
@@ -8,9 +8,8 @@
 </section>
 
 <section class="add-carousel-container">
-    <h2 class="custom-heading text-center add-knive__anim1">Slideshow images</h2>
+    <h2 class="custom-heading text-center add-knive__anim1">Настройки на фон</h2>
     <hr />
-
     <section class="images-container">
         <div class="image-container" *ngFor="let image of allCarouselImages">
             <img class="img" src="../../assets/images/{{image.imagePath}}" alt="image">
@@ -21,16 +20,27 @@
     </section>
 
     <form (ngSubmit)="onSubmit()">
-        <div class="form-group images-select text-center add-knive__anim12">
-            <section>
-                <div class="form-group">
-                    <label>{{'home.SelectImages'|translate}}:</label>
-                </div>
-                <div>
-                    <input accept="image/*" type="file" multiple (change)="selectFiles($event)">
-                </div>
-            </section>
-        </div>
+      <div class="form-group images-select text-center add-knive__anim12">
+        <section>
+          <div class="form-group">
+            <label>Избери картинка за фон на страниците:</label>
+          </div>
+          <div>
+            <input accept="image/*" type="file" (change)="selectImage($event)">
+          </div>
+        </section>
+      </div>
+      <hr />
+      <div>
+        <section>
+          <div class="form-group">
+            <label>Избери видео :</label>
+          </div>
+          <div>
+            <input accept="video/*" type="file" (change)="selectVideo($event)">
+          </div>
+        </section>
+      </div>
         <hr />
         <div class="buttons-container add-knive__anim13">
             <button *ngIf="!isLoading" type="submit" class="btn btn-theme btn-shadow">Save</button>

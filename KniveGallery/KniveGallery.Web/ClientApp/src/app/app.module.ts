@@ -18,26 +18,27 @@ import { EditKniveComponent } from './edit-knive/edit-knive.component';
 import { KnivesService } from '../Services/knives.service';
 import { FooterComponent } from './core/footer/footer.component';
 import { PrivacyComponent } from './privacy/privacy.component';
-import { ContactInfoComponent } from "./contact-info/contact-info.component";
+import { ContactInfoComponent } from "./utility-components/contact-info/contact-info.component";
 import { KniveCardComponent } from './knive-card/knive-card.component';
 import { OrderComponent } from './orders/order/order.component';
 import { OrderService } from '../Services/orders.service';
 import { OrderSummaryComponent } from './orders/order-summary/order-summary.component'
 import { OrderManagerComponent } from './orders/order-manager/order-manager.component';
-import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { LoadingScreenComponent } from './utility-components/loading-screen/loading-screen.component';
 // import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
 import { AddKniveComponent } from './add-knive/add-knive.component'
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AsideCarouselComponent } from './aside-carousel/aside-carousel.component';
-import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
 import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-cart-details.component';
 import { KnivesComponent } from './knives/knives.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { ImageService } from "../Services/images.service";
 import { ShoppingCartService } from "../Services/shopping-cart.service";
+import { BackgroundImageComponent } from "./utility-components/background-image/background-image.component";
+import { AsideCarouselComponent } from "./utility-components/aside-carousel/aside-carousel.component";
+import { EditBackground } from "./edit-background/edit-background.component";
 
 // const cookieConfig: NgcCookieConsentConfig = {
 //   cookie: {
@@ -86,9 +87,10 @@ import { ShoppingCartService } from "../Services/shopping-cart.service";
     AddKniveComponent,
     NotFoundComponent,
     AsideCarouselComponent,
-    AddCarouselImagesComponent,
+    EditBackground,
     ShoppingCartDetailsComponent,
     KnivesComponent,
+    BackgroundImageComponent
   ],
   imports: [
     CoreModule,

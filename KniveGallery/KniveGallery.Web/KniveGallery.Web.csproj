@@ -37,20 +37,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\custom.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\home\home.component.scss" />
     <None Remove="ClientApp\src\app\nav-menu\nav-menu.component.css" />
     <None Remove="ClientApp\src\Models\order.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Remove="ClientApp\src\app\add-carousel-images\add-carousel-images.component.spec.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\add-carousel-images\add-carousel-images.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\add-knive\add-knive.component.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\aside-carousel\aside-carousel.component.spec.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\aside-carousel\aside-carousel.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\utility-components\aside-carousel\aside-carousel.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\knives\knives.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\knives\knives.component.ts" />
-    <TypeScriptCompile Remove="ClientApp\src\app\loading-screen\loading-screen.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\utility-components\loading-screen\loading-screen.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\order-manager\order-manager.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\order-summary\order-summary.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\app\shopping-cart-details\shopping-cart-details.component.spec.ts" />
@@ -61,6 +62,10 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\locale\" />
     <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\custom.js" />
   </ItemGroup>
 
   <ItemGroup>

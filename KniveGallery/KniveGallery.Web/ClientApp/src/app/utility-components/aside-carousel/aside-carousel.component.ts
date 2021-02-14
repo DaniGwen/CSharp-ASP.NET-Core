@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CarouselImage } from '../../Models/carouselImage';
-import { ImageService } from '../../Services/images.service';
+import { CarouselImage } from "../../../Models/carouselImage";
+import { ImageService } from "../../../Services/images.service";
 
 @Component({
   selector: 'app-aside-carousel',

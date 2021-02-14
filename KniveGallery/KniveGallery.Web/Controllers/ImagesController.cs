@@ -26,7 +26,7 @@ namespace KniveGallery.Web.Controllers
         }
 
         [HttpGet]
-        public List<CarouselImage> GetCarouselImages()
+        public List<CarouselImage> GetBackgroundImages()
         {
             var carouselImages = _context.CarouselImages.ToList();
             return carouselImages;
@@ -52,7 +52,7 @@ namespace KniveGallery.Web.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("AddCarouselImage")]
+        [Route("AddBackgroundImage")]
         public async Task<IActionResult> AddImage()
         {
             var image = Request.Form.Files[0];

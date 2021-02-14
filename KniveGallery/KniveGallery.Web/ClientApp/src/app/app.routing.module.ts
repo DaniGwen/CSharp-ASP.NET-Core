@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddCarouselImagesComponent } from './add-carousel-images/add-carousel-images.component';
 import { AddKniveComponent } from './add-knive/add-knive.component';
 import { EditKniveComponent } from './edit-knive/edit-knive.component';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +14,7 @@ import { ShoppingCartDetailsComponent } from './shopping-cart-details/shopping-c
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { AuthorizeGuard } from "../api-authorization/authorize.guard";
+import { EditBackground } from "./edit-background/edit-background.component";
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
     component: ShoppingCartDetailsComponent
   },
   {
-    path: "add-carousel-images",
-    component: AddCarouselImagesComponent,
+    path: "edit-background",
+    component: EditBackground,
     canActivate: [AuthorizeGuard]
   },
   {

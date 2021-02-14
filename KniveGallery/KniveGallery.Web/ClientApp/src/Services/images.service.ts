@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
-import { CarouselImage } from "../Models/carouselImage";
+import { BackgroundImage } from "../Models/backgroundImage";
 
 @Injectable({
     providedIn: 'root'
@@ -14,12 +14,12 @@ export class ImageService {
     constructor(private http: HttpClient) {
     }
 
-    public getCarouselImages(): Observable<CarouselImage[]> {
-        return this.http.get<CarouselImage[]>(this.Url, { headers: this.headers });
+    public getBackgroundImages(): Observable<BackgroundImage[]> {
+      return this.http.get<BackgroundImage[]>(this.Url, { headers: this.headers });
     }
 
-    public addCarouselImage(form: FormData) {
-        return this.http.post(`${this.Url}/AddCarouselImage`, form, { headers: this.headers });
+    public addBackgroundImage(form: FormData) {
+        return this.http.post(`${this.Url}/AddBackgroundImage`, form, { headers: this.headers });
     }
 
     public deleteImageById(imageId: number): Observable<string> {
