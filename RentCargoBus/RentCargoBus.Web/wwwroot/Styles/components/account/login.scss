@@ -1,9 +1,0 @@
-﻿@import "../../settings/_settings-breakpoints.scss";
-
-.login-form {
-    @include for-phone-only {
-        max-width: 375px;
-        margin: 0 auto;
-        text-align: center;
-    }
-}

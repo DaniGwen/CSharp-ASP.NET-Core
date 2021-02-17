@@ -1,8 +1,0 @@
-Knive gallery.
-
-Application build using ASP.NET Core 3 RESTfull API and ANGULAR
-
-Administrator can add,edit and delete knives after login
-
-Guests can view home page click on knive and view details and images for that knive.
-Guests can sort knives by category.
