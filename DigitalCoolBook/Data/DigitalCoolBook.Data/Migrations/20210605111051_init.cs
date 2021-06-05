@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalCoolBook.Data.Migrations
 {
-    public partial class _1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,10 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,8 +25,8 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Grades",
                 columns: table => new
                 {
-                    GradeId = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 3, nullable: true)
+                    GradeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,9 +37,9 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    SubjectId = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Abbreviation = table.Column<string>(nullable: true)
+                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,14 +47,27 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TestRooms",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TeacherId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TestId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestRooms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,9 +84,9 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    SubjectId = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,36 +103,60 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "SubjectGrades",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdGrade = table.Column<string>(nullable: true),
-                    IdSubject = table.Column<string>(nullable: true)
+                    GradeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubjectGrades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubjectGrades_Grades_IdGrade",
-                        column: x => x.IdGrade,
+                        name: "FK_SubjectGrades_Grades_GradeId",
+                        column: x => x.GradeId,
                         principalTable: "Grades",
                         principalColumn: "GradeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SubjectGrades_Subjects_IdSubject",
-                        column: x => x.IdSubject,
+                        name: "FK_SubjectGrades_Subjects_SubjectId",
+                        column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "SubjectId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
+                name: "TestRoomStudents",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    TestRoomId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Finished = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestRoomStudents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestRoomStudents_TestRooms_TestRoomId",
+                        column: x => x.TestRoomId,
+                        principalTable: "TestRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lessons",
                 columns: table => new
                 {
-                    LessonId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<string>(nullable: true)
+                    LessonId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    IsUnlocked = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,12 +170,38 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    ScoreId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ScorePoints = table.Column<int>(type: "int", nullable: false),
+                    LessonId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.ScoreId);
+                    table.ForeignKey(
+                        name: "FK_Scores_Lessons_LessonId",
+                        column: x => x.LessonId,
+                        principalTable: "Lessons",
+                        principalColumn: "LessonId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Scores_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "SubjectId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CorrectAnswers",
                 columns: table => new
                 {
-                    CorrectAnswerId = table.Column<string>(nullable: false),
-                    AnswerId = table.Column<string>(nullable: true),
-                    ExpiredTestId = table.Column<string>(nullable: true)
+                    CorrectAnswerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AnswerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ExpiredTestId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,8 +212,8 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,11 +230,11 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,10 +245,10 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,10 +259,10 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -210,10 +273,10 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Attendances",
                 columns: table => new
                 {
-                    AttendanceId = table.Column<string>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Attended = table.Column<bool>(nullable: false),
-                    IdStudent = table.Column<string>(nullable: true)
+                    AttendanceId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Attended = table.Column<bool>(type: "bit", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,15 +287,15 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "ExpiredTests",
                 columns: table => new
                 {
-                    ExpiredTestId = table.Column<string>(nullable: false),
-                    TestName = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<string>(nullable: true),
-                    Timer = table.Column<int>(nullable: false),
-                    LessonId = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Result = table.Column<int>(nullable: false),
-                    Place = table.Column<string>(nullable: true),
-                    StudentId = table.Column<string>(nullable: true)
+                    ExpiredTestId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TestName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Timer = table.Column<int>(type: "int", nullable: false),
+                    LessonId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Result = table.Column<int>(type: "int", nullable: false),
+                    Place = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -249,16 +312,16 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "GradeTeachers",
                 columns: table => new
                 {
-                    GradeTeacherId = table.Column<string>(nullable: false),
-                    IdGrade = table.Column<string>(nullable: true),
-                    IdTeacher = table.Column<string>(nullable: true)
+                    GradeTeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GradeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GradeTeachers", x => x.GradeTeacherId);
                     table.ForeignKey(
-                        name: "FK_GradeTeachers_Grades_IdGrade",
-                        column: x => x.IdGrade,
+                        name: "FK_GradeTeachers_Grades_GradeId",
+                        column: x => x.GradeId,
                         principalTable: "Grades",
                         principalColumn: "GradeId",
                         onDelete: ReferentialAction.Cascade);
@@ -268,43 +331,43 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    DateOfBirth = table.Column<DateTime>(nullable: true),
-                    PlaceOfBirth = table.Column<string>(maxLength: 200, nullable: true),
-                    Sex = table.Column<string>(maxLength: 20, nullable: true),
-                    MobilePhone = table.Column<int>(nullable: true),
-                    Address = table.Column<string>(maxLength: 100, nullable: true),
-                    FatherName = table.Column<string>(maxLength: 50, nullable: true),
-                    MotherName = table.Column<string>(maxLength: 50, nullable: true),
-                    MotherMobileNumber = table.Column<int>(nullable: true),
-                    FatherMobileNumber = table.Column<int>(nullable: true),
-                    Telephone = table.Column<int>(nullable: true),
-                    GradeId = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: true),
-                    GradeTeacherId = table.Column<string>(nullable: true),
-                    Teacher_Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Teacher_DateOfBirth = table.Column<DateTime>(nullable: true),
-                    Teacher_PlaceOfBirth = table.Column<string>(maxLength: 100, nullable: true),
-                    Teacher_Sex = table.Column<string>(maxLength: 20, nullable: true),
-                    Teacher_MobilePhone = table.Column<int>(nullable: true),
-                    Teacher_Telephone = table.Column<int>(nullable: true),
-                    Teacher_IsDeleted = table.Column<bool>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Student_Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Student_DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Student_PlaceOfBirth = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Student_Sex = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Student_MobilePhone = table.Column<int>(type: "int", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    FatherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    MotherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    MotherMobileNumber = table.Column<int>(type: "int", nullable: true),
+                    FatherMobileNumber = table.Column<int>(type: "int", nullable: true),
+                    Student_Telephone = table.Column<int>(type: "int", nullable: true),
+                    Student_IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    GradeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    GradeTeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PlaceOfBirth = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Sex = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    MobilePhone = table.Column<int>(type: "int", nullable: true),
+                    Telephone = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -324,60 +387,57 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ScoreRecords",
+                name: "ScoreStudents",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdSubject = table.Column<string>(nullable: true),
-                    IdStudent = table.Column<string>(nullable: true)
+                    ScoreId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScoreRecords", x => x.Id);
+                    table.PrimaryKey("PK_ScoreStudents", x => new { x.ScoreId, x.StudentId });
                     table.ForeignKey(
-                        name: "FK_ScoreRecords_AspNetUsers_IdStudent",
-                        column: x => x.IdStudent,
+                        name: "FK_ScoreStudents_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ScoreRecords_Subjects_IdSubject",
-                        column: x => x.IdSubject,
-                        principalTable: "Subjects",
-                        principalColumn: "SubjectId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_ScoreStudents_Scores_ScoreId",
+                        column: x => x.ScoreId,
+                        principalTable: "Scores",
+                        principalColumn: "ScoreId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tests",
                 columns: table => new
                 {
-                    TestId = table.Column<string>(nullable: false),
-                    TestName = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<string>(nullable: true),
-                    Timer = table.Column<int>(nullable: false),
-                    LessonId = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Result = table.Column<int>(nullable: false),
-                    Place = table.Column<string>(nullable: true),
-                    GradeId = table.Column<string>(nullable: true),
-                    IsExpired = table.Column<bool>(nullable: false)
+                    TestId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TestName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Timer = table.Column<int>(type: "int", nullable: false),
+                    LessonId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Result = table.Column<int>(type: "int", nullable: false),
+                    Place = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsExpired = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tests", x => x.TestId);
                     table.ForeignKey(
-                        name: "FK_Tests_Lessons_LessonId",
-                        column: x => x.LessonId,
-                        principalTable: "Lessons",
-                        principalColumn: "LessonId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Tests_AspNetUsers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tests_Lessons_LessonId",
+                        column: x => x.LessonId,
+                        principalTable: "Lessons",
+                        principalColumn: "LessonId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -385,9 +445,9 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    QuestionId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    TestId = table.Column<string>(nullable: true)
+                    QuestionId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TestId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -401,23 +461,24 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TestStudent",
+                name: "TestStudents",
                 columns: table => new
                 {
-                    TestId = table.Column<string>(nullable: false),
-                    StudentId = table.Column<string>(nullable: false)
+                    TestId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TestStudent", x => new { x.StudentId, x.TestId });
+                    table.PrimaryKey("PK_TestStudents", x => new { x.StudentId, x.TestId });
                     table.ForeignKey(
-                        name: "FK_TestStudent_AspNetUsers_StudentId",
+                        name: "FK_TestStudents_AspNetUsers_StudentId",
                         column: x => x.StudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TestStudent_Tests_TestId",
+                        name: "FK_TestStudents_Tests_TestId",
                         column: x => x.TestId,
                         principalTable: "Tests",
                         principalColumn: "TestId",
@@ -428,11 +489,10 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "Answers",
                 columns: table => new
                 {
-                    AnswerId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    QuestionId = table.Column<string>(nullable: true),
-                    IsChecked = table.Column<bool>(nullable: false),
-                    IsCorrect = table.Column<bool>(nullable: false)
+                    AnswerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuestionId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsCorrect = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -478,6 +538,11 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_GradeId",
                 table: "AspNetUsers",
                 column: "GradeId");
@@ -488,11 +553,6 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "GradeTeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -500,9 +560,9 @@ namespace DigitalCoolBook.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attendances_IdStudent",
+                name: "IX_Attendances_StudentId",
                 table: "Attendances",
-                column: "IdStudent");
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_SubjectId",
@@ -530,14 +590,14 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GradeTeachers_IdGrade",
+                name: "IX_GradeTeachers_GradeId",
                 table: "GradeTeachers",
-                column: "IdGrade");
+                column: "GradeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GradeTeachers_IdTeacher",
+                name: "IX_GradeTeachers_TeacherId",
                 table: "GradeTeachers",
-                column: "IdTeacher");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lessons_CategoryId",
@@ -550,26 +610,36 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ScoreRecords_IdStudent",
-                table: "ScoreRecords",
-                column: "IdStudent");
+                name: "IX_Scores_LessonId",
+                table: "Scores",
+                column: "LessonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ScoreRecords_IdSubject",
-                table: "ScoreRecords",
-                column: "IdSubject");
+                name: "IX_Scores_SubjectId",
+                table: "Scores",
+                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectGrades_IdGrade",
+                name: "IX_ScoreStudents_StudentId",
+                table: "ScoreStudents",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubjectGrades_GradeId",
                 table: "SubjectGrades",
-                column: "IdGrade",
+                column: "GradeId",
                 unique: true,
-                filter: "[IdGrade] IS NOT NULL");
+                filter: "[GradeId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectGrades_IdSubject",
+                name: "IX_SubjectGrades_SubjectId",
                 table: "SubjectGrades",
-                column: "IdSubject");
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TestRoomStudents_TestRoomId",
+                table: "TestRoomStudents",
+                column: "TestRoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tests_LessonId",
@@ -582,8 +652,8 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TestStudent_TestId",
-                table: "TestStudent",
+                name: "IX_TestStudents_TestId",
+                table: "TestStudents",
                 column: "TestId");
 
             migrationBuilder.AddForeignKey(
@@ -635,9 +705,9 @@ namespace DigitalCoolBook.Data.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Attendances_AspNetUsers_IdStudent",
+                name: "FK_Attendances_AspNetUsers_StudentId",
                 table: "Attendances",
-                column: "IdStudent",
+                column: "StudentId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
@@ -651,9 +721,9 @@ namespace DigitalCoolBook.Data.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GradeTeachers_AspNetUsers_IdTeacher",
+                name: "FK_GradeTeachers_AspNetUsers_TeacherId",
                 table: "GradeTeachers",
-                column: "IdTeacher",
+                column: "TeacherId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -662,7 +732,7 @@ namespace DigitalCoolBook.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_GradeTeachers_AspNetUsers_IdTeacher",
+                name: "FK_GradeTeachers_AspNetUsers_TeacherId",
                 table: "GradeTeachers");
 
             migrationBuilder.DropTable(
@@ -687,13 +757,16 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "CorrectAnswers");
 
             migrationBuilder.DropTable(
-                name: "ScoreRecords");
+                name: "ScoreStudents");
 
             migrationBuilder.DropTable(
                 name: "SubjectGrades");
 
             migrationBuilder.DropTable(
-                name: "TestStudent");
+                name: "TestRoomStudents");
+
+            migrationBuilder.DropTable(
+                name: "TestStudents");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -703,6 +776,12 @@ namespace DigitalCoolBook.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExpiredTests");
+
+            migrationBuilder.DropTable(
+                name: "Scores");
+
+            migrationBuilder.DropTable(
+                name: "TestRooms");
 
             migrationBuilder.DropTable(
                 name: "Questions");

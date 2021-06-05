@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +18,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-    using Microsoft.EntityFrameworkCore;
 
     public class TestController : Controller
     {
@@ -489,7 +490,7 @@
             }
             catch (Exception)
             {
-                return this.Json("Нещо се обърка.");
+                return this.Json("Something gone wrong..");
             }
         }
 
@@ -502,11 +503,11 @@
             {
                 await this.testService.RemoveTestAsync(testId);
 
-                return this.Json("Теста е изтрит.");
+                return this.Json("Test is deleted.");
             }
             catch (Exception)
             {
-                return this.Json("Грешка при изтриване на теста!");
+                return this.Json("Error deleting test!");
             }
         }
 
@@ -552,7 +553,7 @@
             }
             catch (Exception)
             {
-                return this.Json("Нещо се обърка.");
+                return this.Json("Error editing test.");
             }
         }
 
@@ -614,7 +615,7 @@
             }
             catch (Exception)
             {
-                this.TempData["ErrorMsg"] = "Грешка при обработка на заявката!";
+                this.TempData["ErrorMsg"] = "Error editing test!";
                 return this.View("/Home/Error");
             }
         }
@@ -729,7 +730,7 @@
             return this.Json(new
             {
                 success = false,
-                Message = "Няма активни тестове.",
+                Message = "No active tests.",
             });
         }
 
