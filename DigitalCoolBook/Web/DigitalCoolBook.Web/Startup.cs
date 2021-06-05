@@ -44,11 +44,6 @@ namespace DigitalCoolBook.App
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddResponseCompression(options =>
-            {
-                options.EnableForHttps = true;
-            });
-
             services.Configure<CookiePolicyOptions>(
                options =>
                {
@@ -74,6 +69,9 @@ namespace DigitalCoolBook.App
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredUniqueChars = 0;
             });
 
             services.AddControllersWithViews()
@@ -88,7 +86,7 @@ namespace DigitalCoolBook.App
 
             services.AddSignalR(options =>
             {
-                options.EnableDetailedErrors = true;
+                options.EnableDetailedErrors = true; // Remove in production
             }).AddMessagePackProtocol();
         }
 
@@ -99,21 +97,16 @@ namespace DigitalCoolBook.App
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
 
-                using (var serviceScope = app.ApplicationServices.CreateScope())
-                {
-                    using (var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
-                    {
-                        context.Database.EnsureCreated();
-                        this.CreateRoles(serviceProvider).Wait();
-                        this.SeedDbAsync(context, serviceProvider).Wait();
-                    }
-                }
+                using var serviceScope = app.ApplicationServices.CreateScope();
+                using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                context.Database.EnsureCreated();
+                this.CreateRoles(serviceProvider).Wait();
+                this.SeedDbAsync(context, serviceProvider).Wait();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -158,14 +151,14 @@ namespace DigitalCoolBook.App
 
             if (!context.Grades.Any())
             {
-                context.Grades.AddRange(this.AddParalelos());
-                context.SaveChanges();
+                await context.Grades.AddRangeAsync(this.AddParalelos());
+                await context.SaveChangesAsync();
             }
 
             if (!context.Subjects.Any())
             {
-                context.Subjects.AddRange(this.AddSubjects());
-                context.SaveChanges();
+                await context.Subjects.AddRangeAsync(this.AddSubjects());
+                await context.SaveChangesAsync();
             }
 
             if (!context.Teachers.Any())
@@ -196,14 +189,14 @@ namespace DigitalCoolBook.App
 
             if (!context.GradeTeachers.Any())
             {
-                context.GradeTeachers.AddRange(this.AddGradeParalelo(context));
-                context.SaveChanges();
+                await context.GradeTeachers.AddRangeAsync(this.AddGradeParalelo(context));
+                await context.SaveChangesAsync();
             }
 
             if (!context.Categories.Any())
             {
-                List<Category> cathegories = this.AddCategories(context);
-                await context.Categories.AddRangeAsync(cathegories);
+                List<Category> categories = this.AddCategories(context);
+                await context.Categories.AddRangeAsync(categories);
                 await context.SaveChangesAsync();
             }
 
@@ -454,28 +447,28 @@ namespace DigitalCoolBook.App
                    Id = 1.ToString(),
                    Title = "Живот и творчество",
                    Lessons = new List<Lesson>(this.AddLessons("1")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
                },
                new Category()
                {
                    Id = 2.ToString(),
                    Title = "Творци на модерното изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("2")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
                },
                new Category()
                {
                    Id = 3.ToString(),
                    Title = "Световни музей и галерии",
                    Lessons = new List<Lesson>(this.AddLessons("3")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
                },
                new Category()
                {
                    Id = 4.ToString(),
                    Title = "Протестно Изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("4")),
-                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство").SubjectId,
+                   SubjectId = context.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
                },
            };
 
@@ -493,7 +486,7 @@ namespace DigitalCoolBook.App
                 {
                     new Lesson
                     {
-                        LessonId = 10.ToString(),
+                        LessonId = "10",
                         Title = "Живот и творчество на художника",
                         Content = "„Днес може би малцина си дават точна сметка за онова, което изгубваме. Може би мнозина не знаят името на тоя извънредно даровит млад човек, отгледан в оскъдица от баща овчар. Но ще минат години и всички ще почувстваме цената на златото, което той носеше в душата си. И с щедростта на приказен цар разсипваше в своите декоративни видения” " +
                           "Сирак Скитник, в. „Слово”, 1927 г., бр. 1388",
@@ -503,7 +496,7 @@ namespace DigitalCoolBook.App
                     },
                     new Lesson
                     {
-                        LessonId = 20.ToString(),
+                        LessonId = "20",
                         Title = "Творчески процес",
                         Content = "Творчество e умствен и обществен процес на човешката дейност, при който се създават качествено нови материални и духовни ценности. Свързан е с генерирането на нови идеи и понятия, или пък нови връзки между вече съществуващи такива. Съществената разлика с производството е оригиналността на новия продукт. Творчеството е също така неразривно свързано със свободата.",
                         CategoryId = id,
@@ -517,7 +510,7 @@ namespace DigitalCoolBook.App
                 {
                     new Lesson
                     {
-                        LessonId = 30.ToString(),
+                        LessonId = "30",
                         Title = "Творци на модерното изкуство",
                         Content = "Първите крачки в модерното изкуство са направени от импресионистите и под влиянието на Едуард Мане през 1880-те години. Освен че отричат нормите на френската академия на изкуствата – нещо което преди тях са сторили и художниците на реализма – те добавят и съвсем нови елементи в рисуването. Примери за това са използването на чисти бои и рисуването чрез нанасяне на щрихи. Това отричане на класическото изкуство отваря пътя на художници като Сезан, Гоген и Ван Гог и към стилове като кубизма.",
                         CategoryId = id,
@@ -526,7 +519,7 @@ namespace DigitalCoolBook.App
                     },
                     new Lesson
                     {
-                        LessonId = 40.ToString(),
+                        LessonId = "40",
                         Title = "Творци на съвременното изкуство",
                         Content = "Съвременното изкуство е съвременна живопис създадена в края на 20 век или в 21 век. Творчеството на съвременните живописци е повлияно от средата на глобален, културно разнообразен и технологично развиващ се свят. Съвременната живопис е динамична комбинация от материали, методи, идеи и субекти, които излизат изъвн традиционните граници на мисълта и излизат извън границите на човешкото въображение. Тази живопис е разнообразна и дигитална като цяло се отличава със самата липса на единен, организиращ принцип, идеология или „идеологизъм“. Съвременното изкуство е част от културен диалог, който засяга по-големи общностни рамки като лична и културна идентичност, семейство, общност и националност в света на чо",
                         CategoryId = id,
@@ -540,7 +533,7 @@ namespace DigitalCoolBook.App
                 {
                     new Lesson
                     {
-                        LessonId = 50.ToString(),
+                        LessonId = "50",
                         Title = "Световни Музей",
                         Content = "1. Националния дворец музей, Тайпе, Тайван " +
                         "Този величествен музей се намира в Тайпе, Тайван, Китай. Tук ще намерите изложени над 693 507 експоната, изобразяващи древната история на Китай за последните 8000 години. На това място може да получите пълна представа за историята и културата на Китай." +
@@ -552,12 +545,12 @@ namespace DigitalCoolBook.App
                     },
                     new Lesson
                     {
-                        LessonId = 60.ToString(),
+                        LessonId = "60",
                         Title = "Галерии",
                         Content = "От 1998 г. Берлинската картинна галерия се помества в специално построена за нея сграда в Културфорума. В проекта на новата музейна сграда, изпълнена от архитектите Хайнц Хилмер, Христоф Затлер и Томас Албрехт, е включена вилата на издателя Паул Парей. Северната фасада на правоъгълното здание е леко изтеглено напред. Цокълът на фасадата навява на италианския Ренесанс и пруския класицизъм.",
                         CategoryId = id,
                         Level = 2,
-                        IsUnlocked= false,
+                        IsUnlocked = false,
                     },
                 };
                     break;
@@ -566,7 +559,7 @@ namespace DigitalCoolBook.App
                 {
                     new Lesson
                     {
-                        LessonId = 70.ToString(),
+                        LessonId = "70",
                         Title = "Художествени форми на протест",
                         Content = "Още преди две години обществените места в Истанбул бяха предвидени за творческите изяви на общо 88 творци от различни държави. Художествените инсталации и творби трябваше да се разположат из парка Гези, на площад Таксим, из застрашения от разрушаване квартал - т.е. все на места, за които дискутира цяла Турция. Истанбулската градска управа обаче не даде разрешение за ползването на обществените места като изложбени зали",
                         CategoryId = id,
@@ -575,12 +568,12 @@ namespace DigitalCoolBook.App
                     },
                     new Lesson
                     {
-                        LessonId = 80.ToString(),
+                        LessonId = "80",
                         Title = "Форми на протестното изкуство",
                         Content = "Всяко разминаване с комунистическата идеология, включително в областта на изкуството, се преследва, отстранява, а в част от случаите се унищожава физически. Модерното изкуство се заклеймява като вражеско и човеконенавистно, и се обявява за продукт на психично болни и психопати. Забранено е внасянето на книги, албуми и каталози, както и организиране на изложби с потенциално модерен характер.",
                         CategoryId = id,
-                         Level = 2,
-                        IsUnlocked =false,
+                        Level = 2,
+                        IsUnlocked = false,
                     },
                 };
                     break;
@@ -597,7 +590,7 @@ namespace DigitalCoolBook.App
                 {
                    GradeTeacherId = "1",
                    GradeId = context.Grades.First(grade => grade.Name == "10а").GradeId,
-                   TeacherId = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
+                   TeacherId = context.Teachers.First(teacher => teacher.Email == "pau@pau.com").Id,
                 },
 
                 new GradeTeacher
@@ -618,7 +611,7 @@ namespace DigitalCoolBook.App
                 {
                     GradeTeacherId = "4",
                     GradeId = context.Grades.First(grade => grade.Name == "12а").GradeId,
-                    TeacherId = context.Teachers.First(teacher => teacher.Email == "tot@tot.com").Id,
+                    TeacherId = context.Teachers.First(teacher => teacher.Email == "pau@pau.com").Id,
                 },
             };
             return gradeParalelos;
@@ -633,7 +626,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Ceco Ivanov",
-                    PasswordHash = "Cec155*",
+                    PasswordHash = "ceco@ceco.com",
                     PlaceOfBirth = "Botevgrad",
                     Sex = "Male",
                     Telephone = 8765,
@@ -644,14 +637,14 @@ namespace DigitalCoolBook.App
                     MotherMobileNumber = 099999933,
                     Email = "ceco@ceco.com",
                     UserName = "ceco@ceco.com",
-                    GradeId = context.Grades.First(g => g.Name == "10е").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
                 },
                 new Student
                 {
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 094098321,
                     Name = "Ivailo Dimitrov",
-                    PasswordHash = "Ivo155*",
+                    PasswordHash = "ivailo@ivailo.com",
                     PlaceOfBirth = "Pirdop",
                     Sex = "Male",
                     Telephone = 3234,
@@ -669,7 +662,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 0978755442,
                     Name = "Mariq Ignatova",
-                    PasswordHash = "Mar155*",
+                    PasswordHash = "mima@mima.com",
                     PlaceOfBirth = "Мелник",
                     Sex = "Female",
                     Telephone = 3300,
@@ -687,25 +680,25 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 0978757342,
                     Name = "Атанас Сакъзов",
-                    PasswordHash = "Atanas155*",
+                    PasswordHash = "atanas@atanas.com",
                     PlaceOfBirth = "Мелник",
                     Sex = "Мале",
                     Telephone = 3400,
                     Address = "Радко Димитриев 19",
                     FatherName = "Свилен Сакъзов",
                     FatherMobileNumber = 098722054,
-                    MotherName = "Генка Шикерова",
+                    MotherName = "Генка",
                     MotherMobileNumber = 0987699033,
                     Email = "atanas@atanas.com",
                     UserName = "atanas@atanas.com",
-                    GradeId = context.Grades.First(g => g.Name == "10е").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
                 },
                 new Student
                 {
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Stefan Conev",
-                    PasswordHash = "Stef155*",
+                    PasswordHash = "stef@stef.com",
                     PlaceOfBirth = "Montana",
                     Sex = "Male",
                     Telephone = 8765,
@@ -723,7 +716,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Dragan Tconev",
-                    PasswordHash = "Drag155*",
+                    PasswordHash = "drag@drag.com",
                     PlaceOfBirth = "Svilengrad",
                     Sex = "Male",
                     Telephone = 8765,
@@ -741,7 +734,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Ивелин Тошев",
-                    PasswordHash = "Ivelin155*",
+                    PasswordHash = "ivelin@ivelin.com",
                     PlaceOfBirth = "Samokov",
                     Sex = "Male",
                     Telephone = 8765,
@@ -759,7 +752,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Маньо Минчев",
-                    PasswordHash = "Man155*",
+                    PasswordHash = "man@man.com",
                     PlaceOfBirth = "Haskovo",
                     Sex = "Male",
                     Telephone = 8765,
@@ -777,7 +770,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Щефан Сандерс",
-                    PasswordHash = "Shtef155*",
+                    PasswordHash = "shtef@shtef.com",
                     PlaceOfBirth = "Костинброд",
                     Sex = "Male",
                     Telephone = 876521,
@@ -795,7 +788,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Богомил Милев",
-                    PasswordHash = "Bog155*",
+                    PasswordHash = "bog@bog.com",
                     PlaceOfBirth = "Елин Пелин",
                     Sex = "Male",
                     Telephone = 098765,
@@ -813,7 +806,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Десислава Атанасова",
-                    PasswordHash = "Des155*",
+                    PasswordHash = "des@des.com",
                     PlaceOfBirth = "Благоевград",
                     Sex = "Female",
                     Telephone = 88899,
@@ -831,7 +824,7 @@ namespace DigitalCoolBook.App
                     Id = Guid.NewGuid().ToString(),
                     MobilePhone = 099760043,
                     Name = "Радослав Първанов",
-                    PasswordHash = "Rad155*",
+                    PasswordHash = "rad@rad.com",
                     PlaceOfBirth = "Перник",
                     Sex = "Male",
                     Telephone = 87652,
@@ -856,14 +849,14 @@ namespace DigitalCoolBook.App
                 {
                     Id = Guid.NewGuid().ToString(),
                     DateOfBirth = DateTime.Parse("05/2/1990"),
-                    Email = "tot@tot.com",
+                    Email = "pau@pau.com",
                     MobilePhone = 0997655443,
-                    Name = "Pavlina",
-                    PasswordHash = "Tot155*",
+                    Name = "Paulina",
+                    PasswordHash = "pau@pau.com",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Female",
                     Telephone = 3344,
-                    UserName = "tot@tot.com",
+                    UserName = "pau@pau.com",
                 },
 
                 new Teacher
@@ -873,7 +866,7 @@ namespace DigitalCoolBook.App
                     Email = "stam@stam.com",
                     MobilePhone = 099456373,
                     Name = "Stamat Ionchev",
-                    PasswordHash = "Stam155*",
+                    PasswordHash = "stam@stam.com",
                     PlaceOfBirth = "Plovdiv",
                     Sex = "Male",
                     Telephone = 3264,
@@ -886,7 +879,7 @@ namespace DigitalCoolBook.App
                     Email = "pesh@pesh.com",
                     MobilePhone = 0997655442,
                     Name = "Pesho Geshev",
-                    PasswordHash = "Pesh155*",
+                    PasswordHash = "pesh@pesh.com",
                     PlaceOfBirth = "Sofia",
                     Sex = "Male",
                     Telephone = 3346,
@@ -973,7 +966,6 @@ namespace DigitalCoolBook.App
                     await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
-
 
             // Creating Student role
             isUserAddedInRole = await roleManager.RoleExistsAsync("Student");
