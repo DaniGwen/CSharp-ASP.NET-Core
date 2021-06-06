@@ -10,51 +10,51 @@
     }
 </style>
 
-<h2 class="text-center">Редактиране на профил</h2>
+<h2 class="text-center">Edit profile</h2>
 
 <hr />
 <form asp-action="EditTeacher" asp-route-id="@Model.Id">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group row">
-        <label asp-for="Name" class="col-sm-2 col-form-label">Име</label>
+        <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="Email" class="col-sm-2 col-form-label">Имейл</label>
+        <label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="DateOfBirth" class="col-sm-2 col-form-label">Дата на раждане</label>
+        <label asp-for="DateOfBirth" class="col-sm-2 col-form-label">Date of birth</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="datepicker" name="dateOfBirth" />
             <span asp-validation-for="DateOfBirth" class="text-danger" id="alertDatepicker"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="PlaceOfBirth" class="col-sm-2 col-form-label">Място на раждане</label>
+        <label asp-for="PlaceOfBirth" class="col-sm-2 col-form-label">Place of birth</label>
         <div class="col-sm-10">
             <input asp-for="PlaceOfBirth" class="form-control" />
             <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="Sex" class="col-sm-2 col-form-label">Пол</label>
+        <label asp-for="Sex" class="col-sm-2 col-form-label">Sex</label>
         <div class="col-sm-10">
             <select class="form-control" name="sex" id="sex">
-                <option value="Мъж">Мъж</option>
-                <option value="Жена">Жена</option>
-                <option value="Друго">Друго</option>
+                <option value="Мъж">Male</option>
+                <option value="Жена">Female</option>
+                <option value="Друго">Other</option>
             </select>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="MobilePhone" class="col-sm-2 col-form-label">Мобилен телефон</label>
+        <label asp-for="MobilePhone" class="col-sm-2 col-form-label">Mobile phone number</label>
         <div class="col-sm-10">
             <input asp-for="MobilePhone" min="0" class="form-control w-100" type="tel" />
             <span asp-validation-for="MobilePhone" class="text-danger"></span>
@@ -62,7 +62,7 @@
 
     </div>
     <div class="form-group row">
-        <label asp-for="Telephone" class="col-sm-2 col-form-label">Домашен телефон</label>
+        <label asp-for="Telephone" class="col-sm-2 col-form-label">Home phone number</label>
         <div class="col-sm-10">
             <input asp-for="Telephone" min="0" class="form-control w-100" />
             <span asp-validation-for="Telephone" class="text-danger"></span>
@@ -70,8 +70,8 @@
     </div>
     <hr />
     <div class="form-group">
-        <input type="submit" value="Запиши" class="btn btn-block myOrangeButton" />
-        <a class="btn btn-block btn-outline-dark" asp-action="EditTeachers">Назад</a>
+        <input type="submit" value="Save" class="btn btn-block myOrangeButton" />
+        <a class="btn btn-block btn-outline-dark" asp-action="EditTeachers">Back</a>
     </div>
 </form>
 
@@ -82,7 +82,7 @@
         changeMonth: true,
         changeYear: true,
         showButtonPanel: true,
-        dateFormat: "dd.M.yy",
+        dateFormat: "dd.M.yy"
     });
 
     $(function () {
@@ -90,13 +90,14 @@
     });
 
     $(function () {
-        $('form').on('submit', function (event) {
-            if ($('#datepicker').val() == '') {
-                event.preventDefault();
-                $('#alertDatepicker').html("Попълнете дата на раждане.").fadeToggle(4000);
-            }
-        })
-    })
+        $('form').on('submit',
+            function (event) {
+                if ($('#datepicker').val() === '') {
+                    event.preventDefault();
+                    $('#alertDatepicker').html("Please select date of birth.").fadeToggle(4000);
+                }
+            });
+    });
 </script>
 
 

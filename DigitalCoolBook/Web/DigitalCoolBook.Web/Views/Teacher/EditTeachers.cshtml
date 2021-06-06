@@ -11,34 +11,33 @@
     }
 </style>
 <div class="container-fluid">
-    <h2 class="text-center">Редактиране на учителски профили.</h2>
-
+    <h2 class="text-center">Teachers control panel</h2>
     <p>
-        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-sm btn-outline-info">Добавяне на учител</a>
+        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-sm btn-outline-info">Add a teacher</a>
     </p>
     <table class="table font-weight-bold table-hover table-sm" id="teacherDetails">
         <thead class="thead-light">
             <tr>
                 <th>
-                    @Html.DisplayName("Име")
+                    @Html.DisplayName("Name")
                 </th>
                 <th>
-                    @Html.DisplayName("Имейл")
+                    @Html.DisplayName("Email")
                 </th>
                 <th>
-                    @Html.DisplayName("Дата на раждане")
+                    @Html.DisplayName("Date of birth")
                 </th>
                 <th>
-                    @Html.DisplayName("Място на раждане")
+                    @Html.DisplayName("Place of birth")
                 </th>
                 <th>
-                    @Html.DisplayName("Пол")
+                    @Html.DisplayName("Sex")
                 </th>
                 <th>
-                    @Html.DisplayName("Мобилен телефон")
+                    @Html.DisplayName("Mobile phone number")
                 </th>
                 <th>
-                    @Html.DisplayName("Домашен телефон")
+                    @Html.DisplayName("Home phone number")
                 </th>
                 <th></th>
             </tr>
@@ -47,9 +46,7 @@
             @if (!Model.Any())
             {
                 <tr class="text-center">
-                    <td>
-                        Няма записи в базата данни.
-                    </td>
+                    <td>No profiles..</td>
                 </tr>
             }
             else
@@ -57,40 +54,31 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateOfBirth)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PlaceOfBirth)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Sex)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MobilePhone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Telephone)
-                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PlaceOfBirth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Sex)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MobilePhone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Telephone)</td>
                         <td class="row form-group">
-                            <a class="btnDelete btn btn-sm btn-outline-danger" href="#" id="@item.Id">Изтрий</a>
-                            <a class="btn btn-sm btn-outline-info ml-1" asp-controller="Teacher" asp-action="EditTeacher" asp-route-id="@item.Id">Промяна</a>
-                            <a class="btn btn-sm btn-outline-info mt-1 ml-3" asp-controller="Teacher" asp-action="ChangePassword" asp-route-id="@item.Id">Смяна на парола</a>
+                            <a class="btnDelete btn btn-sm btn-outline-danger" href="#" id="@item.Id">Delete</a>
+                            <a class="btn btn-sm btn-outline-info ml-1"
+                               asp-controller="Teacher"
+                               asp-action="EditTeacher"
+                               asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-info mt-1 ml-3"
+                               asp-controller="Teacher"
+                               asp-action="ChangePassword"
+                               asp-route-id="@item.Id">Change password</a>
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    <a class="btn btn-sm btn-outline-info mb-2" href="/Admin/AdminPanel">назад</a>
+    <a class="btn btn-sm btn-outline-info mb-2" href="/Admin/AdminPanel">Back</a>
 </div>
-
 
 <script type="text/javascript">
     $(function () {
@@ -102,12 +90,11 @@
                 width: 400,
                 modal: true,
                 buttons: {
-
-                    "назад": function () {
+                    "cancel": function () {
                         $(this).dialog("close");
                     },
                     // delete teacher
-                    "изтриване": function () {
+                    "delete": function () {
                         var teacherId = $(".btnDelete").attr("id");
                         $.ajax({
                             url: "/Teacher/Delete/" + teacherId,
@@ -133,7 +120,7 @@
                                     width: 600,
                                     modal: true,
                                     buttons: {
-                                        "Затвори": function () {
+                                        "close": function () {
                                             $(this).dialog("close");
                                         }
                                     }
@@ -143,23 +130,22 @@
                         });
                         $(this).dialog("close");
                     }
-
                 }
             });
         });
     });
 </script>
 
-<div id="dialog-confirm" title="Изтриване на потребител">
+<div id="dialog-confirm" title="Delete">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-        Профилът ще бъде изтрит. Продължи?
+        The profile will be deleted. Continue?
     </p>
 </div>
 
 <div id="successMessage"></div>
 
-<div style="display: none; " id="errorMessageDialog" title="Грешка!">
+<div style="display: none; " id="errorMessageDialog" title="Error!">
     <p style="max-height:280px; overflow:auto;" id="errorMessage">
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
     </p>
