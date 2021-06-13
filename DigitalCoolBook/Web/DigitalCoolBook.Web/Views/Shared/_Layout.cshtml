@@ -10,11 +10,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/jquery-ui.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 
     <!--Script-->
     <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -35,7 +34,7 @@
             <div class="container-fluid" id="navbarNavDropdown">
                 <ul class="nav navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link index-button" href="/Home/Index">Начало </a>
+                        <a class="nav-link index-button" href="/Home/Index">Home</a>
                     </li>
                     @if (this.User.IsInRole("Teacher"))
                     {
@@ -99,27 +98,18 @@
                     @if (!this.User.Identity.IsAuthenticated)
                     {
                         <div>
-                            <h1 class="page-header">Добре дошли в Digital Cool Book!</h1>
-                            <span>Ученето може да бъде забавно!</span>
+                            <h1 class="page-header">Welcome to Digital Cool Book!</h1>
+                            <span>Learn more and have fun!</span>
                         </div>
                         <div class="pt-4">
                             <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
-                                <span class="fa fa-user"></span> Вписване
+                                <span class="fa fa-user"></span> Login
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <h2 class="DCB-text">Добре дошъл @ViewData["UserName"]!</h2>
-                            }
-                            else
-                            {
-                                <h2 class="DCB-text">Добре дошъл в Digital Cool Book!</h2>
-                            }
-                        </div>
+                        <div><h2 class="DCB-text">Welcome @ViewData["UserName"]!</h2></div>
                     }
                 </div>
             </div>
@@ -129,7 +119,7 @@
         </section>
 
         <!--Popup Dialog-->
-        <div title="Активни тестове" id="dialog"></div>
+        <div title="Active test" id="dialog"></div>
     </main>
 
     <!--Footer-->

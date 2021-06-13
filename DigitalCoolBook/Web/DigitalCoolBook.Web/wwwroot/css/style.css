@@ -2,10 +2,14 @@
 @import "navigation.css";
 @import "footer.css";
 
-@font-face {
-    font-family: Manrope;
-    src: url("../fonts/Manrope-Regular.ttf") format("truetype");
-}
+@import "styles/elements/_elements-body.css";
+@import "styles/settings/_settings-typography.css";
+@import "styles/generic/_generic-normalize.css";
+@import "styles/components/_component-jumbotron.css";
+@import "styles/components/_component-test-room-summary.css";
+@import "styles/components/_component-test-history.css";
+@import "styles/components/_component-subject.css";
+@import "styles/components/_component-buttons.css";
 
 * {
     box-sizing: border-box;
@@ -15,37 +19,12 @@ html {
     height: 100%;
 }
 
-body {
-    font-family: Manrope, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    background-color: #dddcdc;
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    display: grid;
-    grid-template-rows: 1fr auto;
-}
-
-header {
-    height: 20%;
-}
-
-main {
-    grid-row-start: 2;
-}
-
 .img {
     max-width: 100%;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
-}
-
-h1, h2, h3, h4, h5 {
-    font-family: Manrope, sans-serif;
-    color: #2E004B;
 }
 
 ul {
@@ -101,28 +80,12 @@ input[type=number] {
     height: 30px;
 }
 
-
-
 /*HR orange lighten-4*/
 hr.hr-orange {
     background-color: #ffb74d;
 }
 
-.jumbotron-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 55%;
-    height: 40%;
-    margin-bottom: 7%;
-}
 
-.jumbotron {
-    background-color: rgba(255, 204, 128, 0.80);
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0 0 12px 8px gray;
-}
 
 .page-header {
     padding-bottom: 5px;
@@ -173,79 +136,4 @@ input[type="radio"] {
     padding: 5px;
     font-size: 16px;
     margin-right: 5px;
-}
-
-/*TestRoomSummary*/
-.studentName-summary {
-    margin-right: 20px;
-}
-
-.studentScore-summary {
-    font-weight: bold;
-}
-
-.section-summary {
-    text-align: center;
-}
-
-/* TestsHistory */
-.section-testHistory {
-    margin: 0 auto;
-}
-
-tbody tr td a {
-    margin-right: 100px;
-    max-width: 300px;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-tbody time {
-    max-width: 150px;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-tbody tr:nth-of-type(odd) {
-    background-color: #ebebeb
-}
-
-
-
-/*Subjects*/
-.subject-card {
-    margin: 0px 30px 80px 35px;
-    display: inline-block;
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    box-shadow: 4px 4px 4px rgba(128, 128, 128, 0.616);
-}
-
-    .subject-card:hover {
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        box-shadow: 13px 13px 10px rgba(128, 128, 128, 1.0);
-        font-size: 20px;
-    }
-
-.lower-card {
-    display: inline-block;
-    padding: 20px;
-    max-width: 300px;
-}
-
-    .lower-card span {
-        font-size: 17px;
-        color: #000000;
-    }
-
-.subject-card:hover span {
-    font-size: 20px;
-    color: #3b3939;
-}
-
-.upper-card img {
-    width: 300px;
-    height: 180px;
-    border-radius: 5px 5px 0 0;
 }

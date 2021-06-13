@@ -1,0 +1,20 @@
+﻿.section-testHistory {
+    margin: 0 auto;
+}
+
+tbody tr td a {
+    margin-right: 100px;
+    max-width: 300px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+tbody time {
+    max-width: 150px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #ebebeb
+}
