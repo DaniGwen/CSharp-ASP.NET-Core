@@ -60,34 +60,30 @@
                                     @if (this.User.IsInRole("Admin"))
                                     {
                                         <form class="nav-item" asp-area="" asp-controller="Admin" asp-action="AdminPanel">
-                                            <button class="btn-outline-primary btn-sm">Администраторски панел</button>
+                                            <button class="btn-outline-primary btn-sm">Admin panel</button>
                                         </form>
                                     }
 
                                     @if (this.User.IsInRole("Student"))
                                     {
                                         <form class="nav-item" asp-area="" asp-controller="Student" asp-action="Panel">
-                                            <button class="btn btn-outline-primary btn-sm">Профил</button>
+                                            <button class="btn btn-outline-primary btn-sm">My profile</button>
                                         </form>
                                     }
 
                                     @if (this.User.IsInRole("Teacher"))
                                     {
                                         <form class="nav-item" asp-area="" method="get" asp-controller="Teacher" asp-action="Panel">
-                                            <button class="btn btn-outline-primary btn-sm">Профил</button>
+                                            <button class="btn btn-outline-primary btn-sm">My profile</button>
                                         </form>
                                     }
                                 </div>
                                 <div class="col">
                                     <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                        <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-user"></span>Отписване</button>
+                                        <button type="submit" class="btn btn-outline-dark btn-sm"><span class="fa fa-user"></span>Sign out</button>
                                     </form>
                                 </div>
                             </div>
-                        }
-                        else if (!this.User.Identity.IsAuthenticated)
-                        {
-                            <a href="/Admin/LoginAdmin" class="btn btn-outline-secondary btn-sm">Вляз като Администратор <span class="fa fa-user"></span></a>
                         }
                     </li>
                 </ul>

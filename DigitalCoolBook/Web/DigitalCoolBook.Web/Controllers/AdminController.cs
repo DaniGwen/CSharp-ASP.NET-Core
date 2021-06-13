@@ -54,42 +54,6 @@
             return this.View();
         }
 
-        public IActionResult LoginAdmin()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginAdminAsync(LoginAdminViewModel inputModel, string returnUrl)
-        {
-
-            returnUrl = returnUrl ?? this.Url.Content("~/");
-
-            if (this.ModelState.IsValid)
-            {
-                var result = await this.signInManager.PasswordSignInAsync(inputModel.Username, inputModel.Password, inputModel.RememberMe, lockoutOnFailure: false);
-
-                if (result.Succeeded)
-                {
-                    this.logger.LogInformation("User logged in.");
-                    return this.LocalRedirect(returnUrl);
-                }
-
-                if (result.IsLockedOut)
-                {
-                    this.logger.LogWarning("User account locked out.");
-                    return this.RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return this.View(inputModel);
-                }
-            }
-
-            return this.View();
-        }
-
         public IActionResult AdminContact()
         {
             return this.View();
