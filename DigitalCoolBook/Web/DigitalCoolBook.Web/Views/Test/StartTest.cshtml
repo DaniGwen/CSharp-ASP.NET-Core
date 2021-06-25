@@ -60,8 +60,8 @@
     {
         <section class="row d-flex justify-content-between">
             <div>
-                <p>Добавени в теста:</p>
-                <ul  class="added-students-inroom" id="added-students">
+                <p>Added students:</p>
+                <ul class="added-students-inroom" id="added-students">
                     @foreach (var studentName in Model.StudentNames)
                     {
                         <li>@studentName</li>
@@ -69,12 +69,11 @@
                 </ul>
             </div>
             <div>
-                <h2 class="text-success">Активен</h2>
+                <h2 class="text-success">Active</h2>
                 <div class="row-form-label-lg">
-                    <label>Времетраене: @Model.Timer минути.</label>
+                    <label>Elapsed: @Model.Timer minutes.</label>
                 </div>
             </div>
-
         </section>
         <div class="row">
             <div class="connected-students" id="studentList"></div>
@@ -82,7 +81,7 @@
             <div class="disconnected-students" id="finishedLabel"></div>
         </div>
         <div class="text-center mb-2">
-            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents/@Model.TestName">Предаване</a>
+            <a class="btn btn-outline-danger" href="/Test/EndTestAllStudents/@Model.TestName">Submit</a>
         </div>
     }
 </div>
@@ -114,19 +113,18 @@
                 submitForm();
             }
         });
-    })
+    });
 
     function submitForm() {
-        alert("Край на теста.");
+        alert("Test ended.");
         $("#form").submit();
     };
 
-
     //digital - clock
-    $(document).ready(function () {
+    $(document).ready(function() {
         clockUpdate();
         setInterval(clockUpdate, 1000);
-    })
+    });
 
     function clockUpdate() {
         var date = new Date();
@@ -142,7 +140,7 @@
         function twelveHour(x) {
             if (x > 12) {
                 return x = x - 12;
-            } else if (x == 0) {
+            } else if (x === 0) {
                 return x = 12;
             } else {
                 return x;
@@ -153,7 +151,7 @@
         var m = addZero(date.getMinutes());
         var s = addZero(date.getSeconds());
 
-        $('.digital-clock').text(h + ':' + m + ':' + s)
+        $('.digital-clock').text(h + ':' + m + ':' + s);
     }
 </script>
 
@@ -165,10 +163,6 @@
         font-weight: bold;
         padding: 10px;
     }
-
-    /*These are the default CSS classes
-    used by this plugin. Use these values
-    for a basic style to get started.*/
 
     .jst-hours {
         float: left;

@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +18,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
-    using Microsoft.EntityFrameworkCore;
 
     public class TestController : Controller
     {
@@ -51,8 +52,8 @@
 
         // Admin creates a test for a lesson
         [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public IActionResult CreateTestAdmin()
+        [Authorize(Roles = "Admin, Teacher")]
+        public IActionResult CreateTest()
         {
             var lessons = this.subjectService.GetLessons().ToList();
 
@@ -65,17 +66,19 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        [ActionName("CreateTestAdmin")]
-        public async Task<IActionResult> CreateTestAdminAsync(ICollection<QuestionAnswerViewModel> model, string LessonId, string place)
+        [Authorize(Roles = "Admin, Teacher")]
+        [ActionName("CreateTest")]
+        public async Task<IActionResult> CreateTestAsync(ICollection<QuestionAnswerViewModel> model,
+            string lessonId,
+            string place)
         {
-            var lesson = await this.subjectService.GetLessonAsync(LessonId);
+            var lesson = await this.subjectService.GetLessonAsync(lessonId);
 
-            // Instanciate test
+            // Instantiate test
             var test = new Test
             {
                 TestId = Guid.NewGuid().ToString(),
-                LessonId = LessonId,
+                LessonId = lessonId,
                 Place = place,
                 TestName = lesson.Title,
             };
@@ -84,7 +87,7 @@
             var questionsForDb = new List<Question>();
             var answersForDb = new List<Answer>();
 
-            // Create question and asnwers
+            // Create question and answers
             foreach (var questionDto in model)
             {
                 var question = new Question
@@ -158,18 +161,17 @@
 
                 await this.questionService.SaveChangesAsync();
 
-                return this.Json("Успешно записване.");
+                return this.Json("Successfully saved.");
             }
             catch (Exception exception)
             {
                 // return error object to view
-                return this.Json(new { error = "Нещо се обърка.", message = exception.Message });
+                return this.Json(new { error = "Ops something gone wrong.", message = exception.Message });
             }
         }
 
         [Authorize(Roles = "Teacher, Admin")]
-        [ActionName("GetStudents")]
-        public JsonResult GetStudentsAsync(string gradeId)
+        public JsonResult GetStudents(string gradeId)
         {
             var students = this.userService.GetStudents()
                 .Where(s => s.GradeId == gradeId)
@@ -193,8 +195,7 @@
         // Set the timer for the test before it starts
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        [ActionName("SetTestTimer")]
-        public async Task<IActionResult> SetTestTimerAsync(string testId)
+        public IActionResult SetTestTimer(string testId)
         {
             var model = new TestViewModel
             {
@@ -217,7 +218,7 @@
             {
                 if (students.Length == 0)
                 {
-                    this.ModelState.AddModelError(string.Empty, "Добавете поне един ученик.");
+                    this.ModelState.AddModelError(string.Empty, "At least one student is needed.");
 
                     return this.View(model);
                 }
@@ -226,7 +227,9 @@
                 var test = await this.testService.GetTestAsync(model.TestId);
 
                 // Set current Teacher Id to test
-                test.TeacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                test.TeacherId = this.User
+                    .FindFirst(ClaimTypes.NameIdentifier)?
+                    .Value;
 
                 // Set test timer from input model
                 test.Timer = model.Timer;
@@ -489,7 +492,7 @@
             }
             catch (Exception)
             {
-                return this.Json("Нещо се обърка.");
+                return this.Json("Something gone wrong..");
             }
         }
 
@@ -502,11 +505,11 @@
             {
                 await this.testService.RemoveTestAsync(testId);
 
-                return this.Json("Теста е изтрит.");
+                return this.Json("Test is deleted.");
             }
             catch (Exception)
             {
-                return this.Json("Грешка при изтриване на теста!");
+                return this.Json("Error deleting test!");
             }
         }
 
@@ -552,7 +555,7 @@
             }
             catch (Exception)
             {
-                return this.Json("Нещо се обърка.");
+                return this.Json("Error editing test.");
             }
         }
 
@@ -614,7 +617,7 @@
             }
             catch (Exception)
             {
-                this.TempData["ErrorMsg"] = "Грешка при обработка на заявката!";
+                this.TempData["ErrorMsg"] = "Error editing test!";
                 return this.View("/Home/Error");
             }
         }
@@ -670,9 +673,9 @@
             // Add expired test to DB if score is bigger then the one in the database
             if (this.testService.GetExpiredTests().Any())
             {
-                var expiredTestDb = this.testService.GetExpiredTests().First();
+                var expiredTestDb = this.testService.GetExpiredTests().FirstOrDefault();
 
-                if (expiredTestDb.Result < expiredTest.Result)
+                if (expiredTestDb?.Result < expiredTest.Result)
                 {
                     await this.testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId);
                     await this.testService.AddExpiredTestAsync(expiredTest);
@@ -704,7 +707,7 @@
         public async Task<IActionResult> IsStudentInTestAsync()
         {
             var studentId = this.User
-                .FindFirst(ClaimTypes.NameIdentifier)
+                .FindFirst(ClaimTypes.NameIdentifier)?
                 .Value;
 
             var testId = this.testService.IsStudentInTest(studentId);
@@ -729,7 +732,7 @@
             return this.Json(new
             {
                 success = false,
-                Message = "Няма активни тестове.",
+                Message = "No active tests.",
             });
         }
 

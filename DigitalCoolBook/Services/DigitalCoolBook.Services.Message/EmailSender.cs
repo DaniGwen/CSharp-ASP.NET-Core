@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using SendGrid;
+﻿using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace DigitalCoolBook.App.Services
 {
@@ -47,6 +45,11 @@ namespace DigitalCoolBook.App.Services
                              "<strong>Digital Cool Book</strong>";
 
             await this.Execute( emailSubject, emailBody, email);
+        }
+
+        public async Task SendEmailAsync(string inputEmail, string confirmYourEmail, string s)
+        {
+            //TODO implement email confirmation
         }
     }
 }

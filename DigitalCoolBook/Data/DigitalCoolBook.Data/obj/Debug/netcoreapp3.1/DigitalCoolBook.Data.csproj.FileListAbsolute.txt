@@ -33,3 +33,6 @@ C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoo
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.dll
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Models.pdb
 C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.csproj.CopyComplete
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.runtimeconfig.json
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\bin\Debug\netcoreapp3.1\DigitalCoolBook.Data.runtimeconfig.dev.json
+C:\Users\AW\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\Data\DigitalCoolBook.Data\obj\Debug\netcoreapp3.1\DigitalCoolBook.Data.genruntimeconfig.cache
