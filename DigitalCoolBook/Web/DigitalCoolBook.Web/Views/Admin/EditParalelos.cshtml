@@ -5,21 +5,21 @@
     Layout = "_LayoutMenus";
 }
 
-<h2>Добавяне/Редактиране на Паралелки</h2>
+<h2>Class control panel</h2>
 <p>
-    <a class="btn btn-secondary" href="/Admin/CreateParalelo">Създай нова Паралелка</a>
+    <a class="btn btn-secondary" href="/Admin/CreateParalelo">Create new class</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("Име на Учител")
+                Teacher name
             </th>
             <th>
-                @Html.DisplayName("Име на Класа")
+                Class name
             </th>
             <th>
-                @Html.DisplayName("Брой ученици")
+                Students count
             </th>
             <th></th>
         </tr>
@@ -40,10 +40,10 @@
                 </td>
                 <td>
                     <button class="text-white btn btn-secondary btn-sm">
-                        @Html.ActionLink("Редактиране", "EditParalelo", new { id = item.Id })
+                        @Html.ActionLink("Edit", "EditParalelo", new { id = item.Id })
                     </button>
                     <button class="text-white btn btn-secondary btn-sm">
-                        @Html.ActionLink("Изтриване", "DeleteParalelo", new { id = item.Id })
+                        @Html.ActionLink("Delete", "DeleteParalelo", new { id = item.Id })
                     </button>
                 </td>
             </tr>

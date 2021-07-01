@@ -1,11 +1,11 @@
 ﻿@model DigitalCoolBook.App.Models.GradeParaleloViewModels.ParaleloCreateViewModel
 
 @{
-    ViewData["Title"] = "EditParalelo";
+    ViewData["Title"] = "EditClass";
     Layout = "_LayoutMenus";
 }
 
-<h2>Редакция на Паралелка</h2>
+<h2>Edit class</h2>
 
 <hr />
 <div class="row">
@@ -14,12 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(m => m.GradeParaleloId)
             <div class="form-group">
-                <label>Учител</label>
-                @Html.DropDownListFor(model => model.IdTeacher, new SelectList(Model.Teachers, "Id", "Name"), "Избери Учител")
+                <label>Teacher</label>
+                @Html.DropDownListFor(model => model.IdTeacher, new SelectList(Model.Teachers, "Id", "Name"), "Choose a teacher")
             </div>
             <div class="form-group">
                 <label>Клас</label>
-                @Html.DropDownListFor(model => model.IdGrade, new SelectList(Model.Grades, "GradeId", "Name"), "Избери Клас")
+                @Html.DropDownListFor(model => model.IdGrade, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class")
             </div>
             <div class="form-group">
                 <input type="submit" value="Запази" class="btn btn-primary" />
@@ -29,6 +29,6 @@
 </div>
 
 <div>
-    <a asp-controller="Admin" asp-action="EditParalelos">Назад</a>
+    <a asp-controller="Admin" asp-action="EditParalelos">Back</a>
 </div>
 

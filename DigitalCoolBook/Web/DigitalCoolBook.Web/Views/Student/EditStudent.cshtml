@@ -5,12 +5,6 @@
     Layout = "_LayoutMenus";
 }
 
-<style>
-    .myOrangeButton {
-        background: #ffb74d;
-    }
-</style>
-
 <h2>Edit student</h2>
 <hr />
 
@@ -117,26 +111,28 @@
 <a class="btn btn-block btn-outline-dark mb-2" asp-action="EditStudents">Back</a>
 
 <!--setting datepicker and validating DateOfBirth input-->
-<script>
-    $.datepicker.setDefaults($.datepicker.regional["bg"]);
-    $.datepicker.setDefaults({
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: "dd.M.yy"
-    });
+@section Scripts{ 
+    <script>
+        $.datepicker.setDefaults($.datepicker.regional["bg"]);
+        $.datepicker.setDefaults({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: "dd.M.yy"
+        });
 
-    $(function () {
-        $('#datepicker').datepicker();
-    });
+        $(function () {
+            $('#datepicker').datepicker();
+        });
 
-    $(function () {
-        $('form').on('submit',
-            function (event) {
-                if ($('#datepicker').val() === '') {
-                    event.preventDefault();
-                    $('#alertDatepicker').html("Select date of birth.").fadeToggle(4000);
-                }
-            });
-    });
-</script>
+        $(function () {
+            $('form').on('submit',
+                function (event) {
+                    if ($('#datepicker').val() === '') {
+                        event.preventDefault();
+                        $('#alertDatepicker').html("Select date of birth.").fadeToggle(4000);
+                    }
+                });
+        });
+    </script>
+}
