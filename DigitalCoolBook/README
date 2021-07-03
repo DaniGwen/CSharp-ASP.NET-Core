@@ -1,6 +1,0 @@
-Application about online learning.
-It uses Administrator to register Students and Teacher
-Teachers can add Students to take a test and set a timer for a test
-Students can only log in, change their given password, view their scores and classes.
-Admin can add Tests, Subjects, Categories, Lessons, Edit accounts and issue new passwords in case they are forgotten.
-
