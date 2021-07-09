@@ -1,9 +1,10 @@
-﻿namespace DigitalCoolBook.App.Models.StudentViewModels
+﻿using System;
+
+namespace DigitalCoolBook.App.Models.StudentViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.App.Models.GradesViewModels;
+    using GradesViewModels;
     using DigitalCoolBook.Models;
 
     public class StudentEditViewModel
@@ -15,14 +16,14 @@
 
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "Полето е задъжително.")]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Полето е задъжително.")]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage ="Попълнете дата на раждане.")]
-        public string DateOfBirth { get; set; }
+        [Required(ErrorMessage ="Date of birth is required")]
+        public DateTime DateOfBirth { get; set; }
 
         public string PlaceOfBirth { get; set; }
 

@@ -4,14 +4,12 @@
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgba(128, 128, 128, 0.616);
+    transition-duration: 0.3s;
 }
 
-.subject-card:hover {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 13px 13px 10px rgba(128, 128, 128, 1.0);
-    font-size: 20px;
-}
+    .subject-card:hover {
+        transform: scale(1.1);
+    }
 
 .lower-card {
     display: inline-block;
@@ -19,15 +17,10 @@
     max-width: 300px;
 }
 
-.lower-card span {
-    font-size: 17px;
-    color: #000000;
-}
-
-.subject-card:hover span {
-    font-size: 20px;
-    color: #3b3939;
-}
+    .lower-card span {
+        font-size: 17px;
+        color: #000000;
+    }
 
 .upper-card img {
     width: 300px;

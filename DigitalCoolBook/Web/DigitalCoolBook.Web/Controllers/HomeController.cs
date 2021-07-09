@@ -45,22 +45,17 @@
                     return this.View();
 
                 if (this.User.IsInRole("Teacher"))
-                {
-                    var teacher = (Teacher)user;
-                    this.ViewData["UserName"] = teacher.Name;
-                }
-                else if (this.User.IsInRole("Student"))
-                {
-                    var student = (Student)user;
-                    this.ViewData["UserName"] = student.Name;
-                }
-                else if (this.User.IsInRole("Admin"))
-                    this.ViewData["UserName"] = "Admin";
+                    return Redirect("/Subject/Subjects"); 
+                if (this.User.IsInRole("Student"))
+                    return Redirect("/Subject/Subjects"); 
+                if (this.User.IsInRole("Admin"))
+                    return Redirect("/Admin/AdminPanel");
             }
 
             return this.View();
         }
 
+        [HttpGet]
         public IActionResult Login() => this.View();
 
         [HttpPost]
@@ -106,11 +101,8 @@
         public IActionResult Privacy() => this.View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return this.View(new ErrorViewModel
-            { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+
 
         [Authorize(Roles = "Teacher, Admin, Student")]
         public IActionResult Success()

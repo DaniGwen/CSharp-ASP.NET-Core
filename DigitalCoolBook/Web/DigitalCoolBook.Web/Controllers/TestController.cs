@@ -5,13 +5,12 @@ namespace DigitalCoolBook.App.Controllers
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Hubs;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-    using DigitalCoolBook.App.Models.TestviewModels;
+    using Hubs;
+    using Models.CategoryViewModels;
+    using Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using DigitalCoolBook.Web.Models.TestviewModels;
@@ -318,12 +317,6 @@ namespace DigitalCoolBook.App.Controllers
             return this.View();
         }
 
-        /// <summary>
-        /// Checks if all students completed the test end then removes the test room.
-        /// Process the test score and creates ExpiredTest to keep history.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpPost]
         [ActionName("EndTest")]
         [Authorize(Roles = "Teacher, Student")]
@@ -622,12 +615,6 @@ namespace DigitalCoolBook.App.Controllers
             }
         }
 
-        /// <summary>
-        /// Creates ExpiredTest to the current student.
-        /// Process the test score.
-        /// Rewrites score in database if the current score is better.
-        /// </summary>
-        /// <returns>Test score.</returns>
         private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model, string testId)
         {
             var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -704,7 +691,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Student")]
         [HttpGet]
-        public async Task<IActionResult> IsStudentInTestAsync()
+        public ActionResult IsStudentInTest()
         {
             var studentId = this.User
                 .FindFirst(ClaimTypes.NameIdentifier)?
@@ -736,10 +723,6 @@ namespace DigitalCoolBook.App.Controllers
             });
         }
 
-        /// <summary>
-        /// Ends the test for all instances.
-        /// </summary>
-        /// <returns><see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Authorize(Roles = "Teacher")]
         [ActionName("EndTestAllStudents")]
         public async Task<IActionResult> EndTestAllStudentsAsync(string id)
@@ -756,15 +739,11 @@ namespace DigitalCoolBook.App.Controllers
             return this.Redirect("/Home/Index");
         }
 
-        /// <summary>
-        /// Shows the Teacher all active tests.
-        /// </summary>
-        /// <returns>Void <see cref="IActionResult"/>.</returns>
         [HttpGet]
         [Authorize(Roles = "Teacher")]
         public IActionResult ActiveTests()
         {
-            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             List<Test> activeTests = this.testService.GetActiveTestsByTeacherId(teacherId);
 
@@ -776,7 +755,7 @@ namespace DigitalCoolBook.App.Controllers
         [HttpGet]
         public IActionResult TestsHistory()
         {
-            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var tests = this.testService.GetExpiredTestsByTeacherId(teacherId);
 

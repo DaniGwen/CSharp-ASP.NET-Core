@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<DigitalCoolBook.Web.Models.TestviewModels.StudentTestSummaryViewModel>
 
 <section class="section-summary">
-    <h1>Резултати</h1>
+    <h1>Score</h1>
     <ol>
         @foreach (var student in Model)
         {
             <li>
                 <label class="studentName-summary">@student.StudentName</label>
-                <span class="studentScore-summery">@student.Score точки</span>
+                <span class="studentScore-summery">@student.Score points</span>
             </li>
         }
     </ol>
-    <a class="boxed_btn_orange" href="/Home/Index">Начало</a>
+    <a class="btn btn-outline-secondary btn-sm" href="/Home/Index">Back</a>
 </section>
 

@@ -1,50 +1,36 @@
 ﻿@model LoginViewModel
 @{
     ViewData["Title"] = "Login";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
 
-<div class="container-fluid  w-50">
-    <section>
-        <form asp-action="Login" method="post">
-            <br />
-            <h2 class="text-center">Login</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="font-weight-bold" asp-for="Email">Email</label>
-                <input asp-for="Email" class="form-control" placeholder="john@yahoo.com..." autofocus />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<div class="offset-3 col-10 col-sm-12">
+    <form asp-action="Login" method="post">
+        <br />
+        <h2>Sign in</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <label class="form-label" asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control w-50" placeholder="john@yahoo.com..." autofocus />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group row mt-3">
+            <label class="form-label" asp-for="Password">Password</label>
+            <input asp-for="Password" class="form-control w-50" placeholder="Your password..." />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group row mt-2">
+            <div class="checkbox">
+                <label asp-for="RememberMe"><input asp-for="RememberMe" />Remember me?</label>
             </div>
-            <div class="form-group">
-                <label class="font-weight-bold" asp-for="Password">Password</label>
-                <input asp-for="Password" class="form-control" placeholder="Your password..." />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        @Html.DisplayNameFor(m => m.RememberMe)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group row d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary w-50">login</button>
-            </div>
-            <hr />
-            <div class="form-group">
-                <p>
-                    <a href="/Home/Index">back</a>
-                </p>
-                <p>
-                    <a id="forgot-password" href="/Admin/ForgotPassword">Forgotten password?</a>
-                </p>
-                <p>
-                    <a href="/Admin/AdminContact">Contact admin</a>
-                </p>
-            </div>
-        </form>
-    </section>
+        </div>
+        <div class="button-wrapper mt-2">
+            <button type="submit" class="btn btn-outline-primary">Login</button>
+        </div>
+        <div class="row form-group">
+            <a href="/Admin/ForgotPassword" id="forgot-password" class="mb-2 mt-2">Forgotten password?</a>
+            <a href="/Admin/AdminContact">Contact admin</a>
+        </div>
+    </form>
 </div>
 

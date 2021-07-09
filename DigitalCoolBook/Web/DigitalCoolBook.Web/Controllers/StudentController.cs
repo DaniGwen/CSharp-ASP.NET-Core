@@ -77,7 +77,7 @@
 
                     this.logger.LogInformation("User created a new account with password.");
 
-                    this.TempData["SuccessMsg"] = "Акаунта е регистриран";
+                    this.TempData["SuccessMsg"] = "Account register is successful";
                     return this.Redirect("/Home/Success");
                 }
                 else
@@ -127,8 +127,8 @@
             return this.View(studentsList);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditStudentAsync(string id)
         {
             var student = await this.userService.GetStudentAsync(id);
@@ -142,7 +142,7 @@
             model.Grades.AddRange(gradeModel);
 
             // convert DateTime from Db to string for view model
-            model.DateOfBirth = student.DateOfBirth.Date.ToString();
+            model.DateOfBirth = student.DateOfBirth.Date;
 
             return this.View(model);
         }
@@ -156,7 +156,7 @@
                 var student = await this.userService.GetStudentAsync(model.Id);
 
                 student.Address = model.Address;
-                student.DateOfBirth = DateTime.Parse(model.DateOfBirth);
+                student.DateOfBirth = model.DateOfBirth;
                 student.Email = model.Email;
                 student.FatherMobileNumber = model.FatherMobileNumber;
                 student.FatherName = model.FatherName;
@@ -170,7 +170,7 @@
                 student.GradeId = model.GradeId;
 
                 await this.userService.SaveChangesAsync();
-                this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+                this.TempData["SuccessMsg"] = "Changes saved successfully";
 
                 return this.Redirect("/Home/Success");
             }
@@ -241,13 +241,13 @@
             }
         }
 
-        [Authorize(Roles = "Student, Teacher")]
-        [ActionName("Panel")]
         [HttpGet]
-        public async Task<IActionResult> PanelAsync()
+        [Authorize(Roles = "Student, Teacher")]
+        public async Task<IActionResult> Panel()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier);
-            var userDb = await this.userService.GetUserAsync(userId.Value);
+            var userDb = await this.userService.GetUserAsync(userId?.Value);
+
             var model = new StudentChangePasswordViewModel
             {
                 Id = userDb.Id,
@@ -282,20 +282,6 @@
             }
 
             return this.Json(averageScore);
-        }
-
-        private string HashPassword(string password)
-        {
-            // Add Salt to password
-            byte[] salt = new byte[128 / 8];
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-
-            return hashed.ToString();
         }
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj": {}
+    "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
+    "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
+        "projectUniqueName": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
         "projectName": "DigitalCoolBook.Data",
-        "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
-        "packagesPath": "C:\\Users\\AW\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\obj\\",
+        "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,14 +22,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Users\\danig": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://lwlsv019/tfs/LWL/_packaging/ITDW/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
+              "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+                "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
               }
             }
           }
@@ -78,21 +80,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+    "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj",
+        "projectUniqueName": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj",
         "projectName": "DigitalCoolBook.Models",
-        "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj",
-        "packagesPath": "C:\\Users\\AW\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\obj\\",
+        "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -100,7 +102,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Users\\danig": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://lwlsv019/tfs/LWL/_packaging/ITDW/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -138,21 +142,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj": {
+    "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj",
+        "projectUniqueName": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj",
         "projectName": "DigitalCoolBook.Services",
-        "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj",
-        "packagesPath": "C:\\Users\\AW\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\obj\\",
+        "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\DigitalCoolBook.Services.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Services\\DigitalCoolBook.Services.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,20 +164,22 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Users\\danig": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://lwlsv019/tfs/LWL/_packaging/ITDW/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj"
+              "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj": {
+                "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Data\\DigitalCoolBook.Data.csproj"
               },
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
+              "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+                "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
               },
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj"
+              "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj": {
+                "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj"
               }
             }
           }
@@ -202,21 +208,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj": {
+    "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj",
+        "projectUniqueName": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj",
         "projectName": "DigitalCoolBook.Web.Models",
-        "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj",
-        "packagesPath": "C:\\Users\\AW\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\obj\\",
+        "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\DigitalCoolBook.Web.Models.csproj",
+        "packagesPath": "C:\\Users\\danig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Web\\DigitalCoolBook.Web.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AW\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\danig\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -224,14 +230,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Users\\danig": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://lwlsv019/tfs/LWL/_packaging/ITDW/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
-                "projectPath": "C:\\Users\\AW\\Documents\\GitHub\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
+              "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj": {
+                "projectPath": "C:\\Users\\danig\\Desktop\\ASP.NET core repo\\CSharp-ASP.NET-Core\\DigitalCoolBook\\Data\\DigitalCoolBook.Models\\DigitalCoolBook.Models.csproj"
               }
             }
           }
@@ -266,7 +274,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

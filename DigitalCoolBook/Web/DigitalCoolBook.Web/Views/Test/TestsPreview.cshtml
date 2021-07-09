@@ -2,15 +2,13 @@
 
 @{
     ViewData["Title"] = "TestsPreview";
-    Layout = "~/Views/Shared/_LayoutMenus.cshtml";
+    Layout = "_Layout";
 }
 
-
-
 <div class="container-fluid w-75">
-    <h2 class="text-center">Тестове</h2>
+    <h2 class="text-center">Tests</h2>
     <div class="form-group">
-        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTestAdmin">Създай нов</a>
+        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTestAdmin">Create new</a>
         <div class="col-form-label-lg">
             @Html.DisplayNameFor(model => model.TestName)
         </div>
@@ -18,50 +16,49 @@
         {
             <div class="row form-group">
                 <a class="btn btn-block btn-outline-info w-75 mr-1" href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
-                <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Изтрии</a>
+                <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Delete</a>
             </div>
         }
 
-        <a href="/Admin/AdminPanel">назад</a>
+        <a class="btn btn-outline-secondary" href="/Admin/AdminPanel">Back</a>
     </div>
 </div>
+
+@*Popup dialogs*@
 <div id="popup"></div>
 <div id="confirmdelete"></div>
 
-<script>
-    // delete test
-    function DeleteTest(elem) {
-        // Sets the popup title
-        $('#popup').dialog({ title: "Изтриване на тест" });
+@section Scripts{
+    <script>
+        // delete test
+        function DeleteTest(elem) {
+            // Sets the popup title
+            $('#popup').dialog({ title: "Delete test" });
 
-        $('#popup').dialog({
-            resizable: false,
-            modal: true,
-            heigth: 220,
-            width: 400,
-            buttons: {
-
-                "Назад": function () {
-                    $(this).dialog('close');
-                },
-                // delete test
-                "Изтриване": function () {
-                    $.post("/Test/DeleteTest", { testId: $(elem).attr('id') }, function (message) {
-                        $('#popup').dialog({
-                            resizable: false,
-                            modal: true,
-                            heigth: 220,
-                            width: 400,
-                            buttons: {
-                                "Ok": function () {
-                                    $(this).dialog('close', location.href = location.href);
-                                }
-                            }
-                        })
-                        $('#popup').html(message);
-                    })
+            $('#popup').dialog({
+                modal: true,
+                buttons: {
+                    "Back": function () {
+                        $(this).dialog('close');
+                    },
+                    // delete test
+                    "Delete": function () {
+                        $.post("/Test/DeleteTest",
+                            { testId: $(elem).attr('id') },
+                            function (message) {
+                                $('#popup').dialog({
+                                    modal: true,
+                                    buttons: {
+                                        "Ok": function () {
+                                            $(this).dialog('close', location.href = location.href);
+                                        }
+                                    }
+                                });
+                                $('#popup').html(message);
+                            });
+                    }
                 }
-            }
-        })
-    }
-</script>
+            });
+        }
+    </script>
+}

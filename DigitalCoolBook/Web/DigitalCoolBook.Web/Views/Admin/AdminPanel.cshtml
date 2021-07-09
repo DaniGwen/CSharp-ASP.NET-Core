@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
 <style>
     .backgroundOrange{
@@ -13,16 +13,16 @@
     <div class="row">
         <div class="col">
             <div class="list-group">
-                <a class="list-group-item backgroundOrange">Register</a>
-                <a href="/Teacher/EditTeachers" class="list-group-item list-group-item-action list-group-item-light">Register a teacher</a>
-                <a href="/Student/EditStudents" class="list-group-item list-group-item-action list-group-item-light">Register a student</a>
-                <a href="/Admin/EditParalelos" class="list-group-item list-group-item-action list-group-item-light">Add a grade</a>
+                <a class="list-group-item backgroundOrange"><h4>Personal management</h4></a>
+                <a href="/Teacher/EditTeachers" class="list-group-item list-group-item-action list-group-item-light">T E A C H E R S</a>
+                <a href="/Student/EditStudents" class="list-group-item list-group-item-action list-group-item-light">S T U D E N T S</a>
+                <a href="/Admin/EditParalelos" class="list-group-item list-group-item-action list-group-item-light">C L A S S E S</a>
             </div>
-            <div class="mt-2 mb-2">
-                <a class="list-group-item backgroundOrange">Add materials</a>
-                <a href="/Subject/AddLesson" class="list-group-item list-group-item-action list-group-item-light">Add a lesson</a>
-                <a href="/Test/CreateTest" class="list-group-item list-group-item-action list-group-item-light">Add a test</a>
-                <a href="/Test/TestsPreview" class="list-group-item list-group-item-action list-group-item-light">Tests overview</a>
+            <div class="mt-2">
+                <a class="list-group-item backgroundOrange"><h4>Materials management</h4></a>
+                <a href="/Subject/AddLesson" class="list-group-item list-group-item-action list-group-item-light">T O P I C S</a>
+                <a href="/Test/CreateTest" class="list-group-item list-group-item-action list-group-item-light">T E S T S</a>
+                <a href="/Test/TestsPreview" class="list-group-item list-group-item-action list-group-item-light">T E S T S   O V E R V I E W</a>
             </div>
         </div>
     </div>

@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<DigitalCoolBook.Web.Models.TestviewModels.TestExpiredViewModel>
 @{
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
-<section class="section-testsHistory">
+
+<section>
     <div class="container-fluid">
         <div class="col d-flex justify-content-center">
-            <h2 class=" my-h2">История на тестове</h2>
+            <h2 class=" my-h2">Test archive</h2>
         </div>
         <div class="d-flex justify-content-center">
-            <table class="table-testsHistory">
+            <table class="table table-hover ">
                 <thead>
                     <tr>
-                        <th>Заглавие</th>
-                        <th>Дата</th>
+                        <th>Title</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +27,7 @@
                 </tbody>
             </table>
         </div>
-        <a class="back-button" href="/Home/Index">назад</a>
+        <a class="btn btn-outline-secondary btn-sm" href="/Home/Index">Back</a>
     </div>
 </section>
 

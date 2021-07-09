@@ -1,15 +1,14 @@
 ﻿$(document).ready(function () {
-
     function Dialog(arg1, arg2) {
         $('#dialog').dialog({
             buttons: {
 
-                "отказ": function () {
+                "Cancel": function () {
                     $('#dialog').empty();
                     $(this).dialog("close");
                 },
 
-                "към теста": function () {
+                "To test": function () {
                     $(this).dialog("close");
                     window.location = "/Test/StartTest/" + arg2;
                 }
@@ -21,7 +20,7 @@
     function DialogEmpty(arg1) {
         $('#dialog').dialog({
             buttons: {
-                "затвори": function () {
+                "Close": function () {
                     $('#dialog').empty();
                     $(this).dialog('close');
                 }
@@ -30,14 +29,15 @@
             .append("<label>" + arg1 + "</label>");
     }
 
-    $("#activeTests").on('click', function () {
-        $.get("/Test/IsStudentInTest", function (response) {
-            if (response.success) {
-                Dialog(response.testName, response.testId);
-            }
-            else {
-                DialogEmpty(response.message)
-            }
+    $("#activeTests").on('click',
+        function() {
+            $.get("/Test/IsStudentInTest",
+                function(response) {
+                    if (response.success) {
+                        Dialog(response.testName, response.testId);
+                    } else {
+                        DialogEmpty(response.message);
+                    }
+                });
         });
-    })
 })

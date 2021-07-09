@@ -1,27 +1,23 @@
-﻿@model IEnumerable<DigitalCoolBook.App.Models.SubjectViewModels.SubjectViewModel>
+﻿@using System.Security.Claims
+@model IEnumerable<DigitalCoolBook.App.Models.SubjectViewModels.SubjectViewModel>
 
 @{
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
     ViewData["Title"] = "Subjects";
 }
-<div class="row mb-5">
-    <div class="col d-flex justify-content-center">
-        <h2 class="col-sm-auto my-h2">Учебни предмети</h2>
-    </div>
+
+<div class="offset-md-2 col-md-10 offset-sm-0 col-sm-12 mt-3">
+    @foreach (var subject in Model)
+    {
+        string imgName = subject.Name + ".jpg";
+
+        <a class="subject-card" asp-controller="Subject" asp-action="Categories" asp-route-id="@subject.SubjectId">
+            <div class="upper-card">
+                <img src="~/img/@imgName" alt="study" />
+            </div>
+            <div class="lower-card">
+                <span>@subject.Name</span>
+            </div>
+        </a>
+    }
 </div>
-@foreach (var item in Model)
-{
-    string imgName = item.Name + ".jpg";
-
-    <a class="subject-card" asp-controller="Subject" asp-action="Categories" asp-route-id="@item.SubjectId">
-        <div class="upper-card">
-            <img src="~/img/@imgName" all="study" />
-        </div>
-        <div class="lower-card">
-            <span>
-                @Html.DisplayFor(modelItem => item.Name)
-            </span>
-        </div>
-    </a>
-}
-

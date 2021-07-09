@@ -6,13 +6,14 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-    using DigitalCoolBook.App.Models.SubjectViewModels;
+    using Models.CategoryViewModels;
+    using Models.SubjectViewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using DigitalCoolBook.Web.Models.CategoryViewModels;
 
     public class SubjectController : Controller
     {
@@ -101,15 +102,13 @@
                 }
             }
 
-            // Create model for the view
-            var model = new CategoryDetailsViewModel
+            return this.View(new CategoryDetailsViewModel
             {
+                CategoryId = categoryId,
                 CategoryTitle = categoryTitle,
                 Lessons = lessonsDto,
                 SubjectId = subjectId,
-            };
-
-            return this.View(model);
+            });
         }
 
         [HttpGet]
@@ -291,7 +290,7 @@
             }
             else
             {
-                this.ModelState.AddModelError(string.Empty, "Моля попълнете всички полета.");
+                this.ModelState.AddModelError(string.Empty, "Please fill out the fields");
                 return this.View(model);
             }
 
@@ -305,7 +304,7 @@
         {
             if (categoryId == null)
             {
-                return this.BadRequest("Моля изберете категория.");
+                return this.BadRequest("Please select category");
             }
 
             await this.subjectService.RemoveCategoryAsync(categoryId);
@@ -320,7 +319,7 @@
         {
             if (subjectId == null)
             {
-                return this.BadRequest("Моля изберете предмет.");
+                return this.BadRequest("Please select subject");
             }
 
             await this.subjectService.RemoveSubjectAsync(subjectId);

@@ -56,7 +56,7 @@ namespace DigitalCoolBook.Data
 
             if (!_dbContext.Students.Any())
             {
-                var students = this.AddStudents(userManager, _dbContext);
+                var students = this.CreateStudents(_dbContext);
 
                 foreach (var student in students)
                 {
@@ -327,28 +327,28 @@ namespace DigitalCoolBook.Data
                    Id = 1.ToString(),
                    Title = "Живот и творчество",
                    Lessons = new List<Lesson>(this.AddLessons("1")),
-                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
+                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Art")?.SubjectId,
                },
                new Category()
                {
                    Id = 2.ToString(),
                    Title = "Творци на модерното изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("2")),
-                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
+                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Art")?.SubjectId,
                },
                new Category()
                {
                    Id = 3.ToString(),
                    Title = "Световни музей и галерии",
                    Lessons = new List<Lesson>(this.AddLessons("3")),
-                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
+                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Art")?.SubjectId,
                },
                new Category()
                {
                    Id = 4.ToString(),
                    Title = "Протестно Изкуство",
                    Lessons = new List<Lesson>(this.AddLessons("4")),
-                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Изобразително изкуство")?.SubjectId,
+                   SubjectId = _dbContext.Subjects.FirstOrDefault(s => s.Name == "Art")?.SubjectId,
                },
            };
 
@@ -469,35 +469,35 @@ namespace DigitalCoolBook.Data
                 new GradeTeacher
                 {
                    GradeTeacherId = "1",
-                   GradeId = _dbContext.Grades.First(grade => grade.Name == "10а").GradeId,
+                   GradeId = _dbContext.Grades.First(grade => grade.Name == "10a").GradeId,
                    TeacherId = _dbContext.Teachers.First(teacher => teacher.Email == "pau@pau.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "2",
-                    GradeId = _dbContext.Grades.First(grade => grade.Name == "10е").GradeId,
+                    GradeId = _dbContext.Grades.First(grade => grade.Name == "10e").GradeId,
                     TeacherId = _dbContext.Teachers.First(teacher => teacher.Email == "stam@stam.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "3",
-                    GradeId = _dbContext.Grades.First(grade => grade.Name == "10б").GradeId,
+                    GradeId = _dbContext.Grades.First(grade => grade.Name == "10b").GradeId,
                     TeacherId = _dbContext.Teachers.First(teacher => teacher.Email == "pesh@pesh.com").Id,
                 },
 
                 new GradeTeacher
                 {
                     GradeTeacherId = "4",
-                    GradeId = _dbContext.Grades.First(grade => grade.Name == "12а").GradeId,
+                    GradeId = _dbContext.Grades.First(grade => grade.Name == "12a").GradeId,
                     TeacherId = _dbContext.Teachers.First(teacher => teacher.Email == "pau@pau.com").Id,
                 },
             };
             return gradeParalelos;
         }
 
-        private Student[] AddStudents(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        private Student[] CreateStudents(ApplicationDbContext context)
         {
             Student[] students = new Student[12]
              {
@@ -517,7 +517,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "ceco@ceco.com",
                     UserName = "ceco@ceco.com",
-                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10b").GradeId,
                 },
                 new Student
                 {
@@ -535,7 +535,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099009933,
                     Email = "ivailo@ivailo.com",
                     UserName = "ivailo@ivailo.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -553,7 +553,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 0997699933,
                     Email = "mima@mima.com",
                     UserName = "mima@mima.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -571,7 +571,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 0987699033,
                     Email = "atanas@atanas.com",
                     UserName = "atanas@atanas.com",
-                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10b").GradeId,
                 },
                 new Student
                 {
@@ -589,7 +589,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "stef@stef.com",
                     UserName = "stef@stef.com",
-                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10b").GradeId,
                 },
                 new Student
                 {
@@ -607,7 +607,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "drag@drag.com",
                     UserName = "drag@drag.com",
-                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10b").GradeId,
                 },
                 new Student
                 {
@@ -625,7 +625,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "ivelin@ivelin.com",
                     UserName = "ivelin@ivelin.com",
-                    GradeId = context.Grades.First(g => g.Name == "10б").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10b").GradeId,
                 },
                 new Student
                 {
@@ -643,7 +643,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "man@man.com",
                     UserName = "man@man.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -661,7 +661,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "shtef@shtef.com",
                     UserName = "shtef@shtef.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -679,7 +679,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "bog@bog.com",
                     UserName = "bog@bog.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -697,7 +697,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "des@des.com",
                     UserName = "des@des.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
                 new Student
                 {
@@ -715,7 +715,7 @@ namespace DigitalCoolBook.Data
                     MotherMobileNumber = 099999933,
                     Email = "rad@rad.com",
                     UserName = "rad@rad.com",
-                    GradeId = context.Grades.First(g => g.Name == "10а").GradeId,
+                    GradeId = context.Grades.First(g => g.Name == "10a").GradeId,
                 },
              };
             return students;
@@ -771,7 +771,7 @@ namespace DigitalCoolBook.Data
 
         private List<Grade> AddParalelos()
         {
-            var paraleloArray = new string[8] { "а", "б", "в", "г", "д", "е", "ж", "з" };
+            var paraleloArray = new string[8] { "a", "b", "c", "d", "e", "f", "g", "h" };
             var grades = new List<Grade>();
 
             foreach (var paralelo in paraleloArray)
@@ -793,9 +793,9 @@ namespace DigitalCoolBook.Data
         {
             var subjects = new List<string>()
                         {
-                            "Математика", "Български", "Литература",
-                            "География", "История", "Компютърна графика",
-                            "Изобразително изкуство",
+                            "Mathematics", "Bulgarian language", "Literature",
+                            "Geography", "History", "Computer Graphics",
+                            "Art",
                         };
 
             var subjectsList = new List<Subject>();

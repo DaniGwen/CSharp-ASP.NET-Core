@@ -23,9 +23,7 @@
             var userName = await this.GetUserNameAsync();
 
             if (userName != null)
-            {
-                await this.Clients.All.SendAsync("OnConnected", $"{userName} влезна.");
-            }
+                await this.Clients.All.SendAsync("OnConnected", $"{userName} connected");
         }
 
         [Authorize]
@@ -36,14 +34,12 @@
             await this.userService.SetStudentFinishedTestRoom(userName);
 
             if (userName != null)
-            {
-                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} приключи теста.", userName);
-            }
+                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} disconected", userName);
         }
 
         private async Task<string> GetUserNameAsync()
         {
-            var userId = this.Context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = this.Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var identityUser = await this.userService.GetUserAsync(userId);
 
@@ -53,10 +49,8 @@
 
                 return student.Name;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 }

@@ -2,25 +2,22 @@
 
 @{
     ViewData["Title"] = "LessonDetails";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
 
 <div class="container-fluid">
-    <h3 class="col-sm-5 mt-2 my-border text-white">@Model.Title</h3>
+    <h3>@Model.Title</h3>
     <hr />
     <div>
-        <p class="lesson-content" >
-            @Model.Content
-        </p>
+        <p class="lesson-content">@Model.Content</p>
     </div>
     <hr />
-    <div class="form-group">
-        <a href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})" class="mt-1">Назад</a>
-        <div class="d-flex justify-content-center mb-2">
-            @if (this.User.IsInRole("Teacher"))
-            {
-                <a href="/Test/CreateTest/@Model.LessonId" class="btn boxed-btn ml-5">Тест</a>
-            }
-        </div>
+    <div class="buttons-wrapper">
+        <a class="btn btn-outline-secondary btn-sm"
+           href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})">Back</a>
+        @if (this.User.IsInRole("Teacher"))
+        {
+            <a class="btn btn-outline-info btn-lg" href="/Test/CreateTest/@Model.LessonId">Test</a>
+        }
     </div>
 </div>

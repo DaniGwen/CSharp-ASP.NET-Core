@@ -59,13 +59,9 @@
                 teacher.PasswordHash = registerModel.Password;
 
                 if (registerModel.Username == null)
-                {
                     teacher.UserName = registerModel.Email;
-                }
                 else
-                {
                     teacher.UserName = registerModel.Username;
-                }
 
                 var result = await this.userManager.CreateAsync(teacher, registerModel.Password);
 
@@ -73,18 +69,14 @@
                 {
                     await this.userManager.AddToRoleAsync(teacher, "Teacher");
 
-                    this.logger.LogInformation("User created a new account with password.");
-
-                    this.TempData["SuccessMsg"] = "Акаунта е създаден.";
+                    this.TempData["SuccessMsg"] = "The account has been created";
                     return this.Redirect("/Home/Success");
                 }
-                else
+
+                foreach (var error in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        this.ModelState.AddModelError(string.Empty, error.Description);
-                        return this.View(registerModel);
-                    }
+                    this.ModelState.AddModelError(string.Empty, error.Description);
+                    return this.View(registerModel);
                 }
             }
 
@@ -153,11 +145,11 @@
                 await this.userService.RemoveTeacherAsync(id);
                 await this.userService.SaveChangesAsync();
 
-                return this.Json("Акаунта е изтрит.");
+                return this.Json("Account has been deleted");
             }
             catch (Exception)
             {
-                return this.Json("Грешка при изтриването.");
+                return this.Json("Error deleting account");
             }
         }
 
@@ -183,7 +175,7 @@
 
                 await this.userService.SaveChangesAsync();
 
-                this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+                this.TempData["SuccessMsg"] = "Changes are saved";
 
                 return this.Redirect("/Home/Success");
             }
@@ -233,7 +225,7 @@
                 if (addPasswordResult.Succeeded)
                 {
                     await this.signInManager.SignOutAsync();
-                    this.TempData["SuccessMsg"] = "Паролата е записана успешно";
+                    this.TempData["SuccessMsg"] = "Password saved";
                     return this.Redirect("/Home/Success");
                 }
                 else
@@ -255,28 +247,15 @@
         public async Task<IActionResult> PanelAsync()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier);
-            var user = await this.userService.GetUserAsync(userId.Value);
-            var model = new TeacherChangePasswordViewModel
+            var user = await this.userService.GetUserAsync(userId?.Value);
+            var model = new TeacherChangePasswordViewModel();
+
+            if (user != null)
             {
-                Id = user.Id,
-            };
+                model.Id = user.Id;
+            }
 
             return this.View(model);
-        }
-
-        private string HashPassword(string password)
-        {
-            // Add Salt to password
-            byte[] salt = new byte[128 / 8];
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-
-            return hashed.ToString();
         }
     }
 }

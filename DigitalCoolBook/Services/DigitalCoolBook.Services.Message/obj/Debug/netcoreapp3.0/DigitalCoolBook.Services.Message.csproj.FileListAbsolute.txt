@@ -1,3 +1,0 @@
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.0\DigitalCoolBook.Services.Message.csprojAssemblyReference.cache
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.0\DigitalCoolBook.Services.Message.AssemblyInfoInputs.cache
-C:\Users\deko\Documents\GitHub\CSharp-ASP.NET-Core\DigitalCoolBook\DigitalCoolBook.Services.Message\obj\Debug\netcoreapp3.0\DigitalCoolBook.Services.Message.AssemblyInfo.cs

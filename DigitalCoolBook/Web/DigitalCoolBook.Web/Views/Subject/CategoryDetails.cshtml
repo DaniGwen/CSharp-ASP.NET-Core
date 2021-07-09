@@ -1,18 +1,12 @@
-﻿@model DigitalCoolBook.App.Models.CategoryViewModels.CategoryDetailsViewModel
+﻿@model DigitalCoolBook.Web.Models.CategoryViewModels.CategoryDetailsViewModel
 
 @{
     ViewData["Title"] = "Category Details";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
 
-<div class="container-fluid">
-    <div class="col">
-        <h2>@ViewData["CategoryTitle"]</h2>
-    </div>
-    <hr />
-    <div class="d-flex justify-content-center">
-        <h2 class="mb-2 my-h2 col-sm-auto">Теми</h2>
-    </div>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Topics</h3>
     <div>
         @foreach (var lesson in Model.Lessons)
         {
@@ -22,16 +16,16 @@
                     <div class="col-sm-7 d-flex justify-content-center">
                         @if (lesson.IsUnlocked)
                         {
-                            <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
+                            <a href="/Subject/LessonDetails/@lesson.LessonId" class="btn btn-outline-info mb-2">@lesson.Title</a>
                         }
                         else
                         {
-                            <a class="btn-outline-secondary btn-lg mb-2 disabled" aria-disabled="true">@lesson.Title</a>
+                            <a class="btn btn-outline-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
                             <i class="fa fa-lock text-danger mt-3"></i>
                         }
                     </div>
                     <div class="col-sm-4 d-flex justify-content-end">
-                        <span class="text-info">Точки:</span>
+                        <span class="text-info">Score:</span>
                         @if (lesson.Score == 0)
                         {
                             <span class="text-info font-weight-bold ml-2">@lesson.Score</span>
@@ -48,105 +42,98 @@
                 }
                 @if (this.User.IsInRole("Teacher"))
                 {
-                    <div class="col-sm-7 d-flex justify-content-center">
-                        <a href="/Subject/LessonDetails/@lesson.LessonId" class=" btn-outline-info btn-lg mb-2">@lesson.Title</a>
-                    </div>
+                    <a href="/Subject/LessonDetails/@lesson.LessonId" class="btn btn-outline-info">@lesson.Title</a>
                 }
             </div>
-            <div>
+            <div class="buttons-wrapper">
                 @if (this.User.IsInRole("Admin"))
                 {
-                    <div class="form-group">
-                        <button class="btn btn-outline-info w-100">
-                            @Html.ActionLink("Промяна", "Edit", new { id = lesson.LessonId })
-                        </button>
-                        <a class="btnDelete btn btn-outline-info w-100 mt-2" id="@lesson.LessonId" href="#">Изтрии</a>
-                    </div>
+                    <a class="btn btn-outline-warning btn-sm"
+                       asp-controller="Subject"
+                       asp-action="EditLesson"
+                       asp-route-id="@lesson.LessonId">
+                        Edit
+                    </a>
+                    <a class="btn-sm btn btn-outline-danger" id="@lesson.LessonId" href="#">Delete</a>
                 }
             </div>
         }
     </div>
     <hr />
-    <div class="mt-4 ml-4 mb-2 row form-group">
-        <a href="@Url.Action("Subjects", "Subject")">Назад</a>
-    </div>
+    <a class="btn btn-outline-secondary btn-sm" href="/Subject/Categories/@Model.CategoryId">Back</a>
 
     @if (this.User.IsInRole("Admin"))
     {
-        <p class="btn btn-outline-info">
-            <a asp-action="AddLesson">Създаване</a>
-        </p>
+        <a class="btn btn-outline-success btn-sm mt-2" asp-action="AddLesson">Create</a>
     }
 </div>
 
-<div hidden id="dialog-confirm" title="Изтриване на урок">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-        Информацията ще бъде изтрита. Продължи?
-    </p>
-</div>
+@if (this.User.IsInRole("Admin"))
+{
+    <div id="dialog-confirm" title="Delete">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+            The topic will be removed. Continue?
+        </p>
+    </div>
 
-<div id="successMessage"></div>
+    <div id="successMessage"></div>
 
-<div style="display: none; " id="errorMessageDialog" title="Грешка!">
-    <p style="max-height:280px; overflow:auto;" id="errorMessage">
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-    </p>
-</div>
+    <div style="display: none; " id="errorMessageDialog" title="Error">
+        <p style="max-height:280px; overflow:auto;" id="errorMessage">
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        </p>
+    </div>
+}
 
-<script>
-    $(function () {
-        $("#dialog-confirm").hide();
-        $(".btnDelete").click(function () {
-            $("#dialog-confirm").dialog({
-                resizable: true,
-                height: 250,
-                width: 450,
-                modal: true,
-                buttons:
-                {
-                    "изтриване": function () {
-                        var categoryId = $(".btnDelete").attr("id");
-                        $.ajax({
-                            url: "/Subject/DeleteLesson/" + categoryId,
-                            type: "POST",
-                            success: function () {
-                                $("#successMessage").dialog({
-                                    resizable: false,
-                                    height: 200,
-                                    width: 300,
-                                    modal: true,
-                                    buttons: {
-                                        "Затвори": function () {
-                                            $(this).dialog("close");
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#dialog-confirm").hide();
+            $(".btn-delete").click(function () {
+                $("#dialog-confirm").dialog({
+                    modal: true,
+                    buttons:
+                    {
+                        "Delete": function () {
+                            var categoryId = $(".btn-delete").attr("id");
+                            $.ajax({
+                                url: "/Subject/DeleteLesson/" + categoryId,
+                                type: "POST",
+                                success: function () {
+                                    $("#successMessage").dialog({
+                                        modal: true,
+                                        buttons: {
+                                            "Close": function () {
+                                                $(this).dialog("close");
+                                            }
                                         }
-                                    }
-                                });
-                                $("#successMessage").html("Успешно изтриване!");
-                            },
-                            error: function (request, err, message) {
-                                $("#errorMessage").html(request.statusText);
-                                $("#errorMessageDialog").dialog({
-                                    maxHeight: 290,
-                                    width: 600,
-                                    modal: true,
-                                    buttons: {
-                                        "Затвори": function () {
-                                            $(this).dialog("close");
+                                    });
+                                    $("#successMessage").html("Successfully removed");
+                                },
+                                error: function (request, err, message) {
+                                    $("#errorMessage").html(request.statusText);
+                                    $("#errorMessageDialog").dialog({
+                                        modal: true,
+                                        buttons: {
+                                            "Close": function () {
+                                                $(this).dialog("close");
+                                            }
                                         }
-                                    }
-                                });
-                                //In release version use this
-                                //$("#errorMessage").html("Потребителя не  може да бъде изтрит");
-                            }
-                        });
-                        $(this).dialog("close");
-                    },
-                    "назад": function () {
-                        $(this).dialog("close");
+                                    });
+                                    //Use in release
+                                    //$("#errorMessage").html("User can't be deleted");
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Back": function () {
+                            $(this).dialog("close");
+                        }
                     }
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
+}

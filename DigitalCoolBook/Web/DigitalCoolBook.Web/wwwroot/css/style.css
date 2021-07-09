@@ -1,22 +1,27 @@
-@import "buttons.css";
-@import "navigation.css";
-@import "footer.css";
+@import "styles/elements/_element-body.css";
+@import "styles/elements/_element-select.css";
 
-@import "styles/elements/_elements-body.css";
 @import "styles/settings/_settings-typography.css";
-@import "styles/generic/_generic-normalize.css";
-@import "styles/components/_component-jumbotron.css";
+
+/*@import "styles/generic/_generic-normalize.css";*/
+@import "styles/generic/_generic-reset.css";
+
 @import "styles/components/_component-test-room-summary.css";
 @import "styles/components/_component-test-history.css";
 @import "styles/components/_component-subject.css";
 @import "styles/components/_component-buttons.css";
+@import "styles/components/_component-navigation.css";
+@import "styles/components/_component-footer.css";
+@import "styles/components/_component-layout.css";
+@import "styles/components/_component-lessonsPreview.css";
+@import "styles/components/_component-liveFeed.css";
+@import "styles/components/teacher/_component-editTeacher.css";
+@import "styles/components/teacher/_component-editTeachers.css";
+
+
 
 * {
     box-sizing: border-box;
-}
-
-html {
-    height: 100%;
 }
 
 .img {
@@ -38,10 +43,6 @@ ul {
 
 hr.hr-orange {
     background: #ffb74d;
-}
-
-.DCB-text {
-    color: darkslategray;
 }
 
 .my-info-text {
@@ -71,10 +72,6 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-    input[type="checkbox"]:checked + label span {
-        /*background: url(check_radio_sheet.png) -19px top no-repeat;*/
-    }
-
 input[type=number] {
     width: 80px;
     height: 30px;
@@ -84,8 +81,6 @@ input[type=number] {
 hr.hr-orange {
     background-color: #ffb74d;
 }
-
-
 
 .page-header {
     padding-bottom: 5px;

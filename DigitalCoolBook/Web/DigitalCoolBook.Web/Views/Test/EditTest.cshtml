@@ -2,16 +2,16 @@
 
 @{
     ViewData["Title"] = "EditTest";
-    Layout = "~/Views/Shared/_LayoutMenus.cshtml";
+    Layout = "_Layout";
 
     var indexQuestion = 0;
     var numberQuestion = 1;
     var indexAnswer = 0;
-    var letters = new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З" };
+    var letters = new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 }
 
 <div class="container-fluid w-75">
-    <h2 class="text-center">Редакция на тест</h2>
+    <h2 class="text-center">Test edit</h2>
     <br />
     <h3 class="text-center">@Model.TestName</h3>
     <hr />
@@ -43,8 +43,8 @@
             }
         </div>
         <div class="d-flex justify-content-between">
-            <a href="/Test/TestsPreview">назад</a>
-            <button class="btn btn-block btn-outline-secondary w-25 mb-1" id="saveForm" type="submit">запази</button>
+            <a class="btn btn-outline-secondary btn-sm" href="/Test/TestsPreview">Back</a>
+            <button class="btn btn-outline-success btn-sm mb-1" id="saveForm" type="submit">Save</button>
         </div>
     </form>
 </div>

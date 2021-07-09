@@ -2,18 +2,12 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
-<style>
-    .myOrangeButton {
-        background: #ffb74d;
-    }
-</style>
 
-<h2 class="text-center">Edit profile</h2>
+<h3>Edit profile</h3>
 
-<hr />
-<form asp-action="EditTeacher" asp-route-id="@Model.Id">
+<form class="text-center" asp-action="EditTeacher" asp-route-id="@Model.Id">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group row">
         <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
@@ -68,36 +62,38 @@
             <span asp-validation-for="Telephone" class="text-danger"></span>
         </div>
     </div>
-    <hr />
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-block myOrangeButton" />
-        <a class="btn btn-block btn-outline-dark" asp-action="EditTeachers">Back</a>
+    <div class="buttons-wrapper">
+        <a class="btn btn-outline-secondary btn-sm" asp-action="EditTeachers">Back</a>
+        <input class="btn btn-outline-success btn-sm" type="submit" value="Save" />
     </div>
 </form>
 
-<!--setting datepicker and validating DateOfBirth input-->
-<script type="text/javascript">
-    $.datepicker.setDefaults($.datepicker.regional["bg"]);
-    $.datepicker.setDefaults({
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: "dd.M.yy"
-    });
+@section Scripts{
+    <!--setting datepicker and validating DateOfBirth input-->
+    <script type="text/javascript">
+        $.datepicker.setDefaults($.datepicker.regional["bg"]);
+        $.datepicker.setDefaults({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: "dd.M.yy"
+        });
 
-    $(function () {
-        $('#datepicker').datepicker();
-    });
+        $(function () {
+            $('#datepicker').datepicker();
+        });
 
-    $(function () {
-        $('form').on('submit',
-            function (event) {
-                if ($('#datepicker').val() === '') {
-                    event.preventDefault();
-                    $('#alertDatepicker').html("Please select date of birth.").fadeToggle(4000);
-                }
-            });
-    });
-</script>
+        $(function () {
+            $('form').on('submit',
+                function (event) {
+                    if ($('#datepicker').val() === '') {
+                        event.preventDefault();
+                        $('#alertDatepicker').html("Please select date of birth.").fadeToggle(4000);
+                    }
+                });
+        });
+    </script>
+}
+
 
 

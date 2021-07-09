@@ -57,7 +57,6 @@ namespace DigitalCoolBook.App
             {
                 cfg.AddProfile<OrganizationProfile>();
             });
-            var mapper = config.CreateMapper();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -94,7 +93,7 @@ namespace DigitalCoolBook.App
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDBSeeder(context, serviceProvider, this.Configuration);
@@ -109,14 +108,13 @@ namespace DigitalCoolBook.App
 
             var supportedCultures = new[]
             {
-                // Add english-USA support localization
-                // new CultureInfo("en-US"),
+                new CultureInfo("en"),
                 new CultureInfo("bg"),
             };
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("bg"),
+                DefaultRequestCulture = new RequestCulture("en"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures,
             });
@@ -130,6 +128,7 @@ namespace DigitalCoolBook.App
             app.UseEndpoints(endpoint =>
             {
                 endpoint.MapHub<TestHub>("/testhub");
+                endpoint.MapHub<LiveFeedHub>("/liveFeedHub");
             });
 
             app.UseMvc(routes =>

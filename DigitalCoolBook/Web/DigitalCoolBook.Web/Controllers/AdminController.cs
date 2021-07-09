@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Models;
-    using DigitalCoolBook.App.Models.AdminViewModels;
-    using DigitalCoolBook.App.Models.GradeParaleloViewModels;
-    using DigitalCoolBook.App.Services;
+    using Models;
+    using Models.AdminViewModels;
+    using Models.GradeParaleloViewModels;
+    using Services;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
@@ -16,7 +16,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
-    using SendGrid;
 
     [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
@@ -48,50 +47,38 @@
             this.configuration = configuration;
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminPanel()
-        {
-            return this.View();
-        }
+        public IActionResult AdminPanel() => this.View();
 
-        public IActionResult AdminContact()
-        {
-            return this.View();
-        }
+        [HttpGet]
+        public IActionResult AdminContact() => this.View();
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult EditParalelos()
         {
-            var paralelos = this.gradeService.GetGradeParalelos().ToList();
+            var gradeTeachers = this.gradeService.GetGradeParalelos().ToList();
             var models = new List<ParaleloViewModel>();
-
-            foreach (var paralelo in paralelos)
+        
+            foreach (var gradeTeacher in gradeTeachers)
             {
-                var grades = this.gradeService
-                    .GetGrades()
-                    .ToList();
-
                 var model = new ParaleloViewModel
                 {
-                    Id = paralelo.GradeTeacherId,
-
-                    GradeId = paralelo.GradeId,
-
-                    TeacherId = paralelo.TeacherId,
-
+                    Id = gradeTeacher.GradeTeacherId,
+                    GradeId = gradeTeacher.GradeId,
+                    TeacherId = gradeTeacher.TeacherId,
                     GradeName = this.gradeService
                     .GetGrades()
-                    .FirstOrDefault(g => g.GradeId == paralelo.GradeId)
+                    .FirstOrDefault(g => g.GradeId == gradeTeacher.GradeId)?
                     .Name,
-
                     TeacherName = this.userService
                     .GetTeachers()
-                    .FirstOrDefault(t => t.Id == paralelo.TeacherId)
+                    .FirstOrDefault(t => t.Id == gradeTeacher.TeacherId)?
                     .Name,
-
                     Students = this.userService
                     .GetStudents()
-                    .Where(s => s.GradeId == paralelo.Grade.GradeId)
+                    .Where(s => s.GradeId == gradeTeacher.Grade.GradeId)
                     .ToList(),
                 };
 
@@ -101,8 +88,40 @@
             return this.View(models);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditParaleloAsync(string teacherId, string gradeId)
+        {
+            var gradeParalelo = await this.gradeService.GetGradeParaleloAsync(teacherId);
+
+            var grades = this.gradeService
+                .GetGrades()
+                .OrderBy(g => g.Name)
+                .ToList();
+
+            var teachers = this.userService
+                .GetTeachers()
+                .ToList();
+
+            var model = this.mapper.Map<ParaleloCreateViewModel>(gradeParalelo);
+
+            model.GradeName = this.gradeService
+                .GetGrades()
+                .FirstOrDefault(g => g.GradeId == gradeParalelo.GradeId)?.Name;
+
+            model.TeacherName = this.userService
+                .GetTeachers()
+                .FirstOrDefault(t => t.Id == gradeParalelo.TeacherId)?.Name;
+
+            model.Teachers = teachers;
+            model.Grades = grades;
+            model.GradeParaleloId = teacherId;
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateParalelo()
         {
             var teachers = this.userService
@@ -123,64 +142,32 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateParaleloAsync(ParaleloCreateViewModel model)
         {
             try
             {
-                var gradeParalelo = this.mapper.Map<GradeTeacher>(model);
-
-                gradeParalelo.GradeTeacherId = Guid.NewGuid().ToString();
+                var gradeParalelo = new GradeTeacher
+                {
+                    GradeTeacherId = Guid.NewGuid().ToString(),
+                    GradeId = model.IdGrade,
+                    TeacherId = model.IdTeacher
+                };
 
                 await this.gradeService.AddGradeParaleloAsync(gradeParalelo);
             }
             catch (Exception exception)
             {
-                var error = new ErrorViewModel
-                {
-                    Message = exception.Message,
-                };
-                return this.View("Error", error);
+                return this.View("Error", new ErrorViewModel { Message = exception.Message });
             }
 
-            this.TempData["SuccessMsg"] = "Паралелката създадена успешно";
+            this.TempData["SuccessMsg"] = "Class has been created successfully";
             return this.Redirect("/Home/Success");
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<IActionResult> EditParaleloAsync(string id)
-        {
-            var paralelo = await this.gradeService.GetGradeParaleloAsync(id);
-
-            var grades = this.gradeService
-                .GetGrades()
-                .OrderBy(g => g.Name)
-                .ToList();
-
-            var teachers = this.userService
-                .GetTeachers()
-                .ToList();
-
-            var model = this.mapper.Map<ParaleloCreateViewModel>(paralelo);
-
-            model.GradeName = this.gradeService
-                .GetGrades()
-                .FirstOrDefault(g => g.GradeId == paralelo.GradeId).Name;
-
-            model.TeacherName = this.userService
-                .GetTeachers()
-                .FirstOrDefault(t => t.Id == paralelo.TeacherId).Name;
-
-            model.Teachers = teachers;
-            model.Grades = grades;
-
-            return this.View(model);
-        }
-
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditParaleloAsync(ParaleloCreateViewModel model)
         {
             try
@@ -202,7 +189,7 @@
                 return this.View("Error", error);
             }
 
-            this.TempData["SuccessMsg"] = "Промяната е записана успешно";
+            this.TempData["SuccessMsg"] = "Changes saved";
             return this.Redirect("/Home/Success");
         }
 
@@ -223,7 +210,7 @@
                 return this.View("Error", error);
             }
 
-            this.TempData["SuccessMsg"] = "Премахването е успешно";
+            this.TempData["SuccessMsg"] = "Removed successfully";
             return this.Redirect("/Home/Success");
         }
 
@@ -245,7 +232,7 @@
 
             if (user == null)
             {
-                this.ModelState.AddModelError(string.Empty, $"{email} няма регистриран такъв имейл.");
+                this.ModelState.AddModelError(string.Empty, $"{email} no such email registered.");
 
                 return this.View();
             }

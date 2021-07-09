@@ -7,7 +7,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-    using DigitalCoolBook.App.Data;
+    using Data;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
-    using DigitalCoolBook.App.Services;
+    using Services;
 
     [AllowAnonymous]
     public class RegisterTeacherModel : PageModel
@@ -24,16 +24,13 @@
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterTeacherModel> _logger;
         private readonly EmailSender _emailSender;
-        private readonly ApplicationDbContext _context;
 
         public RegisterTeacherModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterTeacherModel> logger,
-            EmailSender emailSender,
-            ApplicationDbContext context)
+            EmailSender emailSender)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -92,8 +89,10 @@
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
-            returnUrl = returnUrl ?? this.Url.Content("~/");
+            returnUrl ??= this.Url.Content("~/");
+
             this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (this.ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };

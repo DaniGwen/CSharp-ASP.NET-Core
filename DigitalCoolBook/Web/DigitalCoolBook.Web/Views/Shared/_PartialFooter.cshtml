@@ -1,17 +1,16 @@
 ﻿<footer>
     <ul class="footer-ul">
-        <li>Телефон: *******</li>
-        <li>Адрес: *******</li>
-        <li>Пощенски код: ****</li>
+        <li>Phone: *******</li>
+        <li>Address: *******</li>
+        <li>Postcode: ****</li>
     </ul>
     <ul class="footer-ul">
         <li>FAQ</li>
-        <li>Favorites</li>
-        <li>Contacts</li>
+        <li><a href="#">Contacts</a></li>
     </ul>
     <ul class="footer-ul last">
-        <li>Privacy</li>
-        <li>Terms</li>
-        <li>&copy @DateTime.Now.Year DigitalCoolBook</li>
+        <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li>&copy @DateTime.Now.Year.ToString() DigitalCoolBook</li>
     </ul>
 </footer>

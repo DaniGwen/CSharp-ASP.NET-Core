@@ -2,12 +2,12 @@
 
 @{
     ViewData["Title"] = "Tests";
-    Layout = "_LayoutMenus";
+    Layout = "_Layout";
 }
 
 <div class="container-fluid w-75">
     <div class="col d-flex justify-content-center">
-        <h2 class="col-sm-auto my-h2">Тестове</h2>
+        <h2 class="col-sm-auto my-h2">Tests</h2>
     </div>
     <div class="row">
         @Html.DisplayNameFor(model => model.TestName)
@@ -19,15 +19,13 @@
             <p class="col-form-label-lg">@test.TestName</p>
             <div class="col d-flex justify-content-end">
                 <div class="col-form-label-lg ml-3">
-                    @Html.ActionLink("Задаване на таймер", "SetTestTimer", "Test", new { testId = test.TestId }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Set timer", "SetTestTimer", "Test", new { testId = test.TestId }, new { @class = "btn btn-outline-primary" })
                 </div>
 
-
-                @*<div class="col-form-label-lg ml-3">
-                        @Html.ActionLink("Старт", "StartTest", "Test", new { id = test.TestId }, new { @class = "btn btn-outline-success" })
-                    </div>*@
+                <div class="col-form-label-lg ml-3">
+                    <a class="btn btn-outline-success btn-sm" href="/Test/StartTest/@test.TestId">Start</a>
+                </div>
             </div>
-
         </div>
     }
 </div>
