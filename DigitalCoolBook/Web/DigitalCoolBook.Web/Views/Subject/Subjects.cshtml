@@ -1,0 +1,23 @@
+﻿@using System.Security.Claims
+@model IEnumerable<DigitalCoolBook.App.Models.SubjectViewModels.SubjectViewModel>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Subjects";
+}
+
+<div class="offset-md-2 col-md-10 offset-sm-0 col-sm-12 mt-3">
+    @foreach (var subject in Model)
+    {
+        string imgName = subject.Name + ".jpg";
+
+        <a class="subject-card" asp-controller="Subject" asp-action="Categories" asp-route-id="@subject.SubjectId">
+            <div class="upper-card">
+                <img src="~/img/@imgName" alt="study" />
+            </div>
+            <div class="lower-card">
+                <span>@subject.Name</span>
+            </div>
+        </a>
+    }
+</div>

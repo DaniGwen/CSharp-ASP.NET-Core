@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.TestviewModels.QuestionsModel>
+
+@{
+    ViewData["Title"] = "MarkCorrectAnswers";
+    Layout = "_Layout";
+    var index = 0;
+}
+
+<div class="container-fluid w-75">
+    <h3 class="text-center mt-2">Mark the correct answers</h3>
+    <form asp-action="MarkCorrectAnswers" method="post">
+        <input hidden name="testId" value="@TempData["TestId"]" />
+        <div class="container w-75">
+            <div class="form-group">
+                @foreach (var question in Model)
+                {
+                    <span>@question.Title</span>
+                    @Html.HiddenFor(modelItem => question.QuestionId)
+                    foreach (var answer in question.Answers)
+                    {
+                        <fieldset id="checkArray" class="list-group-item">
+                            <input type="checkbox" name="correctAnswerIds[]" value="@answer.AnswerId" />
+                            <span>@answer.Title</span>
+                        </fieldset>
+                        index += 1;
+                    }
+                }
+                <span class="text-danger text-center mt-1" id="alertAnswers"></span>
+                <p class="text-center"><small>These are the correct answers that will be used to evaluate the test</small></p>
+                <div class="form-group d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="popupDialog"></div>
+
+@section Scripts{
+    <script>
+        $('form').on('submit',
+            function (event) {
+                event.preventDefault();
+
+                // DoValidation();   // validate checkboxes
+
+                var action = $(this).attr("action"); // get form action
+                var formData = $(this).serialize(); // serialize form fields
+                var popupDialog = $('#popupDialog');
+
+                $.post(action,
+                    formData,
+                    function (response) {
+                        popupDialog.dialog({
+                            modal: true,
+                            buttons: {
+                                "Ok": function () {
+                                    $(this).dialog('close', location.href = "/Admin/AdminPanel");
+                                }
+                            }
+                        });
+                    }).done(function (response) {
+                        popupDialog.html(response);
+                    }).fail(function (response) {
+                        popupDialog.html(response.error + '-' + response.message);
+                    });
+            });
+
+        // TODO fix bug
+        // Validate checkboxes
+        function DoValidation() {
+            if ($('#checkArray:checkbox:checked').length === 0) {
+                $("#alertAnswers").html("Please mark the correct answers for all questions").fadeToggle(5000);
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+<!--Submit and display popup confirmation-->

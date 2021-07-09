@@ -1,0 +1,65 @@
+﻿.live-feed-wrapper {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    width: 400px;
+    height: 350px;
+    background: whitesmoke;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    transition: 0.2s ease-in;
+}
+
+.live-feed-input {
+    position: absolute;
+}
+
+.live-feed-messages {
+    overflow: auto;
+    height: 270px;
+}
+
+.live-feed-username {
+    background: black;
+    color: whitesmoke;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.live-feed-toggle {
+    position: absolute;
+    top: -31%;
+    right: -14%;
+    transition: 0.2s;
+    border: none;
+    font-size: 26px;
+}
+
+    .live-feed-toggle:hover {
+        transform: scale(1.1);
+    }
+
+.live-feed-title {
+    position: absolute;
+    top: 69px;
+    right: -19.5%;
+    background: lightgray;
+    transform: rotate( -90deg );
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.live-feed-hide {
+    transform: translateX(-397px);
+    opacity: 0.3;
+}
+
+.live-feed-show {
+    transform: translateX(8px);
+    opacity: 0.9;
+}
+
+.live-feed-title-and-toggleBtn {
+    position: relative;
+}

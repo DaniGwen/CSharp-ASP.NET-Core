@@ -1,0 +1,47 @@
+﻿@using DigitalCoolBook.Models
+@model IEnumerable<DigitalCoolBook.App.Models.GradeParaleloViewModels.ParaleloViewModel>
+
+@{
+    ViewData["Title"] = "CreateParalelo";
+    Layout = "_Layout";
+}
+
+<h3>Class control panel</h3>
+<a class="btn btn-outline-info btn-sm mt-1 mb-2" href="/Admin/CreateParalelo">Create new class</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Teacher name</th>
+        <th>Class</th>
+        <th>Number of students</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var teacher in Model)
+    {
+        <tr>
+
+            <td>@teacher.TeacherName</td>
+            <td>@teacher.GradeName</td>
+            <td>@teacher.Students.Count</td>
+            <td class="buttons-wrapper">
+                <a class="btn btn-outline-warning btn-sm" 
+                   asp-controller="Admin" 
+                   asp-action="EditParalelo" 
+                   asp-route-teacherId="@teacher.Id"
+                   asp-route-gradeId="@teacher.GradeId">
+                    Edit
+                </a>
+                <a class="btn btn-outline-danger btn-sm" asp-controller="Admin" asp-action="DeleteParalelo" asp-route-id="@teacher.Id">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div class="buttons-wrapper">
+    <a class="btn btn-outline-secondary btn-sm" asp-controller="Admin" asp-action="AdminPanel">Back</a>
+</div>
+

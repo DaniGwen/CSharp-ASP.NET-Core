@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.GradesViewModels.GradeDetailViewModel>
+
+@{
+    ViewData["Title"] = "GradeDetails";
+    var paraleloName = ViewData["paraleloName"];
+    Layout = "_Layout";
+}
+<div class="container-fluid w-50">
+    <div class="row mb-2">
+        <div class="col col-form-label d-flex justify-content-center">
+            <h2 class="col-sm-auto">@paraleloName class</h2>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                <tr class="text-center">
+                    <td>No records...</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <a class="btn btn-outline-info" href="/Student/Details/@item.Id">@item.Name</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-outline-secondary btn-sm" href="/Teacher/ChooseGrade">Back</a>
+</div>
+
+

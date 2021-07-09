@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DigitalCoolBook.App.Models.CategoryViewModels.LessonPreviewViewModel>
+
+@{
+    ViewData["Title"] = "LessonsPreview";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid text-center">
+    <h3 class="text-center">Topics overview</h3>
+
+    @foreach (var item in Model)
+    {
+        <div class="row topics-wrapper text-center m-0 mb-2">
+            <a class="btn btn-outline-info btn-block w-75" id="lessonDetails">@item.Title</a>
+            <div class="d-flex justify-content-end form-group ">
+                <a class="btn btn-sm btn-outline-warning ml-1" href="/Subject/EditLesson/@item.LessonId">Edit</a>
+                <a class="btn btn-sm btn-outline-danger ml-1" onclick="Delete(this)" id="delete" value="@item.LessonId">Delete</a>
+            </div>
+        </div>
+    }
+    <div class="buttons-wrapper">
+        <a class="btn btn-outline-secondary btn-sm" href="/Admin/AdminPanel">Back</a>
+        <a class="btn btn-outline-info btn-sm" asp-action="AddLesson">New Topic</a>
+    </div>
+</div>
+
+<div id="dialog"></div>
+<div id="dialog-confirm"></div>
+
+@section Scripts{
+    <script>
+        // Open dialog and delete lesson on confirmation
+        function Delete(elem) {
+            $('#dialog').html("Remove topic?");
+            $('#dialog').dialog({
+                title: "Delete",
+                modal: true,
+                buttons: {
+                    "Back": function () {
+                        $(this).dialog('close');
+                    },
+                    "Delete": function () {
+                        $.post("/Subject/RemoveLesson", { lessonId: $(elem).attr('value') });
+                        $(this).dialog('close', location.href = "/Subject/LessonsPreview");
+                    }
+                }
+            });
+        };
+    </script>
+}
+

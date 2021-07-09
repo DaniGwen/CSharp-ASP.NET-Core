@@ -1,0 +1,23 @@
+﻿@model DigitalCoolBook.App.Models.CategoryViewModels.LessonsViewModel
+
+@{
+    ViewData["Title"] = "LessonDetails";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <h3>@Model.Title</h3>
+    <hr />
+    <div>
+        <p class="lesson-content">@Model.Content</p>
+    </div>
+    <hr />
+    <div class="buttons-wrapper">
+        <a class="btn btn-outline-secondary btn-sm"
+           href="@Url.Action("CategoryDetails", "Subject",new {categoryId = Model.CategoryId})">Back</a>
+        @if (this.User.IsInRole("Teacher"))
+        {
+            <a class="btn btn-outline-info btn-lg" href="/Test/CreateTest/@Model.LessonId">Test</a>
+        }
+    </div>
+</div>

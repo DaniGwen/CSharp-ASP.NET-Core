@@ -1,0 +1,16 @@
+﻿.buttons-wrapper {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, min-content);
+    align-items: center;
+    grid-column-gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons-vertical-wrapper {
+    display: grid;
+    justify-content: right;
+    grid-template-rows: repeat(3, min-content);
+    align-items: center;
+    grid-row-gap:3px;
+}

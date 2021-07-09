@@ -1,0 +1,188 @@
+﻿@model DigitalCoolBook.App.Models.TestviewModels.TestStartViewModel
+
+@{
+    Layout = "_Layout";
+    var index = 0;
+}
+
+<div class="container-fluid w-70">
+    <div class="col text-center mt-4">
+        <h3>@Model.TestName</h3>
+    </div>
+    @if (this.User.IsInRole("Student"))
+    {
+        <form id="form" asp-action="EndTest" method="post">
+            <div class="row">
+                <div class="col align-content-start">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </div>
+                    @Convert.ToString($"{Model.Date:dd/M/yyyy}")
+                    <div>
+                        <span class="digital-clock">00:00:00</span><span>ч.</span>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="row form-group text-right">
+                        <span class="col-form-label">Time remaining:</span>
+                    </div>
+                    <div class="row form-group mt-3">
+                        <span class="timer col-form-label" data-minutes-left="@Model.Timer"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                @foreach (var question in Model.Questions)
+                {
+                    <div class="col-form-label-lg mt-4">
+                        <span name="questionCount">@question.Title</span>
+                    </div>
+                    <input type="hidden" name="[@index].questionId" value="@question.QuestionId" />
+
+                    foreach (var answer in question.Answers)
+                    {
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input type="radio" name="[@index].answerId" value="@answer.AnswerId" />
+                                <label class="col-form-label-lg">@answer.Title</label>
+                            </li>
+                        </ul>
+                    }
+                    index += 1;
+                }
+            </div>
+            <div class="d-flex justify-content-center mt-4 mb-3">
+                <input type="submit" value="Submit" class="btn btn-outline-success btn-lg" />
+            </div>
+        </form>
+    }
+    else if (this.User.IsInRole("Teacher"))
+    {
+        <section class="row d-flex justify-content-between">
+            <div>
+                <p>Added students:</p>
+                <ul class="added-students-inroom" id="added-students">
+                    @foreach (var studentName in Model.StudentNames)
+                    {
+                        <li>@studentName</li>
+                    }
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-success">Active</h2>
+                <div class="row-form-label-lg">
+                    <label>Elapsed: @Model.Timer minutes.</label>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+            <div class="connected-students" id="studentList"></div>
+            <hr />
+            <div class="disconnected-students" id="finishedLabel"></div>
+        </div>
+        <div class="text-center mb-2">
+            <a class="btn btn-outline-warning btn-lg" href="/Test/EndTestAllStudents/@Model.TestName">End test</a>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script src="~/js/custom/startTest-signalR.js"></script>
+    <script src="~/js/jquery.simple.timer.js"></script>
+
+    <!--validate checkboxes-->
+    @*<script>
+            $('form').on('submit', function (event) {
+                var count = document.getElementsByName("questionCount").length;
+                for (var i = 0; i < length; i++) {
+
+                }
+            })
+        </script>*@
+
+    <!--countdown function-->
+    <script>
+        // Alert before leaving the page
+        $(window).bind('beforeunload', function () {
+            return 'Are you sure you want to leave?';
+        });
+
+        $(function () {
+            $('.timer').startTimer({
+                onComplete: function () {
+                    submitForm();
+                }
+            });
+        });
+
+        function submitForm() {
+            alert("Test ended.");
+            $("#form").submit();
+        };
+
+        //digital - clock
+        $(document).ready(function () {
+            clockUpdate();
+            setInterval(clockUpdate, 1000);
+        });
+
+        function clockUpdate() {
+            var date = new Date();
+            $('.digital-clock');
+            function addZero(x) {
+                if (x < 10) {
+                    return x = '0' + x;
+                } else {
+                    return x;
+                }
+            }
+
+            function twelveHour(x) {
+                if (x > 12) {
+                    return x = x - 12;
+                } else if (x === 0) {
+                    return x = 12;
+                } else {
+                    return x;
+                }
+            }
+
+            var h = addZero(twelveHour(date.getHours()));
+            var m = addZero(date.getMinutes());
+            var s = addZero(date.getSeconds());
+
+            $('.digital-clock').text(h + ':' + m + ':' + s);
+        }
+    </script>
+}
+
+
+<!--Timer styling-->
+<style>
+    .timer, .timer-done, .timer-loop {
+        font-size: 25px;
+        color: black;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    .jst-hours {
+        float: left;
+    }
+
+    .jst-minutes {
+        float: left;
+    }
+
+    .jst-seconds {
+        float: left;
+    }
+
+    .jst-clearDiv {
+        clear: both;
+    }
+
+    .jst-timeout {
+        color: red;
+    }
+</style>

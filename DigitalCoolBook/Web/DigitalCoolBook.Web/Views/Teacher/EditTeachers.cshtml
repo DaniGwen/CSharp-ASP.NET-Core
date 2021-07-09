@@ -1,0 +1,122 @@
+﻿@using DigitalCoolBook.App.Models.TeacherViewModels
+@model IEnumerable<TeacherEditViewModel>
+
+@{
+    ViewData["Title"] = "EditTeacher";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <h2 class="text-center">Teacher Control Panel</h2>
+    <p>
+        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-sm btn-outline-info">Add Teacher</a>
+    </p>
+    <table class="table table-hover" id="teacherDetails">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Place of birth</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Mobile phone number</th>
+                <th scope="col">Home phone number</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr class="text-center">
+                    <td>No profiles..</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var teacher in Model)
+                {
+                    <tr>
+                        <td>@teacher.Name</td>
+                        <td>@teacher.Email</td>
+                        <td>@teacher.DateOfBirth.ToShortDateString()</td>
+                        <td>@teacher.PlaceOfBirth</td>
+                        <td>@teacher.Sex</td>
+                        <td>@teacher.MobilePhone</td>
+                        <td>@teacher.Telephone</td>
+                        <td class="buttons-vertical-wrapper">
+                            <a class="btn btn-sm btn-outline-danger btn-delete" href="#" id="@teacher.Id">Delete</a>
+                            <a class="btn btn-sm btn-outline-warning"
+                               asp-controller="Teacher"
+                               asp-action="EditTeacher"
+                               asp-route-id="@teacher.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-warning"
+                               asp-controller="Teacher"
+                               asp-action="ChangePassword"
+                               asp-route-id="@teacher.Id">Change password</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-sm btn-outline-info mb-2" href="/Admin/AdminPanel">Back</a>
+</div>
+
+@*Pop up dialogs*@
+<div id="dialog-confirm" title="Delete">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        The profile will be deleted. Continue?
+    </p>
+</div>
+
+<div id="successMessage"></div>
+
+<div style="display: none; " id="errorMessageDialog" title="Error!">
+    <p style="max-height:280px; overflow:auto;" id="errorMessage">
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+    </p>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#dialog-confirm").hide();
+            $(".btn-delete").click(function () {
+                $("#dialog-confirm").dialog({
+                    modal: true,
+                    buttons: {
+                        "Cancel": function () { $(this).dialog("close"); },
+                        //Delete teacher
+                        "Delete": function () {
+                            var teacherId = $(".btn-delete").attr("id");
+                            $.ajax({
+                                url: "/Teacher/Delete/" + teacherId,
+                                type: "POST",
+                                success: function (message) {
+                                    $("#successMessage").dialog({
+                                        resizable: false,
+                                        modal: true,
+                                        buttons: {
+                                            "Ok": function () { $(this).dialog('close', location.href = "/Teacher/EditTeachers"); }
+                                        }
+                                    });
+                                    $("#successMessage").html(message);
+                                },
+                                // error dialog
+                                error: function (message) {
+                                    $("#errorMessageDialog").dialog({
+                                        modal: true,
+                                        buttons: { "close": function () { $(this).dialog("close"); } }
+                                    });
+                                    $("#errorMessage").html(message);
+                                }
+                            });
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

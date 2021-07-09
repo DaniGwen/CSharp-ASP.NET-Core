@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\DigitalCoolBook.Data\DigitalCoolBook.Data.csproj" />
+    <ProjectReference Include="..\..\Data\DigitalCoolBook.Models\DigitalCoolBook.Models.csproj" />
+    <ProjectReference Include="..\..\Web\DigitalCoolBook.Web.Models\DigitalCoolBook.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

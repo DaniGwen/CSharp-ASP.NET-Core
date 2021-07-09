@@ -1,0 +1,139 @@
+﻿@model DigitalCoolBook.Web.Models.CategoryViewModels.CategoryDetailsViewModel
+
+@{
+    ViewData["Title"] = "Category Details";
+    Layout = "_Layout";
+}
+
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Topics</h3>
+    <div>
+        @foreach (var lesson in Model.Lessons)
+        {
+            <div class="row">
+                @if (this.User.IsInRole("Student"))
+                {
+                    <div class="col-sm-7 d-flex justify-content-center">
+                        @if (lesson.IsUnlocked)
+                        {
+                            <a href="/Subject/LessonDetails/@lesson.LessonId" class="btn btn-outline-info mb-2">@lesson.Title</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
+                            <i class="fa fa-lock text-danger mt-3"></i>
+                        }
+                    </div>
+                    <div class="col-sm-4 d-flex justify-content-end">
+                        <span class="text-info">Score:</span>
+                        @if (lesson.Score == 0)
+                        {
+                            <span class="text-info font-weight-bold ml-2">@lesson.Score</span>
+                        }
+                        else if (lesson.Score < 70)
+                        {
+                            <span class="text-danger font-weight-bold ml-2">@lesson.Score</span>
+                        }
+                        else if (lesson.Score >= 70)
+                        {
+                            <span class="text-success font-weight-bold ml-2">@lesson.Score</span>
+                        }
+                    </div>
+                }
+                @if (this.User.IsInRole("Teacher"))
+                {
+                    <a href="/Subject/LessonDetails/@lesson.LessonId" class="btn btn-outline-info">@lesson.Title</a>
+                }
+            </div>
+            <div class="buttons-wrapper">
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-outline-warning btn-sm"
+                       asp-controller="Subject"
+                       asp-action="EditLesson"
+                       asp-route-id="@lesson.LessonId">
+                        Edit
+                    </a>
+                    <a class="btn-sm btn btn-outline-danger" id="@lesson.LessonId" href="#">Delete</a>
+                }
+            </div>
+        }
+    </div>
+    <hr />
+    <a class="btn btn-outline-secondary btn-sm" href="/Subject/Categories/@Model.CategoryId">Back</a>
+
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a class="btn btn-outline-success btn-sm mt-2" asp-action="AddLesson">Create</a>
+    }
+</div>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <div id="dialog-confirm" title="Delete">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+            The topic will be removed. Continue?
+        </p>
+    </div>
+
+    <div id="successMessage"></div>
+
+    <div style="display: none; " id="errorMessageDialog" title="Error">
+        <p style="max-height:280px; overflow:auto;" id="errorMessage">
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+        </p>
+    </div>
+}
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#dialog-confirm").hide();
+            $(".btn-delete").click(function () {
+                $("#dialog-confirm").dialog({
+                    modal: true,
+                    buttons:
+                    {
+                        "Delete": function () {
+                            var categoryId = $(".btn-delete").attr("id");
+                            $.ajax({
+                                url: "/Subject/DeleteLesson/" + categoryId,
+                                type: "POST",
+                                success: function () {
+                                    $("#successMessage").dialog({
+                                        modal: true,
+                                        buttons: {
+                                            "Close": function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
+                                    $("#successMessage").html("Successfully removed");
+                                },
+                                error: function (request, err, message) {
+                                    $("#errorMessage").html(request.statusText);
+                                    $("#errorMessageDialog").dialog({
+                                        modal: true,
+                                        buttons: {
+                                            "Close": function () {
+                                                $(this).dialog("close");
+                                            }
+                                        }
+                                    });
+                                    //Use in release
+                                    //$("#errorMessage").html("User can't be deleted");
+                                }
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Back": function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

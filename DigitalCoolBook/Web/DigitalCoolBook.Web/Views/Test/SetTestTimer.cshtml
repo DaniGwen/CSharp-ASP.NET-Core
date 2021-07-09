@@ -1,0 +1,82 @@
+﻿@model DigitalCoolBook.App.Models.TestviewModels.TestViewModel
+
+@{
+    ViewData["Title"] = "TestSetup";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid w-50">
+    <p class="col-form-label-lg text-center">Start test</p>
+    <hr />
+    <form id="form" asp-action="SetTestTimer" method="post">
+        <input hidden name="TestId" value="@Model.TestId" />
+        <div class="col col-form-label d-flex justify-content-center">
+            <div class="row">
+                <label class="col-form-label mr-2">Timer: </label>
+                <input class="col-form-label-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
+                <small class="col-form-label-sm ml-1 mt-1">minutes</small>
+                <span class="text-danger" id="alert-timer"></span>
+            </div>
+        </div>
+        <div class="row col-form-label d-flex justify-content-center ">
+            <label class="col-form-label mt-2 mr-2">Class</label>
+            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control w-50" })
+        </div>
+        <div class="row col-form-label d-flex justify-content-center mb-1">
+            <small>Add participants</small>
+        </div>
+        <div class="col col-form-label d-flex justify-content-center">
+            <a class="mb-4 mr-3">Students:</a>
+            <div id="checkArray"></div>
+        </div>
+        <div class="row form-group mb-2 mt-3 d-flex justify-content-between">
+            <div class="ml-4">
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Tests">Back</a>
+            </div>
+            <div class="ml-5">
+                <input id="button" type="submit" value="Start" class="btn btn-outline-primary btn-lg" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <!--Update checkboxes-->
+    <script>
+        var studentCheckBox = $('#checkArray'); // cache variable
+        $('#GradeId').change(function () {
+            var gradeId = $(this).val();
+            studentCheckBox.empty(); // clear existing options
+            if (!gradeId) {
+                return; // exit if null
+            }
+            // Send request to server with grade Id and receive collection of students
+            $.ajax({
+                type: "POST",
+                url: "/Test/GetStudents",
+                data: { gradeId: gradeId }, // sends gradeId to the action
+                success: function (response) {
+                    $.each(response,
+                        function (i, item) {
+                            studentCheckBox.append(
+                                $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
+                                $('<label/>', { for: item.id, text: item.name }),
+                                $('<br/>')
+                            );
+                        });
+                }
+            });
+        });
+    </script>
+
+    <!--validate timer input-->
+    <script>
+        $('form').on('submit', function (event) {
+            if ($('#timer-input').val() === 0) {
+                $('#alert-timer').html("Set time").fadeToggle(4000);
+                event.preventDefault();
+            }
+        })
+    </script>
+
+}
