@@ -1,30 +1,26 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AdminPanel";
     Layout = "_Layout";
 }
 <style>
-    .backgroundOrange{
+    .backgroundOrange {
         background: #ffb74d;
     }
 </style>
 
-<div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col">
-            <div class="list-group">
-                <a class="list-group-item backgroundOrange"><h4>Personal management</h4></a>
-                <a href="/Teacher/EditTeachers" class="list-group-item list-group-item-action list-group-item-light">T E A C H E R S</a>
-                <a href="/Student/EditStudents" class="list-group-item list-group-item-action list-group-item-light">S T U D E N T S</a>
-                <a href="/Admin/EditParalelos" class="list-group-item list-group-item-action list-group-item-light">C L A S S E S</a>
-            </div>
-            <div class="mt-2">
-                <a class="list-group-item backgroundOrange"><h4>Materials management</h4></a>
-                <a href="/Subject/AddLesson" class="list-group-item list-group-item-action list-group-item-light">T O P I C S</a>
-                <a href="/Test/CreateTest" class="list-group-item list-group-item-action list-group-item-light">T E S T S</a>
-                <a href="/Test/TestsPreview" class="list-group-item list-group-item-action list-group-item-light">T E S T S   O V E R V I E W</a>
-            </div>
-        </div>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-5">
+    <div class="list-group">
+        <a class="list-group-item backgroundOrange"><h3>PERSONAL MANAGEMENT</h3></a>
+        <a href="/Teacher/EditTeachers" class="list-group-item list-group-item-action list-group-item-light">TEACHERS</a>
+        <a href="/Student/EditStudents" class="list-group-item list-group-item-action list-group-item-light">STUDENTS</a>
+        <a href="/Admin/EditParalelos" class="list-group-item list-group-item-action list-group-item-light">CLASSES</a>
+    </div>
+    <div class="mt-4">
+        <a class="list-group-item backgroundOrange"><h3>MATERIALS MANAGEMENT</h3></a>
+        <a href="/Subject/AddLesson" class="list-group-item list-group-item-action list-group-item-light">TOPICS</a>
+        <a href="/Test/CreateTest" class="list-group-item list-group-item-action list-group-item-light">CREATE TEST</a>
+        <a href="/Test/TestsPreview" class="list-group-item list-group-item-action list-group-item-light">TESTS OVERVIEW</a>
     </div>
 </div>
 

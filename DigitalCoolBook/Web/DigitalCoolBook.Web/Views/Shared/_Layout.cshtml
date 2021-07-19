@@ -7,12 +7,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/jquery-ui.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/css/bootstrap.css" />
-    @*<link rel="stylesheet" href="~/css/font-awesome.min.css" />*@
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.theme.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 
 </head>
 <body>
@@ -52,28 +52,27 @@
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <form class="nav-item" asp-controller="Admin" asp-action="AdminPanel" method="get">
-                                            <button class="btn btn-outline-secondary btn-sm">Admin Control Panel</button>
+                                            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-cog"></i> Admin Control Panel</button>
                                         </form>
                                     }
                                     @if (this.User.IsInRole("Student"))
                                     {
                                         <form class="nav-item" asp-controller="Student" asp-action="Panel" method="get">
-                                            <button class="btn btn-outline-primary btn-sm">My profile</button>
+                                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-th"></i> My profile</button>
                                         </form>
                                     }
 
                                     @if (this.User.IsInRole("Teacher"))
                                     {
                                         <form class="nav-item" asp-controller="Teacher" asp-action="Panel" method="get">
-                                            <button class="btn btn-outline-primary btn-sm">My profile</button>
+                                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-th"></i> My profile</button>
                                         </form>
                                     }
                                 </div>
                                 <div>
                                     <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                         <button type="submit"
-                                                class="btn btn-outline-dark btn-sm">
-                                            <span class="fa fa-user"></span>Sign out
+                                                class="btn btn-outline-dark btn-sm"><span class="fa fa-user"></span>Sign out
                                         </button>
                                     </form>
                                 </div>
@@ -96,21 +95,17 @@
         <partial name="_PartialFooter" />
     </div>
 
+    @*<script src="~/js/bootstrap.js"></script>*@
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/custom/activeTests-popup.js"></script>
+
     @if (this.User.IsInRole("Teacher"))
     {
         <partial name="_PartialLiveFeed" />
     }
-    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/js/bootstrap.js"></script>
-<script src="~/js/main.js"></script>
-
-    @*<script src="~/js/jquery.validate.min.js"></script>*@
-    @*<script src="~/js/jquery.form.js"></script>*@
-    @*<script src="~/js/ajax-form.js"></script>*@
-    @*<script src="~/js/moment.js"></script>*@
-    @*<script src="~/js/popper.min.js"></script>*@
-    <script src="~/js/jquery-ui.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

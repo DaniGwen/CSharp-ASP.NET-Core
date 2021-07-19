@@ -42,7 +42,11 @@
                 }
                 @if (this.User.IsInRole("Teacher"))
                 {
-                    <a href="/Subject/LessonDetails/@lesson.LessonId" class="btn btn-outline-info">@lesson.Title</a>
+                    <a asp-action="LessonDetails"
+                       asp-controller="Subject"
+                       asp-route-lessonId="@lesson.LessonId"
+                       asp-route-subjectId="@Model.SubjectId"
+                       class="btn btn-outline-info">@lesson.Title</a>
                 }
             </div>
             <div class="buttons-wrapper">
@@ -60,7 +64,10 @@
         }
     </div>
     <hr />
-    <a class="btn btn-outline-secondary btn-sm" href="/Subject/Categories/@Model.CategoryId">Back</a>
+    <a class="btn btn-outline-secondary btn-sm" asp-controller="Subject"
+       asp-action="Categories"
+       asp-route-categoryId="@Model.CategoryId"
+       asp-route-subjectId="@Model.SubjectId">Back</a>
 
     @if (this.User.IsInRole("Admin"))
     {

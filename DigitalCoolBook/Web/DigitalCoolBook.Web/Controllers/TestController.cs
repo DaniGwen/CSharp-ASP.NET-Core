@@ -71,7 +71,7 @@ namespace DigitalCoolBook.App.Controllers
             string lessonId,
             string place)
         {
-            var lesson = await this.subjectService.GetLessonAsync(lessonId);
+           var lesson = await this.subjectService.GetLessonAsync(lessonId);
 
             // Instantiate test
             var test = new Test
@@ -120,17 +120,16 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Teacher")]
         public IActionResult MarkCorrectAnswers(string testId)
         {
             var questions = this.questionService
                 .GetQuestions()
                 .Where(question => question.TestId == testId);
 
-            // Map questions to question model
             var model = this.mapper.Map<List<QuestionsModel>>(questions);
 
-            // Passing test Id to this view
+            // Passing test Id to the view
             this.TempData["TestId"] = testId;
 
             // Add answers to questions
@@ -145,7 +144,7 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Teacher")]
         [ActionName("MarkCorrectAnswers")]
         public async Task<IActionResult> MarkCorrectAnswersAsync(string[] correctAnswerIds, string testId)
         {
@@ -211,21 +210,26 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         [Authorize(Roles = "Teacher")]
         [ActionName("SetTestTimer")]
-        public async Task<IActionResult> SetTestTimerAsync(TestViewModel model, string[] students)
+        public async Task<IActionResult> SetTestTimerAsync(TestViewModel model)
         {
             try
             {
-                if (students.Length == 0)
+                if (model.Students == null || model.Students.Any())
                 {
-                    this.ModelState.AddModelError(string.Empty, "At least one student is needed.");
+                    this.ModelState.AddModelError(string.Empty, "Select at least one participant");
 
-                    return this.View(model);
+                    return this.View(new TestViewModel
+                    {
+                        Grades = this.gradeService
+                            .GetGrades()
+                            .OrderBy(g => g.Name)
+                            .ToList(),
+                        TestId = model.TestId,
+                    });
                 }
 
-                // Get test from DB
                 var test = await this.testService.GetTestAsync(model.TestId);
 
-                // Set current Teacher Id to test
                 test.TeacherId = this.User
                     .FindFirst(ClaimTypes.NameIdentifier)?
                     .Value;
@@ -233,31 +237,31 @@ namespace DigitalCoolBook.App.Controllers
                 // Set test timer from input model
                 test.Timer = model.Timer;
 
-                // Adding TestStudent in list before adding them to DB
-                var testStudentForDB = new List<TestStudent>();
+                var testStudents = new List<TestStudent>();
+                var studentsDb = this.userService.GetStudents().ToList();
 
                 // Adding "TestStudent" relation
-                foreach (var student in students)
+                foreach (var studentName in model.Students)
                 {
+                    var student = studentsDb.FirstOrDefault(s => s.Name == studentName);
                     var testStudent = new TestStudent()
                     {
-                        StudentId = this.userService
-                        .GetStudents()
-                        .FirstOrDefault(s => s.Name == student).Id,
-
+                        StudentId = student?.Id,
+                        Student = student,
                         TestId = test.TestId,
+                        Test = test
                     };
 
-                    testStudentForDB.Add(testStudent);
+                    testStudents.Add(testStudent);
                 }
 
                 // Adding students in TestRoom
-                string testRoomId = await this.testService.AddTestRoomAsync(students, test.TeacherId, model.TestId);
+                string testRoomId = await this.testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
 
                 // Add entity testStudent to DB
-                await this.testService.AddTestStudentsAsync(testStudentForDB);
+                await this.testService.AddTestStudentsAsync(testStudents);
 
-                return this.RedirectToAction("StartTest", "Test", new { Id = test.TestId });
+                return this.RedirectToAction("StartTest", "Test", new { TestId = test.TestId });
             }
             catch (Exception exception)
             {
@@ -269,11 +273,11 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
-        public async Task<IActionResult> StartTest(string id)
+        public async Task<IActionResult> StartTest(string testId)
         {
             try
             {
-                var test = await this.testService.GetTestAsync(id);
+                var test = await this.testService.GetTestAsync(testId);
 
                 // Keep the test Id for EndTest action
                 this.TempData["TestId"] = test.TestId;
@@ -725,16 +729,21 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Teacher")]
         [ActionName("EndTestAllStudents")]
-        public async Task<IActionResult> EndTestAllStudentsAsync(string id)
+        public async Task<IActionResult> EndTestAllStudentsAsync(string testName)
         {
             await this.testHub.Clients.All.SendAsync("SubmitAll");
 
-            var testId = this.testService
+            var testDb = this.testService
                 .GetTests()
-                .First(x => x.TestName == id)
-                .TestId;
+                .First(x => x.TestName == testName);
 
-            await this.testService.RemoveTestRoomAsync(testId);
+            var expiredTest = this.mapper.Map<ExpiredTest>(testDb);
+
+            testDb.IsExpired = true;
+            expiredTest.ExpiredTestId = testDb.TestId;
+            await this.testService.AddExpiredTestAsync(expiredTest);
+            await this.testService.RemoveTestAsync(testDb.TestId);
+            await this.testService.RemoveTestRoomAsync(testDb.TestId);
 
             return this.Redirect("/Home/Index");
         }

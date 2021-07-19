@@ -17,8 +17,7 @@
 @import "styles/components/_component-liveFeed.css";
 @import "styles/components/teacher/_component-editTeacher.css";
 @import "styles/components/teacher/_component-editTeachers.css";
-
-
+@import "styles/components/test/_component-startTest.css";
 
 * {
     box-sizing: border-box;
@@ -41,27 +40,6 @@ ul {
     width: 50px;
 }
 
-hr.hr-orange {
-    background: #ffb74d;
-}
-
-.my-info-text {
-    border-style: solid;
-    border-color: #aed581;
-    border-width: 1px;
-    border-radius: 4px;
-}
-
-.my-h2 {
-    margin-top: 1rem;
-    border-radius: 9px;
-    background: rgb(174,216,81);
-    background: linear-gradient(0deg, rgba(174,216,81,0.9103350812981442) 0%, rgba(34,193,195,1) 100%, rgba(253,187,45,1) 100%);
-    text-align: center;
-    padding: 5px;
-    color: #fff;
-    width: auto;
-}
 
 input[type="checkbox"] {
     display: inline-block;
@@ -85,31 +63,6 @@ hr.hr-orange {
 .page-header {
     padding-bottom: 5px;
     color: #5d5d5d;
-}
-
-.added-students-inroom {
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 2px;
-    border-color: #6c6a6a;
-    padding: 10px;
-    list-style-type: decimal
-}
-
-.connected-students {
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: #aed581;
-    padding: 5px;
-}
-
-.disconnected-students {
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: rgba(239, 2, 2, 0.79);
-    padding: 5px;
 }
 
 .lesson-content {

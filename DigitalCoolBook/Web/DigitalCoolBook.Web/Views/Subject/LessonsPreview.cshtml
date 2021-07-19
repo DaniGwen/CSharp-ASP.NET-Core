@@ -5,21 +5,23 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid text-center">
-    <h3 class="text-center">Topics overview</h3>
-
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Topics overview</h3>
+    <hr />
     @foreach (var item in Model)
     {
-        <div class="row topics-wrapper text-center m-0 mb-2">
-            <a class="btn btn-outline-info btn-block w-75" id="lessonDetails">@item.Title</a>
-            <div class="d-flex justify-content-end form-group ">
-                <a class="btn btn-sm btn-outline-warning ml-1" href="/Subject/EditLesson/@item.LessonId">Edit</a>
-                <a class="btn btn-sm btn-outline-danger ml-1" onclick="Delete(this)" id="delete" value="@item.LessonId">Delete</a>
+        <div class="row mb-2 align-items-baseline">
+            <div class="col-10">
+                <a class="btn btn-outline-info w-100" id="lessonDetails">@item.Title</a>
+            </div>
+            <div class="col-2 buttons-wrapper">
+                <a class="btn btn-sm btn-outline-warning" href="/Subject/EditLesson/@item.LessonId">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" onclick="Delete(this)" id="delete" value="@item.LessonId">Delete</a>
             </div>
         </div>
     }
     <div class="buttons-wrapper">
-        <a class="btn btn-outline-secondary btn-sm" href="/Admin/AdminPanel">Back</a>
+        <a class="btn btn-outline-secondary btn-sm" asp-controller="Admin" asp-action="AdminPanel">Back</a>
         <a class="btn btn-outline-info btn-sm" asp-action="AddLesson">New Topic</a>
     </div>
 </div>

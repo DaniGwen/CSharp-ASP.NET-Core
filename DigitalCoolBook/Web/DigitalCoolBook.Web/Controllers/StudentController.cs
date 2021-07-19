@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using DigitalCoolBook.App.Models.TestviewModels;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +27,8 @@
         private readonly IGradeService gradeService;
         private readonly IMapper mapper;
         private readonly IScoreService scoreService;
-        private UserManager<IdentityUser> userManager;
+        private readonly ITestService testService;
+        private readonly UserManager<IdentityUser> userManager;
 
         public StudentController(
             ILogger<HomeController> logger,
@@ -34,7 +37,8 @@
             IUserService userService,
             IGradeService gradeService,
             IMapper mapper,
-            IScoreService scoreService)
+            IScoreService scoreService,
+            ITestService testService)
         {
             this.userManager = userManager;
             this.userService = userService;
@@ -43,10 +47,11 @@
             this.signInManager = signInManager;
             this.mapper = mapper;
             this.scoreService = scoreService;
+            this.testService = testService;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult RegisterStudent()
         {
             var model = new StudentRegisterInputModel
@@ -59,8 +64,8 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterStudent(StudentRegisterInputModel registerModel)
         {
             if (this.ModelState.IsValid)
@@ -134,21 +139,17 @@
             var student = await this.userService.GetStudentAsync(id);
             var grades = this.gradeService.GetGrades().OrderBy(grade => grade.Name).ToList();
 
-            // Map student to view model
             var model = this.mapper.Map<StudentEditViewModel>(student);
 
-            // Map grades to gradeModel and add to view model
             var gradeModel = this.mapper.Map<List<GradeViewModel>>(grades);
             model.Grades.AddRange(gradeModel);
-
-            // convert DateTime from Db to string for view model
             model.DateOfBirth = student.DateOfBirth.Date;
 
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditStudent(StudentEditViewModel model)
         {
             if (this.ModelState.IsValid)
@@ -183,14 +184,13 @@
         {
             await this.userService.RemoveStudentAsync(id);
 
-            // Redirect to / Admin / AdminPanel after 4 seconds
             this.Response.Headers.Add("REFRESH", "4;URL=/Admin/AdminPanel");
-            this.TempData["SuccessMsg"] = "Акаунта е премахнат";
+            this.TempData["SuccessMsg"] = "Account has been removed";
             return this.Redirect("/Home/Success");
         }
 
-        [Authorize(Roles = "Admin, Student, Teacher")]
         [HttpGet]
+        [Authorize(Roles = "Admin, Student, Teacher")]
         public async Task<IActionResult> ChangePassword(string id)
         {
             var student = await this.userService.GetStudentAsync(id);
@@ -200,8 +200,8 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = "Admin, Student, Teacher")]
         [HttpPost]
+        [Authorize(Roles = "Admin, Student, Teacher")]
         public async Task<IActionResult> ChangePassword(StudentChangePasswordViewModel model)
         {
             try
@@ -256,32 +256,45 @@
             return this.View(model);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Student, Teacher")]
         public async Task<IActionResult> DetailsAsync(string id)
         {
             var student = await this.userService.GetStudentAsync(id);
 
-            var model = this.mapper.Map<StudentDetailsViewModel>(student);
+            var viewModel = this.mapper.Map<StudentDetailsViewModel>(student);
+            viewModel.AverageScore = CalcAverageScore(id);
+            viewModel.TestsTaken.AddRange(this.testService
+                 .GetExpiredTests()
+                 .Where(t => t.StudentId == id)
+                 .Select(x => x.TestName)
+                 .ToList());
 
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [Authorize(Roles = "Student")]
         public IActionResult GetAverageScore(string id)
         {
-            // Get ScoreStudets with student Id
-            var scores = this.scoreService.GetScoreStudents()
-                .Where(s => s.StudentId == id)
+            double averageScore = CalcAverageScore(id);
+
+            return this.Json(averageScore);
+        }
+
+        private double CalcAverageScore(string studentId)
+        {
+            var studentScores = this.scoreService.GetScoreStudents()
+                .Where(s => s.StudentId == studentId)
                 .ToList();
 
             double averageScore = 0;
 
-            // Calculate average score
-            if (scores.Count > 0)
+            if (studentScores.Count > 0)
             {
-                averageScore = scores.Average(scoreStudent => scoreStudent.Score.ScorePoints);
+                averageScore = studentScores.Average(s => s.Score.ScorePoints);
             }
 
-            return this.Json(averageScore);
+            return averageScore;
         }
     }
 }

@@ -4,6 +4,8 @@
     {
         public string CategoryId { get; set; }
 
+        public string SubjectId { get; set; }
+
         public string Title { get; set; }
 
         public string Content { get; set; }

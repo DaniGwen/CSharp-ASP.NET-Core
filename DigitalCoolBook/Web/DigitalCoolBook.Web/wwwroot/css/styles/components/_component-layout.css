@@ -10,13 +10,6 @@
     padding-bottom: 130px;
 }
 
-.nav-right-wrapper, .nav-left-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3,max-content);
-    grid-column-gap: 5px;
-    align-items: center;
-}
-
 .navbar {
     border-bottom: 1px solid gray;
 }

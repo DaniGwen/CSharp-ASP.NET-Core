@@ -1,7 +1,7 @@
 ﻿.buttons-wrapper {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(3, min-content);
+    grid-template-columns: repeat(3, max-content);
     align-items: center;
     grid-column-gap: 10px;
     margin-top: 10px;

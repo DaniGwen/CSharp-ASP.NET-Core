@@ -5,115 +5,114 @@
     Layout = "_Layout";
 }
 
-<h3>Edit student</h3>
-<hr />
-
-<form asp-action="EditStudent">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group row">
-        <label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Date of birth</label>
-        <div class="col-sm-10">
-            <input type="text" class="datepicker" id="datepicker" name="dateOfBirth" />
-            <span asp-validation-for="DateOfBirth" class="text-danger" id="alertDatepicker"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="PlaceOfBirth" class="col-sm-2 col-form-label">Place of birth</label>
-        <div class="col-sm-10">
-            <input asp-for="PlaceOfBirth" class="form-control" />
-            <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="Sex" class="col-sm-2 col-form-label">Sex</label>
-        <div class="col-sm-10">
-            <select class="form-control" name="sex" id="sex">
-                <option value="Мъж">Male</option>
-                <option value="Жена">Female</option>
-                <option value="Друго">Other</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="MobilePhone" class="col-sm-2 col-form-label">Mobile phone number</label>
-        <div class="col-sm-10">
-            <input asp-for="MobilePhone" class="form-control w-100" />
-            <span asp-validation-for="MobilePhone" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="Telephone" class="col-sm-2 col-form-label">Home phone number</label>
-        <div class="col-sm-10">
-            <input asp-for="Telephone" class="form-control w-100" />
-            <span asp-validation-for="Telephone" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="FatherName" class="col-sm-2 col-form-label">Father's name</label>
-        <div class="col-sm-10">
-            <input asp-for="FatherName" class="form-control" />
-            <span asp-validation-for="FatherName" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="MotherName" class="col-sm-2 col-form-label">Mother's name</label>
-        <div class="col-sm-10">
-            <input asp-for="MotherName" class="form-control" />
-            <span asp-validation-for="MotherName" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="MotherMobileNumber" class="col-sm-2 col-form-label">Mather phone number</label>
-        <div class="col-sm-10">
-            <input asp-for="MotherMobileNumber" class="form-control w-100" />
-            <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="FatherMobileNumber" class="col-sm-2 col-form-label">Father phone number</label>
-        <div class="col-sm-10">
-            <input asp-for="FatherMobileNumber" class="form-control w-100" />
-            <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="Address" class="col-sm-2 col-form-label">Address</label>
-        <div class="col-sm-10">
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Class</label>
-        <div class="col-sm-10">
-            @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), new { @class = "form-control" })
-        </div>
-    </div>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Edit student</h3>
     <hr />
-    <div class="buttons-wrapper">
-        <a class="btn btn-outline-secondary btn-sm" asp-action="EditStudents">Back</a>
-        <input class="btn btn-outline-success btn-sm" type="submit" value="Save"/>
-    </div>
-</form>
-
-
+    <form asp-action="EditStudent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row mb-2">
+            <label asp-for="Email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label class="col-sm-2 col-form-label">Date of birth</label>
+            <div class="col-sm-10">
+                <input type="text" class="datepicker" id="datepicker" name="dateOfBirth" />
+                <span asp-validation-for="DateOfBirth" class="text-danger" id="alertDatepicker"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="PlaceOfBirth" class="col-sm-2 col-form-label">Place of birth</label>
+            <div class="col-sm-10">
+                <input asp-for="PlaceOfBirth" class="form-control" />
+                <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="Sex" class="col-sm-2 col-form-label">Sex</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="sex" id="sex">
+                    <option value="Мъж">Male</option>
+                    <option value="Жена">Female</option>
+                    <option value="Друго">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="MobilePhone" class="col-sm-2 col-form-label">Mobile phone number</label>
+            <div class="col-sm-10">
+                <input asp-for="MobilePhone" class="form-control w-100" />
+                <span asp-validation-for="MobilePhone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="Telephone" class="col-sm-2 col-form-label">Home phone number</label>
+            <div class="col-sm-10">
+                <input asp-for="Telephone" class="form-control w-100" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="FatherName" class="col-sm-2 col-form-label">Father's name</label>
+            <div class="col-sm-10">
+                <input asp-for="FatherName" class="form-control" />
+                <span asp-validation-for="FatherName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="MotherName" class="col-sm-2 col-form-label">Mother's name</label>
+            <div class="col-sm-10">
+                <input asp-for="MotherName" class="form-control" />
+                <span asp-validation-for="MotherName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="MotherMobileNumber" class="col-sm-2 col-form-label">Mather phone number</label>
+            <div class="col-sm-10">
+                <input asp-for="MotherMobileNumber" class="form-control w-100" />
+                <span asp-validation-for="MotherMobileNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="FatherMobileNumber" class="col-sm-2 col-form-label">Father phone number</label>
+            <div class="col-sm-10">
+                <input asp-for="FatherMobileNumber" class="form-control w-100" />
+                <span asp-validation-for="FatherMobileNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label asp-for="Address" class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-2">
+            <label class="col-sm-2 col-form-label">Class</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+        <hr />
+        <div class="buttons-wrapper">
+            <a class="btn btn-outline-secondary btn-sm" asp-action="EditStudents">Back</a>
+            <input class="btn btn-outline-success btn-sm" type="submit" value="Save" />
+        </div>
+    </form>
+</div>
 
 <!--setting datepicker and validating DateOfBirth input-->
-@section Scripts{ 
+@section Scripts{
     <script>
         $.datepicker.setDefaults($.datepicker.regional["bg"]);
         $.datepicker.setDefaults({
@@ -132,7 +131,7 @@
                 function (event) {
                     if ($('#datepicker').val() === '') {
                         event.preventDefault();
-                        $('#alertDatepicker').html("Select date of birth.").fadeToggle(4000);
+                        $('#alertDatepicker').html("Select date of birth.").fadeToggle(2000);
                     }
                 });
         });

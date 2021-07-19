@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using DigitalCoolBook.App.Models.TestviewModels;
 
 namespace DigitalCoolBook.App.Models.StudentViewModels
 {
@@ -29,5 +31,9 @@ namespace DigitalCoolBook.App.Models.StudentViewModels
         public string Address { get; set; }
 
         public string GradeId { get; set; }
+
+        public List<string> TestsTaken { get; set; } = new();
+
+        public double AverageScore { get; set; }
     }
 }

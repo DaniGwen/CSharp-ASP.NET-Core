@@ -53,7 +53,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\styles\components\subjects\" />
     <Folder Include="wwwroot\css\styles\utilities\" />
   </ItemGroup>
 

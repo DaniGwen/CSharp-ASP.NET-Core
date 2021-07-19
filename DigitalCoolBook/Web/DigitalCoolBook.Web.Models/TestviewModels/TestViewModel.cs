@@ -26,7 +26,7 @@
 
         public string GradeId { get; set; }
 
-        public string TestTitle { get; set; }
+        public string[] Students { get; set; }
 
         public List<Test> Tests { get; set; }
     }

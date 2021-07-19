@@ -5,22 +5,24 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid w-75">
-    <h2 class="text-center">Tests</h2>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Tests</h3>
     <div class="form-group">
-        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTestAdmin">Create new</a>
+        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTest">Create test</a>
         <div class="col-form-label-lg">
             @Html.DisplayNameFor(model => model.TestName)
         </div>
         @foreach (var item in Model)
         {
-            <div class="row form-group">
-                <a class="btn btn-block btn-outline-info w-75 mr-1" href="/Test/GetTestDetails/@item.TestId">@item.TestName</a>
+            <div class="buttons-wrapper">
+                <a class="btn btn-outline-info btn-sm" 
+                   asp-controller="Test" 
+                   asp-action="GetTestDetails" 
+                   asp-route-id="@item.TestId">@item.TestName</a>
                 <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Delete</a>
             </div>
         }
-
-        <a class="btn btn-outline-secondary" href="/Admin/AdminPanel">Back</a>
+        <a class="btn btn-outline-secondary btn-sm" href="/Admin/AdminPanel">Back</a>
     </div>
 </div>
 

@@ -5,5 +5,7 @@
         public string GradeId { get; set; }
 
         public string Name { get; set; }
+
+        public int StudentCount { get; set; }
     }
 }

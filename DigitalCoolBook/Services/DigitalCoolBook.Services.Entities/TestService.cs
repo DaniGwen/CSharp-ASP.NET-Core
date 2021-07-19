@@ -84,9 +84,9 @@
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<ExpiredTest> GetExpiredTest(string id)
+        public async Task<ExpiredTest> GetExpiredTest(string expiredTestId)
         {
-            return await this.context.ExpiredTests.FindAsync(id);
+            return await this.context.ExpiredTests.FindAsync(expiredTestId);
         }
 
         public IQueryable<ExpiredTest> GetExpiredTests()
@@ -110,24 +110,23 @@
                 TestId = testId,
             };
 
-            var testRoomStudentsList = new List<TestRoomStudent>();
+            var studentsDb = this.context.Students.ToList();
 
-            foreach (var studentId in students)
+            foreach (var studentName in students)
             {
-                var studentFromDb = this.context.Students.FirstOrDefault(s => s.Name == studentId);
-
+                var studentDb = studentsDb.FirstOrDefault(s => s.Name == studentName);
+                
                 var studentForTestRoom = new TestRoomStudent
                 {
-                    StudentId = studentFromDb.Id,
+                    StudentId = studentDb?.Id,
+                    StudentName = studentDb?.Name,
                     TestRoomId = testRoom.Id,
-                    StudentName = studentFromDb.Name,
                 };
-
-                testRoomStudentsList.Add(studentForTestRoom);
+                testRoom.Students.Add(studentForTestRoom);
             }
 
             await this.context.TestRooms.AddAsync(testRoom);
-            await this.context.TestRoomStudents.AddRangeAsync(testRoomStudentsList);
+            await this.context.TestRoomStudents.AddRangeAsync(testRoom.Students);
             await this.SaveChangesAsync();
 
             return testRoom.Id;
@@ -184,7 +183,7 @@
         public async Task<List<string>> GetStudentsInTestRoomAsync(string testId)
         {
             var testRoom = this.context.TestRooms
-                .First(x => x.TestId == testId);
+                .FirstOrDefault(x => x.TestId == testId);
 
             var studentsInRoom = this.context.TestRoomStudents
                 .Where(x => x.TestRoomId == testRoom.Id)

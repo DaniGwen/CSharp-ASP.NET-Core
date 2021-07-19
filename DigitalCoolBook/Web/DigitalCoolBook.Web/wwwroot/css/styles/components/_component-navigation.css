@@ -16,3 +16,10 @@
         text-decoration: underline;
         text-decoration-color: #0094ff;
     }
+
+.nav-right-wrapper, .nav-left-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6,max-content);
+    grid-column-gap: 5px;
+    align-items: center;
+}

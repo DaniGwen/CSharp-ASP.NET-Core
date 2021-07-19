@@ -5,45 +5,44 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid w-50">
-    <p class="col-form-label-lg text-center">Start test</p>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Start test</h3>
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
         <input hidden name="TestId" value="@Model.TestId" />
-        <div class="col col-form-label d-flex justify-content-center">
-            <div class="row">
-                <label class="col-form-label mr-2">Timer: </label>
-                <input class="col-form-label-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
-                <small class="col-form-label-sm ml-1 mt-1">minutes</small>
-                <span class="text-danger" id="alert-timer"></span>
+        <div class="row mb-4">
+            <div>
+                <label class="form-label">Timer</label>
+                <input class="form-control-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
+                <small class="form-label">minutes</small>
+            </div>
+            <span class="text-danger" id="alert-timer"></span>
+        </div>
+        <div class="row mb-4">
+            <div>
+                <label class="form-label">Class</label>
+                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control" })
             </div>
         </div>
-        <div class="row col-form-label d-flex justify-content-center ">
-            <label class="col-form-label mt-2 mr-2">Class</label>
-            @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control w-50" })
-        </div>
-        <div class="row col-form-label d-flex justify-content-center mb-1">
-            <small>Add participants</small>
-        </div>
-        <div class="col col-form-label d-flex justify-content-center">
-            <a class="mb-4 mr-3">Students:</a>
-            <div id="checkArray"></div>
-        </div>
-        <div class="row form-group mb-2 mt-3 d-flex justify-content-between">
-            <div class="ml-4">
-                <a class="btn btn-outline-secondary btn-sm" asp-action="Tests">Back</a>
+        <div class="row">
+            <div>
+                <h5>Add participants</h5>
+                <div id="checkArray"></div>
+                <span class="text-danger" asp-validation-for="Students"></span>
             </div>
-            <div class="ml-5">
-                <input id="button" type="submit" value="Start" class="btn btn-outline-primary btn-lg" />
-            </div>
+        </div>
+        <div class="buttons-wrapper">
+            <a class="btn btn-outline-secondary btn-sm" asp-action="Tests">Back</a>
+            <input class="btn btn-outline-success btn-sm" id="button" type="submit" value="Start" />
         </div>
     </form>
 </div>
 
 @section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
     <!--Update checkboxes-->
     <script>
-        var studentCheckBox = $('#checkArray'); // cache variable
+        var studentCheckBox = $('#checkArray');
         $('#GradeId').change(function () {
             var gradeId = $(this).val();
             studentCheckBox.empty(); // clear existing options
@@ -54,16 +53,20 @@
             $.ajax({
                 type: "POST",
                 url: "/Test/GetStudents",
-                data: { gradeId: gradeId }, // sends gradeId to the action
+                data: { gradeId: gradeId },
                 success: function (response) {
-                    $.each(response,
-                        function (i, item) {
-                            studentCheckBox.append(
-                                $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
-                                $('<label/>', { for: item.id, text: item.name }),
-                                $('<br/>')
-                            );
-                        });
+                    if (response.length === 0) {
+                        studentCheckBox.append($('<label/>', { text: 'no students...' }));
+                    } else {
+                        $.each(response,
+                            function (i, item) {
+                                studentCheckBox.append(
+                                    $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
+                                    $('<label/>', { for: item.id, text: item.name }),
+                                    $('<br/>')
+                                );
+                            });
+                    }
                 }
             });
         });

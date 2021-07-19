@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using DigitalCoolBook.Web.Models.SubjectViewModels;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -48,17 +50,15 @@
 
         [HttpGet]
         [ActionName("Categories")]
-        public IActionResult CategoriesAsync(string Id)
+        public IActionResult CategoriesAsync(string subjectId, string categoryId)
         {
-            var categoryLessons = this.subjectService.GetLessons().ToList();
+            //var categoryLessons = this.subjectService.GetLessons().ToList();
 
-            var subjectsDb = this.subjectService.GetSubjects()
+            var subjectDb = this.subjectService.GetSubjects()
                 .Include(s => s.Categories)
-                .ToList();
+                .FirstOrDefault(s => s.SubjectId == subjectId);
 
-            var subject = subjectsDb.FirstOrDefault(s => s.SubjectId == Id);
-
-            var model = this.mapper.Map<SubjectViewModel>(subject);
+            var model = this.mapper.Map<SubjectViewModel>(subjectDb);
 
             return this.View(model);
         }
@@ -66,10 +66,10 @@
         [HttpGet]
         [ActionName("CategoryDetails")]
         [Authorize(Roles = "Admin, Teacher, Student")]
-        public IActionResult CategoryDetailsAsync(string categoryId, string categoryTitle, string subjectId)
+        public IActionResult CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
         {
             var lessons = this.subjectService.GetLessons()
-                .Where(lesson => lesson.CategoryId == categoryId)
+                .Where(lesson => lesson.CategoryId == categoryDetailsModel.CategoryId)
                 .ToList();
 
             var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
@@ -80,34 +80,24 @@
                 foreach (var lesson in lessonsDto)
                 {
                     // Gets student ID
-                    var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                    var studentScores = this.scoreService
+                    var score = this.scoreService
                         .GetScoreStudents()
                         .Where(ss => ss.StudentId == studentId)
-                        .ToList();
-
-                    var score = studentScores
                         .FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
 
                     // Set Score if there is any
-                    if (score != null)
-                    {
-                        lesson.Score = score.Score.ScorePoints;
-                    }
-                    else
-                    {
-                        lesson.Score = 0;
-                    }
+                    lesson.Score = score?.Score.ScorePoints ?? 0;
                 }
             }
 
             return this.View(new CategoryDetailsViewModel
             {
-                CategoryId = categoryId,
-                CategoryTitle = categoryTitle,
+                CategoryId = categoryDetailsModel.CategoryId,
+                CategoryTitle = categoryDetailsModel.CategoryTitle,
                 Lessons = lessonsDto,
-                SubjectId = subjectId,
+                SubjectId = categoryDetailsModel.SubjectId,
             });
         }
 
@@ -151,11 +141,11 @@
 
                 await this.subjectService.CreateLessonAsync(lesson);
 
-                return this.Json("Темата е добавена.");
+                return this.Json("The topic has been added");
             }
             catch (Exception)
             {
-                return this.Json("Възникна грешка.");
+                return this.Json("Error saving the topic");
             }
         }
 
@@ -196,7 +186,7 @@
             var categories = this.subjectService.GetCategories().ToList();
 
             var categoriesDto = this.mapper.Map<IList<CategoryViewModel>>(categories);
-
+            
             model.Categories = categoriesDto;
 
             return this.View(model);
@@ -205,23 +195,23 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ActionName("EditLesson")]
-        public async Task<IActionResult> EditLessonAsync(string lessonId, string title, string content, string categoryId)
+        public async Task<IActionResult> EditLessonAsync(EditLessonPostViewModel viewModel)
         {
             try
             {
-                var lesson = await this.subjectService.GetLessonAsync(lessonId);
+                var lesson = await this.subjectService.GetLessonAsync(viewModel.LessonId);
 
-                lesson.Title = title;
-                lesson.Content = content;
-                lesson.CategoryId = categoryId;
+                lesson.Title = viewModel.Title;
+                lesson.Content = viewModel.Content;
+                lesson.CategoryId = viewModel.CategoryId;
 
                 await this.subjectService.SaveChangesAsync();
 
-                return this.Json("Промените са записани.");
+                return this.Json("Changes are saved");
             }
             catch (Exception)
             {
-                return this.Json("Грешка при записването.");
+                return this.Json("Error saving");
             }
         }
 
@@ -352,22 +342,22 @@
             {
                 await this.subjectService.RemoveLessonAsync(lessonId);
 
-                return this.Json("Темата е изтрита.");
+                return this.Json("Topic was removed");
             }
             catch (Exception)
             {
-                return this.Json("Грешка при изтриване.");
+                return this.Json("Error removing topic");
             }
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Admin, Student")]
         [ActionName("LessonDetails")]
-        public async Task<IActionResult> LessonDetailsAsync(string id)
+        public async Task<IActionResult> LessonDetailsAsync(string lessonId, string subjectId)
         {
-            var lesson = await this.subjectService.GetLessonAsync(id);
-
+            var lesson = await this.subjectService.GetLessonAsync(lessonId);
             var model = this.mapper.Map<LessonsViewModel>(lesson);
+            model.SubjectId = subjectId;
 
             return this.View(model);
         }

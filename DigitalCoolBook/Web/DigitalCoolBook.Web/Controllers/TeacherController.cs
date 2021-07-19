@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -84,21 +86,23 @@
         }
 
         [Authorize(Roles = "Admin, Teacher")]
-        public IActionResult ChooseGrade()
+        public IActionResult AssignedGrades()
         {
             var grades = this.gradeService.GetGrades()
+                .Include(x=>x.Students)
                 .Where(grade => grade.GradeTeachers.Count != 0)
                 .ToList();
 
-            var gradesToView = new List<GradeViewModel>();
+            var gradesViewModel = new List<GradeViewModel>();
 
             foreach (var grade in grades)
             {
                 var gradeDto = this.mapper.Map<GradeViewModel>(grade);
-                gradesToView.Add(gradeDto);
+                gradeDto.StudentCount = grade.Students.Count;
+                gradesViewModel.Add(gradeDto);
             }
 
-            return this.View(gradesToView);
+            return this.View(gradesViewModel);
         }
 
         [Authorize(Roles = "Admin, Teacher")]

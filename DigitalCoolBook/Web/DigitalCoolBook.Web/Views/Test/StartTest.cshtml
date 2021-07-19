@@ -5,10 +5,9 @@
     var index = 0;
 }
 
-<div class="container-fluid w-70">
-    <div class="col text-center mt-4">
-        <h3>@Model.TestName</h3>
-    </div>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>@Model.TestName</h3>
+    <h4 class="text-success">Active</h4>
     @if (this.User.IsInRole("Student"))
     {
         <form id="form" asp-action="EndTest" method="post">
@@ -58,30 +57,30 @@
     }
     else if (this.User.IsInRole("Teacher"))
     {
-        <section class="row d-flex justify-content-between">
-            <div>
-                <p>Added students:</p>
-                <ul class="added-students-inroom" id="added-students">
-                    @foreach (var studentName in Model.StudentNames)
-                    {
-                        <li>@studentName</li>
-                    }
-                </ul>
-            </div>
-            <div>
-                <h2 class="text-success">Active</h2>
-                <div class="row-form-label-lg">
-                    <label>Elapsed: @Model.Timer minutes.</label>
-                </div>
-            </div>
-        </section>
+        <div>
+            <label class="form-label">Participants</label>
+            <ul class="added-students" id="added-students">
+                @foreach (var studentName in Model.StudentNames)
+                {
+                    <li>@studentName</li>
+                }
+            </ul>
+        </div>
         <div class="row">
-            <div class="connected-students" id="studentList"></div>
-            <hr />
-            <div class="disconnected-students" id="finishedLabel"></div>
+            <div>
+                <label class="form-label">Active</label>
+                <div class="connected-students" id="studentList"></div>
+            </div>
+            <div>
+                <label class="form-label">Finished</label>
+                <div class="disconnected-students" id="finishedLabel"></div>
+            </div>
         </div>
         <div class="text-center mb-2">
-            <a class="btn btn-outline-warning btn-lg" href="/Test/EndTestAllStudents/@Model.TestName">End test</a>
+            <a class="btn btn-outline-warning"
+               asp-controller="Test"
+               asp-action="EndTestAllStudents"
+               asp-route-testName="@Model.TestName">End test</a>
         </div>
     }
 </div>
@@ -116,7 +115,7 @@
         });
 
         function submitForm() {
-            alert("Test ended.");
+            alert("Test ended");
             $("#form").submit();
         };
 
