@@ -214,7 +214,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                if (model.Students == null || model.Students.Any())
+                if (model.Students == null || !model.Students.Any())
                 {
                     this.ModelState.AddModelError(string.Empty, "Select at least one participant");
 
@@ -255,10 +255,7 @@ namespace DigitalCoolBook.App.Controllers
                     testStudents.Add(testStudent);
                 }
 
-                // Adding students in TestRoom
                 string testRoomId = await this.testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
-
-                // Add entity testStudent to DB
                 await this.testService.AddTestStudentsAsync(testStudents);
 
                 return this.RedirectToAction("StartTest", "Test", new { TestId = test.TestId });
@@ -273,7 +270,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
-        public async Task<IActionResult> StartTest(string testId)
+        public async Task<IActionResult> StartTest([FromQuery]string testId)
         {
             try
             {
@@ -282,7 +279,6 @@ namespace DigitalCoolBook.App.Controllers
                 // Keep the test Id for EndTest action
                 this.TempData["TestId"] = test.TestId;
 
-                // Map test to testModel
                 var model = this.mapper.Map<TestStartViewModel>(test);
 
                 // Gets the participating students
@@ -693,9 +689,9 @@ namespace DigitalCoolBook.App.Controllers
             return points;
         }
 
-        [Authorize(Roles = "Student")]
         [HttpGet]
-        public ActionResult IsStudentInTest()
+        [Authorize(Roles = "Student")]
+       public ActionResult IsStudentInTest()
         {
             var studentId = this.User
                 .FindFirst(ClaimTypes.NameIdentifier)?
@@ -715,8 +711,8 @@ namespace DigitalCoolBook.App.Controllers
                 return this.Json(new
                 {
                     success = true,
-                    TestId = testId,
-                    TestName = testName,
+                    testId = testId,
+                    testName = testName,
                 });
             }
 

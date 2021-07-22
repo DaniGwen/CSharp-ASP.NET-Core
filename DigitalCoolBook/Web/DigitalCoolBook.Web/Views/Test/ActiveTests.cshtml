@@ -5,9 +5,7 @@
 }
 
 <div class="container-fluid w-75">
-    <div class="col d-flex justify-content-center">
-        <h2 class="col-sm-auto my-h2">Active tests</h2>
-    </div>
+        <h3>Active tests</h3>
     <table class="table">
         <thead>
         </thead>
@@ -22,11 +20,15 @@
             }
             else
             {
-                @foreach (var item in Model)
+                @foreach (var activeTest in Model)
                 {
                     <tr>
                         <td class="text-center">
-                            <a class="btn btn-outline-info" href="/Test/StartTest/@item.TestId">@item.TestName</a>
+                            <a class="btn btn-outline-info" asp-controller="Test"
+                               asp-action="StartTest"
+                               asp-route-testId="@activeTest.TestId">
+                                @activeTest.TestName
+                            </a>
                         </td>
                     </tr>
                 }

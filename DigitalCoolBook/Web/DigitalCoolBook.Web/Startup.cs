@@ -93,7 +93,7 @@ namespace DigitalCoolBook.App
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                context.Database.EnsureDeleted();
+               // context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDBSeeder(context, serviceProvider, this.Configuration);
