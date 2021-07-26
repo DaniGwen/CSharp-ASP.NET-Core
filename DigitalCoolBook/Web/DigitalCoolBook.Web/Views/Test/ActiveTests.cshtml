@@ -4,37 +4,27 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid w-75">
-        <h3>Active tests</h3>
-    <table class="table">
-        <thead>
-        </thead>
-        <tbody>
-            @if (Model.Count() == 0)
-            {
-                <tr>
-                    <td class="text-center">
-                        <label>No active tests...</label>
-                    </td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var activeTest in Model)
-                {
-                    <tr>
-                        <td class="text-center">
-                            <a class="btn btn-outline-info" asp-controller="Test"
-                               asp-action="StartTest"
-                               asp-route-testId="@activeTest.TestId">
-                                @activeTest.TestName
-                            </a>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Active tests</h3>
+    <hr />
+    @if (!Model.Any())
+    {
+        <label>No active tests...</label>
+    }
+    else
+    {
+        @foreach (var activeTest in Model)
+        {
+            <div class="mb-2">
+                <a class="btn btn-outline-info w-100"
+                   asp-controller="Test"
+                   asp-action="StartTest"
+                   asp-route-id="@activeTest.TestId">
+                    @activeTest.TestName
+                </a>
+            </div>
+        }
+    }
 </div>
 
 

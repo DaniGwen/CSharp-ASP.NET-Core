@@ -10,7 +10,7 @@
 
                 "To test": function () {
                     $(this).dialog("close");
-                    window.location = "/Test/StartTest/" + testId;
+                    window.location = `/Test/StartTest/${testId}`;
                 }
             }
         })

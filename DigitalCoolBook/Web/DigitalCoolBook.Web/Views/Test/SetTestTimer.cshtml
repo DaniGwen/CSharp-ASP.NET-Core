@@ -9,7 +9,7 @@
     <h3>Start test</h3>
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
-        <input hidden name="TestId" value="@Model.TestId" />
+        <input hidden name="testId" value="@Model.TestId" />
         <div class="row mb-4">
             <div>
                 <label class="form-label">Timer</label>
@@ -76,7 +76,7 @@
     <script>
         $('form').on('submit', function (event) {
             if ($('#timer-input').val() === 0) {
-                $('#alert-timer').html("Set time").fadeToggle(4000);
+                $('#alert-timer').html("Set time").fadeToggle(2000);
                 event.preventDefault();
             }
         })

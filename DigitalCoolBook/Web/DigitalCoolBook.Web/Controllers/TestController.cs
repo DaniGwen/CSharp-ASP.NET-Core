@@ -209,7 +209,6 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        [ActionName("SetTestTimer")]
         public async Task<IActionResult> SetTestTimerAsync(TestViewModel model)
         {
             try
@@ -258,7 +257,7 @@ namespace DigitalCoolBook.App.Controllers
                 string testRoomId = await this.testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
                 await this.testService.AddTestStudentsAsync(testStudents);
 
-                return this.RedirectToAction("StartTest", "Test", new { TestId = test.TestId });
+                return this.RedirectToAction("StartTest", "Test", new{id = test.TestId});
             }
             catch (Exception exception)
             {
@@ -270,19 +269,19 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
-        public async Task<IActionResult> StartTest([FromQuery]string testId)
+        public async Task<IActionResult> StartTest([FromRoute]string id)
         {
             try
             {
-                var test = await this.testService.GetTestAsync(testId);
+                var test = await this.testService.GetTestAsync(id);
 
                 // Keep the test Id for EndTest action
                 this.TempData["TestId"] = test.TestId;
 
-                var model = this.mapper.Map<TestStartViewModel>(test);
+                var testViewModel = this.mapper.Map<TestStartViewModel>(test);
 
                 // Gets the participating students
-                model.StudentNames = await this.testService
+                testViewModel.StudentNames = await this.testService
                     .GetStudentsInTestRoomAsync(test.TestId);
 
                 // Gets the questions for this test
@@ -292,11 +291,11 @@ namespace DigitalCoolBook.App.Controllers
                .ToList();
 
                 // Add questions to model and map questions to QuestionModel
-                model.Questions
+                testViewModel.Questions
                         .AddRange(this.mapper.Map<List<QuestionsModel>>(questionsDb));
 
                 // Add Answers to Questions for this test
-                foreach (var question in model.Questions)
+                foreach (var question in testViewModel.Questions)
                 {
                     var answers = this.questionService.GetAnswers()
                         .Where(answer => answer.QuestionId == question.QuestionId)
@@ -305,7 +304,7 @@ namespace DigitalCoolBook.App.Controllers
                     question.Answers.AddRange(answers);
                 }
 
-                return this.View(model);
+                return this.View(testViewModel);
             }
             catch (Exception exception)
             {
@@ -473,7 +472,6 @@ namespace DigitalCoolBook.App.Controllers
                     var answersForQuestion = answers.Where(answer => answer.QuestionId == question.QuestionId)
                         .ToList();
 
-                    // Map answers to answers view model
                     var answersModel = this.mapper.Map<List<AnswerDetailsViewModel>>(answersForQuestion);
 
                     question.Answers = answersModel;

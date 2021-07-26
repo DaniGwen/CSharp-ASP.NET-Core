@@ -18,23 +18,23 @@
         }
 
         [Authorize]
-        public async override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
             var userName = await this.GetUserNameAsync();
 
             if (userName != null)
-                await this.Clients.All.SendAsync("OnConnected", $"{userName} connected");
+                await this.Clients.All.SendAsync("OnConnected", $"{userName} test started");
         }
 
         [Authorize]
-        public async override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
             var userName = await this.GetUserNameAsync();
 
             await this.userService.SetStudentFinishedTestRoom(userName);
 
             if (userName != null)
-                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} disconected", userName);
+                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} test submitted", userName);
         }
 
         private async Task<string> GetUserNameAsync()
