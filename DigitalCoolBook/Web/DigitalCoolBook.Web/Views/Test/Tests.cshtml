@@ -15,10 +15,21 @@
             <div class="col-md-4">
                 <div class="row">
                     <div class="col p-0">
-                        <a class="btn btn-outline-primary btn-sm"
-                           asp-controller="Test"
-                           asp-action="SetTestTimer"
-                           asp-route-testId="@test.TestId">Set test</a>
+                        @if (test.IsActive)
+                        {
+                            <a class="btn btn-outline-success btn-sm"
+                               asp-controller="Test"
+                               asp-action="StartTest"
+                               asp-route-id="@test.TestId">Active</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-primary btn-sm"
+                               asp-controller="Test"
+                               asp-action="SetTestTimer"
+                               asp-route-testId="@test.TestId">Create test</a>
+                        }
+
                     </div>
                 </div>
             </div>

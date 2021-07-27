@@ -9,17 +9,14 @@
     {
         public string TestId { get; set; }
 
-        [Display(Name ="Място")]
-        [Required(ErrorMessage ="Моля въведете място на провеждане на теста.")]
+        [Required(ErrorMessage ="Please enter test location")]
         public string Place { get; set; }
 
-        [Required(ErrorMessage ="Въведете времетраене на теста.")]
-        [Display(Name ="Времетраене")]
+        [Required(ErrorMessage ="Please set test timer")]
         public int Timer { get; set; }
 
         public string TestName { get; set; }
 
-        [Display(Name = "Дата на провеждане")]
         public DateTime Date { get; set; }
 
         public List<Grade> Grades { get; set; }

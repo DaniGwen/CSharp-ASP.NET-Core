@@ -11,6 +11,8 @@ namespace DigitalCoolBook.App.Models.TestviewModels
 
         public bool IsExpired { get; set; }
 
+        public bool IsActive { get; set; }
+
         public int Timer { get; set; }
     }
 }

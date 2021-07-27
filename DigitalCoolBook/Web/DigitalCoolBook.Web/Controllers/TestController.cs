@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DigitalCoolBook.App.Helpers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -28,6 +30,7 @@ namespace DigitalCoolBook.App.Controllers
         private readonly IQuestionService questionService;
         private readonly IScoreService scoreService;
         private readonly IHubContext<TestHub> testHub;
+        private readonly UserManager<IdentityUser> userManager;
 
         public TestController(
             ITestService testService,
@@ -37,7 +40,9 @@ namespace DigitalCoolBook.App.Controllers
             IUserService userService,
             IQuestionService questionService,
             IScoreService scoreService,
-            IHubContext<TestHub> testHub)
+            IHubContext<TestHub> testHub,
+            UserManager<IdentityUser> userManager
+           )
         {
             this.testService = testService;
             this.subjectService = subjectService;
@@ -47,6 +52,7 @@ namespace DigitalCoolBook.App.Controllers
             this.questionService = questionService;
             this.scoreService = scoreService;
             this.testHub = testHub;
+            this.userManager = userManager;
         }
 
         // Admin creates a test for a lesson
@@ -71,7 +77,7 @@ namespace DigitalCoolBook.App.Controllers
             string lessonId,
             string place)
         {
-           var lesson = await this.subjectService.GetLessonAsync(lessonId);
+            var lesson = await this.subjectService.GetLessonAsync(lessonId);
 
             // Instantiate test
             var test = new Test
@@ -159,12 +165,12 @@ namespace DigitalCoolBook.App.Controllers
 
                 await this.questionService.SaveChangesAsync();
 
-                return this.Json("Successfully saved.");
+                return this.Json("Test was successfully saved");
             }
             catch (Exception exception)
             {
                 // return error object to view
-                return this.Json(new { error = "Ops something gone wrong.", message = exception.Message });
+                return this.Json(new { error = "Ops something went wrong.", message = exception.Message });
             }
         }
 
@@ -182,12 +188,22 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult Tests()
         {
+            var teacherId = this.userManager.GetUserId(this.User);
             var tests = this.testService.GetTests().ToList();
+            var activeTests = this.testService.GetActiveTestsByTeacherId(teacherId);
 
             // Map and create model for the view
-            var model = this.mapper.Map<List<TestsNamesViewModel>>(tests);
+            var viewModel = this.mapper.Map<List<TestsNamesViewModel>>(tests);
 
-            return this.View(model);
+            foreach (var test in viewModel)
+            {
+                if (activeTests.Any(x => x.TestId == test.TestId))
+                {
+                    test.IsActive = true;
+                }
+            }
+
+            return this.View(viewModel);
         }
 
         // Set the timer for the test before it starts
@@ -195,6 +211,12 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult SetTestTimer(string testId)
         {
+            var teacherId = this.userManager.GetUserId(this.User);
+            var activeTests = this.testService.GetActiveTestsByTeacherId(teacherId);
+
+            if (activeTests.Any(x => x.TestId == testId))
+                return RedirectToAction("StartTest", new { id = testId });
+
             var model = new TestViewModel
             {
                 Grades = this.gradeService
@@ -211,6 +233,8 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> SetTestTimerAsync(TestViewModel model)
         {
+            var teacherId = this.userManager.GetUserId(this.User);
+
             try
             {
                 if (model.Students == null || !model.Students.Any())
@@ -229,9 +253,7 @@ namespace DigitalCoolBook.App.Controllers
 
                 var test = await this.testService.GetTestAsync(model.TestId);
 
-                test.TeacherId = this.User
-                    .FindFirst(ClaimTypes.NameIdentifier)?
-                    .Value;
+                test.TeacherId = teacherId;
 
                 // Set test timer from input model
                 test.Timer = model.Timer;
@@ -254,10 +276,10 @@ namespace DigitalCoolBook.App.Controllers
                     testStudents.Add(testStudent);
                 }
 
-                string testRoomId = await this.testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
+                await this.testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
                 await this.testService.AddTestStudentsAsync(testStudents);
 
-                return this.RedirectToAction("StartTest", "Test", new{id = test.TestId});
+                return this.RedirectToAction("StartTest", "Test", new { id = test.TestId });
             }
             catch (Exception exception)
             {
@@ -269,7 +291,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
-        public async Task<IActionResult> StartTest([FromRoute]string id)
+        public async Task<IActionResult> StartTest([FromRoute] string id)
         {
             try
             {
@@ -376,7 +398,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 if (model.Questions.Count < 1)
                 {
-                    this.ModelState.AddModelError(string.Empty, "Моля добавете поне един въпрос.");
+                    this.ModelState.AddModelError(string.Empty, "Please add questions");
 
                     return this.View(model);
                 }
@@ -403,7 +425,7 @@ namespace DigitalCoolBook.App.Controllers
             }
 
             await this.testService.SaveChangesAsync();
-            this.TempData["SuccessMsg"] = "Въпросите бяха записани";
+            this.TempData["SuccessMsg"] = "Questions were saved";
 
             return this.Redirect("/Home/Success");
         }
@@ -427,7 +449,7 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult GetLessons(string lessonId)
         {
-            // TODO
+            //TODO
             return this.Json(string.Empty);
         }
 
@@ -689,7 +711,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Student")]
-       public ActionResult IsStudentInTest()
+        public ActionResult IsStudentInTest()
         {
             var studentId = this.User
                 .FindFirst(ClaimTypes.NameIdentifier)?
@@ -723,13 +745,13 @@ namespace DigitalCoolBook.App.Controllers
 
         [Authorize(Roles = "Teacher")]
         [ActionName("EndTestAllStudents")]
-        public async Task<IActionResult> EndTestAllStudentsAsync(string testName)
+        public async Task<IActionResult> EndTestAllStudentsAsync(string testId)
         {
             await this.testHub.Clients.All.SendAsync("SubmitAll");
 
             var testDb = this.testService
                 .GetTests()
-                .First(x => x.TestName == testName);
+                .First(x => x.TestId == testId);
 
             var expiredTest = this.mapper.Map<ExpiredTest>(testDb);
 
@@ -746,8 +768,7 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult ActiveTests()
         {
-            var teacherId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
+            var teacherId = this.userManager.GetUserId(this.User);
             List<Test> activeTests = this.testService.GetActiveTestsByTeacherId(teacherId);
 
             var model = this.mapper.Map<List<ActiveTestsViewModel>>(activeTests);
