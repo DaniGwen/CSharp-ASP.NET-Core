@@ -12,9 +12,9 @@ namespace DigitalCoolBook.Data
 {
     public class ApplicationDBSeeder
     {
-        private IServiceProvider _serviceProvider;
-        private ApplicationDbContext _dbContext;
-        private IConfiguration _configuration;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IConfiguration _configuration;
 
         public ApplicationDBSeeder(ApplicationDbContext dbContext
             , IServiceProvider serviceProvider

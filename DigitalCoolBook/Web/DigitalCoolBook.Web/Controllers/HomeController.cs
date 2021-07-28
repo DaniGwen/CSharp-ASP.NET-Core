@@ -1,33 +1,33 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Diagnostics;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using DigitalCoolBook.App.Models;
-    using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IUserService _userService;
+        private readonly INotyfService _toasterService;
         private readonly UserManager<IdentityUser> _userManager;
 
         public HomeController(
-            ILogger<HomeController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IUserService userService)
+            IUserService userService,
+            INotyfService toasterService)
         {
             _userManager = userManager;
             _userService = userService;
-            _logger = logger;
+            _toasterService = toasterService;
             _signInManager = signInManager;
         }
 
@@ -39,15 +39,13 @@
                     .FindFirst(ClaimTypes.NameIdentifier)?
                     .Value;
 
-                var user = await this._userService.GetUserAsync(userId);
+                var user = await _userService.GetUserAsync(userId);
 
                 if (user == null)
                     return this.View();
 
-                if (this.User.IsInRole("Teacher"))
-                    return Redirect("/Subject/Subjects"); 
-                if (this.User.IsInRole("Student"))
-                    return Redirect("/Subject/Subjects"); 
+                if (this.User.IsInRole("Teacher") || this.User.IsInRole("Student"))
+                    return Redirect("/Subject/Subjects");
                 if (this.User.IsInRole("Admin"))
                     return Redirect("/Admin/AdminPanel");
             }
@@ -75,7 +73,7 @@
                     {
                         var result = await _signInManager
                             .PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
-                        _logger.LogInformation("User logged in.");
+                        _toasterService.Success("You are logged in");
                     }
                     else
                     {
@@ -103,28 +101,14 @@
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
 
-
-        [Authorize(Roles = "Teacher, Admin, Student")]
-        public IActionResult Success()
+        public void Success()
         {
-            this.AddRefreshHeader();
-
-            return this.View();
+          _toasterService.Success("Success");
         }
 
-        public IActionResult PasswordSaved()
+        public void PasswordSaved()
         {
-            this.AddRefreshHeader();
-
-            return this.View();
-        }
-
-        [Authorize(Roles = "Teacher, Admin")]
-        public IActionResult ErrorView()
-        {
-            this.AddRefreshHeader();
-
-            return this.View();
+           _toasterService.Success("Password was saved");
         }
 
         private void AddRefreshHeader() =>

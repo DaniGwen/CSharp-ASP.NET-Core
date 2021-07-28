@@ -1,8 +1,7 @@
-using DigitalCoolBook.App.Helpers;
-using DigitalCoolBook.Data;
-
 namespace DigitalCoolBook.App
 {
+    using System;
+    using System.Globalization;
     using AutoMapper;
     using Data;
     using DigitalCoolBook.Services;
@@ -19,8 +18,8 @@ namespace DigitalCoolBook.App
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Service;
-    using System;
-    using System.Globalization;
+    using AspNetCoreHero.ToastNotification;
+    using DigitalCoolBook.Data;
 
     public class Startup
     {
@@ -46,6 +45,13 @@ namespace DigitalCoolBook.App
                    options.CheckConsentNeeded = context => true;
                    options.MinimumSameSitePolicy = SameSiteMode.None;
                });
+
+            services.AddNotyf(conf =>
+            {
+                conf.IsDismissable = true;
+                conf.Position = NotyfPosition.TopLeft;
+                conf.DurationInSeconds = 10;
+            });
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();

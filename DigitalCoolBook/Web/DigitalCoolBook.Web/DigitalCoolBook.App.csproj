@@ -15,6 +15,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AspNetCoreHero.ToastNotification" Version="1.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="cldrjs" Version="0.5.1" />
     <PackageReference Include="jquery-globalize" Version="1.4.2" />

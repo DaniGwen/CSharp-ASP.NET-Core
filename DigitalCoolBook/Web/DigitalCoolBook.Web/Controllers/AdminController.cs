@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -15,36 +17,35 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
 
     [AutoValidateAntiforgeryToken]
     public class AdminController : Controller
     {
-        private readonly ILogger<AdminController> logger;
-        private readonly IGradeService gradeService;
-        private readonly IUserService userService;
-        private readonly IMapper mapper;
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly IConfiguration configuration;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IGradeService _gradeService;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _configuration;
+        private readonly INotyfService _toasterService;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public AdminController(
             SignInManager<IdentityUser> signInManager,
-            ILogger<AdminController> logger,
             IGradeService gradeService,
             IUserService userService,
             IMapper mapper,
             UserManager<IdentityUser> userManager,
-            IConfiguration configuration
+            IConfiguration configuration,
+            INotyfService toasterService
             )
         {
-            this.signInManager = signInManager;
-            this.logger = logger;
-            this.gradeService = gradeService;
-            this.userService = userService;
-            this.mapper = mapper;
-            this.userManager = userManager;
-            this.configuration = configuration;
+            _signInManager = signInManager;
+            _gradeService = gradeService;
+            _userService = userService;
+            _mapper = mapper;
+            _userManager = userManager;
+            _configuration = configuration;
+            _toasterService = toasterService;
         }
 
         [HttpGet]
@@ -58,9 +59,9 @@
         [Authorize(Roles = "Admin")]
         public IActionResult EditParalelos()
         {
-            var gradeTeachers = this.gradeService.GetGradeParalelos().ToList();
+            var gradeTeachers = this._gradeService.GetGradeParalelos().ToList();
             var models = new List<ParaleloViewModel>();
-        
+
             foreach (var gradeTeacher in gradeTeachers)
             {
                 var model = new ParaleloViewModel
@@ -68,15 +69,15 @@
                     Id = gradeTeacher.GradeTeacherId,
                     GradeId = gradeTeacher.GradeId,
                     TeacherId = gradeTeacher.TeacherId,
-                    GradeName = this.gradeService
+                    GradeName = this._gradeService
                     .GetGrades()
                     .FirstOrDefault(g => g.GradeId == gradeTeacher.GradeId)?
                     .Name,
-                    TeacherName = this.userService
+                    TeacherName = this._userService
                     .GetTeachers()
                     .FirstOrDefault(t => t.Id == gradeTeacher.TeacherId)?
                     .Name,
-                    Students = this.userService
+                    Students = this._userService
                     .GetStudents()
                     .Where(s => s.GradeId == gradeTeacher.Grade.GradeId)
                     .ToList(),
@@ -92,24 +93,24 @@
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditParaleloAsync(string teacherId, string gradeId)
         {
-            var gradeParalelo = await this.gradeService.GetGradeParaleloAsync(teacherId);
+            var gradeParalelo = await _gradeService.GetGradeParaleloAsync(teacherId);
 
-            var grades = this.gradeService
+            var grades = _gradeService
                 .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList();
 
-            var teachers = this.userService
+            var teachers = _userService
                 .GetTeachers()
                 .ToList();
 
-            var model = this.mapper.Map<ParaleloCreateViewModel>(gradeParalelo);
+            var model = _mapper.Map<ParaleloCreateViewModel>(gradeParalelo);
 
-            model.GradeName = this.gradeService
+            model.GradeName = _gradeService
                 .GetGrades()
                 .FirstOrDefault(g => g.GradeId == gradeParalelo.GradeId)?.Name;
 
-            model.TeacherName = this.userService
+            model.TeacherName = _userService
                 .GetTeachers()
                 .FirstOrDefault(t => t.Id == gradeParalelo.TeacherId)?.Name;
 
@@ -124,11 +125,11 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateParalelo()
         {
-            var teachers = this.userService
+            var teachers = _userService
                 .GetTeachers()
                 .ToList();
 
-            var grades = this.gradeService
+            var grades = _gradeService
                 .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList();
@@ -148,22 +149,21 @@
         {
             try
             {
-                var gradeParalelo = new GradeTeacher
+                await this._gradeService.AddGradeParaleloAsync(new GradeTeacher
                 {
                     GradeTeacherId = Guid.NewGuid().ToString(),
                     GradeId = model.IdGrade,
                     TeacherId = model.IdTeacher
-                };
-
-                await this.gradeService.AddGradeParaleloAsync(gradeParalelo);
+                });
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                return this.View("Error", new ErrorViewModel { Message = exception.Message });
+                _toasterService.Error("Error creating a class");
+                return this.View();
             }
 
-            this.TempData["SuccessMsg"] = "Class has been created successfully";
-            return this.Redirect("/Home/Success");
+            _toasterService.Success("Class has been created successfully");
+            return Redirect("/Home/Index");
         }
 
         [HttpPost]
@@ -172,46 +172,39 @@
         {
             try
             {
-                var gradeParalelo = await this.gradeService.GetGradeParaleloAsync(model.GradeParaleloId);
+                var gradeParalelo = await this._gradeService.GetGradeParaleloAsync(model.GradeParaleloId);
 
                 gradeParalelo.TeacherId = model.IdTeacher;
                 gradeParalelo.GradeId = model.IdGrade;
 
-                await this.gradeService.SaveChangesAsync();
+                await this._gradeService.SaveChangesAsync();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                var error = new ErrorViewModel
-                {
-                    Message = exception.Message,
-                };
-
-                return this.View("Error", error);
+                _toasterService.Error("Error saving changes");
+                return this.View();
             }
 
-            this.TempData["SuccessMsg"] = "Changes saved";
-            return this.Redirect("/Home/Success");
+            _toasterService.Success("Changes saved successfully");
+            return this.Redirect("/Home/Index");
         }
 
         public async Task<IActionResult> DeleteParaleloAsync(string id)
         {
             try
             {
-                var paralelo = await this.gradeService.GetGradeParaleloAsync(id);
-                await this.gradeService.RemoveGradeParaleloAsync(paralelo);
-                await this.gradeService.SaveChangesAsync();
+                var paralelo = await this._gradeService.GetGradeParaleloAsync(id);
+                await this._gradeService.RemoveGradeParaleloAsync(paralelo);
+                await this._gradeService.SaveChangesAsync();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                var error = new ErrorViewModel
-                {
-                    Message = exception.Message,
-                };
-                return this.View("Error", error);
+                _toasterService.Error("Error removing");
+                return BadRequest();
             }
 
-            this.TempData["SuccessMsg"] = "Removed successfully";
-            return this.Redirect("/Home/Success");
+            _toasterService.Success("Removed successfully");
+            return this.Redirect("/Home/Index");
         }
 
         [HttpGet]
@@ -228,7 +221,7 @@
                 return this.View(email);
             }
 
-            var user = this.userService.GetUserByEmail(email);
+            var user = this._userService.GetUserByEmail(email);
 
             if (user == null)
             {
@@ -241,19 +234,18 @@
 
             var newPassword = GeneratePassword(4, 1, 3, 1);
 
-            await this.userManager.AddPasswordAsync(user, newPassword);
+            await this._userManager.AddPasswordAsync(user, newPassword);
 
-            await this.userService.SaveChangesAsync();
+            await this._userService.SaveChangesAsync();
 
             // Sends the new password to the user
-            var emailSender = new EmailSender(configuration);
+            var emailSender = new EmailSender(_configuration);
 
-            emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
+            await emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
 
-            return this.Json("Нова парола беше изпратена на вашият имейл.");
+            return this.Json("New password has been send to your email");
         }
 
-        // Generates Random password
         private static string GeneratePassword(int lowercase, int uppercase, int numerics, int symbols)
         {
             string lowers = "abcdefghijklmnopqrstuvwxyz";
