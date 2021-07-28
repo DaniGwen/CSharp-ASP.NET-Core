@@ -27,10 +27,8 @@ namespace DigitalCoolBook.App.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly INotyfService _toasterService;
-        private readonly SignInManager<IdentityUser> _signInManager;
 
         public AdminController(
-            SignInManager<IdentityUser> signInManager,
             IGradeService gradeService,
             IUserService userService,
             IMapper mapper,
@@ -39,7 +37,6 @@ namespace DigitalCoolBook.App.Controllers
             INotyfService toasterService
             )
         {
-            _signInManager = signInManager;
             _gradeService = gradeService;
             _userService = userService;
             _mapper = mapper;
@@ -238,7 +235,6 @@ namespace DigitalCoolBook.App.Controllers
 
             await this._userService.SaveChangesAsync();
 
-            // Sends the new password to the user
             var emailSender = new EmailSender(_configuration);
 
             await emailSender.SendNewPassword(newPassword, user.Email, user.UserName);
