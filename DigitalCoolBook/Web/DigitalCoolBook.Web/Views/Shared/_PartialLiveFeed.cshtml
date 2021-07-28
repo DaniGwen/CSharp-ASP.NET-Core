@@ -1,4 +1,13 @@
-﻿<div class="live-feed-wrapper live-feed-hide">
+﻿@using DigitalCoolBook.Services.Contracts
+@inject IUserService UserService
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var userId = UserManager.GetUserId(this.User);
+    var teacherName = (await UserService.GetTeacherAsync(userId)).Name;
+}
+
+<div class="live-feed-wrapper live-feed-hide">
     <div class="live-feed-title-and-toggleBtn">
         <h5 class="live-feed-title">Live feed</h5>
         <button class="btn live-feed-toggle">
@@ -10,7 +19,7 @@
             <ul id="messagesList"></ul>
         </div>
         <div class="live-feed-input input-group input-group-sm mb-3">
-            <span class="input-group-text " id="userInput">@User.Identity.Name</span>
+            <span class="input-group-text " id="userInput">@teacherName</span>
             <input class="form-control"
                    id="messageInput"
                    type="text"
