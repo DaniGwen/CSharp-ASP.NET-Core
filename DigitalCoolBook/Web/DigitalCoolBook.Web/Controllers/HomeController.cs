@@ -8,7 +8,6 @@ namespace DigitalCoolBook.App.Controllers
     using System.Threading.Tasks;
     using DigitalCoolBook.App.Models;
     using DigitalCoolBook.Services.Contracts;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -66,14 +65,13 @@ namespace DigitalCoolBook.App.Controllers
                     var user = await _userManager
                         .FindByEmailAsync(loginModel.Email);
 
-                    var isPasswordSuccess = await _userManager
+                    var passwordResult = await _userManager
                         .CheckPasswordAsync(user, loginModel.Password);
 
-                    if (isPasswordSuccess)
+                    if (passwordResult)
                     {
-                        var result = await _signInManager
-                            .PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
-                        _toasterService.Success("You are logged in");
+                        await _signInManager.PasswordSignInAsync(user, loginModel.Password, isPersistent: true, false);
+                        _toasterService.Information("You are logged in");
                     }
                     else
                     {
@@ -81,15 +79,10 @@ namespace DigitalCoolBook.App.Controllers
                         return this.View(loginModel);
                     }
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
-                    var error = new ErrorViewModel
-                    {
-                        Message = exception.Message,
-                        RequestId = this.Request.HttpContext.TraceIdentifier,
-                    };
-
-                    return this.View("Error", error);
+                  _toasterService.Error("Error occurred while logging in");
+                    return this.RedirectToAction("Index");
                 }
             }
 
@@ -100,19 +93,5 @@ namespace DigitalCoolBook.App.Controllers
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-
-        public void Success()
-        {
-          _toasterService.Success("Success");
-        }
-
-        public void PasswordSaved()
-        {
-           _toasterService.Success("Password was saved");
-        }
-
-        private void AddRefreshHeader() =>
-            this.Response.Headers.Add("REFRESH", $"3;URL=/Home/Index");
-
     }
 }
