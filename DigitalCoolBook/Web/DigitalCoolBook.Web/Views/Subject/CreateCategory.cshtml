@@ -5,23 +5,23 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid w-75">
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>Create category</h3>
     <hr />
     <form asp-action="CreateCategory" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label class="gj-font-size-16">Subject</label>
-            @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Select subject", new { @class = "form-control" })
+            <label class="form-label">Subject</label>
+            @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Select subject", new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            <label asp-for="Title" class="control-label">Title</label>
-            <input id="title" asp-for="Title" class="form-control" />
+            <label asp-for="Title" class="form-label">Title</label>
+            <input id="title" asp-for="Title" class="form-control form-control-sm" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="buttons-wrapper">
-            <a class="btn btn-outline-secondary btn-sm" href="/Admin/AdminPanel">Back</a>
+            <a class="btn btn-outline-secondary btn-sm" asp-controller="Admin" asp-action="AdminPanel">Back</a>
             <a class="btn btn-outline-success btn-sm" id="submit">Create</a>
         </div>
     </form>
