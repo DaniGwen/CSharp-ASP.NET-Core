@@ -49,7 +49,7 @@ namespace DigitalCoolBook.App
             services.AddNotyf(conf =>
             {
                 conf.IsDismissable = true;
-                conf.Position = NotyfPosition.TopLeft;
+                conf.Position = NotyfPosition.TopCenter;
                 conf.DurationInSeconds = 10;
             });
 
