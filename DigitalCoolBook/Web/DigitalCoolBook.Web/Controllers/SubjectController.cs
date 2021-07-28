@@ -1,11 +1,8 @@
-﻿using DigitalCoolBook.Web.Models.SubjectViewModels;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
     using Models.CategoryViewModels;
@@ -16,32 +13,41 @@ namespace DigitalCoolBook.App.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using DigitalCoolBook.Web.Models.CategoryViewModels;
+    using DigitalCoolBook.Web.Models.SubjectViewModels;
+    using AspNetCoreHero.ToastNotification.Abstractions;
+    using Microsoft.AspNetCore.Identity;
 
     public class SubjectController : Controller
     {
-        private readonly ISubjectService subjectService;
-        private readonly IMapper mapper;
-        private readonly IScoreService scoreService;
+        private readonly ISubjectService _subjectService;
+        private readonly IMapper _mapper;
+        private readonly IScoreService _scoreService;
+        private readonly INotyfService _toasterService;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public SubjectController(
             ISubjectService subjectService,
             IMapper mapper,
-            IScoreService scoreService)
+            IScoreService scoreService,
+            INotyfService toasterService,
+            UserManager<IdentityUser> userManager)
         {
-            this.subjectService = subjectService;
-            this.mapper = mapper;
-            this.scoreService = scoreService;
+            _subjectService = subjectService;
+            _mapper = mapper;
+            _scoreService = scoreService;
+            _toasterService = toasterService;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult Subjects()
         {
-            var subjects = this.subjectService.GetSubjects().ToList();
+            var subjects = _subjectService.GetSubjects().ToList();
             var subjectList = new List<SubjectViewModel>();
 
             foreach (var subject in subjects)
             {
-                var subjectModel = this.mapper.Map<SubjectViewModel>(subject);
+                var subjectModel = _mapper.Map<SubjectViewModel>(subject);
                 subjectList.Add(subjectModel);
             }
 
@@ -52,13 +58,11 @@ namespace DigitalCoolBook.App.Controllers
         [ActionName("Categories")]
         public IActionResult CategoriesAsync(string subjectId, string categoryId)
         {
-            //var categoryLessons = this.subjectService.GetLessons().ToList();
-
-            var subjectDb = this.subjectService.GetSubjects()
+            var subjectDb = _subjectService.GetSubjects()
                 .Include(s => s.Categories)
                 .FirstOrDefault(s => s.SubjectId == subjectId);
 
-            var model = this.mapper.Map<SubjectViewModel>(subjectDb);
+            var model = _mapper.Map<SubjectViewModel>(subjectDb);
 
             return this.View(model);
         }
@@ -68,21 +72,20 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin, Teacher, Student")]
         public IActionResult CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
         {
-            var lessons = this.subjectService.GetLessons()
+            var lessons = _subjectService.GetLessons()
                 .Where(lesson => lesson.CategoryId == categoryDetailsModel.CategoryId)
                 .ToList();
 
-            var lessonsDto = this.mapper.Map<List<LessonsViewModel>>(lessons);
+            var lessonsDto = _mapper.Map<List<LessonsViewModel>>(lessons);
 
             // If User is Student adding score in view
             if (this.User.IsInRole("Student"))
             {
                 foreach (var lesson in lessonsDto)
                 {
-                    // Gets student ID
-                    var studentId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                    var studentId = _userManager.GetUserId(this.User);
 
-                    var score = this.scoreService
+                    var score = _scoreService
                         .GetScoreStudents()
                         .Where(ss => ss.StudentId == studentId)
                         .FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
@@ -105,7 +108,7 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult AddLesson()
         {
-            var subjects = this.subjectService.GetSubjects().ToList();
+            var subjects = _subjectService.GetSubjects().ToList();
 
             var model = new CategoryCreateViewModel
             {
@@ -123,7 +126,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                var lessonLevel = int.Parse(level);
+                var unlockLevel = int.Parse(level);
 
                 var lesson = new Lesson
                 {
@@ -131,15 +134,12 @@ namespace DigitalCoolBook.App.Controllers
                     CategoryId = categoryId,
                     Content = content,
                     Title = title,
-                    Level = lessonLevel,
+                    Level = unlockLevel,
                 };
 
-                if (lessonLevel == 1)
-                {
-                    lesson.IsUnlocked = true;
-                }
+                if (unlockLevel == 1) { lesson.IsUnlocked = true; }
 
-                await this.subjectService.CreateLessonAsync(lesson);
+                await _subjectService.CreateLessonAsync(lesson);
 
                 return this.Json("The topic has been added");
             }
@@ -152,13 +152,12 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public JsonResult GetCategories(string subjectId)
         {
-            var categories = this.subjectService
+            var categories = _subjectService
                 .GetCategories()
                 .Where(c => c.SubjectId == subjectId)
                 .ToList();
 
-            var categoriesDto = this.mapper
-                .Map<IEnumerable<Category>, IEnumerable<CategoryAjaxViewModel>>(categories);
+            var categoriesDto = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryAjaxViewModel>>(categories);
 
             return this.Json(categoriesDto);
         }
@@ -166,10 +165,10 @@ namespace DigitalCoolBook.App.Controllers
         [HttpPost]
         public JsonResult GetLessons(string categoryId)
         {
-            var lessons = this.subjectService.GetLessons()
+            var lessons = this._subjectService.GetLessons()
                 .Where(l => l.CategoryId == categoryId);
 
-            var model = this.mapper.Map<List<LessonsViewModel>>(lessons);
+            var model = this._mapper.Map<List<LessonsViewModel>>(lessons);
 
             return this.Json(model);
         }
@@ -179,17 +178,17 @@ namespace DigitalCoolBook.App.Controllers
         [ActionName("EditLesson")]
         public async Task<IActionResult> EditLessonAsync(string id)
         {
-            var lesson = await this.subjectService.GetLessonAsync(id);
+            var lesson = await _subjectService.GetLessonAsync(id);
 
-            var model = this.mapper.Map<LessonEditViewModel>(lesson);
+            var lessonViewModel = _mapper.Map<LessonEditViewModel>(lesson);
 
-            var categories = this.subjectService.GetCategories().ToList();
+            var categories = _subjectService.GetCategories().ToList();
 
-            var categoriesDto = this.mapper.Map<IList<CategoryViewModel>>(categories);
-            
-            model.Categories = categoriesDto;
+            var categoriesDto = this._mapper.Map<IList<CategoryViewModel>>(categories);
 
-            return this.View(model);
+            lessonViewModel.Categories = categoriesDto;
+
+            return this.View(lessonViewModel);
         }
 
         [HttpPost]
@@ -199,19 +198,19 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                var lesson = await this.subjectService.GetLessonAsync(viewModel.LessonId);
+                var lesson = await _subjectService.GetLessonAsync(viewModel.LessonId);
 
                 lesson.Title = viewModel.Title;
                 lesson.Content = viewModel.Content;
                 lesson.CategoryId = viewModel.CategoryId;
 
-                await this.subjectService.SaveChangesAsync();
+                await _subjectService.SaveChangesAsync();
 
-                return this.Json("Changes are saved");
+                return this.Json("Changes were saved");
             }
             catch (Exception)
             {
-                return this.Json("Error saving");
+                return this.Json("Error occurred while saving");
             }
         }
 
@@ -222,43 +221,44 @@ namespace DigitalCoolBook.App.Controllers
             return this.View(new SubjectCreateViewModel());
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateSubjectAsync(SubjectCreateViewModel model)
         {
             if (this.ModelState.IsValid)
             {
-                if (this.subjectService.GetSubjects().Any(s => s.Name == model.Name))
+                if (_subjectService.GetSubjects().Any(s => s.Name == model.Name))
                 {
-                    this.ModelState.AddModelError(string.Empty, "Предмета вече съществува.");
+                    this.ModelState.AddModelError(string.Empty, "The subject already exist");
+
                     return this.View(model);
                 }
 
-                var subject = new Subject
+                await _subjectService.CreateSubjectAsync(new Subject
                 {
                     Name = model.Name,
                     SubjectId = Guid.NewGuid().ToString(),
-                };
-                await this.subjectService.CreateSubjectAsync(subject);
+                });
             }
             else
             {
                 return this.View(model);
             }
 
-            this.TempData["SuccessMsg"] = "Предмета е създаден.";
-            return this.Redirect("/Home/Success");
+            _toasterService.Success("Subject has been created");
+
+            return this.Redirect("/Home/Index");
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult CreateCategory()
         {
-            var subjects = this.subjectService.GetSubjects().ToList();
+            var subjects = this._subjectService.GetSubjects().ToList();
 
             var model = new CategoryAdminCreateViewModel()
             {
-                Subjects = this.mapper.Map<List<SubjectViewModel>>(subjects),
+                Subjects = _mapper.Map<List<SubjectViewModel>>(subjects),
             };
 
             return this.View(model);
@@ -270,49 +270,43 @@ namespace DigitalCoolBook.App.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var category = new Category
+                await _subjectService.CreateCategoryAsync(new Category
                 {
                     Id = Guid.NewGuid().ToString(),
                     SubjectId = model.SubjectId,
                     Title = model.Title,
-                };
-                await this.subjectService.CreateCategoryAsync(category);
+                });
             }
             else
             {
                 this.ModelState.AddModelError(string.Empty, "Please fill out the fields");
+
                 return this.View(model);
             }
 
             return this.Json("/Subject/AddLesson");
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ActionName("RemoveCategory")]
         public async Task<IActionResult> RemoveCategoryAsync(string categoryId)
         {
-            if (categoryId == null)
-            {
-                return this.BadRequest("Please select category");
-            }
+            if (categoryId == null) { return this.BadRequest("Please select category"); }
 
-            await this.subjectService.RemoveCategoryAsync(categoryId);
+            await _subjectService.RemoveCategoryAsync(categoryId);
 
             return this.Redirect("/Subject/AddLesson");
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ActionName("RemoveSubject")]
         public async Task<IActionResult> RemoveSubjectAsync(string subjectId)
         {
-            if (subjectId == null)
-            {
-                return this.BadRequest("Please select subject");
-            }
+            if (subjectId == null) { return this.BadRequest("Please select subject"); }
 
-            await this.subjectService.RemoveSubjectAsync(subjectId);
+            await _subjectService.RemoveSubjectAsync(subjectId);
 
             return this.Redirect("/Subject/AddLesson");
         }
@@ -321,16 +315,14 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult RemoveLesson()
         {
-            var categories = this.subjectService.GetCategories().ToList();
-            var lessons = this.subjectService.GetLessons().ToList();
+            var categories = _subjectService.GetCategories().ToList();
+            var lessons = _subjectService.GetLessons().ToList();
 
-            var model = new LessonRemoveViewModel
+            return this.View(new LessonRemoveViewModel
             {
                 Categories = categories,
                 Lessons = lessons,
-            };
-
-            return this.View(model);
+            });
         }
 
         [HttpPost]
@@ -340,13 +332,13 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                await this.subjectService.RemoveLessonAsync(lessonId);
+                await _subjectService.RemoveLessonAsync(lessonId);
 
                 return this.Json("Topic was removed");
             }
             catch (Exception)
             {
-                return this.Json("Error removing topic");
+                return this.Json("Error occurred while removing the topic");
             }
         }
 
@@ -355,20 +347,20 @@ namespace DigitalCoolBook.App.Controllers
         [ActionName("LessonDetails")]
         public async Task<IActionResult> LessonDetailsAsync(string lessonId, string subjectId)
         {
-            var lesson = await this.subjectService.GetLessonAsync(lessonId);
-            var model = this.mapper.Map<LessonsViewModel>(lesson);
-            model.SubjectId = subjectId;
+            var lesson = await _subjectService.GetLessonAsync(lessonId);
+            var lessonsViewModel = _mapper.Map<LessonsViewModel>(lesson);
+            lessonsViewModel.SubjectId = subjectId;
 
-            return this.View(model);
+            return this.View(lessonsViewModel);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult LessonsPreview()
         {
-            var lessons = this.subjectService.GetLessons();
+            var lessons = _subjectService.GetLessons();
 
-            var model = this.mapper.Map<List<LessonPreviewViewModel>>(lessons);
+            var model = _mapper.Map<List<LessonPreviewViewModel>>(lessons);
 
             return this.View(model);
         }

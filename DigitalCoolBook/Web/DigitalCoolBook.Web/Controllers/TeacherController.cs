@@ -180,9 +180,9 @@ namespace DigitalCoolBook.App.Controllers
 
                 await _userService.SaveChangesAsync();
 
-                this.TempData["SuccessMsg"] = "Changes are saved";
+               _toasterService.Success("Changes were saved");
 
-                return this.Redirect("/Home/Success");
+                return this.RedirectToAction("EditTeachers");
             }
 
             return this.View(model);
