@@ -1,14 +1,10 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
-    using DigitalCoolBook.App.Models;
     using DigitalCoolBook.App.Models.GradesViewModels;
     using DigitalCoolBook.App.Models.StudentViewModels;
     using DigitalCoolBook.Models;
@@ -16,6 +12,7 @@ namespace DigitalCoolBook.App.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using AspNetCoreHero.ToastNotification.Abstractions;
 
     public class StudentController : Controller
     {
@@ -126,14 +123,14 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditStudentAsync(string id)
         {
-            var student = await this._userService.GetStudentAsync(id);
-            var grades = this._gradeService.GetGrades()
+            var student = await _userService.GetStudentAsync(id);
+            var grades = _gradeService.GetGrades()
                 .OrderBy(grade => grade.Name)
                 .ToList();
 
-            var studentViewModel = this._mapper.Map<StudentEditViewModel>(student);
+            var studentViewModel = _mapper.Map<StudentEditViewModel>(student);
+            var gradeModel = _mapper.Map<List<GradeViewModel>>(grades);
 
-            var gradeModel = this._mapper.Map<List<GradeViewModel>>(grades);
             studentViewModel.Grades.AddRange(gradeModel);
             studentViewModel.DateOfBirth = student.DateOfBirth.Date;
 
