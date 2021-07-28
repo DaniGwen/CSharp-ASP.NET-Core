@@ -96,8 +96,6 @@
         <partial name="_PartialFooter" />
     </div>
 
-    @await Component.InvokeAsync("Notyf")
-
     <script src="/js/jquery.js"></script>
     <script src="/js/jquery-ui.min.js"></script>
     <script src="~/js/jquery.magnific-popup.min.js"></script>
@@ -109,6 +107,6 @@
     {
         <partial name="_PartialLiveFeed" />
     }
-
+    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
