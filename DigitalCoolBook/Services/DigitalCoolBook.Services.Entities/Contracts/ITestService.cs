@@ -31,7 +31,7 @@
 
         IQueryable<ExpiredTest> GetExpiredTests();
 
-        Task RemoveExpiredTest(string id);
+        Task RemoveExpiredTest(string expiredTestId, string studentId);
 
         Task<string> AddTestRoomAsync(string[] students, string teacherId, string testId);
 
@@ -48,5 +48,7 @@
         Task<List<string>> GetStudentsInTestRoomAsync(string testId);
 
         List<TestExpiredViewModel> GetExpiredTestsByTeacherId(string teacherId);
+
+        Task TestRoomStudentFinished(string studentId, int score);
     }
 }

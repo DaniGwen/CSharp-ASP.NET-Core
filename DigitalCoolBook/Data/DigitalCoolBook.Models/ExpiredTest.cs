@@ -33,8 +33,6 @@ namespace DigitalCoolBook.Models
 
         public string StudentId { get; set; }
 
-       // public virtual ICollection<TestStudent> TestStudent { get; set; }
-
         public ICollection<CorrectAnswer> CorrectAnswers { get; set; }
     }
 }

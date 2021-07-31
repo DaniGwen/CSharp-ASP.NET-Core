@@ -7,13 +7,13 @@ var connection = new signalR.HubConnectionBuilder()
 connection.on("OnConnected", function (user) {
     var li = document.createElement("li");
     li.textContent = user;
-    document.getElementById("studentList").appendChild(li);
+    document.getElementById("activeStudents").appendChild(li);
 });
 
 connection.on("OnDisconnected", function (message, studentName) {
     var li = document.createElement("li");
     li.textContent = message;
-    document.getElementById("finishedLabel").appendChild(li);
+    document.getElementById("finishedStudents").appendChild(li);
 
     $("#added-students:contains(" + studentName + ")").css("text-decoration", "line-through");
 });

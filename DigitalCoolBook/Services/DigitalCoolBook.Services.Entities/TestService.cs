@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.Service
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DigitalCoolBook.Service
 {
     using DigitalCoolBook.App.Data;
     using DigitalCoolBook.Models;
@@ -94,10 +96,12 @@
             return this.dbContext.ExpiredTests;
         }
 
-        public async Task RemoveExpiredTest(string id)
+        public async Task RemoveExpiredTest(string expiredTestId, string studentId)
         {
-            var expiredTest = await this.dbContext.ExpiredTests.FindAsync(id);
-            this.dbContext.ExpiredTests.Remove(expiredTest);
+            var expiredTestDb = await this.dbContext.ExpiredTests
+                .FirstOrDefaultAsync(x => x.ExpiredTestId == expiredTestId && x.StudentId == studentId);
+
+            this.dbContext.ExpiredTests.Remove(expiredTestDb);
             await this.SaveChangesAsync();
         }
 
@@ -115,7 +119,7 @@
             foreach (var studentName in students)
             {
                 var studentDb = studentsDb.FirstOrDefault(s => s.Name == studentName);
-                
+
                 var studentForTestRoom = new TestRoomStudent
                 {
                     StudentId = studentDb?.Id,
@@ -130,6 +134,20 @@
             await this.SaveChangesAsync();
 
             return testRoom.Id;
+        }
+
+        public async Task TestRoomStudentFinished(string studentId, int score)
+        {
+            var testRoomStudent = await this.dbContext.TestRoomStudents
+                .FirstOrDefaultAsync(x => x.StudentId == studentId);
+
+            if (testRoomStudent != null)
+            {
+                testRoomStudent.Finished = true;
+                testRoomStudent.Score = score;
+
+                await this.SaveChangesAsync();
+            }
         }
 
         public string IsStudentInTest(string studentId)
@@ -205,11 +223,11 @@
             var expiredTests = this.dbContext.ExpiredTests
                 .Where(x => x.TeacherId == teacherId)
                 .Select(x => new TestExpiredViewModel
-                {
-                    ExpiredTestName = x.TestName,
-                    ExpiredTestId = x.ExpiredTestId,
-                    ExpiredTestDate = x.Date,
-                })
+                 {
+                     ExpiredTestName = x.TestName,
+                     ExpiredTestId = x.ExpiredTestId,
+                     ExpiredTestDate = x.Date,
+                 })
                 .ToList();
 
             return expiredTests;

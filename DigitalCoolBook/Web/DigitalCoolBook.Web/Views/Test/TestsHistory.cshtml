@@ -18,8 +18,8 @@
                 <tr>
                     <td>
                         <a asp-controller="Test"
-                           asp-action="TestRoomSummary"
-                           asp-route-id="@test.ExpiredTestId">@test.ExpiredTestName</a>
+                           asp-action="TestSummary"
+                           asp-route-expiredTestId="@test.ExpiredTestId">@test.ExpiredTestName</a>
                     </td>
                     <td><time>@test.ExpiredTestDate</time> </td>
                 </tr>
