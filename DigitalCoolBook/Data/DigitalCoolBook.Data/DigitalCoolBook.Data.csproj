@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalCoolBook.Models\DigitalCoolBook.Models.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\DigitalCoolBook.Models\DigitalCoolBook.Models.csproj" />
   </ItemGroup>
 
 </Project>
