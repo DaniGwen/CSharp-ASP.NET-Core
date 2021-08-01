@@ -54,12 +54,12 @@ namespace DigitalCoolBook.App
                 conf.DurationInSeconds = 10;
             });
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IGradeService, GradeService>();
-            services.AddTransient<ISubjectService, SubjectService>();
-            services.AddTransient<ITestService, TestService>();
-            services.AddTransient<IQuestionService, QuestionService>();
-            services.AddTransient<IScoreService, ScoreService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<ITestService, TestService>();
+            services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IScoreService, ScoreService>();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -101,7 +101,7 @@ namespace DigitalCoolBook.App
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDBSeeder(context, serviceProvider, this.Configuration);

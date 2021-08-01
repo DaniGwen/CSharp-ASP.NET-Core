@@ -1,13 +1,13 @@
-﻿@using DigitalCoolBook.Services
+﻿@using DigitalCoolBook.Services.Contracts
 @model List<DigitalCoolBook.Web.Models.TestviewModels.StudentTestSummaryViewModel>
-@inject TestService TestService
+@inject ITestService TestService
 
 @{
-    var testSummaryName = (await TestService.GetExpiredTest(ViewData["testId"].ToString())).TestName;
+    var testName = (await TestService.GetExpiredTest(ViewData["testId"].ToString()))?.TestName;
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Scores for @testSummaryName</h3>
+    <h3>Scores for @testName</h3>
     <ol>
         @foreach (var student in Model)
         {

@@ -10,11 +10,11 @@
 
     public class TestHub : Hub
     {
-        private readonly IUserService userService;
+        private readonly IUserService _userService;
 
         public TestHub(IUserService userService)
         {
-            this.userService = userService;
+            _userService = userService;
         }
 
         [Authorize]
@@ -31,7 +31,7 @@
         {
             var userName = await this.GetUserNameAsync();
 
-            await this.userService.SetStudentFinishedTestRoom(userName);
+            await _userService.SetStudentFinishedTestRoom(userName);
 
             if (userName != null)
                 await this.Clients.All.SendAsync("OnDisconnected", $"{userName} test submitted", userName);
@@ -41,7 +41,7 @@
         {
             var userId = this.Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var identityUser = await this.userService.GetUserAsync(userId);
+            var identityUser = await _userService.GetUserAsync(userId);
 
             if (this.Context.User.IsInRole("Student"))
             {

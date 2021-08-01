@@ -101,12 +101,7 @@
 
     <!--countdown function-->
     <script>
-        // Alert before leaving the page
-        $(window).bind('beforeunload', function () {
-            return 'Are you sure you want to leave?';
-        });
-
-        $(function () {
+       $(function () {
             $('.timer').startTimer({
                 onComplete: function () {
                     submitForm();
