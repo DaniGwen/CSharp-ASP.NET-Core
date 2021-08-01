@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +31,7 @@
         private readonly IScoreService _scoreService;
         private readonly IHubContext<TestHub> _testHub;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toasterService;
 
         public TestController(
             ITestService testService,
@@ -39,18 +42,20 @@
             IQuestionService questionService,
             IScoreService scoreService,
             IHubContext<TestHub> testHub,
-            UserManager<IdentityUser> userManager
+            UserManager<IdentityUser> userManager,
+            INotyfService toasterService
            )
         {
-            this._testService = testService;
-            this._subjectService = subjectService;
-            this._mapper = mapper;
-            this._gradeService = gradeService;
-            this._userService = userService;
-            this._questionService = questionService;
-            this._scoreService = scoreService;
-            this._testHub = testHub;
-            this._userManager = userManager;
+            _testService = testService;
+            _subjectService = subjectService;
+            _mapper = mapper;
+            _gradeService = gradeService;
+            _userService = userService;
+            _questionService = questionService;
+            _scoreService = scoreService;
+            _testHub = testHub;
+            _userManager = userManager;
+            _toasterService = toasterService;
         }
 
         // Admin creates a test for a lesson
@@ -400,11 +405,16 @@
                     return this.View(model);
                 }
 
-                var test = this._testService
+                var test = _testService
                     .GetTests()
                     .Include("Lesson")
                     .FirstOrDefault(t => t.LessonId == model.LessonId);
+                if (test == null)
+                {
+                    _toasterService.Error("Test not found");
 
+                    return this.RedirectToAction("AddQuestions");
+                }
                 foreach (var question in model.Questions)
                 {
                     test.Questions.Add(new Question
@@ -414,24 +424,24 @@
                     });
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                this.TempData["ErrorMsg"] = exception.Message;
+               _toasterService.Error("Error, something went wrong");
 
-                return this.Redirect("/Home/ErrorView");
+                return this.Redirect("/Home/Index");
             }
 
-            await this._testService.SaveChangesAsync();
-            this.TempData["SuccessMsg"] = "Questions were saved";
+            await _testService.SaveChangesAsync();
+            _toasterService.Success("Questions were added");
 
-            return this.Redirect("/Home/Success");
+            return this.Redirect("/Home/Index");
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult CheckTestExist(string lessonId)
         {
-            var test = this._testService.GetTests()
+            var test = _testService.GetTests()
                .FirstOrDefault(t => t.LessonId == lessonId);
 
             if (test == null)
@@ -454,9 +464,9 @@
         [Authorize(Roles = "Admin")]
         public IActionResult TestsPreview()
         {
-            var tests = this._testService.GetTests();
+            var tests = _testService.GetTests();
 
-            var model = this._mapper.Map<List<TestPreviewViewModel>>(tests);
+            var model = _mapper.Map<List<TestPreviewViewModel>>(tests);
 
             return this.View(model);
         }
@@ -620,15 +630,15 @@
                     }
                 }
 
-                await this._questionService.AddAnswersAsync(answersForDb);
+                await _questionService.AddAnswersAsync(answersForDb);
 
                 // Redirect to MarkCorrectAnswers action to select the right answers
                 return this.RedirectToAction("MarkCorrectAnswers", new { testId = testId });
             }
             catch (Exception)
             {
-                this.TempData["ErrorMsg"] = "Error editing test!";
-                return this.View("/Home/Error");
+                _toasterService.Error("Error saving the changes");
+                return this.RedirectToAction("EditTest", new { id = testId });
             }
         }
 
@@ -747,13 +757,16 @@
                 .GetTests()
                 .First(x => x.TestId == testId);
 
-            var expiredTest = _mapper.Map<ExpiredTest>(testDb);
+            var newExpiredTest = _mapper.Map<ExpiredTest>(testDb);
+            var newArchivedTest = _mapper.Map<ArchivedTestViewModel>(testDb);
 
             testDb.IsExpired = true;
-            expiredTest.ExpiredTestId = testDb.TestId;
-            await _testService.AddExpiredTestAsync(expiredTest);
+            newExpiredTest.ExpiredTestId = testDb.TestId;
+            await _testService.AddExpiredTestAsync(newExpiredTest);
             await _testService.RemoveTestAsync(testDb.TestId);
             await _testService.RemoveTestRoomAsync(testDb.TestId);
+
+            await _testService.AddArchivedTest(newArchivedTest);
 
             return this.Redirect("/Home/Index");
         }
@@ -772,25 +785,36 @@
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public IActionResult TestsHistory()
+        public async Task<IActionResult> TestsHistory()
         {
             var teacherId = _userManager.GetUserId(this.User);
 
-            var tests = _testService.GetExpiredTestsByTeacherId(teacherId);
+            var tests = await _testService.GetArchivedTestsByTeacherId(teacherId);
 
             return this.View(tests);
         }
 
         [HttpGet]
         [Authorize(Roles = "Teacher")]
-        public async Task<List<TestExpiredViewModel>> TestSummary(string expiredTestId)
+        public async Task<ActionResult<List<StudentTestSummaryViewModel>>> TestSummary(string testId)
         {
-            this.ViewData["testSummaryId"] = expiredTestId;
+            this.ViewData["testId"] = testId;
             var teacherId = _userManager.GetUserId(this.User);
 
-            var expiredTestsDb = _testService.GetExpiredTestsByTeacherId(teacherId);
+            var archivedTests = await _testService.GetExpiredTests()
+                .Where(x => x.TeacherId == teacherId)
+                .ToListAsync();
 
-            return expiredTestsDb;
+            var studentTestSummaryViewModels = archivedTests
+                .Select(x => new StudentTestSummaryViewModel
+                {
+                    Score = x.Result,
+                    StudentName = _userService.GetStudentAsync(x.StudentId).Result.Name,
+                    TestId = x.ExpiredTestId
+                })
+                .ToList();
+
+            return this.View(studentTestSummaryViewModels);
         }
     }
 }

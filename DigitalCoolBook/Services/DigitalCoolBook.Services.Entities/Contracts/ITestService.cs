@@ -4,14 +4,11 @@
     using DigitalCoolBook.Web.Models.TestviewModels;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     public interface ITestService
     {
         Test GetTestByLesson(string id);
-
-        Task SaveChangesAsync();
 
         Task AddTestAsync(Test test);
 
@@ -47,8 +44,12 @@
 
         Task<List<string>> GetStudentsInTestRoomAsync(string testId);
 
-        List<TestExpiredViewModel> GetExpiredTestsByTeacherId(string teacherId);
+        Task<List<ArchivedTestViewModel>> GetArchivedTestsByTeacherId(string teacherId);
 
         Task TestRoomStudentFinished(string studentId, int score);
+
+        Task AddArchivedTest(ArchivedTestViewModel archivedTestViewModel);
+
+        Task SaveChangesAsync();
     }
 }

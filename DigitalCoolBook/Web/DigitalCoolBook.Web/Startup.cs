@@ -1,3 +1,5 @@
+using DigitalCoolBook.App.Mappings;
+
 namespace DigitalCoolBook.App
 {
     using System;
@@ -6,7 +8,6 @@ namespace DigitalCoolBook.App
     using Data;
     using DigitalCoolBook.Services;
     using DigitalCoolBook.Services.Contracts;
-    using DigitalCoolBook.Services.Mapping;
     using Hubs;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -17,7 +18,6 @@ namespace DigitalCoolBook.App
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Service;
     using AspNetCoreHero.ToastNotification;
     using DigitalCoolBook.Data;
 
@@ -101,7 +101,7 @@ namespace DigitalCoolBook.App
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDBSeeder(context, serviceProvider, this.Configuration);

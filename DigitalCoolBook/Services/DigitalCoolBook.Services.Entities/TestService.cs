@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace DigitalCoolBook.Service
+namespace DigitalCoolBook.Services
 {
     using DigitalCoolBook.App.Data;
     using DigitalCoolBook.Models;
@@ -12,25 +12,25 @@ namespace DigitalCoolBook.Service
 
     public class TestService : ITestService
     {
-        private readonly ApplicationDbContext dbContext;
-        private readonly IQuestionService questionService;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IQuestionService _questionService;
 
         public TestService(ApplicationDbContext context, IQuestionService questionService)
         {
-            this.dbContext = context;
-            this.questionService = questionService;
+            _dbContext = context;
+            _questionService = questionService;
         }
 
         public async Task AddExpiredTestAsync(ExpiredTest expiredTest)
         {
-            await this.dbContext.ExpiredTests.AddAsync(expiredTest);
-            await this.SaveChangesAsync();
+            await _dbContext.ExpiredTests.AddAsync(expiredTest);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddTestAsync(Test test)
         {
-            await this.dbContext.Tests.AddAsync(test);
-            await this.SaveChangesAsync();
+            await _dbContext.Tests.AddAsync(test);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddTestStudentsAsync(List<TestStudent> testStudentList)
@@ -39,7 +39,7 @@ namespace DigitalCoolBook.Service
 
             foreach (var testStudent in testStudentList)
             {
-                var testStudentFromDb = this.dbContext
+                var testStudentFromDb = _dbContext
                     .TestStudents
                     .FirstOrDefault(ts => ts.StudentId == testStudent.StudentId && ts.TestId == testStudent.TestId);
 
@@ -49,60 +49,55 @@ namespace DigitalCoolBook.Service
                 }
             }
 
-            await this.dbContext.AddRangeAsync(testStudentsForDb);
-            await this.SaveChangesAsync();
+            await _dbContext.AddRangeAsync(testStudentsForDb);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddTestStudentsAsync(ICollection<TestStudent> testStudents)
         {
-            await this.dbContext.TestStudents.AddRangeAsync(testStudents);
-            await this.SaveChangesAsync();
+            await _dbContext.TestStudents.AddRangeAsync(testStudents);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Test> GetTestAsync(string id)
         {
-            return await this.dbContext.Tests.FindAsync(id);
+            return await _dbContext.Tests.FindAsync(id);
         }
 
         public Test GetTestByLesson(string id)
         {
-            return this.dbContext.Tests.FirstOrDefault(t => t.LessonId == id);
+            return this._dbContext.Tests.FirstOrDefault(t => t.LessonId == id);
         }
 
         public IQueryable<Test> GetTests()
         {
-            return this.dbContext.Tests;
+            return this._dbContext.Tests;
         }
 
         public async Task RemoveTestAsync(string testId)
         {
-            var test = await this.dbContext.Tests.FindAsync(testId);
-            this.dbContext.Remove(test);
-            await this.SaveChangesAsync();
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await this.dbContext.SaveChangesAsync();
+            var test = await _dbContext.Tests.FindAsync(testId);
+            _dbContext.Remove(test);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<ExpiredTest> GetExpiredTest(string expiredTestId)
         {
-            return await this.dbContext.ExpiredTests.FindAsync(expiredTestId);
+            return await _dbContext.ExpiredTests.FindAsync(expiredTestId);
         }
 
         public IQueryable<ExpiredTest> GetExpiredTests()
         {
-            return this.dbContext.ExpiredTests;
+            return this._dbContext.ExpiredTests;
         }
 
         public async Task RemoveExpiredTest(string expiredTestId, string studentId)
         {
-            var expiredTestDb = await this.dbContext.ExpiredTests
+            var expiredTestDb = await _dbContext.ExpiredTests
                 .FirstOrDefaultAsync(x => x.ExpiredTestId == expiredTestId && x.StudentId == studentId);
 
-            this.dbContext.ExpiredTests.Remove(expiredTestDb);
-            await this.SaveChangesAsync();
+            _dbContext.ExpiredTests.Remove(expiredTestDb);
+            await _dbContext.SaveChangesAsync();
         }
 
         // Add students to test room
@@ -114,7 +109,7 @@ namespace DigitalCoolBook.Service
                 TestId = testId,
             };
 
-            var studentsDb = this.dbContext.Students.ToList();
+            var studentsDb = _dbContext.Students.ToList();
 
             foreach (var studentName in students)
             {
@@ -129,16 +124,16 @@ namespace DigitalCoolBook.Service
                 testRoom.Students.Add(studentForTestRoom);
             }
 
-            await this.dbContext.TestRooms.AddAsync(testRoom);
-            await this.dbContext.TestRoomStudents.AddRangeAsync(testRoom.Students);
-            await this.SaveChangesAsync();
+            await _dbContext.TestRooms.AddAsync(testRoom);
+            await _dbContext.TestRoomStudents.AddRangeAsync(testRoom.Students);
+            await _dbContext.SaveChangesAsync();
 
             return testRoom.Id;
         }
 
         public async Task TestRoomStudentFinished(string studentId, int score)
         {
-            var testRoomStudent = await this.dbContext.TestRoomStudents
+            var testRoomStudent = await _dbContext.TestRoomStudents
                 .FirstOrDefaultAsync(x => x.StudentId == studentId);
 
             if (testRoomStudent != null)
@@ -146,44 +141,44 @@ namespace DigitalCoolBook.Service
                 testRoomStudent.Finished = true;
                 testRoomStudent.Score = score;
 
-                await this.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
             }
         }
 
         public string IsStudentInTest(string studentId)
         {
-            return this.dbContext.TestRoomStudents
+            return _dbContext.TestRoomStudents
                 .Where(student => student.StudentId == studentId)
                 .Select(student => student.TestRoom.TestId).FirstOrDefault();
         }
 
         public bool CheckAllFinished()
         {
-            return this.dbContext.TestRoomStudents.Any(x => x.Finished == false);
+            return _dbContext.TestRoomStudents.Any(x => x.Finished == false);
         }
 
         public TestRoomStudent GetTestRoomStudent(string studentId)
         {
-            return this.dbContext.TestRoomStudents
+            return _dbContext.TestRoomStudents
                 .FirstOrDefault(x => x.StudentId == studentId);
         }
 
         public async Task RemoveTestRoomAsync(string testId)
         {
-            var testRoom = this.dbContext.TestRooms.FirstOrDefault(x => x.TestId == testId);
+            var testRoom = _dbContext.TestRooms.FirstOrDefault(x => x.TestId == testId);
 
-            var testRoomStudents = this.dbContext.TestRoomStudents
+            var testRoomStudents = _dbContext.TestRoomStudents
                 .Where(x => x.TestRoomId == testRoom.Id)
                 .ToList();
 
-            this.dbContext.TestRooms.Remove(testRoom);
-            this.dbContext.TestRoomStudents.RemoveRange(testRoomStudents);
-            await this.SaveChangesAsync();
+            _dbContext.TestRooms.Remove(testRoom);
+            _dbContext.TestRoomStudents.RemoveRange(testRoomStudents);
+            await _dbContext.SaveChangesAsync();
         }
 
         public List<Test> GetActiveTestsByTeacherId(string teacherId)
         {
-            var testRooms = this.dbContext.TestRooms
+            var testRooms = _dbContext.TestRooms
                 .Where(x => x.TeacherId == teacherId)
                 .ToList();
 
@@ -191,7 +186,7 @@ namespace DigitalCoolBook.Service
 
             foreach (var testRoom in testRooms)
             {
-                var testFromDb = this.dbContext.Tests.FirstOrDefault(x => x.TestId == testRoom.TestId);
+                var testFromDb = _dbContext.Tests.FirstOrDefault(x => x.TestId == testRoom.TestId);
                 tests.Add(testFromDb);
             }
 
@@ -200,10 +195,10 @@ namespace DigitalCoolBook.Service
 
         public async Task<List<string>> GetStudentsInTestRoomAsync(string testId)
         {
-            var testRoom = this.dbContext.TestRooms
+            var testRoom = _dbContext.TestRooms
                 .FirstOrDefault(x => x.TestId == testId);
 
-            var studentsInRoom = this.dbContext.TestRoomStudents
+            var studentsInRoom = _dbContext.TestRoomStudents
                 .Where(x => x.TestRoomId == testRoom.Id)
                 .ToList();
 
@@ -211,26 +206,48 @@ namespace DigitalCoolBook.Service
 
             foreach (var student in studentsInRoom)
             {
-                var studentDb = await this.dbContext.Students.FindAsync(student.StudentId);
+                var studentDb = await _dbContext.Students.FindAsync(student.StudentId);
                 studentNames.Add(studentDb.Name);
             }
 
             return studentNames;
         }
 
-        public List<TestExpiredViewModel> GetExpiredTestsByTeacherId(string teacherId)
+        public async Task AddArchivedTest(ArchivedTestViewModel model)
         {
-            var expiredTests = this.dbContext.ExpiredTests
-                .Where(x => x.TeacherId == teacherId)
-                .Select(x => new TestExpiredViewModel
-                 {
-                     ExpiredTestName = x.TestName,
-                     ExpiredTestId = x.ExpiredTestId,
-                     ExpiredTestDate = x.Date,
-                 })
-                .ToList();
+            _dbContext.ArchivedTests.Add(new ArchivedTest
+            {
+                TestId = model.TestId,
+                TestName = model.TestName,
+                Date = model.Date,
+                LessonId = model.LessonId,
+                Place = model.Place,
+                Students = model.Students,
+                TeacherId = model.TeacherId,
+                Timer = model.Timer
+            });
 
-            return expiredTests;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<ArchivedTestViewModel>> GetArchivedTestsByTeacherId(string teacherId)
+        {
+            var archivedTests = await _dbContext.ArchivedTests
+                .Where(x => x.TeacherId == teacherId)
+                .Select(x => new ArchivedTestViewModel
+                {
+                    TestName = x.TestName,
+                    TestId = x.TestId,
+                    Date = x.Date,
+                })
+                .ToListAsync();
+
+            return archivedTests;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

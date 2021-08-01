@@ -1,16 +1,16 @@
-﻿namespace DigitalCoolBook.Services.Mapping
-{
-    using AutoMapper;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-    using DigitalCoolBook.App.Models.GradeParaleloViewModels;
-    using DigitalCoolBook.App.Models.GradesViewModels;
-    using DigitalCoolBook.App.Models.StudentViewModels;
-    using DigitalCoolBook.App.Models.SubjectViewModels;
-    using DigitalCoolBook.App.Models.TeacherViewModels;
-    using DigitalCoolBook.App.Models.TestviewModels;
-    using DigitalCoolBook.Models;
-    using DigitalCoolBook.Web.Models.TestviewModels;
+﻿using AutoMapper;
+using DigitalCoolBook.App.Models.CategoryViewModels;
+using DigitalCoolBook.App.Models.GradeParaleloViewModels;
+using DigitalCoolBook.App.Models.GradesViewModels;
+using DigitalCoolBook.App.Models.StudentViewModels;
+using DigitalCoolBook.App.Models.SubjectViewModels;
+using DigitalCoolBook.App.Models.TeacherViewModels;
+using DigitalCoolBook.App.Models.TestviewModels;
+using DigitalCoolBook.Models;
+using DigitalCoolBook.Web.Models.TestviewModels;
 
+namespace DigitalCoolBook.App.Mappings
+{
     public class OrganizationProfile : Profile
     {
         public OrganizationProfile()
@@ -54,6 +54,7 @@
             this.CreateMap<Test, TestPreviewViewModel>();
             this.CreateMap<Test, TestDetailsViewModel>();
             this.CreateMap<Test, ActiveTestsViewModel>();
+            this.CreateMap<Test, ArchivedTestViewModel>();
 
             // Question mappings
             this.CreateMap<Question, QuestionsModel>();

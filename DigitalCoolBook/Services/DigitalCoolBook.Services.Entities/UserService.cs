@@ -12,78 +12,78 @@
 
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public UserService(ApplicationDbContext context)
         {
-            this.dbContext = context;
+            _dbContext = context;
         }
 
         public async Task<Student> GetStudentAsync(string id)
         {
-            return await this.dbContext.Students.FindAsync(id);
+            return await _dbContext.Students.FindAsync(id);
         }
 
         public IQueryable<Student> GetStudents()
         {
-            return this.dbContext.Students;
+            return _dbContext.Students;
         }
 
         public IQueryable<Teacher> GetTeachers()
         {
-            return this.dbContext.Teachers;
+            return _dbContext.Teachers;
         }
 
         public async Task<Teacher> GetTeacherAsync(string id)
         {
-            return await this.dbContext.Teachers.FindAsync(id);
+            return await _dbContext.Teachers.FindAsync(id);
         }
 
         public async Task RemoveStudentAsync(string id)
         {
             var student = await this.GetStudentAsync(id);
 
-            this.dbContext.Students.Remove(student);
-            await this.dbContext.SaveChangesAsync();
+            _dbContext.Students.Remove(student);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync()
         {
-            await this.dbContext.SaveChangesAsync();
+            await this._dbContext.SaveChangesAsync();
         }
 
         public async Task<IdentityUser> GetUserAsync(string id)
         {
-            return await this.dbContext.Users.FindAsync(id);
+            return await _dbContext.Users.FindAsync(id);
         }
 
         public async Task RemoveTeacherAsync(string id)
         {
             var teacher = await this.GetTeacherAsync(id);
-            this.dbContext.Teachers.Remove(teacher);
+            this._dbContext.Teachers.Remove(teacher);
             await this.SaveChangesAsync();
         }
 
         public IdentityUser GetUserByEmail(string email)
         {
-            return dbContext.Users.FirstOrDefault(u => u.Email == email);
+            return _dbContext.Users.FirstOrDefault(u => u.Email == email);
         }
 
         public async Task SetStudentFinishedTestRoom(string studentName)
         {
-            var studentDb = await this.dbContext.Students.FirstAsync(x => x.Name == studentName);
-            var testRoomStudent = await this.dbContext.TestRoomStudents.FirstAsync(x => x.StudentId == studentDb.Id);
+            var studentDb = await this._dbContext.Students.FirstAsync(x => x.Name == studentName);
+            var testRoomStudent = await this._dbContext.TestRoomStudents.FirstAsync(x => x.StudentId == studentDb.Id);
             testRoomStudent.Finished = true;
 
-            await this.dbContext.SaveChangesAsync();
+            await this._dbContext.SaveChangesAsync();
         }
 
         public async Task<List<StudentTestSummaryViewModel>> GetTestResultsById(string testId)
         {
-            var testRoom = await this.dbContext.TestRooms
+            var testRoom = await this._dbContext.TestRooms
                 .FirstAsync(x => x.TestId == testId);
 
-            var studentsInTestRoom = await this.dbContext.TestRoomStudents
+            var studentsInTestRoom = await this._dbContext.TestRoomStudents
                 .Where(x => x.TestRoomId == testRoom.Id)
                 .Select(x => new StudentTestSummaryViewModel
                 {

@@ -19,7 +19,7 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<Subject> Subjects { get; set; }
 
-        public DbSet<SubjectGrade> SubjectGrades { get; set; }
+        //public DbSet<SubjectGrade> SubjectGrades { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }
 
@@ -44,6 +44,8 @@ namespace DigitalCoolBook.App.Data
         public DbSet<TestRoom> TestRooms { get; set; }
 
         public DbSet<TestRoomStudent> TestRoomStudents { get; set; }
+
+        public DbSet<ArchivedTest> ArchivedTests { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
