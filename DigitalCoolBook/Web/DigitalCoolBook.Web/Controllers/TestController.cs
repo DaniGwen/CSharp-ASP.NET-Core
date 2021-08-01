@@ -297,31 +297,31 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                var test = await this._testService.GetTestAsync(id);
+                var test = await _testService.GetTestAsync(id);
 
                 // Keep the test Id for EndTest action
-                this.TempData["TestId"] = test.TestId;
+                this.TempData["TestId"] = test?.TestId;
 
-                var testViewModel = this._mapper.Map<TestStartViewModel>(test);
+                var testViewModel = _mapper.Map<TestStartViewModel>(test);
 
                 // Gets the participating students
-                testViewModel.StudentNames = await this._testService
-                    .GetStudentsInTestRoomAsync(test.TestId);
+                testViewModel.StudentNames = await _testService
+                    .GetStudentsInTestRoomAsync(test?.TestId);
 
                 // Gets the questions for this test
-                var questionsDb = this._questionService
+                var questionsDb = _questionService
                .GetQuestions()
                .Where(question => question.TestId == test.TestId)
                .ToList();
 
                 // Add questions to model and map questions to QuestionModel
                 testViewModel.Questions
-                        .AddRange(this._mapper.Map<List<QuestionsModel>>(questionsDb));
+                        .AddRange(_mapper.Map<List<QuestionsModel>>(questionsDb));
 
                 // Add Answers to Questions for this test
                 foreach (var question in testViewModel.Questions)
                 {
-                    var answers = this._questionService.GetAnswers()
+                    var answers = _questionService.GetAnswers()
                         .Where(answer => answer.QuestionId == question.QuestionId)
                         .ToList();
 
@@ -330,11 +330,11 @@ namespace DigitalCoolBook.App.Controllers
 
                 return this.View(testViewModel);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                this.TempData["ErrorMsg"] = exception.Message;
+                _toasterService.Error("Error, something went wrong");
 
-                this.Redirect("/Home/Error");
+                this.Redirect("/Home/Index");
             }
 
             return this.View();
@@ -345,24 +345,32 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            int result = 0;
+            int score = 0;
 
             var testId = this.TempData["TestId"].ToString();
 
+            var testDb = _testService
+                .GetTests()
+                .First(x => x.TestId == testId);
+
+            var newArchivedTest = _mapper.Map<ArchivedTestViewModel>(testDb);
+
+            await _testService.AddArchivedTest(newArchivedTest);
+
             if (this.User.IsInRole("Student"))
             {
-                result = await this.ProcessTestAsync(model, testId);
+                score = await this.ProcessTestAsync(model, testId);
             }
 
-            this.ViewData["Result"] = result;
+            this.ViewData["Result"] = score;
 
             // Check if all students in the test room has finished
-            bool isAllFinished = this._testService.CheckAllFinished();
+            bool isAllFinished = _testService.CheckAllFinished();
 
             if (!isAllFinished)
             {
                 // Test room is empty so we remove it along with the students in it
-                await this._testService.RemoveTestRoomAsync(testId);
+                await _testService.RemoveTestRoomAsync(testId);
             }
 
             if (this.User.IsInRole("Teacher"))
@@ -523,7 +531,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                await this._testService.RemoveTestAsync(testId);
+                await _testService.RemoveTestAsync(testId);
 
                 return this.Json("Test is deleted.");
             }
@@ -757,16 +765,10 @@ namespace DigitalCoolBook.App.Controllers
                 .GetTests()
                 .First(x => x.TestId == testId);
 
-            var newExpiredTest = _mapper.Map<ExpiredTest>(testDb);
-            var newArchivedTest = _mapper.Map<ArchivedTestViewModel>(testDb);
-
             testDb.IsExpired = true;
-            newExpiredTest.ExpiredTestId = testDb.TestId;
-            await _testService.AddExpiredTestAsync(newExpiredTest);
+           
             await _testService.RemoveTestAsync(testDb.TestId);
             await _testService.RemoveTestRoomAsync(testDb.TestId);
-
-            await _testService.AddArchivedTest(newArchivedTest);
 
             return this.Redirect("/Home/Index");
         }
