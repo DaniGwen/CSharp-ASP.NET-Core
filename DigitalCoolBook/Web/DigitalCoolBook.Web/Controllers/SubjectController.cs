@@ -40,6 +40,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Teacher, Student")]
         public IActionResult Subjects()
         {
             var subjects = _subjectService.GetSubjects().ToList();
