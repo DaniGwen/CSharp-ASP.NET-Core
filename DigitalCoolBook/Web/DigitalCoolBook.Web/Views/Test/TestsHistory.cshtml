@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DigitalCoolBook.Web.Models.TestviewModels.TestExpiredViewModel>
+﻿@model IEnumerable<DigitalCoolBook.Web.Models.TestviewModels.ArchivedTestViewModel>
 @{
     Layout = "_Layout";
 }
@@ -19,9 +19,9 @@
                     <td>
                         <a asp-controller="Test"
                            asp-action="TestSummary"
-                           asp-route-expiredTestId="@test.ExpiredTestId">@test.ExpiredTestName</a>
+                           asp-route-testId="@test.TestId">@test.TestName</a>
                     </td>
-                    <td><time>@test.ExpiredTestDate</time> </td>
+                    <td><time>@test.Date</time> </td>
                 </tr>
             }
         </tbody>

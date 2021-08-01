@@ -1,9 +1,9 @@
-﻿@using DigitalCoolBook.Service
-@model IEnumerable<DigitalCoolBook.Web.Models.TestviewModels.StudentTestSummaryViewModel>
+﻿@using DigitalCoolBook.Services
+@model List<DigitalCoolBook.Web.Models.TestviewModels.StudentTestSummaryViewModel>
 @inject TestService TestService
 
 @{
-    var testSummaryName = (await TestService.GetExpiredTest(ViewData["testSummaryId"].ToString())).TestName;
+    var testSummaryName = (await TestService.GetExpiredTest(ViewData["testId"].ToString())).TestName;
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
