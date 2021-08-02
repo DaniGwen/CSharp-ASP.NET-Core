@@ -8,7 +8,6 @@ namespace DigitalCoolBook.Models
     {
         public ExpiredTest()
         {
-            this.ExpiredTestId = Guid.NewGuid().ToString();
             this.CorrectAnswers = new List<CorrectAnswer>();
         }
 

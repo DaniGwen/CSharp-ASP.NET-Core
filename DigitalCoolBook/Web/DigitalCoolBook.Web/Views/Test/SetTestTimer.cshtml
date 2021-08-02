@@ -6,13 +6,13 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Start test</h3>
+    <h3>Test settings</h3>
     <hr />
     <form id="form" asp-action="SetTestTimer" method="post">
         <input hidden name="testId" value="@Model.TestId" />
         <div class="row mb-4">
             <div>
-                <label class="form-label">Timer</label>
+                <label class="form-label">Test duration</label>
                 <input class="form-control-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
                 <small class="form-label">minutes</small>
             </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="buttons-wrapper">
             <a class="btn btn-outline-secondary btn-sm" asp-action="Tests">Back</a>
-            <input class="btn btn-outline-success btn-sm" id="button" type="submit" value="Start" />
+            <input class="btn btn-outline-success btn-sm" id="button" type="submit" value="Create" />
         </div>
     </form>
 </div>

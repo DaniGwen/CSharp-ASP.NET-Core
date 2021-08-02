@@ -6,34 +6,40 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Tests</h3>
-
-    @foreach (var test in Model)
+    <a class="btn btn-outline-secondary btn-sm" asp-action="CreateTest">Create test</a>
+    @if (Model.Any())
     {
-        <div class="row align-items-baseline">
-            <p class="col-form-label-lg col-md-8">@test.TestName</p>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col p-0">
-                        @if (test.IsActive)
-                        {
-                            <a class="btn btn-outline-success btn-sm"
-                               asp-controller="Test"
-                               asp-action="StartTest"
-                               asp-route-id="@test.TestId">Active</a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-outline-primary btn-sm"
-                               asp-controller="Test"
-                               asp-action="SetTestTimer"
-                               asp-route-testId="@test.TestId">Create test</a>
-                        }
+        @foreach (var test in Model)
+        {
+            <div class="row align-items-baseline mt-3">
+                <p class="col-form-label-lg col-md-8 p-0">@test.TestName</p>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col p-0">
+                            @if (test.IsActive)
+                            {
+                                <a class="btn btn-outline-success btn-sm"
+                                   asp-controller="Test"
+                                   asp-action="StartTest"
+                                   asp-route-id="@test.TestId">Active</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-primary btn-sm"
+                                   asp-controller="Test"
+                                   asp-action="SetTestTimer"
+                                   asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Test settings</a>
+                            }
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <h4 class="mt-5">No tests created...</h4>
     }
 </div>
 

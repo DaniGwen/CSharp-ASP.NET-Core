@@ -10,13 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalCoolBook.Data
 {
-    public class ApplicationDBSeeder
+    public class ApplicationDbSeeder
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ApplicationDbContext _dbContext;
         private readonly IConfiguration _configuration;
 
-        public ApplicationDBSeeder(ApplicationDbContext dbContext
+        public ApplicationDbSeeder(ApplicationDbContext dbContext
             , IServiceProvider serviceProvider
             , IConfiguration configuration)
         {
@@ -80,31 +80,31 @@ namespace DigitalCoolBook.Data
                 await _dbContext.SaveChangesAsync();
             }
 
-            if (!_dbContext.Tests.Any())
-            {
-                List<Test> tests = this.AddTests();
-                await _dbContext.Tests.AddRangeAsync(tests);
-                await _dbContext.SaveChangesAsync();
-            }
+            //if (!_dbContext.Tests.Any())
+            //{
+            //    List<Test> tests = this.AddTests();
+            //    await _dbContext.Tests.AddRangeAsync(tests);
+            //    await _dbContext.SaveChangesAsync();
+            //}
         }
 
-        private List<Test> AddTests()
-        {
-            var tests = new List<Test>()
-            {
-                 new Test
-                {
-                    Date = DateTime.Now,
-                    LessonId = "40",
-                    Place = "Пловдив",
-                    Questions = this.AddQuestions("11"),
-                    TestId = "11",
-                    TestName = _dbContext.Lessons.First(l => l.LessonId == "40").Title,
-                },
-            };
+        //private List<Test> AddTests()
+        //{
+        //    var tests = new List<Test>()
+        //    {
+        //         new Test
+        //        {
+        //            Date = DateTime.Now,
+        //            LessonId = "40",
+        //            Place = "Пловдив",
+        //            Questions = this.AddQuestions("11"),
+        //            TestId = "11",
+        //            TestName = _dbContext.Lessons.First(l => l.LessonId == "40").Title,
+        //        },
+        //    };
 
-            return tests;
-        }
+        //    return tests;
+        //}
 
         private ICollection<Question> AddQuestions(string testId)
         {
@@ -816,7 +816,6 @@ namespace DigitalCoolBook.Data
 
         public async Task CreateRoles()
         {
-            // initializing custom roles
             var roleManager = _serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = _serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
             var context = _serviceProvider.GetRequiredService<ApplicationDbContext>();
@@ -825,7 +824,7 @@ namespace DigitalCoolBook.Data
 
             if (!isUserAddedInRole)
             {
-                // first we create Admin role
+                // Create Admin role
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 await roleManager.CreateAsync(role);

@@ -63,11 +63,11 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin, Teacher")]
         public IActionResult CreateTest()
         {
-            var lessons = this._subjectService.GetLessons().ToList();
+            var lessons = _subjectService.GetLessons().ToList();
 
             var model = new TestCreateAdminViewModel()
             {
-                Lessons = this._mapper.Map<List<LessonsViewModel>>(lessons),
+                Lessons = _mapper.Map<List<LessonsViewModel>>(lessons),
             };
 
             return this.View(model);
@@ -80,7 +80,7 @@ namespace DigitalCoolBook.App.Controllers
             string lessonId,
             string place)
         {
-            var lesson = await this._subjectService.GetLessonAsync(lessonId);
+            var lesson = await _subjectService.GetLessonAsync(lessonId);
 
             // Instantiate test
             var test = new Test
@@ -121,9 +121,9 @@ namespace DigitalCoolBook.App.Controllers
                 }
             }
 
-            await this._testService.AddTestAsync(test);
-            await this._questionService.AddQuestionsAsync(questionsForDb);
-            await this._questionService.AddAnswersAsync(answersForDb);
+            await _testService.AddTestAsync(test);
+            await _questionService.AddQuestionsAsync(questionsForDb);
+            await _questionService.AddAnswersAsync(answersForDb);
 
             return this.RedirectToAction("MarkCorrectAnswers", new { testId = test.TestId });
         }
@@ -132,11 +132,11 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin,Teacher")]
         public IActionResult MarkCorrectAnswers(string testId)
         {
-            var questions = this._questionService
+            var questions = _questionService
                 .GetQuestions()
                 .Where(question => question.TestId == testId);
 
-            var model = this._mapper.Map<List<QuestionsModel>>(questions);
+            var model = _mapper.Map<List<QuestionsModel>>(questions);
 
             // Passing test Id to the view
             this.TempData["TestId"] = testId;
@@ -144,7 +144,7 @@ namespace DigitalCoolBook.App.Controllers
             // Add answers to questions
             foreach (var question in model)
             {
-                question.Answers = this._questionService.GetAnswers()
+                question.Answers = _questionService.GetAnswers()
                .Where(answer => answer.QuestionId == question.QuestionId)
                .ToList();
             }
@@ -162,18 +162,17 @@ namespace DigitalCoolBook.App.Controllers
                 // Sets correct answers to true
                 foreach (var correctAnswer in correctAnswerIds)
                 {
-                    var answer = await this._questionService.GetAnswerAsync(correctAnswer);
+                    var answer = await _questionService.GetAnswerAsync(correctAnswer);
                     answer.IsCorrect = true;
                 }
 
-                await this._questionService.SaveChangesAsync();
+                await _questionService.SaveChangesAsync();
 
                 return this.Json("Test was successfully saved");
             }
-            catch (Exception exception)
-            {
-                // return error object to view
-                return this.Json(new { error = "Ops something went wrong.", message = exception.Message });
+            catch (Exception)
+            { 
+                return this.Json(new { error = "Test was not saved"});
             }
         }
 
@@ -213,15 +212,15 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult SetTestTimer(string testId)
         {
-            var teacherId = this._userManager.GetUserId(this.User);
-            var activeTests = this._testService.GetActiveTestsByTeacherId(teacherId);
+            var teacherId = _userManager.GetUserId(this.User);
+            var activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
 
             if (activeTests.Any(x => x.TestId == testId))
                 return RedirectToAction("StartTest", new { id = testId });
 
             var model = new TestViewModel
             {
-                Grades = this._gradeService
+                Grades = _gradeService
                 .GetGrades()
                 .OrderBy(g => g.Name)
                 .ToList(),
@@ -235,7 +234,7 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> SetTestTimerAsync(TestViewModel model)
         {
-            var teacherId = this._userManager.GetUserId(this.User);
+            var teacherId = _userManager.GetUserId(this.User);
 
             try
             {
@@ -245,7 +244,7 @@ namespace DigitalCoolBook.App.Controllers
 
                     return this.View(new TestViewModel
                     {
-                        Grades = this._gradeService
+                        Grades = _gradeService
                             .GetGrades()
                             .OrderBy(g => g.Name)
                             .ToList(),
@@ -253,11 +252,8 @@ namespace DigitalCoolBook.App.Controllers
                     });
                 }
 
-                var test = await this._testService.GetTestAsync(model.TestId);
-
+                var test = await _testService.GetTestAsync(model.TestId);
                 test.TeacherId = teacherId;
-
-                // Set test timer from input model
                 test.Timer = model.Timer;
 
                 var testStudents = new List<TestStudent>();
@@ -278,8 +274,8 @@ namespace DigitalCoolBook.App.Controllers
                     testStudents.Add(testStudent);
                 }
 
-                await this._testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
-                await this._testService.AddTestStudentsAsync(testStudents);
+                await _testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
+                await _testService.AddTestStudentsAsync(testStudents);
 
                 return this.RedirectToAction("StartTest", "Test", new { id = test.TestId });
             }
@@ -351,7 +347,7 @@ namespace DigitalCoolBook.App.Controllers
 
             var testDb = _testService
                 .GetTests()
-                .First(x => x.TestId == testId);
+                .FirstOrDefault(x => x.TestId == testId);
 
             var newArchivedTest = _mapper.Map<ArchivedTestViewModel>(testDb);
 
@@ -687,6 +683,7 @@ namespace DigitalCoolBook.App.Controllers
             newExpiredTest.Date = DateTime.UtcNow;
             newExpiredTest.Result = score;
             newExpiredTest.StudentId = studentId;
+            newExpiredTest.ExpiredTestId = test.TestId;
 
             // Add expired test to DB if score is bigger then the one in the database
             if (_testService.GetExpiredTests().Any(x => x.StudentId == studentId && x.ExpiredTestId == testId))
@@ -777,10 +774,10 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult ActiveTests()
         {
-            var teacherId = this._userManager.GetUserId(this.User);
-            List<Test> activeTests = this._testService.GetActiveTestsByTeacherId(teacherId);
+            var teacherId = _userManager.GetUserId(this.User);
+            List<Test> activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
 
-            var model = this._mapper.Map<List<ActiveTestsViewModel>>(activeTests);
+            var model = _mapper.Map<List<ActiveTestsViewModel>>(activeTests);
 
             return this.View(model);
         }
@@ -804,7 +801,7 @@ namespace DigitalCoolBook.App.Controllers
             var teacherId = _userManager.GetUserId(this.User);
 
             var archivedTests = await _testService.GetExpiredTests()
-                .Where(x => x.TeacherId == teacherId)
+                .Where(x => x.TeacherId == teacherId && x.ExpiredTestId == testId)
                 .ToListAsync();
 
             var studentTestSummaryViewModels = archivedTests
@@ -812,7 +809,8 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     Score = x.Result,
                     StudentName = _userService.GetStudentAsync(x.StudentId).Result.Name,
-                    TestId = x.ExpiredTestId
+                    TestId = x.ExpiredTestId,
+                    TestName = x.TestName
                 })
                 .ToList();
 
