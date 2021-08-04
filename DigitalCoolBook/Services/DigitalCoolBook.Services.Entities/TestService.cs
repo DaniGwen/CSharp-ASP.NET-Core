@@ -43,10 +43,7 @@ namespace DigitalCoolBook.Services
                     .TestStudents
                     .FirstOrDefault(ts => ts.StudentId == testStudent.StudentId && ts.TestId == testStudent.TestId);
 
-                if (testStudentFromDb == null)
-                {
-                    testStudentsForDb.Add(testStudent);
-                }
+                if (testStudentFromDb == null) { testStudentsForDb.Add(testStudent); }
             }
 
             await _dbContext.AddRangeAsync(testStudentsForDb);
@@ -125,6 +122,7 @@ namespace DigitalCoolBook.Services
             }
 
             await _dbContext.TestRooms.AddAsync(testRoom);
+            await Task.Delay(300);
             await _dbContext.TestRoomStudents.AddRangeAsync(testRoom.Students);
             await _dbContext.SaveChangesAsync();
 
@@ -152,9 +150,9 @@ namespace DigitalCoolBook.Services
                 .Select(student => student.TestRoom.TestId).FirstOrDefault();
         }
 
-        public bool CheckAllFinished()
+        public bool IsAllStudentsFinished()
         {
-            return _dbContext.TestRoomStudents.Any(x => x.Finished == false);
+            return _dbContext.TestRoomStudents.Any(x => x.Finished);
         }
 
         public TestRoomStudent GetTestRoomStudent(string studentId)

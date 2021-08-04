@@ -171,8 +171,8 @@ namespace DigitalCoolBook.App.Controllers
                 return this.Json("Test was successfully saved");
             }
             catch (Exception)
-            { 
-                return this.Json(new { error = "Test was not saved"});
+            {
+                return this.Json(new { error = "Test was not saved" });
             }
         }
 
@@ -257,7 +257,7 @@ namespace DigitalCoolBook.App.Controllers
                 test.Timer = model.Timer;
 
                 var testStudents = new List<TestStudent>();
-                var studentsDb = this._userService.GetStudents().ToList();
+                var studentsDb = _userService.GetStudents().ToList();
 
                 // Adding "TestStudent" relation
                 foreach (var studentName in model.Students)
@@ -274,16 +274,16 @@ namespace DigitalCoolBook.App.Controllers
                     testStudents.Add(testStudent);
                 }
 
-                await _testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
                 await _testService.AddTestStudentsAsync(testStudents);
+                await _testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
 
                 return this.RedirectToAction("StartTest", "Test", new { id = test.TestId });
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                this.TempData["ErrorMsg"] = exception.Message;
+               _toasterService.Error("Error. Could not create the test");
 
-                return this.Redirect("/Home/Error");
+               return this.RedirectToAction("SetTestTimer");
             }
         }
 
@@ -341,8 +341,6 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
-            int score = 0;
-
             var testId = this.TempData["TestId"].ToString();
 
             var testDb = _testService
@@ -353,6 +351,8 @@ namespace DigitalCoolBook.App.Controllers
 
             await _testService.AddArchivedTest(newArchivedTest);
 
+            int score = 0;
+
             if (this.User.IsInRole("Student"))
             {
                 score = await this.ProcessTestAsync(model, testId);
@@ -360,19 +360,13 @@ namespace DigitalCoolBook.App.Controllers
 
             this.ViewData["Result"] = score;
 
-            // Check if all students in the test room has finished
-            bool isAllFinished = _testService.CheckAllFinished();
-
-            if (!isAllFinished)
+            if (_testService.IsAllStudentsFinished())
             {
                 // Test room is empty so we remove it along with the students in it
                 await _testService.RemoveTestRoomAsync(testId);
             }
 
-            if (this.User.IsInRole("Teacher"))
-            {
-                return this.Redirect("/Home/Index");
-            }
+            if (this.User.IsInRole("Teacher")) { return this.Redirect("/Home/Index"); }
 
             return this.View("Result");
         }
@@ -430,7 +424,7 @@ namespace DigitalCoolBook.App.Controllers
             }
             catch (Exception)
             {
-               _toasterService.Error("Error, something went wrong");
+                _toasterService.Error("Error, something went wrong");
 
                 return this.Redirect("/Home/Index");
             }
@@ -763,7 +757,7 @@ namespace DigitalCoolBook.App.Controllers
                 .First(x => x.TestId == testId);
 
             testDb.IsExpired = true;
-           
+
             await _testService.RemoveTestAsync(testDb.TestId);
             await _testService.RemoveTestRoomAsync(testDb.TestId);
 

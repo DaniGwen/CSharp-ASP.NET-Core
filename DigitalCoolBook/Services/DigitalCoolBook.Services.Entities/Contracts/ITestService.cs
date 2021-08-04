@@ -34,7 +34,7 @@
 
         string IsStudentInTest(string studentId);
 
-        bool CheckAllFinished();
+        bool IsAllStudentsFinished();
 
         TestRoomStudent GetTestRoomStudent(string studentId);
 

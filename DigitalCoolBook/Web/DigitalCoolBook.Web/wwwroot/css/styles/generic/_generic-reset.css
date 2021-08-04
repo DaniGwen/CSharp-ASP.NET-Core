@@ -56,8 +56,8 @@ button {
 
 /* line 40, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
 h1, h2, h3, h4, h5 {
-  font-family: "Playfair Display", serif;
-  color: #1F1F1F;
+    font-family: 'Montserrat', sans-serif;
+    color: gray;
 }
 
 /* line 44, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
