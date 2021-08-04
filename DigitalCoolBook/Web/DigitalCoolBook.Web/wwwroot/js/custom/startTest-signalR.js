@@ -1,4 +1,4 @@
-﻿//"use strict";
+﻿"use strict";
 
 var connection = new signalR.HubConnectionBuilder()
     .withUrl("/testhub")
@@ -15,7 +15,7 @@ connection.on("OnDisconnected", function (message, studentName) {
     li.textContent = message;
     document.getElementById("finishedStudents").appendChild(li);
 
-    $("#added-students:contains(" + studentName + ")").css("text-decoration", "line-through");
+    $("#added-students:contains("studentName")").css("text-decoration", "line-through");
 });
 
 connection.on("SubmitAll",

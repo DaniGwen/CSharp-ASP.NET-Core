@@ -82,38 +82,36 @@ namespace DigitalCoolBook.App.Controllers
         {
             var lesson = await _subjectService.GetLessonAsync(lessonId);
 
-            // Instantiate test
             var test = new Test
             {
                 TestId = Guid.NewGuid().ToString(),
                 LessonId = lessonId,
                 Place = place,
-                TestName = lesson.Title,
+                TestName = lesson?.Title,
             };
 
-            // Collections of answers and questions to be saved in DB
             var questionsForDb = new List<Question>();
             var answersForDb = new List<Answer>();
 
             // Create question and answers
-            foreach (var questionDto in model)
+            foreach (var questionModel in model)
             {
                 var question = new Question
                 {
                     QuestionId = Guid.NewGuid().ToString(),
                     TestId = test.TestId,
-                    Title = questionDto.Question,
+                    Title = questionModel.Question,
                 };
 
                 questionsForDb.Add(question);
 
                 // Setting answers properties
-                foreach (var answerDto in questionDto.Answers)
+                foreach (var answerModel in questionModel.Answers)
                 {
                     var answer = new Answer
                     {
                         AnswerId = Guid.NewGuid().ToString(),
-                        Title = answerDto,
+                        Title = answerModel,
                         QuestionId = question.QuestionId,
                     };
 
@@ -253,8 +251,11 @@ namespace DigitalCoolBook.App.Controllers
                 }
 
                 var test = await _testService.GetTestAsync(model.TestId);
-                test.TeacherId = teacherId;
-                test.Timer = model.Timer;
+                if (test != null)
+                {
+                    test.TeacherId = teacherId;
+                    test.Timer = model.Timer;
+                }
 
                 var testStudents = new List<TestStudent>();
                 var studentsDb = _userService.GetStudents().ToList();
@@ -277,13 +278,15 @@ namespace DigitalCoolBook.App.Controllers
                 await _testService.AddTestStudentsAsync(testStudents);
                 await _testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
 
+                _toasterService.Success("Test created");
+
                 return this.RedirectToAction("StartTest", "Test", new { id = test.TestId });
             }
             catch (Exception)
             {
-               _toasterService.Error("Error. Could not create the test");
+                _toasterService.Error("Error. Could not create the test");
 
-               return this.RedirectToAction("SetTestTimer");
+                return this.RedirectToAction("SetTestTimer");
             }
         }
 
@@ -337,7 +340,6 @@ namespace DigitalCoolBook.App.Controllers
         }
 
         [HttpPost]
-        [ActionName("EndTest")]
         [Authorize(Roles = "Teacher, Student")]
         public async Task<IActionResult> EndTestAsync(ICollection<EndTestViewModel> model)
         {
@@ -673,11 +675,17 @@ namespace DigitalCoolBook.App.Controllers
                 .GetTestAsync(testId);
 
             // Create expired test for history
-            var newExpiredTest = _mapper.Map<ExpiredTest>(test);
-            newExpiredTest.Date = DateTime.UtcNow;
-            newExpiredTest.Result = score;
-            newExpiredTest.StudentId = studentId;
-            newExpiredTest.ExpiredTestId = test.TestId;
+            var newExpiredTest = new ExpiredTest
+            {
+                ExpiredTestId = Guid.NewGuid().ToString(),
+                TestName = test.TestName,
+                Date = DateTime.UtcNow,
+                Result = score,
+                StudentId = studentId,
+                LessonId = test.LessonId,
+                Timer = test.Timer,
+                Place = test.Place,
+            };
 
             // Add expired test to DB if score is bigger then the one in the database
             if (_testService.GetExpiredTests().Any(x => x.StudentId == studentId && x.ExpiredTestId == testId))

@@ -122,7 +122,7 @@ namespace DigitalCoolBook.Services
             }
 
             await _dbContext.TestRooms.AddAsync(testRoom);
-            await Task.Delay(300);
+            await Task.Delay(500);
             await _dbContext.TestRoomStudents.AddRangeAsync(testRoom.Students);
             await _dbContext.SaveChangesAsync();
 
@@ -152,7 +152,7 @@ namespace DigitalCoolBook.Services
 
         public bool IsAllStudentsFinished()
         {
-            return _dbContext.TestRoomStudents.Any(x => x.Finished);
+            return _dbContext.TestRoomStudents.All(x => x.Finished);
         }
 
         public TestRoomStudent GetTestRoomStudent(string studentId)
