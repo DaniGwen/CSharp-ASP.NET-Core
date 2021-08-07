@@ -3,12 +3,12 @@
         $('#dialog').dialog({
             buttons: {
 
-                "Cancel": function () {
+                "Back": function () {
                     $('#dialog').empty();
                     $(this).dialog("close");
                 },
 
-                "To test": function () {
+                "Start Test": function () {
                     $(this).dialog("close");
                     window.location = `/Test/StartTest/${testId}`;
                 }
