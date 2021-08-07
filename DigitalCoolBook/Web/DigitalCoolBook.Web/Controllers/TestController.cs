@@ -188,19 +188,15 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult Tests()
         {
-            var teacherId = this._userManager.GetUserId(this.User);
-            var tests = this._testService.GetTests().ToList();
-            var activeTests = this._testService.GetActiveTestsByTeacherId(teacherId);
+            var teacherId = _userManager.GetUserId(this.User);
+            var activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
 
             // Map and create model for the view
-            var viewModel = this._mapper.Map<List<TestsNamesViewModel>>(tests);
+            var viewModel = _mapper.Map<List<TestsNamesViewModel>>(activeTests);
 
             foreach (var test in viewModel)
             {
-                if (activeTests.Any(x => x.TestId == test.TestId))
-                {
-                    test.IsActive = true;
-                }
+                test.IsActive = true;
             }
 
             return this.View(viewModel);
@@ -268,7 +264,7 @@ namespace DigitalCoolBook.App.Controllers
                     {
                         StudentId = student?.Id,
                         Student = student,
-                        TestId = test.TestId,
+                        TestId = test?.TestId,
                         Test = test
                     };
 
@@ -292,13 +288,13 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Teacher, Student")]
-        public async Task<IActionResult> StartTest([FromRoute] string id)
+        public async Task<IActionResult> StartTest([FromQuery][FromRoute]string testId)
         {
             try
             {
-                var test = await _testService.GetTestAsync(id);
+                var test = await _testService.GetTestAsync(testId);
 
-                // Keep the test Id for EndTest action
+                // Pass the test Id for EndTest action
                 this.TempData["TestId"] = test?.TestId;
 
                 var testViewModel = _mapper.Map<TestStartViewModel>(test);
@@ -724,17 +720,15 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Student")]
         public ActionResult IsStudentInTest()
         {
-            var studentId = this.User
-                .FindFirst(ClaimTypes.NameIdentifier)?
-                .Value;
+            var studentId = _userManager.GetUserId(this.User);
 
-            var testId = this._testService.IsStudentInTest(studentId);
+            var testId = _testService.IsStudentInTest(studentId);
 
-            var testRoomStudent = this._testService.GetTestRoomStudent(studentId);
+            var testRoomStudent = _testService.GetTestRoomStudent(studentId);
 
             if (testId != null && testRoomStudent.Finished == false)
             {
-                var testName = this._testService
+                var testName = _testService
                     .GetTests()
                     .First(x => x.TestId == testId)
                     .TestName;
@@ -770,18 +764,6 @@ namespace DigitalCoolBook.App.Controllers
             await _testService.RemoveTestRoomAsync(testDb.TestId);
 
             return this.Redirect("/Home/Index");
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Teacher")]
-        public IActionResult ActiveTests()
-        {
-            var teacherId = _userManager.GetUserId(this.User);
-            List<Test> activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
-
-            var model = _mapper.Map<List<ActiveTestsViewModel>>(activeTests);
-
-            return this.View(model);
         }
 
         [HttpGet]

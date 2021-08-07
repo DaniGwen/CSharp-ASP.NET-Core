@@ -23,7 +23,7 @@
             var userName = await this.GetUserNameAsync();
 
             if (userName != null)
-                await this.Clients.All.SendAsync("OnConnected", $"{userName} test started");
+                await this.Clients.All.SendAsync("OnConnected", userName);
         }
 
         [Authorize]
@@ -34,7 +34,7 @@
             await _userService.SetStudentFinishedTestRoom(userName);
 
             if (userName != null)
-                await this.Clients.All.SendAsync("OnDisconnected", $"{userName} test submitted", userName);
+                await this.Clients.All.SendAsync("OnDisconnected", userName);
         }
 
         private async Task<string> GetUserNameAsync()

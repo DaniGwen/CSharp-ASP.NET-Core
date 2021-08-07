@@ -53,7 +53,6 @@ namespace DigitalCoolBook.App.Mappings
             this.CreateMap<Test, SetTimerViewModel>();
             this.CreateMap<Test, TestPreviewViewModel>();
             this.CreateMap<Test, TestDetailsViewModel>();
-            this.CreateMap<Test, ActiveTestsViewModel>();
             this.CreateMap<Test, ArchivedTestViewModel>();
 
             // Question mappings

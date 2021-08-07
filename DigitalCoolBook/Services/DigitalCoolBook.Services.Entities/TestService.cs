@@ -196,16 +196,19 @@ namespace DigitalCoolBook.Services
             var testRoom = _dbContext.TestRooms
                 .FirstOrDefault(x => x.TestId == testId);
 
-            var studentsInRoom = _dbContext.TestRoomStudents
-                .Where(x => x.TestRoomId == testRoom.Id)
+            var testRoomStudents = _dbContext.TestRoomStudents
+                .Where(x => x.TestRoomId == testRoom.Id
+                            && !x.Finished)
                 .ToList();
 
             var studentNames = new List<string>();
 
-            foreach (var student in studentsInRoom)
+            foreach (var testRoomStudent in testRoomStudents)
             {
-                var studentDb = await _dbContext.Students.FindAsync(student.StudentId);
-                studentNames.Add(studentDb.Name);
+                var studentDb = await _dbContext.Students
+                    .FirstOrDefaultAsync(x =>x.Id == testRoomStudent.StudentId);
+
+                studentNames.Add(studentDb?.Name);
             }
 
             return studentNames;
