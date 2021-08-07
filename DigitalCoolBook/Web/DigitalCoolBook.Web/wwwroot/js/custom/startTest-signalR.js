@@ -1,21 +1,21 @@
-﻿"use strict";
+﻿/*"use strict";*/
 
 var connection = new signalR.HubConnectionBuilder()
     .withUrl("/testhub")
     .build();
 
-connection.on("OnConnected", function (user) {
+connection.on("OnConnected", function (studentName) {
     var li = document.createElement("li");
-    li.textContent = user;
+    li.textContent = studentName;
     document.getElementById("activeStudents").appendChild(li);
 });
 
-connection.on("OnDisconnected", function (message, studentName) {
+connection.on("OnDisconnected", function (studentName) {
     var li = document.createElement("li");
-    li.textContent = message;
+    li.textContent = studentName;
     document.getElementById("finishedStudents").appendChild(li);
 
-    $("#added-students:contains("studentName")").css("text-decoration", "line-through");
+    $(`#activeStudents:contains('${studentName}')`).remove();
 });
 
 connection.on("SubmitAll",
