@@ -21,14 +21,14 @@
                                 <a class="btn btn-outline-success btn-sm"
                                    asp-controller="Test"
                                    asp-action="StartTest"
-                                   asp-route-id="@test.TestId">Active</a>
+                                   asp-route-testId="@test.TestId">Active</a>
                             }
                             else
                             {
                                 <a class="btn btn-outline-primary btn-sm"
                                    asp-controller="Test"
                                    asp-action="SetTestTimer"
-                                   asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Test settings</a>
+                                   asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Configure Test</a>
                             }
 
                         </div>
@@ -39,7 +39,7 @@
     }
     else
     {
-        <h4 class="mt-5">No tests created...</h4>
+        <h3 class="mt-5">No tests created...</h3>
     }
 </div>
 

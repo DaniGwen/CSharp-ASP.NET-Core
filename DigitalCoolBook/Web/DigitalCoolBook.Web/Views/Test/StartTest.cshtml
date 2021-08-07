@@ -6,8 +6,7 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>@Model.TestName</h3>
-    <h4 class="text-success">Active</h4>
+    <h3>T E S T - @Model.TestName</h3>
     @if (this.User.IsInRole("Student"))
     {
         <form id="form" asp-action="EndTest" method="post">
@@ -40,9 +39,11 @@
 
                     foreach (var answer in question.Answers)
                     {
-                        <ul class="list-group">
+                        <ul class="list-group mb-1">
                             <li class="list-group-item">
-                                <input type="radio" name="[@index].answerId" value="@answer.AnswerId" />
+                                <input type="checkbox"
+                                       name="[@index].answerId"
+                                       value="@answer.AnswerId" />
                                 <label class="col-form-label-lg">@answer.Title</label>
                             </li>
                         </ul>
@@ -57,8 +58,9 @@
     }
     else if (this.User.IsInRole("Teacher"))
     {
+        <h4 class="text-success">Active</h4>
         <div>
-            <label class="form-label">Participants</label>
+            <h5>Participants</h5>
             <ul class="added-students" id="added-students">
                 @foreach (var studentName in Model.StudentNames)
                 {
@@ -66,15 +68,13 @@
                 }
             </ul>
         </div>
-        <div class="row">
-            <div>
-                <label class="form-label">Active</label>
-                <div class="connected-students" id="activeStudents"></div>
-            </div>
-            <div>
-                <label class="form-label">Finished</label>
-                <div class="disconnected-students" id="finishedStudents"></div>
-            </div>
+        <div class="mt-2">
+            <h5>Started</h5>
+            <div class="connected-students" id="activeStudents"></div>
+        </div>
+        <div class="mt-2">
+            <h5>Finished</h5>
+            <div class="disconnected-students" id="finishedStudents"></div>
         </div>
         <div class="text-center mb-2">
             <a class="btn btn-outline-warning"
@@ -101,7 +101,7 @@
 
     <!--countdown function-->
     <script>
-       $(function () {
+        $(function () {
             $('.timer').startTimer({
                 onComplete: function () {
                     submitForm();
