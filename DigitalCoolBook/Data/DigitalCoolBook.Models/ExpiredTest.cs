@@ -16,6 +16,8 @@ namespace DigitalCoolBook.Models
 
         public string TestName { get; set; }
 
+        public string TestId { get; set; }
+
         public string TeacherId { get; set; }
         public Teacher Teacher { get; set; }
 
@@ -26,7 +28,7 @@ namespace DigitalCoolBook.Models
 
         public DateTime Date { get; set; }
 
-        public int Result { get; set; }
+        public int Score { get; set; }
 
         public string Place { get; set; }
 
