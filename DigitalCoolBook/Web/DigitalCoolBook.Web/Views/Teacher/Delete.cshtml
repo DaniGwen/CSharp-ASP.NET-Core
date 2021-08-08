@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-<h1>Remove account</h1>
+<h3>Remove account</h3>
 
 <div>
     <hr />
@@ -16,7 +16,12 @@
         <dd class="col-sm-10">@Model.Email</dd>
     </dl>
 </div>
-<button type="button" id="deleteBtn" class="btn btn-outline-danger" data-dismiss="modal">Remove</button>
+<button type="button" 
+        id="deleteBtn" 
+        class="btn btn-outline-danger" 
+        data-dismiss="modal">
+    Remove
+</button>
 
 @using (Html.BeginForm("Delete", "Teacher", FormMethod.Post, new { id = "deleteForm" }))
 {
@@ -24,7 +29,9 @@
 
     <div class="form-control">
         <input type="submit" value="Remove" class="btn btn-danger" /> |
-        <a class="btn btn-outline-secondary btn-sm" asp-action="/Admin/AdminPanel">Back</a>
+        <a class="btn btn-outline-secondary btn-sm" 
+           asp-controller="Admin" 
+           asp-action="AdminPanel">Back</a>
     </div>
 }
 
