@@ -48,7 +48,7 @@
 
         Task TestRoomStudentFinished(string studentId, int score);
 
-        Task AddArchivedTest(ArchivedTestViewModel archivedTestViewModel);
+        Task AddArchivedTest(Test archivedTestViewModel);
 
         Task SaveChangesAsync();
     }

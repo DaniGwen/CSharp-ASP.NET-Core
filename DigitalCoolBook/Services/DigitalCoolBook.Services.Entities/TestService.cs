@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalCoolBook.Services
 {
@@ -85,7 +86,7 @@ namespace DigitalCoolBook.Services
 
         public IQueryable<ExpiredTest> GetExpiredTests()
         {
-            return this._dbContext.ExpiredTests;
+            return _dbContext.ExpiredTests;
         }
 
         public async Task RemoveExpiredTest(string expiredTestId, string studentId)
@@ -206,7 +207,7 @@ namespace DigitalCoolBook.Services
             foreach (var testRoomStudent in testRoomStudents)
             {
                 var studentDb = await _dbContext.Students
-                    .FirstOrDefaultAsync(x =>x.Id == testRoomStudent.StudentId);
+                    .FirstOrDefaultAsync(x => x.Id == testRoomStudent.StudentId);
 
                 studentNames.Add(studentDb?.Name);
             }
@@ -214,21 +215,26 @@ namespace DigitalCoolBook.Services
             return studentNames;
         }
 
-        public async Task AddArchivedTest(ArchivedTestViewModel model)
+        public async Task AddArchivedTest(Test model)
         {
-            _dbContext.ArchivedTests.Add(new ArchivedTest
-            {
-                TestId = model.TestId,
-                TestName = model.TestName,
-                Date = model.Date,
-                LessonId = model.LessonId,
-                Place = model.Place,
-                Students = model.Students,
-                TeacherId = model.TeacherId,
-                Timer = model.Timer
-            });
+            var isArchivedTestDb =
+                _dbContext.ArchivedTests.Any(x => x.TeacherId == model.TeacherId && x.TestId == model.TestId);
 
-            await _dbContext.SaveChangesAsync();
+            if (!isArchivedTestDb)
+            {
+                await _dbContext.ArchivedTests.AddAsync(new ArchivedTest
+                {
+                    TestId = model.TestId,
+                    TestName = model.TestName,
+                    Date = DateTime.UtcNow,
+                    LessonId = model.LessonId,
+                    Place = model.Place,
+                    TeacherId = model.TeacherId,
+                    Timer = model.Timer
+                });
+
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<ArchivedTestViewModel>> GetArchivedTestsByTeacherId(string teacherId)
