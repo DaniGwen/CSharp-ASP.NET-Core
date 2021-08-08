@@ -80,14 +80,14 @@
 
         public async Task<List<StudentTestSummaryViewModel>> GetTestResultsById(string testId)
         {
-            var testRoom = await this._dbContext.TestRooms
+            var testRoom = await _dbContext.TestRooms
                 .FirstAsync(x => x.TestId == testId);
 
-            var studentsInTestRoom = await this._dbContext.TestRoomStudents
+            var studentsInTestRoom = await _dbContext.TestRoomStudents
                 .Where(x => x.TestRoomId == testRoom.Id)
                 .Select(x => new StudentTestSummaryViewModel
                 {
-                    StudentName = x.StudentName,
+                    //StudentName = x.StudentName,
                     Score = x.Score,
                 })
                 .ToListAsync();
