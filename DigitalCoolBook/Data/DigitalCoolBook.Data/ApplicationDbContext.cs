@@ -47,6 +47,8 @@ namespace DigitalCoolBook.App.Data
 
         public DbSet<ArchivedTest> ArchivedTests { get; set; }
 
+        public DbSet<LiveFeedMessage> LiveFeedMessages { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

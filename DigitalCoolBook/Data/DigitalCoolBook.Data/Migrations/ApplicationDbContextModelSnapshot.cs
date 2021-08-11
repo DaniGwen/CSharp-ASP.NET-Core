@@ -236,6 +236,27 @@ namespace DigitalCoolBook.Data.Migrations
                     b.ToTable("Lessons");
                 });
 
+            modelBuilder.Entity("DigitalCoolBook.Models.LiveFeedMessage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("LiveFeedMessages");
+                });
+
             modelBuilder.Entity("DigitalCoolBook.Models.Question", b =>
                 {
                     b.Property<string>("QuestionId")
@@ -836,6 +857,15 @@ namespace DigitalCoolBook.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.LiveFeedMessage", b =>
+                {
+                    b.HasOne("DigitalCoolBook.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Question", b =>

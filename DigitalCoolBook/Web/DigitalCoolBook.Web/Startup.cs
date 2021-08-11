@@ -59,6 +59,7 @@ namespace DigitalCoolBook.App
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IScoreService, ScoreService>();
+            services.AddScoped<ILiveFeedService,LiveFeedService>();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -99,7 +100,7 @@ namespace DigitalCoolBook.App
 
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
+                
                 //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 

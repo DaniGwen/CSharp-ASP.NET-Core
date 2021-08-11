@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalCoolBook.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210808122139_UpdateEexpiredTestColumnName")]
-    partial class UpdateEexpiredTestColumnName
+    [Migration("20210808130410_addedLiveFeedMessages")]
+    partial class addedLiveFeedMessages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -236,6 +236,27 @@ namespace DigitalCoolBook.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.LiveFeedMessage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("LiveFeedMessages");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Question", b =>
@@ -838,6 +859,15 @@ namespace DigitalCoolBook.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.LiveFeedMessage", b =>
+                {
+                    b.HasOne("DigitalCoolBook.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Question", b =>
