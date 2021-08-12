@@ -1,4 +1,15 @@
 ﻿body {
     font-family: Manrope, sans-serif;
-    background-color: whitesmoke;
 }
+
+    body:before {
+        content: "";
+        background-image: url("../../../img/BackToSchool.jpg");
+        background-size: cover;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        opacity: 0.4;
+    }

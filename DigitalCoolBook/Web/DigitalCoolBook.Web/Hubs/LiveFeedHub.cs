@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
@@ -21,14 +22,20 @@ namespace DigitalCoolBook.App.Hubs
             _userManager = userManager;
         }
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string userName, string message)
         {
-            _toasterService.Information($"Live feed: New Message from {user}");
-            await Task.Delay(1000);
-            var teacherId = _userManager.GetUserId(this.Context.User);
-            _liveFeedService.SaveMessage(teacherId, message);
+            _toasterService.Information($"Live feed: New Message from {userName}");
+            var userId = _userManager.GetUserId(this.Context.User);
+            await _liveFeedService.SaveMessage(userId, userName, message);
 
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("ReceiveMessage", userName, message);
+        }
+
+        public async Task GetLiveMessages()
+        {
+            var messages = (await _liveFeedService.GetLiveMessages()).ToList();
+
+            await Clients.Caller.SendAsync("ReceiveLiveMessages", messages);
         }
     }
 }

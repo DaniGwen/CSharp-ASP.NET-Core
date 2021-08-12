@@ -59,7 +59,7 @@ namespace DigitalCoolBook.App
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IScoreService, ScoreService>();
-            services.AddScoped<ILiveFeedService,LiveFeedService>();
+            services.AddTransient<ILiveFeedService,LiveFeedService>();
 
             var config = new MapperConfiguration(cfg =>
             {

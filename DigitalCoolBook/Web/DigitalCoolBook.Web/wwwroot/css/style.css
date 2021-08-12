@@ -3,7 +3,6 @@
 
 @import "styles/settings/_settings-typography.css";
 
-/*@import "styles/generic/_generic-normalize.css";*/
 @import "styles/generic/_generic-reset.css";
 
 @import "styles/components/_component-test-room-summary.css";

@@ -18,10 +18,5 @@
            asp-action="CategoryDetails"
            asp-route-categoryId="@Model.CategoryId"
            asp-route-subjectId="@Model.CategoryId">Back</a>
-
-        @if (this.User.IsInRole("Teacher"))
-        {
-            <a class="btn btn-outline-info btn-lg" href="/Test/CreateTest/@Model.LessonId">Test</a>
-        }
     </div>
 </div>

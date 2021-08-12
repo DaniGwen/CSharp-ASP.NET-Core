@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using DigitalCoolBook.App.Data;
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Services.Contracts;
@@ -14,17 +16,23 @@ namespace DigitalCoolBook.Services
             _dbContext = dbContext;
         }
 
-        public async void SaveMessage(string teacherId, string message)
+        public async Task SaveMessage(string userId, string userName, string message)
         {
             await _dbContext.LiveFeedMessages.AddAsync(new LiveFeedMessage
             {
                 Id = Guid.NewGuid().ToString(),
-                TeacherId = teacherId,
+                UserId = userId,
+                UserName = userName,
                 Date = DateTime.UtcNow,
                 Message = message
             });
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IQueryable<LiveFeedMessage>> GetLiveMessages()
+        {
+            return _dbContext.LiveFeedMessages;
         }
     }
 }

@@ -8,8 +8,9 @@ namespace DigitalCoolBook.Models
 
         public string Message { get; set; }
 
-        public string TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
 
         public DateTime Date { get; set; }
     }

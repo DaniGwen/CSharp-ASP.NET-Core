@@ -18,7 +18,7 @@
             @foreach (var item in Model)
             {
                 <div class="col mb-3">
-                    <a class="w-100 btn btn-outline-primary"
+                    <a class="w-50 btn btn-outline-secondary"
                        asp-controller="Teacher"
                        asp-action="GradeDetails"
                        asp-route-id="@item.GradeId">@item.Name.ToUpper() <i class="ms-3 fas fa-user-graduate"></i> @item.StudentCount</a>

@@ -11,10 +11,6 @@
     transition: 0.2s ease-in;
 }
 
-.live-feed-input {
-   
-}
-
 .live-feed-messages {
     overflow: auto;
     height: 270px;
@@ -29,15 +25,21 @@
 
 .live-feed-toggle {
     position: absolute;
-    top: -31%;
-    right: -16%;
+    top: -35%;
+    right: -14%;
     transition: 0.2s;
     border: none;
     font-size: 26px;
+    color: indigo;
 }
 
     .live-feed-toggle:hover {
-        transform: scale(1.1);
+        transform: scale(1.2);
+        color: indigo;
+    }
+
+    .live-feed-toggle:focus {
+        outline: none;
     }
 
 .live-feed-title {
@@ -48,6 +50,7 @@
     transform: rotate( -90deg );
     padding: 5px;
     border-radius: 3px;
+    color: indigo;
 }
 
 .live-feed-hide {
@@ -62,4 +65,8 @@
 
 .live-feed-title-and-toggleBtn {
     position: relative;
+}
+
+#sendButton {
+    color: indigo;
 }
