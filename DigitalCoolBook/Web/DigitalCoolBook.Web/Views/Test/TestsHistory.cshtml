@@ -11,7 +11,7 @@
             @foreach (var test in Model)
             {
                 <div>
-                    <a class="btn btn-sm btn-info w-100 mb-1"
+                    <a class="btn btn-sm btn-secondary w-75 mb-2"
                        asp-controller="Test"
                        asp-action="TestSummary"
                        asp-route-testId="@test.TestId">@test.TestName <time class="ms-2">@test.Date</time></a>

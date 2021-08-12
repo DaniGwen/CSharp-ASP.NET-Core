@@ -9,7 +9,7 @@
     <h3>@Model.Name</h3>
     <hr />
     <div class="row">
-        <h5>Tests taken</h5>
+        <h4>Tests taken</h4>
         @if (!Model.TestsTaken.Any())
         {
             <h6>No tests taken</h6>
@@ -58,12 +58,12 @@
     </div>
     <hr />
     <div class="row">
-        <h5>Average score</h5>
+        <h4>Average score</h4>
         <h2>@Model.AverageScore %</h2>
     </div>
     <hr />
     <div>
-        <a class="btn btn-outline-secondary btn-sm" 
+        <a class="btn btn-secondary btn-sm" 
            asp-controller="Teacher" 
            asp-action="GradeDetails" 
            asp-route-id="@Model.GradeId">Back</a>

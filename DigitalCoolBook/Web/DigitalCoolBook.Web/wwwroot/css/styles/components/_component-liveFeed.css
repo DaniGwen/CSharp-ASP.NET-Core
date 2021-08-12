@@ -25,7 +25,7 @@
 
 .live-feed-toggle {
     position: absolute;
-    top: -35%;
+    top: -20px;
     right: -14%;
     transition: 0.2s;
     border: none;
@@ -35,17 +35,13 @@
 
     .live-feed-toggle:hover {
         transform: scale(1.2);
-        color: indigo;
-    }
-
-    .live-feed-toggle:focus {
-        outline: none;
+        color: #b30000;
     }
 
 .live-feed-title {
     position: absolute;
-    top: 69px;
-    right: -19.5%;
+    top: 54px;
+    right: -20%;
     background: lightgray;
     transform: rotate( -90deg );
     padding: 5px;

@@ -7,8 +7,7 @@
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>My Classes</h3>
-    <hr />
-    <div class="row row-cols-3">
+    <div class="row row-cols-3 mt-3">
         @if (!Model.Any())
         {
             <h5>No classes assigned...</h5>
@@ -18,7 +17,7 @@
             @foreach (var item in Model)
             {
                 <div class="col mb-3">
-                    <a class="w-50 btn btn-outline-secondary"
+                    <a class="btn btn-primary"
                        asp-controller="Teacher"
                        asp-action="GradeDetails"
                        asp-route-id="@item.GradeId">@item.Name.ToUpper() <i class="ms-3 fas fa-user-graduate"></i> @item.StudentCount</a>
@@ -26,7 +25,7 @@
             }
         }
     </div>
-    <a class="btn btn-outline-secondary btn-sm"
+    <a class="btn btn-secondary btn-sm"
        asp-controller="Home"
        asp-action="Index">Back</a>
 </div>

@@ -7,24 +7,27 @@
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>@Model.Name</h3>
-
-    @if (Model.Categories.Count == 0)
-    {
-        <h5>No categories</h5>
-    }
-    else
-    {
-        @foreach (var category in Model.Categories)
-        {
-            <div class="row">
-                <a href="@Url.Action("CategoryDetails", "Subject",
-                    new { categoryId = category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
-                   type="button" class="btn btn-outline-info mt-3">
-                    @category.Title
-                </a>
-            </div>
-        }
-    }
     <hr />
-    <a class="btn btn-outline-secondary btn-sm mt-4" href="@Url.Action("Subjects", "Subject")">Back</a>
+    <div class="mb-3">
+        @if (Model.Categories.Count == 0)
+        {
+            <h5>No categories</h5>
+        }
+        else
+        {
+            @foreach (var category in Model.Categories)
+            {
+                <div class="row d-flex justify-content-center">
+                    <a href="@Url.Action("CategoryDetails", "Subject",
+                    new { categoryId = category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
+                       type="button" class="w-75 btn btn-primary mt-3">
+                        @category.Title
+                    </a>
+                </div>
+            }
+        }
+    </div>
+
+    <a class="btn btn-secondary btn-sm" 
+       href="@Url.Action("Subjects", "Subject")">Back</a>
 </div>

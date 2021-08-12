@@ -13,6 +13,7 @@
 @import "styles/components/_component-footer.css";
 @import "styles/components/_component-layout.css";
 @import "styles/components/_component-lessonsPreview.css";
+@import "styles/components/_component-lessonDetails.css";
 @import "styles/components/_component-liveFeed.css";
 @import "styles/components/teacher/_component-editTeacher.css";
 @import "styles/components/teacher/_component-editTeachers.css";
@@ -54,11 +55,6 @@ input[type=number] {
     height: 30px;
 }
 
-/*HR orange lighten-4*/
-hr.hr-orange {
-    background-color: #ffb74d;
-}
-
 .page-header {
     padding-bottom: 5px;
     color: #5d5d5d;
@@ -83,4 +79,26 @@ input[type="radio"] {
     padding: 5px;
     font-size: 16px;
     margin-right: 5px;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: indigo;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
 }

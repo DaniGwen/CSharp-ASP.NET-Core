@@ -12,7 +12,7 @@
         <input hidden name="testId" value="@Model.TestId" />
         <div class="row mb-4">
             <div>
-                <label class="form-label">Test duration</label>
+                <p class="form-label d-inline-block">Test duration</p>
                 <input class="form-control-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
                 <label class="form-label">minutes</label>
             </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="row mb-4">
             <div>
-                <label class="form-label">Class</label>
+                <span class="form-label">Class</span>
                 @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control" })
             </div>
         </div>
@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="buttons-wrapper">
-            <a class="btn btn-outline-secondary btn-sm" asp-action="Tests">Back</a>
-            <input class="btn btn-outline-success btn-sm" id="button" type="submit" value="Create" />
+            <a class="btn btn-secondary btn-sm" asp-action="Tests">Back</a>
+            <input class="btn btn-success btn-sm" id="button" type="submit" value="Create" />
         </div>
     </form>
 </div>
@@ -62,7 +62,7 @@
                             function (i, item) {
                                 studentCheckBox.append(
                                     $('<input/>', { type: 'checkbox', name: 'students', id: item.id, value: item.name }),
-                                    $('<label/>', { for: item.id, text: item.name }),
+                                    $('<span/>', { for: item.id, text: item.name }),
                                     $('<br/>')
                                 );
                             });

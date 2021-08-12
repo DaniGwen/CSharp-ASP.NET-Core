@@ -4,32 +4,33 @@
     Layout = "_Layout";
 }
 
-<div class="offset-3 col-10 col-sm-12">
+<div class="offset-md-3 col-md-6 col-sm-12">
     <form asp-action="Login" method="post">
-        <br />
-        <h2>Sign in</h2>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <label class="form-label" asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control w-50" placeholder="john@yahoo.com..." autofocus />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group row mt-3">
-            <label class="form-label" asp-for="Password">Password</label>
-            <input asp-for="Password" class="form-control w-50" placeholder="Your password..." />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group row mt-2">
-            <div class="checkbox">
-                <label asp-for="RememberMe"><input asp-for="RememberMe" />Remember me?</label>
+        <h2>L o g i n</h2>
+        <div class="justify-content-center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <span class="form-label" asp-for="Email">Email</span>
+                <input asp-for="Email" class="form-control w-50" placeholder="john@yahoo.com..." autofocus />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-        </div>
-        <div class="button-wrapper mt-2">
-            <button type="submit" class="btn btn-outline-primary">Login</button>
-        </div>
-        <div class="row form-group">
-            <a href="/Admin/ForgotPassword" id="forgot-password" class="mb-2 mt-2">Forgotten password?</a>
-            <a href="/Admin/AdminContact">Contact admin</a>
+            <div class="form-group row mt-3">
+                <span class="form-label" asp-for="Password">Password</span>
+                <input asp-for="Password" class="form-control w-50" placeholder="Your password..." />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group row mt-2">
+                <div class="checkbox">
+                    <label asp-for="RememberMe"><input asp-for="RememberMe" />Remember me?</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Login</button>
+
+            <div class="row form-group mt-3">
+                <a href="/Admin/ForgotPassword" id="forgot-password" class="mb-3">Forgotten password?</a>
+                <a href="/Admin/AdminContact">Contact admin</a>
+            </div>
         </div>
     </form>
 </div>

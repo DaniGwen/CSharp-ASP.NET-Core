@@ -56,7 +56,6 @@
         }
 
         [HttpGet]
-        [ActionName("Categories")]
         public IActionResult CategoriesAsync(string subjectId, string categoryId)
         {
             var subjectDb = _subjectService.GetSubjects()
@@ -64,17 +63,17 @@
                 .FirstOrDefault(s => s.SubjectId == subjectId);
 
             var model = _mapper.Map<SubjectViewModel>(subjectDb);
+            model.CategoryId = categoryId;
 
             return this.View(model);
         }
 
         [HttpGet]
-        [ActionName("CategoryDetails")]
         [Authorize(Roles = "Admin, Teacher, Student")]
         public IActionResult CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
         {
             var lessons = _subjectService.GetLessons()
-                .Where(lesson => lesson.CategoryId == categoryDetailsModel.CategoryId)
+                .Where(l => l.CategoryId == categoryDetailsModel.CategoryId)
                 .ToList();
 
             var lessonsDto = _mapper.Map<List<LessonsViewModel>>(lessons);
@@ -82,13 +81,14 @@
             // If User is Student adding score in view
             if (this.User.IsInRole("Student"))
             {
+                var studentId = _userManager.GetUserId(this.User);
+
                 foreach (var lesson in lessonsDto)
                 {
-                    var studentId = _userManager.GetUserId(this.User);
-
                     var score = _scoreService
                         .GetScoreStudents()
                         .Where(ss => ss.StudentId == studentId)
+                        .OrderByDescending(x => x.Score.ScorePoints)
                         .FirstOrDefault(s => s.Score.LessonId == lesson.LessonId);
 
                     // Set Score if there is any

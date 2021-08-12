@@ -6,40 +6,46 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <a class="btn btn-secondary btn-sm" asp-action="CreateTest">Create test</a>
-    @if (Model.Any())
-    {
-        @foreach (var test in Model)
+    <h3>Tests</h3>
+    <div class="mb-3">
+        <a class="btn btn-success btn-sm mt-3" asp-action="CreateTest">Create test</a>
+        @if (Model.Any())
         {
-            <div class="row align-items-baseline mt-3">
-                <p class="col-form-label-lg col-md-8 p-0">@test.TestName</p>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col p-0">
-                            @if (test.IsActive)
-                            {
-                                <a class="btn btn-success btn-sm"
-                                   asp-controller="Test"
-                                   asp-action="StartTest"
-                                   asp-route-id="@test.TestId">Active</a>
-                            }
-                            else
-                            {
-                                <a class="btn btn-primary btn-sm"
-                                   asp-controller="Test"
-                                   asp-action="SetTestTimer"
-                                   asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Configure Test</a>
-                            }
+            @foreach (var test in Model)
+            {
+                <div class="row align-items-center mt-3">
+                    <p class="col-form-label-lg col-md-8">@test.TestName</p>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col p-0">
+                                @if (test.IsActive)
+                                {
+                                    <a class="btn btn-success btn-sm"
+                                       asp-controller="Test"
+                                       asp-action="StartTest"
+                                       asp-route-id="@test.TestId">Active</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary btn-sm"
+                                       asp-controller="Test"
+                                       asp-action="SetTestTimer"
+                                       asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Configure Test</a>
+                                }
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
-    else
-    {
-        <h3 class="mt-5">No tests created...</h3>
-    }
+        else
+        {
+            <h3 class="mt-5">No tests created...</h3>
+        }
+    </div>
+    <a class="btn btn-secondary btn-sm"
+       asp-controller="Home"
+       asp-action="Index">Back</a>
 </div>
 

@@ -6,7 +6,6 @@ namespace DigitalCoolBook.App.Controllers
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
     using Hubs;
@@ -732,17 +731,15 @@ namespace DigitalCoolBook.App.Controllers
 
         private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model, string testId)
         {
-            var studentId = _userManager.GetUserId(this.User);
-
-            // Gets questions for this test
             var questions = _questionService
                 .GetQuestions()
                 .Include(question => question.Answers)
                 .Where(question => question.TestId == testId)
                 .ToList();
 
-            // Max points 100
-            var score = 0;
+            // Max score 100
+            var correctAnswers = 0;
+            var questionsCount = questions?.Count;
 
             // Check for correct answer and add points
             foreach (var question in questions)
@@ -752,13 +749,17 @@ namespace DigitalCoolBook.App.Controllers
 
                 var modelAnswerId = model.FirstOrDefault(q => q.QuestionId == question.QuestionId)?.AnswerId;
 
-                if (modelAnswerId == correctAnswerId)
-                    score += 10;
+                if (modelAnswerId == correctAnswerId) { correctAnswers += 1; }
             }
 
             // Get Test from DB
             var test = await _testService
                 .GetTestAsync(testId);
+
+            var studentId = _userManager.GetUserId(this.User);
+
+            //Calculate score
+            var score = (int)((100 * correctAnswers) / questionsCount);
 
             // Create expired test for history
             var newExpiredTest = _mapper.Map<ExpiredTest>(test);
@@ -766,7 +767,7 @@ namespace DigitalCoolBook.App.Controllers
             newExpiredTest.ExpiredTestId = Guid.NewGuid().ToString();
             newExpiredTest.StudentId = studentId;
             newExpiredTest.Score = score;
-            
+
             await _testService.AddExpiredTestAsync(newExpiredTest);
 
             // Create Score
@@ -776,7 +777,6 @@ namespace DigitalCoolBook.App.Controllers
                 await _scoreService.CreateScoreStudentAsync(scoreId, studentId);
             }
 
-            // Set the student score property and display it after all students has finished in teacher's view
             await _testService.TestRoomStudentFinished(studentId, score);
 
             return score;

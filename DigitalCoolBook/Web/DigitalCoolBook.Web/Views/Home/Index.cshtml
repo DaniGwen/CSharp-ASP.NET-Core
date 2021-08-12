@@ -7,16 +7,19 @@
 
 @if (!this.User.Identity.IsAuthenticated)
 {
-    <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-5">
         <div>
             <h1 class="page-header">Welcome to Digital Cool Book!</h1>
-            <h5><label class="me-2">L e a r n</label>
-                <label class="me-2">a n d</label>
-                <label class="me-2">h a v e</label>
-                <label>f u n!</label></h5>
+            <h5>
+                <span class="me-2">L e a r n</span>
+                <span class="me-2">a n d</span>
+                <span class="me-2">h a v e</span>
+                <span>f u n!</span>
+            </h5>
         </div>
         <div class="pt-4">
-            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">
+            <a asp-controller="Home"
+               asp-action="Login">
                 <span class="fa fa-user"></span> Login
             </a>
         </div>
