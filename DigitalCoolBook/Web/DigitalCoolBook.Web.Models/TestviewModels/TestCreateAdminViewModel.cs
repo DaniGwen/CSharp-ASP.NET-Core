@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
+﻿using DigitalCoolBook.Web.Models.CategoryViewModels;
+
+namespace DigitalCoolBook.App.Models.TestviewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

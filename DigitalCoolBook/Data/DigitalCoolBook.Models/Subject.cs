@@ -9,7 +9,6 @@
         {
             this.Categories = new List<Category>();
             this.Scores = new List<Score>();
-            this.SubjectGrades = new List<SubjectGrade>();
         }
 
         [Key]
@@ -24,7 +23,5 @@
         public List<Category> Categories { get; set; }
 
         public List<Score> Scores{ get; set; }
-
-        public List<SubjectGrade> SubjectGrades { get; set; }
     }
 }

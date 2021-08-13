@@ -5,7 +5,6 @@
     Layout = "_Layout";
 }
 
-
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>Create test</h3>
     <form id="form" asp-controller="Test" asp-action="CreateTest" method="post">
@@ -37,8 +36,10 @@
             </div>
         </div>
         <div class="buttons-wrapper">
-            <a class="btn btn-outline-secondary btn-sm" asp-action="Index" asp-controller="Home">Back</a>
-            <button id="save" class="btn btn-outline-primary btn-sm">Next</button>
+            <a asp-action="Index" 
+               asp-controller="Home"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+
+            <button id="save" class="btn btn-primary btn-sm">Next</button>
         </div>
     </form>
 </div>

@@ -5,43 +5,48 @@
     Layout = "_Layout";
 }
 
-<h3>Settings</h3>
-<hr />
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Security</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
-    </li>
-</ul>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Settings</h3>
+    <hr />
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Security</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+        </li>
+    </ul>
 
-<div class="tab-content">
-    <div class="tab-pane active mt-3 mb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <a class="btn btn-outline-info btn-sm" id="changePassword" asp-route-id="@Model.Id" asp-action="ChangePassword">
-           Change password
-        </a>
+    <div class="tab-content">
+        <div class="tab-pane active mt-3 mb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <a class="btn btn-warning btn-sm" id="changePassword"
+               asp-route-id="@Model.Id"
+               asp-action="ChangePassword">
+                Change password
+            </a>
+        </div>
+        <div class="tab-pane mt-3 mb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <a class="btn btn-info btn-sm" id="averageScore" onclick="AverageScore('@Model.Id')">
+                Average score
+            </a>
+        </div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
     </div>
-    <div class="tab-pane mt-3 mb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <a class="btn btn-outline-info btn-sm" id="averageScore" onclick="AverageScore('@Model.Id')">
-           Average score
-        </a>
-    </div>
-    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
-    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
 </div>
+
 
 <div id="popupDialog" title="Average score"></div>
 
 <!--get the average score-->
 @section Scripts{ 
-    <script type="text/javascript">
+    <script>
         function AverageScore(studentId) {
             $.get("/Student/GetAverageScore/" + studentId + "",
                 function (averageScore) {
@@ -62,66 +67,4 @@
         });
     </script>
 }
-
-@*<script>
-        $(function () {
-            $("#changePassword").click(function () {
-                $("#changePasswordDialog").dialog({
-                    resizeble: false,
-                    modal: true,
-                    height: 270,
-                    width: 310,
-                    buttons: {
-                        "Назад": function () {
-                            $(this).dialog("close");
-                        },
-                        "Смени": function () {
-                            var url = "/Student/ChangePassword/" + $(".classId").attr("id");
-                            var model = $("#passwordForm").serialize();
-                            $.ajax({
-                                url: url,
-                                type: "POST",
-                                data: model,
-                                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                                success: function () {
-                                    $("#success").dialog({
-                                        resizable: false,
-                                        height: 270,
-                                        width: 320,
-                                        modal: true,
-                                        buttons: {
-                                            "Затвори": function () {
-                                                $(this).dialog("close");
-                                            }
-                                        }
-                                    });
-                                    $("#success").html("Паролата беше сменена.");
-                                },
-                                error: function (request, err, message) {
-                                    $("#error").dialog({
-                                        resizable: false,
-                                        height: 270,
-                                        width: 320,
-                                        modal: true,
-                                        buttons: {
-                                            "Затвори": function () {
-                                                $(this).dialog("close");
-                                            }
-                                        }
-                                    })
-                                    $("#errorMessage").html(request.message, message, err)
-                                }
-                            })
-                        }
-                    }
-                })
-            })
-        })
-    </script>*@
-
-@*<div style="display: none" id="success"></div>
-    <div style="display: none" id="error">
-        <div id="errorMessage">
-        </div>
-    </div>*@
 

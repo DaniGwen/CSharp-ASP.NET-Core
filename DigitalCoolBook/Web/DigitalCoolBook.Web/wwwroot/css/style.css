@@ -81,6 +81,10 @@ input[type="radio"] {
     margin-right: 5px;
 }
 
+fa-lg {
+    font-size: 1.9rem;
+}
+
 /*Scrollbar*/
 ::-webkit-scrollbar {
     width: 10px;

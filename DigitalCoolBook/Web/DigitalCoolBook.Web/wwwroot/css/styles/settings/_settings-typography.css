@@ -3,17 +3,7 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css';
 
 html, * {
-    font-family: 'Manrope', sans-serif;
-}
-
-a, button {
-    font-style: normal;
-    font-size: 14px;
-    line-height: 16px;
-}
-
-a {
-    font-weight: 600;
+   /* font-family: 'Manrope', sans-serif;*/
 }
 
 button {
@@ -33,9 +23,9 @@ h3 {
     font-size: 24px;
     line-height: 30px;
     display: inline-block;
-    background-color: whitesmoke;
+    background-color: darkslateblue;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 h4 {

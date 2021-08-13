@@ -211,7 +211,7 @@
                         return this.Redirect("/Home/Index");
                     }
 
-                    this.ModelState.AddModelError(string.Empty, passwordResult.Errors.FirstOrDefault().ToString());
+                    this.ModelState.AddModelError(string.Empty, passwordResult?.Errors?.FirstOrDefault().ToString());
                 }
 
                 return this.View(model);
@@ -229,7 +229,7 @@
         public async Task<IActionResult> Panel()
         {
             var userId = _userManager.GetUserId(User);
-            var userDb = await this._userService.GetUserAsync(userId);
+            var userDb = await _userService.GetUserAsync(userId);
 
             var model = new StudentChangePasswordViewModel
             {
@@ -243,12 +243,12 @@
         [Authorize(Roles = "Student, Teacher")]
         public async Task<IActionResult> DetailsAsync(string id)
         {
-            var student = await this._userService.GetStudentAsync(id);
+            var student = await _userService.GetStudentAsync(id);
 
-            var studentDetailsViewModel = this._mapper.Map<StudentDetailsViewModel>(student);
+            var studentDetailsViewModel = _mapper.Map<StudentDetailsViewModel>(student);
 
-            studentDetailsViewModel.AverageScore = CalcAverageScore(id);
-            studentDetailsViewModel.TestsTaken.AddRange(this._testService
+            studentDetailsViewModel.AverageScore = StudentAverageScore(id);
+            studentDetailsViewModel.TestsTaken.AddRange(_testService
                  .GetExpiredTests()
                  .Where(t => t.StudentId == id)
                  .Select(x => x.TestName)
@@ -260,14 +260,14 @@
         [Authorize(Roles = "Student")]
         public IActionResult GetAverageScore(string id)
         {
-            double averageScore = CalcAverageScore(id);
+            double averageScore = StudentAverageScore(id);
 
             return this.Json(averageScore);
         }
 
-        private double CalcAverageScore(string studentId)
+        public double StudentAverageScore(string studentId)
         {
-            var studentScores = this._scoreService.GetScoreStudents()
+            var studentScores = _scoreService.GetScoreStudents()
                 .Where(s => s.StudentId == studentId)
                 .ToList();
 

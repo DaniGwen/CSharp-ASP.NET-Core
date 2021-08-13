@@ -87,7 +87,6 @@
                 .Where(x => x.TestRoomId == testRoom.Id)
                 .Select(x => new StudentTestSummaryViewModel
                 {
-                    //StudentName = x.StudentName,
                     Score = x.Score,
                 })
                 .ToListAsync();

@@ -19,7 +19,5 @@ namespace DigitalCoolBook.Models
         public ICollection<GradeTeacher> GradeTeachers { get; set; }
 
         public ICollection<Student> Students { get; set; }
-
-        public SubjectGrade SubjectGrade { get; set; }
     }
 }

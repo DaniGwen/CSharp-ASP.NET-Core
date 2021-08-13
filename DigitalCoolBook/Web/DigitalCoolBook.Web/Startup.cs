@@ -53,12 +53,12 @@ namespace DigitalCoolBook.App
                 conf.DurationInSeconds = 10;
             });
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IGradeService, GradeService>();
-            services.AddScoped<ISubjectService, SubjectService>();
-            services.AddScoped<ITestService, TestService>();
-            services.AddScoped<IQuestionService, QuestionService>();
-            services.AddScoped<IScoreService, ScoreService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IGradeService, GradeService>();
+            services.AddTransient<ISubjectService, SubjectService>();
+            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<IQuestionService, QuestionService>();
+            services.AddTransient<IScoreService, ScoreService>();
             services.AddTransient<ILiveFeedService,LiveFeedService>();
 
             var config = new MapperConfiguration(cfg =>

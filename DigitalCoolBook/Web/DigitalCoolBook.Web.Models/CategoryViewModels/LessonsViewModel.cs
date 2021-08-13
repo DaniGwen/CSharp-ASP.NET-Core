@@ -1,4 +1,4 @@
-﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
+﻿namespace DigitalCoolBook.Web.Models.CategoryViewModels
 {
     public class LessonsViewModel
     {
@@ -13,6 +13,8 @@
         public string LessonId { get; set; }
 
         public int Score { get; set; }
+
+        public int Level { get; set; }
 
         public bool IsUnlocked { get; set; }
     }

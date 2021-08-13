@@ -9,71 +9,77 @@ namespace DigitalCoolBook.Services
 {
     public class ScoreService : IScoreService
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public ScoreService(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public async Task AddScoreAsync(Score score)
         {
-            await this.context.Scores.AddAsync(score);
+            await _context.Scores.AddAsync(score);
             await this.SaveChangesAsync();
         }
 
         public async Task AddScoreStudentAsync(ScoreStudent scoreStudent)
         {
-            await this.context.ScoreStudents.AddAsync(scoreStudent);
+            await _context.ScoreStudents.AddAsync(scoreStudent);
             await this.SaveChangesAsync();
         }
 
         public async Task<Score> GetScoreAsync(string scoreId)
         {
-            return await this.context.Scores.FindAsync(scoreId);
+            return await _context.Scores.FindAsync(scoreId);
         }
 
         public IQueryable<Score> GetScores()
         {
-            return this.context.Scores;
+            return _context.Scores;
         }
 
         public IQueryable<ScoreStudent> GetScoreStudents()
         {
-            return this.context.ScoreStudents
+            return _context.ScoreStudents
                 .Include(x => x.Score)
                 .ThenInclude(x => x.Lesson);
         }
 
         public async Task SaveChangesAsync()
         {
-            await this.context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<string> CreateScoreAsync(int points, string lessonId)
+        public async void CreateScore(int points, string lessonId, string studentId)
         {
+            var previousScore = _context.ScoreStudents
+                .Include(x => x.Score)
+                .FirstOrDefault(x => x.StudentId == studentId);
+
             var score = new Score
             {
                 ScorePoints = points,
                 LessonId = lessonId,
             };
 
-            await this.context.Scores.AddAsync(score);
-            await this.context.SaveChangesAsync();
-
-            return score.ScoreId;
-        }
-
-        public async Task CreateScoreStudentAsync(string scoreId, string studentId)
-        {
             var scoreStudent = new ScoreStudent
             {
-                ScoreId = scoreId,
+                ScoreId = score.ScoreId,
                 StudentId = studentId,
             };
 
-            await this.context.ScoreStudents.AddAsync(scoreStudent);
-            await this.context.SaveChangesAsync();
+            if (previousScore != null)
+            {
+                if (previousScore.Score.ScorePoints < points)
+                {
+                    _context.ScoreStudents.Remove(previousScore);
+                    _context.Scores.Remove(previousScore.Score);
+                }
+            }
+
+            await _context.ScoreStudents.AddAsync(scoreStudent);
+            await _context.Scores.AddAsync(score);
+            await _context.SaveChangesAsync();
         }
     }
 }

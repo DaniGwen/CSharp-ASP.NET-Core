@@ -1,19 +1,18 @@
-﻿@model DigitalCoolBook.App.Models.CategoryViewModels.LessonsViewModel
+﻿@model DigitalCoolBook.Web.Models.CategoryViewModels.LessonsViewModel
 
 @{
     ViewData["Title"] = "LessonDetails";
     Layout = "_Layout";
 }
 
-<div class="offset-md-2 col-md-7 offset-sm-0 col-sm-12 mt-3">
+<div class="offset-md-2 col-md-8 offset-sm-0 col-sm-12 mt-3">
     <h3>@Model.Title</h3>
     <hr />
     <div class="mb-3 bg-dark lesson-wrapper">
         <p class="lesson-content text-white">@Model.Content</p>
     </div>
-    <a class="btn btn-secondary btn-sm"
-       asp-controller="Subject"
+    <a asp-controller="Subject"
        asp-action="CategoryDetails"
        asp-route-categoryId="@Model.CategoryId"
-       asp-route-subjectId="@Model.CategoryId">Back</a>
+       asp-route-subjectId="@Model.CategoryId"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
 </div>

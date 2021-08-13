@@ -21,7 +21,9 @@
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="buttons-wrapper">
-            <a class="btn btn-outline-secondary btn-sm" asp-controller="Admin" asp-action="AdminPanel">Back</a>
+            <a asp-controller="Admin" 
+               asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+
             <a class="btn btn-outline-success btn-sm" id="submit">Create</a>
         </div>
     </form>

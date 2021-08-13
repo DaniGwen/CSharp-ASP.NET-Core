@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalCoolBook.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210808130410_addedLiveFeedMessages")]
-    partial class addedLiveFeedMessages
+    [Migration("20210813171721_studentUnlockRemoved")]
+    partial class studentUnlockRemoved
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,12 +249,13 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("LiveFeedMessages");
                 });
@@ -331,30 +332,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
-                });
-
-            modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("GradeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubjectId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradeId")
-                        .IsUnique()
-                        .HasFilter("[GradeId] IS NOT NULL");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("SubjectGrade");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>
@@ -861,15 +838,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.LiveFeedMessage", b =>
-                {
-                    b.HasOne("DigitalCoolBook.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId");
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("DigitalCoolBook.Models.Question", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Test", "Test")
@@ -910,21 +878,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("Score");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
-                {
-                    b.HasOne("DigitalCoolBook.Models.Grade", "Grade")
-                        .WithOne("SubjectGrade")
-                        .HasForeignKey("DigitalCoolBook.Models.SubjectGrade", "GradeId");
-
-                    b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
-                        .WithMany("SubjectGrades")
-                        .HasForeignKey("SubjectId");
-
-                    b.Navigation("Grade");
-
-                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>
@@ -1059,8 +1012,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("GradeTeachers");
 
                     b.Navigation("Students");
-
-                    b.Navigation("SubjectGrade");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.GradeTeacher", b =>
@@ -1088,8 +1039,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Scores");
-
-                    b.Navigation("SubjectGrades");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>

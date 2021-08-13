@@ -54,14 +54,13 @@ a,
 /* line 35, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
 a,
 button {
-    color: #1F1F1F;
-    outline: medium none;
+    color: darkslateblue;
 }
 
 /* line 40, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
 h1, h2, h3, h4, h5 {
     font-family: 'Montserrat', sans-serif;
-    color: gray;
+    color: whitesmoke;
 }
 
     /* line 44, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
@@ -92,8 +91,6 @@ p {
     line-height: 28px;
     margin-bottom: 0;
     font-family: "Roboto", sans-serif;
-    border-left: 5px solid grey;
-    border-radius: 5px;
     padding: 5px !important;
 }
 

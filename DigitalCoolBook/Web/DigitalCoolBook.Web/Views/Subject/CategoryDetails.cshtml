@@ -14,20 +14,21 @@
             <div class="row d-flex justify-content-center align-items-center">
                 @if (this.User.IsInRole("Student"))
                 {
-                    <div class="col-sm-7 d-flex align-content-center">
-                        @if (lesson.IsUnlocked)
-                        {
-                            <a class="w-75 btn btn-success mb-2"
-                               asp-controller="Subject"
-                               asp-action="LessonDetails"
-                               asp-route-lessonId="@lesson.LessonId">@lesson.Title</a>
-                        }
-                        else
-                        {
-                            <a class="w-75 btn btn-secondary mb-2 me-2 disabled" aria-disabled="true">@lesson.Title</a>
-                            <i class="fa fa-lg fa-lock text-danger mt-3"></i>
-                        }
-                    </div>
+                <div class="col-sm-7 d-flex align-content-center">
+                    @if (lesson.IsUnlocked)
+                    {
+                        <a class="w-75 btn btn-success mb-2"
+                           asp-controller="Subject"
+                           asp-action="LessonDetails"
+                           asp-route-lessonId="@lesson.LessonId">@lesson.Title</a>
+                        <i class="fas fa-lg text-success ms-1 fa-unlock"></i>
+                    }
+                    else
+                    {
+                        <a class="w-75 btn btn-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
+                        <i class="fas fa-lg fa-lock text-danger ms-1"></i>
+                    }
+                </div>
                     <div class="col-sm-4">
                         <h5 class="d-inline-block">Score:</h5>
                         @if (lesson.Score >= 70)
@@ -63,9 +64,8 @@
             </div>
         }
     </div>
-    <a class="btn btn-secondary btn-sm"
-       asp-controller="Subject"
-       asp-action="Subjects">Back</a>
+    <a asp-controller="Subject"
+       asp-action="Subjects"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
 
     @if (this.User.IsInRole("Admin"))
     {

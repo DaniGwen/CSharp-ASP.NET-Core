@@ -30,12 +30,12 @@
     transition: 0.2s;
     border: none;
     font-size: 26px;
-    color: indigo;
+    color: darkslateblue;
 }
 
     .live-feed-toggle:hover {
         transform: scale(1.2);
-        color: #b30000;
+        color: slateblue;
     }
 
 .live-feed-title {
@@ -46,7 +46,7 @@
     transform: rotate( -90deg );
     padding: 5px;
     border-radius: 3px;
-    color: indigo;
+    color: darkslateblue;
 }
 
 .live-feed-hide {

@@ -132,16 +132,16 @@ namespace DigitalCoolBook.Services
 
         public async Task TestRoomStudentFinished(string studentId, int score)
         {
-            var testRoomStudent = await _dbContext.TestRoomStudents
-                .FirstOrDefaultAsync(x => x.StudentId == studentId);
+            var testRoomStudent =  _dbContext.TestRoomStudents
+                .FirstOrDefault(x => x.StudentId == studentId);
 
             if (testRoomStudent != null)
             {
                 testRoomStudent.Finished = true;
                 testRoomStudent.Score = score;
-
-                await _dbContext.SaveChangesAsync();
             }
+
+            await _dbContext.SaveChangesAsync();
         }
 
         public string IsStudentInTest(string studentId)
@@ -255,6 +255,33 @@ namespace DigitalCoolBook.Services
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsLessonUnlocked(string categoryId, int lessonLevel, string studentId)
+        {
+            if (lessonLevel == 1) { return true; }
+
+            var lessonsDb = await _dbContext.Lessons
+                .Where(x => x.CategoryId == categoryId)
+                .ToListAsync();
+
+            var scoreStudents = _dbContext.ScoreStudents
+                .Where(x => x.StudentId == studentId)
+                .AsQueryable();
+
+            foreach (var lessonDb in lessonsDb)
+            {
+                if (lessonLevel > lessonDb.Level)
+                {
+                    var score = scoreStudents
+                                       .FirstOrDefault(x => x.Score.LessonId == lessonDb.LessonId)?.Score;
+
+                    if (score?.ScorePoints > 70) { return true; }
+                }
+               
+            }
+
+            return false;
         }
     }
 }

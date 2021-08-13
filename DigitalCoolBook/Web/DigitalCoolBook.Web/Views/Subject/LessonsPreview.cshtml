@@ -21,8 +21,10 @@
         </div>
     }
     <div class="buttons-wrapper">
-        <a class="btn btn-outline-secondary btn-sm" asp-controller="Admin" asp-action="AdminPanel">Back</a>
-        <a class="btn btn-outline-info btn-sm" asp-action="AddLesson">New Topic</a>
+        <a asp-controller="Admin" 
+           asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+
+        <a class="btn btn-success btn-sm" asp-action="AddLesson">New Topic</a>
     </div>
 </div>
 

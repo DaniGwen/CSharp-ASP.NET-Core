@@ -24,19 +24,22 @@
         private readonly IScoreService _scoreService;
         private readonly INotyfService _toasterService;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ITestService _testService;
 
         public SubjectController(
             ISubjectService subjectService,
             IMapper mapper,
             IScoreService scoreService,
             INotyfService toasterService,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            ITestService testService)
         {
             _subjectService = subjectService;
             _mapper = mapper;
             _scoreService = scoreService;
             _toasterService = toasterService;
             _userManager = userManager;
+            _testService = testService;
         }
 
         [HttpGet]
@@ -70,7 +73,7 @@
 
         [HttpGet]
         [Authorize(Roles = "Admin, Teacher, Student")]
-        public IActionResult CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
+        public async Task<IActionResult> CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
         {
             var lessons = _subjectService.GetLessons()
                 .Where(l => l.CategoryId == categoryDetailsModel.CategoryId)
@@ -93,6 +96,8 @@
 
                     // Set Score if there is any
                     lesson.Score = score?.Score.ScorePoints ?? 0;
+                    lesson.IsUnlocked = await _testService
+                        .IsLessonUnlocked(lesson.CategoryId, lesson.Level, studentId);
                 }
             }
 

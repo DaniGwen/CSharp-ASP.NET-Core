@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalCoolBook.Data.Migrations
 {
-    public partial class addedLiveFeedMessages : Migration
+    public partial class studentUnlockRemoved : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,21 @@ namespace DigitalCoolBook.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Grades", x => x.GradeId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LiveFeedMessages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LiveFeedMessages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,32 +108,6 @@ namespace DigitalCoolBook.Data.Migrations
                     table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Categories_Subjects_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subjects",
-                        principalColumn: "SubjectId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SubjectGrade",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GradeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubjectGrade", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SubjectGrade_Grades_GradeId",
-                        column: x => x.GradeId,
-                        principalTable: "Grades",
-                        principalColumn: "GradeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SubjectGrade_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "SubjectId",
@@ -455,26 +444,6 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LiveFeedMessages",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LiveFeedMessages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LiveFeedMessages_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ScoreStudents",
                 columns: table => new
                 {
@@ -708,11 +677,6 @@ namespace DigitalCoolBook.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LiveFeedMessages_TeacherId",
-                table: "LiveFeedMessages",
-                column: "TeacherId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Questions_TestId",
                 table: "Questions",
                 column: "TestId");
@@ -731,18 +695,6 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "IX_ScoreStudents_StudentId",
                 table: "ScoreStudents",
                 column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubjectGrade_GradeId",
-                table: "SubjectGrade",
-                column: "GradeId",
-                unique: true,
-                filter: "[GradeId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubjectGrade_SubjectId",
-                table: "SubjectGrade",
-                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TestRoomStudents_TestRoomId",
@@ -833,9 +785,6 @@ namespace DigitalCoolBook.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ScoreStudents");
-
-            migrationBuilder.DropTable(
-                name: "SubjectGrade");
 
             migrationBuilder.DropTable(
                 name: "TestRoomStudents");

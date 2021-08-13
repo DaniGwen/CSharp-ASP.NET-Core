@@ -332,30 +332,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("GradeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SubjectId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradeId")
-                        .IsUnique()
-                        .HasFilter("[GradeId] IS NOT NULL");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("SubjectGrade");
-                });
-
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>
                 {
                     b.Property<string>("TestId")
@@ -902,21 +878,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("DigitalCoolBook.Models.SubjectGrade", b =>
-                {
-                    b.HasOne("DigitalCoolBook.Models.Grade", "Grade")
-                        .WithOne("SubjectGrade")
-                        .HasForeignKey("DigitalCoolBook.Models.SubjectGrade", "GradeId");
-
-                    b.HasOne("DigitalCoolBook.Models.Subject", "Subject")
-                        .WithMany("SubjectGrades")
-                        .HasForeignKey("SubjectId");
-
-                    b.Navigation("Grade");
-
-                    b.Navigation("Subject");
-                });
-
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>
                 {
                     b.HasOne("DigitalCoolBook.Models.Lesson", "Lesson")
@@ -1049,8 +1010,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("GradeTeachers");
 
                     b.Navigation("Students");
-
-                    b.Navigation("SubjectGrade");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.GradeTeacher", b =>
@@ -1078,8 +1037,6 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Scores");
-
-                    b.Navigation("SubjectGrades");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Test", b =>

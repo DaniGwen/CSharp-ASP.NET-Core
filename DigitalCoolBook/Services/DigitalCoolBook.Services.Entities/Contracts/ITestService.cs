@@ -51,5 +51,7 @@
         Task AddArchivedTest(Test archivedTestViewModel);
 
         Task SaveChangesAsync();
+
+        Task<bool> IsLessonUnlocked(string categoryId,int lessonLevel, string studentId);
     }
 }

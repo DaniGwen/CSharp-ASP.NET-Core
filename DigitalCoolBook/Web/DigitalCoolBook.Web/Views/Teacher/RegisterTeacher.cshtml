@@ -66,8 +66,12 @@
                     <span asp-validation-for="MobilePhone" class="text-danger"></span>
                 </div>
                 <div class="buttons-wrapper">
-                    <a class="btn btn-outline-secondary btn-sm" asp-controller="Home" asp-action="Index">Back</a>
-                    <input class="btn btn-outline-success btn-sm" type="submit" value="Create" />
+                    <a asp-controller="Home" 
+                       asp-action="Index">
+                        <i class="fas fa-lg fa-arrow-circle-left"></i>
+                    </a>
+
+                    <input class="btn btn-success btn-sm" type="submit" value="Create" />
                 </div>
             </form>
         </div>

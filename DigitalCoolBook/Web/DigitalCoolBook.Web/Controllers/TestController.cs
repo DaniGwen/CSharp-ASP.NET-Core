@@ -1,5 +1,4 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using DigitalCoolBook.App.Models.StudentViewModels;
+﻿using DigitalCoolBook.Web.Models.CategoryViewModels;
 
 namespace DigitalCoolBook.App.Controllers
 {
@@ -19,6 +18,7 @@ namespace DigitalCoolBook.App.Controllers
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using AspNetCoreHero.ToastNotification.Abstractions;
 
     public class TestController : Controller
     {
@@ -187,6 +187,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             var teacherId = _userManager.GetUserId(this.User);
             var activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
+
             var tests = _testService.GetTests()
                 .Where(x => x.TeacherId == teacherId)
                 .ToList();
@@ -257,7 +258,6 @@ namespace DigitalCoolBook.App.Controllers
                 var testStudents = new List<TestStudent>();
                 var studentsDb = _userService.GetStudents().ToList();
 
-                // Adding "TestStudent" relation
                 foreach (var studentName in model.Students)
                 {
                     var student = studentsDb.FirstOrDefault(s => s.Name == studentName);
@@ -342,10 +342,6 @@ namespace DigitalCoolBook.App.Controllers
         {
             var testId = this.TempData["TestId"].ToString();
 
-            var testDb = _testService
-                .GetTests()
-                .FirstOrDefault(x => x.TestId == testId);
-
             int score = 0;
 
             if (this.User.IsInRole("Student"))
@@ -355,9 +351,14 @@ namespace DigitalCoolBook.App.Controllers
 
             this.ViewData["Result"] = score;
 
+            var testDb = _testService
+                .GetTests()
+                .FirstOrDefault(x => x.TestId == testId);
+
             if (_testService.IsAllStudentsFinished())
             {
                 // Test room is empty so we remove it along with the students in it
+                await _testService.RemoveTestAsync(testId);
                 await _testService.RemoveTestRoomAsync(testId);
                 await _testService.AddArchivedTest(testDb);
             }
@@ -495,8 +496,6 @@ namespace DigitalCoolBook.App.Controllers
                 .GetTests()
                 .First(x => x.TestId == testId);
 
-            testDb.IsExpired = true;
-
             await _testService.RemoveTestAsync(testDb.TestId);
             await _testService.RemoveTestRoomAsync(testDb.TestId);
 
@@ -533,12 +532,11 @@ namespace DigitalCoolBook.App.Controllers
                 var student = await studentsQuery
                     .FirstOrDefaultAsync(x => x.Id == expiredTest.StudentId);
 
-                var studentModel = new StudentTestSummaryViewModel
+                participatedStudents.Add(new StudentTestSummaryViewModel
                 {
                     Score = expiredTest.Score,
                     StudentName = student.Name,
-                };
-                participatedStudents.Add(studentModel);
+                });
             }
 
             var viewModel = new TestSummaryViewModel
@@ -630,36 +628,30 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var test = await _testService.GetTestAsync(id);
 
-                // Map test to view model
-                var model = _mapper.Map<TestDetailsViewModel>(test);
+                var testModel = _mapper.Map<TestDetailsViewModel>(test);
 
-                // Getting the questions for this test
                 var questions = _questionService.GetQuestions()
-                    .Where(question => question.TestId == model.TestId)
+                    .Where(question => question.TestId == testModel.TestId)
                     .ToList();
 
-                // Getting the answers from DB
                 var answers = _questionService.GetAnswers().ToList();
 
-                // Map the questions to questions view model
                 var questionsModel = _mapper.Map<List<QuestionDetailsViewModel>>(questions);
 
-                // Iterate through questionsModel and add answers
                 foreach (var question in questionsModel)
                 {
-                    // Filter the answers for that question
+                    // Get the answers for question
                     var answersForQuestion = answers.Where(answer => answer.QuestionId == question.QuestionId)
                         .ToList();
 
-                    // Map answers to answers view model
                     var answersModel = _mapper.Map<List<AnswerDetailsViewModel>>(answersForQuestion);
 
                     question.Answers = answersModel;
                 }
 
-                model.Questions = questionsModel;
+                testModel.Questions = questionsModel;
 
-                return this.View(model);
+                return this.View(testModel);
             }
             catch (Exception)
             {
@@ -673,12 +665,10 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                // questions for test from DB
                 var questions = this._questionService.GetQuestions()
                     .Where(q => q.TestId == testId)
                     .ToList();
 
-                // answers from DB
                 var answers = this._questionService.GetAnswers()
                     .ToList();
 
@@ -688,18 +678,16 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     foreach (var questionModel in model)
                     {
-                        // Set question title
                         if (question.QuestionId == questionModel.QuestionId)
                         {
                             question.Title = questionModel.Question;
 
-                            // Find the answers belong to this question
                             var answersToRemove = answers
                                 .Where(a => a.QuestionId == question.QuestionId)
                                 .ToList();
 
                             // Remove old answers
-                            await this._questionService.RemoveAnswers(answersToRemove);
+                            await _questionService.RemoveAnswers(answersToRemove);
 
                             // Create new answers with updated titles
                             foreach (var answerTitle in questionModel.Answers)
@@ -752,34 +740,44 @@ namespace DigitalCoolBook.App.Controllers
                 if (modelAnswerId == correctAnswerId) { correctAnswers += 1; }
             }
 
-            // Get Test from DB
             var test = await _testService
                 .GetTestAsync(testId);
 
             var studentId = _userManager.GetUserId(this.User);
 
             //Calculate score
-            var score = (int)((100 * correctAnswers) / questionsCount);
+            var currentScore = (int)((100 * correctAnswers) / questionsCount);
 
-            // Create expired test for history
+            // Create expired test history
             var newExpiredTest = _mapper.Map<ExpiredTest>(test);
-            newExpiredTest.Date = DateTime.UtcNow;
+
+            var expiredTestDb = _testService.GetExpiredTests()
+                .FirstOrDefault(x => x.TestId == testId && x.StudentId == studentId);
+
+            newExpiredTest.Date = DateTime.Now;
             newExpiredTest.ExpiredTestId = Guid.NewGuid().ToString();
             newExpiredTest.StudentId = studentId;
-            newExpiredTest.Score = score;
+            newExpiredTest.Score = currentScore;
 
-            await _testService.AddExpiredTestAsync(newExpiredTest);
+            if (expiredTestDb?.Score < currentScore)
+            {
+                await _testService.RemoveExpiredTest(expiredTestDb.ExpiredTestId, studentId);
+                await _testService.AddExpiredTestAsync(newExpiredTest);
+            }
+            else if (expiredTestDb == null)
+            {
+                await _testService.AddExpiredTestAsync(newExpiredTest);
+            }
 
             // Create Score
             if (this.User.IsInRole("Student"))
             {
-                var scoreId = await _scoreService.CreateScoreAsync(score, test.LessonId);
-                await _scoreService.CreateScoreStudentAsync(scoreId, studentId);
+                _scoreService.CreateScore(currentScore, test.LessonId, studentId);
             }
 
-            await _testService.TestRoomStudentFinished(studentId, score);
+            await _testService.TestRoomStudentFinished(studentId, currentScore);
 
-            return score;
+            return currentScore;
         }
     }
 }

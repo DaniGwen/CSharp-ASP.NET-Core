@@ -8,45 +8,24 @@ namespace DigitalCoolBook.App.Data
     public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Attendance> Attendances { get; set; }
-
         public DbSet<GradeTeacher> GradeTeachers { get; set; }
-
         public DbSet<Grade> Grades { get; set; }
-
         public DbSet<ScoreStudent> ScoreStudents { get; set; }
-
         public DbSet<Student> Students { get; set; }
-
         public DbSet<Subject> Subjects { get; set; }
-
-        //public DbSet<SubjectGrade> SubjectGrades { get; set; }
-
         public DbSet<Teacher> Teachers { get; set; }
-
         public DbSet<Category> Categories { get; set; }
-
         public DbSet<Lesson> Lessons { get; set; }
-
         public DbSet<Test> Tests { get; set; }
-
         public DbSet<Question> Questions { get; set; }
-
         public DbSet<Answer> Answers { get; set; }
-
         public DbSet<ExpiredTest> ExpiredTests { get; set; }
-
         public DbSet<CorrectAnswer> CorrectAnswers { get; set; }
-
         public DbSet<TestStudent> TestStudents { get; set; }
-
         public DbSet<Score> Scores { get; set; }
-
         public DbSet<TestRoom> TestRooms { get; set; }
-
         public DbSet<TestRoomStudent> TestRoomStudents { get; set; }
-
         public DbSet<ArchivedTest> ArchivedTests { get; set; }
-
         public DbSet<LiveFeedMessage> LiveFeedMessages { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
