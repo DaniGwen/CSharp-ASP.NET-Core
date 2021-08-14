@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DigitalCoolBook.Models.BlazorModels;
+using DigitalCoolBook.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using TodoApp.Data.Models;
-using TodoApp.Services.Contracts;
 
-namespace TodoApp.Controllers
+namespace DigitalCoolBook.App.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -18,6 +18,7 @@
 @import "styles/components/teacher/_component-editTeacher.css";
 @import "styles/components/teacher/_component-editTeachers.css";
 @import "styles/components/test/_component-startTest.css";
+@import "styles/components/_component-blazorTodoApp.css";
 
 * {
     box-sizing: border-box;
@@ -81,8 +82,15 @@ input[type="radio"] {
     margin-right: 5px;
 }
 
-fa-lg {
-    font-size: 1.9rem;
+.fa-lg {
+    font-size: 1.7rem !important;
+}
+
+.page-wrapper {
+    max-height: 625px;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    margin: 0 auto;
 }
 
 /*Scrollbar*/

@@ -1,4 +1,5 @@
 ﻿using DigitalCoolBook.Models;
+using DigitalCoolBook.Models.BlazorModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ namespace DigitalCoolBook.App.Data
         public DbSet<TestRoomStudent> TestRoomStudents { get; set; }
         public DbSet<ArchivedTest> ArchivedTests { get; set; }
         public DbSet<LiveFeedMessage> LiveFeedMessages { get; set; }
+        public DbSet<Todo> Todos { get; set; }
+        public DbSet<TodoTask> TodoTasks { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

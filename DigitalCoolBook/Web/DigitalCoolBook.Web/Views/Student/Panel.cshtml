@@ -32,11 +32,12 @@
             </a>
         </div>
         <div class="tab-pane mt-3 mb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <a class="btn btn-info btn-sm" id="averageScore" onclick="AverageScore('@Model.Id')">
+            <a class="btn btn-info btn-sm" id="averageScore" onclick="averageScore('@Model.Id')">
                 Average score
             </a>
         </div>
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+        </div>
         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
     </div>
 </div>
@@ -47,23 +48,23 @@
 <!--get the average score-->
 @section Scripts{ 
     <script>
-        function AverageScore(studentId) {
+        $(function () {
+            $('#myTab li:last-child a').tab('show');
+        });
+
+        $(function averageScore(studentId) {
             $.get("/Student/GetAverageScore/" + studentId + "",
-                function (averageScore) {
+                function(averageScore) {
                     $('#popupDialog').dialog({
                         modal: true,
                         buttons: {
-                            Ok: function () {
+                            Ok: function() {
                                 $(this).dialog('close');
                             }
                         }
                     });
                     $('#popupDialog').html("<h1 class='text-center'>" + averageScore + "%" + "</h1>");
                 });
-        }
-
-        $(function () {
-            $('#myTab li:last-child a').tab('show');
         });
     </script>
 }

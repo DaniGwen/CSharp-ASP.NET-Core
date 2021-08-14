@@ -5,11 +5,11 @@
     Layout = "_Layout";
 }
 
-<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3 page-wrapper">
     <h3>Create test</h3>
     <form id="form" asp-controller="Test" asp-action="CreateTest" method="post">
         <div class="form-group mb-2">
-            <label class="form-label">Test location</label>
+            <span class="form-label">Test location</span>
             <input type="text" class="form-control" name="place" id="inputPlace" placeholder="location..">
             <span class="text-danger" id="alertPlace"></span>
         </div>
@@ -20,7 +20,7 @@
         <hr />
         <div class="form-group">
             <div class="row mt-2">
-                <label>Number of questions</label>
+                <span>Number of questions</span>
             </div>
             <div class="form-group">
                 <input class="form-control"
@@ -35,13 +35,13 @@
             <div id="questions" name="questions">
             </div>
         </div>
-        <div class="buttons-wrapper">
-            <a asp-action="Index" 
-               asp-controller="Home"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-
-            <button id="save" class="btn btn-primary btn-sm">Next</button>
-        </div>
     </form>
+</div>
+<div class="buttons-wrapper">
+    <a asp-action="Index" 
+       asp-controller="Home"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+
+    <button id="save" class="btn btn-primary btn-sm">Next</button>
 </div>
 
 

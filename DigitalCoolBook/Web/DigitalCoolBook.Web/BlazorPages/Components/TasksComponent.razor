@@ -1,0 +1,36 @@
+﻿@inject ITaskService TaskService
+@inject NavigationManager NavigationManager
+
+<div class="task-wrapper form-group">
+    <h4 class="task__title">@TodoTask.Title</h4>
+    <section class="task__links">
+        <NavLink class="link-small text-warning" href="#" @onclick="() =>  EditTaskTitle(TodoTask.TaskId, TodoTask.Title)">
+            Edit
+        </NavLink>
+        <NavLink class="link-small text-danger" href="#" @onclick="() => DeleteTask(TodoTask.TaskId)">
+            Delete
+        </NavLink>
+    </section>
+</div>
+<hr />
+
+@code {
+    [Parameter]
+    public TodoTask TodoTask { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChanged { get; set; }
+
+    protected async Task DeleteTask(int todoTaskId)
+    {
+        await TaskService.DeleteTask(todoTaskId);
+
+        // Invokes method in parent component in order to refresh content
+        await OnChanged.InvokeAsync("info");
+    }
+
+    protected void EditTaskTitle(int taskId, string taskTitle)
+    {
+        this.NavigationManager.NavigateTo($"edittask/{taskId}/{taskTitle}");
+    }
+}

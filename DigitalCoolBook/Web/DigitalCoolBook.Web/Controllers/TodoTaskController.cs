@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using TodoApp.Data.DTOs;
-using TodoApp.Data.Models;
-using TodoApp.Services.Contracts;
+﻿using System.Collections.Generic;
+using DigitalCoolBook.Models.BlazorModels;
+using DigitalCoolBook.Services.Contracts;
+using DigitalCoolBook.Web.Models.BlazorViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace TodoApp.Controllers
+namespace DigitalCoolBook.App.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -41,8 +41,8 @@ namespace TodoApp.Controllers
             return Ok();
         }
 
-        [Route("{id}")]
         [HttpDelete]
+        [Route("{id}")]
         public IActionResult DeleteTask(int id)
         {
             _taskService.DeleteTask(id);

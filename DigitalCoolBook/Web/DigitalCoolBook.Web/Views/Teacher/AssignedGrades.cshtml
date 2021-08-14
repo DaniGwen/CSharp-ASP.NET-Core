@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3 page-wrapper">
     <h3>My Classes</h3>
     <div class="row mt-3 mb-5">
         @if (!Model.Any())
@@ -17,7 +17,7 @@
             @foreach (var item in Model)
             {
                 <div class="mt-2">
-                    <a class="btn btn-primary"
+                    <a class="btn btn-sm btn-primary"
                        asp-controller="Teacher"
                        asp-action="GradeDetails"
                        asp-route-id="@item.GradeId">@item.Name.ToUpper() <i class="ms-3 fas fa-user-graduate"></i> @item.StudentCount</a>

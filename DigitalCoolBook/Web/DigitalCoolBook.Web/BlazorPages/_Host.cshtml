@@ -1,0 +1,9 @@
+﻿@page "/blazor"
+@using DigitalCoolBook.App
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<component type="typeof(BlazorApp)" render-mode="ServerPrerendered" />

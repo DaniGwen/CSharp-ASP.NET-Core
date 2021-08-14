@@ -87,7 +87,6 @@
         <main>
             <div class="content-wrapper mt-3">
                 @RenderBody()
-
                 <!--Popup Dialog-->
                 <div title="Active test" id="dialog"></div>
             </div>
@@ -108,5 +107,7 @@
         <partial name="_PartialLiveFeed" />
     }
     @await Component.InvokeAsync("Notyf")
+
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>

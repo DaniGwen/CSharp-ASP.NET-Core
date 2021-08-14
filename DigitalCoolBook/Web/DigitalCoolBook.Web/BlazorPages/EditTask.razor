@@ -1,0 +1,36 @@
+﻿@page "/edittask/{TaskId:int}/{Title}"
+
+@inject ITaskService TaskService
+@inject NavigationManager NavigationManager
+
+<div class="page-wrapper offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <h3>Edit ToDo list</h3>
+    <hr />
+    <div class="form-group">
+        <span>Title</span>
+        <input type="text" class="form-control" @bind-value="Title" @bind-value:event="oninput">
+    </div>
+    <hr />
+    <NavLink class="btn btn-sm btn-success" @onclick="Submit">Save <i class="fas fa-check"></i></NavLink>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public int TaskId { get; set; }
+
+    async Task Submit()
+    {
+        var task = new TodoTask
+        {
+            Title = Title,
+            TaskId = TaskId,
+        };
+
+        await TaskService.EditTask(task);
+
+        this.NavigationManager.NavigateTo("/Initial");
+    }
+}

@@ -1,0 +1,82 @@
+﻿@page "/Initial"
+
+@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager NavigationManager
+@inject ITaskService TaskService
+
+<div class="page-wrapper offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <NavLink class="btn btn-success btn-sm me-3" href="/addtask">New Todo List</NavLink>
+    @if (_todoTasks.Count == 0)
+    {
+        <hr />
+        <h4>No Todo lists...</h4>
+    }
+    else
+    {
+        <button class="btn btn-sm btn-secondary" @onclick="ToggleHidden">Show/Hide Todos</button>
+        <hr class="mb-4 mt-4" />
+
+        foreach (var task in _todoTasks)
+        {
+            <section class="task-wrapper">
+
+                <TasksComponent TodoTask="task" OnChanged="OnInitializedAsync"></TasksComponent>
+
+                @if (_hidden)
+                {
+                    <TodosComponent TaskId="task.TaskId"></TodosComponent>
+                }
+                else
+                {
+                    <p class="text-light">Todos hidden</p>
+                }
+
+                <a class="btn btn-sm btn-success mb-2" href="/addtodo/@task.TaskId">New</a>
+                <br />
+            </section>
+            <hr class="task-divider" />
+        }
+    }
+</div>
+
+
+@code{
+    private List<TodoTask> _todoTasks = new List<TodoTask>();
+
+    bool _hidden = true;
+
+    protected override Task OnInitializedAsync()
+    {
+        if (this.HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            string userId = HttpContextAccessor
+                .HttpContext
+                .User
+                .FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            _todoTasks = TaskService.GetAllTasks(userId).ToList();
+        }
+
+        return base.OnInitializedAsync();
+    }
+
+    protected void ToggleHidden()
+    {
+        _hidden = !_hidden;
+    }
+
+    protected void AddTodo(int taskId)
+    {
+        NavigationManager.NavigateTo($"/addtodo/{taskId}");
+    }
+
+    protected void RefreshPage()
+    {
+        // Gets called from TaskComponent to re-render this page
+    }
+
+    private void Navigate()
+    {
+        NavigationManager.NavigateTo("/addtask");
+    }
+}

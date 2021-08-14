@@ -19,13 +19,11 @@ h1 {
 
 h3 {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 24px;
     line-height: 30px;
     display: inline-block;
-    background-color: darkslateblue;
-    padding: 5px;
-    border-radius: 3px;
+    color: darkslateblue !important;
 }
 
 h4 {

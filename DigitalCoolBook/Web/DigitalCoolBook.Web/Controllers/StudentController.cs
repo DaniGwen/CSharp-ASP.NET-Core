@@ -229,11 +229,10 @@
         public async Task<IActionResult> Panel()
         {
             var userId = _userManager.GetUserId(User);
-            var userDb = await _userService.GetUserAsync(userId);
 
             var model = new StudentChangePasswordViewModel
             {
-                Id = userDb.Id,
+                Id = userId,
             };
 
             return this.View(model);
@@ -257,12 +256,10 @@
             return this.View(studentDetailsViewModel);
         }
 
-        [Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Student")]
         public IActionResult GetAverageScore(string id)
         {
-            double averageScore = StudentAverageScore(id);
-
-            return this.Json(averageScore);
+            return this.Json(StudentAverageScore(id));
         }
 
         public double StudentAverageScore(string studentId)

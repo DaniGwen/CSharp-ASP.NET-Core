@@ -96,9 +96,8 @@ p {
 
 /* line 69, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
 label {
-    color: #7e7e7e;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
 }
 

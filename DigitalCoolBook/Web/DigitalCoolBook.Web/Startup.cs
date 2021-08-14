@@ -1,3 +1,5 @@
+using System.Net.Http;
+using DigitalCoolBook.App.Controllers;
 using DigitalCoolBook.App.Mappings;
 
 namespace DigitalCoolBook.App
@@ -59,7 +61,9 @@ namespace DigitalCoolBook.App
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IScoreService, ScoreService>();
-            services.AddTransient<ILiveFeedService,LiveFeedService>();
+            services.AddTransient<ILiveFeedService, LiveFeedService>();
+            services.AddTransient<ITodoService, TodoService>();
+            services.AddTransient<ITaskService, TaskService>();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -81,13 +85,11 @@ namespace DigitalCoolBook.App
                 .AddNewtonsoftJson(options =>
                         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddMvc(mvcOptions =>
-            {
-                mvcOptions.EnableEndpointRouting = false;
-            });
+            services.AddServerSideBlazor();
 
-            services.AddSignalR(options =>
-            {
+            services.AddMvc().WithRazorPagesRoot("/BlazorPages");
+
+            services.AddSignalR(options => {
                 options.EnableDetailedErrors = true; // Remove in production
             }).AddMessagePackProtocol();
         }
@@ -100,8 +102,8 @@ namespace DigitalCoolBook.App
 
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                
-                //context.Database.EnsureDeleted();
+
+               //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDbSeeder(context, serviceProvider, this.Configuration);
@@ -135,15 +137,12 @@ namespace DigitalCoolBook.App
 
             app.UseEndpoints(endpoint =>
             {
+                endpoint.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoint.MapBlazorHub();
+                endpoint.MapFallbackToPage("/_Host");
+
                 endpoint.MapHub<TestHub>("/testhub");
                 endpoint.MapHub<LiveFeedHub>("/liveFeedHub");
-            });
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
