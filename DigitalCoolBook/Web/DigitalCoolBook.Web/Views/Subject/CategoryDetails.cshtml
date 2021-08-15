@@ -6,71 +6,91 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Topics</h3>
-    <hr />
-    <div class="mb-3">
-        @foreach (var lesson in Model.Lessons)
-        {
-            <div class="row d-flex justify-content-center align-items-center">
-                @if (this.User.IsInRole("Student"))
-                {
-                <div class="col-sm-7 d-flex align-content-center">
-                    @if (lesson.IsUnlocked)
+    <div class="page-wrapper">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">
+                    <a class="link-lg" 
+                       asp-action="Subjects">Subjects</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">
+                    <a class="link-lg" 
+                       asp-action="Categories" 
+                       asp-route-subjectId="@Model.SubjectId"
+                       asp-route-categoryId="@Model.CategoryId">Categories</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Lessons</li>
+            </ol>
+        </nav>
+        <h3>Lessons</h3>
+        <hr/>
+        <div class="mb-3">
+            @foreach (var lesson in Model.Lessons)
+            {
+                <div>
+                    @if (this.User.IsInRole("Student"))
                     {
-                        <a class="w-75 btn btn-success mb-2"
-                           asp-controller="Subject"
-                           asp-action="LessonDetails"
-                           asp-route-lessonId="@lesson.LessonId">@lesson.Title</a>
-                        <i class="fas fa-lg text-success ms-1 fa-unlock"></i>
+                        <div class="col-sm-7 d-flex align-content-center">
+                            @if (lesson.IsUnlocked)
+                            {
+                                <a class="w-75 btn btn-success mb-2"
+                                   asp-controller="Subject"
+                                   asp-action="LessonDetails"
+                                   asp-route-lessonId="@lesson.LessonId">@lesson.Title</a>
+                                <i class="fas fa-lg text-success ms-1 fa-unlock"></i>
+                            }
+                            else
+                            {
+                                <a class="w-75 btn btn-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
+                                <i class="fas fa-lg fa-lock text-danger ms-1"></i>
+                            }
+                        </div>
+                        <div class="col-sm-4">
+                            <h5 class="d-inline-block">Score:</h5>
+                            @if (lesson.Score >= 70)
+                            {
+                                <h4 class="text-success ms-2 d-inline-block">@lesson.Score</h4>
+                            }
+                            else
+                            {
+                                <h4 class="ms-2 d-inline-block">@lesson.Score</h4>
+                            }
+                        </div>
                     }
-                    else
+
+                    @if (this.User.IsInRole("Teacher"))
                     {
-                        <a class="w-75 btn btn-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
-                        <i class="fas fa-lg fa-lock text-danger ms-1"></i>
+                        <a class="link-lg d-block text-center"
+                           asp-action="LessonDetails"
+                           asp-controller="Subject"
+                           asp-route-lessonId="@lesson.LessonId"
+                           asp-route-subjectId="@Model.SubjectId">@lesson.Title</a>
                     }
                 </div>
-                    <div class="col-sm-4">
-                        <h5 class="d-inline-block">Score:</h5>
-                        @if (lesson.Score >= 70)
-                        {
-                            <h4 class="text-success ms-2 d-inline-block">@lesson.Score</h4>
-                        }
-                        else
-                        {
-                            <h4 class="ms-2 d-inline-block">@lesson.Score</h4>
-                        }
-                    </div>
-                }
-                @if (this.User.IsInRole("Teacher"))
-                {
-                    <a class="w-75 btn btn-primary"
-                       asp-action="LessonDetails"
-                       asp-controller="Subject"
-                       asp-route-lessonId="@lesson.LessonId"
-                       asp-route-subjectId="@Model.SubjectId">@lesson.Title</a>
-                }
-            </div>
-            <div class="buttons-wrapper">
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <a class="btn btn-warning btn-sm"
-                       asp-controller="Subject"
-                       asp-action="EditLesson"
-                       asp-route-id="@lesson.LessonId">
-                        Edit
-                    </a>
-                    <a class="btn-sm btn btn-danger" id="@lesson.LessonId" href="#">Delete</a>
-                }
-            </div>
+                <div class="buttons-wrapper">
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-warning btn-sm"
+                           asp-controller="Subject"
+                           asp-action="EditLesson"
+                           asp-route-id="@lesson.LessonId">
+                            Edit
+                        </a>
+                        <a class="btn-sm btn btn-danger" id="@lesson.LessonId" href="#">Delete</a>
+                    }
+                </div>
+            }
+        </div>
+
+        @if (this.User.IsInRole("Admin"))
+        {
+            <a class="btn btn-success btn-sm mt-2" asp-action="AddLesson">Create</a>
         }
     </div>
-    <a asp-controller="Subject"
-       asp-action="Subjects"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-
-    @if (this.User.IsInRole("Admin"))
-    {
-        <a class="btn btn-success btn-sm mt-2" asp-action="AddLesson">Create</a>
-    }
+    <div class="buttons-wrapper">
+        <a asp-controller="Subject"
+           asp-action="Subjects"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
 
 @if (this.User.IsInRole("Admin"))

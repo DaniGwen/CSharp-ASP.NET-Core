@@ -53,9 +53,4 @@
     </Content>
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\styles\utilities\" />
-  </ItemGroup>
-
 </Project>

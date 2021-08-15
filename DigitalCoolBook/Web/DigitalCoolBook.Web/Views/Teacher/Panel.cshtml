@@ -5,37 +5,18 @@
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>Settings</h3>
     <hr />
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" id="security-tab" data-toggle="tab" href="#home" role="tab" aria-controls="security" aria-selected="true">Security</a>
+            <a class="nav-link link-lg active"
+               aria-current="page"
+               asp-route-id="@Model.Id"
+               asp-action="ChangePassword">Change password</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+            <a class="nav-link" href="#">Link</a>
         </li>
     </ul>
-
-    <div class="tab-content">
-        <div class="tab-pane active mt-3 mb-2" id="home" role="tabpanel" aria-labelledby="security-tab">
-            <a class="btn btn-warning btn-sm"
-               asp-route-id="@Model.Id"
-               asp-action="ChangePassword">
-                Change password
-            </a>
-        </div>
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
-        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
-    </div>
 </div>
-
-<script>
-    $(function () {
-        $('#myTab li:last-child a').tab('show');
-    })
-</script>

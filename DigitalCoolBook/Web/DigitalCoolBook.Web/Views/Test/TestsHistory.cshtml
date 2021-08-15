@@ -10,8 +10,8 @@
         {
             @foreach (var test in Model)
             {
-                <div>
-                    <a class="btn btn-sm btn-secondary w-75 mb-2"
+                <div class="mb-3">
+                    <a class="nav-link link-lg"
                        asp-controller="Test"
                        asp-action="TestSummary"
                        asp-route-testId="@test.TestId">@test.TestName <time class="ms-2">@test.Date</time></a>
@@ -20,8 +20,8 @@
         }
         else
         {
-            <div class="mt-2 mb-2">
-                <h4>No history</h4>
+            <div class="mt-4 mb-4">
+                <h4>No tests history...</h4>
             </div>
         }
 

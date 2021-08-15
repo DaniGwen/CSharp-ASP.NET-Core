@@ -20,6 +20,8 @@
 @import "styles/components/test/_component-startTest.css";
 @import "styles/components/_component-blazorTodoApp.css";
 
+@import "styles/utilities/_animations.css";
+
 * {
     box-sizing: border-box;
 }
@@ -86,16 +88,32 @@ input[type="radio"] {
     font-size: 1.7rem !important;
 }
 
+.link-lg {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+    .link-lg:hover {
+        transform: scale(1.1) !important;
+    }
+
 .page-wrapper {
-    max-height: 625px;
+    max-height: 615px;
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
     margin: 0 auto;
+    animation-name: slide-down;
+    animation-duration: 0.5s;
+}
+
+.breadcrumb-item .active {
+    font-size: 18px !important;
+    font-weight: 600 !important;
 }
 
 /*Scrollbar*/
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 /* Track */
@@ -106,11 +124,11 @@ input[type="radio"] {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: indigo;
+    background: darkslateblue;
     border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-}
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: darkblue;
+    }

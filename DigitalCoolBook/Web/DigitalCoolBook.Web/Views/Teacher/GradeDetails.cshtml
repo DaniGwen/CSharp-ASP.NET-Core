@@ -6,7 +6,7 @@
 }
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3 page-wrapper">
     <h3>Class @ViewData["paraleloName"]</h3>
-    <hr/>
+    <hr />
     <div class="mb-3">
         @if (!Model.Any())
         {
@@ -17,14 +17,15 @@
             @foreach (var item in Model)
             {
                 <div class="mb-2 justify-content-center d-flex">
-                    <a asp-controller="Student"
+                    <a class="link-lg"
+                       asp-controller="Student"
                        asp-action="Details"
                        asp-route-id="@item.Id">@item.Name</a>
                 </div>
             }
         }
     </div>
-    <a asp-controller="Teacher" 
+    <a asp-controller="Teacher"
        asp-action="AssignedGrades"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
 </div>
 

@@ -6,27 +6,36 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>@Model.Name</h3>
-    <hr />
-    <div class="mb-3">
-        @if (Model.Categories.Count == 0)
-        {
-            <h5>No categories</h5>
-        }
-        else
-        {
-            @foreach (var category in Model.Categories)
+    <div class="page-wrapper">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">
+                    <a class="link-lg" asp-action="Subjects">Subjects</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
+            </ol>
+        </nav>
+        <h3>@Model.Name</h3>
+        <hr/>
+        <div class="mb-3">
+            @if (Model.Categories.Count == 0)
             {
-                <div class="row d-flex justify-content-center">
-                    <a href="@Url.Action("CategoryDetails", "Subject",
-                    new { categoryId = category.Id, categoryTitle = category.Title, subjectId = category.SubjectId })"
-                       type="button" class="w-75 btn btn-primary mt-3">
+                <h5>No categories for this subject...</h5>
+            }
+            else
+            {
+                @foreach (var category in Model.Categories)
+                {
+                    <a class="link-lg text-center mt-3 d-block"
+                       href="@Url.Action("CategoryDetails", "Subject", new {categoryId = category.Id, categoryTitle = category.Title, subjectId = category.SubjectId})">
                         @category.Title
                     </a>
-                </div>
+                }
             }
-        }
+        </div>
     </div>
 
-    <a href="@Url.Action("Subjects", "Subject")"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    <div class="buttons-wrapper">
+        <a href="@Url.Action("Subjects", "Subject")"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>

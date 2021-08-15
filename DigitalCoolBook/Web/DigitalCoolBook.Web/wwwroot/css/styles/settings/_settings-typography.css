@@ -6,6 +6,15 @@ html, * {
    /* font-family: 'Manrope', sans-serif;*/
 }
 
+a {
+    text-decoration: none !important;
+}
+
+    a:hover {
+        color: azure;
+        text-decoration: underline !important;
+    }
+
 button {
     font-weight: 800;
 }

@@ -8,64 +8,44 @@
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <h3>Settings</h3>
     <hr />
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Security</a>
+            <a class="nav-link link-lg active"
+               aria-current="page"
+               asp-route-id="@Model.Id"
+               asp-action="ChangePassword">Change password</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            <a class="nav-link link-lg"
+               href="#"
+               onclick="averageScore('@Model.Id')">Average score</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+            <a class="nav-link" href="#">Link</a>
         </li>
     </ul>
-
-    <div class="tab-content">
-        <div class="tab-pane active mt-3 mb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <a class="btn btn-warning btn-sm" id="changePassword"
-               asp-route-id="@Model.Id"
-               asp-action="ChangePassword">
-                Change password
-            </a>
-        </div>
-        <div class="tab-pane mt-3 mb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <a class="btn btn-info btn-sm" id="averageScore" onclick="averageScore('@Model.Id')">
-                Average score
-            </a>
-        </div>
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-        </div>
-        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
-    </div>
 </div>
 
 
 <div id="popupDialog" title="Average score"></div>
 
 <!--get the average score-->
-@section Scripts{ 
+@section Scripts{
     <script>
-        $(function () {
-            $('#myTab li:last-child a').tab('show');
-        });
-
-        $(function averageScore(studentId) {
+        function averageScore(studentId) {
             $.get("/Student/GetAverageScore/" + studentId + "",
-                function(averageScore) {
+                function (averageScore) {
                     $('#popupDialog').dialog({
                         modal: true,
                         buttons: {
-                            Ok: function() {
+                            Ok: function () {
                                 $(this).dialog('close');
                             }
                         }
                     });
                     $('#popupDialog').html("<h1 class='text-center'>" + averageScore + "%" + "</h1>");
                 });
-        });
+        };
     </script>
 }
 

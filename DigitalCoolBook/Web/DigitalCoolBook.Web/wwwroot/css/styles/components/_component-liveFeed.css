@@ -17,16 +17,18 @@
 }
 
 .live-feed-username {
-    background: black;
-    color: whitesmoke;
-    padding: 3px;
-    border-radius: 3px;
+    background: darkslateblue;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 .live-feed-toggle {
     position: absolute;
-    top: -20px;
-    right: -14%;
+    top: -9px;
+    right: -11%;
     transition: 0.2s;
     border: none;
     font-size: 26px;
@@ -36,6 +38,7 @@
     .live-feed-toggle:hover {
         transform: scale(1.2);
         color: slateblue;
+        cursor: pointer;
     }
 
 .live-feed-title {

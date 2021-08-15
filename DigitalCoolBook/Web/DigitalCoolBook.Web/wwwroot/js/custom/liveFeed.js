@@ -8,11 +8,11 @@ toggleBtn.addEventListener("click",
         if (liveFeed.classList.contains("live-feed-hide")) {
             liveFeed.classList.remove("live-feed-hide");
             liveFeed.classList.add("live-feed-show");
-            toggleBtnIcon.className = "fas fa-chevron-circle-left";
+            toggleBtnIcon.className = "fas fa-chevron-circle-left live-feed-toggle";
         }
         else {
             liveFeed.classList.remove("live-feed-show");
             liveFeed.classList.add("live-feed-hide");
-            toggleBtnIcon.className = "fas fa-chevron-circle-right";
+            toggleBtnIcon.className = "fas fa-chevron-circle-right live-feed-toggle";
         }
     });

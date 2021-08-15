@@ -6,66 +6,67 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>@Model.Name</h3>
-    <hr />
-    <div class="row">
-        <h4>Tests taken</h4>
-        @if (!Model.TestsTaken.Any())
-        {
-            <h6>No tests taken</h6>
-        }
-        else
-        {
-            @foreach (var testName in Model.TestsTaken)
+    <div class="page-wrapper">
+        <h3>@Model.Name</h3>
+        <hr />
+        <div class="row">
+            <h4>Tests taken</h4>
+            @if (!Model.TestsTaken.Any())
             {
-                <h6>@testName</h6>
+                <h6>No tests taken</h6>
             }
-        }
-    </div>
-    <hr/>
-    <div>
-        <dl class="row">
-            <dt class="col-sm-4">Email</dt>
-            <dd class="col-sm-8">@Model.Email</dd>
+            else
+            {
+                @foreach (var testName in Model.TestsTaken)
+                {
+                    <h6>@testName</h6>
+                }
+            }
+        </div>
+        <hr />
+        <div>
+            <dl class="row">
+                <dt class="col-sm-4">Email</dt>
+                <dd class="col-sm-8">@Model.Email</dd>
 
-            <dt class="col-sm-4">Date Of Birth</dt>
-            <dd class="col-sm-8">@Model.DateOfBirth</dd>
+                <dt class="col-sm-4">Date Of Birth</dt>
+                <dd class="col-sm-8">@Model.DateOfBirth</dd>
 
-            <dt class="col-sm-4">Place Of Birth</dt>
-            <dd class="col-sm-8">@Model.PlaceOfBirth</dd>
+                <dt class="col-sm-4">Place Of Birth</dt>
+                <dd class="col-sm-8">@Model.PlaceOfBirth</dd>
 
-            <dt class="col-sm-4">MobilePhone</dt>
-            <dd class="col-sm-8">@Model.MobilePhone)</dd>
+                <dt class="col-sm-4">MobilePhone</dt>
+                <dd class="col-sm-8">@Model.MobilePhone)</dd>
 
-            <dt class="col-sm-4">Telephone</dt>
-            <dd class="col-sm-8">@Model.Telephone</dd>
+                <dt class="col-sm-4">Telephone</dt>
+                <dd class="col-sm-8">@Model.Telephone</dd>
 
-            <dt class="col-sm-4">Father Name</dt>
-            <dd class="col-sm-8">@Model.FatherName</dd>
+                <dt class="col-sm-4">Father Name</dt>
+                <dd class="col-sm-8">@Model.FatherName</dd>
 
-            <dt class="col-sm-4">Mother Name</dt>
-            <dd class="col-sm-8">@Model.MotherName</dd>
+                <dt class="col-sm-4">Mother Name</dt>
+                <dd class="col-sm-8">@Model.MotherName</dd>
 
-            <dt class="col-sm-4">Mother Mobile Number</dt>
-            <dd class="col-sm-8">@Model.MotherMobileNumber</dd>
+                <dt class="col-sm-4">Mother Mobile Number</dt>
+                <dd class="col-sm-8">@Model.MotherMobileNumber</dd>
 
-            <dt class="col-sm-4">Father Mobile Number)</dt>
-            <dd class="col-sm-8">@Model.FatherMobileNumber)</dd>
+                <dt class="col-sm-4">Father Mobile Number)</dt>
+                <dd class="col-sm-8">@Model.FatherMobileNumber)</dd>
 
-            <dt class="col-sm-4">Address</dt>
-            <dd class="col-sm-8">@Model.Address</dd>
-        </dl>
+                <dt class="col-sm-4">Address</dt>
+                <dd class="col-sm-8">@Model.Address</dd>
+            </dl>
+        </div>
+        <hr />
+        <div class="row">
+            <h4>Average score</h4>
+            <h2>@Model.AverageScore %</h2>
+        </div>
     </div>
     <hr />
-    <div class="row">
-        <h4>Average score</h4>
-        <h2>@Model.AverageScore %</h2>
-    </div>
-    <hr />
-    <div>
-        <a class="btn btn-secondary btn-sm" 
-           asp-controller="Teacher" 
-           asp-action="GradeDetails" 
-           asp-route-id="@Model.GradeId">Back</a>
+    <div class="buttons-wrapper">
+        <a asp-controller="Teacher"
+           asp-action="GradeDetails"
+           asp-route-id="@Model.GradeId"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
     </div>
 </div>
