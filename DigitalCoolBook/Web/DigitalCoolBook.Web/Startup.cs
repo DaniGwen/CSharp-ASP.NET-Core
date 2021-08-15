@@ -143,6 +143,7 @@ namespace DigitalCoolBook.App
 
                 endpoint.MapHub<TestHub>("/testhub");
                 endpoint.MapHub<LiveFeedHub>("/liveFeedHub");
+                endpoint.MapHub<NotifierHub>("/notifierhub");
             });
         }
     }

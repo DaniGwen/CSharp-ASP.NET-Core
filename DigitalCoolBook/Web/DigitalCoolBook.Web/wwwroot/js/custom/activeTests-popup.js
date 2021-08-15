@@ -2,7 +2,6 @@
     function dialog(success, testId, testName) {
         $('#dialog').dialog({
             buttons: {
-
                 "Back": function () {
                     $('#dialog').empty();
                     $(this).dialog("close");

@@ -9,8 +9,9 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.png">
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/jquery-ui.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="/css/jquery-ui.theme.min.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
@@ -100,12 +101,18 @@
     <script src="~/js/jquery.magnific-popup.min.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/js/custom/activeTests-popup.js"></script>
+    <script src="js/custom/notifier-signalR.js"></script>
 
     @RenderSection("Scripts", required: false)
 
     @if (this.User.IsInRole("Teacher"))
     {
         <partial name="_PartialLiveFeed" />
+    }
+
+    @if (this.User.IsInRole("Student"))
+    {
+        <partial name="_PartialNotifier" />
     }
 
     @await Component.InvokeAsync("Notyf")

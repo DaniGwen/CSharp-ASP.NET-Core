@@ -5,8 +5,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/liveFeedHub").buil
 //Disable send button until connection is established
 document.getElementById("sendButton").disabled = true;
 
-connection.on("ReceiveLiveMessages",
-    function (messages) {
+connection.on("ReceiveLiveMessages", function (messages) {
         for (var i = 0; i < messages.length; i++) {
             var li = document.createElement("li");
             var span = document.createElement("span");

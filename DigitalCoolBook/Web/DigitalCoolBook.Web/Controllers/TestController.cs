@@ -8,7 +8,6 @@ namespace DigitalCoolBook.App.Controllers
     using System.Threading.Tasks;
     using AutoMapper;
     using Hubs;
-    using Models.CategoryViewModels;
     using Models.TestviewModels;
     using DigitalCoolBook.Models;
     using DigitalCoolBook.Services.Contracts;
@@ -32,6 +31,7 @@ namespace DigitalCoolBook.App.Controllers
         private readonly IHubContext<TestHub> _testHub;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly INotyfService _toasterService;
+        private readonly IHubContext<NotifierHub> _notifierHub;
 
         public TestController(
             ITestService testService,
@@ -43,7 +43,8 @@ namespace DigitalCoolBook.App.Controllers
             IScoreService scoreService,
             IHubContext<TestHub> testHub,
             UserManager<IdentityUser> userManager,
-            INotyfService toasterService
+            INotyfService toasterService,
+            IHubContext<NotifierHub> notifierHub
            )
         {
             _testService = testService;
@@ -56,6 +57,7 @@ namespace DigitalCoolBook.App.Controllers
             _testHub = testHub;
             _userManager = userManager;
             _toasterService = toasterService;
+            _notifierHub = notifierHub;
         }
 
         [HttpGet]
@@ -272,12 +274,17 @@ namespace DigitalCoolBook.App.Controllers
                     testStudents.Add(testStudent);
                 }
 
+                //Notify students about assigned test
+                await _notifierHub.Clients
+                    .Users(testStudents.Select(x => x.StudentId))
+                    .SendAsync("ReceiveNotification", $"TEST - \"{test?.TestName}\" was assigned to you");
+
                 await _testService.AddTestStudentsAsync(testStudents);
-                await _testService.AddTestRoomAsync(model.Students, test.TeacherId, model.TestId);
+                await _testService.AddTestRoomAsync(model.Students, test?.TeacherId, model.TestId);
 
                 _toasterService.Success("Test created");
 
-                return this.RedirectToAction("StartTest", "Test", new { id = test.TestId });
+                return this.RedirectToAction("StartTest", "Test", new { id = test?.TestId });
             }
             catch (Exception)
             {

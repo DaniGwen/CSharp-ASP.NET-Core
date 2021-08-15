@@ -20,6 +20,7 @@
 @import "styles/components/test/_component-startTest.css";
 @import "styles/components/_component-blazorTodoApp.css";
 @import "styles/components/_component-privacy.css";
+@import "styles/components/_component-notifier.css";
 
 @import "styles/utilities/_animations.css";
 
@@ -105,6 +106,7 @@ input[type="radio"] {
     margin: 0 auto;
     animation-name: slide-down;
     animation-duration: 0.5s;
+    padding: 10px;
 }
 
 .breadcrumb-item.active {

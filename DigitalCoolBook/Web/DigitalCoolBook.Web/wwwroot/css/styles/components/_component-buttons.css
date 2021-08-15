@@ -3,7 +3,7 @@
     justify-content: center;
     grid-template-columns: repeat(3, max-content);
     align-items: center;
-    grid-column-gap: 10px;
+    grid-column-gap: 30px;
     margin-top: 10px;
 }
 
