@@ -6,22 +6,23 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="link-lg" 
+                   asp-action="Subjects">Subjects</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="link-lg" 
+                   asp-action="Categories" 
+                   asp-route-subjectId="@Model.SubjectId"
+                   asp-route-categoryId="@Model.CategoryId">Categories</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Lessons</li>
+        </ol>
+    </nav>
+
     <div class="page-wrapper">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item" aria-current="page">
-                    <a class="link-lg" 
-                       asp-action="Subjects">Subjects</a>
-                </li>
-                <li class="breadcrumb-item" aria-current="page">
-                    <a class="link-lg" 
-                       asp-action="Categories" 
-                       asp-route-subjectId="@Model.SubjectId"
-                       asp-route-categoryId="@Model.CategoryId">Categories</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Lessons</li>
-            </ol>
-        </nav>
         <h3>Lessons</h3>
         <hr/>
         <div class="mb-3">
@@ -89,7 +90,9 @@
     </div>
     <div class="buttons-wrapper">
         <a asp-controller="Subject"
-           asp-action="Subjects"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+           asp-action="Subjects"
+           asp-route-subjectId="@Model.SubjectId"
+           asp-route-categoryId="@Model.CategoryId"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
     </div>
 </div>
 

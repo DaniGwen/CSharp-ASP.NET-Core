@@ -3,17 +3,18 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css';
 
 html, * {
-   /* font-family: 'Manrope', sans-serif;*/
+    /* font-family: 'Manrope', sans-serif;*/
 }
 
 a {
     text-decoration: none !important;
+    position: relative;
 }
 
     a:hover {
         color: azure;
-        text-decoration: underline !important;
     }
+
 
 button {
     font-weight: 800;

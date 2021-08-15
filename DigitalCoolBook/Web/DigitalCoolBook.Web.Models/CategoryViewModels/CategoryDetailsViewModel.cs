@@ -1,6 +1,4 @@
-﻿using DigitalCoolBook.App.Models.CategoryViewModels;
-
-namespace DigitalCoolBook.Web.Models.CategoryViewModels
+﻿namespace DigitalCoolBook.Web.Models.CategoryViewModels
 {
     using System.Collections.Generic;
 

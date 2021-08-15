@@ -35,13 +35,15 @@
             <div id="questions" name="questions">
             </div>
         </div>
-    </form>
-</div>
-<div class="buttons-wrapper">
-    <a asp-action="Index" 
-       asp-controller="Home"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+        <div class="buttons-wrapper">
+            <a asp-action="Index" 
+               asp-controller="Home"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
 
-    <button id="save" class="btn btn-primary btn-sm">Next</button>
+            <button class="btn btn-sm btn-primary" 
+                    id="save" 
+                    type="submit">Next <i class="fas fa-marker"></i></button>
+        </div>
+    </form>
 </div>
 
 

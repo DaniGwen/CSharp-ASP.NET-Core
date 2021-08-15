@@ -6,26 +6,30 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Settings</h3>
-    <hr />
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link link-lg active"
-               aria-current="page"
-               asp-route-id="@Model.Id"
-               asp-action="ChangePassword">Change password</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link link-lg"
-               href="#"
-               onclick="averageScore('@Model.Id')">Average score</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-    </ul>
+    <div class="page-wrapper">
+        <h3>Settings</h3>
+        <hr />
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="btn btn-sm btn-warning"
+                   asp-route-id="@Model.Id"
+                   asp-action="ChangePassword">Change password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-lg"
+                   href="#"
+                   onclick="averageScore('@Model.Id')">Average score</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-wrapper mt-4">
+        <a asp-controller="Subject"
+           asp-action="Subjects"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
-
 
 <div id="popupDialog" title="Average score"></div>
 

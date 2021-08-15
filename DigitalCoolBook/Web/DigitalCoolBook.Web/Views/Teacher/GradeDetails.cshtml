@@ -4,29 +4,48 @@
     ViewData["Title"] = "GradeDetails";
     Layout = "_Layout";
 }
-<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3 page-wrapper">
-    <h3>Class @ViewData["paraleloName"]</h3>
-    <hr />
-    <div class="mb-3">
-        @if (!Model.Any())
-        {
-            <h5>No students in this class...</h5>
-        }
-        else
-        {
-            @foreach (var item in Model)
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="link-lg"
+                   asp-controller="Subject"
+                   asp-action="Subjects">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="link-lg"
+                   asp-action="AssignedGrades">Classes</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Class</li>
+        </ol>
+    </nav>
+
+    <div class="page-wrapper">
+        <h3>Class @ViewData["paraleloName"]</h3>
+        <hr/>
+        <div class="mb-3">
+            @if (!Model.Any())
             {
-                <div class="mb-2 justify-content-center d-flex">
-                    <a class="link-lg"
-                       asp-controller="Student"
-                       asp-action="Details"
-                       asp-route-id="@item.Id">@item.Name</a>
-                </div>
+                <h5>No students in this class...</h5>
             }
-        }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="mb-2 justify-content-center d-flex">
+                        <a class="link-lg"
+                           asp-controller="Student"
+                           asp-action="Details"
+                           asp-route-id="@item.Id">@item.Name</a>
+                    </div>
+                }
+            }
+        </div>
     </div>
-    <a asp-controller="Teacher"
-       asp-action="AssignedGrades"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    <div class="buttons-wrapper">
+        <a asp-controller="Teacher"
+           asp-action="AssignedGrades"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
 
 

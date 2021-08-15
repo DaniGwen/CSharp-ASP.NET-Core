@@ -66,6 +66,9 @@
                 .FirstOrDefault(s => s.SubjectId == subjectId);
 
             var model = _mapper.Map<SubjectViewModel>(subjectDb);
+
+            if (model == null) { return RedirectToAction("Subjects"); }
+
             model.CategoryId = categoryId;
 
             return this.View(model);
@@ -73,7 +76,7 @@
 
         [HttpGet]
         [Authorize(Roles = "Admin, Teacher, Student")]
-        public async Task<IActionResult> CategoryDetailsAsync(CategoryDetailsViewModel categoryDetailsModel)
+        public async Task<IActionResult> LessonsAsync(CategoryDetailsViewModel categoryDetailsModel)
         {
             var lessons = _subjectService.GetLessons()
                 .Where(l => l.CategoryId == categoryDetailsModel.CategoryId)

@@ -6,36 +6,40 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Test settings</h3>
-    <hr />
-    <form id="form" asp-action="SetTestTimer" method="post">
-        <input hidden name="testId" value="@Model.TestId" />
-        <div class="row mb-4">
-            <div>
-                <p class="form-label d-inline-block">Test duration</p>
-                <input class="form-control-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
-                <label class="form-label">minutes</label>
+    <div class="page-wrapper">
+        <h3>Test settings</h3>
+        <hr />
+        <form id="form" asp-action="SetTestTimer" method="post">
+            <input hidden name="testId" value="@Model.TestId" />
+            <div class="row mb-4">
+                <div>
+                    <p class="form-label d-inline-block">Test duration</p>
+                    <input class="form-control-sm" asp-for="Timer" id="timer-input" min="0" max="360" />
+                    <label class="form-label">minutes</label>
+                </div>
+                <span class="text-danger" id="alert-timer"></span>
             </div>
-            <span class="text-danger" id="alert-timer"></span>
-        </div>
-        <div class="row mb-4">
-            <div>
-                <span class="form-label">Class</span>
-                @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control" })
+            <div class="row mb-4">
+                <div>
+                    <span class="form-label">Class</span>
+                    @Html.DropDownListFor(m => m.GradeId, new SelectList(Model.Grades, "GradeId", "Name"), "Choose a class..", new { @class = "form-control" })
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div>
-                <h5>Add participants</h5>
-                <div id="checkArray"></div>
-                <span class="text-danger" asp-validation-for="Students"></span>
+            <div class="row">
+                <div>
+                    <h5>Add participants</h5>
+                    <div id="checkArray"></div>
+                    <span class="text-danger" asp-validation-for="Students"></span>
+                </div>
             </div>
-        </div>
-        <div class="buttons-wrapper">
-            <a asp-action="Tests"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-            <input class="btn btn-success btn-sm" id="button" type="submit" value="Create" />
-        </div>
-    </form>
+            <div class="buttons-wrapper mt-4">
+                <a asp-action="Tests"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+                <button class="btn btn-success btn-sm" 
+                        id="button" 
+                        type="submit">Create <i class="fas fa-play-circle"></i></button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts{
@@ -81,5 +85,4 @@
             }
         })
     </script>
-
 }

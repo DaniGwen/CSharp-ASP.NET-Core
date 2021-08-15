@@ -5,27 +5,53 @@
     Layout = "_Layout";
 }
 
-<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3 page-wrapper">
-    <h3>My Classes</h3>
-    <div class="row mt-3 mb-5">
-        @if (!Model.Any())
-        {
-            <h5>No classes assigned...</h5>
-        }
-        else
-        {
-            @foreach (var item in Model)
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="link-lg"
+                   asp-controller="Subject"
+                   asp-action="Subjects">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Classes</li>
+        </ol>
+    </nav>
+
+    <div class="page-wrapper">
+        <h3>My Classes</h3>
+        <div class="row row-cols-4 mt-3 mb-5">
+            @if (!Model.Any())
             {
-                <div class="mt-2">
-                    <a class="btn btn-sm btn-primary"
-                       asp-controller="Teacher"
-                       asp-action="GradeDetails"
-                       asp-route-id="@item.GradeId">@item.Name.ToUpper() <i class="ms-3 fas fa-user-graduate"></i> @item.StudentCount</a>
-                </div>
+                <h5>No classes assigned...</h5>
             }
-        }
+            else
+            {
+                @foreach (var grade in Model)
+                {
+                    <div class="mt-2">
+                        @if (grade.StudentCount == 0)
+                        {
+                            <a class="btn btn-sm btn-primary disabled">
+                                <strong>@grade.Name.ToUpper()</strong><i class="ms-3 fas fa-user-graduate"></i> @grade.StudentCount
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-primary"
+                               asp-controller="Teacher"
+                               asp-action="GradeDetails"
+                               asp-route-id="@grade.GradeId">
+                                <strong>@grade.Name.ToUpper()</strong><i class="ms-3 fas fa-user-graduate"></i> <strong>@grade.StudentCount</strong>
+                            </a>
+                        }
+                    </div>
+                }
+            }
+        </div>
     </div>
-    <a asp-controller="Home"
-       asp-action="Index"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    <div class="buttons-wrapper">
+        <a asp-controller="Home"
+           asp-action="Index"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
 

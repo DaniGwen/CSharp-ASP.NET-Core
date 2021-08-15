@@ -5,10 +5,12 @@
     </ul>
     <ul class="footer-ul">
         <li>FAQ</li>
-        <li><a href="#">Contacts</a></li>
+        <li><a class="link-lg" href="#">Contacts</a></li>
     </ul>
-    <ul class="footer-ul last">
-        <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+    <ul class="footer-ul">
+        <li><a class="link-lg"
+               asp-controller="Home" 
+               asp-action="Privacy">Privacy</a></li>
         <li>&copy @DateTime.Now.Year.ToString() DigitalCoolBook</li>
     </ul>
 </footer>

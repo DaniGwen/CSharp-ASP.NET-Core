@@ -6,83 +6,86 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>T E S T - @Model.TestName</h3>
-    @if (this.User.IsInRole("Student"))
-    {
-        <form id="form" asp-action="EndTest" method="post">
-            <div class="row">
-                <div class="col align-content-start">
-                    <div>
-                        @Html.DisplayNameFor(model => model.Date)
+    <div class="page-wrapper">
+        <h3>T E S T - @Model.TestName</h3>
+        <hr />
+        @if (this.User.IsInRole("Student"))
+        {
+            <form id="form" asp-action="EndTest" method="post">
+                <div class="row">
+                    <div class="col align-content-start">
+                        <div>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </div>
+                        @Convert.ToString($"{Model.Date:dd/M/yyyy}")
+                        <div>
+                            <span class="digital-clock">00:00:00</span><span>ч.</span>
+                        </div>
                     </div>
-                    @Convert.ToString($"{Model.Date:dd/M/yyyy}")
-                    <div>
-                        <span class="digital-clock">00:00:00</span><span>ч.</span>
+                    <div class="col d-flex justify-content-center">
+                        <div class="text-end">
+                            <span class="col-form-label">Time remaining:</span>
+                        </div>
+                        <div class="mt-3">
+                            <span class="timer col-form-label" data-minutes-left="@Model.Timer"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col d-flex justify-content-center">
-                    <div class="text-end">
-                        <span class="col-form-label">Time remaining:</span>
-                    </div>
-                    <div class="mt-3">
-                        <span class="timer col-form-label" data-minutes-left="@Model.Timer"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                @foreach (var question in Model.Questions)
-                {
-                    <div class="col-form-label-lg mt-4">
-                        <span name="questionCount">@question.Title</span>
-                    </div>
-                    <input type="hidden" name="[@index].questionId" value="@question.QuestionId" />
-
-                    foreach (var answer in question.Answers)
+                <div class="col">
+                    @foreach (var question in Model.Questions)
                     {
-                        <ul class="list-group mb-1">
-                            <li class="list-group-item">
-                                <input type="checkbox"
-                                       name="[@index].answerId"
-                                       value="@answer.AnswerId" />
-                                <label class="col-form-label-lg">@answer.Title</label>
-                            </li>
-                        </ul>
+                        <div class="col-form-label-lg mt-4">
+                            <span name="questionCount">@question.Title</span>
+                        </div>
+                        <input type="hidden" name="[@index].questionId" value="@question.QuestionId" />
+
+                        foreach (var answer in question.Answers)
+                        {
+                            <ul class="list-group mb-1">
+                                <li class="list-group-item">
+                                    <input type="checkbox"
+                                           name="[@index].answerId"
+                                           value="@answer.AnswerId" />
+                                    <label class="col-form-label-lg">@answer.Title</label>
+                                </li>
+                            </ul>
+                        }
+                        index += 1;
                     }
-                    index += 1;
-                }
+                </div>
+                <div class="d-flex justify-content-center mt-4 mb-3">
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                </div>
+            </form>
+        }
+        else if (this.User.IsInRole("Teacher"))
+        {
+            <h4 class="text-success text-center">Active</h4>
+            <div>
+                <h5>Participants</h5>
+                <ol class="added-students" id="added-students">
+                    @foreach (var studentName in Model.StudentNames)
+                    {
+                        <li>@studentName</li>
+                    }
+                </ol>
             </div>
-            <div class="d-flex justify-content-center mt-4 mb-3">
-                <input type="submit" value="Submit" class="btn btn-success" />
+            <div class="mt-2">
+                <h5>Started</h5>
+                <div class="connected-students" id="activeStudents"></div>
             </div>
-        </form>
-    }
-    else if (this.User.IsInRole("Teacher"))
-    {
-        <h4 class="text-success">Active</h4>
-        <div>
-            <h5>Participants</h5>
-            <ul class="added-students" id="added-students">
-                @foreach (var studentName in Model.StudentNames)
-                {
-                    <li>@studentName</li>
-                }
-            </ul>
-        </div>
-        <div class="mt-2">
-            <h5>Started</h5>
-            <div class="connected-students" id="activeStudents"></div>
-        </div>
-        <div class="mt-2">
-            <h5>Finished</h5>
-            <div class="disconnected-students" id="finishedStudents"></div>
-        </div>
-        <div class="text-center mb-2">
-            <a class="btn btn-warning"
-               asp-controller="Test"
-               asp-action="EndTestAllStudents"
-               asp-route-testId="@Model.TestId">End Test</a>
-        </div>
-    }
+            <div class="mt-2">
+                <h5>Finished</h5>
+                <div class="disconnected-students" id="finishedStudents"></div>
+            </div>
+        }
+    </div>
+    <div class="buttons-wrapper mt-4">
+        <a class="btn btn-danger"
+           asp-controller="Test"
+           asp-action="EndTestAllStudents"
+           asp-route-testId="@Model.TestId">End Test</a>
+    </div>
 </div>
 
 @section Scripts{

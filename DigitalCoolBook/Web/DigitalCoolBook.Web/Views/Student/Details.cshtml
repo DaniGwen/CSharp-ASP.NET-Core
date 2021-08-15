@@ -6,9 +6,30 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a class="link-lg"
+                   asp-controller="Subject"
+                   asp-action="Subjects">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="link-lg"
+                   asp-action="AssignedGrades">Classes</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a class="link-lg" 
+                   asp-controller="Teacher"
+                   asp-action="GradeDetails"
+                   asp-route-id="@Model.GradeId">Class</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Student</li>
+        </ol>
+    </nav>
+
     <div class="page-wrapper">
         <h3>@Model.Name</h3>
-        <hr />
+        <hr/>
         <div class="row">
             <h4>Tests taken</h4>
             @if (!Model.TestsTaken.Any())
@@ -23,7 +44,7 @@
                 }
             }
         </div>
-        <hr />
+        <hr/>
         <div>
             <dl class="row">
                 <dt class="col-sm-4">Email</dt>
@@ -57,16 +78,16 @@
                 <dd class="col-sm-8">@Model.Address</dd>
             </dl>
         </div>
-        <hr />
+        <hr/>
         <div class="row">
             <h4>Average score</h4>
             <h2>@Model.AverageScore %</h2>
         </div>
-    </div>
-    <hr />
-    <div class="buttons-wrapper">
-        <a asp-controller="Teacher"
-           asp-action="GradeDetails"
-           asp-route-id="@Model.GradeId"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+        <hr/>
+        <div class="buttons-wrapper">
+            <a asp-controller="Teacher"
+               asp-action="GradeDetails"
+               asp-route-id="@Model.GradeId"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+        </div>
     </div>
 </div>

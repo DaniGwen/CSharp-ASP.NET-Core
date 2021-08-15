@@ -4,31 +4,32 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Tests History</h3>
-    <div class="mb-3 mt-3">
-        @if (Model.Any())
-        {
-            @foreach (var test in Model)
+    <div class="page-wrapper">
+        <h3>Tests History</h3>
+        <div class="mb-3 mt-3">
+            @if (Model.Any())
             {
-                <div class="mb-3">
-                    <a class="nav-link link-lg"
-                       asp-controller="Test"
-                       asp-action="TestSummary"
-                       asp-route-testId="@test.TestId">@test.TestName <time class="ms-2">@test.Date</time></a>
+                @foreach (var test in Model)
+                {
+                    <div class="mb-3">
+                        <a class="nav-link link-lg"
+                           asp-controller="Test"
+                           asp-action="TestSummary"
+                           asp-route-testId="@test.TestId">@test.TestName <time class="ms-2">@test.Date</time></a>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="mt-4 mb-4">
+                    <h4>No tests history...</h4>
                 </div>
             }
-        }
-        else
-        {
-            <div class="mt-4 mb-4">
-                <h4>No tests history...</h4>
-            </div>
-        }
-
+        </div>
     </div>
-  
-    <a asp-controller="Home"
-       asp-action="Index"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-
+    <div class="buttons-wrapper mt-2">
+        <a asp-controller="Home"
+           asp-action="Index"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
 

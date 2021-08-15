@@ -19,6 +19,7 @@
 @import "styles/components/teacher/_component-editTeachers.css";
 @import "styles/components/test/_component-startTest.css";
 @import "styles/components/_component-blazorTodoApp.css";
+@import "styles/components/_component-privacy.css";
 
 @import "styles/utilities/_animations.css";
 
@@ -106,9 +107,10 @@ input[type="radio"] {
     animation-duration: 0.5s;
 }
 
-.breadcrumb-item .active {
+.breadcrumb-item.active {
     font-size: 18px !important;
     font-weight: 600 !important;
+    color: darkgray;
 }
 
 /*Scrollbar*/

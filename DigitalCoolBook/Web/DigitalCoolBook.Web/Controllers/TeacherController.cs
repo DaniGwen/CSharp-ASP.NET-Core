@@ -1,13 +1,8 @@
-﻿
-
-using AspNetCoreHero.ToastNotification.Abstractions;
-
-namespace DigitalCoolBook.App.Controllers
+﻿namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
     using DigitalCoolBook.App.Models.GradesViewModels;
@@ -18,7 +13,7 @@ namespace DigitalCoolBook.App.Controllers
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
+    using AspNetCoreHero.ToastNotification.Abstractions;
 
     public class TeacherController : Controller
     {
@@ -51,8 +46,8 @@ namespace DigitalCoolBook.App.Controllers
             return this.View();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterTeacherAsync(TeacherRegisterModel registerModel)
         {
             if (this.ModelState.IsValid)
@@ -103,7 +98,7 @@ namespace DigitalCoolBook.App.Controllers
                 gradesViewModel.Add(gradeDto);
             }
 
-            return this.View(gradesViewModel);
+            return this.View(gradesViewModel.OrderByDescending(x => x.StudentCount));
         }
 
         [Authorize(Roles = "Admin, Teacher")]
