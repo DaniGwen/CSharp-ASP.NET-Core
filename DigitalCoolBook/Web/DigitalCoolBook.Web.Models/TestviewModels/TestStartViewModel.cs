@@ -1,4 +1,6 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
+﻿using DigitalCoolBook.Web.Models.TestviewModels;
+
+namespace DigitalCoolBook.App.Models.TestviewModels
 {
     using System;
     using System.Collections.Generic;

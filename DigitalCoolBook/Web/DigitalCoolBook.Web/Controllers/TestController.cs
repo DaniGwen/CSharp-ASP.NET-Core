@@ -152,7 +152,7 @@ namespace DigitalCoolBook.App.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Teacher")]
-        public async Task<IActionResult> MarkCorrectAnswersAsync(string[] correctAnswerIds, string testId)
+        public async void MarkCorrectAnswersAsync(string[] correctAnswerIds, string testId)
         {
             try
             {
@@ -165,11 +165,11 @@ namespace DigitalCoolBook.App.Controllers
 
                 await _questionService.SaveChangesAsync();
 
-                return this.Json("Test was successfully saved");
+                _toasterService.Success("Test successfully saved");
             }
             catch (Exception)
             {
-                return this.Json(new { error = "Test was not saved" });
+                _toasterService.Error("Something went wrong. Test not saved");
             }
         }
 
@@ -188,22 +188,15 @@ namespace DigitalCoolBook.App.Controllers
         public IActionResult Tests()
         {
             var teacherId = _userManager.GetUserId(this.User);
-            var activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
 
             var tests = _testService.GetTests()
-                .Where(x => x.TeacherId == teacherId)
+                .Where(x => x.TeacherId == teacherId && !x.IsExpired)
                 .ToList();
 
             // Map and create model for the view
-            var viewModel = _mapper.Map<List<TestsNamesViewModel>>(tests);
+            var testViewModel = _mapper.Map<List<TestsNamesViewModel>>(tests);
 
-            foreach (var test in viewModel)
-            {
-                if (activeTests.Any(x => x.TestId == test.TestId))
-                    test.IsActive = true;
-            }
-
-            return this.View(viewModel);
+            return this.View(testViewModel);
         }
 
         [HttpGet]
@@ -213,7 +206,7 @@ namespace DigitalCoolBook.App.Controllers
             var teacherId = _userManager.GetUserId(this.User);
             var activeTests = _testService.GetActiveTestsByTeacherId(teacherId);
 
-            if (activeTests.Any(x => x.TestId == testId))
+            if (activeTests.Any(x => x?.TestId == testId))
                 return RedirectToAction("StartTest", new { id = testId });
 
             var model = new TestViewModel
@@ -282,7 +275,7 @@ namespace DigitalCoolBook.App.Controllers
                 await _testService.AddTestStudentsAsync(testStudents);
                 await _testService.AddTestRoomAsync(model.Students, test?.TeacherId, model.TestId);
 
-                _toasterService.Success("Test created");
+                _toasterService.Information("Test created");
 
                 return this.RedirectToAction("StartTest", "Test", new { id = test?.TestId });
             }
@@ -308,8 +301,10 @@ namespace DigitalCoolBook.App.Controllers
                 var testViewModel = _mapper.Map<TestStartViewModel>(test);
 
                 // Gets the participating students
-                testViewModel.StudentNames = await _testService
-                    .GetStudentsInTestRoomAsync(test?.TestId);
+                testViewModel.StudentNames = (await _testService
+                    .GetStudentsInTestRoomAsync(test?.TestId))
+                    .Select(x => x.Name)
+                    .ToList();
 
                 // Gets the questions for this test
                 var questionsDb = _questionService
@@ -349,14 +344,10 @@ namespace DigitalCoolBook.App.Controllers
         {
             var testId = this.TempData["TestId"].ToString();
 
-            int score = 0;
-
             if (this.User.IsInRole("Student"))
             {
-                score = await this.ProcessTestAsync(model, testId);
+                this.ViewData["Result"] = await this.ProcessTestEndAsync(model, testId);
             }
-
-            this.ViewData["Result"] = score;
 
             var testDb = _testService
                 .GetTests()
@@ -364,10 +355,7 @@ namespace DigitalCoolBook.App.Controllers
 
             if (_testService.IsAllStudentsFinished())
             {
-                // Test room is empty so we remove it along with the students in it
-                await _testService.RemoveTestAsync(testId);
-                await _testService.RemoveTestRoomAsync(testId);
-                await _testService.AddArchivedTest(testDb);
+                await RemoveTestRoomAndCreateArchive(testDb);
             }
 
             if (this.User.IsInRole("Teacher")) { return this.Redirect("/Home/Index"); }
@@ -476,8 +464,7 @@ namespace DigitalCoolBook.App.Controllers
             {
                 var testName = _testService
                     .GetTests()
-                    .First(x => x.TestId == testId)
-                    .TestName;
+                    .FirstOrDefault(x => x.TestId == testId)?.TestName;
 
                 return this.Json(new
                 {
@@ -497,14 +484,24 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> EndTestAllStudentsAsync(string testId)
         {
-            await _testHub.Clients.All.SendAsync("SubmitAll");
+            var studentsInTestRoom = await _testService.GetStudentsInTestRoomAsync(testId);
+
+            await _testHub.Clients
+                .Users(studentsInTestRoom.Select(x => x.Id))
+                .SendAsync("SubmitAll");
+
+            await Task.Delay(2000);
 
             var testDb = _testService
                 .GetTests()
-                .First(x => x.TestId == testId);
+                .FirstOrDefault(x => x.TestId == testId);
 
-            await _testService.RemoveTestAsync(testDb.TestId);
-            await _testService.RemoveTestRoomAsync(testDb.TestId);
+            if (testDb != null)
+            {
+                await RemoveTestRoomAndCreateArchive(testDb);
+            }
+            
+            _toasterService.Information("Test ended");
 
             return this.Redirect("/Home/Index");
         }
@@ -617,7 +614,7 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                await _testService.RemoveTestAsync(testId);
+                await _testService.SetTestExpiredAsync(testId);
 
                 return this.Json("Test is deleted.");
             }
@@ -724,7 +721,7 @@ namespace DigitalCoolBook.App.Controllers
             }
         }
 
-        private async Task<int> ProcessTestAsync(ICollection<EndTestViewModel> model, string testId)
+        private async Task<int> ProcessTestEndAsync(ICollection<EndTestViewModel> model, string testId)
         {
             var questions = _questionService
                 .GetQuestions()
@@ -753,7 +750,11 @@ namespace DigitalCoolBook.App.Controllers
             var studentId = _userManager.GetUserId(this.User);
 
             //Calculate score
-            var currentScore = (int)((100 * correctAnswers) / questionsCount);
+            var currentScore = 0;
+            if (questionsCount > 0 && correctAnswers > 0)
+            {
+                currentScore = (int)((100 * correctAnswers) / questionsCount);
+            }
 
             // Create expired test history
             var newExpiredTest = _mapper.Map<ExpiredTest>(test);
@@ -779,12 +780,20 @@ namespace DigitalCoolBook.App.Controllers
             // Create Score
             if (this.User.IsInRole("Student"))
             {
-                _scoreService.CreateScore(currentScore, test.LessonId, studentId);
+                await _scoreService.CreateScore(currentScore, test.LessonId, studentId);
             }
 
             await _testService.TestRoomStudentFinished(studentId, currentScore);
 
             return currentScore;
+        }
+
+        private async Task RemoveTestRoomAndCreateArchive(Test test)
+        {
+            // Test room is empty so we remove it along with the students in it
+            await _testService.RemoveTestRoomAsync(test.TestId);
+            await _testService.SetTestExpiredAsync(test.TestId);
+            await _testService.AddArchivedTest(test);
         }
     }
 }

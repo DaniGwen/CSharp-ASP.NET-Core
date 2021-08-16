@@ -1,4 +1,7 @@
-﻿namespace DigitalCoolBook.App.Controllers
+﻿using DigitalCoolBook.Web.Models.StudentViewModels;
+using DigitalCoolBook.Web.Models.TestviewModels;
+
+namespace DigitalCoolBook.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -250,7 +253,12 @@
             studentDetailsViewModel.TestsTaken.AddRange(_testService
                  .GetExpiredTests()
                  .Where(t => t.StudentId == id)
-                 .Select(x => x.TestName)
+                 .Select(x => new TestStudentDetailsViewModel
+                 {
+                     TestName = x.TestName,
+                     Score = x.Score,
+                     Date = x.Date
+                 })
                  .ToList());
 
             return this.View(studentDetailsViewModel);

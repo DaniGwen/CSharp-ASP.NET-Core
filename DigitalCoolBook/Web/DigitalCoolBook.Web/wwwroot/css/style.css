@@ -22,7 +22,8 @@
 @import "styles/components/_component-privacy.css";
 @import "styles/components/_component-notifier.css";
 
-@import "styles/utilities/_animations.css";
+@import "styles/utilities/_utilities-animations.css";
+@import "styles/utilities/_utilities-dcbElements.css";
 
 * {
     box-sizing: border-box;
@@ -88,6 +89,10 @@ input[type="radio"] {
 
 .fa-lg {
     font-size: 1.7rem !important;
+}
+
+.fa-lg:hover {
+    transform: scale(1.1);
 }
 
 .link-lg {

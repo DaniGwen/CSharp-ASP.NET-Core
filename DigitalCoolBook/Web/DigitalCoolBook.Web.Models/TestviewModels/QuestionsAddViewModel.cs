@@ -1,11 +1,9 @@
-﻿using DigitalCoolBook.Web.Models.CategoryViewModels;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DigitalCoolBook.Web.Models.CategoryViewModels;
 
-namespace DigitalCoolBook.App.Models.TestviewModels
+namespace DigitalCoolBook.Web.Models.TestviewModels
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-
     public class QuestionsAddViewModel
     {
         public QuestionsAddViewModel()
@@ -14,7 +12,7 @@ namespace DigitalCoolBook.App.Models.TestviewModels
             this.Questions = new List<string>();
         }
 
-        [Required(ErrorMessage = "Моля изберете от менюто.")]
+        [Required(ErrorMessage = "Please select from the menu")]
         public string LessonId { get; set; }
 
         public List<string> Questions { get; set; }

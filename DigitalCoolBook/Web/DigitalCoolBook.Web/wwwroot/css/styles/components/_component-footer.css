@@ -5,8 +5,8 @@
     padding: 10px;
     align-items: center;
     width: 100%;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     position: absolute;
     bottom: 0;
     min-height: 90px;

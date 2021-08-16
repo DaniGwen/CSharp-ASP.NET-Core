@@ -1,4 +1,4 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
+﻿namespace DigitalCoolBook.Web.Models.TestviewModels
 {
     public class QuestionAnswerViewModel
     {

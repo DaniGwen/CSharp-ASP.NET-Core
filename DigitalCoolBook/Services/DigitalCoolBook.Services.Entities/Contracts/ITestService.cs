@@ -20,7 +20,7 @@
 
         Task AddExpiredTestAsync(ExpiredTest expiredTest);
 
-        Task RemoveTestAsync(string testId);
+        Task SetTestExpiredAsync(string testId);
 
         Task AddTestStudentsAsync(ICollection<TestStudent> testStudents);
 
@@ -42,7 +42,7 @@
 
         List<Test> GetActiveTestsByTeacherId(string teacherId);
 
-        Task<List<string>> GetStudentsInTestRoomAsync(string testId);
+        Task<List<Student>> GetStudentsInTestRoomAsync(string testId);
 
         Task<List<ArchivedTestViewModel>> GetArchivedTestsByTeacherId(string teacherId);
 

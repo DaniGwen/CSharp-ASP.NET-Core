@@ -6,13 +6,14 @@
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
     <div class="page-wrapper">
         <h3>Tests History</h3>
-        <div class="mb-3 mt-3">
+        <hr />
+        <div class="mt-3">
             @if (Model.Any())
             {
                 @foreach (var test in Model)
                 {
-                    <div class="mb-3">
-                        <a class="nav-link link-lg"
+                    <div class="mb-3 justify-content-center d-flex">
+                        <a class="link-lg"
                            asp-controller="Test"
                            asp-action="TestSummary"
                            asp-route-testId="@test.TestId">@test.TestName <time class="ms-2">@test.Date</time></a>
@@ -27,7 +28,7 @@
             }
         </div>
     </div>
-    <div class="buttons-wrapper mt-2">
+    <div class="buttons-wrapper mt-4">
         <a asp-controller="Home"
            asp-action="Index"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
     </div>

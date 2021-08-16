@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DigitalCoolBook.App.Models.TestviewModels
+namespace DigitalCoolBook.Web.Models.TestviewModels
 {
     public class CorrectAnswersViewModel
     {

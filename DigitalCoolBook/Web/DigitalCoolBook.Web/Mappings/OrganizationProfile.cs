@@ -8,6 +8,7 @@ using DigitalCoolBook.App.Models.TeacherViewModels;
 using DigitalCoolBook.App.Models.TestviewModels;
 using DigitalCoolBook.Models;
 using DigitalCoolBook.Web.Models.CategoryViewModels;
+using DigitalCoolBook.Web.Models.StudentViewModels;
 using DigitalCoolBook.Web.Models.TestviewModels;
 
 namespace DigitalCoolBook.App.Mappings

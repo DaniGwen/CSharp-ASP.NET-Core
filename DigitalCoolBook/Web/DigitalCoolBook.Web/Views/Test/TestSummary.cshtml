@@ -1,17 +1,19 @@
 ﻿@model DigitalCoolBook.Web.Models.TestviewModels.TestSummaryViewModel
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Scores for @Model.TestName</h3>
-    <hr />
-    <div class="mb-3">
-        @foreach (var student in Model.ParticipatedStudents)
-        {
-            <div>
-                <p class="form-label">@student.StudentName - <strong>@student.Score points</strong></p>
-            </div>
-        }
+    <div class="page-wrapper">
+        <h3>Scores - @Model.TestName</h3>
+        <hr />
+        <div class="mb-3 justify-content-center d-flex">
+            @foreach (var student in Model.ParticipatedStudents)
+            {
+                <h5>@student.StudentName - @student.Score %</h5>
+            }
+        </div>
     </div>
-    <a asp-controller="Test"
-       asp-action="TestsHistory"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    <div class="buttons-wrapper  mt-4">
+        <a asp-controller="Test"
+           asp-action="TestsHistory"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+    </div>
 </div>
 

@@ -1,4 +1,4 @@
-﻿@model DigitalCoolBook.App.Models.StudentViewModels.StudentDetailsViewModel
+﻿@model DigitalCoolBook.Web.Models.StudentViewModels.StudentDetailsViewModel
 
 @{
     ViewData["Title"] = "StudentDetails";
@@ -18,7 +18,7 @@
                    asp-action="AssignedGrades">Classes</a>
             </li>
             <li class="breadcrumb-item active">
-                <a class="link-lg" 
+                <a class="link-lg"
                    asp-controller="Teacher"
                    asp-action="GradeDetails"
                    asp-route-id="@Model.GradeId">Class</a>
@@ -29,7 +29,7 @@
 
     <div class="page-wrapper">
         <h3>@Model.Name</h3>
-        <hr/>
+        <hr />
         <div class="row">
             <h4>Tests taken</h4>
             @if (!Model.TestsTaken.Any())
@@ -38,13 +38,17 @@
             }
             else
             {
-                @foreach (var testName in Model.TestsTaken)
-                {
-                    <h6>@testName</h6>
-                }
+                <ol>
+                    @foreach (var test in Model.TestsTaken)
+                    {
+                        <li>
+                            <h6 class="dcb-badge d-inline">@test.TestName <strong>|</strong> Score: @test.Score% <strong>|</strong> Date: @test.Date</h6>
+                        </li>
+                    }
+                </ol>
             }
         </div>
-        <hr/>
+        <hr />
         <div>
             <dl class="row">
                 <dt class="col-sm-4">Email</dt>
@@ -78,12 +82,12 @@
                 <dd class="col-sm-8">@Model.Address</dd>
             </dl>
         </div>
-        <hr/>
-        <div class="row">
+        <hr />
+        <div class="row text-center">
             <h4>Average score</h4>
-            <h2>@Model.AverageScore %</h2>
+            <h2 class="dcb-badge">@Model.AverageScore %</h2>
         </div>
-        <hr/>
+        <hr />
         <div class="buttons-wrapper">
             <a asp-controller="Teacher"
                asp-action="GradeDetails"

@@ -1,8 +1,8 @@
 ﻿.navbar {
     background-color: whitesmoke;
     height: 70px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     grid-row-start: row1-start;
     padding: 10px;
 }

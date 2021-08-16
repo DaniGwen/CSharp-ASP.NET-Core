@@ -18,16 +18,15 @@
 <body>
     <div class="body-container">
         <header>
-            <!--navigation bar-->
             <nav class="navbar navbar-expand-sm navbar-light">
-                <span class="navbar-brand brand-text">Digital Cool Book</span>
+                <span class="navbar-brand brand-text">DigitalCoolBook</span>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="container-fluid" id="navbarNavDropdown">
                     <ul class="nav navbar-nav nav-left-wrapper">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/Home/Index">Home</a>
+                            <a class="link-lg" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @if (this.User.IsInRole("Teacher"))
                         {

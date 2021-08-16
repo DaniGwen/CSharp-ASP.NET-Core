@@ -50,7 +50,7 @@ namespace DigitalCoolBook.Services
             await _context.SaveChangesAsync();
         }
 
-        public async void CreateScore(int points, string lessonId, string studentId)
+        public async Task CreateScore(int points, string lessonId, string studentId)
         {
             var previousScore = _context.ScoreStudents
                 .Include(x => x.Score)

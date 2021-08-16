@@ -64,18 +64,22 @@ namespace DigitalCoolBook.Services
 
         public Test GetTestByLesson(string id)
         {
-            return this._dbContext.Tests.FirstOrDefault(t => t.LessonId == id);
+            return _dbContext.Tests.FirstOrDefault(t => t.LessonId == id);
         }
 
         public IQueryable<Test> GetTests()
         {
-            return this._dbContext.Tests;
+            return _dbContext.Tests;
         }
 
-        public async Task RemoveTestAsync(string testId)
+        public async Task SetTestExpiredAsync(string testId)
         {
-            var test = await _dbContext.Tests.FindAsync(testId);
-            _dbContext.Remove(test);
+            var testDb = _dbContext.Tests.FirstOrDefault(x =>x.TestId == testId);
+            if (testDb != null) 
+            {
+                testDb.IsExpired = true;
+            }
+            
             await _dbContext.SaveChangesAsync();
         }
 
@@ -98,7 +102,6 @@ namespace DigitalCoolBook.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        // Add students to test room
         public async Task<string> AddTestRoomAsync(string[] students, string teacherId, string testId)
         {
             var testRoom = new TestRoom
@@ -185,14 +188,14 @@ namespace DigitalCoolBook.Services
 
             foreach (var testRoom in testRooms)
             {
-                var testFromDb = _dbContext.Tests.FirstOrDefault(x => x.TestId == testRoom.TestId);
+                var testFromDb = _dbContext.Tests.FirstOrDefault(x => x.TestId == testRoom.TestId && !x.IsExpired);
                 tests.Add(testFromDb);
             }
 
             return tests;
         }
 
-        public async Task<List<string>> GetStudentsInTestRoomAsync(string testId)
+        public async Task<List<Student>> GetStudentsInTestRoomAsync(string testId)
         {
             var testRoom = _dbContext.TestRooms
                 .FirstOrDefault(x => x.TestId == testId);
@@ -202,17 +205,17 @@ namespace DigitalCoolBook.Services
                             && !x.Finished)
                 .ToList();
 
-            var studentNames = new List<string>();
+            var students = new List<Student>();
 
             foreach (var testRoomStudent in testRoomStudents)
             {
                 var studentDb = await _dbContext.Students
                     .FirstOrDefaultAsync(x => x.Id == testRoomStudent.StudentId);
 
-                studentNames.Add(studentDb?.Name);
+                students.Add(studentDb);
             }
 
-            return studentNames;
+            return students;
         }
 
         public async Task AddArchivedTest(Test model)
@@ -226,7 +229,7 @@ namespace DigitalCoolBook.Services
                 {
                     TestId = model.TestId,
                     TestName = model.TestName,
-                    Date = DateTime.UtcNow,
+                    Date = DateTime.Now,
                     LessonId = model.LessonId,
                     Place = model.Place,
                     TeacherId = model.TeacherId,

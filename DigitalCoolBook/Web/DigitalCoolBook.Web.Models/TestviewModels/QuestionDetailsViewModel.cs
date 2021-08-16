@@ -1,8 +1,9 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
-{
-    using AutoMapper;
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using DigitalCoolBook.App.Models.TestviewModels;
 
+namespace DigitalCoolBook.Web.Models.TestviewModels
+{
     public class QuestionDetailsViewModel
     {
         public string Title { get; set; }

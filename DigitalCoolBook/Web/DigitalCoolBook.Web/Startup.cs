@@ -58,7 +58,7 @@ namespace DigitalCoolBook.App
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGradeService, GradeService>();
             services.AddTransient<ISubjectService, SubjectService>();
-            services.AddTransient<ITestService, TestService>();
+            services.AddScoped<ITestService, TestService>();
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IScoreService, ScoreService>();
             services.AddTransient<ILiveFeedService, LiveFeedService>();
@@ -89,7 +89,8 @@ namespace DigitalCoolBook.App
 
             services.AddMvc().WithRazorPagesRoot("/BlazorPages");
 
-            services.AddSignalR(options => {
+            services.AddSignalR(options =>
+            {
                 options.EnableDetailedErrors = true; // Remove in production
             }).AddMessagePackProtocol();
         }
@@ -103,7 +104,7 @@ namespace DigitalCoolBook.App
                 using var serviceScope = app.ApplicationServices.CreateScope();
                 using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-               //context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
                 var seeder = new ApplicationDbSeeder(context, serviceProvider, this.Configuration);

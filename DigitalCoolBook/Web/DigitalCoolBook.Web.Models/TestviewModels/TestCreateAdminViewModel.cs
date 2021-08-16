@@ -1,17 +1,15 @@
-﻿using DigitalCoolBook.Web.Models.CategoryViewModels;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DigitalCoolBook.Web.Models.CategoryViewModels;
 
-namespace DigitalCoolBook.App.Models.TestviewModels
+namespace DigitalCoolBook.Web.Models.TestviewModels
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.App.Models.CategoryViewModels;
-
     public class TestCreateAdminViewModel
     {
-        [Required(ErrorMessage = "Въведете място.")]
+        [Required(ErrorMessage = "Enter place")]
         public string Place { get; set; }
 
-        [Required(ErrorMessage="Изберете тема.")]
+        [Required(ErrorMessage="Choose lesson")]
         public string LessonId { get; set; }
 
         public List<LessonsViewModel> Lessons { get; set; }

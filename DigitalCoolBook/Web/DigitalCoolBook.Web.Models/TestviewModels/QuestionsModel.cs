@@ -1,8 +1,8 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
-{
-    using System.Collections.Generic;
-    using DigitalCoolBook.Models;
+﻿using System.Collections.Generic;
+using DigitalCoolBook.Models;
 
+namespace DigitalCoolBook.Web.Models.TestviewModels
+{
     public class QuestionsModel
     {
         public string QuestionId { get; set; }

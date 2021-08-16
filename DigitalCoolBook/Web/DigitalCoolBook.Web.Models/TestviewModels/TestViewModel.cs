@@ -1,10 +1,10 @@
-﻿namespace DigitalCoolBook.App.Models.TestviewModels
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DigitalCoolBook.Models;
 
+namespace DigitalCoolBook.Web.Models.TestviewModels
+{
     public class TestViewModel
     {
         public string TestId { get; set; }
