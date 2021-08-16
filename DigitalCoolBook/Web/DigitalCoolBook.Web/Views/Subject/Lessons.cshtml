@@ -28,33 +28,33 @@
         <div class="mb-3">
             @foreach (var lesson in Model.Lessons)
             {
-                <div>
+                <div class="row d-flex align-items-center">
                     @if (this.User.IsInRole("Student"))
                     {
-                        <div class="col-sm-7 d-flex align-content-center">
+                        <div class="col-sm-7">
                             @if (lesson.IsUnlocked)
                             {
-                                <a class="w-75 btn btn-success mb-2"
+                                <a class="w-75 btn btn-success btn-sm mb-2"
                                    asp-controller="Subject"
                                    asp-action="LessonDetails"
                                    asp-route-lessonId="@lesson.LessonId">@lesson.Title</a>
-                                <i class="fas fa-lg text-success ms-1 fa-unlock"></i>
+                                <i class="fas text-success ms-1 fa-unlock"></i>
                             }
                             else
                             {
                                 <a class="w-75 btn btn-secondary mb-2 disabled" aria-disabled="true">@lesson.Title</a>
-                                <i class="fas fa-lg fa-lock text-danger ms-1"></i>
+                                <i class="fas fa-lock text-danger ms-1"></i>
                             }
                         </div>
                         <div class="col-sm-4">
                             <h5 class="d-inline-block">Score:</h5>
                             @if (lesson.Score >= 70)
                             {
-                                <h4 class="text-success ms-2 d-inline-block">@lesson.Score</h4>
+                                <h4 class="text-success ms-2 d-inline-block">@lesson.Score %</h4>
                             }
                             else
                             {
-                                <h4 class="ms-2 d-inline-block">@lesson.Score</h4>
+                                <h4 class="ms-2 d-inline-block">@lesson.Score %</h4>
                             }
                         </div>
                     }

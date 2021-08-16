@@ -48,13 +48,13 @@ a,
     .portfolio-cat a:hover,
     .footer -menu li a:hover {
         text-decoration: none;
-        color: #1F1F1F;
+        color: burlywood;
     }
 
 /* line 35, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */
 a,
 button {
-    color: darkslateblue;
+    color: saddlebrown;
 }
 
 /* line 40, ../../Arafath/CL/CL september/205. Barber/HTML/scss/reset.scss */

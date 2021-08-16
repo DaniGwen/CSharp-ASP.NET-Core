@@ -1,9 +1,10 @@
 ﻿.navbar {
-    background-color: whitesmoke;
+    background-color: initial;
     height: 70px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    grid-row-start: row1-start;
+    border: 1px solid gray;
+    border-top: none;
     padding: 10px;
 }
 

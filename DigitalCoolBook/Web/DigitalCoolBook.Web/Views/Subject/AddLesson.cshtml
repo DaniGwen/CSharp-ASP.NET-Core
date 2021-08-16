@@ -6,77 +6,81 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Materials control panel</h3>
-    <hr />
-    <form>
-        <div class="col form-group p-0">
-            <label class="col-form-label-lg">Choose Subject</label>
-            <div>
-                <small><strong>Add</strong> or <strong>delete</strong> existing subject</small>
-            </div>
-            @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Subject...", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
-            <div class="buttons-wrapper">
-                <a asp-controller="Subject" asp-action="CreateSubject" class="btn btn-sm btn-outline-secondary">Create</a>
-                <a href="#" id="deleteSubject" class="btn btn-sm btn-outline-danger">Delete</a>
-            </div>
-        </div>
-        <div class="col form-group p-0">
-            <label class="col-form-label-lg">Choose Category</label>
-            <div>
-                <small><strong>Add</strong> or <strong>remove</strong> existing section</small>
-            </div>
-            @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Section...", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
-            <div class="buttons-wrapper">
-                <a asp-controller="Subject" asp-action="CreateCategory" class="btn btn-sm btn-outline-secondary">Create</a>
-                <a href="#" id="deleteCategory" class="btn btn-sm btn-outline-danger">Delete</a>
-            </div>
-        </div>
-        <div class="mb-3 mt-3">
-            <small class="p-2 border-start-3 rounded">
-                The higher the level of access more tests need to be passed successfully in order to access it.
-                All lesson topics with access level > 1 will be accessible only when the average score is >= 70 points.
-            </small>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Access level</label>
-            </div>
-            <select class="form-select form-select-sm" id="inputGroupSelect01">
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </div>
-        <span class="text-danger" id="alertLevel"></span>
+    <div class="page-wrapper">
+        <h3>Materials control panel</h3>
         <hr />
-        <div>
-            <label class="col-form-label-lg">Topic</label>
-            <input type="text" class="form-control" id="title" name="title" />
-            <span class="row text-danger ml-2 mb-1" id="alertTitle"></span>
+        <form>
+            <div class="col form-group p-0">
+                <label class="col-form-label-lg">Choose Subject</label>
+                <div>
+                    <small class="text-light"><strong>Add</strong> or <strong>delete</strong> existing subject</small>
+                </div>
+                @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Subject...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
+                <div class="buttons-wrapper">
+                    <a asp-controller="Subject" asp-action="CreateSubject" class="btn btn-sm btn-secondary">Create</a>
+                    <a href="#" id="deleteSubject" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
 
-            <label class="col-form-label-lg">Content</label>
-            <textarea class="form-control" id="content" name="content" rows="10"></textarea>
-            <span class="text-danger" id="alertContent"></span>
-        </div>
-        <div class="d-flex justify-content-end mt-2">
-            <a class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Overview and edit all lesson themes" href="/Subject/LessonsPreview">Topics overview</a>
-        </div>
-        <div class="buttons-wrapper">
-            <a asp-controller="Admin" 
-               asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+            <div class="col form-group p-0">
+                <label class="col-form-label-lg">Choose Category</label>
+                <div>
+                    <small class="text-light"><strong>Add</strong> or <strong>remove</strong> existing section</small>
+                </div>
+                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "Section...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+                <div class="buttons-wrapper">
+                    <a asp-controller="Subject" asp-action="CreateCategory" class="btn btn-sm btn-secondary">Create</a>
+                    <a href="#" id="deleteCategory" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
 
-            <input class="btn btn-outline-success btn-sm" type="submit" value="Create" />
-        </div>
-    </form>
+            <div class="mb-3 mt-3">
+                <small class="p-2 text-light rounded">
+                    The higher the level of access more tests need to be passed successfully in order to access it.
+                    All lesson topics with access level > 1 will be accessible only when the average score is >= 70 points.
+                </small>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Access level</label>
+                </div>
+                <select class="form-select form-select-sm" id="inputGroupSelect01">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <span class="text-danger" id="alertLevel"></span>
+            <hr />
+            <div>
+                <label class="col-form-label-lg">Topic</label>
+                <input type="text" class="form-control" id="title" name="title" />
+                <span class="row text-danger ml-2 mb-1" id="alertTitle"></span>
+
+                <label class="col-form-label-lg">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+                <span class="text-danger" id="alertContent"></span>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                <a class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="bottom" title="Overview and edit all lesson themes" href="/Subject/LessonsPreview">Topics overview</a>
+            </div>
+            <div class="buttons-wrapper">
+                <a asp-controller="Admin"
+                   asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+
+                <input class="btn btn-success btn-sm" type="submit" value="Create" />
+            </div>
+        </form>
+    </div>
 </div>
 
 <div id="successMessage"></div>

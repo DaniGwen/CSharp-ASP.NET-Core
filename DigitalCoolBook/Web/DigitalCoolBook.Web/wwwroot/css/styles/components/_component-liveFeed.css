@@ -1,4 +1,5 @@
 ﻿.live-feed-wrapper {
+    z-index: 1000;
     position: absolute;
     left: 0;
     top: 40%;
@@ -13,7 +14,7 @@
 
 .live-feed-messages {
     overflow: auto;
-    height: 270px;
+    height: 298px;
 }
 
 .live-feed-username {
@@ -32,12 +33,12 @@
     transition: 0.2s;
     border: none;
     font-size: 26px;
-    color: darkslateblue;
+    color: teal;
 }
 
     .live-feed-toggle:hover {
         transform: scale(1.2);
-        color: slateblue;
+        color: gray;
         cursor: pointer;
     }
 

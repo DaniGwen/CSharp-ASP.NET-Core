@@ -1,18 +1,19 @@
-﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DigitalCoolBook.App.Models.CategoryViewModels;
 
+namespace DigitalCoolBook.Web.Models.CategoryViewModels
+{
     public class LessonEditViewModel
     {
         public string LessonId { get; set; }
 
-        [Required(ErrorMessage ="Въведете заглавие")]
-        [StringLength(maximumLength: 40, ErrorMessage = "Въведете заглавие до 40 символа и минимум 3 символа.", MinimumLength = 3)]
+        [Required(ErrorMessage ="Enter title")]
+        [StringLength(maximumLength: 60, ErrorMessage = "Minimum 3 symbols, maximum 60", MinimumLength = 3)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage ="Въведете съдържание")]
-        [StringLength(maximumLength: 1000, ErrorMessage = "Минимално съдържание 20 символа.", MinimumLength = 20)]
+        [Required(ErrorMessage ="Enter content")]
+        [StringLength(maximumLength: 20000, ErrorMessage = "Minimum 20 symbols", MinimumLength = 20)]
         public string Content { get; set; }
 
         public IList<CategoryViewModel> Categories { get; set; }

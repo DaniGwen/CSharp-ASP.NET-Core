@@ -1,7 +1,7 @@
 ﻿.subject-card {
     margin: 25px 15px;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
+    background-color: inherit;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgba(128, 128, 128, 0.616);
     transition-duration: 0.3s;

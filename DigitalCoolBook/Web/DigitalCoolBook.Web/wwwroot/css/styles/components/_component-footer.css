@@ -1,7 +1,7 @@
 ﻿footer {
     display: flex !important;
     justify-content: space-evenly;
-    background-color: whitesmoke;
+    background-color: initial;
     padding: 10px;
     align-items: center;
     width: 100%;
@@ -10,6 +10,8 @@
     position: absolute;
     bottom: 0;
     min-height: 90px;
+    border: 1px solid gray;
+    border-bottom: none;
 }
 
 .footer-ul {

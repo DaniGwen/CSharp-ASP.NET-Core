@@ -16,83 +16,86 @@
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-    <div class="body-container">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-light">
-                <span class="navbar-brand brand-text">DigitalCoolBook</span>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="container-fluid" id="navbarNavDropdown">
-                    <ul class="nav navbar-nav nav-left-wrapper">
-                        <li class="nav-item active">
-                            <a class="link-lg" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @if (this.User.IsInRole("Teacher"))
-                        {
-                            <partial name="_PartialTeacherNav" />
-                        }
-                        else if (this.User.IsInRole("Admin"))
-                        {
-                            <partial name="_PartialAdminNav" />
-                        }
-                        else if (this.User.IsInRole("Student"))
-                        {
-                            <partial name="_PartialStudentNav" />
-                        }
-
-                    </ul>
-                    <ul class="nav navbar-nav nav-right">
-                        <li class="nav-right-wrapper">
-                            @if (this.User.Identity.IsAuthenticated)
+    <div class="background-overlay">
+        <div class="body-container">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-light">
+                    <span class="navbar-brand brand-text">DigitalCoolBook</span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="container-fluid" id="navbarNavDropdown">
+                        <ul class="nav navbar-nav nav-left-wrapper">
+                            <li class="nav-item active">
+                                <a class="link-lg" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            @if (this.User.IsInRole("Teacher"))
                             {
-                                <div><span class="font-bold">@User.Identity.Name</span></div>
-                                <div>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <form class="nav-item" asp-controller="Admin" asp-action="AdminPanel" method="get">
-                                            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-cog"></i> Admin Control Panel</button>
-                                        </form>
-                                    }
-                                    @if (this.User.IsInRole("Student"))
-                                    {
-                                        <form class="nav-item" asp-controller="Student" asp-action="Panel" method="get">
-                                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-th"></i> My profile</button>
-                                        </form>
-                                    }
-
-                                    @if (this.User.IsInRole("Teacher"))
-                                    {
-                                        <form class="nav-item" asp-controller="Teacher" asp-action="Panel" method="get">
-                                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-th"></i> My profile</button>
-                                        </form>
-                                    }
-                                </div>
-                                <div>
-                                    <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                        <button type="submit"
-                                                class="btn btn-outline-dark btn-sm">
-                                            <span class="fa fa-user"></span>Sign out
-                                        </button>
-                                    </form>
-                                </div>
+                                <partial name="_PartialTeacherNav" />
                             }
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="collapse navbar-collapse " id="navbarNavDropdown"></div>
-        </header>
-        <main>
-            <div class="content-wrapper mt-3">
-                @RenderBody()
-                <!--Popup Dialog-->
-                <div title="Active test" id="dialog"></div>
-            </div>
-        </main>
+                            else if (this.User.IsInRole("Admin"))
+                            {
+                                <partial name="_PartialAdminNav" />
+                            }
+                            else if (this.User.IsInRole("Student"))
+                            {
+                                <partial name="_PartialStudentNav" />
+                            }
 
-        <partial name="_PartialFooter" />
+                        </ul>
+                        <ul class="nav navbar-nav nav-right">
+                            <li class="nav-right-wrapper">
+                                @if (this.User.Identity.IsAuthenticated)
+                                {
+                                    <div><strong>@User.Identity.Name</strong></div>
+                                    <div>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <form class="nav-item" asp-controller="Admin" asp-action="AdminPanel" method="get">
+                                                <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-cog"></i> Admin Control Panel</button>
+                                            </form>
+                                        }
+                                        @if (this.User.IsInRole("Student"))
+                                        {
+                                            <form class="nav-item" asp-controller="Student" asp-action="Panel" method="get">
+                                                <button class="btn btn-secondary btn-sm"><i class="fas fa-th"></i> My profile</button>
+                                            </form>
+                                        }
+
+                                        @if (this.User.IsInRole("Teacher"))
+                                        {
+                                            <form class="nav-item" asp-controller="Teacher" asp-action="Panel" method="get">
+                                                <button class="btn btn-secondary btn-sm"><i class="fas fa-th"></i> My profile</button>
+                                            </form>
+                                        }
+                                    </div>
+                                    <div>
+                                        <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                            <button type="submit"
+                                                    class="btn btn-dark btn-sm">
+                                                <span class="fa fa-user"></span> Sign out
+                                            </button>
+                                        </form>
+                                    </div>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="collapse navbar-collapse " id="navbarNavDropdown"></div>
+            </header>
+            <main>
+                <div class="content-wrapper mt-3">
+                    @RenderBody()
+                    <!--Popup Dialog-->
+                    <div title="Active test" id="dialog"></div>
+                </div>
+            </main>
+
+            <partial name="_PartialFooter" />
+        </div>
     </div>
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

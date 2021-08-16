@@ -1,5 +1,10 @@
 @import "styles/elements/_element-body.css";
 @import "styles/elements/_element-select.css";
+@import "styles/elements/_element-hr.css";
+@import "styles/elements/_element-span.css";
+@import "styles/elements/_element-label.css";
+@import "styles/elements/_element-paragraph.css";
+@import "styles/elements/_element-li.css";
 
 @import "styles/settings/_settings-typography.css";
 
@@ -21,6 +26,7 @@
 @import "styles/components/_component-blazorTodoApp.css";
 @import "styles/components/_component-privacy.css";
 @import "styles/components/_component-notifier.css";
+@import "styles/components/_component-htmlTable.css";
 
 @import "styles/utilities/_utilities-animations.css";
 @import "styles/utilities/_utilities-dcbElements.css";
@@ -91,9 +97,9 @@ input[type="radio"] {
     font-size: 1.7rem !important;
 }
 
-.fa-lg:hover {
-    transform: scale(1.1);
-}
+    .fa-lg:hover {
+        transform: scale(1.1);
+    }
 
 .link-lg {
     font-size: 18px;
@@ -133,11 +139,11 @@ input[type="radio"] {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: darkslateblue;
+    background: teal;
     border-radius: 10px;
 }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: darkblue;
+        background: #006400;
     }

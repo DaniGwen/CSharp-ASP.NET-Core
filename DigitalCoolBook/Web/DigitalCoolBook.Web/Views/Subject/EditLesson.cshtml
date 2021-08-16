@@ -1,4 +1,4 @@
-﻿@model DigitalCoolBook.App.Models.CategoryViewModels.LessonEditViewModel
+﻿@model DigitalCoolBook.Web.Models.CategoryViewModels.LessonEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,34 +6,39 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <form asp-action="EditLesson">
-        <input hidden id="lessonId" value="@Model.LessonId" />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group mb-2">
-            <label class="form-label">Title</label>
-            <input asp-for="Title" id="title" class="form-control" />
-            <span id="titleAlert" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-2">
-            <label class="form-label">Content</label>
-            <textarea asp-for="Content" id="content" class="form-control" rows="10"></textarea>
-            <span id="contentAlert" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-2">
-            <select class="form-select" aria-label="Default select example" id="selectedCategory">
-                <option selected>Select category</option>
-                @foreach (var category in Model.Categories)
-                {
-                    <option value="@category.Id">@category.Title</option>
-                }
-            </select>
-            <span id="categoryAlert" class="text-danger"></span>
-        </div>
-        <div class="buttons-wrapper">
-            <a asp-action="LessonsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-            <input class="btn btn-outline-success btn-sm" type="submit" value="Save" />
-        </div>
-    </form>
+    <div class="page-wrapper">
+        <form asp-action="EditLesson">
+            <input hidden id="lessonId" value="@Model.LessonId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-2">
+                <label class="form-label">Title</label>
+                <input asp-for="Title" id="title" class="form-control" />
+                <span id="titleAlert" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label class="form-label">Content</label>
+                <textarea asp-for="Content" id="content" class="form-control" rows="10"></textarea>
+                <span id="contentAlert" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <select class="form-select" aria-label="Default select example" id="selectedCategory">
+                    <option selected>Select category</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Title</option>
+                    }
+                </select>
+                <span id="categoryAlert" class="text-danger"></span>
+            </div>
+            <div class="buttons-wrapper mt-4 mb-4">
+                <a asp-action="LessonsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+                <input class="btn btn-success btn-sm" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+   
 </div>
 
 <div id="dialog" title="Message"></div>

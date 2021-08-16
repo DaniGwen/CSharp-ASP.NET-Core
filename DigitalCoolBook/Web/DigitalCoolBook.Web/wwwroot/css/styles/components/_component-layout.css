@@ -6,6 +6,17 @@
     overflow: hidden;
 }
 
+.background-overlay {
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .content-wrapper {
     width: 90%;
     margin: 0 auto;

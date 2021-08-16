@@ -6,13 +6,15 @@
     Layout = "_Layout";
 }
 
-<div class="container-fluid">
-    <h3 class="text-center">Teacher Control Panel</h3>
-    <p>
-        <a asp-controller="Teacher" asp-action="RegisterTeacher" class="btn btn-sm btn-outline-info">Add Teacher</a>
-    </p>
-    <table class="table table-hover" id="teacherDetails">
-        <thead>
+<div class="offset-md-2 col-md-8 offset-sm-0 col-sm-12 mt-3">
+    <div class="page-wrapper">
+        <h3>Teacher Control Panel</h3>
+        <hr />
+        <a asp-controller="Teacher"
+           asp-action="RegisterTeacher"
+           class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Teacher</a>
+        <table class="table table-hover" id="teacherDetails">
+            <thead>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -23,11 +25,11 @@
                 <th scope="col">Home phone number</th>
                 <th></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @if (!Model.Any())
             {
-                <tr class="text-center">
+                <tr>
                     <td>No profiles..</td>
                 </tr>
             }
@@ -44,12 +46,12 @@
                         <td>@teacher.MobilePhone</td>
                         <td>@teacher.Telephone</td>
                         <td class="buttons-vertical-wrapper">
-                            <a class="btn btn-sm btn-outline-danger btn-delete" href="#" id="@teacher.Id">Delete</a>
-                            <a class="btn btn-sm btn-outline-warning"
+                            <a class="btn btn-sm btn-danger btn-delete" href="#" id="@teacher.Id">Delete</a>
+                            <a class="btn btn-sm btn-warning"
                                asp-controller="Teacher"
                                asp-action="EditTeacher"
                                asp-route-id="@teacher.Id">Edit</a>
-                            <a class="btn btn-sm btn-outline-warning"
+                            <a class="btn btn-sm btn-warning"
                                asp-controller="Teacher"
                                asp-action="ChangePassword"
                                asp-route-id="@teacher.Id">Change password</a>
@@ -57,9 +59,13 @@
                     </tr>
                 }
             }
-        </tbody>
-    </table>
-    <a class="mb-2" href="/Admin/AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+            </tbody>
+        </table>
+        <div class="buttons-wrapper mb-4 mt-4">
+            <a asp-controller="Admin"
+               asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
 </div>
 
 @*Pop up dialogs*@

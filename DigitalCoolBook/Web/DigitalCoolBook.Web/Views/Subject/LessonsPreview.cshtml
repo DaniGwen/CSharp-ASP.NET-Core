@@ -6,25 +6,26 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Topics overview</h3>
-    <hr />
-    @foreach (var item in Model)
-    {
-        <div class="row mb-2 align-items-baseline">
-            <div class="col-10">
-                <a class="btn btn-outline-info w-100" id="lessonDetails">@item.Title</a>
+    <div class="page-wrapper">
+        <h3>Topics overview</h3>
+        <hr />
+        @foreach (var item in Model)
+        {
+            <div class="row mb-2 align-items-baseline">
+                <div class="col">
+                    <p id="lessonDetails">@item.Title</p>
+                </div>
+                <div class="col buttons-wrapper">
+                    <a class="btn btn-sm btn-warning" href="/Subject/EditLesson/@item.LessonId">Edit</a>
+                    <a class="btn btn-sm btn-danger" onclick="Delete(this)" id="delete" value="@item.LessonId">Delete</a>
+                </div>
             </div>
-            <div class="col-2 buttons-wrapper">
-                <a class="btn btn-sm btn-outline-warning" href="/Subject/EditLesson/@item.LessonId">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" onclick="Delete(this)" id="delete" value="@item.LessonId">Delete</a>
-            </div>
-        </div>
-    }
-    <div class="buttons-wrapper">
-        <a asp-controller="Admin" 
+        }
+    </div>
+    <div class="buttons-wrapper mt-4 mb-4">
+        <a asp-controller="Admin"
            asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-
-        <a class="btn btn-success btn-sm" asp-action="AddLesson">New Topic</a>
+        <a class="btn btn-success btn-sm" asp-action="AddLesson"><i class="fas fa-plus"></i> Topic</a>
     </div>
 </div>
 

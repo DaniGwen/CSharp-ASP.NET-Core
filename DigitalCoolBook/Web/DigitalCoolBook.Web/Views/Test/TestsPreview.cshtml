@@ -6,23 +6,29 @@
 }
 
 <div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
-    <h3>Tests</h3>
-    <div class="form-group">
-        <a class="btn btn-sm btn-outline-secondary" asp-action="CreateTest">Create test</a>
-        <div class="col-form-label-lg">
-            @Html.DisplayNameFor(model => model.TestName)
-        </div>
-        @foreach (var item in Model)
-        {
-            <div class="buttons-wrapper">
-                <a class="btn btn-outline-info btn-sm" 
-                   asp-controller="Test" 
-                   asp-action="GetTestDetails" 
-                   asp-route-id="@item.TestId">@item.TestName</a>
-                <a class="btn btn-outline-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Delete</a>
+    <div class="page-wrapper">
+        <h3>Tests</h3>
+        <hr />
+        <a class="btn btn-sm btn-success" asp-action="CreateTest"><i class="fas fa-plus"></i> Test</a>
+        <div class="form-group mt-2">
+            @foreach (var item in Model)
+            {
+                <div class="row mt-2">
+                    <div class=col>
+                        <a class="link-lg"
+                           asp-controller="Test"
+                           asp-action="GetTestDetails"
+                           asp-route-id="@item.TestId">@item.TestName</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-danger btn-sm" id="@item.TestId" onclick="DeleteTest(this)">Delete</a>
+                    </div>
+                </div>
+            }
+            <div class="buttons-wrapper mt-4 mb-4">
+                <a asp-controller="Admin" asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
             </div>
-        }
-        <a href="/Admin/AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+        </div>
     </div>
 </div>
 
