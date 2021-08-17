@@ -78,7 +78,7 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     await _userManager.AddToRoleAsync(student, "Student");
 
-                    _toasterService.Success("Account registered");
+                    _toasterService.Success("Student account has been registered");
                     return this.Redirect("/Home/Index");
                 }
 
@@ -175,10 +175,18 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
-            await _userService.RemoveStudentAsync(id);
+            try
+            {
+                await _userService.RemoveStudentAsync(id);
 
-            _toasterService.Success("Account has been removed");
-            return this.Redirect("/Home/Index");
+                _toasterService.Success("Account has been removed");
+            }
+            catch (Exception)
+            {
+                _toasterService.Error("Account was not deleted");
+            }
+           
+            return this.RedirectToAction("EditStudents");
         }
 
         [HttpGet]

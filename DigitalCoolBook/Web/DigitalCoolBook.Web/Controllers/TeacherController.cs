@@ -67,8 +67,9 @@
                 {
                     await _userManager.AddToRoleAsync(teacher, "Teacher");
 
-                    this.TempData["SuccessMsg"] = "The account has been created";
-                    return this.Redirect("/Home/Success");
+                   _toasterService.Success("Teacher account has been created");
+
+                    return this.Redirect("/Home/Index");
                 }
 
                 foreach (var error in result.Errors)
@@ -136,21 +137,24 @@
             return this.View(studentsForView);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             try
             {
                 await _userService.RemoveTeacherAsync(id);
-                await _userService.SaveChangesAsync();
 
-                return this.Json("Account has been deleted");
+                _toasterService.Success("Account has been deleted");
+                //return this.Json("Account has been deleted");
             }
             catch (Exception)
             {
-                return this.Json("Error deleting account");
+                _toasterService.Error("Error deleting account");
+                //return this.Json("Error deleting account");
             }
+
+            return RedirectToAction("EditTeachers");
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿@model DigitalCoolBook.App.Models.CategoryViewModels.CategoryAdminCreateViewModel
+﻿@model DigitalCoolBook.Web.Models.CategoryViewModels.CategoryAdminCreateViewModel
 
 @{
     ViewData["Title"] = "CreateCategory";
@@ -15,16 +15,16 @@
             @Html.DropDownListFor(model => model.SubjectId, new SelectList(Model.Subjects, "SubjectId", "Name"), "Select subject", new { @class = "form-control form-control-sm" })
             @Html.ValidationMessageFor(m => m.SubjectId, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label asp-for="Title" class="form-label">Title</label>
             <input id="title" asp-for="Title" class="form-control form-control-sm" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-        <div class="buttons-wrapper">
-            <a asp-controller="Admin" 
+        <div class="buttons-wrapper mt-4 mb-4">
+            <a asp-controller="Admin"
                asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
 
-            <a class="btn btn-outline-success btn-sm" id="submit">Create</a>
+            <a class="btn btn-success btn-sm" id="submit">Create</a>
         </div>
     </form>
 </div>
@@ -54,6 +54,7 @@
                                     }
                                 }
                             });
+                        $("#successMessage").dialog({ title: "Success" });
                         $("#successMessage").html("Category created successfully");
                     },
                     error: function (request, err, message) {
@@ -65,8 +66,8 @@
                                 }
                             }
                         });
-                        $('#errorMessageDialog').dialog({ title: 'Error' });
-                        $("#errorMessageDialog").html("Error while creating category");
+                        $('#errorMessageDialog').dialog({ title: 'Warning' });
+                        $("#errorMessageDialog").html("Please select Subject and enter Title");
                     }
                 });
             });

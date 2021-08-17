@@ -187,6 +187,8 @@ namespace DigitalCoolBook.App.Controllers
         [Authorize(Roles = "Teacher, Admin")]
         public IActionResult Tests()
         {
+            if (User.IsInRole("Admin")) { return RedirectToAction("TestsPreview"); }
+
             var teacherId = _userManager.GetUserId(this.User);
 
             var tests = _testService.GetTests()
@@ -614,12 +616,14 @@ namespace DigitalCoolBook.App.Controllers
         {
             try
             {
-                await _testService.SetTestExpiredAsync(testId);
+                await _testService.RemoveTest(testId);
 
+                //_toasterService.Success("Test is deleted");
                 return this.Json("Test is deleted.");
             }
             catch (Exception)
             {
+                //_toasterService.Error("Error deleting test!");
                 return this.Json("Error deleting test!");
             }
         }

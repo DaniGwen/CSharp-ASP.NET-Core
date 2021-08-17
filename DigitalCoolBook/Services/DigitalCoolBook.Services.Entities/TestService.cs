@@ -102,6 +102,12 @@ namespace DigitalCoolBook.Services
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task RemoveTest(string testId)
+        {
+            _dbContext.Tests.Remove(_dbContext.Tests.FirstOrDefault(x => x.TestId == testId));
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<string> AddTestRoomAsync(string[] students, string teacherId, string testId)
         {
             var testRoom = new TestRoom

@@ -16,27 +16,29 @@
             {
                 <div class="row align-items-center mt-3">
                     <p class="col-form-label-lg col-md-8">@test.TestName</p>
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div class="col p-0">
-                                @if (test.IsActive)
-                                {
-                                    <a class="btn btn-success btn-sm"
-                                       asp-controller="Test"
-                                       asp-action="StartTest"
-                                       asp-route-id="@test.TestId">Active</a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-primary btn-sm"
-                                       asp-controller="Test"
-                                       asp-action="SetTestTimer"
-                                       asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Configure Test</a>
-                                }
-
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col p-0">
+                                    @if (test.IsActive)
+                                    {
+                                        <a class="btn btn-success btn-sm"
+                                           asp-controller="Test"
+                                           asp-action="StartTest"
+                                           asp-route-id="@test.TestId">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary btn-sm"
+                                           asp-controller="Test"
+                                           asp-action="SetTestTimer"
+                                           asp-route-testId="@test.TestId"><i class="fas fa-pencil-alt"></i> Configure Test</a>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             }
         }

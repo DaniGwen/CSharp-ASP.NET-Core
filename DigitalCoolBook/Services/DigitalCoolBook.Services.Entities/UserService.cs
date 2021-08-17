@@ -36,7 +36,7 @@
 
         public async Task<Teacher> GetTeacherAsync(string id)
         {
-            return await _dbContext.Teachers.FindAsync(id);
+            return await _dbContext.Teachers.FirstOrDefaultAsync(x=>x.Id == id);
         }
 
         public async Task RemoveStudentAsync(string id)
@@ -60,8 +60,9 @@
         public async Task RemoveTeacherAsync(string id)
         {
             var teacher = await this.GetTeacherAsync(id);
-            this._dbContext.Teachers.Remove(teacher);
-            await this.SaveChangesAsync();
+            _dbContext.Teachers.Remove(teacher);
+
+            await _dbContext.SaveChangesAsync();
         }
 
         public IdentityUser GetUserByEmail(string email)

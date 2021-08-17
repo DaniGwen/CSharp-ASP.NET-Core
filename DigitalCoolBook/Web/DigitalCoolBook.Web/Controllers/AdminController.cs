@@ -186,22 +186,25 @@ namespace DigitalCoolBook.App.Controllers
             return this.Redirect("/Home/Index");
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteParaleloAsync(string id)
         {
             try
             {
-                var paralelo = await this._gradeService.GetGradeParaleloAsync(id);
-                await this._gradeService.RemoveGradeParaleloAsync(paralelo);
-                await this._gradeService.SaveChangesAsync();
+                var paralelo = await _gradeService.GetGradeParaleloAsync(id);
+                await _gradeService.RemoveGradeParaleloAsync(paralelo);
+                await _gradeService.SaveChangesAsync();
+
+                _toasterService.Success("Class was removed");
             }
             catch (Exception)
             {
-                _toasterService.Error("Error removing");
+                _toasterService.Error("Error removing the class");
                 return BadRequest();
             }
 
-            _toasterService.Success("Removed successfully");
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction("EditParalelos");
         }
 
         [HttpGet]

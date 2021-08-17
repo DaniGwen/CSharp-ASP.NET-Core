@@ -52,28 +52,33 @@
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <form class="nav-item" asp-controller="Admin" asp-action="AdminPanel" method="get">
-                                                <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-cog"></i> Admin Control Panel</button>
+                                                <button class="btn btn-secondary btn-sm">
+                                                    <i class="fas fa-users-cog"></i> Control Panel
+                                                </button>
                                             </form>
                                         }
                                         @if (this.User.IsInRole("Student"))
                                         {
                                             <form class="nav-item" asp-controller="Student" asp-action="Panel" method="get">
-                                                <button class="btn btn-secondary btn-sm"><i class="fas fa-th"></i> My profile</button>
+                                                <button class="btn btn-secondary btn-sm">
+                                                    <i class="fas fa-th"></i> My profile
+                                                </button>
                                             </form>
                                         }
-
                                         @if (this.User.IsInRole("Teacher"))
                                         {
                                             <form class="nav-item" asp-controller="Teacher" asp-action="Panel" method="get">
-                                                <button class="btn btn-secondary btn-sm"><i class="fas fa-th"></i> My profile</button>
+                                                <button class="btn btn-secondary btn-sm">
+                                                    <i class="fas fa-th"></i> My profile
+                                                </button>
                                             </form>
                                         }
                                     </div>
                                     <div>
                                         <form class="nav-item" asp-area="Identity" asp-page="/Account/Logout" method="post">
                                             <button type="submit"
-                                                    class="btn btn-dark btn-sm">
-                                                <span class="fa fa-user"></span> Sign out
+                                                    class="btn btn-secondary btn-sm">
+                                                <i class="fa fa-user"></i> Sign out
                                             </button>
                                         </form>
                                     </div>
@@ -96,7 +101,6 @@
         </div>
     </div>
 
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="/js/jquery-ui.min.js"></script>
@@ -116,9 +120,8 @@
     {
         <partial name="_PartialNotifier" />
     }
-
-    @await Component.InvokeAsync("Notyf")
-
+    <partial name="_ValidationScriptsPartial" />
     <script src="_framework/blazor.server.js"></script>
+    @await Component.InvokeAsync("Notyf")
 </body>
 </html>

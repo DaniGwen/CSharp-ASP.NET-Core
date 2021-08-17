@@ -46,7 +46,11 @@
                         <td>@teacher.MobilePhone</td>
                         <td>@teacher.Telephone</td>
                         <td class="buttons-vertical-wrapper">
-                            <a class="btn btn-sm btn-danger btn-delete" href="#" id="@teacher.Id">Delete</a>
+                            <a class="btn btn-sm btn-danger btn-delete" 
+                               asp-controller="Teacher"
+                               asp-action="Delete"
+                               asp-route-id="@teacher.Id"
+                               id="@teacher.Id">Delete</a>
                             <a class="btn btn-sm btn-warning"
                                asp-controller="Teacher"
                                asp-action="EditTeacher"
@@ -68,12 +72,9 @@
     </div>
 </div>
 
-@*Pop up dialogs*@
-<div id="dialog-confirm" title="Delete">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-        The profile will be deleted. Continue?
-    </p>
+@*Pop ups*@
+@*<div id="dialog-confirm" title="Delete">
+    <p>The profile will be deleted. Continue?</p>
 </div>
 
 <div id="successMessage"></div>
@@ -82,10 +83,10 @@
     <p style="max-height:280px; overflow:auto;" id="errorMessage">
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
     </p>
-</div>
+</div>*@
 
 @section Scripts{
-    <script>
+    @*<script>
         $(function () {
             $("#dialog-confirm").hide();
             $(".btn-delete").click(function () {
@@ -107,6 +108,7 @@
                                             "Ok": function () { $(this).dialog('close', location.href = "/Teacher/EditTeachers"); }
                                         }
                                     });
+                                    $("#successMessage").dialog({ title: "Success" });
                                     $("#successMessage").html(message);
                                 },
                                 // error dialog
@@ -115,6 +117,7 @@
                                         modal: true,
                                         buttons: { "close": function () { $(this).dialog("close"); } }
                                     });
+                                    $("#errorMessage").dialog({title: "Error"});
                                     $("#errorMessage").html(message);
                                 }
                             });
@@ -124,5 +127,5 @@
                 });
             });
         });
-    </script>
+    </script>*@
 }

@@ -49,7 +49,11 @@
                     <td>@student.Address</td>
                     <td>@student.GradeName</td>
                     <td class="buttons-vertical-wrapper">
-                        <a class="btn-delete btn btn-danger btn-sm" href="#" id="@student.Id">Delete</a>
+                        <a class="btn-delete btn btn-danger btn-sm"
+                           asp-controller="Student"
+                           asp-action="DeleteStudent"
+                           asp-route-id="@student.Id"
+                           id="@student.Id">Delete</a>
                         <a class="btn btn-warning btn-sm"
                            asp-controller="Student"
                            asp-action="EditStudent"
@@ -70,7 +74,7 @@
 </div>
 
 @*Dialogs*@
-<div id="dialog-confirm" title="Delete">
+@*<div id="dialog-confirm" title="Delete">
     <p>
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
         The profile will be deleted. Continue?
@@ -83,11 +87,11 @@
     <p style="max-height:280px; overflow:auto;" id="errorMessage">
         <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
     </p>
-</div>
+</div>*@
 
 @section Scripts
 {
-    <script>
+    @*<script>
         $(function () {
             $("#dialog-confirm").hide();
             $(".btn-delete").click(function () {
@@ -133,5 +137,5 @@
                 });
             });
         });
-    </script>
+    </script>*@
 }

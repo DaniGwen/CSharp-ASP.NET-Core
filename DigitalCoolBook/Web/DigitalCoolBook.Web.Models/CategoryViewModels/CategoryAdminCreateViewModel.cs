@@ -1,12 +1,12 @@
-﻿namespace DigitalCoolBook.App.Models.CategoryViewModels
-{
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using DigitalCoolBook.App.Models.SubjectViewModels;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DigitalCoolBook.App.Models.SubjectViewModels;
 
+namespace DigitalCoolBook.Web.Models.CategoryViewModels
+{
     public class CategoryAdminCreateViewModel
     {
-        [Required(ErrorMessage = "Моля въведете заглавие.")]
+        [Required(ErrorMessage = "Please enter title")]
         public string Title { get; set; }
 
         [Required]
