@@ -97,19 +97,20 @@ namespace DigitalCoolBook.App
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            //context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+
+            //Seed initial data
+            var seeder = new ApplicationDbSeeder(context, serviceProvider, this.Configuration);
+            seeder.CreateRoles().Wait();
+            seeder.SeedDbAsync().Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
-                using var serviceScope = app.ApplicationServices.CreateScope();
-                using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-                //context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-                var seeder = new ApplicationDbSeeder(context, serviceProvider, this.Configuration);
-                seeder.CreateRoles().Wait();
-                seeder.SeedDbAsync().Wait();
             }
             else
             {
