@@ -4,6 +4,7 @@ using DigitalCoolBook.Services.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalCoolBook.Services
 {
@@ -38,9 +39,16 @@ namespace DigitalCoolBook.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<Answer> GetAnswerAsync(string correctAnswerId)
+        public async Task SetAnswerCorrectAsync(string correctAnswerId)
         {
-            return await this.context.Answers.FindAsync(correctAnswerId);
+            var correctAnswer =  await this.context.Answers
+                .FirstOrDefaultAsync(x => x.AnswerId == correctAnswerId);
+
+            if (correctAnswer != null)
+            {
+                correctAnswer.IsCorrect = true;
+                await context.SaveChangesAsync();
+            }
         }
 
         public IQueryable<Answer> GetAnswers()

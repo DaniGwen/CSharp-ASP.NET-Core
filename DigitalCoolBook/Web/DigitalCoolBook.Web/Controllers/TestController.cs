@@ -159,11 +159,8 @@ namespace DigitalCoolBook.App.Controllers
                 // Sets correct answers to true
                 foreach (var correctAnswer in correctAnswerIds)
                 {
-                    var answer = await _questionService.GetAnswerAsync(correctAnswer);
-                    answer.IsCorrect = true;
+                   await _questionService.SetAnswerCorrectAsync(correctAnswer);
                 }
-
-                await _questionService.SaveChangesAsync();
 
                 _toasterService.Success("Test successfully saved");
             }
@@ -250,6 +247,7 @@ namespace DigitalCoolBook.App.Controllers
                 {
                     test.TeacherId = teacherId;
                     test.Timer = model.Timer;
+                    test.IsActive = true;
                 }
 
                 var testStudents = new List<TestStudent>();
@@ -794,7 +792,6 @@ namespace DigitalCoolBook.App.Controllers
 
         private async Task RemoveTestRoomAndCreateArchive(Test test)
         {
-            // Test room is empty so we remove it along with the students in it
             await _testService.RemoveTestRoomAsync(test.TestId);
             await _testService.SetTestExpiredAsync(test.TestId);
             await _testService.AddArchivedTest(test);

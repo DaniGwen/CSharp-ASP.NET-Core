@@ -100,7 +100,7 @@ namespace DigitalCoolBook.App
             using var serviceScope = app.ApplicationServices.CreateScope();
             using var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             //Seed initial data

@@ -34,5 +34,7 @@
         public ICollection<Question> Questions { get; set; }
 
         public bool IsExpired { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

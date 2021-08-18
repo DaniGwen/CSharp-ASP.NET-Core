@@ -21,7 +21,7 @@ namespace DigitalCoolBook.Services.Contracts
 
         Task AddAnswersAsync(ICollection<Answer> answers);
 
-        Task<Answer> GetAnswerAsync(string correctAnswerId);
+        Task SetAnswerCorrectAsync(string correctAnswerId);
 
         Task RemoveAnswers(List<Answer> answersToRemove);
     }
