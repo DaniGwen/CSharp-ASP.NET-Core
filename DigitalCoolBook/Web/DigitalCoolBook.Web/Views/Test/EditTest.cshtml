@@ -10,41 +10,43 @@
     var letters = new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 }
 
-<div class="container-fluid w-75">
-    <h3 class="text-center">Test edit</h3>
-    <br />
-    <h3 class="text-center">@Model.TestName</h3>
-    <hr />
-    <form asp-action="EditTest" method="post">
-        <input hidden name="testId" value="@Model.TestId" />
-        <div class="form-group">
-            @foreach (var question in Model.Questions)
-            {
-                <span class="mr-3 font-weight-bold">@numberQuestion.</span>
-                <input hidden name="[@indexQuestion].QuestionId" value="@question.QuestionId" />
-                <input class="font-weight-bold mt-2 mb-3" name="[@indexQuestion].Question" asp-for="@question.Title" value="@question.Title" />
-
-                @foreach (var answer in question.Answers)
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <div class="page-wrapper">
+        <h3 class="text-center">Edit - @Model.TestName</h3>
+        <hr />
+        <form asp-action="EditTest" method="post">
+            <input hidden name="testId" value="@Model.TestId" />
+            <div class="form-group">
+                @foreach (var question in Model.Questions)
                 {
-                    <div class="row form-group">
-                        <label class="font-weight-bold form-group mt-1">@letters[indexAnswer].</label>
-                        <input class="ml-2 form-group" name="[@indexQuestion].Answers" asp-for="@answer.Title" value="@answer.Title" />
-                    </div>
-                    
-                    // Sets the Letter for the answer 
-                    indexAnswer += 1;
+                    <h4 class="d-inline">@numberQuestion.</h4>
+                    <input hidden name="[@indexQuestion].QuestionId" value="@question.QuestionId" />
+                    <input class="mt-4 mb-3" name="[@indexQuestion].Question" asp-for="@question.Title" value="@question.Title" />
+
+                    @foreach (var answer in question.Answers)
+                    {
+                        <div class="row form-group mt-2 bg-dark">
+                            <label class="col col-md-1 form-group">@letters[indexAnswer].</label>
+                            <input class="col form-group" name="[@indexQuestion].Answers" asp-for="@answer.Title" value="@answer.Title" />
+                        </div>
+
+                        // Sets the Letter for the answer
+                        indexAnswer += 1;
+                    }
+                    // increment index for question number
+                    numberQuestion += 1;
+                    // increment index for question model binder
+                    indexQuestion += 1;
+                    indexAnswer = 0;
                 }
-                // increment index for question number
-                numberQuestion += 1;
-                // increment index for question model binder
-                indexQuestion += 1;
-                // sets answers index to zero
-                indexAnswer = 0;
-            }
-        </div>
-        <div class="d-flex justify-content-between">
-            <a href="/Test/TestsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-            <button class="btn btn-outline-success btn-sm mb-1" id="saveForm" type="submit">Save</button>
-        </div>
-    </form>
+            </div>
+            <div class="buttons-wrapper mt-4 mb-4">
+                <a asp-controller="Test"
+                   asp-action="TestsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+                <button class="btn btn-success btn-sm" 
+                        id="saveForm" 
+                        type="submit">Save <i class="fas fa-save"></i></button>
+            </div>
+        </form>
+    </div>
 </div>

@@ -1,4 +1,6 @@
-﻿.navbar {
+﻿
+
+.navbar {
     background-color: initial;
     height: 70px;
     border-bottom-left-radius: 15px;
@@ -9,14 +11,20 @@
 }
 
 .brand-text {
-    font-weight: bold;
-    color: #808080;
+    margin: 0;
+    z-index: 1;
+    font-family: 'Teko', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    animation: glow 1s ease-in-out infinite alternate;
+    text-align: center;
+    transform: skewY(6deg);
 }
 
-    .brand-text:hover {
+   /* .brand-text:hover {
         text-decoration: underline;
         text-decoration-color: #0094ff;
-    }
+    }*/
 
 .nav-right-wrapper, .nav-left-wrapper {
     display: grid;

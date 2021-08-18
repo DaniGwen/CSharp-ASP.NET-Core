@@ -10,7 +10,7 @@
         <h3>Tests</h3>
         <hr />
         <a class="btn btn-sm btn-success" asp-action="CreateTest"><i class="fas fa-plus"></i> Test</a>
-        <div class="form-group mt-2">
+        <div class="form-group mt-4">
             @if (Model.Any())
             {
                 @foreach (var item in Model)
@@ -32,7 +32,7 @@
             {
                 <h4 class="mt-4">No tests...</h4>
             }
-            <div class="buttons-wrapper mt-4 mb-4">
+            <div class="buttons-wrapper mt-5 mb-4">
                 <a asp-controller="Admin" asp-action="AdminPanel"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
             </div>
         </div>

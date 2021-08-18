@@ -49,14 +49,6 @@
                                 {
                                     <div><strong>@User.Identity.Name</strong></div>
                                     <div>
-                                        @if (User.IsInRole("Admin"))
-                                        {
-                                            <form class="nav-item" asp-controller="Admin" asp-action="AdminPanel" method="get">
-                                                <button class="btn btn-secondary btn-sm">
-                                                    <i class="fas fa-users-cog"></i> Control Panel
-                                                </button>
-                                            </form>
-                                        }
                                         @if (this.User.IsInRole("Student"))
                                         {
                                             <form class="nav-item" asp-controller="Student" asp-action="Panel" method="get">

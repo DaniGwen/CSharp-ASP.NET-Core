@@ -27,6 +27,8 @@
 @import "styles/components/_component-privacy.css";
 @import "styles/components/_component-notifier.css";
 @import "styles/components/_component-htmlTable.css";
+@import "styles/components/_component-adminPanel.css";
+@import "styles/components/_component-index.css";
 
 @import "styles/utilities/_utilities-animations.css";
 @import "styles/utilities/_utilities-dcbElements.css";

@@ -8,34 +8,39 @@
     var letters = new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 }
 
-<div class="container-fluid w-75">
-    <h2 class="text-center">Test</h2>
-    <br />
-    <h3 class="text-center">@Model.TestName</h3>
-    <hr />
-    <div class="form-group">
-        @foreach (var question in Model.Questions)
-        {
-            <h4 class="font-weight-bold mt-2 mb-3"><span class="mr-3 font-weight-bold">@indexQuestion.</span>@question.Title</h4>
-            <ul class="list-group">
-                @foreach (var answer in question.Answers)
-                {
-                    <li class="list-group-item">
-                        <div class="row">
-                            <label class="col-form-label">@letters[indexAnswer].</label><p class="ml-2 col-form-label">@answer.Title</p>
-                        </div>
-                    </li>
+<div class="offset-md-3 col-md-6 offset-sm-0 col-sm-12 mt-3">
+    <div class="page-wrapper">
+        <h3>Test - @Model.TestName</h3>
+        <hr />
+        <div class="form-group">
+            @foreach (var question in Model.Questions)
+            {
+                <h4 class="mt-4 text-secondary"><strong class="me-3">@indexQuestion.</strong>@question.Title</h4>
+                <ul class="list-group">
+                    @foreach (var answer in question.Answers)
+                    {
+                        <li class="list-group-item bg-dark mb-2">
+                            <div class="row">
+                                <label class="col col-md-1 col-form-label">@letters[indexAnswer].</label>
+                                <p class="col col-form-label">@answer.Title</p>
+                            </div>
+                        </li>
 
-                    indexAnswer += 1;
-                }
-            </ul>
+                        indexAnswer += 1;
+                    }
+                </ul>
 
-            indexQuestion += 1;
-            indexAnswer = 0;
-        }
-    </div>
-    <div class="d-flex justify-content-between">
-        <a href="/Test/TestsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
-        <a class="btn btn-outline-warning btn-sm mb-2" href="/Test/EditTest/@Model.TestId">Edit</a>
+                indexQuestion += 1;
+                indexAnswer = 0;
+            }
+        </div>
+        <div class="buttons-wrapper mt-4 mb-4">
+            <a asp-controller="Test" 
+               asp-action="TestsPreview"><i class="fas fa-lg fa-arrow-circle-left"></i></a>
+            <a asp-controller="Test" 
+               asp-action="EditTest" 
+               asp-route-id="@Model.TestId" 
+               class="btn btn-warning btn-sm">Edit</a>
+        </div>
     </div>
 </div>
