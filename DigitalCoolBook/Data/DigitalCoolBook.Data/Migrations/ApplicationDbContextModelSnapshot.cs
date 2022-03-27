@@ -504,6 +504,29 @@ namespace DigitalCoolBook.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "10",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "19f5c14a-95b6-46a5-a557-d8ea50cf5290",
+                            ConcurrencyStamp = "2",
+                            Name = "Student",
+                            NormalizedName = "Student"
+                        },
+                        new
+                        {
+                            Id = "d9933970-004f-4e39-a075-88fc8f13b0d1",
+                            ConcurrencyStamp = "3",
+                            Name = "Teacher",
+                            NormalizedName = "Teacher"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -599,6 +622,23 @@ namespace DigitalCoolBook.Data.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "20",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "462f8152-794d-478d-861f-07ceee8b7010",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENU6rEyamMsRVYoNpRVVMH7LhXJA+akJPn+xXdEVlB3LtP6R1/G46CUKX5x8y96ylQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dd51359f-04b3-4643-92a4-d225b1bae9b2",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@admin.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -660,6 +700,13 @@ namespace DigitalCoolBook.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "20",
+                            RoleId = "10"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

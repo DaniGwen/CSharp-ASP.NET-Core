@@ -113,7 +113,7 @@ input[type="radio"] {
     }
 
 .page-wrapper {
-    max-height: 615px;
+    max-height: 585px;
     overflow-x: hidden;
     overflow-y: auto;
     margin: 0 auto;

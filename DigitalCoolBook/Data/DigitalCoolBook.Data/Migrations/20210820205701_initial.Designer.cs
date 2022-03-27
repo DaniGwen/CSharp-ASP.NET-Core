@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalCoolBook.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210813171721_studentUnlockRemoved")]
-    partial class studentUnlockRemoved
+    [Migration("20210820205701_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,6 +97,51 @@ namespace DigitalCoolBook.Data.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.BlazorModels.Todo", b =>
+                {
+                    b.Property<int>("TodoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TodoTaskId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TodoId");
+
+                    b.HasIndex("TodoTaskId");
+
+                    b.ToTable("Todos");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.BlazorModels.TodoTask", b =>
+                {
+                    b.Property<int>("TaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("TaskId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TodoTasks");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Category", b =>
@@ -342,6 +387,9 @@ namespace DigitalCoolBook.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsExpired")
                         .HasColumnType("bit");
 
@@ -458,6 +506,29 @@ namespace DigitalCoolBook.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "10",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "19f5c14a-95b6-46a5-a557-d8ea50cf5290",
+                            ConcurrencyStamp = "2",
+                            Name = "Student",
+                            NormalizedName = "Student"
+                        },
+                        new
+                        {
+                            Id = "d9933970-004f-4e39-a075-88fc8f13b0d1",
+                            ConcurrencyStamp = "3",
+                            Name = "Teacher",
+                            NormalizedName = "Teacher"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -553,6 +624,23 @@ namespace DigitalCoolBook.Data.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "20",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "462f8152-794d-478d-861f-07ceee8b7010",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENU6rEyamMsRVYoNpRVVMH7LhXJA+akJPn+xXdEVlB3LtP6R1/G46CUKX5x8y96ylQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dd51359f-04b3-4643-92a4-d225b1bae9b2",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@admin.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -614,6 +702,13 @@ namespace DigitalCoolBook.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "20",
+                            RoleId = "10"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -772,6 +867,26 @@ namespace DigitalCoolBook.Data.Migrations
                         .HasForeignKey("StudentId");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.BlazorModels.Todo", b =>
+                {
+                    b.HasOne("DigitalCoolBook.Models.BlazorModels.TodoTask", "TodoTask")
+                        .WithMany("Todos")
+                        .HasForeignKey("TodoTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TodoTask");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.BlazorModels.TodoTask", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Category", b =>
@@ -995,6 +1110,11 @@ namespace DigitalCoolBook.Data.Migrations
             modelBuilder.Entity("DigitalCoolBook.Models.ArchivedTest", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("DigitalCoolBook.Models.BlazorModels.TodoTask", b =>
+                {
+                    b.Navigation("Todos");
                 });
 
             modelBuilder.Entity("DigitalCoolBook.Models.Category", b =>

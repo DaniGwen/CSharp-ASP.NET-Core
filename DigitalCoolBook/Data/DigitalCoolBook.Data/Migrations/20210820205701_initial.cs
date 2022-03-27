@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalCoolBook.Data.Migrations
 {
-    public partial class studentUnlockRemoved : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -479,7 +479,8 @@ namespace DigitalCoolBook.Data.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Result = table.Column<int>(type: "int", nullable: false),
                     Place = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsExpired = table.Column<bool>(type: "bit", nullable: false)
+                    IsExpired = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -495,6 +496,26 @@ namespace DigitalCoolBook.Data.Migrations
                         column: x => x.LessonId,
                         principalTable: "Lessons",
                         principalColumn: "LessonId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TodoTasks",
+                columns: table => new
+                {
+                    TaskId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TodoTasks", x => x.TaskId);
+                    table.ForeignKey(
+                        name: "FK_TodoTasks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -543,6 +564,27 @@ namespace DigitalCoolBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Todos",
+                columns: table => new
+                {
+                    TodoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDone = table.Column<bool>(type: "bit", nullable: false),
+                    TodoTaskId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Todos", x => x.TodoId);
+                    table.ForeignKey(
+                        name: "FK_Todos_TodoTasks_TodoTaskId",
+                        column: x => x.TodoTaskId,
+                        principalTable: "TodoTasks",
+                        principalColumn: "TaskId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Answers",
                 columns: table => new
                 {
@@ -561,6 +603,26 @@ namespace DigitalCoolBook.Data.Migrations
                         principalColumn: "QuestionId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "10", "1", "Admin", "Admin" },
+                    { "19f5c14a-95b6-46a5-a557-d8ea50cf5290", "2", "Student", "Student" },
+                    { "d9933970-004f-4e39-a075-88fc8f13b0d1", "3", "Teacher", "Teacher" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "20", 0, "462f8152-794d-478d-861f-07ceee8b7010", "IdentityUser", "admin@admin.com", false, false, null, "ADMIN@ADMIN.COM", null, "AQAAAAEAACcQAAAAENU6rEyamMsRVYoNpRVVMH7LhXJA+akJPn+xXdEVlB3LtP6R1/G46CUKX5x8y96ylQ==", null, false, "dd51359f-04b3-4643-92a4-d225b1bae9b2", false, "admin@admin.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "10", "20" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_QuestionId",
@@ -716,6 +778,16 @@ namespace DigitalCoolBook.Data.Migrations
                 table: "TestStudents",
                 column: "TestId");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Todos_TodoTaskId",
+                table: "Todos",
+                column: "TodoTaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TodoTasks_UserId",
+                table: "TodoTasks",
+                column: "UserId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_CorrectAnswers_Answers_AnswerId",
                 table: "CorrectAnswers",
@@ -793,6 +865,9 @@ namespace DigitalCoolBook.Data.Migrations
                 name: "TestStudents");
 
             migrationBuilder.DropTable(
+                name: "Todos");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -806,6 +881,9 @@ namespace DigitalCoolBook.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "TestRooms");
+
+            migrationBuilder.DropTable(
+                name: "TodoTasks");
 
             migrationBuilder.DropTable(
                 name: "Questions");
